@@ -28,3 +28,5 @@ There are two main goals of TypeScript:
 We find it best to explain these in separation. 
 
 ## The TypeScript type system
+
+TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript). 
