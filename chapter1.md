@@ -21,12 +21,10 @@ With a dev setup out of the way lets jump into TypeScript syntax
 
 
 # Why TypeScript
-There are two goals of TypeScript: 
+There are two main goals of TypeScript: 
 * Provider an *optional type system* for JavaScript.
 * Provide features of future JavaScript version to current JavaScript engines.
 
-We find it best to explain these in seperation. 
-
-
+We find it best to explain these in separation. 
 
 ## The TypeScript type system
