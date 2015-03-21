@@ -15,6 +15,18 @@ So:
 * `apm install atom-typescript`
 * Fire up atom. Wait for the message: `AtomTS: Dependencies installed correctly. Enjoy TypeScript ♥` **It may take up to 5 minutes for this message to appear. Be patient!**
  
-Now create a new `.ts` TypeScript file and start hacking away. AtomTS will take care of compiling it to `.js` and create a default [`tsconfig.json` TypeScript project file](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) for you.
+Now create a new `.ts` TypeScript file and start hacking away. AtomTS will take care of compiling it to `.js` and create a default [`tsconfig.json` TypeScript project file](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) for you. 
 
-## Types
+With a dev setup out of the way lets jump into TypeScript syntax
+
+
+# Why TypeScript
+There are two goals of TypeScript: 
+* Provider an *optional type system* for JavaScript.
+* Provide features of future JavaScript version to current JavaScript engines.
+
+We find it best to explain these in seperation. 
+
+
+
+## The TypeScript type system
