@@ -11,4 +11,5 @@ Traditionally you would need to set all these up (and more) but we're trying to 
 ![](./images/ch1/atomts.png)
 
 So: 
-* install [atom](https://atom.io/)
+* Install [atom](https://atom.io/).
+* 
