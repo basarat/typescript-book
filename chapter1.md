@@ -6,6 +6,7 @@ TypeScript compiles into JavaScript. JavaScript is what you are actually going t
 * A TypeScript editor (traditionally visual studio)
 * Some build pipeline for a build server
 
+
 Traditionally you would need to set all these up (and more) but we're trying to consolidate all this into a single Atom Package : [Atom-TypeScript](https://atom.io/packages/atom-typescript). The only thing you need to share and collaborate on TypeScript projects across platforms (Windows / Mac / Linux).
 
 ![](./images/ch1/IMG_1108.JPG)
