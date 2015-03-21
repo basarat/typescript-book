@@ -12,4 +12,7 @@ Traditionally you would need to set all these up (and more) but we're trying to 
 
 So: 
 * Install [atom](https://atom.io/).
-* 
+* `apm install atom-typescript`
+* Fire up atom. Wait for the message: `AtomTS: Dependencies installed correctly. Enjoy TypeScript ♥` **It may take up to 5 minutes for this message to appear. Be patient!**
+ 
+Now open any TypeScript file and start hacking away.
