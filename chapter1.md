@@ -11,9 +11,9 @@ Traditionally you would need to set all these up (and more) but we're trying to 
 ![](./images/ch1/atomts.png)
 
 So: 
-* Install [atom](https://atom.io/).
-* `apm install atom-typescript`
-* Fire up atom. Wait for the message: `AtomTS: Dependencies installed correctly. Enjoy TypeScript ♥` **It may take up to 5 minutes for this message to appear. Be patient!**
+1. Install [atom](https://atom.io/).
+1. `apm install atom-typescript`
+1. Fire up atom. Wait (around 5 mins) for the message: `AtomTS: Dependencies installed correctly. Enjoy TypeScript ♥`
  
 Now create a new `.ts` TypeScript file and start hacking away. AtomTS will take care of compiling it to `.js` and create a default [`tsconfig.json` TypeScript project file](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) for you. 
 
