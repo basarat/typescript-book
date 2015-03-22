@@ -7,6 +7,10 @@ We find it best to explain these in separation in first go.
 
 ## The TypeScript type system
 
+### Why Types?
+* Increase you agility when doing refactorings
+* Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
+
 ### Your JavaScript is TypeScript
 TypeScript provides compile time Type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code `.js` file can be renamed to a `.ts` file and TypeScript will still give you back valid `.js` equivalent to the original JavaScript file. TypeScript is *intentionally* and strictly a superset of JavaScript with optional Type checking.
 
@@ -20,10 +24,6 @@ foo = '456'; // Error: cannot assign `string` to `number`
 // Is foo a number or a string?
 ```
 The motivation is that if you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later.
-
-### Why Types?
-* Increase you agility when doing refactorings
-* Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
 ### Types can be specified
 As we've mentioned before, TypeScript will infer as much as it can safely, however you can use annotations to:
@@ -40,6 +40,9 @@ So if you do something wrong the compiler will error e.g.:
 ```ts
 var foo: number = '123'; // Error: cannot assign a `string` to a `number`
 ```
+
+We will discuss all the details of all the annotation methods supported by TypeScript in a later chapter.
+
 
 
 
