@@ -43,7 +43,7 @@ foo = '456'; // Error: cannot assign `string` to `number`
 ```
 The motivation is that if you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later. 
 
-### Why Types
+### Why Types?
 * Increase you agility when doing refactorings
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
