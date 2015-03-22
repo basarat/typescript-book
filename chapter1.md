@@ -25,8 +25,27 @@ There are two main goals of TypeScript:
 * Provider an *optional type system* for JavaScript.
 * Provide features of future JavaScript version to current JavaScript engines.
 
-We find it best to explain these in separation. 
+We find it best to explain these in separation in first go.
 
 ## The TypeScript type system
 
+### Your JavaScript is TypeScript
+TypeScript provides compile time Type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code `.js` file can be renamed to a `.ts` file and TypeScript will still give you back valid `.js` equivalent to the original JavaScript file. TypeScript is *intentionally* and strictly a superset of JavaScript with optional Type checking.
+
+### Types are Inferred
+In order to give you type safety with minimal cost of productivity during new code development. E.g. TypeScript will know that foo is of type `number` below and will give an error on the second line as shown: 
+
+```ts
+var foo = 123;
+foo = '456'; // Error: cannot assign `string` to `number`
+
+// Is foo a number or a string? 
+```
+The motivation is that if you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases.
+
+### Why Types
+* Increase you agility when doing refactorings
+* Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
+
+### Types can be Specified
 TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript). 
