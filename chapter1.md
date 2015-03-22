@@ -41,11 +41,19 @@ foo = '456'; // Error: cannot assign `string` to `number`
 
 // Is foo a number or a string? 
 ```
-The motivation is that if you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases.
+The motivation is that if you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later. 
 
 ### Why Types
 * Increase you agility when doing refactorings
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
 ### Types can be Specified
+As we've mentioned before, TypeScript will infer as much as it can safely, however you can use annotations to: 
+* Help along the compiler, and more importantly the next developer who has to read your code (that might be future you!).
+* Enforce that what the compiler sees is, what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler). 
+
 TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript). 
+
+/// TODO: 
+Type Inferernce rules 
+Cover all the annotations
