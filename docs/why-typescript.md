@@ -43,9 +43,20 @@ var foo: number = '123'; // Error: cannot assign a `string` to a `number`
 
 We will discuss all the details of all the annotation methods supported by TypeScript in a later chapter.
 
+### Types are structural
+In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though *you know* that the code will work fine the language semantics force you to copy stuff around. This is why stuff like [automapper for C#](http://automapper.org/) exists. In TypeScript because we really want it to be easy for JavaScript developers, and be minimum cognitive overload types are *structural*. This means that *duck typing* is a first class language construct. An example is in order:
+
+```ts
+interface Foo{
+    name: string;
+}
+interfaace Bar{
+    name: string;
+    class: number;
+}
+```
 
 
-
-/// TODO:
-Type Inferernce rules
-Cover all the annotations
+[](Interfaces are open ended)
+[](Type Inferernce rules)
+[](Cover all the annotations)
