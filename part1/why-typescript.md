@@ -25,12 +25,23 @@ The motivation is that if you do stuff like this, in the rest of your code you c
 * Increase you agility when doing refactorings
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
-### Types can be Specified
+### Types can be specified
 As we've mentioned before, TypeScript will infer as much as it can safely, however you can use annotations to:
-* Help along the compiler, and more importantly the next developer who has to read your code (that might be future you!).
-* Enforce that what the compiler sees is, what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
+1. Help along the compiler, and more importantly the next developer who has to read your code (that might be future you!).
+1. Enforce that what the compiler sees is, what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
 
 TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript).
+
+```ts
+var foo: number = 123;
+```
+So if you do something wrong the compiler will error e.g.:
+
+```ts
+var foo: number = '123'; // Error: cannot assign a `string` to a `number`
+```
+
+
 
 /// TODO:
 Type Inferernce rules
