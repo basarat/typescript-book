@@ -13,8 +13,6 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./es6/classes/class.ts",
-        "./es6/test.ts",
-        "./testing.ts"
+        "./class.ts"
     ]
 }
