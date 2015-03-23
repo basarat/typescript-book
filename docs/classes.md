@@ -202,7 +202,7 @@ Here `d` refers to the derived class and `b` refers to the base class. This func
 
 People rarely have trouble understanding 1, but many people struggle with 2. so an explanation is in order
 
-#### d.prototype.__proto__ = b.prototype
+#### `d.prototype.__proto__ = b.prototype`
 
 After having tutored many people about this I find the following explanation to be simplest. First we will explain how the code from `__extends` is equivalent to the simple `d.prototype.__proto__ = b.prototype`, and then why this line in itself is significant. To understand all this you need to know these things: 
 1. `__proto__`
@@ -268,7 +268,7 @@ Reading this function in reverse the `d.prototype = new __()` on line 3 effectiv
 
 But wait we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, d.constructor = d}` (because of 3, effect of `new` on `this` inside the called function). So since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`. 
 
-#### d.prototype.__proto__ = b.prototype significance
+#### `d.prototype.__proto__ = b.prototype` significance
 
 The significance is that it allows you to add members functions to a child class and inherit other from the base class. This is demonstrated by the following simple example: 
 
