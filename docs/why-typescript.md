@@ -88,12 +88,12 @@ foo = '456';
 So you can incrementally upgrade your JavaScript code to TypeScript. This is very different from how many other language compilers work and yet another reason to move to TypeScript.
 
 ### Types can be ambient
-A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of *declaration*. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular libraries have already been written for you by the [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) so for the most purposes: 
+A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of *declaration*. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular JavaScript libraries have already been written for you by the [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) so for most purposes either: 
 
-1. The definition already exists 
-1. You have a vast list of well reviewed TypeScript declaration templates already available.
+1. The definition file already exists.
+1. Or at the very least, you have a vast list of well reviewed TypeScript declaration templates already available
 
-As a quick example consider a trivial example of [jquery](https://jquery.com/). By default (as expect in good JS code) TypeScript expects you to declare (i.e. use `var` somewhere) before you use a variable
+As a quick example of how you would author your own declaration file, consider a trivial example of [jquery](https://jquery.com/). By default (as expect in good JS code) TypeScript expects you to declare (i.e. use `var` somewhere) before you use a variable
 ```ts
 $('.awesome').show(); // Error: cannot find name `$`
 ```
@@ -143,6 +143,7 @@ In this section we have provided you with the motivation and design goals of Typ
 [](Type Inferernce rules)
 [](Cover all the annotations)
 [](Cover all ambients : also that there are no runtime enforcement)
+[](.ts vs. .d.ts)
 
 
 {% include "footer.md" %}
