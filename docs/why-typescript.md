@@ -1,6 +1,6 @@
 # Why TypeScript
 There are two main goals of TypeScript:
-* Provider an *optional type system* for JavaScript.
+* Provide an *optional type system* for JavaScript.
 * Provide features of future JavaScript version to current JavaScript engines.
 
 We find it best to explain these in separation in first go.
@@ -8,7 +8,9 @@ We find it best to explain these in separation in first go.
 ## The TypeScript type system
 
 ### Why Types?
-* Increase you agility when doing refactorings
+Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
+
+* Types increase you agility when doing refactoring. *Its better for the compiler to catch errors than to have things fail at runtime*.
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
 ### Your JavaScript is TypeScript
