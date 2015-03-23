@@ -1,0 +1,2 @@
+# Duck Typing
+If it walks like a duck and quacks like a duck, its a duck. For TypeScript if it has all the members structurally then it okay for other things (irrespecitive of name) that accept that structure.

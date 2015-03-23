@@ -47,13 +47,22 @@ We will discuss all the details of all the annotation methods supported by TypeS
 In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though *you know* that the code will work fine the language semantics force you to copy stuff around. This is why stuff like [automapper for C#](http://automapper.org/) exists. In TypeScript because we really want it to be easy for JavaScript developers, and be minimum cognitive overload types are *structural*. This means that *duck typing* is a first class language construct. An example is in order:
 
 ```ts
-interface Foo{
-    name: string;
+interface Point2D {
+    x: number;
+    y: number;
 }
-interfaace Bar{
-    name: string;
-    class: number;
+interface Point3D {
+    x: number;
+    y: number;
+    z: number;
 }
+var point2D: Point2D = { x: 0, y: 10, }
+var point3D: Point3D = { x: 0, y: 10, z: 20 }
+function iTakePoint2D(point: Point2D) { /* do something */ }
+
+iTakePoint2D(point2D); // exact match okay
+iTakePoint2D(point3D); // extra information okay
+iTakePoint2D({ x: 0 }); // Error: missing information `y`
 ```
 
 
