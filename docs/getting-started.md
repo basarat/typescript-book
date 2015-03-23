@@ -18,3 +18,5 @@ So:
 Now create a new `.ts` TypeScript file and start hacking away. AtomTS will take care of compiling it to `.js` and create a default [`tsconfig.json` TypeScript project file](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) for you.
 
 With a dev setup out of the way lets jump into TypeScript syntax.
+
+{% include "footer.md" %}

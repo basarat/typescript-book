@@ -60,3 +60,5 @@ interfaace Bar{
 [](Interfaces are open ended)
 [](Type Inferernce rules)
 [](Cover all the annotations)
+
+{% include "footer.md" %}
