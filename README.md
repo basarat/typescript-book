@@ -5,4 +5,5 @@ I've been looking at the issues that turn up commonly when people start using Ty
 
 Your feedback on this [work is highly appreciated](https://twitter.com/basarat).
 
-[fork me on github](https://github.com/basarat/typescript-book/)
+[<img src="./images/github.png" alt="Drawing" style="width: 16px;"/> Fork me on github](https://github.com/basarat/typescript-book/)
+
