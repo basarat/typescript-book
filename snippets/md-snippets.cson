@@ -1,0 +1,6 @@
+'.source.gfm':
+    'include':
+        'prefix': 'include'
+        'body': """
+            {% include "${1:./path}.md" %}            
+        """

@@ -12,8 +12,5 @@
         "./**/*.ts",
         "!./node_modules/**/*.ts"
     ],
-    "files": [
-        "./es6/test.ts",
-        "./testing.ts"
-    ]
+    "files": []
 }
