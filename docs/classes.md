@@ -3,7 +3,7 @@ The reason why its important to have classes in JavaScript as a first class item
 1. People like to use classes
 1. Provides a consistent way for developers to use classes instead of every framework (emberjs,reactjs etc) coming up with their own version.
 
-Finally JavaScript developers can *have `class`* :bowtie:. Here we have a basic class called Point: 
+Finally JavaScript developers can *have `class`*. Here we have a basic class called Point: 
 ```ts
 class Point {
     x: number;
@@ -34,7 +34,7 @@ var Point = (function () {
     return Point;
 })();
 ```
-This is a fairly idiomatic JavaScript class pattern. 
+This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct. Note that `constructor` is optional.
 
 #### Whats up with the IIFE
 The js generated for the class could have been: 
@@ -77,7 +77,7 @@ class Point3D extends Point {
     }
 }
 ```
-You *must* call the parent constructor from your constructor (this ensures that the stuff that it needs to set on `this` gets set), followed by any additional stuff you want to do in your constructor (here we add another member `z`). 
+If you have a constructor in your class then you *must* call the parent constructor from your constructor (TypeScript will point this out to you). This ensures that the stuff that it needs to set on `this` gets set. Followed by the call to `super` you can add any additional stuff you want to do in your constructor (here we add another member `z`). 
 
 Note that you override parent member functions easily (here we override `add`) and still use the functionality of the super class in your members (using `super.` syntax). 
 
