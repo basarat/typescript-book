@@ -32,10 +32,10 @@ This type inference is well motivated. If you do stuff like shown in this exampl
 
 ### Types can be Explicit
 As we've mentioned before, TypeScript will infer as much as it can safely, however you can use annotations to:
-1. Help along the compiler, and more importantly the next developer who has to read your code (that might be future you!).
-1. Enforce that what the compiler sees is, what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
+1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
+1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
 
-TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript).
+TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript and F#).
 
 ```ts
 var foo: number = 123;
@@ -46,10 +46,10 @@ So if you do something wrong the compiler will error e.g.:
 var foo: number = '123'; // Error: cannot assign a `string` to a `number`
 ```
 
-We will discuss all the details of all the annotation methods supported by TypeScript in a later chapter.
+We will discuss all the details of all the annotation syntax supported by TypeScript in a later chapter.
 
 ### Types are structural
-In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though *you know* that the code will work fine the language semantics force you to copy stuff around. This is why stuff like [automapper for C#](http://automapper.org/) exists. In TypeScript because we really want it to be easy for JavaScript developers, and be minimum cognitive overload types are *structural*. This means that *duck typing* is a first class language construct. An example is in order:
+In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though *you know* that the code will work fine the language semantics force you to copy stuff around. This is why stuff like [automapper for C#](http://automapper.org/) is *vital* for C#. In TypeScript because we really want it to be easy for JavaScript developers with a minimum cognitive overload, types are *structural*. This means that *duck typing* is a first class language construct. Consider the following example. The function `iTakePoint2D` will accept anything that contains all the things (`x` and `y`) it expects:
 
 ```ts
 interface Point2D {
@@ -85,7 +85,7 @@ var foo = 123;
 foo = '456';
 ```
 
-So you can incrementally upgrade your JavaScript code to TypeScript. This is very different from how many other language compilers work and is there for your ease.
+So you can incrementally upgrade your JavaScript code to TypeScript. This is very different from how many other language compilers work and yet another reason to move to TypeScript.
 
 ### Types can be ambient
 A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of *declaration*. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular libraries have already been written for you by the [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) so for the most purposes: 
