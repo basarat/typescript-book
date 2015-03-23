@@ -7,17 +7,18 @@ We find it best to explain these in separation in first go.
 
 ## The TypeScript type system
 
-### Why Types?
 Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
 
 * Types increase you agility when doing refactoring. *Its better for the compiler to catch errors than to have things fail at runtime*.
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
+However types have a way of being unnecessarily ceremonious. TypeScript is very particiular about keeping the barrier to entry as low as possible. Here's how:
+
 ### Your JavaScript is TypeScript
 TypeScript provides compile time Type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code `.js` file can be renamed to a `.ts` file and TypeScript will still give you back valid `.js` equivalent to the original JavaScript file. TypeScript is *intentionally* and strictly a superset of JavaScript with optional Type checking.
 
 ### Types can be Implicit
-In order to give you type safety with minimal cost of productivity during new code development. E.g. TypeScript will know that foo is of type `number` below and will give an error on the second line as shown:
+TypeScript will try to infer as much of the Type information as it can in order to give you type safety with minimal cost of productivity during code development. For example, in the following example TypeScript will know that foo is of type `number` below and will give an error on the second line as shown:
 
 ```ts
 var foo = 123;
@@ -25,7 +26,7 @@ foo = '456'; // Error: cannot assign `string` to `number`
 
 // Is foo a number or a string?
 ```
-The motivation is that if you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later.
+This type inference is well motivated. If you do stuff like this, in the rest of your code you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later.
 
 ### Types can be Explicit
 As we've mentioned before, TypeScript will infer as much as it can safely, however you can use annotations to:
