@@ -7,12 +7,12 @@ We find it best to explain these in separation in first go.
 
 ## The TypeScript type system
 
-Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
+You might be wondering **why add types to JavaScript?**. Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
 
 * Types increase you agility when doing refactoring. *Its better for the compiler to catch errors than to have things fail at runtime*.
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
-However types have a way of being unnecessarily ceremonious. TypeScript is very particiular about keeping the barrier to entry as low as possible. Here's how:
+However types have a way of being unnecessarily ceremonious. TypeScript is very particular about keeping the barrier to entry as low as possible. Here's how:
 
 ### Your JavaScript is TypeScript
 TypeScript provides compile time Type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code `.js` file can be renamed to a `.ts` file and TypeScript will still give you back valid `.js` equivalent to the original JavaScript file. TypeScript is *intentionally* and strictly a superset of JavaScript with optional Type checking.
