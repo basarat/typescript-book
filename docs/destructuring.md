@@ -59,7 +59,7 @@ var _a;
 ```
 
 #### Summary
-Destructuring can again make your code more readable and maintainable. Array destructuring can allow to use arrays like tuples in many other languages.
+Destructuring can make your code more readable and maintainable by reducing the line count and making the intent clear. Array destructuring can allow to use arrays as though they were tuples.
 
 
 {% include "footer.md" %}
