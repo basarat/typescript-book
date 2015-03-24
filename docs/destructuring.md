@@ -25,7 +25,7 @@ var x = 1, y = 2;
 [x, y] = [y, x];
 console.log(x, y); // 2,1
 ```
-Note that array destructuring is effectively the compiler doing the `[0] , [1]` and so on for you. There is no guarantee that these values will exist.
+Note that array destructuring is effectively the compiler doing the `[0], [1], ...` and so on for you. There is no guarantee that these values will exist.
 
 #### Array Destructuring with rest
 You can pick up any number of elements from the array and get *an array* of the remaining elements using array destructuring with rest.
