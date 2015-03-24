@@ -6,7 +6,7 @@ TypeScript supports the following forms of Destructuring (literally named after 
 1. Array Destructuring
 
 #### Object Destructuring
-Destructuring  is useful because it quite commonly allow you to do in a single line what would otherwise require multiple lines. Consider the following case:
+Destructuring  is useful because it allows you to do in a single line, what would otherwise require multiple lines. Consider the following case:
 
 ```ts
 var rect = { x: 0, y: 10, width: 15, height: 20 };
@@ -15,7 +15,7 @@ var rect = { x: 0, y: 10, width: 15, height: 20 };
 var {x, y, width, height} = rect;
 console.log(x, y, width, height); // 0,10,15,20
 ```
-Here in the absence of destructing you would have to pick off `x,y,width,height` one by one of `rect`.
+Here in the absence of destructing you would have to pick off `x,y,width,height` one by one from `rect`.
 
 #### Array Destructuring
 A common programming question : Swap two variables without using a third one. The TypeScript solution:
