@@ -6,4 +6,4 @@
   * [Classes](docs/classes.md)
   * [Arrow Functions](docs/arrow-functions.md)
   * [let](docs/let.md)
-  * [destructuring](docs/destructuring.md)
+  * [Destructuring](docs/destructuring.md)
