@@ -14,6 +14,7 @@
     ],
     "files": [
         "./es6/classes/class.ts",
+        "./es6/destructuring.ts",
         "./es6/let.ts",
         "./es6/test.ts",
         "./testing.ts"
