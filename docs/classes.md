@@ -174,7 +174,7 @@ class Foo{
 }
 ```
 
-### Member initializer
+### Property initializer
 This is a nifty feature supported by TypeScript (from ES7 actually). You can initialize any member of the class outside the class constructor, useful to provide default (notice `members = []`)
 
 ```ts
