@@ -27,7 +27,7 @@ for (var char of hello) {
 ```
 
 #### JS Generation
-For pre ES6 targets TypeScript will generate the standard `for (var i; i < list.length; i++)` kind of loop. For example here's what generated for our previous example: 
+For pre ES6 targets TypeScript will generate the standard `for (var i = 0; i < list.length; i++)` kind of loop. For example here's what gets generated for our previous example: 
 ```ts
 var someArray = [9, 2, 5];
 for (var item of someArray) {
@@ -41,7 +41,7 @@ for (var _i = 0; _i < someArray.length; _i++) {
     console.log(item);
 }
 ```
-You can see that using `for...of` makes *intent* clearer and also decreases the amount of code you have to write.
+You can see that using `for...of` makes *intent* clearer and also decreases the amount of code you have to write (and variable names you need to come up with).
 
 #### Limitations 
 If you are not targeting ES6 or above, the generated code assumes the property `length` exists on the object and that the object can be indexed via numbers e.g `obj[2]`. So it is only supported on `string` and `array` for these legacy JS engines. 
@@ -55,7 +55,7 @@ for (let paragraph of articleParagraphs) {
 }
 ```
 
-Use `for...of` only for stuff that *you know* to be an array or a string. 
+Use `for...of` only for stuff that *you know* to be an array or a string. Note that this limitation might be removed in a future version of TypeScript.
 
 #### Summary 
 You would be surprised at how many times you will be iterating over the elements of an array. The next time you find yourself doing that, give `for...of` a go. You might just make the next person who reviews you code happy.
