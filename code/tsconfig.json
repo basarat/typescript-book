@@ -17,6 +17,7 @@
         "./es6/destructuring.ts",
         "./es6/forof.ts",
         "./es6/let.ts",
+        "./es6/templatestrings.ts",
         "./es6/test.ts",
         "./testing.ts"
     ]

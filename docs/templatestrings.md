@@ -1,1 +1,0 @@
-Cover both Template Strings and Tagged String Templates
