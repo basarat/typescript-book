@@ -7,3 +7,4 @@
   * [Arrow Functions](docs/arrow-functions.md)
   * [let](docs/let.md)
   * [Destructuring](docs/destructuring.md)
+  * [for...of](docs/for...of.md)

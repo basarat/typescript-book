@@ -5,5 +5,6 @@ One of the main selling points of TypeScript is that it allows you to use a bunc
 1. [Arrow Functions](arrow-functions.md)
 1. [`let`](let.md)
 1. [Destructuring](destructuring.md)
+1. [for...of](for...of.md)
 
 {% include "footer.md" %}
