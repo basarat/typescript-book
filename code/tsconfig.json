@@ -18,6 +18,7 @@
         "./es6/for..of.ts",
         "./es6/let.ts",
         "./es6/rest-parameters.ts",
+        "./es6/spread-operator.ts",
         "./es6/template-strings.ts",
         "./es6/test.ts",
         "./testing.ts"

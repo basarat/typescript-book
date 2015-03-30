@@ -10,3 +10,4 @@
   * [Destructuring](docs/destructuring.md)
   * [for...of](docs/for...of.md)
   * [Template Strings](docs/template-strings.md)
+  * [Spread Operator](docs/spread-operator.md)
