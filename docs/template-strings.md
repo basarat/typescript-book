@@ -1,5 +1,5 @@
 ### Template Strings
-Syntactically these are strings that use backticks (i.e. \` ) instead of single (') or double (") quotes. The motivation of Template Strings is three fold:
+Syntactically these are strings that use backticks ( i.e. \` ) instead of single (') or double (") quotes. The motivation of Template Strings is three fold:
 
 * Multiline Strings
 * String Interpolation
