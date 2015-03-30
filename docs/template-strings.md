@@ -73,6 +73,9 @@ function htmlEscape(literals, ...placeholders) {
 }
 ```
 
+#### Generated JS
+For pre ES6 compile targets the code is fairly simple. Multiline strings become escaped strings. String interpolation becomes *string concatenation*. Tagged Templates become function calls.
+
 #### Summary
 Multiline strings and string interpolation are just great things to have in any language. Its great that you can now use them in your JavaScript (thanks TypeScript!). Tagged templates allow you to create powerful string utilities.
 
