@@ -8,6 +8,7 @@ One of the main selling points of TypeScript is that it allows you to use a bunc
 1. [Destructuring](destructuring.md)
 1. [for...of](for...of.md)
 1. [Template Strings](template-strings.md)
+1. [Spread Operator](spread-operator.md)
 
 
 {% include "footer.md" %}
