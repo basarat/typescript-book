@@ -21,6 +21,7 @@
         "./es6/spread-operator.ts",
         "./es6/template-strings.ts",
         "./es6/test.ts",
-        "./testing.ts"
+        "./testing.ts",
+        "./types/types.ts"
     ]
 }
