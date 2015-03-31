@@ -3,7 +3,7 @@ We covered the main features of the TypeScript Type System back when we disucsse
 * The type system in typescript is designed to be *optional* so that *your javascript is typescript*.
 * TypeScript does not block *JavaScript emit* in the presence of Type Errors, allowing you to *progressively update your JS to TS*. 
 
-In this section we will take a shallow dive into the syntax as well as the semantics of the TypeScript type system. This will prepare you for a deeper dive later.
+In this section we will take a shallow dive into the syntax as well as the semantics of the TypeScript type system. This way you can start using these in your code immediately and see the benefit. This will prepare you for a deeper dive later.
 
 ## Annotation
 As mentioned before Types are annotated using `:TypeAnnotation` syntax. Anything that is available in the type declaration space can be used as a Type Annotation.
