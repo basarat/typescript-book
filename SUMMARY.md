@@ -11,3 +11,7 @@
   * [for...of](docs/for...of.md)
   * [Template Strings](docs/template-strings.md)
   * [Spread Operator](docs/spread-operator.md)
+* [TypeScript's Type System](docs/types/type-system.md)
+  * [Ambient Declarations](docs/types/ambient-declarations.md)
+  * [Functions](docs/types/type-compatability.md)
+  * [Type Compatability](docs/types/type-compatability.md)

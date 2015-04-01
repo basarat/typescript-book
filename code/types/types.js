@@ -88,6 +88,12 @@ var null_undefined;
     foo: Null;
     bar: Undefined;
 })(null_undefined || (null_undefined = {}));
+var void_;
+(function (void_) {
+    function log(message) {
+        console.log(message);
+    }
+})(void_ || (void_ = {}));
 var generics;
 (function (generics) {
     function reverse(items) {
@@ -133,3 +139,73 @@ var generics;
         '2'
     ];
 })(generics || (generics = {}));
+var union;
+(function (union) {
+    function formatCommandline(command) {
+        var line = '';
+        if (typeof command === 'string') {
+            line = command.trim();
+        }
+        else {
+            line = command.join(' ').trim();
+        }
+    }
+})(union || (union = {}));
+var tuple;
+(function (tuple) {
+    var nameNumber;
+    nameNumber = [
+        'Jenny',
+        8675309
+    ];
+    nameNumber = [
+        'Jenny',
+        '867-5309'
+    ];
+    var name = nameNumber[0], num = nameNumber[1];
+})(tuple || (tuple = {}));
+var getset;
+(function (getset) {
+    var _value;
+    function getOrSet(value) {
+        if (value === undefined) {
+            return _value;
+        }
+        else {
+            _value = value;
+        }
+    }
+    getOrSet(1);
+    console.log(getOrSet());
+})(getset || (getset = {}));
+var getset_;
+(function (getset_) {
+    var _value;
+    function getOrSet(value) {
+        if (value === undefined) {
+            return _value;
+        }
+        else {
+            _value = value;
+        }
+    }
+    getOrSet(1);
+    console.log(getOrSet());
+})(getset_ || (getset_ = {}));
+var overload;
+(function (overload) {
+    function callMe(v1, v2) {
+    }
+    callMe();
+    callMe(1);
+    callMe('jenny', 5309);
+    callMe('jenny');
+    callMe('jenny', '5309');
+})(overload || (overload = {}));
+var alias;
+(function (alias) {
+    var sample;
+    sample = 123;
+    sample = '123';
+    sample = true;
+})(alias || (alias = {}));
