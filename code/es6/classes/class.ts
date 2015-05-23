@@ -35,4 +35,4 @@ class Something {
 
 var s1 = new Something();
 var s2 = new Something();
-console.log(Someting.instances); // 2
+console.log(Something.instances); // 2

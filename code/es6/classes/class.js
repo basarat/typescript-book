@@ -38,4 +38,4 @@ var Something = (function () {
 })();
 var s1 = new Something();
 var s2 = new Something();
-console.log(Someting.instances);
+console.log(Something.instances);
