@@ -2,7 +2,7 @@
 
 Lovingly called the *fat arrow* (becuase `->` is a thin arrow and `=>` is a fat arrow) and also called a *lambda function* (because of other languages). Another commonly used feature is the fat arrow function `()=>something`. The motivation for a *fat arrow* is: 
 1. You don't need to keep typing `function`
-1. I lexically captures the meaning of `this`
+1. It lexically captures the meaning of `this`
 
 For a language that claims to be functional, in JavaScript you tend to be typing `function` quite a lot. The fat arrow makes it simple for you to create a function 
 ```ts
