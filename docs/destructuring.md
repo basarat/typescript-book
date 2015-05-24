@@ -15,7 +15,7 @@ var rect = { x: 0, y: 10, width: 15, height: 20 };
 var {x, y, width, height} = rect;
 console.log(x, y, width, height); // 0,10,15,20
 ```
-Here in the absence of destructing you would have to pick off `x,y,width,height` one by one from `rect`.
+Here in the absence of destructuring you would have to pick off `x,y,width,height` one by one from `rect`.
 
 #### Array Destructuring
 A common programming question : Swap two variables without using a third one. The TypeScript solution:
@@ -59,7 +59,7 @@ var _a;
 ```
 
 #### Summary
-Destructuring can make your code more readable and maintainable by reducing the line count and making the intent clear. Array destructuring can allow to use arrays as though they were tuples.
+Destructuring can make your code more readable and maintainable by reducing the line count and making the intent clear. Array destructuring can allow you to use arrays as though they were tuples.
 
 
 {% include "footer.md" %}
