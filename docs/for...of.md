@@ -58,6 +58,6 @@ for (let paragraph of articleParagraphs) {
 Use `for...of` only for stuff that *you know* to be an array or a string. Note that this limitation might be removed in a future version of TypeScript.
 
 #### Summary 
-You would be surprised at how many times you will be iterating over the elements of an array. The next time you find yourself doing that, give `for...of` a go. You might just make the next person who reviews you code happy.
+You would be surprised at how many times you will be iterating over the elements of an array. The next time you find yourself doing that, give `for...of` a go. You might just make the next person who reviews your code happy.
 
 {% include "footer.md" %}
