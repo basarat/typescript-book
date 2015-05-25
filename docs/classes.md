@@ -234,7 +234,7 @@ console.log(Foo.prototype); // {} i.e. it exists and is not undefined
 console.log(Foo.prototype.constructor === Foo); // Has a member called `constructor` pointing back to the function
 ```
 
-Now lets look at *effect of `new` on `this` inside the called function*. Basically `this` inside the called function is going to point to the newly created object that will be returned from the function. Its simple to see if you mutate a property on `this` inside the function: 
+Now lets look at *effect of `new` on `this` inside the called function*. Basically `this` inside the called function is going to point to the newly created object that will be returned from the function. It's simple to see if you mutate a property on `this` inside the function: 
 
 ```ts
 function Foo() {
@@ -270,7 +270,7 @@ But wait we wanted `d.prototype.__proto__` i.e. just the proto changed and maint
 
 #### `d.prototype.__proto__ = b.prototype` significance
 
-The significance is that it allows you to add members functions to a child class and inherit other from the base class. This is demonstrated by the following simple example: 
+The significance is that it allows you to add member functions to a child class and inherit others from the base class. This is demonstrated by the following simple example: 
 
 ```ts
 function Animal() { }

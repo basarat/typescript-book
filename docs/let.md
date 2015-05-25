@@ -108,7 +108,7 @@ for (var j = 0; j < 3; j++) {
     funcs[j]();
 }
 ```
-Here the functions close over (hence called a `closure`) the *local* variable (conviniently named `local`) and use that instead of the loop variable `i`. Note that closures come with a performance impact (they need to store the surrounding state) and therefore even though the ES6 `let` keyword in a loop would have the same behavior as the previous example, the following is an error in TypeScript if you target something less that ES6: 
+Here the functions close over (hence called a `closure`) the *local* variable (conveniently named `local`) and use that instead of the loop variable `i`. Note that closures come with a performance impact (they need to store the surrounding state) and therefore even though the ES6 `let` keyword in a loop would have the same behavior as the previous example, the following is an error in TypeScript if you target something less than ES6: 
 
 ```ts
 var funcs = [];

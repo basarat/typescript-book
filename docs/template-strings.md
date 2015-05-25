@@ -21,7 +21,7 @@ Never gonna let you down`;
 ```
 
 #### String Interpolation
-Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* get there name from. Here's how you would potentially generate an html string previously: 
+Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* get their name from. Here's how you would potentially generate an html string previously: 
 
 ```ts
 var lyrics = 'Never gonna give you up';
@@ -77,6 +77,6 @@ function htmlEscape(literals, ...placeholders) {
 For pre ES6 compile targets the code is fairly simple. Multiline strings become escaped strings. String interpolation becomes *string concatenation*. Tagged Templates become function calls.
 
 #### Summary
-Multiline strings and string interpolation are just great things to have in any language. Its great that you can now use them in your JavaScript (thanks TypeScript!). Tagged templates allow you to create powerful string utilities.
+Multiline strings and string interpolation are just great things to have in any language. It's great that you can now use them in your JavaScript (thanks TypeScript!). Tagged templates allow you to create powerful string utilities.
 
 {% include "footer.md" %}
