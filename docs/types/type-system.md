@@ -169,13 +169,13 @@ reversed[0] = 1;       // Okay
 reversed = [1, 2];     // Okay
 ```
 
-Here you are basically saying that the function `reverse` takes an array (`items: T[]`) of *some* type `T` (notice the type parameter in `reverse<T>`) and returns an array of type `T` (notice `: T[]`). Because the `reverse` function returns items of the same type as it takes, TypeScript knows the the `reversed` variable is also of type `number[]` and will give you Type safety. Similarly if you pass in an array of `string[]` to the reverse function the returned result is also an array of `string[]` and you get similar type safety as shown below:
+Here you are basically saying that the function `reverse` takes an array (`items: T[]`) of *some* type `T` (notice the type parameter in `reverse<T>`) and returns an array of type `T` (notice `: T[]`). Because the `reverse` function returns items of the same type as it takes, TypeScript knows the `reversed` variable is also of type `number[]` and will give you Type safety. Similarly if you pass in an array of `string[]` to the reverse function the returned result is also an array of `string[]` and you get similar type safety as shown below:
 
 ```ts
 var strArr = ['1', '2'];
 var reversedStrs = reverse(strArr);
 
-reversedStr = [1, 2]; // Error!
+reversedStrs = [1, 2]; // Error!
 ```
 
 In fact JavaScript arrays already have a `.reverse` function and TypeScript does indeed use generics to define its structure:
