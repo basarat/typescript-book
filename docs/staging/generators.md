@@ -1,10 +1,10 @@
 ### Generators
 Also called `function *`, generators allow you to create functions whose execution can be paused and then later resumed maintaining the state between pause-resume transitions. The value returned from a generator is called an `iterator` and can be used to control this `pause-resume` transition.
 
-Here is a simple example of a generator function that generates an *infinite* list of integers. 
+Here is a simple example of a generator function that generates an *infinite* list of whole numbers. 
 
 ```ts
-function* integers(){
+function* wholeNumbers(){
     var current = 0;
     while(true){
         yield current++;
@@ -15,13 +15,13 @@ function* integers(){
 The `yield` contextual keyword is used to return control from a generator (effectively pausing function execution) along with an optional value (here `current`). You can get access to this value using the `iterator`'s `.next()` member function, this is shown below:
 
 ```ts
-function* integers(){
+function* wholeNumbers(){
     var current = 0;
     while(true){
         yield current++;
     }
 }
-var iterator = integers(); 
+var iterator = wholeNumbers(); 
 console.log(iterator.next()); // 0
 console.log(iterator.next()); // 1
 console.log(iterator.next()); // 2
@@ -34,7 +34,7 @@ Now that you have seen `function*`, `yield` and `.next()` we can dig deeper.
 Any errors thrown (intentially using `throw` or unintentionally due to error) from the generator can be caught using `try/catch` just like normal function executions. This is demonstrated below: 
 
 ```ts
-function* integers(){
+function* wholeNumbers(){
     var current = 0;
     while(true){
       if (current === 3)
@@ -43,7 +43,7 @@ function* integers(){
         yield current++;
     }
 }
-var iterator = integers(); 
+var iterator = wholeNumbers(); 
 console.log(iterator.next()); // 0
 console.log(iterator.next()); // 1
 console.log(iterator.next()); // 2
