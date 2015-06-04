@@ -1,0 +1,5 @@
+### Declaration Spaces
+
+There are two declaration spaces in TypeScript: The *variable* declaration space and the *type* declaration space. Also these declaration spaces are either *global* (no external module) or *limited to the file* (in the presence of an `import` or `export` statement at the file root).
+
+{% include "footer.md" %}
