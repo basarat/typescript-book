@@ -13,6 +13,7 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
+        "./declarationspaces/declarationspace.ts",
         "./es6/classes/class.ts",
         "./es6/destructuring.ts",
         "./es6/for..of.ts",
