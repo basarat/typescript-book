@@ -27,16 +27,16 @@ namespace fourn {
 
 namespace meh {
     var something = {};
-    (function(something) {
-        something.foo = 123;
-    })(something || something = {})
+    // (function(something) {
+    //     something.foo = 123;
+    // })(something || something = {})
 }
 
 namespace utility {
-    function log(msg) {
+    export function log(msg) {
         console.log(msg);
     }
-    function error(msg) {
+    export function error(msg) {
         console.error(msg);
     }
 }
@@ -44,3 +44,24 @@ namespace utility {
 // usage
 utility.log('Call me');
 utility.error('maybe!');
+
+
+module importing {
+    class Foo { }
+    var Bar = Foo;
+    var bar: Bar; // ERROR: "cannot find name 'Bar'"
+}
+
+namespace importing {
+    export class Foo { }
+}
+
+import Bar = importing.Foo;
+var bar: Bar; // Okay
+
+namespace typeofAnnotation {
+    var foo = 123;
+    var bar: typeof foo; // `bar` has the same type as `foo` (here `number`)
+    bar = 456; // Okay
+    bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
+}

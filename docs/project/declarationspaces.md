@@ -47,4 +47,37 @@ var bar: foo; // ERROR: "cannot find name 'foo'"
 ```
 The reason why it says `cannot find name` is because the name `foo` *is not defined* in the *type* declaration space.
 
+### TIPS
+
+#### Copying Stuff around in the Type Declaration Space
+
+If you want to move a class around you might be tempted to do the following: 
+
+```ts
+class Foo { }
+var Bar = Foo;
+var bar: Bar; // ERROR: "cannot find name 'Bar'"
+```
+This is an error because `var` only copied the `Foo` into the *variable* declaration space and you therefore cannot use `Bar` as a type annotation. The proper way is to use the `import` keyword. Note that you can only use the `import` keyword in such a way if you are using *namespaces* or *modules* (more on these later):
+
+```ts
+namespace importing {
+    export class Foo { }
+}
+
+import Bar = importing.Foo;
+var bar: Bar; // Okay
+```
+
+#### Capturing the type of a variable
+
+You can actually use a variable in a type annotation using the `typeof` operator. This allows you to tell the compiler that one variable is the same type as another. Here is an example to demonstrate this:
+
+```ts
+var foo = 123;
+var bar: typeof foo; // `bar` has the same type as `foo` (here `number`)
+bar = 456; // Okay
+bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
+```
+
 {% include "footer.md" %}
