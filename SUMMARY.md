@@ -22,3 +22,5 @@
   * [Ambient Declarations](docs/types/ambient-declarations.md)
   * [Functions](docs/types/type-compatability.md)
   * [Type Compatability](docs/types/type-compatability.md)
+* [TIPs](docs/tips/main.md)
+  * [Modules](docs/tips/modules.md)

@@ -1,7 +1,7 @@
-# External module tips
+## External modules
 There is a lot of power and usability packed into the TypeScript external module pattern. Here we discuss its power and some patterns needed to reflect real world usages.
 
-## File lookup
+### File lookup
 The following statement: 
 
 ```ts
@@ -26,7 +26,7 @@ Tells the TypeScript compiler to look for a TypeScript file at the relative loca
 
 This is not the complete specification but its a decent mental model to have and use.
 
-## Compiler Module Option
+### Compiler Module Option
 The following statement:
 
 ```ts
@@ -44,7 +44,7 @@ Here is how to chose which one is right for you:
 
 I recommend that for new projects you just use `--module system`. But it is good to be aware of this compiler option.
 
-## Pick and choose 
+### Pick and choose 
 The following statement:
 
 ```ts
@@ -55,13 +55,13 @@ actually imports *two* things:
 * The type information from the imported file.
 * Takes are runtime dependency on the `foo` module.
 
-You can pick and choose so that only *one* of these things happen. Before continuing you might want to recap the *declaration spaces* section of the book.
+You can pick and choose so that only *one* of these things happen. Before continuing you might want to recap the [*declaration spaces*](docs/project/declarationspaces.md) section of the book.
 
-## Import type only
+### Import type only
 
 If you do not use the 
 
-## Lazy loading
+### Lazy loading
 
 
 // TODO: es6 modules
