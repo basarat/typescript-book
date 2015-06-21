@@ -55,7 +55,7 @@ actually imports *two* things:
 * The type information from the imported file.
 * Takes are runtime dependency on the `foo` module.
 
-You can pick and choose so that only *one* of these things happen. Before continuing you might want to recap the [*declaration spaces*](docs/project/declarationspaces.md) section of the book.
+You can pick and choose so that only *one* of these things happen. Before continuing you might want to recap the [*declaration spaces*](../project/declarationspaces.md) section of the book.
 
 ### Import type only
 
