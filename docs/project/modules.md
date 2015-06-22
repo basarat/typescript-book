@@ -13,7 +13,7 @@ If you now create a *new* file `bar.ts` in the same project, you will be *allowe
 ```ts
 var bar = foo; // allowed
 ```
-Needless to say having a global namespace is dangerous as it opens your code up for naming conflicts. Nevertheless it is convenient to have *some* files just with type declarations (for smaller projects preferably one called `globals.d.ts`) in the global namespace to make it easy to have some *types* just *magically* available for consumption in *all* your TypeScript code. For any code that is going to generate *JavaScript* we recommend using *external modules* presented next.
+Needless to say having a global namespace is dangerous as it opens your code up for naming conflicts. We recommend using file modules which are presented next.
 
 ### File Module
 Also called *external modules*. If you have an `import` or an `export` at the root level of a TypeScript file then it creates a *local* scope within that file. So if we were to change the previous `foo.ts` to the following (note the `export` usage): 

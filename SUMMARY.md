@@ -24,3 +24,4 @@
   * [Type Compatability](docs/types/type-compatability.md)
 * [TIPs](docs/tips/main.md)
   * [Modules](docs/tips/modules.md)
+  * [globals.d.ts](docs/tips/globals.md)
