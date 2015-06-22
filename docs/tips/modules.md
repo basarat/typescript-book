@@ -44,7 +44,7 @@ Here is how to chose which one is right for you:
 
 I recommend that for new projects you just use `--module system`. But it is good to be aware of this compiler option.
 
-### Pick and choose 
+### Import type only
 The following statement:
 
 ```ts
@@ -55,15 +55,86 @@ actually imports *two* things:
 * The type information from the imported file.
 * Takes are runtime dependency on the `foo` module.
 
-You can pick and choose so that only *one* of these things happen. Before continuing you might want to recap the [*declaration spaces*](../project/declarationspaces.md) section of the book.
+You can pick and choose so that only *the type information* is loaded and no runtime dependency occurs. Before continuing you might want to recap the [*declaration spaces*](../project/declarationspaces.md) section of the book.
 
-### Import type only
+If you do not use the imported name in the variable declaration space then the import is completely removed from the generated JavaScript. This is best explained with examples. Once you understand this we will present you with use cases.
 
-If you do not use the 
+#### Example 1
+```ts
+import foo = require('foo');
+```
+will generate the JavaScript: 
 
-### Lazy loading
+```js
+
+```
+Thats right. An *empty* file as foo is not used.
+
+#### Example 2
+```ts
+import foo = require('foo');
+var bar: foo;
+```
+will generate the JavaScript:
+```js
+var bar;
+```
+This is because `foo` (or any of its properties e.g. `foo.bas`) is never used as a variable.
+
+#### Example 3
+```ts
+import foo = require('foo');
+var bar = foo;
+```
+will generate the JavaScript (assuming commonjs):
+```js
+var foo = require('foo');
+var bar = foo;
+```
+This is because `foo` is used as a variable.
 
 
-// TODO: es6 modules
+### Use case: Lazy loading
+Type inference needs to be done *upfront*. This means that if you want to use some type from a file `foo` in a file `bar` you will have to do: 
+
+```ts
+import foo = require('foo');
+var bar: foo.SomeType;
+```
+However you might want to only load the file `foo` at runtime under certain conditions. For such cases you should use the `import`ed name only in *type annotations* and **not** as a *variable*. This removes any *upfront* runtime dependency code being injected by TypeScript. Then *manually import* the actual module using code that is specific to your module loader. 
+
+As an example, consider the following `commonjs` based code where we only load a module `'foo'` on a certain function call
+
+```ts
+import foo = require('foo');
+
+export function loadFoo(){
+    // This is lazy loading `foo` and using the original module *only* as a type annotation
+    var _foo: typeof foo = require('foo');
+    // Now use `_foo` as a variable instead of `foo`.
+}
+```
+
+A similar sample in `amd` (using requirejs) would be: 
+```ts
+import foo = require('foo');
+
+export function loadFoo(){
+    // This is lazy loading `foo` and using the original module *only* as a type annotation
+    require(['foo'], (_foo: typeof foo) => {
+        // Now use `_foo` as a variable instead of `foo`.    
+    });
+}
+```
+
+This pattern is commonly used:
+* in web apps where you load certain JavaScript on particular routes 
+* in node applications where you only load certain modules if needed to speed up application bootup.
+
+### Use case: Breaking Circular dependencies
+
+Similar to the lazy loading use case certain module loaders (commonjs/node and amd/requirejs) don't work well with circular dependencies. In such cases it is useful to have *lazy loading* code in one direction and loading the modules upfront in the other direction.
+
+[](// TODO: es6 modules)
 
 {% include "footer.md" %}
