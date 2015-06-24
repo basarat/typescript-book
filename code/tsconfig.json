@@ -23,6 +23,7 @@
         "./es6/template-strings.ts",
         "./es6/test.ts",
         "./testing.ts",
+        "./tips/mixins.ts",
         "./types/types.ts"
     ]
 }
