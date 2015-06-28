@@ -24,6 +24,8 @@
         "./es6/test.ts",
         "./testing.ts",
         "./tips/mixins.ts",
+        "./types/lib/exclude/nolibd.ts",
+        "./types/lib/usage/libd.ts",
         "./types/types.ts"
     ]
 }
