@@ -1,2 +1,3 @@
-exports.foo = 123;
-exports.bar = exports.foo.toString();
+var foo = 123;
+var bar = foo.toString();
+var test = window;

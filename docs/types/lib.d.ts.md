@@ -29,7 +29,27 @@ So now that you understand the importance of `lib.d.ts` what does its contents l
 
 The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`. 
 
+Lets look at a sample *variable* declaration, e.g. `window` is defined as:
+```ts
+declare var window: Window;
+```
+That is just a simple `declare var` followed by the variable name (here `window`) and an interface for a type annotation (here the `Window` interface). These variables generally point to some global *interface* e.g. here is a small sample of the (actually quite massive) `Window` interface: 
+
+```ts
+interface Window extends EventTarget, WindowTimers, WindowSessionStorage, WindowLocalStorage, WindowConsole, GlobalEventHandlers, IDBEnvironment, WindowBase64 {
+    animationStartTime: number;
+    applicationCache: ApplicationCache;
+    clientInformation: Navigator;
+    closed: boolean;
+    crypto: Crypto;
+```
+You can see that here is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisence`.
+
+There is a good reason for using *interfaces* for these globals. It allows you to *add additional properties* to these globals *without* a need to change `lib.d.ts`. We will cover this concept next.
+
 ### Modifying native types
+
+// TODO:
 
 Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions
 
