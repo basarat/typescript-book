@@ -44,6 +44,8 @@ interface Window extends EventTarget, WindowTimers, WindowSessionStorage, Window
     clientInformation: Navigator;
     closed: boolean;
     crypto: Crypto;
+    // so on and so forth...
+} 
 ```
 You can see that here is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisence`.
 
