@@ -1,6 +1,6 @@
 ### Arrow Functions
 
-Lovingly called the *fat arrow* (becuase `->` is a thin arrow and `=>` is a fat arrow) and also called a *lambda function* (because of other languages). Another commonly used feature is the fat arrow function `()=>something`. The motivation for a *fat arrow* is: 
+Lovingly called the *fat arrow* (because `->` is a thin arrow and `=>` is a fat arrow) and also called a *lambda function* (because of other languages). Another commonly used feature is the fat arrow function `()=>something`. The motivation for a *fat arrow* is: 
 1. You don't need to keep typing `function`
 2. It lexically captures the meaning of `this`
 
