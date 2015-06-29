@@ -29,6 +29,8 @@ So now that you understand the importance of `lib.d.ts` what does its contents l
 
 The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`. 
 
+The simplest way to discover what is what is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (atom-typescript has great support for this).
+
 Lets look at a sample *variable* declaration, e.g. `window` is defined as:
 ```ts
 declare var window: Window;
@@ -49,9 +51,88 @@ There is a good reason for using *interfaces* for these globals. It allows you t
 
 ### Modifying native types
 
-// TODO:
+Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to get associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../tips/globals.md) for this purpose.
 
-Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions
+Here are a few example cases where we add stuff to `window`, `Math`, `Date`: 
+
+#### Example `window`
+
+Just add stuff to the `Window` interface e.g. 
+
+```ts
+interface Window {
+    helloWorld():void;
+}
+```
+This will allow you to use it in a *type safe* manner: 
+
+```ts
+// Add it at runtime
+window.helloWorld = () => console.log('hello world');
+// Call it
+window.helloWorld();
+// Misuse it and you get an error: 
+window.helloWorld('gracius'); // Error: Supplied parameters do not match the signature of the call target
+```
+
+#### Example `Math`
+The global variable `Math` is defined in `lib.d.ts` as (again, use your dev tools to navigate to definition): 
+
+```ts
+/** An intrinsic object that provides basic mathematics functionality and constants. */
+declare var Math: Math;
+```
+i.e. the variable `Math` is an instance of the `Math` interface. The `Math` interface is defined as: 
+
+```ts
+interface Math {
+    E: number;
+    LN10: number;
+    // others ... 
+}
+```
+This means that if you want to add stuff to the `Math` global variable you just need to add it to the `Math` global interface, e.g. consider the [`seedrandom` project](https://www.npmjs.com/package/seedrandom) which adds a `seedrandom` function to the global `Math` object. This can be declared quite easily: 
+
+```ts
+interface Math {
+    seedrandom(seed?: string);
+}
+```
+And then you can just use it: 
+
+```ts
+Math.seedrandom();
+// or
+Math.seedrandom("Any string you want!");
+```
+
+#### Example `Date`
+
+If you look the definition of the `Date` *variable* in `lib.d.ts` you will find
+
+
+Consider the project [`datejs`](https://github.com/abritinthebay/datejs). DateJS adds members to both the `Date` global variable and `Date` instances. There for a TypeScript definition for this library would look like (note that it [already exists](https://github.com/borisyankov/DefinitelyTyped/blob/master/datejs/datejs.d.ts)): 
+
+```ts
+/** DateJS Public Static Methods */
+interface DateConstructor {
+    /** Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM) */
+    today(): Date;
+    // ... so on and so forth
+}
+
+/** DateJS Public Instance Methods */
+interface Date {
+    /** Adds the specified number of milliseconds to this instance. */
+    addMilliseconds(milliseconds: number): Date;
+    // ... so on and so forth    
+}
+```
+
+This allows you to do stuff like the following in a TypeSafe manner: 
+
+
+Similar variable / interfaces exist for other things that have both static and instance member like `Number`, `String`, `RegExp` etc.
 
 ### Using your own custom lib.d.ts
 As we mentioned earlier using the `noLib` boolean compiler flag causes TypeScript to exclude the automatic inclusion of `lib.d.ts`. There are various reasons why this is a useful feature. Here are a few of the common ones: 
