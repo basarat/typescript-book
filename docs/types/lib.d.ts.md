@@ -108,10 +108,24 @@ Math.seedrandom("Any string you want!");
 
 #### Example `Date`
 
-If you look the definition of the `Date` *variable* in `lib.d.ts` you will find
+If you look the definition of the `Date` *variable* in `lib.d.ts` you will find: 
 
+```ts
+declare var Date: DateConstructor;
+```
+The interface `DateConstructor` is similar to what you have seen before with `Math` and `Window` in that it contains members you can use off of the `Date` global variable e.g. `Date.now()`. In addition to these members it contains *construct* signatures which allow you to create `Date` instances (e.g. `new Date()`). A snippet of the `DateConstructor` interface is shown below:
 
-Consider the project [`datejs`](https://github.com/abritinthebay/datejs). DateJS adds members to both the `Date` global variable and `Date` instances. There for a TypeScript definition for this library would look like (note that it [already exists](https://github.com/borisyankov/DefinitelyTyped/blob/master/datejs/datejs.d.ts)): 
+```ts
+interface DateConstructor {
+    new (): Date;
+    // ... other construct signatures
+    
+    now(): number;
+    // ... other member functions
+}
+```
+
+Consider the project [`datejs`](https://github.com/abritinthebay/datejs). DateJS adds members to both the `Date` global variable and `Date` instances. Therefore a TypeScript definition for this library would look like ([BTW the community has already written this for you in this case](https://github.com/borisyankov/DefinitelyTyped/blob/master/datejs/datejs.d.ts)): 
 
 ```ts
 /** DateJS Public Static Methods */
@@ -128,11 +142,33 @@ interface Date {
     // ... so on and so forth    
 }
 ```
+This allows you to do stuff like the following in a TypeSafe manner:
 
-This allows you to do stuff like the following in a TypeSafe manner: 
+```ts
+var today = Date.today();
+var todayAfter1second = today.addMilliseconds(1000);
+```
 
+#### Example `string`
 
-Similar variable / interfaces exist for other things that have both static and instance member like `Number`, `String`, `RegExp` etc.
+If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface impacts string *literals* as well as demonstrated in the below code sample: 
+
+```ts
+
+interface String {
+    endsWith(suffix: string): boolean;
+}
+
+String.prototype.endsWith = function(suffix: string): boolean {
+    var str: string = this;
+    return str && str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+console.log('foo bar'.endsWith('bas')); // false
+console.log('foo bas'.endsWith('bas')); // true
+```
+
+Similar variable / interfaces exist for other things that have both static and instance member like `Number`, `Boolean`, `RegExp` etc. and these interfaces affect literal instances of these types as well.
 
 ### Using your own custom lib.d.ts
 As we mentioned earlier using the `noLib` boolean compiler flag causes TypeScript to exclude the automatic inclusion of `lib.d.ts`. There are various reasons why this is a useful feature. Here are a few of the common ones: 
@@ -146,5 +182,5 @@ Note: Be careful with `--noLib`. Once you are in noLib land, if you chose to sha
 
 ### Compiler target effect on `lib.d.ts`
 
-Setting the compiler target to be `es6` causes the `lib.d.ts` to include *addtional* ambient declarations for more modern stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others its problematic as it compiles *code generation* with *code ambience*. For people that want to compile with both targets it is recommended that they compile with `--noLib` and include their own cutomized `lib.d.ts` as mentioned before.
+Setting the compiler target to be `es6` causes the `lib.d.ts` to include *addtional* ambient declarations for more modern stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others its problematic as it conflates *code generation* with *code ambience*. For people that want to compile with both targets *and actually use the modern es6 features* using poly-fills, it is recommended that they compile with `--noLib` and include their own customized `lib.d.ts` as mentioned before.
 

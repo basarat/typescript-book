@@ -20,7 +20,7 @@
   * [tsconfig.json](docs/project/tsconfig.md)
 * [TypeScript's Type System](docs/types/type-system.md)
   * [Ambient Declarations](docs/types/ambient-declarations.md)
-  * [`lib.d.ts`](docs/types/lib.d.ts-wip.md)
+  * [`lib.d.ts`](docs/types/lib.d.ts.md)
   * [Functions](docs/types/type-compatability.md)
   * [Type Compatability](docs/types/type-compatability.md)
 * [TIPs](docs/tips/main.md)
