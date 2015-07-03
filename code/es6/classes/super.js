@@ -40,3 +40,21 @@ var bse;
         return Child;
     })(Base);
 })(bse || (bse = {}));
+var quz;
+(function (quz) {
+    var Base = (function () {
+        function Base() {
+            this.log = function () { console.log('hello world'); };
+        }
+        return Base;
+    })();
+    var Child = (function (_super) {
+        __extends(Child, _super);
+        function Child() {
+            _super.apply(this, arguments);
+        }
+        Child.prototype.logWorld = function () { _super.prototype.log.call(this); };
+        ;
+        return Child;
+    })(Base);
+})(quz || (quz = {}));

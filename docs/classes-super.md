@@ -32,7 +32,7 @@ var Child = (function (_super) {
 ```
 Notice `_super.prototype.log.call(this)`.
 
-This means that you cannot use `super` on member properties. Instead you should just use `this`. Note that TypeScript will warn you if you try to misuse `super`, 
+This means that you cannot use `super` on member properties. Instead you should just use `this`.
 
 ```ts
 class Base {
@@ -45,5 +45,20 @@ class Child extends Base {
 ```
 
 Notice since there is only one `this` shared between the `Base` and the `Child` class you need to use *different* names (here `log` and `logWorld`).
+
+Also Note that TypeScript will warn you if you try to misuse `super`:
+
+```ts
+module quz {
+    class Base {
+        log = () => { console.log('hello world'); }
+    }
+
+    class Child extends Base {
+        // ERROR : only `public` and `protected` methods of base class are accessible via `super`
+        logWorld() { super.log() }; 
+    }
+}
+```
 
 {% include "footer.md" %}
