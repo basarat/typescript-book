@@ -5,6 +5,7 @@
 * [Future JavaScript Now](docs/future-javascript.md)
   * [Classes](docs/classes.md)
     * [Classes Emit](docs/classes-emit.md)
+    * [Classes Super](docs/classes-super.md)
   * [Arrow Functions](docs/arrow-functions.md)
   * [Rest Parameters](docs/rest-parameters.md)
   * [let](docs/let.md)
