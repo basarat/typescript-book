@@ -13,6 +13,7 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
+        "./abstract.ts",
         "./class.ts"
     ]
 }
