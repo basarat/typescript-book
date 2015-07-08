@@ -8,7 +8,7 @@ var foo = {};
 foo.bar = 123; // error : property 'bar' does not exist on `{}`
 foo.bas = 'hello'; // error : property 'bas' does not exist on `{}`
 ```
-Here the code errors because the *inferred* type of `foo` is `{}` i.e. an object with zero properties. Therefore you are not allowed to add `bar` or `bas` to it. You can fix this simply by a type assertion:
+Here the code errors because the *inferred* type of `foo` is `{}` i.e. an object with zero properties. Therefore you are not allowed to add `bar` or `bas` to it. You can fix this simply by a type assertion `as Foo`:
 
 ```ts
 interface Foo {
@@ -16,8 +16,8 @@ interface Foo {
     bas: string;
 }
 var foo = {} as Foo;
-foo.bar = 123; // error : property 'bar' does not exist on `{}`
-foo.bas = 'hello'; // error : property 'bas' does not exist on `{}`
+foo.bar = 123;
+foo.bas = 'hello';
 ```
 
 ### `as foo` vs. `<foo>`

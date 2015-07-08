@@ -12,8 +12,8 @@ module assert {
         bas: string;
     }
     var foo = {} as Foo;
-    foo.bar = 123; // error : property 'bar' does not exist on `{}`
-    foo.bas = 'hello'; // error : property 'bas' does not exist on `{}`
+    foo.bar = 123;
+    foo.bas = 'hello';
 }
 
 module sdfsdfsdf {
