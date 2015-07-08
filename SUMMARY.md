@@ -26,4 +26,6 @@
   * [Ambient Declarations](docs/types/ambient-declarations.md)
   * [`lib.d.ts`](docs/types/lib.d.ts.md)
   * [Functions](docs/types/type-compatability.md)
+  * [Type Assertion](docs/types/type-assertion.md)
   * [Type Compatability](docs/types/type-compatability.md)
+* [JSX](docs/jsx/tsx.md)
