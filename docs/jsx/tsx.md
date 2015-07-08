@@ -64,4 +64,5 @@ TypeScript provides you with the ability to use something other than React with 
         * You can control which `class` must be inherited by components by customizing the default `interface ElementClass extends React.Component<any, any> { }` declaration.
         * You can control which property is used to type check the attributes (the default is `props`) by customizing the `declare module JSX { interface ElementAttributesProperty { props: {}; } }` declaration.
 
+
 {% include "footer.md" %}
