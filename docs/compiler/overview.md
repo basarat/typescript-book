@@ -25,7 +25,7 @@ This is the interface provided by the TypeChecker.
 * `CompilerHost`
 This is used by the `Program` to interact with the `System`.
 * `Node`
-A AST node.
+An AST node.
 
 ## File: System
 All interaction of the TypeScript compiler with the operating system goes through a `System` interface. Both the interface and its implementations (`WScript` and `Node`) are defined in `system.ts`. You can think of it as the *Operating Environment* (OE).
