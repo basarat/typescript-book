@@ -1,5 +1,8 @@
 ## Program
 
+The compilation context ([a concept we covered previously](docs/project/compilation-context.md)) is represented within the TypeScript compiler as a `Program`. It consists of `SourceFile`s and compiler options.
+
+
 ### Usage of `CompilerHost`
 Its interaction mechanism with the OE:
 
@@ -11,7 +14,4 @@ There are other users of `System` as well (e.g. tests).
 
 ### SourceFile
 
-* `SyntaxKind.SourceFile`
-* `interface SourceFile`.
-
-The `program` consists of a bunch of source files. A `sourceFile` is actually a top-level AST node as well (`SyntaxKind.SourceFile`). Instances implement `interface SourceFile`.
+The program provides an API to get the Source Files `getSourceFiles(): SourceFile[];`. Each is represented as a root-level node for an AST (called `SourceFile`). 

@@ -33,3 +33,4 @@
 * [TypeScript Compiler](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)
+    * [TIP: Visit Children](docs/compiler/ast-tip-children.md)
