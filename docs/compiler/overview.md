@@ -1,5 +1,5 @@
 # Compiler
-The typescript compiler source is located under the [`src/compiler`] folder : https://github.com/Microsoft/TypeScript/tree/master/src/compiler
+The typescript compiler source is located under the [`src/compiler`](https://github.com/Microsoft/TypeScript/tree/master/src/compiler) folder.
 
 It is split into the follow key parts:
 * Scanner (`scanner.ts`)
