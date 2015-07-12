@@ -29,3 +29,6 @@ An AST node.
 
 ## File: System
 `system.ts`. All interaction of the TypeScript compiler with the operating system goes through a `System` interface. Both the interface and its implementations (`WScript` and `Node`) are defined in `system.ts`. You can think of it as the *Operating Environment* (OE).
+
+
+Note: Thanks to the TypeScript team for providing much of the docs : https://github.com/Microsoft/TypeScript/wiki/Architectural-Overview that are used to write this story.

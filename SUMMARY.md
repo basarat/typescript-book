@@ -34,3 +34,4 @@
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)
     * [TIP: Visit Children](docs/compiler/ast-tip-children.md)
+    * [Trivia](docs/compiler/ast-trivia.md)
