@@ -1,7 +1,3 @@
-## Compilation Context
-The compilation context is basically just a fancy term for grouping of the files that TypeScript will parse and analyze to determine what is valid and what isn't. A great way to define this logical grouping (we also like to use the term *project*) is using a `tsconfig.json` file.
-
-
 ### Basic
 It is extremely easy to get started with tsconfig.json as the basic file you need is:
 ```json
@@ -32,6 +28,4 @@ Good IDEs come with built in support for on the fly `ts` to `js` compilation. If
 * Just run `tsc` and it will look for `tsconfig.json` in the current as well as all parent folders till it finds it.
 * Run `tsc -p ./path-to-project-directory`. Of course the path can be a complete or relative to the current directory.
 
-You can even start the TypeScript compiler in *watch* mode using `tsc -w` and it will watch your TypeScript files for changes.
-
-{% include "footer.md" %}
+You can even start the TypeScript compiler in *watch* mode using `tsc -w` and it will watch your TypeScript project files for changes.
