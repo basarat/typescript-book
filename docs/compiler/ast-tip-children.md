@@ -19,6 +19,8 @@ export function forEachChild<T>(node: Node, cbNode: (node: Node) => T, cbNodeArr
                 return visitNode(cbNode, (<IfStatement>node).expression) ||
                     visitNode(cbNode, (<IfStatement>node).thenStatement) ||
                     visitNode(cbNode, (<IfStatement>node).elseStatement);
+
+            // .... lots more
 ```
 
 Basically it checks `node.kind` and based on that assumes an interface offered by the `node` and calls the `cbNode` on the children.
