@@ -7,11 +7,45 @@ It is split into the follow key parts:
 * Binder (`bindder.ts`)
 * Checker (`checker.ts`)
 * Emitter (`emitter.ts`)
-* Program (`program.ts`)
 
 Each of these get their own unique files in the source. These parts will be explained later on in this chapter.
 
-There are a few additional files in the TypeScript compiler that provide utilities to many of these key portions:
+## Syntax vs. Semantics
+Just because something is *syntactically* correct doesn't mean it is *semantically* correct. Consider the following piece of TypeScript code which although *syntactically* valid is *semantically* wrong 
+
+```ts
+var foo: number = "not a number";
+```
+
+`Semantic` means "meaning" in English. This concept is useful to have in your head.
+
+## Processing Overview
+The following is a quick review of how these key parts of the TypeScript compiler compose: 
+
+```code
+SourceCode ~~ scanner ~~> Token Stream 
+```
+
+```code
+Token Stream ~~ parser ~~> AST
+```
+
+```code
+AST ~~ binder ~~> Symbols
+```
+`Symbol` is the primary building block of the TypeScript *semantic* system. As shown the symbols are created as a result of binding. Symbols connect declaration nodes in the AST to other declarations contributing to the same entity. 
+
+Symbols + AST are what is used by the checker to *semantically* validate the source code
+```code
+AST + Symbols ~~ checker ~~> Type Validation
+```
+
+Finally When a JS output is requested: 
+```code
+AST + Checker ~~ emitter ~~> JS 
+```
+
+There are a few additional files in the TypeScript compiler that provide utilities to many of these key portions which we cover next.
 
 ## File: Utilities
 `core.ts` : core utilities used by the TypeScript compiler
@@ -30,5 +64,4 @@ An AST node.
 ## File: System
 `system.ts`. All interaction of the TypeScript compiler with the operating system goes through a `System` interface. Both the interface and its implementations (`WScript` and `Node`) are defined in `system.ts`. You can think of it as the *Operating Environment* (OE).
 
-
-Note: Thanks to the TypeScript team for providing much of the docs : https://github.com/Microsoft/TypeScript/wiki/Architectural-Overview that are used to write this story.
+Now that you have an overview of the major files, we can look at the concept of `Program`

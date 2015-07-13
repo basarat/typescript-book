@@ -20,6 +20,7 @@ export function makeTsGlobal(typescriptServices?: string) {
     (global as any).ts = sandbox.ts;
 }
 makeTsGlobal();
+
 export function syntaxKindToName(kind: ts.SyntaxKind) {
     return (<any>ts).SyntaxKind[kind];
 }

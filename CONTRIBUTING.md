@@ -14,3 +14,6 @@ Also you can mostly just edit the `.md` files in [`/docs`](https://github.com/ba
 
 #### More Gitbook Tips
 Links best work if they are relative (e.g `./foo.md`) to the *current* file.
+
+### TypeScript Compiler Docs
+Thanks to the TypeScript team for providing much of the docs : https://github.com/Microsoft/TypeScript/wiki/Architectural-Overview that are used to write the compiler story.

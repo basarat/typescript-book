@@ -1,6 +1,6 @@
 ## Program
 
-The compilation context ([a concept we covered previously](docs/project/compilation-context.md)) is represented within the TypeScript compiler as a `Program`. It consists of `SourceFile`s and compiler options.
+Defined in `program.ts`. The compilation context ([a concept we covered previously](docs/project/compilation-context.md)) is represented within the TypeScript compiler as a `Program`. It consists of `SourceFile`s and compiler options.
 
 
 ### Usage of `CompilerHost`
