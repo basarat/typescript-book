@@ -17,6 +17,9 @@ So:
 
 Now create a new `.ts` TypeScript file and start hacking away. AtomTS will take care of compiling it to `.js` and create a default [`tsconfig.json` TypeScript project file](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) for you.
 
+## NTypeScript
+Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released. For this purpose we have a [Nightly build of TypeScript setup called NTypeScript](https://github.com/TypeStrong/ntypescript). you use it the same way you would use `typescript` but just have an `n` prefix for all things (binary : `ntsc`, require: `ntypescript`). This is also the compiler used by atom-typescript. 
+
 With a dev setup out of the way lets jump into TypeScript syntax.
 
 {% include "footer.md" %}
