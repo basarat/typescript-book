@@ -45,5 +45,15 @@ while (token != ts.SyntaxKind.EndOfFileToken) {
 }
 ```
 
+This will print out the following : 
+
+```
+VarKeyword
+Identifier
+FirstAssignment
+FirstLiteralToken
+SemicolonToken
+```
+
 ### Standalone scanner
 You can create a standalone scanner using `createScanner` and use `setText`/`setTextPos` to scan at different points in a file for your amusement.
