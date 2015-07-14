@@ -36,6 +36,6 @@ var bar = foo; // allowed
 ```
 Using an `import` in `bar.ts` not only allows you to bring in stuff from other files, but also marks the file `bar.ts` as a *module* and therefore `bar.ts` doesn't pollute the global namespace either.
 
-What JavaScript is generated from a given TypeScript file that uses external modules is driven by the compiler flag called `module`. We will cover this flag after we take a look at `tsconfig.json`.
+What JavaScript is generated from a given TypeScript file that uses external modules is driven by the compiler flag called `module`.
 
 {% include "footer.md" %}
