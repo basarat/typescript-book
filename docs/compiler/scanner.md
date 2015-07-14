@@ -49,5 +49,10 @@ FirstLiteralToken
 SemicolonToken
 ```
 
+### Scanner State
+After you call `scan` the scanner updates its local state (position in the scan, current token details etc). The scanner provides a bunch of utility functions to get the current scanner state.
+
+// TODO: document a few of these and provide a sample.
+
 ### Standalone scanner
-You can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.
+Even though the parser has a singleton scanner you can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.
