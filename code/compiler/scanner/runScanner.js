@@ -10,7 +10,7 @@ function initializeState(text) {
 }
 initializeState("\nvar foo = 123;\n");
 var token = scanner.scan();
-while (token != 1) {
+while (token != ntypescript_1.SyntaxKind.EndOfFileToken) {
     console.log(ntypescript_1.syntaxKindToName(token));
     token = scanner.scan();
 }

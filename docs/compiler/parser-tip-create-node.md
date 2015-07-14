@@ -1,0 +1,22 @@
+### Node creation
+
+AST creation is the responsibility of the `parser` as we saw in the *overview*. The parser has a bunch of `parserFoo` functions with bodies that create `Foo` nodes. These are generally called (from other parser functions) at a time where a `Foo` node is expected. A typical sample of this process is the `parseEmptyStatement()` function which is used to parse out empty statements like `;;;;;;`. Here is the function in its entirety
+
+```ts
+function parseEmptyStatement(): Statement {
+    let node = <Statement>createNode(SyntaxKind.EmptyStatement);
+    parseExpected(SyntaxKind.SemicolonToken);
+    return finishNode(node);
+}
+```
+
+It shows three critical functions `createNode`, `parseExpected` and `finishNode`.
+
+#### `createNode`
+The parser's `createNode` function `function createNode(kind: SyntaxKind, pos?: number): Node` is responsible for creating a Node, setting up its `SyntaxKind` as passed in, and set the initial position if passed in (or use the position from the current scanner state). 
+
+#### `parseExpected`
+The parser's `parseExpected` function `function parseExpected(kind: SyntaxKind, diagnosticMessage?: DiagnosticMessage): boolean` will check that the current token in the parser state matches the desired `SyntaxKind`. If not it will either report the `diagnosticMessage` sent in or create a generic one of the form `foo expected`. It internally uses the `parseErrorAtPosition` function (which uses the scanning positions) to give good error reporting.
+
+### `finishNode`
+The parser's `finishNode` function `function finishNode<T extends Node>(node: T, end?: number): T` sets up the `end` position for the node and additional useful stuff like the `parserContextFlags` it was parsed under as well as if there were any errors before parsing this node (if there were then we cannot reuse this AST node in incremental parsing).
