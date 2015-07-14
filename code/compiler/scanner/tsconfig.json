@@ -21,10 +21,6 @@
     ],
     "files": [
         "./runScanner.ts",
-        "./src/core.ts",
-        "./src/diagnosticInformationMap.generated.ts",
-        "./src/scanner.ts",
-        "./src/types.ts",
         "./typings/node/node.d.ts",
         "./typings/tsd.d.ts"
     ]

@@ -6,20 +6,15 @@ SourceCode ~~ scanner ~~> Token Stream ~~ parser ~~> AST
 ```
 
 ### Usage by Parser
-There is a *singleton* `scanner` created in `parser.ts` to avoid the cost of creating scanners over and over again. This scanner is then *primed* by the parser on demand using the `initializeState` function. 
+There is a *singleton* `scanner` created in `parser.ts` to avoid the cost of creating scanners over and over again. This scanner is then *primed* by the parser on demand using the `initializeState` function.
 
-Here is a *simplied* version of the actual code in the parser that you can run demonstrating this concept: 
+Here is a *simplied* version of the actual code in the parser that you can run demonstrating this concept:
 
 ```ts
-
-import ts = require('ntypescript');
-
-export function syntaxKindToName(kind: ts.SyntaxKind) {
-    return (<any>ts).SyntaxKind[kind];
-}
+import {createScanner, syntaxKindToName, SyntaxKind} from "ntypescript";
 
 // TypeScript has a singelton scanner
-const scanner = ts.createScanner(ts.ScriptTarget.Latest, /*skipTrivia*/ true);
+const scanner = createScanner(ts.ScriptTarget.Latest, /*skipTrivia*/ true);
 
 // That is initialized using a function `initializeState` similar to
 function initializeState(text: string) {
@@ -31,21 +26,20 @@ function initializeState(text: string) {
     scanner.setLanguageVariant(ts.LanguageVariant.Standard);
 }
 
-// Sample usage 
+// Sample usage
 initializeState(`
 var foo = 123;
 `);
 
 // Start the scanning
 var token = scanner.scan();
-while (token != ts.SyntaxKind.EndOfFileToken) {
-    var name = syntaxKindToName(token);
-    console.log(name);
+while (token != SyntaxKind.EndOfFileToken) {
+    console.log(syntaxKindToName(token));
     token = scanner.scan();
 }
 ```
 
-This will print out the following : 
+This will print out the following :
 
 ```
 VarKeyword
@@ -56,4 +50,4 @@ SemicolonToken
 ```
 
 ### Standalone scanner
-You can create a standalone scanner using `createScanner` and use `setText`/`setTextPos` to scan at different points in a file for your amusement.
+You can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.
