@@ -1,0 +1,11 @@
+version: 1.0.{build}
+os: MinGW
+environment:
+  access_token:
+    secure: keMAbmi7iJ7xgQfIIv8IWFhu2h/ghgJc43OzQ2Fr554ZPQzhohZ9/+2TA3886VCo
+build_script:
+    - prepare.sh
+on_success:
+    - git config --global credential.helper store
+    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+    - release.sh

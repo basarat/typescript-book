@@ -12,6 +12,9 @@ Note: serve needs port `35729` (for live reload) and `4000` for serving http://l
 
 Also you can mostly just edit the `.md` files in [`/docs`](https://github.com/basarat/typescript-book/docs) using github and create a Pull Request (PR).
 
+# Code
+All the code for the book is in the `/code` folder. Tested with `atom-typescript`.
+
 #### More Gitbook Tips
 Links best work if they are relative (e.g `./foo.md`) to the *current* file.
 
