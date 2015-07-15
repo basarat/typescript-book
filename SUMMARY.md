@@ -37,3 +37,5 @@
     * [TIP: SyntaxKind enum](docs/compiler/ast-tip-syntaxkind.md)
     * [Trivia](docs/compiler/ast-trivia.md)
   * [Scanner](docs/compiler/scanner.md)
+  * [Parser](docs/compiler/parser.md)
+    * [Node Creation](docs/compiler/node-creation.md)
