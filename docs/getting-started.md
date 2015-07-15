@@ -17,6 +17,14 @@ So:
 
 Now create a new `.ts` TypeScript file and start hacking away. AtomTS will take care of compiling it to `.js` and create a default [`tsconfig.json` TypeScript project file](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) for you.
 
+## Getting the Source Code
+The source for this book is available in the books github repository https://github.com/basarat/typescript-book/tree/master/code most of the code samples can be copied in to atom-typescript and run as is. For code samples that need additional setup (e.g. npm modules), we will link you to the code sample before presenting the code. e.g.
+
+`this/will/be/the/link/to/the/code.ts`
+```ts
+      // This will be the code under discussion
+``
+
 ## NTypeScript
 Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released. For this purpose we have a [Nightly build of TypeScript setup called NTypeScript](https://github.com/TypeStrong/ntypescript). you use it the same way you would use `typescript` but just have an `n` prefix for all things (binary : `ntsc`, require: `ntypescript`). This is also the compiler used by atom-typescript. 
 
