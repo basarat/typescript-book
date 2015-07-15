@@ -4,7 +4,7 @@ The typescript compiler source is located under the [`src/compiler`](https://git
 It is split into the follow key parts:
 * Scanner (`scanner.ts`)
 * Parser (`parser.ts`)
-* Binder (`bindder.ts`)
+* Binder (`binder.ts`)
 * Checker (`checker.ts`)
 * Emitter (`emitter.ts`)
 
