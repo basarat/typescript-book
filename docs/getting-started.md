@@ -22,8 +22,8 @@ The source for this book is available in the books github repository https://git
 
 `this/will/be/the/link/to/the/code.ts`
 ```ts
-      // This will be the code under discussion
-``
+// This will be the code under discussion
+```
 
 ## NTypeScript
 Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released. For this purpose we have a [Nightly build of TypeScript setup called NTypeScript](https://github.com/TypeStrong/ntypescript). you use it the same way you would use `typescript` but just have an `n` prefix for all things (binary : `ntsc`, require: `ntypescript`). This is also the compiler used by atom-typescript. 
