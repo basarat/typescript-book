@@ -19,8 +19,8 @@ Program ->
 
 The `parseSourceFile` not only primes the state for the Parser but also primes the state for the `scanner` by calling `initializeState`. It then goes on to parse the source file using `parseSourceFileWorker`. 
 
-### Sample
-Here is a sample code that uses the TypeScript's parser to get the AST of a source file (using `ts.createSourceFile`), and then print it.
+### Sample Usage
+Before we dig too deep into the parser internals, here is a sample code that uses the TypeScript's parser to get the AST of a source file (using `ts.createSourceFile`), and then print it.
 
 `code/compiler/parser/runParser.ts`
 ```ts
