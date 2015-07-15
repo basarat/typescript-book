@@ -20,8 +20,8 @@
         "!./node_modules/**/*"
     ],
     "files": [
-        "./runScanner.ts",
-        "./runScannerWithPositions.ts",
+        "./scanner/runScanner.ts",
+        "./scanner/runScannerWithPositions.ts",
         "./typings/node/node.d.ts",
         "./typings/tsd.d.ts"
     ]
