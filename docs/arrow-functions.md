@@ -3,6 +3,7 @@
 Lovingly called the *fat arrow* (because `->` is a thin arrow and `=>` is a fat arrow) and also called a *lambda function* (because of other languages). Another commonly used feature is the fat arrow function `()=>something`. The motivation for a *fat arrow* is: 
 1. You don't need to keep typing `function`
 2. It lexically captures the meaning of `this`
+2. It lexically captures the meaning of `arguments`
 
 For a language that claims to be functional, in JavaScript you tend to be typing `function` quite a lot. The fat arrow makes it simple for you to create a function 
 ```ts
@@ -63,7 +64,7 @@ setTimeout(person.growOld,1000);
 setTimeout(function(){ console.log(person.age); },2000); // 2
 ```
 
-#### Tip on Arrow Functions
+#### Tip: Arrow Function Need
 Beyond the terse syntax, you only *need* to use the fat arrow if you are going to give the function to someone else to call. Effectively: 
 ```ts
 var growOld = person.growOld; 
@@ -75,5 +76,9 @@ If you are going to call it yourself, i.e.
 person.growOld();
 ```
 then `this` is going to be the correct calling context (in this example `person`).
+
+#### Tip: Arrow Function Danger
+
+In fact if you want `this` *to be the calling context* you should *not use the arrow function*. This is the case with callbacks used by libraries like jquery, underscore, mocha and others. If the documentation mentions functions on `this` then you should probably just use a `function` instead of a fat arrow. Similarly if you plan to use `arguments` don't use an arrow function.
 
 {% include "footer.md" %}
