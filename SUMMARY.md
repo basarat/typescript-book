@@ -38,4 +38,4 @@
     * [Trivia](docs/compiler/ast-trivia.md)
   * [Scanner](docs/compiler/scanner.md)
   * [Parser](docs/compiler/parser.md)
-    * [Node Creation](docs/compiler/node-creation.md)
+    * [Parser Functions](docs/compiler/parser-functions.md)

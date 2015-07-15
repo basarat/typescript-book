@@ -19,9 +19,41 @@ Program ->
 
 The `parseSourceFile` not only primes the state for the Parser but also primes the state for the `scanner` by calling `initializeState`. It then goes on to parse the source file using `parseSourceFileWorker`. 
 
-### `parseSourceFileWorker`
+### Sample
+Here is a sample code that uses the TypeScript's parser to get the AST of a source file (using `ts.createSourceFile`), and then print it.
 
-Starts by creating a `SourceFile` AST node. Then it goes into top down parsing starting from the `parseStatements` function. It then completes the `SourceFile` node with additional information such as its `nodeCount`, `identifierCount` and such.
+`code/compiler/parser/runParser.ts`
+```ts
+import * as ts from "ntypescript";
 
-### `parseStatements`
-It switches by the the current `token` returned from the scanner. E.g. if the current token is a `SemicolonToken` it will call out to `parseEmptyStatement` to create an AST node for an empty statement. 
+function printAllChildren(node: ts.Node, depth = 0) {
+    console.log(new Array(depth + 1).join('----'), ts.syntaxKindToName(node.kind), node.pos, node.end);
+    depth++;
+    node.getChildren().forEach(c=> printAllChildren(c, depth));
+}
+
+var sourceCode = `
+var foo = 123;
+`.trim();
+
+var sourceFile = ts.createSourceFile('foo.ts', sourceCode, ts.ScriptTarget.ES5, true);
+printAllChildren(sourceFile);
+```
+
+This will print out the following: 
+
+```ts
+SourceFile 0 14
+---- SyntaxList 0 14
+-------- VariableStatement 0 14
+------------ VariableDeclarationList 0 13
+---------------- VarKeyword 0 3
+---------------- SyntaxList 3 13
+-------------------- VariableDeclaration 3 13
+------------------------ Identifier 3 7
+------------------------ FirstAssignment 7 9
+------------------------ FirstLiteralToken 9 13
+------------ SemicolonToken 13 14
+---- EndOfFileToken 14 14
+```
+This looks like a (very right sided) tree if you tilt your head to the right. 

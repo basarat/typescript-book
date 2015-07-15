@@ -20,6 +20,7 @@
         "!./node_modules/**/*"
     ],
     "files": [
+        "./parser/runParser.ts",
         "./scanner/runScanner.ts",
         "./scanner/runScannerWithPositions.ts",
         "./typings/node/node.d.ts",

@@ -1,6 +1,17 @@
+### Parser Functions
+
+As mentioned `parseSourceFile` sets up the initial state and passes the work onto `parseSourceFileWorker` function.
+
+#### `parseSourceFileWorker`
+
+Starts by creating a `SourceFile` AST node. Then it goes into top down parsing starting from the `parseStatements` function. It then completes the `SourceFile` node with additional information such as its `nodeCount`, `identifierCount` and such.
+
+#### `parseStatements`
+It switches by the the current `token` returned from the scanner. E.g. if the current token is a `SemicolonToken` it will call out to `parseEmptyStatement` to create an AST node for an empty statement. 
+
 ### Node creation
 
-AST creation is the responsibility of the `parser` as we saw in the *overview*. The parser has a bunch of `parserFoo` functions with bodies that create `Foo` nodes. These are generally called (from other parser functions) at a time where a `Foo` node is expected. A typical sample of this process is the `parseEmptyStatement()` function which is used to parse out empty statements like `;;;;;;`. Here is the function in its entirety
+The parser has a bunch of `parserFoo` functions with bodies that create `Foo` nodes. These are generally called (from other parser functions) at a time where a `Foo` node is expected. A typical sample of this process is the `parseEmptyStatement()` function which is used to parse out empty statements like `;;;;;;`. Here is the function in its entirety
 
 ```ts
 function parseEmptyStatement(): Statement {
