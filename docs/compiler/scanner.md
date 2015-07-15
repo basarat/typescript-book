@@ -10,6 +10,7 @@ There is a *singleton* `scanner` created in `parser.ts` to avoid the cost of cre
 
 Here is a *simplied* version of the actual code in the parser that you can run demonstrating this concept:
 
+`code/compiler/scanner/runScanner.ts`
 ```ts
 import * as ts from "ntypescript";
 
@@ -29,7 +30,7 @@ function initializeState(text: string) {
 // Sample usage
 initializeState(`
 var foo = 123;
-`);
+`.trim());
 
 // Start the scanning
 var token = scanner.scan();
@@ -50,9 +51,34 @@ SemicolonToken
 ```
 
 ### Scanner State
-After you call `scan` the scanner updates its local state (position in the scan, current token details etc). The scanner provides a bunch of utility functions to get the current scanner state.
+After you call `scan` the scanner updates its local state (position in the scan, current token details etc). The scanner provides a bunch of utility functions to get the current scanner state. In the below sample we create a scanner and then use it to identify the tokens as well as their positions in the code.
 
-// TODO: document a few of these and provide a sample.
+`code/compiler/scanner/runScannerWithPosition.ts`
+```ts
+// Sample usage
+initializeState(`
+var foo = 123;
+`.trim());
+
+// Start the scanning
+var token = scanner.scan();
+while (token != ts.SyntaxKind.EndOfFileToken) {
+    let currentToken = ts.syntaxKindToName(token);
+    let tokenStart = scanner.getStartPos();
+    token = scanner.scan();
+    let tokenEnd = scanner.getStartPos();
+    console.log(currentToken, tokenStart, tokenEnd);
+}
+```
+
+This will print out the following: 
+```
+VarKeyword 0 3
+Identifier 3 7
+FirstAssignment 7 9
+FirstLiteralToken 9 13
+SemicolonToken 13 14
+```
 
 ### Standalone scanner
-Even though the parser has a singleton scanner you can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.
+Even though the typescript parser has a singleton scanner you can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.

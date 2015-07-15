@@ -11,6 +11,9 @@ function initializeState(text) {
 initializeState("\nvar foo = 123;\n".trim());
 var token = scanner.scan();
 while (token != 1) {
-    console.log(ts.syntaxKindToName(token));
+    var currentToken = ts.syntaxKindToName(token);
+    var tokenStart = scanner.getStartPos();
     token = scanner.scan();
+    var tokenEnd = scanner.getStartPos();
+    console.log(currentToken, tokenStart, tokenEnd);
 }

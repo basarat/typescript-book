@@ -21,6 +21,9 @@ var foo = 123;
 // Start the scanning
 var token = scanner.scan();
 while (token != ts.SyntaxKind.EndOfFileToken) {
-    console.log(ts.syntaxKindToName(token));
+    let currentToken = ts.syntaxKindToName(token);
+    let tokenStart = scanner.getStartPos();
     token = scanner.scan();
+    let tokenEnd = scanner.getStartPos();
+    console.log(currentToken, tokenStart, tokenEnd);
 }
