@@ -11,10 +11,10 @@ There is a *singleton* `scanner` created in `parser.ts` to avoid the cost of cre
 Here is a *simplied* version of the actual code in the parser that you can run demonstrating this concept:
 
 ```ts
-import {createScanner, syntaxKindToName, SyntaxKind} from "ntypescript";
+import * as ts from "ntypescript";
 
 // TypeScript has a singelton scanner
-const scanner = createScanner(ts.ScriptTarget.Latest, /*skipTrivia*/ true);
+const scanner = ts.createScanner(ts.ScriptTarget.Latest, /*skipTrivia*/ true);
 
 // That is initialized using a function `initializeState` similar to
 function initializeState(text: string) {
@@ -33,8 +33,8 @@ var foo = 123;
 
 // Start the scanning
 var token = scanner.scan();
-while (token != SyntaxKind.EndOfFileToken) {
-    console.log(syntaxKindToName(token));
+while (token != ts.SyntaxKind.EndOfFileToken) {
+    console.log(ts.syntaxKindToName(token));
     token = scanner.scan();
 }
 ```
