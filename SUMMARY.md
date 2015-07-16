@@ -13,6 +13,7 @@
   * [for...of](docs/for...of.md)
   * [Template Strings](docs/template-strings.md)
   * [Spread Operator](docs/spread-operator.md)
+  * [Enums](docs/enums-staging.md)
   * [Async Await](docs/async-await.md)
   * [Generators](docs/generators.md)
 * [Project](docs/project/project.md)
