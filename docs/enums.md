@@ -125,13 +125,45 @@ enum AnimalFlags {
     Endangered     = 1 << 3
 }
 ```
-Here we are using the left shift operator to move `1` around a certain level of bits to come up with bitwise disjoint numbers `0001`, `0010`, `0100` and `1000` (these are decimals `1`,`2`,`4`,`8` if you are curious). The bitwise operators `|` and `&` are your best friend when working with flags and are demonstrated below:
+Here we are using the left shift operator to move `1` around a certain level of bits to come up with bitwise disjoint numbers `0001`, `0010`, `0100` and `1000` (these are decimals `1`,`2`,`4`,`8` if you are curious). The bitwise operators `|` (or) / `&` (and) / `~` (not) are your best friend when working with flags and are demonstrated below:
 
 ```ts
 
+enum AnimalFlags {
+    None           = 0,
+    HasClaws       = 1 << 0,
+    CanFly         = 1 << 1,
+}
+
+function printAnimalAbilities(animal) {
+    var animalFlags = animal.flags;
+    if (animalFlags & AnimalFlags.HasClaws) {
+        console.log('animal has claws');
+    }
+    if (animalFlags & AnimalFlags.CanFly) {
+        console.log('animal can fly');
+    }
+    if (animalFlags == AnimalFlags.None){
+        console.log('nothing');
+    }
+}
+
+var animal = { flags: AnimalFlags.None };
+printAnimalAbilities(animal); // nothing
+animal.flags |= AnimalFlags.HasClaws;
+printAnimalAbilities(animal); // animal has claws
+animal.flags &= ~AnimalFlags.HasClaws;
+printAnimalAbilities(animal); // nothing
+animal.flags = AnimalFlags.HasClaws | AnimalFlags.CanFly;
+printAnimalAbilities(animal); // animal has claws, animal can fly
 ```
 
-Note : you can even combine these flags to create convenient shortcuts within the enum definition
+Here: 
+* we used `|=` to add flags
+* a combination of `&=` and `~` to clear a flag
+* `|` to combine flags 
+
+Note : you can combine flags to create convenient shortcuts within the enum definition e.g. `EndangeredFlyingClawedFishEating` below.
 
 ```ts
 enum AnimalFlags {
@@ -147,4 +179,36 @@ enum AnimalFlags {
 
 #### Const Enums
 
-Also `--preserveConstEnums`
+If you have an enum definition like the following: 
+
+```ts
+enum Tristate {
+    False,
+    True,
+    Unknown
+}
+
+var lie = Tristate.False;
+```
+the line `var lie = Tristate.False` is compiled to the JavaScript `var lie = Tristate.False` (yes output is same as input). This means that at execution the runtime will need to lookup `Tristate` and then `Tristate.False`. To get a performance boost here you can mark the `enum` as a `const enum`. This is demonstrated below:
+
+```ts
+const enum Tristate {
+    False,
+    True,
+    Unknown
+}
+
+var lie = Tristate.False;
+```
+generates the JavaScript: 
+```js
+var lie = 0;
+```
+
+i.e. the compiler : 
+1. *inlines* any usages of the enum (`0` instead of `Tristate.False`).
+1. does not generate any JavaScript for the enum definition (there is no `Tristate` variable at runtime) as its usages are inlined.
+
+##### Const enum preserveConstEnums
+Inlining has obvious performance benefits. The fact that there is no `Tristate` variable at runtime is simply the compiler helping you out by not generating JavaScript that is not actually used at runtime. However you might want the compiler to still generate the JavaScript version of the enum definition for stuff like *number to string* or *string to number* lookups as we saw. In this case you can use the compiler flag `--preserveConstEnums` and it will still generate the `var Tristate` definition so that you can use `Tristate["False"]` or `Tristate[0]` manually at runtime if you want. This does not impact *inlining* in any way.

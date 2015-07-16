@@ -19,6 +19,7 @@ var Tristate;
     Tristate[Tristate["True"] = 1] = "True";
     Tristate[Tristate["Unknown"] = 2] = "Unknown";
 })(Tristate || (Tristate = {}));
+var lie = Tristate.False;
 var AnimalFlags;
 (function (AnimalFlags) {
     AnimalFlags[AnimalFlags["None"] = 0] = "None";
@@ -33,12 +34,15 @@ function printAnimalAbilities(animal) {
     if (animalFlags & AnimalFlags.CanFly) {
         console.log('animal can fly');
     }
+    if (animalFlags == AnimalFlags.None) {
+        console.log('nothing');
+    }
 }
 var animal = { flags: AnimalFlags.None };
 printAnimalAbilities(animal);
 animal.flags |= AnimalFlags.HasClaws;
 printAnimalAbilities(animal);
-animal.flags &= AnimalFlags.HasClaws;
+animal.flags &= ~AnimalFlags.HasClaws;
 printAnimalAbilities(animal);
 animal.flags = AnimalFlags.HasClaws | AnimalFlags.CanFly;
 printAnimalAbilities(animal);
