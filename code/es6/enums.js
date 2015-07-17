@@ -44,5 +44,5 @@ animal.flags |= AnimalFlags.HasClaws;
 printAnimalAbilities(animal);
 animal.flags &= ~AnimalFlags.HasClaws;
 printAnimalAbilities(animal);
-animal.flags = AnimalFlags.HasClaws | AnimalFlags.CanFly;
+animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
 printAnimalAbilities(animal);

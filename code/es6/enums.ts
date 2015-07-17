@@ -57,5 +57,5 @@ animal.flags |= AnimalFlags.HasClaws;
 printAnimalAbilities(animal); // animal has claws
 animal.flags &= ~AnimalFlags.HasClaws;
 printAnimalAbilities(animal); // nothing
-animal.flags = AnimalFlags.HasClaws | AnimalFlags.CanFly;
+animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
 printAnimalAbilities(animal); // animal has claws, animal can fly
