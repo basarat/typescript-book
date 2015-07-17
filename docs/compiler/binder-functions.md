@@ -23,4 +23,5 @@ function createSymbol(flags: SymbolFlags, name: string): Symbol {
     return new Symbol(flags, name);
 }
 ```
-As you can see it is simply keeping the `symbolCount` (a local to `bindSourceFile`) up to date and creating the symbol with the specified parameters. `SymbolFlags` is a flag enum and is really used to identify additional classifications of the symbol (e.g the scope of a variable using symbol flags `FunctionScopedVariable` or `BlockScopedVariable` or others).
+As you can see it is simply keeping the `symbolCount` (a local to `bindSourceFile`) up to date and creating the symbol with the specified parameters.
+

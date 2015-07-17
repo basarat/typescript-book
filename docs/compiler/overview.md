@@ -48,7 +48,9 @@ AST + Checker ~~ emitter ~~> JS
 There are a few additional files in the TypeScript compiler that provide utilities to many of these key portions which we cover next.
 
 ## File: Utilities
-`core.ts` : core utilities used by the TypeScript compiler
+`core.ts` : core utilities used by the TypeScript compiler. A few important ones: 
+
+* `let objectAllocator: ObjectAllocator` : is a variable defined as a singleton global. It provides the definitions for `getNodeConstructor` (Nodes are covered when we look at `parser` / `AST`), `getSymbolConstructor` (Symbols are covered in `binder`), `getTypeConstructor` (Types are covered in `checker`), `getSignatureConstructor` (Signatures are the index, call and construct signatures). 
 
 ## File: Key Data Structures
 `types.ts` contains key data structures and interfaces uses throughout the compiler. Here is a sampling of a few key ones:
