@@ -43,6 +43,6 @@
   * [Binder](docs/compiler/binder.md)
     * [Binder Functions](docs/compiler/binder-functions.md)
     * [Binder Declarations](docs/compiler/binder-declarations.md)
-    * [Binder SymbolTable](docs/compiler/binder-symboltable.md)
     * [Binder Container](docs/compiler/binder-container.md)
+    * [Binder SymbolTable](docs/compiler/binder-symboltable.md)
     * [Binder Error Reporting](docs/compiler/binder-diagnostics.md)

@@ -22,3 +22,6 @@ members?: SymbolTable;                  // Class, interface or literal instance 
 exports?: SymbolTable;                  // Module exports
 ```
 
+#### `locals`
+We saw locals getting initialized by `bindChildren` based on `ContainerFlags`. Here's how it gets populated: 
+
