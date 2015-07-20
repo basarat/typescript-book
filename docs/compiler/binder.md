@@ -21,7 +21,7 @@ function Symbol(flags: SymbolFlags, name: string) {
 `SymbolFlags` is a flag enum and is really used to identify additional classifications of the symbol (e.g the scope of a variable flags `FunctionScopedVariable` or `BlockScopedVariable` or others)
 
 ### Usage by Checker
-The binder is actually used internally by the type checker. The simplified call stack looks like:
+The `binder` is actually used internally by the type `checker` which in turn is used by the `program`. The simplified call stack looks like:
 ```
 program.getTypeChecker ->
     ts.createTypeChecker (in checker)->
@@ -30,4 +30,4 @@ program.getTypeChecker ->
             // followed by
             for each SourceFile `ts.mergeSymbolTable` (in checker)
 ```
-The binder doesn't contain much internal state of its own and can be thought of as just a bunch of function located in `binder.ts` that are driven by `checker.ts`.
+The unit of work for the binder is a SourceFile. The `binder.ts` is driven by `checker.ts`.
