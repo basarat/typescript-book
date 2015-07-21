@@ -46,3 +46,6 @@
     * [Binder Container](docs/compiler/binder-container.md)
     * [Binder SymbolTable](docs/compiler/binder-symboltable.md)
     * [Binder Error Reporting](docs/compiler/binder-diagnostics.md)
+  * [Checker](docs/compiler/checker.md)
+    * [Checker Diagnostics](docs/compiler/checker-global.md)
+    * [Checker Error Reporting](docs/compiler/checker-diagnostics.md)
