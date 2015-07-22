@@ -49,3 +49,5 @@
   * [Checker](docs/compiler/checker.md)
     * [Checker Diagnostics](docs/compiler/checker-global.md)
     * [Checker Error Reporting](docs/compiler/checker-diagnostics.md)
+  * [Emitter](docs/compiler/emitter.md)
+    * [Emitter Functions](docs/compiler/emitter-functions.md)
