@@ -25,8 +25,13 @@ The source for this book is available in the books github repository https://git
 // This will be the code under discussion
 ```
 
-## NTypeScript
-Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released. For this purpose we have a [Nightly build of TypeScript setup called NTypeScript](https://github.com/TypeStrong/ntypescript). you use it the same way you would use `typescript` but just have an `n` prefix for all things (binary : `ntsc`, require: `ntypescript`). This is also the compiler used by atom-typescript. 
+## Nightly TypeScript
+Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released. For this purpose we recommend using nightly typescript versions.
+
+```
+npm install -g typescript@next
+```
+
 
 With a dev setup out of the way lets jump into TypeScript syntax.
 

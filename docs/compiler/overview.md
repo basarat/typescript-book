@@ -10,8 +10,11 @@ It is split into the follow key parts:
 
 Each of these get their own unique files in the source. These parts will be explained later on in this chapter.
 
+## NTypeScript
+We have a porject called [NTypeScript](https://github.com/TypeStrong/ntypescript) which makes it easier to play around with the compiler API e.g. by exposing internal APIs. You use it the same way you would use `typescript` but just have an `n` prefix for all things (binary : `ntsc`, require: `ntypescript`). This is also the compiler used by atom-typescript and the one we will use to present these examples.
+
 ## Syntax vs. Semantics
-Just because something is *syntactically* correct doesn't mean it is *semantically* correct. Consider the following piece of TypeScript code which although *syntactically* valid is *semantically* wrong 
+Just because something is *syntactically* correct doesn't mean it is *semantically* correct. Consider the following piece of TypeScript code which although *syntactically* valid is *semantically* wrong
 
 ```ts
 var foo: number = "not a number";
@@ -20,10 +23,10 @@ var foo: number = "not a number";
 `Semantic` means "meaning" in English. This concept is useful to have in your head.
 
 ## Processing Overview
-The following is a quick review of how these key parts of the TypeScript compiler compose: 
+The following is a quick review of how these key parts of the TypeScript compiler compose:
 
 ```code
-SourceCode ~~ scanner ~~> Token Stream 
+SourceCode ~~ scanner ~~> Token Stream
 ```
 
 ```code
@@ -33,24 +36,24 @@ Token Stream ~~ parser ~~> AST
 ```code
 AST ~~ binder ~~> Symbols
 ```
-`Symbol` is the primary building block of the TypeScript *semantic* system. As shown the symbols are created as a result of binding. Symbols connect declaration nodes in the AST to other declarations contributing to the same entity. 
+`Symbol` is the primary building block of the TypeScript *semantic* system. As shown the symbols are created as a result of binding. Symbols connect declaration nodes in the AST to other declarations contributing to the same entity.
 
 Symbols + AST are what is used by the checker to *semantically* validate the source code
 ```code
 AST + Symbols ~~ checker ~~> Type Validation
 ```
 
-Finally When a JS output is requested: 
+Finally When a JS output is requested:
 ```code
-AST + Checker ~~ emitter ~~> JS 
+AST + Checker ~~ emitter ~~> JS
 ```
 
 There are a few additional files in the TypeScript compiler that provide utilities to many of these key portions which we cover next.
 
 ## File: Utilities
-`core.ts` : core utilities used by the TypeScript compiler. A few important ones: 
+`core.ts` : core utilities used by the TypeScript compiler. A few important ones:
 
-* `let objectAllocator: ObjectAllocator` : is a variable defined as a singleton global. It provides the definitions for `getNodeConstructor` (Nodes are covered when we look at `parser` / `AST`), `getSymbolConstructor` (Symbols are covered in `binder`), `getTypeConstructor` (Types are covered in `checker`), `getSignatureConstructor` (Signatures are the index, call and construct signatures). 
+* `let objectAllocator: ObjectAllocator` : is a variable defined as a singleton global. It provides the definitions for `getNodeConstructor` (Nodes are covered when we look at `parser` / `AST`), `getSymbolConstructor` (Symbols are covered in `binder`), `getTypeConstructor` (Types are covered in `checker`), `getSignatureConstructor` (Signatures are the index, call and construct signatures).
 
 ## File: Key Data Structures
 `types.ts` contains key data structures and interfaces uses throughout the compiler. Here is a sampling of a few key ones:
