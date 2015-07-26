@@ -1,5 +1,5 @@
 ## Freshness
-(Note: you need ntypescript for this at the moment).
+(Note: you need typescript nightly for this at the moment).
 
 TypeScript provides a concept of **Freshness** to make it easier to type check object literals that would otherwise be structurally type compatible.
 
