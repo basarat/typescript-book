@@ -5,8 +5,19 @@ TypeScript supports the following forms of Destructuring (literally named after 
 1. Object Destructuring
 1. Array Destructuring
 
+It is easy to think of destructuring as an inverse of *structuring*. The method of *structuring* in JavaScript is the object literal: 
+
+```ts
+var foo = {
+    bar: {
+        bas: 123
+    }
+};
+```
+Without the awesome *structuring* support built into JavaScript creating new objects on the fly would indeed be very cumbersome. Destructuring brings the same level of convenience to getting data out of a structure.
+
 #### Object Destructuring
-Destructuring  is useful because it allows you to do in a single line, what would otherwise require multiple lines. Consider the following case:
+Destructuring is useful because it allows you to do in a single line, what would otherwise require multiple lines. Consider the following case:
 
 ```ts
 var rect = { x: 0, y: 10, width: 15, height: 20 };
@@ -16,6 +27,13 @@ var {x, y, width, height} = rect;
 console.log(x, y, width, height); // 0,10,15,20
 ```
 Here in the absence of destructuring you would have to pick off `x,y,width,height` one by one from `rect`.
+
+Additionally you can get *deep* data out of a structure using destructuring. This is shown in the following example: 
+
+```ts
+var foo = { bar: { bas: 123 } };
+var {bar: {bas}} = foo; // Effectively `var bas = foo.bar.bas;`
+```
 
 #### Array Destructuring
 A common programming question : Swap two variables without using a third one. The TypeScript solution:
