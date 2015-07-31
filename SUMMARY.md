@@ -25,6 +25,7 @@
     * [globals.d.ts](docs/project/globals.md)
   * [Namespaces](docs/project/namespaces.md)
 * [TypeScript's Type System](docs/types/type-system.md)
+  * [JS Migration Guide](docs/types/migrating.md)
   * [Ambient Declarations](docs/types/ambient-declarations.md)
   * [`lib.d.ts`](docs/types/lib.d.ts.md)
   * [Functions](docs/types/type-compatability.md)
