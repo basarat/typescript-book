@@ -54,3 +54,4 @@
   * [Emitter](docs/compiler/emitter.md)
     * [Emitter Functions](docs/compiler/emitter-functions.md)
     * [Emitter SourceMaps](docs/compiler/emitter-sourcemaps.md)
+  * [Contributing](docs/compiler/contributing.md)
