@@ -12,8 +12,9 @@ This decreases the changes of errors and increases the maintainability of your u
 ## Setup
 
 * Use files with the extension `.tsx` (instead of `.ts`).
-* Install the definitions for JSX and React into your project : (`tsd install react react-jsx --save --resolve`).
 * Use `"jsx" : "react"` in your `tsconfig.json`'s `compilerOptions`.
+* Install the definitions for JSX and React into your project : (`tsd install react --save --resolve`).
+* Import react into your `.tsx` files (`import * as React from "react"`).
 
 ## HTML Tags vs. Components
 React can either render HTML tags (strings) or React components (classes). The JavaScript emit for these elements is different (`React.createElement('div')` vs. `React.createElement(MyComponent)`). The way this is determined is by the *case* of the *first* letter. `foo` is treated as an HTML tag and `Foo` is treated as a component.
