@@ -36,7 +36,7 @@ Baselines are using to manage if there are any changes in the *expected* output 
 
 If you think these changes in generated files are valid then accept baselines using `jake baseline-accept`. The changes to `reference` baselines will now show as a git diff you can commit.
 
-> Note that if you don't run *all* tests then the `baselines-accept` will show a bunch of files as *deleted*. Don't commit this deletion, unless you ran *all* tests.
+> Note that if you don't run *all* tests then the `baseline-accept` will show a bunch of files as *deleted*. Don't commit this deletion, unless you ran *all* tests.
 
 ### Test Categories
 
