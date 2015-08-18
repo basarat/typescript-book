@@ -27,7 +27,7 @@ Additionally I like to work off branches like `bas/` to have it show up cleaner 
 There are lots of `test` and `build` options in their JakeFile. You can run *all* tests with `jake runtests`
 
 ### Baselines
-Baselines are using to manage if there are any changes in the *expected* output of the TypeScript compiler. Baselines are located in `tests/baselines`.
+Baselines are used to manage if there are any changes in the *expected* output of the TypeScript compiler. Baselines are located in `tests/baselines`.
 
 * Reference (*expected*) baselines: `tests/baselines/reference`
 * Generated (*in this test run*) baselines : `tests/baselines/local` (this folder is in **.gitignore**)
@@ -36,7 +36,7 @@ Baselines are using to manage if there are any changes in the *expected* output 
 
 If you think these changes in generated files are valid then accept baselines using `jake baseline-accept`. The changes to `reference` baselines will now show as a git diff you can commit.
 
-> Note that if you don't run *all* tests then the `baseline-accept` will show a bunch of files as *deleted*. Don't commit this deletion, unless you ran *all* tests.
+> Note that if you don't run *all* tests then use `jake baseline-accept[soft]` which will only copy over the new files and not delete the whole `reference` directory.
 
 ### Test Categories
 
