@@ -24,7 +24,7 @@ import foo = require('./foo');
 ```
 Tells the TypeScript compiler to look for a TypeScript file at the relative location `./foo.ts` or `./foo.d.ts` with respect to the current file.
 
-This is not the complete specification but its a decent mental model to have and use.
+This is not the complete specification but it's a decent mental model to have and use.
 
 ### Compiler Module Option
 The following statement:
