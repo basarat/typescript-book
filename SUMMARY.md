@@ -35,6 +35,7 @@
   * [Type Assertion](docs/types/type-assertion.md)
   * [Type Compatability](docs/types/type-compatability.md)
   * [Freshness](docs/types/freshness.md)
+* [NodeJS](docs/node/nodejs.md)
 * [JSX](docs/jsx/tsx.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
