@@ -1,1 +1,9 @@
-{}
+{ 
+  "plugins": ["edit-link"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/basarat/typescript-book/tree/master",
+      "label": "Edit This Page"
+    }
+  }
+}
