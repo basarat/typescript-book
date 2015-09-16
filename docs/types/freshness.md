@@ -1,7 +1,7 @@
 ## Freshness
 (Note: you need typescript nightly for this at the moment).
 
-TypeScript provides a concept of **Freshness** to make it easier to type check object literals that would otherwise be structurally type compatible.
+TypeScript provides a concept of **Freshness** (also called *strict object literal checking*) to make it easier to type check object literals that would otherwise be structurally type compatible.
 
 Structural typing is *extremely convenient*. Consider the following piece of code. This allows you to *very conviniently* upgrade your JavaScript to TypeScript while still preserving a level of type safety.
 
