@@ -40,5 +40,3 @@ npm install -g tsd
 ```
 
 With a dev setup out of the way lets jump into TypeScript syntax.
-
-{% include "footer.md" %}
