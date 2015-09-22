@@ -6,6 +6,7 @@
   * [Classes](docs/classes.md)
     * [Classes Emit](docs/classes-emit.md)
     * [Classes Super](docs/classes-super.md)
+    * [Classes Extensibility](docs/classes-extensibility.md-WIP)
   * [Arrow Functions](docs/arrow-functions.md)
   * [Rest Parameters](docs/rest-parameters.md)
   * [let](docs/let.md)

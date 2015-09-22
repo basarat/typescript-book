@@ -81,4 +81,15 @@ then `this` is going to be the correct calling context (in this example `person`
 
 In fact if you want `this` *to be the calling context* you should *not use the arrow function*. This is the case with callbacks used by libraries like jquery, underscore, mocha and others. If the documentation mentions functions on `this` then you should probably just use a `function` instead of a fat arrow. Similarly if you plan to use `arguments` don't use an arrow function.
 
+#### Tip: Arrow functions with libraries that use `this`
+Many libraries do this e.g `jQuery` iterables (one example http://api.jquery.com/jquery.each/) will use `this` to pass you the object that it is currently iterating over. In this case if you want to access the library passed `this` as well as the surrounding context just use a temp variable like `_self` like you would in the absence of arrow functions.
+
+```ts
+let _self = this;
+something.each(function(){
+    console.log(_self); // the lexically scoped value
+    console.log(this); // the library passed value
+});
+```
+
 {% include "footer.md" %}
