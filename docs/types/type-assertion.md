@@ -40,4 +40,4 @@ Therefore it is now recommended that you just use `as foo` for consistency.
 ### Type Assertion vs. Casting
 The reason why it's not called "type casting" is that *casting* generally implies some sort of runtime support. However *type assertions* are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.
 
-{% include "footer.md" %}
+

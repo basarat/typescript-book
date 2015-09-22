@@ -263,4 +263,4 @@ TIP: If you need to have deep hierarchies of Type annotations use an `interface`
 ## Summary
 Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in the TypeScript's Type System.
 
-{% include "footer.md" %}
+

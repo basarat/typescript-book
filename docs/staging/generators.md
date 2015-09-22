@@ -61,4 +61,4 @@ The iterator returned from the generator function can be used to control the sta
 // TODO: example
 
 
-{% include "footer.md" %}
+

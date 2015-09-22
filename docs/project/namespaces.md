@@ -60,4 +60,3 @@ One thing to note is that namespaces can be nested so you can do stuff like `nam
 
 For most projects we recommend using external modules and using `namespace` for quick demos and porting old JavaScript code.
 
-{% include "footer.md" %}

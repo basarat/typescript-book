@@ -42,4 +42,4 @@ console.log(list); // [1,2,3,4]
 #### Summary
 `apply` is something that you would inevitably do in JavaScript, so it's good to have a better syntax where you don't have that ugly `null` for the `this` argument. Also having a dedicated syntax for moving arrays out of (destructuring) or into (assignment) other arrays provides neat syntax for when you are doing array processing on partial arrays.
 
-{% include "footer.md" %}
+

@@ -11,4 +11,3 @@ iTakeItAll('foo', 'bar', 'bas', 'qux'); // ['bas','qux']
 
 Rest parameters can be used in any function be it `function`/`()=>`/`class member`.
 
-{% include "footer.md" %}

@@ -131,6 +131,6 @@ Note: This limitation may be removed in a future version of TypeScript.
 #### Summary
 Despite a few limitations, we find `let` to be extremely useful to have for the vast majority of code. It can greatly enhance your code readability and decrease the chance of a programming error.
 
-{% include "footer.md" %}
+
 
 [](https://github.com/olov/defs/blob/master/loop-closures.md)

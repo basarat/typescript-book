@@ -61,4 +61,3 @@ module quz {
 }
 ```
 
-{% include "footer.md" %}

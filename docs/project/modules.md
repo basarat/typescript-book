@@ -38,4 +38,3 @@ Using an `import` in `bar.ts` not only allows you to bring in stuff from other f
 
 What JavaScript is generated from a given TypeScript file that uses external modules is driven by the compiler flag called `module`.
 
-{% include "footer.md" %}

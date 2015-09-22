@@ -79,4 +79,4 @@ For pre ES6 compile targets the code is fairly simple. Multiline strings become 
 #### Summary
 Multiline strings and string interpolation are just great things to have in any language. It's great that you can now use them in your JavaScript (thanks TypeScript!). Tagged templates allow you to create powerful string utilities.
 
-{% include "footer.md" %}
+

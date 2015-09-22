@@ -146,4 +146,3 @@ In this section we have provided you with the motivation and design goals of Typ
 [](.ts vs. .d.ts)
 
 
-{% include "footer.md" %}

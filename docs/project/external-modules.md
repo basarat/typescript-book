@@ -137,4 +137,4 @@ Similar to the lazy loading use case certain module loaders (commonjs/node and a
 
 [](// TODO: es6 modules)
 
-{% include "footer.md" %}
+

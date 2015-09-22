@@ -80,4 +80,4 @@ var _a;
 Destructuring can make your code more readable and maintainable by reducing the line count and making the intent clear. Array destructuring can allow you to use arrays as though they were tuples.
 
 
-{% include "footer.md" %}
+

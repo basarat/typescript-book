@@ -4,4 +4,4 @@ One of the main selling points of TypeScript is that it allows you to use a bunc
 Note: Not all of these features are slated for immediate addition to JavaScript but provide great utility to your code organization and maintenance. Also note that you are free to ignore any of the constructs that don't make sense for your project, although you will end up using most of them eventually ;)
 
 
-{% include "footer.md" %}
+

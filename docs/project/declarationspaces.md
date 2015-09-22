@@ -80,4 +80,3 @@ bar = 456; // Okay
 bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
 ```
 
-{% include "footer.md" %}
