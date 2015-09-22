@@ -91,5 +91,3 @@ something.each(function(){
     console.log(this); // the library passed value
 });
 ```
-
-{% include "footer.md" %}
