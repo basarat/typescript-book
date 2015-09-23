@@ -10,6 +10,10 @@ That's it! Now you can use all the built in node modules (e.g. `import fs = requ
 
 ## Creating TypeScript node modules
 
-You can even use other node modules written in TypeScript (e.g. `npm install csx` [for csx](https://www.npmjs.com/package/csx) usage: `import csx = require('csx')`). 
+You can even use other node modules written in TypeScript. As a module author, two things you should do: 
 
-One trick here is that you might want to have a `typings` field (e.g. `src/index`) in your `package.json` similar to the `main` field to point to the default TypeScript definition export. For an example look at [`package.json` for csx](https://github.com/basarat/csx/blob/gh-pages/package.json).
+* have `"declaration": true` to get the `.d.ts` file that other modules will look for.
+* you might want to have a `typings` field (e.g. `src/index`) in your `package.json` similar to the `main` field to point to the default TypeScript definition export. For an example look at [`package.json` for csx](https://github.com/basarat/csx/blob/gh-pages/package.json).
+
+
+Example package: `npm install csx` [for csx](https://www.npmjs.com/package/csx),  usage: `import csx = require('csx')`. 
