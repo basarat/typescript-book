@@ -14,7 +14,7 @@ class Child extends Base {
 generates: 
 
 ```js
-ar Base = (function () {
+var Base = (function () {
     function Base() {
     }
     Base.prototype.log = function () { console.log('hello world'); };
