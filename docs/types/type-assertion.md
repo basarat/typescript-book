@@ -40,4 +40,39 @@ Therefore it is now recommended that you just use `as foo` for consistency.
 ### Type Assertion vs. Casting
 The reason why it's not called "type casting" is that *casting* generally implies some sort of runtime support. However *type assertions* are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.
 
+### Assertion considered harmful
+In many cases assertion will allow you to easily migrate legacy code (and even copy paste other code samples into your codebase), however you should be careful with your use of assertions. Take our original code as a sample, the compiler will not protect you from forgetting to *actually add the properties you promised*:
 
+```ts
+interface Foo {
+    bar: number;
+    bas: string;
+}
+var foo = {} as Foo;
+// ahhhh .... forget something?
+```
+
+Also another common thought is using an assertion as a means of providing *autocomplete* e.g.:
+
+```ts
+interface Foo {
+    bar: number;
+    bas: string;
+}
+var foo = <Foo>{
+    // the compiler will provide autocomplete for properties of Foo
+    // But it is easy for the developer to forget adding all the properties
+    // Also this code is likely to break if Foo gets refactored (e.g. a new property added)
+};
+```
+but the hazard here is the same, if you forget a property the compiler will not complain. It is better if you do the following:
+```ts
+interface Foo {
+    bar: number;
+    bas: string;
+}
+var foo:Foo = {
+    // the compiler will provide autocomplete for properties of Foo
+};
+```
+In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
