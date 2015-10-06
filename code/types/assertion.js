@@ -16,3 +16,15 @@ var sdfsdfsdf;
     var foo;
     var bar = foo;
 })(sdfsdfsdf || (sdfsdfsdf = {}));
+var doubleAssertion;
+(function (doubleAssertion) {
+    function handler1(event) {
+        var mouseEvent = event;
+    }
+    function handler2(event) {
+        var element = event;
+    }
+    function handler(event) {
+        var element = event;
+    }
+})(doubleAssertion || (doubleAssertion = {}));

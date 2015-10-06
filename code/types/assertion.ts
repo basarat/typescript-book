@@ -18,5 +18,21 @@ module assert {
 
 module sdfsdfsdf {
     var foo: any;
-    var bar = <string> foo; // bar is now of type "string"
+    var bar = <string>foo; // bar is now of type "string"
+}
+
+
+namespace doubleAssertion {
+
+    function handler1(event: Event) {
+        let mouseEvent = event as MouseEvent;
+    }
+
+    function handler2(event: Event) {
+        let element = event as HTMLElement; // Error : Neither 'Event' not type 'HTMLElement' is assignable to the other
+    }
+
+    function handler(event: Event) {
+        let element = event as any as HTMLElement; // Okay!
+    }
 }

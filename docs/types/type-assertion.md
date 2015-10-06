@@ -76,3 +76,33 @@ var foo:Foo = {
 };
 ```
 In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
+
+
+### Double assertion
+
+The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g the following is a very valid use case (e.g. the user things the event passed in will be a more specific case of an event) and the type assertion works as expected
+
+```ts
+function handler (event: Event){
+    let mouseEvent = event as MouseEvent;
+}
+```
+
+However the following is most likely an error and TypeScript will complain as shown despite the user's type assertion:
+
+```ts
+function handler(event: Event) {
+    let element = event as HTMLElement; // Error : Neither 'Event' not type 'HTMLElement' is assignable to the other
+}
+```
+
+If you *still want TypeScript you can use a double assertion*, but first asserting to `any` which is compatible with all types and therefore the compiler no longer complains:
+
+```ts
+function handler(event: Event) {
+    let element = event as any as HTMLElement; // Okay!
+}
+```
+
+#### How typescript determines if a single assertion is not enough
+Basically it allows the assertion from type `S` to `T` succeed if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.
