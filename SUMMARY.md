@@ -10,6 +10,7 @@
   * [Arrow Functions](docs/arrow-functions.md)
   * [Rest Parameters](docs/rest-parameters.md)
   * [let](docs/let.md)
+  * [const](docs/const-wip.md)
   * [Destructuring](docs/destructuring.md)
   * [for...of](docs/for...of.md)
   * [Template Strings](docs/template-strings.md)
