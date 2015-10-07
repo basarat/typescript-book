@@ -39,6 +39,8 @@
   * [Freshness](docs/types/freshness.md)
 * [NodeJS](docs/node/nodejs.md)
 * [JSX](docs/jsx/tsx.md)
+* [TIPs](docs/tips/main.md)
+  * [Quick Object Return](docs/tips/quickObjectReturn.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)

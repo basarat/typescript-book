@@ -1,6 +1,6 @@
-# Return an object literal
+## Return an object literal
 
-Something like 
+Sometimes you need a function that just returns a simple object literal. However, something like
 
 ```ts
 var foo = ()=>{
