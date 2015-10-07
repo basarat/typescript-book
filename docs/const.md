@@ -6,7 +6,9 @@
 const foo = 123;
 ```
 
-It is a good practice for both readability and maintainability and avoids using *magic literals* e.g.
+> The syntax is much better (IMHO) than other languages that force the user to type something like `let constant foo` i.e. a variable + behavior specifier.
+
+`const` is a good practice for both readability and maintainability and avoids using *magic literals* e.g.
 
 ```ts
 // Low readability
@@ -19,15 +21,45 @@ if (x > maxRows) {
 }
 ```
 
-> The syntax is much better (IMHO) than other languages that force the user to type something like `let constant foo` i.e. a variable + behavior specifier.
-
-#### Left hand side of assignment cannot be a constant
-Constants are immutable after creation
-
 #### const declarations must be initialized
 The following is a compiler error:
 
+```ts
+const foo; // ERROR: const declarations must be initialized
+```
 
+#### Left hand side of assignment cannot be a constant
+Constants are immutable after creation, so if you try to assign them to a new value it is a compiler error:
+
+```ts
+const foo = 123;
+foo = 456; // ERROR: Left-hand side of an assignment expression cannot be a constant
+```
+
+#### Block Scoped
+A `const` is block scoped like we saw with [`let`](./let.md):
+
+```ts
+const foo = 123;
+if (true) {
+    const foo = 456; // Allowed as its a new variable limited to this `if` block
+}
+```
 
 #### Deep immutability
-// TODO
+A `const` works with object literals as well, as far as protecting the variable *reference* is concerned:
+
+```ts
+const foo = { bar: 123 };
+foo = { bar: 456 }; // ERROR : Left hand side of an assignment expression cannot be a constant
+```
+
+However it does not still allows people to mutate sub properties of objects, as shown below:
+
+```ts
+const foo = { bar: 123 };
+foo.bar = 456; // Allowed!
+console.log(foo); // { bar: 456 }
+```
+
+For this reason I recommend using `const` with literals or immutable data structures.
