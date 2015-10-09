@@ -1,0 +1,11 @@
+var fooId;
+var barId;
+fooId = barId;
+barId = fooId;
+fooId = barId;
+barId = fooId;
+fooId = 'foo';
+barId = 'bar';
+var str;
+str = fooId;
+str = barId;
