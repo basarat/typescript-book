@@ -250,7 +250,7 @@ sample = '123';
 sample = true; // Error!
 ```
 
-Unlike an `interface` you can give a type alias to literally any type annotation. Here are a few more examples to make you familiar with the syntax:
+Unlike an `interface` you can give a type alias to literally any type annotation (useful for stuff like union and intersection types). Here are a few more examples to make you familiar with the syntax:
 
 ```ts
 type Text = string | { text: string };
@@ -258,7 +258,7 @@ type Coordinates = [number, number];
 type Callback = (data: string) => void;
 ```
 
-TIP: If you need to have deep hierarchies of Type annotations use an `interface`. Use a type alias for simpler object structures (like `Coordinates`) just to give them a semantic name.
+> TIP: If you need to have deep hierarchies of Type annotations use an `interface`. Use a type alias for simpler object structures (like `Coordinates`) just to give them a semantic name.
 
 ## Summary
 Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in the TypeScript's Type System.
