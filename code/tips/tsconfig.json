@@ -21,7 +21,8 @@
     ],
     "files": [
         "mixins.ts",
-        "nominalTyping.ts"
+        "nominalTyping.ts",
+        "statefulFunctions.ts"
     ],
     "exclude": []
 }
