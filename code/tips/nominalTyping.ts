@@ -5,7 +5,7 @@ interface FooId extends String {
 
 // BAR
 interface BarId extends String {
-    _brandIdBrand: string; // To prevent type errors
+    _barIdBrand: string; // To prevent type errors
 }
 
 /**
