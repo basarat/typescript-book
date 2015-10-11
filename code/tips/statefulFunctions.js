@@ -1,13 +1,15 @@
 exports.foo = 123;
-var called = (new ((function () {
-    function class_1() {
+var Called = (function () {
+    function Called() {
+        var _this = this;
         this.count = 0;
         this.called = function () {
-            this.count++;
-            console.log("Called : " + this.count);
+            _this.count++;
+            console.log("Called : " + _this.count);
         };
     }
-    return class_1;
-})())).called;
+    return Called;
+})();
+var called = (new Called()).called;
 called();
 called();

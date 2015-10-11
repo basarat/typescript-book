@@ -43,6 +43,7 @@
   * [Quick Object Return](docs/tips/quickObjectReturn.md)
   * [String Based Enums](docs/tips/stringEnums.md)
   * [Nominal Typing](docs/tips/nominalTyping.md)
+  * [Stateful Functions](docs/tips/statefulFunctions.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)

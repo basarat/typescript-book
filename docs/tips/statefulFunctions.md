@@ -15,13 +15,21 @@ int main (){
 }
 ```
 
-Since JavaScript (or TypeScript) doesn't have function statics you can active the same thing using various abstractions that wrap over a local variable e.g. using a class
+Since JavaScript (or TypeScript) doesn't have function statics you can active the same thing using various abstractions that wrap over a local variable e.g. using a `class` :
 
 ```ts
-class Called{
-
+class Called {
+    count = 0;
+    called = () => {
+        this.count++;
+        console.log(`Called : ${this.count}`);
+    }
 }
 
+let {called} = new Called();
+
+called(); // Called : 1
+called(); // Called : 2
 ```
 
-> C++ developers also try and achieve this using a pattern they call *functor* (a class that overrides the operator `()`).
+> C++ developers also try and achieve this using a pattern they call `functor` (a class that overrides the operator `()`).
