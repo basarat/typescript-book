@@ -213,6 +213,30 @@ function formatCommandline(command: string[]|string) {
 }
 ```
 
+## Intersection Types
+`extend` is a very common pattern in JavaScript where you take two objects and create a new one that has the features of both these objects. An **Intersection Type** allows you to use this pattern in a safe way as demonstrated below:
+
+```ts
+function extend<T, U>(first: T, second: U): T & U {
+    let result = <T & U> {};
+    for (let id in first) {
+        result[id] = first[id];
+    }
+    for (let id in second) {
+        if (!result.hasOwnProperty(id)) {
+            result[id] = second[id];
+        }
+    }
+    return result;
+}
+
+var x = extend({ a: "hello" }, { b: 42 });
+
+// x now has both `a` and `b`
+var a = x.a;
+var b = x.b;
+```
+
 ## Tuple Type
 JavaScript doesn't have first class tuple support. People generally just use an array as a tuple. This is exactly what the TypeScript type system supports. Tuples can be annotated using `:[typeofmember1, typeofmember2]` etc. A tuple can have any number of members. Tuples are demonstrated in the below example:
 
@@ -262,5 +286,3 @@ type Callback = (data: string) => void;
 
 ## Summary
 Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in the TypeScript's Type System.
-
-
