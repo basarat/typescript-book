@@ -33,7 +33,7 @@ npm install -g typescript@next
 ```
 
 ## TypeScript definitions
-TypeScript has a concept of a *declaration file* for external JavaScript code bases. *High quality* files exist for nearly 90% of the top JavaScript libraries out there in a project called Definition Typed. You will need `tsd` to get these defintions. Don't worry, we will explain what this means later ... just install for now: 
+TypeScript has a concept of a *declaration file* for external JavaScript code bases. *High quality* files exist for nearly 90% of the top JavaScript libraries out there in a project called [DefinitelyTyped](http://definitelytyped.org/). You will need `tsd` to get these defintions. Don't worry, we will explain what this means later ... just install for now: 
 
 ```
 npm install -g tsd
