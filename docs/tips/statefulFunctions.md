@@ -5,7 +5,7 @@ A common feature in other programming languages is usage of the `static` keyword
 void called(){
     static count = 0;
     count++;
-    printf("Called : %d",x);
+    printf("Called : %d", count);
 }
 
 int main (){
