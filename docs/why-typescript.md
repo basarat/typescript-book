@@ -11,7 +11,7 @@ You might be wondering "**Why add types to JavaScript?**"
 
 Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
 
-* Types increase you agility when doing refactoring. *Its better for the compiler to catch errors than to have things fail at runtime*.
+* Types increase your agility when doing refactoring. *Its better for the compiler to catch errors than to have things fail at runtime*.
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
 However types have a way of being unnecessarily ceremonious. TypeScript is very particular about keeping the barrier to entry as low as possible. Here's how:
