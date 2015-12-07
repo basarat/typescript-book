@@ -12,7 +12,7 @@ foo = 123; // allowed
 
 You have the option of putting these declarations in a `.ts` file or in a `.d.ts` file. We highly recommend you in your real world projects you use a separate `.d.ts` (start with one called something like `globals.d.ts` or `vendor.d.ts`).
 
-If a file has the extension `.d.ts` then each root level definition much have the `declare` keyword prefixed to it to make it clear that the author knows that there will be *no code emitted by TypeScript to ensure that this defined item will exist at runtime*. 
+If a file has the extension `.d.ts` then each root level definition must have the `declare` keyword prefixed to it to make it clear that the author knows that there will be *no code emitted by TypeScript to ensure that this defined item will exist at runtime*. 
 
 > 
 * Ambient declarations is a promise that you are making with the compiler. If these do not exist at runtime and you try to you them, things will break without warning.
