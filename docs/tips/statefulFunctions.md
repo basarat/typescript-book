@@ -18,15 +18,13 @@ int main (){
 Since JavaScript (or TypeScript) doesn't have function statics you can active the same thing using various abstractions that wrap over a local variable e.g. using a `class` :
 
 ```ts
-class Called {
+let {called} = new class {
     count = 0;
     called = () => {
         this.count++;
         console.log(`Called : ${this.count}`);
     }
-}
-
-let {called} = new Called();
+};
 
 called(); // Called : 1
 called(); // Called : 2

@@ -24,5 +24,8 @@
         "nominalTyping.ts",
         "statefulFunctions.ts"
     ],
-    "exclude": []
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }
