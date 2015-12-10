@@ -12,6 +12,6 @@ add(123)(456);
 // curried
 let add123 = add(123);
 
-// use the curried Functions
+// use the curried function
 add123(456);
 ```

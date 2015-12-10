@@ -6,7 +6,7 @@ This is the definition of `bind` in `lib.d.ts`:
 bind(thisArg: any, ...argArray: any[]): any;
 ```
 
-As you can see it returns *any*!. That means that calling `bind` on a function will cause you to completely loose any type safety of the original function signature.
+As you can see it returns **any**! That means that calling `bind` on a function will cause you to completely loose any type safety of the original function signature.
 
 For example the following compiles:
 
