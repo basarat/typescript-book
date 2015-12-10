@@ -20,6 +20,8 @@
         "!node_modules/**"
     ],
     "files": [
+        "bindIsBad.ts",
+        "currying.ts",
         "mixins.ts",
         "nominalTyping.ts",
         "statefulFunctions.ts"
