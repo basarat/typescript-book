@@ -31,4 +31,38 @@ curryOne('456'); // Error!
 
 But if you expect a curried function [there is a better pattern for that](./currying.md).
 
-> PS: If you have a class member function that you expect to pass around, [use an arrow function for that as well](../arrow-functions.md).
+### Class Members
+Another common use is to use `bind` to ensure the correct value of `this` when passing around class functions. Don't do that!
+
+The following demonstrates the fact that you loose parameter type safety if you use `bind`:
+
+```ts
+class Adder {
+    constructor(public a: string) { }
+
+    add(b: string): string {
+        return this.a + b;
+    }
+}
+
+function useAdd(add: (x: number) => number) {
+    return add(456);
+}
+
+let adder = new Adder('mary had a little 🐑');
+useAdd(adder.add.bind(adder)); // No compile error!
+useAdd((x) => adder.add(x)); // Error: number is not assignable to string
+```
+
+If you have a class member function that you **expect** to pass around, [use an arrow function in the first place](../arrow-functions.md) e.g one would write the same `Adder` class as:
+
+```ts
+class Adder {
+    constructor(public a: string) { }
+
+    // This function is now safe to pass around
+    add = (b: string): string => {
+        return this.a + b;
+    }
+}
+```

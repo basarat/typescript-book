@@ -11,8 +11,7 @@ var Adder = (function () {
 function useAdd(add) {
     return add(456);
 }
-var adder = new Adder(123);
-console.log(useAdd(adder.add));
+var adder = new Adder('mary had a little 🐑');
 useAdd(adder.add.bind(adder));
 useAdd(function (x) { return adder.add(x); });
 function twoParams(a, b) {
