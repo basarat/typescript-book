@@ -18,7 +18,7 @@ int main (){
 Since JavaScript (or TypeScript) doesn't have function statics you can active the same thing using various abstractions that wrap over a local variable e.g. using a `class` :
 
 ```ts
-let {called} = new class {
+const {called} = new class {
     count = 0;
     called = () => {
         this.count++;
