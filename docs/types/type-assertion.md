@@ -80,7 +80,7 @@ In some cases you might need to create a temporary variable, but at least you wi
 
 ### Double assertion
 
-The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g the following is a very valid use case (e.g. the user things the event passed in will be a more specific case of an event) and the type assertion works as expected
+The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected
 
 ```ts
 function handler (event: Event){
