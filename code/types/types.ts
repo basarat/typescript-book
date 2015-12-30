@@ -133,7 +133,7 @@ module generics {
     var strArr = ['1', '2'];
     var reversedStrs = reverse(strArr);
 
-    reversedStr = [1, 2]; // Error!
+    reversedStrs = [1, 2]; // Error!
 
     ///
     var numArr = [1, 2];
