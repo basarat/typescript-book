@@ -46,6 +46,7 @@
   * [Stateful Functions](docs/tips/statefulFunctions.md)
   * [Bind is Bad](docs/tips/bind.md)
   * [Currying](docs/tips/currying.md)
+  * [Type Instantiation](docs/tips/typeInstantiation.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)
