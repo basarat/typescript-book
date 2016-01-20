@@ -26,5 +26,8 @@
         "./lib/usage/libd.ts",
         "./migrating/migrating.ts",
         "./types.ts"
-    ]
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }
