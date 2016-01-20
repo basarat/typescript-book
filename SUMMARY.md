@@ -47,6 +47,7 @@
   * [Bind is Bad](docs/tips/bind.md)
   * [Currying](docs/tips/currying.md)
   * [Type Instantiation](docs/tips/typeInstantiation.md)
+* [Common Errors](docs/errors/main.md) 
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)
