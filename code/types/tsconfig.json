@@ -25,6 +25,7 @@
         "./lib/exclude/nolibd.ts",
         "./lib/usage/libd.ts",
         "./migrating/migrating.ts",
+        "./typeGuard.ts",
         "./types.ts"
     ],
     "atom": {
