@@ -15,5 +15,102 @@ if (typeof x === 'string') {
 x.subtr(); // OK
 ```
 
+Here is an example with a class and `instanceof`:
+
+```ts
+class Foo {
+    foo = 123;
+    common = '123';
+}
+
+class Bar {
+    bar = 123;
+    common = '123';
+}
+
+function doStuff(arg: Foo | Bar) {
+    if (arg instanceof Foo){
+        console.log(arg.foo); // OK
+        console.log(arg.bar); // Error!
+    }
+    if (arg instanceof Bar){
+        console.log(arg.foo); // Error!
+        console.log(arg.bar); // OK
+    }
+
+    console.log(arg.common); // OK
+    console.log(arg.foo); // Error!
+    console.log(arg.bar); // Error!
+}
+
+doStuff(new Foo());
+doStuff(new Bar());
+```
+
+TypeScript even understands `else` so when an `if` narrows out one type it knows that within the else *its definitely not that type*. Here is an example:
+
+```ts
+class Foo {
+    foo = 123;
+}
+
+class Bar {
+    bar = 123;
+}
+
+function doStuff(arg: Foo | Bar) {
+    if (arg instanceof Foo){
+        console.log(arg.foo); // OK
+        console.log(arg.bar); // Error!
+    }
+    else {  // MUST BE Bar!
+        console.log(arg.foo); // Error!
+        console.log(arg.bar); // OK
+    }
+}
+
+doStuff(new Foo());
+doStuff(new Bar());
+```
+
 ### User Defined Type Guards
-JavaScript doesn't have very rich runtime introspection support built in.
+JavaScript doesn't have very rich runtime introspection support built in. When you are using just plain JavaScript Objects (using structural typing to your advantage), you do not even have access to `intanceof` or `typeof`. For these cases you can create *User Defined Type Guard functions*. These are just functions that return `someArgumentName is SomeType`. Here is an example:
+
+```ts
+/**
+ * Just some interfaces
+ */
+interface Foo {
+    foo: number;
+    common: string;
+}
+
+interface Bar {
+    bar: number;
+    common: string;
+}
+
+/**
+ * User Defined Type Guard!
+ */
+function isFoo(arg: any): arg is Foo {
+    return arg.foo !== undefined;
+}
+
+/**
+ * Sample usage of the User Defined Type Guard
+ */
+function doStuff(arg: Foo | Bar) {
+    if (isFoo(arg)) {
+        console.log(arg.foo); // OK
+        console.log(arg.bar); // Error!
+    }
+    else {
+        console.log(arg.foo); // Error!
+        console.log(arg.bar); // OK
+    }
+}
+
+doStuff({foo:123,common:'123'});
+doStuff({bar:123,common:'123'});
+```
