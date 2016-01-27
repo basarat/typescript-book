@@ -7,7 +7,7 @@ var foo = ()=>{
     bar: 123
 };
 ```
-is a parsing compiler error. You can fix it but surrounding the object literal in `()`:
+is a parsing compiler error. You can fix it by surrounding the object literal with `()`:
 
 ```ts
 var foo = ()=>({
