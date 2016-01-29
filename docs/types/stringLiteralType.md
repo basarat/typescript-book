@@ -32,11 +32,11 @@ move(1,"Nurth"); // Error!
 ### Use cases
 Valid use cases for string literal types are:
 
-* String based enums
+#### String based enums
 
-[TypeScript enums are number based](../enums.md). You can use string literals with union types to mock a string based enum.
+[TypeScript enums are number based](../enums.md). You can use string literals with union types to mock a string based enum as we did in the `CardinalDirection` example above.
 
-* Modeling existing JavaScript APIs
+#### Modeling existing JavaScript APIs
 
 e.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly) that can either be a `boolean` or the literal string `"nocursor"` (effective valid values `true,false,"nocursor"`).  It can be declared as:
 
