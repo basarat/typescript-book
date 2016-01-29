@@ -38,6 +38,7 @@
   * [Type Compatability](docs/types/type-compatability.md)
   * [Freshness](docs/types/freshness.md)
   * [Type Guard](docs/types/typeGuard.md)
+  * [String Literal Type](docs/types/stringLiteralType.md)
 * [NodeJS](docs/node/nodejs.md)
 * [JSX](docs/jsx/tsx.md)
 * [TIPs](docs/tips/main.md)

@@ -25,7 +25,8 @@
         "lazyObjectLiteralInitialization.ts",
         "mixins.ts",
         "nominalTyping.ts",
-        "statefulFunctions.ts"
+        "statefulFunctions.ts",
+        "stringEnums.ts"
     ],
     "exclude": [],
     "atom": {
