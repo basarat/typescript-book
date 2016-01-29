@@ -48,6 +48,7 @@
   * [Bind is Bad](docs/tips/bind.md)
   * [Currying](docs/tips/currying.md)
   * [Type Instantiation](docs/tips/typeInstantiation.md)
+  * [Lazy Object Literal Initialization](docs/tips/lazyObjectLiteralInitialization.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)

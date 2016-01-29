@@ -22,6 +22,7 @@
     "files": [
         "bindIsBad.ts",
         "currying.ts",
+        "lazyObjectLiteralInitialization.ts",
         "mixins.ts",
         "nominalTyping.ts",
         "statefulFunctions.ts"
