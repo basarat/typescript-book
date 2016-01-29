@@ -39,6 +39,7 @@
   * [Freshness](docs/types/freshness.md)
   * [Type Guard](docs/types/typeGuard.md)
   * [String Literal Type](docs/types/stringLiteralType.md)
+  * [Readonly](docs/types/readonly.md)
 * [NodeJS](docs/node/nodejs.md)
 * [JSX](docs/jsx/tsx.md)
 * [TIPs](docs/tips/main.md)
