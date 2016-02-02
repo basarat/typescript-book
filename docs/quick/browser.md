@@ -11,14 +11,14 @@ npm install webpack -g
 * Use external modules in tsconfig (best `"module":"commonjs"`). We discuss [modules here](../project/external-modules.md))
 ```json
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "sourceMap": true
-  },
-  "exclude": [
-    "node_modules"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
 ```
 
@@ -26,20 +26,20 @@ npm install webpack -g
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
 ```js
 module.exports = {
-  entry: './app.ts',
-  output: {
-    filename: 'bundle.js'
-  },
-  resolve: {
-    // Add `.ts` and `.tsx` as a resolvable extension.
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-  },
-  module: {
-    loaders: [
-      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' }
-    ]
-  }
+    entry: './app.ts',
+    output: {
+        filename: 'bundle.js'
+    },
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    },
+    module: {
+        loaders: [
+            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            { test: /\.tsx?$/, loader: 'ts-loader' }
+        ]
+    }
 }
 ```
 
