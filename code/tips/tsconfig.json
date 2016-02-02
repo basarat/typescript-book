@@ -21,6 +21,7 @@
     ],
     "files": [
         "bindIsBad.ts",
+        "classesAreAwesome.ts",
         "currying.ts",
         "lazyObjectLiteralInitialization.ts",
         "mixins.ts",

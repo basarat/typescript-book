@@ -1,0 +1,2 @@
+export namespace Simple {
+}
