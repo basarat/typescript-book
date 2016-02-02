@@ -1,4 +1,4 @@
-# TypeScript with Webpack
+# TypeScript in the browser
 If you are using TypeScript to create a web application here are my recommendations:
 
 ## General Machine Setup
@@ -9,9 +9,21 @@ npm install webpack -g
 
 ## Project Setup
 * Use external modules in tsconfig (best `"module":"commonjs"`). We discuss [modules here](../project/external-modules.md))
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
+
 * Install [`ts-loader`](https://github.com/TypeStrong/ts-loader/) `npm install ts-loader --save-dev`
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
-
 ```js
 module.exports = {
   entry: './app.ts',
