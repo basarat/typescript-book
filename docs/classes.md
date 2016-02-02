@@ -1,8 +1,8 @@
 ### Classes
 The reason why its important to have classes in JavaScript as a first class item is that:
-1. [Classes are useful](./tips/classesAreUseful.md)
+1. [Classes offer a useful structural abstraction](./tips/classesAreUseful.md)
 1. Provides a consistent way for developers to use classes instead of every framework (emberjs,reactjs etc) coming up with their own version.
-1. People like to use classes
+1. Object Oriented Developers already understand classes.
 
 Finally JavaScript developers can *have `class`*. Here we have a basic class called Point:
 ```ts
