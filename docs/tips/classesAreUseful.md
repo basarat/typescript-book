@@ -1,4 +1,4 @@
-## Classes Are Awesome
+## Classes Are Useful
 
 It is very common to have the following structure:
 
@@ -23,8 +23,7 @@ function foo() {
 
 This is known as the *revealing module pattern* and quite common in JavaScript (taking advantage of JavaScript closure).
 
-If you use [*file modules* which you really should as global scope is bad](../project/modules.md) then *your file is effectively the same*. However there are too many cases where people will write code like the following:
-
+If you use [*file modules* (which you really should as global scope is bad)](../project/modules.md) then *your file is effectively the same*. However there are too many cases where people will write code like the following:
 
 ```ts
 let someProperty;
@@ -55,15 +54,17 @@ class Foo {
     }
 
     public someMethod() {
-
+        // some code
     }
 
     private someUtility() {
-
+        // some code
     }
 }
 
 export = new Foo();
 ```
 
-And its not just developers, creating dev tools that provide great visualizations over classes are much more common, and there is one less pattern your team needs to understand and meet.
+And its not just developers, creating dev tools that provide great visualizations over classes are much more common, and there is one less pattern your team needs to understand and maintain.
+
+> PS: There is nothing wrong in my opinion with *shallow* class hierarchies if they provide significant reuse and reduction in boiler plate.
