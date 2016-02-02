@@ -55,3 +55,42 @@ namespace optionalDefault {
     foo(123);           // 123, world
     foo(123, 'hello');  // 123, hello
 }
+
+namespace overloads {
+    export function padding(a: number, b?: number, c?: number, d?: any) {
+        if (b === undefined && c === undefined && d === undefined) {
+            b = c = d = a;
+        }
+        else if (c === undefined && d === undefined) {
+            c = a;
+            d = b;
+        }
+        return {
+            top: a,
+            right: b,
+            bottom: c,
+            left: d
+        };
+    }
+}
+
+namespace overloadsDone {
+    export function padding(all: number);
+    export function padding(topAndBottom: number, leftAndRight: number);
+    export function padding(top: number, right: number, bottom: number, left: number);
+    export function padding(a: number, b?: number, c?: number, d?: number) {
+        if (b === undefined && c === undefined && d === undefined) {
+            b = c = d = a;
+        }
+        else if (c === undefined && d === undefined) {
+            c = a;
+            d = b;
+        }
+        return {
+            top: a,
+            right: b,
+            bottom: c,
+            left: d
+        };
+    }
+}

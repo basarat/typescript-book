@@ -39,3 +39,41 @@ var optionalDefault;
     foo(123);
     foo(123, 'hello');
 })(optionalDefault || (optionalDefault = {}));
+var overloads;
+(function (overloads) {
+    function padding(a, b, c, d) {
+        if (b === undefined && c === undefined && d === undefined) {
+            b = c = d = a;
+        }
+        else if (c === undefined && d === undefined) {
+            c = a;
+            d = b;
+        }
+        return {
+            top: a,
+            right: b,
+            bottom: c,
+            left: d
+        };
+    }
+    overloads.padding = padding;
+})(overloads || (overloads = {}));
+var overloadsDone;
+(function (overloadsDone) {
+    function padding(a, b, c, d) {
+        if (b === undefined && c === undefined && d === undefined) {
+            b = c = d = a;
+        }
+        else if (c === undefined && d === undefined) {
+            c = a;
+            d = b;
+        }
+        return {
+            top: a,
+            right: b,
+            bottom: c,
+            left: d
+        };
+    }
+    overloadsDone.padding = padding;
+})(overloadsDone || (overloadsDone = {}));

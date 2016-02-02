@@ -77,6 +77,67 @@ foo(123, 'world');  // 123, world
 ```
 
 ### Overloading
+TypeScript allows you to *declare* function overloads. This is useful for documentation + type safety purpose. Consider the following code:
+
+```ts
+function padding(a: number, b?: number, c?: number, d?: any) {
+    if (b === undefined && c === undefined && d === undefined) {
+        b = c = d = a;
+    }
+    else if (c === undefined && d === undefined) {
+        c = a;
+        d = b;
+    }
+    return {
+        top: a,
+        right: b,
+        bottom: c,
+        left: d
+    };
+}
+```
+If you look at the code carefully you realize the meaning of `a`,`b`,`c`,`d` change based on how many arguments are passed in. Also the function only expects `1`, `2` or `4` arguments. These constraints can be *enforced* and *documented* using function overloading. You just:
+
+* declare the function header multiple times,
+* the last function header is the one that is actually active *within* the function body but is not available to the outside world.
+
+This is shown below:
+```ts
+// Overloads
+function padding(all: number);
+function padding(topAndBottom: number, leftAndRight: number);
+function padding(top: number, right: number, bottom: number, left: number);
+// Actual implementation that is a true representation of all the cases the function body needs to handle
+function padding(a: number, b?: number, c?: number, d?: number) {
+    if (b === undefined && c === undefined && d === undefined) {
+        b = c = d = a;
+    }
+    else if (c === undefined && d === undefined) {
+        c = a;
+        d = b;
+    }
+    return {
+        top: a,
+        right: b,
+        bottom: c,
+        left: d
+    };
+}
+```
+
+Here the first three function signatures are what a available as valid calls to `padding`:
+
+```ts
+padding(1); // Okay : all
+padding(1,1); // Okay : topAndBottom, leftAndRight
+padding(1,1,1,1); // Okay : top, right, bottom, left
+
+padding(1,1,1); // Error: Not a part of the available overloads
+```
+
+Of course its important for the final declaration (the true declaration as seen from inside the function) to be compatible with all the overloads. This is because that is the true nature of the function calls that the function body needs to account for.
+
+> Function overloading in TypeScript doesn't come with any runtime overhead. It just allows you to document the manner you expect the function to be called in and the compiler holds the rest of your code in check.
 
 [](### Declaring Functions)
 [](With lambda, with interfaces which allow overloading declarations)
