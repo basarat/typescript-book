@@ -13,7 +13,7 @@ This decreases the chances of errors and increases the maintainability of your u
 
 * Use files with the extension `.tsx` (instead of `.ts`).
 * Use `"jsx" : "react"` in your `tsconfig.json`'s `compilerOptions`.
-* Install the definitions for JSX and React into your project : (`tsd install react --save --resolve`).
+* Install the definitions for JSX and React into your project : (`typings install react --save` && `typings install react-dom --save`).
 * Import react into your `.tsx` files (`import * as React from "react"`).
 
 ## HTML Tags vs. Components
@@ -64,5 +64,3 @@ TypeScript provides you with the ability to use something other than React with 
     * When using components:
         * You can control which `class` must be inherited by components by customizing the default `interface ElementClass extends React.Component<any, any> { }` declaration.
         * You can control which property is used to type check the attributes (the default is `props`) by customizing the `declare module JSX { interface ElementAttributesProperty { props: {}; } }` declaration.
-
-
