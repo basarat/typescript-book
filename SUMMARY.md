@@ -53,7 +53,7 @@
   * [Type Instantiation](docs/tips/typeInstantiation.md)
   * [Lazy Object Literal Initialization](docs/tips/lazyObjectLiteralInitialization.md)
   * [Classes are Useful](docs/tips/classesAreUseful.md)
-  * [`export default` is bad](docs/tips/defaultIsBad.md)
+  * [Avoid Export Default](docs/tips/defaultIsBad.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
