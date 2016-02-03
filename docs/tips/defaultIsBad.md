@@ -4,7 +4,6 @@ Lets go with an example. Consider you have a file `foo.ts` with the following co
 
 ```ts
 class Foo {
-
 }
 export default Foo;
 ```
@@ -23,7 +22,6 @@ For this reason I recommend simple exports + destructured import. E.g. `foo.ts`:
 
 ```ts
 export class Foo {
-
 }
 ```
 And then:
