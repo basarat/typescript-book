@@ -54,6 +54,7 @@
   * [Lazy Object Literal Initialization](docs/tips/lazyObjectLiteralInitialization.md)
   * [Classes are Useful](docs/tips/classesAreUseful.md)
   * [Avoid Export Default](docs/tips/defaultIsBad.md)
+  * [Limit Property Setters](docs/tips/propertySetters.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
