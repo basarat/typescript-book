@@ -32,4 +32,4 @@ interface Point {
 var myPoint.z; // Allowed!
 ```
 
-This is because **interfaces in TypeScript are open ended**. This is a vital tenant of TypeScript that it allows you to mimic the extensibility of JavaScript using *interfaces*.
+This is because **interfaces in TypeScript are open ended**. This is a vital tenet of TypeScript that it allows you to mimic the extensibility of JavaScript using *interfaces*.
