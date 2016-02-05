@@ -31,7 +31,7 @@ console.log(x, y, remaining); // 1, 2, [3,4]
 The motivation here is to simply make it easy for you to capture the remaining elements of an array when destructuring.
 
 #### Array Assignment
-The spread operator allows you easily place an *expanded version* of an array into another array. This is demonstrated in the below example: 
+The spread operator allows you to easily place an *expanded version* of an array into another array. This is demonstrated in the example below: 
 
 ```ts
 var list = [1, 2];
