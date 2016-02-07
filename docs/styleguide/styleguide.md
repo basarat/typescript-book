@@ -2,7 +2,7 @@
 
 > An official TypeScript StyleGuide
 
-People have asked me for my opinions on this. Personally I don't enforce these a lot my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](./docs/tips/main.md) 🌹.
+People have asked me for my opinions on this. Personally I don't enforce these a lot my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](./docs/tips/main.md) (e.g. type assertion is bad, property setters ad bad) 🌹.
 
 Key Sections:
 
@@ -17,6 +17,7 @@ Key Sections:
 * [Single vs. Double Quotes](#quotes)
 * [Tabs vs. Spaces](#spaces)
 * [Use semicolons](#semicolons)
+* [Annotate Arrays as `Type[]`](#array)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -196,12 +197,18 @@ Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically 
 
 ## Spaces
 
-Use `4` spaces. Not tabs.
+* Use `4` spaces. Not tabs.
 
 > Reason: The TypeScript team does this. More JavaScript teams do this. This is the default setting in the TypeScript language service.
 
 ## Semicolons
 
-Use semicolons.
+* Use semicolons.
 
 > Reasons: Explicit semicolons helps language formatting tools give consistent results. ASI (automatic semicolon insertion) can trip new devs e.g. `return` statements.
+
+## Array
+
+* Annotate arrays as `foos:Foo[]` instead of `foos:Array<Foo>`.
+
+> Reasons: Its easier to read. Its used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
