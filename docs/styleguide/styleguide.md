@@ -82,12 +82,12 @@ class Foo {
 
 **Bad**
 ```ts
-inteface IFoo {
+interface IFoo {
 }
 ```
 **Good**
 ```ts
-inteface Foo {
+interface Foo {
 }
 ```
 
