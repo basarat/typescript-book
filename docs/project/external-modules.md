@@ -35,14 +35,7 @@ import foo = require('foo');
 
 will generate *different* JavaScript based on the compiler *module* option (`--module commonjs` or `--module amd` or `--module umd` or `--module system`).
 
-Here is how to chose which one is right for you: 
-
-* Want the package on [NPM](http://npmjs.com) : `--module commonjs`
-* Only want to use the code in the browser : `--module amd`
-* Want to deploy the code on NPM *and* use it in the browser *without* any dependency on something (like *requirejs*, *webpack* or *browserify* etc). : `--module umd`
-* Ready for the promised future of a *truly unified* and ECMA approved module system : `--module system`
-
-I recommend that for new projects you just use `--module system`. But it is good to be aware of this compiler option.
+Personal recommendation : Use `--module commonjs` and then your code will work as it is for NodeJS and for frontend you can use something like `webpack`. 
 
 ### Import type only
 The following statement:
