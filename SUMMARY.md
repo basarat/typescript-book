@@ -55,6 +55,7 @@
   * [Classes are Useful](docs/tips/classesAreUseful.md)
   * [Avoid Export Default](docs/tips/defaultIsBad.md)
   * [Limit Property Setters](docs/tips/propertySetters.md)
+* [StyleGuide](docs/styleguide/styleguide.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
