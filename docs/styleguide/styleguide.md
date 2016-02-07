@@ -16,6 +16,7 @@ Key Sections:
 * [Formatting](#formatting)
 * [Single vs. Double Quotes](#quotes)
 * [Tabs vs. Spaces](#spaces)
+* [Use semicolons](#semicolons)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -184,15 +185,23 @@ Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically 
 
 ## Quotes
 
-Prefer double quotes (`"`).
+* Prefer double quotes (`"`).
 
 > Reasons: Allows easier copy paste of objects into JSON. Allows people to use other languages to work without changing their quote character. Allows you to use apostrophe s e.g. `He's not going.`.
 
 
-When you can't use double try back ticks (\`). These generally represent the intent of complex enough strings.
+* When you can't use double try back ticks (\`).
+
+> Reason: These generally represent the intent of complex enough strings.
 
 ## Spaces
 
 Use `4` spaces. Not tabs.
 
 > Reason: The TypeScript team does this. More JavaScript teams do this. This is the default setting in the TypeScript language service.
+
+## Semicolons
+
+Use semicolons.
+
+> Reasons: Explicit semicolons helps language formatting tools give consistent results. ASI (automatic semicolon insertion) can trip new devs e.g. `return` statements.
