@@ -14,7 +14,8 @@ Key Sections:
 * [Enum](#enum)
 * [`null` vs. `undefined`](#null-vs-undefined)
 * [Formatting](#formatting)
-* [Single Vs Double Quotes](#quotes)
+* [Single vs. Double Quotes](#quotes)
+* [Tabs vs. Spaces](#spaces)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -189,3 +190,9 @@ Prefer double quotes (`"`).
 
 
 When you can't use double try back ticks (\`). These generally represent the intent of complex enough strings.
+
+## Spaces
+
+Use `4` spaces. Not tabs.
+
+> Reason: The TypeScript team does this. More JavaScript teams do this. This is the default setting in the TypeScript language service.
