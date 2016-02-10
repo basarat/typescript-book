@@ -22,7 +22,10 @@ npm install webpack -g
 }
 ```
 
-* Install [`ts-loader`](https://github.com/TypeStrong/ts-loader/) `npm install ts-loader --save-dev`
+* Install [`ts-loader`](https://github.com/TypeStrong/ts-loader/)
+```bash
+npm install ts-loader --save-dev
+```
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
 ```js
 module.exports = {
