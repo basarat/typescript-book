@@ -37,7 +37,7 @@ var html = `<div>${lyrics}</div>`;
 Note that any placeholder inside the interpolation (`${` and `}`) is treated as a JavaScript expression and evaluated as such e.g. you can do fancy math.
 
 ```ts
-console.log(`1 and 1 one make ${1 + 1}`);
+console.log(`1 and 1 make ${1 + 1}`);
 ```
 
 #### Tagged Templates
