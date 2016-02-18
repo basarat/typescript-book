@@ -18,7 +18,7 @@ The source for this book is available in the books github repository https://git
 ```
 
 ## Nightly TypeScript
-Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released. For this purpose we recommend using nightly typescript versions.
+Instead of using the official *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be released yet. For this purpose we recommend using nightly typescript versions.
 
 ```
 npm install -g typescript@next
