@@ -93,7 +93,7 @@ A major design goal of TypeScript was to make it possible for you to safely and 
 1. The definition file already exists.
 1. Or at the very least, you have a vast list of well reviewed TypeScript declaration templates already available
 
-As a quick example of how you would author your own declaration file, consider a trivial example of [jquery](https://jquery.com/). By default (as expect in good JS code) TypeScript expects you to declare (i.e. use `var` somewhere) before you use a variable
+As a quick example of how you would author your own declaration file, consider a trivial example of [jquery](https://jquery.com/). By default (as is to be expected of good JS code) TypeScript expects you to declare (i.e. use `var` somewhere) before you use a variable
 ```ts
 $('.awesome').show(); // Error: cannot find name `$`
 ```
