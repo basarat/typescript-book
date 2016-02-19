@@ -1,5 +1,5 @@
 #### Whats up with the IIFE
-The js generated for the class could have been: 
+The js generated for the class could have been:
 ```ts
 function Point(x, y) {
     this.x = x;
@@ -16,12 +16,12 @@ The reason its wrapped in an Immediately-Invoked Function Expression (IIFE) i.e.
 (function () {
 
     // BODY
-    
+
     return Point;
 })();
 ```
 
-has to do with inheritance. It allows TypeScript to capture the base class as a variable `_super` e.g. 
+has to do with inheritance. It allows TypeScript to capture the base class as a variable `_super` e.g.
 
 ```ts
 var Point3D = (function (_super) {
@@ -38,10 +38,10 @@ var Point3D = (function (_super) {
 })(Point);
 ```
 
-Notice that the IIFE allows TypeScript to easily capture the base class `Point` in a `_super` variable and that is used consistently in the class body. 
+Notice that the IIFE allows TypeScript to easily capture the base class `Point` in a `_super` variable and that is used consistently in the class body.
 
 ### `__extends`
-You will notice that as soon as you inherit a class TypeScript also generates the following function: 
+You will notice that as soon as you inherit a class TypeScript also generates the following function:
 ```ts
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -58,7 +58,7 @@ People rarely have trouble understanding 1, but many people struggle with 2. so 
 
 #### `d.prototype.__proto__ = b.prototype`
 
-After having tutored many people about this I find the following explanation to be simplest. First we will explain how the code from `__extends` is equivalent to the simple `d.prototype.__proto__ = b.prototype`, and then why this line in itself is significant. To understand all this you need to know these things: 
+After having tutored many people about this I find the following explanation to be simplest. First we will explain how the code from `__extends` is equivalent to the simple `d.prototype.__proto__ = b.prototype`, and then why this line in itself is significant. To understand all this you need to know these things:
 1. `__proto__`
 1. `prototype`
 1. effect of `new` on `this` inside the called function
@@ -80,7 +80,7 @@ delete foo.__proto__.bar; // remove from foo.__proto__
 console.log(foo.bar); // undefined
 ```
 
-Cool so you understand `__proto__`. Another useful information is that all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function. This is shown below: 
+Cool so you understand `__proto__`. Another useful information is that all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function. This is shown below:
 
 ```ts
 function Foo() { }
@@ -88,7 +88,7 @@ console.log(Foo.prototype); // {} i.e. it exists and is not undefined
 console.log(Foo.prototype.constructor === Foo); // Has a member called `constructor` pointing back to the function
 ```
 
-Now lets look at *effect of `new` on `this` inside the called function*. Basically `this` inside the called function is going to point to the newly created object that will be returned from the function. It's simple to see if you mutate a property on `this` inside the function: 
+Now lets look at *effect of `new` on `this` inside the called function*. Basically `this` inside the called function is going to point to the newly created object that will be returned from the function. It's simple to see if you mutate a property on `this` inside the function:
 
 ```ts
 function Foo() {
@@ -118,13 +118,13 @@ That's it. Now look at the following straight out of `__extends`. I've take the 
 3   d.prototype = new __();
 ```
 
-Reading this function in reverse the `d.prototype = new __()` on line 3 effectively means `d.prototype = {__proto__ : __.prototype}` (because of 4, effect of `new` on `prototype`), combine it with the previous line (i.e. line 2 `__.prototype = b.prototype;`) you get `d.prototype = {__proto__ : __.prototype}`. 
+Reading this function in reverse the `d.prototype = new __()` on line 3 effectively means `d.prototype = {__proto__ : __.prototype}` (because the effect of `new` on `prototype` and `__proto__`), combine it with the previous line (i.e. line 2 `__.prototype = b.prototype;`) you get `d.prototype = {__proto__ : __.prototype}`. 
 
-But wait we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, d.constructor = d}` (because of 3, effect of `new` on `this` inside the called function). So since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`. 
+But wait we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, d.constructor = d}` (because of 3, effect of `new` on `this` inside the called function). So since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`.
 
 #### `d.prototype.__proto__ = b.prototype` significance
 
-The significance is that it allows you to add member functions to a child class and inherit others from the base class. This is demonstrated by the following simple example: 
+The significance is that it allows you to add member functions to a child class and inherit others from the base class. This is demonstrated by the following simple example:
 
 ```ts
 function Animal() { }
@@ -138,4 +138,4 @@ var bird = new Bird();
 bird.walk();
 bird.fly();
 ```
-Basically `bird.fly` will be looked up from `bird.__proto__.fly` (remember that `new` makes the `bird.__proto__` point to `Bird.prototype`) and `bird.walk` (an inherited member) will be looked up from `bird.__proto__.__proto__.walk` (as `bird.__proto__ == Bird.prototype` and `bird.__proto__.__proto__` == `Animal.prototype`). 
+Basically `bird.fly` will be looked up from `bird.__proto__.fly` (remember that `new` makes the `bird.__proto__` point to `Bird.prototype`) and `bird.walk` (an inherited member) will be looked up from `bird.__proto__.__proto__.walk` (as `bird.__proto__ == Bird.prototype` and `bird.__proto__.__proto__` == `Animal.prototype`).
