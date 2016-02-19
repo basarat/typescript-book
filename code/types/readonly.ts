@@ -81,7 +81,7 @@ export namespace ClassGetter {
     class Person {
         firstName: string = "John";
         lastName: string = "Doe";
-        get fullName(){
+        get fullName() {
             return this.firstName + this.lastName;
         }
     }
@@ -89,4 +89,41 @@ export namespace ClassGetter {
     const person = new Person();
     console.log(person.fullName); // John Doe
     person.fullName = "Dear Reader"; // Error! fullName is readonly
+}
+
+namespace vsconst {
+    const foo = 123;
+    var bar: {
+        readonly bar: number;
+    }
+}
+
+namespace aliasing {
+    let foo: {
+        readonly bar: number;
+    } = {
+            bar: 123
+        };
+
+    function iMutateFoo(foo: { bar: number }) {
+        foo.bar = 456;
+    }
+
+    iMutateFoo(foo); // The foo argument is aliased by the foo parameter
+    console.log(foo.bar); // 456!
+}
+
+namespace aliasing2 {
+    interface Foo {
+        readonly bar: number;
+    }
+    let foo: Foo = {
+        bar: 123
+    };
+
+    function iTakeFoo(foo: Foo) {
+        foo.bar = 456; // Error!  bar is readonly
+    }
+
+    iTakeFoo(foo); // The foo argument is aliased by the foo parameter
 }

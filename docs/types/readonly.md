@@ -106,4 +106,53 @@ console.log(person.fullName); // John Doe
 person.fullName = "Dear Reader"; // Error! fullName is readonly
 ```
 
+### Difference from `const`
+`const`
+1. is for a variable reference
+1. the variable cannot be reassigned to anything else.
+
+`readonly` is
+1. for a property
+1. the property can modified because of aliasing
+
+Sample explaining 1:
+```ts
+const foo = 123; // variable reference
+var bar: {
+    readonly bar: number; // for property
+}
+```
+Sample explaining 2:
+```ts
+let foo: {
+    readonly bar: number;
+} = {
+        bar: 123
+    };
+
+function iMutateFoo(foo:{bar:number}){
+    foo.bar = 456;
+}
+
+iMutateFoo(foo); // The foo argument is aliased by the foo parameter
+console.log(foo.bar); // 456!
+```
+
+Basically `readonly` ensures that *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Ofcourse if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
+
+```ts
+interface Foo {
+    readonly bar: number;
+}
+let foo: Foo = {
+    bar: 123
+};
+
+function iTakeFoo(foo: Foo) {
+    foo.bar = 456; // Error!  bar is readonly
+}
+
+iTakeFoo(foo); // The foo argument is aliased by the foo parameter
+```
+
 [](https://github.com/Microsoft/TypeScript/pull/6532)

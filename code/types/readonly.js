@@ -71,3 +71,29 @@ var ClassGetter;
     console.log(person.fullName);
     person.fullName = "Dear Reader";
 })(ClassGetter = exports.ClassGetter || (exports.ClassGetter = {}));
+var vsconst;
+(function (vsconst) {
+    var foo = 123;
+    var bar;
+})(vsconst || (vsconst = {}));
+var aliasing;
+(function (aliasing) {
+    var foo = {
+        bar: 123
+    };
+    function iMutateFoo(foo) {
+        foo.bar = 456;
+    }
+    iMutateFoo(foo);
+    console.log(foo.bar);
+})(aliasing || (aliasing = {}));
+var aliasing2;
+(function (aliasing2) {
+    var foo = {
+        bar: 123
+    };
+    function iTakeFoo(foo) {
+        foo.bar = 456;
+    }
+    iTakeFoo(foo);
+})(aliasing2 || (aliasing2 = {}));
