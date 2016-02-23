@@ -8,7 +8,7 @@ npm install webpack -g
 ```
 
 ## Project Setup
-* Use external modules in tsconfig (best `"module":"commonjs"`). We discuss [modules here](../project/external-modules.md))
+* Use external modules in tsconfig (best `"module":"commonjs"`). We discuss [modules here](../project/external-modules.md)
 ```json
 {
     "compilerOptions": {
