@@ -6,7 +6,7 @@ This is the definition of `bind` in `lib.d.ts`:
 bind(thisArg: any, ...argArray: any[]): any;
 ```
 
-As you can see it returns **any**! That means that calling `bind` on a function will cause you to completely loose any type safety of the original function signature.
+As you can see it returns **any**! That means that calling `bind` on a function will cause you to completely lose any type safety of the original function signature.
 
 For example the following compiles:
 
@@ -34,7 +34,7 @@ But if you expect a curried function [there is a better pattern for that](./curr
 ### Class Members
 Another common use is to use `bind` to ensure the correct value of `this` when passing around class functions. Don't do that!
 
-The following demonstrates the fact that you loose parameter type safety if you use `bind`:
+The following demonstrates the fact that you lose parameter type safety if you use `bind`:
 
 ```ts
 class Adder {
