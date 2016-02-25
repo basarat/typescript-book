@@ -106,7 +106,7 @@ interface Foo {
 
 * Use `PascalCase` for names
 
-> Reason: Convention followed by the TypeScript team. Namespaces are effectively just a class with static members. Class names are `PascalCase` => Namespace names are `PascalCase`
+> Reason: Convention followed by the TypeScript team. Name are effectively just a class with static members. Class names are `PascalCase` => Namespace names are `PascalCase`
 
 **Bad**
 ```ts
@@ -197,9 +197,9 @@ Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically 
 
 ## Spaces
 
-* Use `4` spaces. Not tabs.
+* Use `2` spaces. Not tabs.
 
-> Reason: The TypeScript team does this. More JavaScript teams do this. This is the default setting in the TypeScript language service.
+> Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [idiomatic](https://github.com/rwaldron/idiomatic.js), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node)).
 
 ## Semicolons
 
