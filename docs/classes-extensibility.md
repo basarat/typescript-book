@@ -1,10 +1,10 @@
 #### Class extensibility
 
-People often add properties to classes from other JavaScript libraries. Here is a simple JavaScript example of this: 
+People often add properties to classes from other JavaScript libraries. Here is a simple JavaScript example of this:
 
 ```js
 // Original Library
-function Foo{}
+function Foo {}
 
-// Third party extension to add new member properties 
+// Third party extension to add new member properties
 ```

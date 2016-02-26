@@ -1,8 +1,8 @@
 ### Binder Error Reporting
 
-Binding errors are added to the sourceFile's list of `bindDiagnostics`. 
+Binding errors are added to the sourceFile's list of `bindDiagnostics`.
 
-An example error detected during binding is the use of `eval` or `arguments` as a variable name in `use strict` scenario. The relevant code is presented in its entirety below (`checkStrictModeEvalOrArguments` is called from multiple places, call stacks originating from `bindWorker` which calls different functions for different node `SyntaxKind`): 
+An example error detected during binding is the use of `eval` or `arguments` as a variable name in `use strict` scenario. The relevant code is presented in its entirety below (`checkStrictModeEvalOrArguments` is called from multiple places, call stacks originating from `bindWorker` which calls different functions for different node `SyntaxKind`):
 
 ```ts
 function checkStrictModeEvalOrArguments(contextNode: Node, name: Node) {
@@ -36,4 +36,4 @@ function getStrictModeEvalOrArgumentsMessage(node: Node) {
 
     return Diagnostics.Invalid_use_of_0_in_strict_mode;
 }
-``` 
+```

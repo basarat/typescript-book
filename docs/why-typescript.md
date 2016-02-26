@@ -78,7 +78,7 @@ var foo = 123;
 foo = '456'; // Error: cannot assign a `string` to a `number`
 ```
 
-will emit the following js: 
+will emit the following js:
 
 ```ts
 var foo = 123;
@@ -88,7 +88,7 @@ foo = '456';
 So you can incrementally upgrade your JavaScript code to TypeScript. This is very different from how many other language compilers work and yet another reason to move to TypeScript.
 
 ### Types can be ambient
-A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of *declaration*. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular JavaScript libraries have already been written for you by the [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) so for most purposes either: 
+A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of *declaration*. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular JavaScript libraries have already been written for you by the [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) so for most purposes either:
 
 1. The definition file already exists.
 1. Or at the very least, you have a vast list of well reviewed TypeScript declaration templates already available
@@ -97,24 +97,24 @@ As a quick example of how you would author your own declaration file, consider a
 ```ts
 $('.awesome').show(); // Error: cannot find name `$`
 ```
-As a quick fix *you can tell TypeScript* that there is indeed something called `$`: 
+As a quick fix *you can tell TypeScript* that there is indeed something called `$`:
 ```ts
 declare var $:any;
-$('.awesome').show(); // Okay! 
+$('.awesome').show(); // Okay!
 ```
-If you want you can build on this basic definition and provide more information to help protect you from errors: 
+If you want you can build on this basic definition and provide more information to help protect you from errors:
 ```ts
 declare var $:{
     (selector:string)=>any;
 };
-$('.awesome').show(); // Okay! 
+$('.awesome').show(); // Okay!
 $(123).show(); // Error: selector needs to be a string
 ```
 
 We will discuss the details of creating TypeScript definitions for existing JavaScript in detail later once you know more about TypeScript (e.g. stuff like `interface` and the `any`).
 
 ## Future JavaScript => Now
-TypeScript provides a number of features that are planned in ES6 for current JavaScript engines (that only support ES5 etc). The typescript team is actively adding these features and this list is only going to get bigger over time and we will cover this in its own section. But just as a specimen here is an example of a class: 
+TypeScript provides a number of features that are planned in ES6 for current JavaScript engines (that only support ES5 etc). The typescript team is actively adding these features and this list is only going to get bigger over time and we will cover this in its own section. But just as a specimen here is an example of a class:
 
 ```ts
 class Point {
@@ -130,7 +130,7 @@ var p2 = new Point(10, 20);
 var p3 = p1.add(p2); // {x:10,y:30}
 ```
 
-and the lovely fat arrow function: 
+and the lovely fat arrow function:
 
 ```ts
 var inc = (x)=>x+1;
@@ -144,5 +144,3 @@ In this section we have provided you with the motivation and design goals of Typ
 [](Cover all the annotations)
 [](Cover all ambients : also that there are no runtime enforcement)
 [](.ts vs. .d.ts)
-
-

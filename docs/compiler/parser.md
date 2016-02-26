@@ -8,16 +8,16 @@ SourceCode ~~ scanner ~~> Token Stream ~~ parser ~~> AST
 The parser is implemented as a singleton (similar reasons to `scanner`, don't want to recreate it if we can reinit it). It is actually implemented as `namespace Parser` which contains *state* variables for the Parser as well as a singleton `scanner`. As mentioned before it contains a `const scanner`. The parser functions manage this scanner.
 
 ### Usage by program
-Parser is driven indirectly by Program (indirectly as its actually by `CompilerHost` which we mentioned previously). Basically this is the simplified call stack: 
+Parser is driven indirectly by Program (indirectly as its actually by `CompilerHost` which we mentioned previously). Basically this is the simplified call stack:
 
 ```
-Program -> 
-    CompilerHost.getSourceFile -> 
-        (global function parser.ts).createSourceFile -> 
+Program ->
+    CompilerHost.getSourceFile ->
+        (global function parser.ts).createSourceFile ->
             Parser.parseSourceFile
 ```
 
-The `parseSourceFile` not only primes the state for the Parser but also primes the state for the `scanner` by calling `initializeState`. It then goes on to parse the source file using `parseSourceFileWorker`. 
+The `parseSourceFile` not only primes the state for the Parser but also primes the state for the `scanner` by calling `initializeState`. It then goes on to parse the source file using `parseSourceFileWorker`.
 
 ### Sample Usage
 Before we dig too deep into the parser internals, here is a sample code that uses the TypeScript's parser to get the AST of a source file (using `ts.createSourceFile`), and then print it.
@@ -40,7 +40,7 @@ var sourceFile = ts.createSourceFile('foo.ts', sourceCode, ts.ScriptTarget.ES5, 
 printAllChildren(sourceFile);
 ```
 
-This will print out the following: 
+This will print out the following:
 
 ```ts
 SourceFile 0 14
@@ -56,4 +56,4 @@ SourceFile 0 14
 ------------ SemicolonToken 13 14
 ---- EndOfFileToken 14 14
 ```
-This looks like a (very right sided) tree if you tilt your head to the left. 
+This looks like a (very right sided) tree if you tilt your head to the left.

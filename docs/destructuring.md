@@ -5,7 +5,7 @@ TypeScript supports the following forms of Destructuring (literally named after 
 1. Object Destructuring
 1. Array Destructuring
 
-It is easy to think of destructuring as an inverse of *structuring*. The method of *structuring* in JavaScript is the object literal: 
+It is easy to think of destructuring as an inverse of *structuring*. The method of *structuring* in JavaScript is the object literal:
 
 ```ts
 var foo = {
@@ -28,7 +28,7 @@ console.log(x, y, width, height); // 0,10,15,20
 ```
 Here in the absence of destructuring you would have to pick off `x,y,width,height` one by one from `rect`.
 
-Additionally you can get *deep* data out of a structure using destructuring. This is shown in the following example: 
+Additionally you can get *deep* data out of a structure using destructuring. This is shown in the following example:
 
 ```ts
 var foo = { bar: { bas: 123 } };
@@ -78,6 +78,3 @@ var _a;
 
 #### Summary
 Destructuring can make your code more readable and maintainable by reducing the line count and making the intent clear. Array destructuring can allow you to use arrays as though they were tuples.
-
-
-

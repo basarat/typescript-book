@@ -1,6 +1,6 @@
 ### Container
 
-An AST node can be a container. This determines the kinds of `SymbolTables` the Node and associated Symbol will have. Container is an abstract concept (i.e. has no associated data structure). The concept is driven by a few things, one being the `ContainerFlags` enum. The function `getContainerFlags` (in `binder.ts`) drives this flag and is presented below: 
+An AST node can be a container. This determines the kinds of `SymbolTables` the Node and associated Symbol will have. Container is an abstract concept (i.e. has no associated data structure). The concept is driven by a few things, one being the `ContainerFlags` enum. The function `getContainerFlags` (in `binder.ts`) drives this flag and is presented below:
 
 ```ts
 function getContainerFlags(node: Node): ContainerFlags {
@@ -62,7 +62,7 @@ function getContainerFlags(node: Node): ContainerFlags {
 }
 ```
 
-It is *only* invoked from the binder's `bindChildren` function which sets up a node as a `container` and/or a `blockScopedContainer` depending upon the evaluation of the `getContainerFlags` function. The function `bindChildren` is presented below: 
+It is *only* invoked from the binder's `bindChildren` function which sets up a node as a `container` and/or a `blockScopedContainer` depending upon the evaluation of the `getContainerFlags` function. The function `bindChildren` is presented below:
 
 ```ts
 // All container nodes are kept on a linked list in declaration order. This list is used by
@@ -121,4 +121,3 @@ function bindChildren(node: Node) {
 ```
 
 As you might recall from section on binder functions : `bindChildren` is called from the `bind` function. So we have the recursive bindig setup : `bind` calls `bindChildren` calls `bind` for each child.
-

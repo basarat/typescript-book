@@ -31,8 +31,8 @@ var bar = <string> foo; // bar is now of type "string"
 However there is an ambiguity in the language grammar when using `<foo>` style assertions in JSX:
 
 ```ts
-var foo = <string>bar;  
-</string>  
+var foo = <string>bar;
+</string>
 ```
 
 Therefore it is now recommended that you just use `as foo` for consistency.
@@ -83,7 +83,7 @@ In some cases you might need to create a temporary variable, but at least you wi
 The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected
 
 ```ts
-function handler (event: Event){
+function handler (event: Event) {
     let mouseEvent = event as MouseEvent;
 }
 ```

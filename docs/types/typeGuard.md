@@ -25,11 +25,11 @@ class Bar {
 }
 
 function doStuff(arg: Foo | Bar) {
-    if (arg instanceof Foo){
+    if (arg instanceof Foo) {
         console.log(arg.foo); // OK
         console.log(arg.bar); // Error!
     }
-    if (arg instanceof Bar){
+    if (arg instanceof Bar) {
         console.log(arg.foo); // Error!
         console.log(arg.bar); // OK
     }
@@ -55,7 +55,7 @@ class Bar {
 }
 
 function doStuff(arg: Foo | Bar) {
-    if (arg instanceof Foo){
+    if (arg instanceof Foo) {
         console.log(arg.foo); // OK
         console.log(arg.bar); // Error!
     }

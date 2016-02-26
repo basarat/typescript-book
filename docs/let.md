@@ -29,12 +29,12 @@ console.log(index); // 0
 ```
 In all sincerity we find it better to use `let` whenever possible as it leads to lesser surprises for new and existing multi-lingual developers.
 
-#### Functions create a new scope    
+#### Functions create a new scope
 Since we mentioned it, we'd like to demonstrate that functions create a new variable scope in JavaScript. Consider the following:
 
 ```ts
 var foo = 123;
-function test(){
+function test() {
     var foo = 456;
 }
 test();

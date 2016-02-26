@@ -5,7 +5,7 @@ TypeScript's type system allows you to mark individual properties on an interfac
 function foo(config:{
     readonly bar: number,
     readonly bas: number
-}){
+}) {
     // ..
 }
 
@@ -96,7 +96,7 @@ In some cases the compiler can automatically infer a particular item to be reado
 class Person {
     firstName: string = "John";
     lastName: string = "Doe";
-    get fullName(){
+    get fullName() {
         return this.firstName + this.lastName;
     }
 }
@@ -130,7 +130,7 @@ let foo: {
         bar: 123
     };
 
-function iMutateFoo(foo:{bar:number}){
+function iMutateFoo(foo:{bar:number}) {
     foo.bar = 456;
 }
 

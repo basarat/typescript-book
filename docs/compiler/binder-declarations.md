@@ -1,7 +1,7 @@
 ### Symbols and Declarations
-Linking between a `node` and a `symbol` is performed by a few functions. One function that is used to bind the `SourceFile` node to the source file Symbol (in case of an external module) is the `addDeclarationToSymbol` function 
+Linking between a `node` and a `symbol` is performed by a few functions. One function that is used to bind the `SourceFile` node to the source file Symbol (in case of an external module) is the `addDeclarationToSymbol` function
 
-Note : the `Symbol` for an external module source file is setup as `flags : SymbolFlags.ValueModule` and `name: '"' + removeFileExtension(file.fileName) + '"'`). 
+Note : the `Symbol` for an external module source file is setup as `flags : SymbolFlags.ValueModule` and `name: '"' + removeFileExtension(file.fileName) + '"'`).
 
 ```ts
 function addDeclarationToSymbol(symbol: Symbol, node: Declaration, symbolFlags: SymbolFlags) {
@@ -28,8 +28,8 @@ function addDeclarationToSymbol(symbol: Symbol, node: Declaration, symbolFlags: 
 }
 ```
 
-The important linking portions: 
-* creates a link to the Symbol from the AST node (`node.symbol`). 
+The important linking portions:
+* creates a link to the Symbol from the AST node (`node.symbol`).
 * add the node as *one of* the declarations of the Symbol (`symbol.declarations`).
 
 #### Declaration

@@ -43,7 +43,7 @@ Components are type checked based on the `props` property of the component. This
 To create React components we recommend using ES6 classes. The `react.d.ts` file defines the `React.Component<Props,State>` class which you should extend in your own class providing your own `Props` and `State` interfaces. This is demonstrated below:
 
 ```ts
-interface Props {  
+interface Props {
   foo: string;
 }
 class MyComponent extends React.Component<Props, {}> {

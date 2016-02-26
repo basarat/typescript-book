@@ -50,7 +50,7 @@ var Tristate;
 })(Tristate || (Tristate = {}));
 ```
 
-lets focus on the line `Tristate[Tristate["False"] = 0] = "False";`. Within it `Tristate["False"] = 0` should be self explanatory, i.e. sets `"False"` member of `Tristate` variable to be `"0"`. Note that in JavaScript the assignment operator returns the assigned value (in this case `0`). Therefore the next thing executed by the JavaScript runtime is `Tristate[0] = "False"`. This means that you can use the `Tristate` variable to convert a string version of the enum to a number or a number version of the enum to a string. This is demonstrated below: 
+lets focus on the line `Tristate[Tristate["False"] = 0] = "False";`. Within it `Tristate["False"] = 0` should be self explanatory, i.e. sets `"False"` member of `Tristate` variable to be `"0"`. Note that in JavaScript the assignment operator returns the assigned value (in this case `0`). Therefore the next thing executed by the JavaScript runtime is `Tristate[0] = "False"`. This means that you can use the `Tristate` variable to convert a string version of the enum to a number or a number version of the enum to a string. This is demonstrated below:
 
 ```ts
 enum Tristate {
@@ -60,11 +60,11 @@ enum Tristate {
 }
 console.log(Tristate[0]); // "False"
 console.log(Tristate["False"]); // 0
-console.log(Tristate[Tristate.False]); // "False" because `Tristate.False == 0` 
+console.log(Tristate[Tristate.False]); // "False" because `Tristate.False == 0`
 ```
 
 #### Changing the number associated with an Enum
-By default enums are `0` based and then each subsequent value increments by 1 automatically. As an example consider the following 
+By default enums are `0` based and then each subsequent value increments by 1 automatically. As an example consider the following
 ```ts
 enum Color {
     Red,     // 0
@@ -82,7 +82,7 @@ enum Color {
 ```
 
 #### Enums are open ended
-Here is the generated JavaScript for an enum shown again: 
+Here is the generated JavaScript for an enum shown again:
 
 ```js
 var Tristate;
@@ -93,8 +93,8 @@ var Tristate;
 })(Tristate || (Tristate = {}));
 ```
 
-We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `TriState` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object. 
-	
+We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `TriState` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object.
+
 This means that you can split (and extend) an enum definition across multiple files. For example below we have split the definition for `Color` into two blocks
 
 ```ts
@@ -114,7 +114,7 @@ enum Color {
 Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`)
 
 #### Enums as flags
-One excellent use of the ability to use enums as `Flags`. Consider the following example 
+One excellent use of the ability to use enums as `Flags`. Consider the following example
 
 ```ts
 enum AnimalFlags {
@@ -143,7 +143,7 @@ function printAnimalAbilities(animal) {
     if (animalFlags & AnimalFlags.CanFly) {
         console.log('animal can fly');
     }
-    if (animalFlags == AnimalFlags.None){
+    if (animalFlags == AnimalFlags.None) {
         console.log('nothing');
     }
 }
@@ -158,10 +158,10 @@ animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
 printAnimalAbilities(animal); // animal has claws, animal can fly
 ```
 
-Here: 
+Here:
 * we used `|=` to add flags
 * a combination of `&=` and `~` to clear a flag
-* `|` to combine flags 
+* `|` to combine flags
 
 Note : you can combine flags to create convenient shortcuts within the enum definition e.g. `EndangeredFlyingClawedFishEating` below.
 
@@ -172,14 +172,14 @@ enum AnimalFlags {
     CanFly         = 1 << 1,
     EatsFish       = 1 << 2,
     Endangered     = 1 << 3,
-	
+
 	EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered,
 }
 ```
 
 #### Const Enums
 
-If you have an enum definition like the following: 
+If you have an enum definition like the following:
 
 ```ts
 enum Tristate {
@@ -201,12 +201,12 @@ const enum Tristate {
 
 var lie = Tristate.False;
 ```
-generates the JavaScript: 
+generates the JavaScript:
 ```js
 var lie = 0;
 ```
 
-i.e. the compiler : 
+i.e. the compiler :
 1. *inlines* any usages of the enum (`0` instead of `Tristate.False`).
 1. does not generate any JavaScript for the enum definition (there is no `Tristate` variable at runtime) as its usages are inlined.
 
