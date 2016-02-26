@@ -28,7 +28,7 @@ If you use [*file modules* (which you really should as global scope is bad)](../
 ```ts
 let someProperty;
 
-function foo(){
+function foo() {
    // Some initialization code
 }
 foo(); // some initialization code
@@ -38,7 +38,7 @@ someProperty = 123; // some more initialization
 // Some utility function not exported
 
 // later
-export function someMethod(){
+export function someMethod() {
 
 }
 ```

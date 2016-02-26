@@ -16,7 +16,7 @@ enum FooIdBrand {}
 type FooId = FooIdBrand & string;
 
 // BAR
-enum BarIdBrand{}
+enum BarIdBrand {}
 type BarId = BarIdBrand & string;
 
 /**

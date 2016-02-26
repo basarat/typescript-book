@@ -7,13 +7,13 @@ declare var process:any;
 
 > You don't *need* to do this for `process` as there is already a [community maintained `node.d.ts`](https://github.com/borisyankov/DefinitelyTyped/blob/master/node/node.d.ts)
 
-This allows you to use the `process` variable without TypeScript complaining: 
+This allows you to use the `process` variable without TypeScript complaining:
 
 ```ts
 process.exit()
 ```
 
-We recommend using an interface wherever possible e.g: 
+We recommend using an interface wherever possible e.g:
 
 ```ts
 interface Process {

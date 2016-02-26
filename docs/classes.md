@@ -99,7 +99,7 @@ foo.z; // ERROR : protected
 
 // EFFECT ON CHILD CLASSES
 class FooChild extends FooBase {
-    constructor(){
+    constructor() {
       super();
         this.x; // okay
         this.y; // ERROR: private
@@ -120,9 +120,9 @@ As always these modifiers work for both member properties and member functions.
 Having a member in a class and initializing it like below:
 
 ```ts
-class Foo{
+class Foo {
     x: number;
-    constructor(x:number){
+    constructor(x:number) {
         this.x = x;
     }
 }
@@ -130,8 +130,8 @@ class Foo{
 is such a common pattern that TypeScript provides a shorthand where you can prefix the member with an *access modifier* and it is automatically declared on the class and copied from the constructor. So the previous example can be re-written as (notice `public x:number`):
 
 ```ts
-class Foo{
-    constructor(public x:number){
+class Foo {
+    constructor(public x:number) {
     }
 }
 ```
@@ -140,9 +140,9 @@ class Foo{
 This is a nifty feature supported by TypeScript (from ES7 actually). You can initialize any member of the class outside the class constructor, useful to provide default (notice `members = []`)
 
 ```ts
-class Foo{
+class Foo {
     members = [];  // Initialize directly
-    add(x){
+    add(x) {
         this.members.push(x);
     }
 }

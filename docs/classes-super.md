@@ -1,6 +1,6 @@
 #### `super`
 
-Note that if you call `super` on a child class it is redirected to the `prototype` as shown below: 
+Note that if you call `super` on a child class it is redirected to the `prototype` as shown below:
 
 ```ts
 class Base {
@@ -11,7 +11,7 @@ class Child extends Base {
     log() { super.log() };
 }
 ```
-generates: 
+generates:
 
 ```js
 var Base = (function () {
@@ -56,8 +56,7 @@ module quz {
 
     class Child extends Base {
         // ERROR : only `public` and `protected` methods of base class are accessible via `super`
-        logWorld() { super.log() }; 
+        logWorld() { super.log() };
     }
 }
 ```
-

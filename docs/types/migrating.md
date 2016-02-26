@@ -22,7 +22,7 @@ var bar = 'hey';
 bar = foo; // ERROR: cannot assign a number to a string
 ```
 
-Even though the **error is valid** (and in most cases the inferred information will be better than what the original authors of different portions of the code bases imagined), your focus will probably be writing new code in TypeScript while progressively updating the old code base. Here you can suppress this error with a type assertion as shown below: 
+Even though the **error is valid** (and in most cases the inferred information will be better than what the original authors of different portions of the code bases imagined), your focus will probably be writing new code in TypeScript while progressively updating the old code base. Here you can suppress this error with a type assertion as shown below:
 
 ```ts
 var foo = 123;
@@ -31,7 +31,7 @@ var bar = 'hey';
 bar = <any>foo; // Okay!
 ```
 
-In other places you might want to annotate something as `any` e.g. 
+In other places you might want to annotate something as `any` e.g.
 
 ```ts
 function foo() {
@@ -41,7 +41,7 @@ var bar = 'hey';
 bar = foo(); // ERROR: cannot assign a number to a string
 ```
 
-Suppressed: 
+Suppressed:
 
 ```ts
 function foo(): any { // Added `any`
@@ -64,7 +64,7 @@ Consider the case of `jquery`, you can create a *trivial* definition for it quit
 declare var $: any;
 ```
 
-Sometimes you might want to add an explicit annotation on something (e.g. `JQuery`) and you need something in *type declaration space*. You can do that quite easily using the `type` keyword: 
+Sometimes you might want to add an explicit annotation on something (e.g. `JQuery`) and you need something in *type declaration space*. You can do that quite easily using the `type` keyword:
 
 ```ts
 declare type JQuery = any;

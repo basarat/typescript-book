@@ -11,7 +11,7 @@ As you can see it returns **any**! That means that calling `bind` on a function 
 For example the following compiles:
 
 ```ts
-function twoParams(a:number,b:number){
+function twoParams(a:number,b:number) {
     return a + b;
 }
 let curryOne = twoParams.bind(null,123);
@@ -21,7 +21,7 @@ curryOne('456'); // Allowed because it wasn't type checked!
 
 A better way to write it would be with a simple [arrow function](../arrow-functions.md) with an explicit type annotation:
 ```ts
-function twoParams(a:number,b:number){
+function twoParams(a:number,b:number) {
     return a + b;
 }
 let curryOne = (x:number)=>twoParams(123,x);

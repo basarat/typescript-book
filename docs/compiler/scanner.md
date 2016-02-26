@@ -71,7 +71,7 @@ while (token != ts.SyntaxKind.EndOfFileToken) {
 }
 ```
 
-This will print out the following: 
+This will print out the following:
 ```
 VarKeyword 0 3
 Identifier 3 7

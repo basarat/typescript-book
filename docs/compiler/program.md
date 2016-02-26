@@ -14,4 +14,4 @@ There are other users of `System` as well (e.g. tests).
 
 ### SourceFile
 
-The program provides an API to get the Source Files `getSourceFiles(): SourceFile[];`. Each is represented as a root-level node for an AST (called `SourceFile`). 
+The program provides an API to get the Source Files `getSourceFiles(): SourceFile[];`. Each is represented as a root-level node for an AST (called `SourceFile`).

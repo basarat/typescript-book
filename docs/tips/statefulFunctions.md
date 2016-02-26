@@ -2,13 +2,13 @@
 A common feature in other programming languages is usage of the `static` keyword to increase the *lifetime* (not *scope*) of a function variable to live beyond function invocations. Here is a `C` sample that achieves this:
 
 ```c
-void called(){
+void called() {
     static count = 0;
     count++;
     printf("Called : %d", count);
 }
 
-int main (){
+int main () {
     called(); // Called : 1
     called(); // Called : 2
     return 0;

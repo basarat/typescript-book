@@ -141,7 +141,7 @@ interface DateConstructor {
 interface Date {
     /** Adds the specified number of milliseconds to this instance. */
     addMilliseconds(milliseconds: number): Date;
-    // ... so on and so forth    
+    // ... so on and so forth
 }
 ```
 This allows you to do stuff like the following in a TypeSafe manner:

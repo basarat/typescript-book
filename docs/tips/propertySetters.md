@@ -17,7 +17,7 @@ In the presence of setter/getters:
 class Foo {
     a: number;
     b: number;
-    set bar(value:{a:number,b:number}){
+    set bar(value:{a:number,b:number}) {
         this.a = value.a;
         this.b = value.b;
     }
