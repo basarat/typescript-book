@@ -1,5 +1,4 @@
 ### Iterators
-*DRAFT*
 
 Iterator itself is not a TypeScript or ES6 feature, Iterator is a
 Behavioral Design Pattern common for Object oriented programming languages.
@@ -177,3 +176,10 @@ for(let num of fibMax21) {
   console.log(num); //Prints fibonacci sequence 0 to 21
 }
 ```
+
+#### Building code with iterators for ES5 target
+Code examples above require ES6 target, however it could work
+with ES5 target as well if target JS engine supports `Symbol.iterator`.
+This can be achieved by using ES6 lib with ES5 target
+(add es6.d.ts to your project) to make it compile.
+Compiled code should work in node 4+, Google Chrome and in some other browsers.
