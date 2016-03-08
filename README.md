@@ -12,5 +12,8 @@ You can also download one of the following:
 * [PDF for Windows and others](https://www.gitbook.com/download/pdf/book/basarat/typescript)
 * [MOBI for Kindle](https://www.gitbook.com/download/mobi/book/basarat/typescript)
 
+## Special Thanks
+All the amazing [contributors](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
+
 ## Share
 Share URL: http://basarat.gitbooks.io/typescript/
