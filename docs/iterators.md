@@ -38,8 +38,10 @@ class Frame implements Iterator<Component> {
         done: false,
         value: this.components[this.pointer++]
       }
-    } else return {
-      done: true
+    } else {
+      return {
+        done: true
+      }
     }
   }
 
@@ -81,8 +83,10 @@ class Frame implements Iterable<Component> {
             done: false,
             value: components[pointer++]
           }
-        } else return {
-          done: true
+        } else {
+          return {
+            done: true
+          }
         }
       }
 
@@ -114,8 +118,10 @@ class Frame implements IterableIterator<Component> {
         done: false,
         value: this.components[this.pointer++]
       }
-    } else return {
-      done: true
+    } else {
+      return {
+        done: true
+      }
     }
   }
 
