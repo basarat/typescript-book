@@ -1,6 +1,6 @@
 ### Destructuring
 
-TypeScript supports the following forms of Destructuring (literally named after de-stucturing i.e. breaking up the structure):
+TypeScript supports the following forms of Destructuring (literally named after de-structuring i.e. breaking up the structure):
 
 1. Object Destructuring
 1. Array Destructuring
