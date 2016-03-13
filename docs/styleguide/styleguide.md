@@ -155,20 +155,55 @@ enum Color {
 
 ## Null vs. Undefined
 
-* Use `null` to demonstrate explicit lack of value
+* Prefer not to use either for explicit unavailability
+
+> Reason: these values are commonly used to keep a consistent structure between values. In TypeScript you use *types* to denote the structure
+
+**Bad**
+```ts
+let foo = {x:123,y:undefined};
+```
+**Good**
+```ts
+let foo:{x:number,y?:number} = {x:123};
+```
+
+* Use `undefined` in general (do consider returning an object like `{valid:boolean,value?:Foo}` instead)
+
+***Bad***
+```ts
+return null;
+```
+***Good***
+```ts
+return undefined;
+```
+
+* Use `null` where its a part of the API or conventional
 
 > Reason: It is conventional in NodeJS e.g. `error` is `null` for NodeBack style callbacks.
 
 **Bad**
 ```ts
-let error = undefined;
+cb(undefined)
 ```
 **Good**
 ```ts
-let error = null;
+cb(null)
 ```
 
-* Use *truthy* check for `null` / `undefined` e.g.
+* Use *truthy* check for **objects** being `null` or `undefined`
+
+**Bad**
+```ts
+if (error === null)
+```
+**Good**
+```ts
+if (error)
+```
+
+* Use `== undefined` / `!= undefined` (not `===` / `!==`) to check for `null` / `undefined` on primitives as it works for both `null`/`undefined` but not other falsy values (like `''`,`0`,`false`) e.g.
 
 **Bad**
 ```ts
@@ -176,8 +211,10 @@ if (error !== null)
 ```
 **Good**
 ```ts
-if (error)
+if (error != undefined)
 ```
+
+PS: [More about `null`](./tips/null.md)
 
 ## Formatting
 The TypeScript compiler ships with a very nice formatting language service. Whatever output it gives by default is good enough to reduce the cognitive overload on the team.
