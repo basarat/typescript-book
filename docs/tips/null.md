@@ -7,7 +7,7 @@ JavaScript (and by extension TypeScript) has two bottom types : `null` and `unde
 Most other languages only have one (commonly called `null`). Since by default JavaScript will evaluate an uninitialized variable / parameter / property to `undefined` (you don't get a choice) we recommend you just use that for your own *unavailable* status and don't bother with `null`.
 
 ## Real world discussions
-TypeScript team doesn't use `null` : [TypeScript coding guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined) and it hasn't caused any propblems. Douglas Crockford thinks [`null` is a bad idea](https://www.youtube.com/watch?v=PSGEjv3Tqo0&feature=youtu.be&t=9m21s) and we should all just use `undefined`
+TypeScript team doesn't use `null` : [TypeScript coding guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined) and it hasn't caused any problems. Douglas Crockford thinks [`null` is a bad idea](https://www.youtube.com/watch?v=PSGEjv3Tqo0&feature=youtu.be&t=9m21s) and we should all just use `undefined`
 
 ## Dealing with `null` style code bases
 If your code base interacts with other APIs that might give you a `null` you check with `== undefined` (instead of `===`). Using this is safe even for other potentially *falsy* values.
