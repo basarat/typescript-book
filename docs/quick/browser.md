@@ -35,7 +35,7 @@ npm init -y
 ```
 * Install TypeScript nightly
 ```
-npm install typescript@next
+npm install typescript@next --save-dev
 ```
 * Install [`ts-loader`](https://github.com/TypeStrong/ts-loader/)
 ```bash
