@@ -14,6 +14,5 @@ You have the option of putting these declarations in a `.ts` file or in a `.d.ts
 
 If a file has the extension `.d.ts` then each root level definition must have the `declare` keyword prefixed to it. This helps make it clear to the author that there will be *no code emitted by TypeScript*. The author needs to ensure that the declared item will exist at runtime.
 
->
-* Ambient declarations is a promise that you are making with the compiler. If these do not exist at runtime and you try to use them, things will break without warning.
+> * Ambient declarations is a promise that you are making with the compiler. If these do not exist at runtime and you try to use them, things will break without warning.
 * Ambient declarations are like docs. If the source changes the docs need to be kept updated. So you might have new behaviours that work at runtime but no one's updated the ambient declaration and hence you get compiler errors.
