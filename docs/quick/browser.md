@@ -2,19 +2,31 @@
 If you are using TypeScript to create a web application here are my recommendations:
 
 ## General Machine Setup
-Install `webpack`:
+
+* Install [NodeJS](https://nodejs.org/en/download/)
+* Install `webpack`:
 ```
 npm install webpack -g
 ```
 
 ## Project Setup
-* Use external modules in tsconfig (best `"module":"commonjs"`). We discuss [modules here](../project/external-modules.md)
+* Create a project dir
+```
+mkdir your-project
+cd your-project
+```
+* Create an npm project: 
+```
+npm init -y
+```
+* Use external modules in `tsconfig.json` (best `"module":"commonjs"`). We discuss [modules here](../project/external-modules.md). Also good to have it setup for `tsx` compilation out of the box.
 ```json
 {
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "sourceMap": true
+        "sourceMap": true,
+        "jsx": "react"
     },
     "exclude": [
         "node_modules"
