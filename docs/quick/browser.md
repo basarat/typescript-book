@@ -4,10 +4,6 @@ If you are using TypeScript to create a web application here are my recommendati
 ## General Machine Setup
 
 * Install [NodeJS](https://nodejs.org/en/download/)
-* Install `webpack`:
-```
-npm install webpack -g
-```
 
 ## Project Setup
 * Create a project dir
@@ -36,6 +32,10 @@ npm init -y
 * Install TypeScript nightly
 ```
 npm install typescript@next --save-dev
+```
+* Install webpack: 
+```bash
+npm install webpack --save-dev
 ```
 * Install [`ts-loader`](https://github.com/TypeStrong/ts-loader/)
 ```bash
