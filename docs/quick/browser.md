@@ -124,3 +124,5 @@ ReactDOM.render(
     document.getElementById("root")
 );
 ```
+
+You can clone this demo project here : https://github.com/basarat/react-typescript
