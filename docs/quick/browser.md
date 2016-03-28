@@ -43,7 +43,7 @@ npm install typescript@next webpack ts-loader typings --save-dev
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
 ```js
 module.exports = {
-    entry: './src/app.ts',
+    entry: './src/app.tsx',
     output: {
         filename: './dist/bundle.js'
     },
@@ -79,7 +79,7 @@ Now if you make edits to your `ts` or `tsx` file webpack will generate `bundle.j
 If you are going to use React (which I highly recommend you give a look), here are a few more steps:
 
 ```
-npm install react react-dom --save
+npm install react react-dom --save-dev
 ```
 
 ```
@@ -88,4 +88,39 @@ npm install react react-dom --save
 
 ```
 "./node_modules/.bin/typings" install react-dom --ambient --save
+```
+
+A demo `index.html`:
+```
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello React!</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- Main -->
+        <script src="./dist/bundle.js"></script>
+    </body>
+</html>
+```
+A demo `./src/app.tsx`
+```ts
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+
+const Hello = (props: { compiler: string, framework: string }) => {
+    return (
+        <div>
+            <div>{props.compiler}</div>
+            <div>{props.framework}</div>
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <Hello compiler="TypeScript" framework="React" />,
+    document.getElementById("root")
+);
 ```
