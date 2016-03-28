@@ -21,17 +21,24 @@ cd your-project
         "jsx": "react"
     },
     "exclude": [
-        "node_modules"
-    ]
+        "node_modules",
+        "typings/browser",
+        "typings/browser.d.ts"
+    ],
+    "compileOnSave": false
 }
 ```
 * Create an npm project:
 ```
 npm init -y
 ```
-* Install TypeScript-nightly, webpack, [`ts-loader`](https://github.com/TypeStrong/ts-loader/)
+* Install TypeScript-nightly, webpack, [`ts-loader`](https://github.com/TypeStrong/ts-loader/), typings
 ```
-npm install typescript@next webpack ts-loader --save-dev
+npm install typescript@next webpack ts-loader typings --save-dev
+```
+* Init typings (creates a `typings.json` file for you).
+```
+"./node_modules/.bin/typings" init
 ```
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
 ```js
@@ -52,10 +59,11 @@ module.exports = {
     }
 }
 ```
-* Setup an npm script to run a build. In your `package.json` add a `script` section:
+* Setup an npm script to run a build. Also have it run `typings install` on `npm install`. In your `package.json` add a `script` section:
 ```json
 "scripts": {
-  "watch": "webpack --watch"
+    "prepublish": "typings install",
+    "watch": "webpack --watch"
 },
 ```
 
@@ -66,3 +74,18 @@ npm run watch
 ```
 
 Now if you make edits to your `ts` or `tsx` file webpack will generate `bundle.js` for you. Serve this up using your web server 🌹.
+
+## More
+If you are going to use React (which I highly recommend you give a look), here are a few more steps:
+
+```
+npm install react react-dom --save
+```
+
+```
+"./node_modules/.bin/typings" install react --ambient --save
+```
+
+```
+"./node_modules/.bin/typings" install react-dom --ambient --save
+```
