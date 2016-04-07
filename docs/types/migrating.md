@@ -74,3 +74,23 @@ declare var $: JQuery;
 This provides you an easier future update path.
 
 Again, a high quality `jquery.d.ts` exists at [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped). But you now know how to overcome any JavaScript -> TypeScript friction *quickly* when using third party JavaScript. We will look at ambient declarations in detail next.
+
+
+# Third Party NPM modules
+
+Similar to global variable declaration you can declare a global module quite easily. E.g. for `jquery` if you want to use it as a module (https://www.npmjs.com/package/jquery) you can write the following yourself: 
+
+```ts
+declare module "jquery" {
+   var $:any;
+   export = $;
+}
+```
+
+And then you can import it in your file as needed: 
+
+```ts
+import * as $ from "jquery";
+```
+
+> Again, a high quality `jquery.d.ts` exists at [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) that provides a much higher quality jquery module declaration. But it might exist for your library, so now you have a quick low friction way of continuing the migration 🌹
