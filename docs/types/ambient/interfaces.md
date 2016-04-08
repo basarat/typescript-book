@@ -14,7 +14,7 @@ interface Point {
 declare var myPoint: Point;
 ```
 
-However the beauty of *Sample B* is that if someone authors a library that builds on the `myPoint` library to add new members they can do that with if you used an interface:
+However the beauty of *Sample B* is that if someone authors a library that builds on the `myPoint` library to add new members they can do that only if you used an interface:
 
 ```ts
 // Lib a.d.ts
