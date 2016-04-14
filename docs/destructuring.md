@@ -28,6 +28,17 @@ console.log(x, y, width, height); // 0,10,15,20
 ```
 Here in the absence of destructuring you would have to pick off `x,y,width,height` one by one from `rect`.
 
+To assign an extracted variable to a new variable name you can do the following:
+
+```ts
+// structure
+const obj = {"some property": "some value"};
+
+// destructure
+const {"some property": someProperty} = obj;
+console.log(someProperty === "some value"); // true
+```
+
 Additionally you can get *deep* data out of a structure using destructuring. This is shown in the following example:
 
 ```ts
