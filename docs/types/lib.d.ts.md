@@ -17,7 +17,7 @@ var bar = foo.toString();
 ```
 This code type checks fine *because* the `toString` function is defined in `lib.d.ts` for all JavaScript objects.
 
-If you use the same sample code with the `noLib` option you can a type check error:
+If you use the same sample code with the `noLib` option you get a type check error:
 
 ```ts
 var foo = 123;
