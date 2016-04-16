@@ -76,11 +76,13 @@ console.log(Something.instances); // 2
 You can have static members as well as static functions.
 
 ### Access Modifiers
-TypeScript supports the common access modifiers that control if *a variable is accessible outside the class directly on instances* and *is the variable accessible in child classes*  :
+TypeScript supports access modifiers `public`,`private` and `protected` which determine the accessibility of a `class` member as shown below:
 
-1. `public`: available on instances everywhere
-1. `private`: not available for access outside the class.
-1. `protected`: available on child classes but not on instances directly.
+| accessible on   | `public` | `private` | `protected` |
+|-----------------|----------|-----------|-------------|
+| class instances | yes      | no        | no          |
+| class           | yes      | yes       | yes         |
+| class children  | yes      | no        | yes         |
 
 Note that at runtime (in the generated JS) these have no significance but will give you compile time errors if you use them incorrectly. An example of each is shown below:
 
