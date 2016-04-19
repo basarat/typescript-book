@@ -44,9 +44,10 @@ The following statement:
 import foo = require('foo');
 ```
 
-actually imports *two* things:
-* The type information from the imported file.
-* Takes are runtime dependency on the `foo` module.
+actually does *two* things:
+
+* Imports the type information of the foo module.
+* Specifies a runtime dependency on the foo module.
 
 You can pick and choose so that only *the type information* is loaded and no runtime dependency occurs. Before continuing you might want to recap the [*declaration spaces*](../project/declarationspaces.md) section of the book.
 
