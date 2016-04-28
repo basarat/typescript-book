@@ -25,7 +25,7 @@ The Type assertion pattern is unsafe in that it trusts you to do the right thing
 class FooNumber extends Foo<number>{}
 ```
 
-One word of caution here : if you use decorators on the base class then the inherited class might now have the same behavior as the base class (it is no longer wrapped by the decorator).
+One word of caution here: if you use decorators on the base class then the inherited class might not have the same behavior as the base class (it is no longer wrapped by the decorator).
 
 Of course if you are not specializing classes you still have to come up with a coercion / assertion pattern that works and hence we showed the general assertion pattern first, e.g.:
 
