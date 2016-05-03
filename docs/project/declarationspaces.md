@@ -79,3 +79,19 @@ var bar: typeof foo; // `bar` has the same type as `foo` (here `number`)
 bar = 456; // Okay
 bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
 ```
+
+#### Capturing the type of a class member
+
+Similar to capturing the type of a variable, you just declare a variable purely for type capturing purposes:
+
+```ts
+class Foo {
+  foo: number; // some member whose type we want to capture
+}
+
+// Purely to capture type
+declare let _foo: Foo;
+
+// Same as before
+let bar: typeof _foo.foo;
+```
