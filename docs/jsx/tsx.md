@@ -64,3 +64,31 @@ TypeScript provides you with the ability to use something other than React with 
     * When using components:
         * You can control which `class` must be inherited by components by customizing the default `interface ElementClass extends React.Component<any, any> { }` declaration.
         * You can control which property is used to type check the attributes (the default is `props`) by customizing the `declare module JSX { interface ElementAttributesProperty { props: {}; } }` declaration.
+
+## `reactNamespace`
+
+Passing `--reactNamespace <JSX factory Name>` along with `--jsx react` allows for using a different JSX factory from the default `React`.
+
+The new factory name will be used to call `createElement` functions.
+
+##### Example
+
+```ts
+import {jsxFactory} from "jsxFactory";
+
+var div = <div>Hello JSX!</div>
+```
+
+Compiled with:
+
+```shell
+tsc --jsx react --reactNamespace jsxFactory --m commonJS
+```
+
+Results in:
+
+```js
+"use strict";
+var jsxFactory_1 = require("jsxFactory");
+var div = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
+```
