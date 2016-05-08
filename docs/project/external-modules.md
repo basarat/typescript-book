@@ -131,7 +131,7 @@ Similar to the lazy loading use case certain module loaders (commonjs/node and a
 
 ### Use case: Ensure Import
 
-Sometimes you want to load a file just for the side effect (e.g the module might register itself with some library like CodeMirror providing commands etc.). However if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.: 
+Sometimes you want to load a file just for the side effect (e.g the module might register itself with some library like [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.). However if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.: 
 
 ```ts
 import foo = require('./foo');
@@ -142,6 +142,6 @@ const ensureImport: any =
     || bar
     || bas;
 ```
-
+The key advantage of using `import/require` instead of just `var/require` is that you get file path completion / checking / goto definition navigation etc.
 
 [](// TODO: es6 modules)
