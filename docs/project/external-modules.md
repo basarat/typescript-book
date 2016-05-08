@@ -129,4 +129,19 @@ This pattern is commonly used:
 
 Similar to the lazy loading use case certain module loaders (commonjs/node and amd/requirejs) don't work well with circular dependencies. In such cases it is useful to have *lazy loading* code in one direction and loading the modules upfront in the other direction.
 
+### Use case: Ensure Import
+
+Sometimes you want to load a file just for the side effect (e.g the module might register itself with some library like CodeMirror providing commands etc.). However if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.: 
+
+```ts
+import foo = require('./foo');
+import bar = require('./bar');
+import bas = require('./bas');
+const ensureImport: any = 
+    foo
+    || bar
+    || bas;
+```
+
+
 [](// TODO: es6 modules)
