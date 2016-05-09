@@ -3,15 +3,15 @@
 Just use a chain of fat arrow functions:
 
 ```ts
-// A function that supports currying
+// A curried function
 let add = (x: number) => (y: number) => x + y;
 
 // Simple usage
 add(123)(456);
 
-// curried
+// partially applied
 let add123 = add(123);
 
-// use the curried function
+// fully apply the function
 add123(456);
 ```
