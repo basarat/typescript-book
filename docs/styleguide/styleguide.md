@@ -243,7 +243,7 @@ Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically 
 
 * Use semicolons.
 
-> Reasons: Explicit semicolons helps language formatting tools give consistent results. ASI (automatic semicolon insertion) can trip new devs e.g. `return` statements.
+> Reasons: Explicit semicolons helps language formatting tools give consistent results. Missing ASI (automatic semicolon insertion) can trip new devs e.g. `foo() \n (function(){})` will be a single statement (not two).
 
 ## Array
 
