@@ -28,6 +28,7 @@
         "./migrating/migrating.ts",
         "./readonly.ts",
         "./stringLiteralType.ts",
+        "./type-inference.ts",
         "./typeGuard.ts",
         "./types.ts"
     ],

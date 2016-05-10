@@ -42,6 +42,7 @@
   * [Type Guard](docs/types/typeGuard.md)
   * [String Literal Type](docs/types/stringLiteralType.md)
   * [Readonly](docs/types/readonly.md)
+  * [Type Inference](docs/types/type-inference.md)
   * [Type Compatibility](docs/types/typeCompatibility.md)
 * [JSX](docs/jsx/tsx.md)
 * [TIPs](docs/tips/main.md)
