@@ -1,3 +1,4 @@
+"use strict";
 exports.foo = 123;
 var Color;
 (function (Color) {
@@ -46,3 +47,33 @@ animal.flags &= ~AnimalFlags.HasClaws;
 printAnimalAbilities(animal);
 animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
 printAnimalAbilities(animal);
+var EnumsWithStatics;
+(function (EnumsWithStatics) {
+    var Weekday;
+    (function (Weekday) {
+        Weekday[Weekday["Monday"] = 0] = "Monday";
+        Weekday[Weekday["Tuesday"] = 1] = "Tuesday";
+        Weekday[Weekday["Wednesday"] = 2] = "Wednesday";
+        Weekday[Weekday["Thursday"] = 3] = "Thursday";
+        Weekday[Weekday["Friday"] = 4] = "Friday";
+        Weekday[Weekday["Saturday"] = 5] = "Saturday";
+        Weekday[Weekday["Sunday"] = 6] = "Sunday";
+    })(Weekday || (Weekday = {}));
+    var Weekday;
+    (function (Weekday) {
+        function isBusinessDay(day) {
+            switch (day) {
+                case Weekday.Saturday:
+                case Weekday.Sunday:
+                    return false;
+                default:
+                    return true;
+            }
+        }
+        Weekday.isBusinessDay = isBusinessDay;
+    })(Weekday || (Weekday = {}));
+    var mon = Weekday.Monday;
+    var sun = Weekday.Sunday;
+    console.log(Weekday.isBusinessDay(mon));
+    console.log(Weekday.isBusinessDay(sun));
+})(EnumsWithStatics || (EnumsWithStatics = {}));
