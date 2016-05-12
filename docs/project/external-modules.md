@@ -24,7 +24,7 @@ import foo = require('./foo');
 ```
 Tells the TypeScript compiler to look for a TypeScript file at the relative location `./foo.ts` or `./foo.d.ts` with respect to the current file.
 
-This is not the complete specification but it's a decent mental model to have and use.
+This is not the complete specification but it's a decent mental model to have and use. We will cover the gritty details later.
 
 ### Compiler Module Option
 The following statement:
@@ -131,13 +131,13 @@ Similar to the lazy loading use case certain module loaders (commonjs/node and a
 
 ### Use case: Ensure Import
 
-Sometimes you want to load a file just for the side effect (e.g the module might register itself with some library like [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.). However if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.: 
+Sometimes you want to load a file just for the side effect (e.g the module might register itself with some library like [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.). However if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.:
 
 ```ts
 import foo = require('./foo');
 import bar = require('./bar');
 import bas = require('./bas');
-const ensureImport: any = 
+const ensureImport: any =
     foo
     || bar
     || bas;
