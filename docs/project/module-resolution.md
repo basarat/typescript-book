@@ -58,3 +58,5 @@ TODO.
 
 [//Comment1]:https://github.com/Microsoft/TypeScript/issues/2338
 [//Comment2]:https://github.com/Microsoft/TypeScript/issues/5039
+[//Comment3ExampleRedirectOfPackageJson]:https://github.com/Microsoft/TypeScript/issues/8528#issuecomment-219172026
+[//Coment4ModuleResolutionInHandbook]:https://github.com/Microsoft/TypeScript-Handbook/blob/release-2.0/pages/Module%20Resolution.md#base-url
