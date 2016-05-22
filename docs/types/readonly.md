@@ -1,4 +1,6 @@
 ## Readonly
+> ⚠️ This feature will be supported starting TypeScript 2.0 (see [Microsoft/TypeScript/pull/6532][1]).
+
 TypeScript's type system allows you to mark individual properties on an interface as `readonly`. This allows you to work in a functional way (unexpected mutation is bad):
 
 ```ts
@@ -155,4 +157,4 @@ function iTakeFoo(foo: Foo) {
 iTakeFoo(foo); // The foo argument is aliased by the foo parameter
 ```
 
-[](https://github.com/Microsoft/TypeScript/pull/6532)
+[1]: https://github.com/Microsoft/TypeScript/pull/6532
