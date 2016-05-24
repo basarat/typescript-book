@@ -1,6 +1,6 @@
 # Singleton Pattern
 
-The conventional singleton pattern is really something this is used to overcome the fact that all code must be in a `class`.
+The conventional singleton pattern is really something that is used to overcome the fact that all code must be in a `class`.
 
 ```ts
 class Singleton {
