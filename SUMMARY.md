@@ -58,6 +58,7 @@
   * [Avoid Export Default](docs/tips/defaultIsBad.md)
   * [Limit Property Setters](docs/tips/propertySetters.md)
   * [`null` is bad](docs/tips/null.md)
+  * [`outFile` caution](docs/tips/outFile.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
