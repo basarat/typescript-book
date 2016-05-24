@@ -31,3 +31,5 @@ namespace Singleton {
 // Usage
 Singleton.someMethod();
 ```
+
+> Warning : Singleton is just a fancy name for [global](http://stackoverflow.com/a/142450/390330)
