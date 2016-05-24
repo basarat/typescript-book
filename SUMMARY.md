@@ -60,6 +60,7 @@
   * [`null` is bad](docs/tips/null.md)
   * [`outFile` caution](docs/tips/outFile.md)
   * [static constructors](docs/tips/staticConstructor.md)
+  * [singleton pattern](docs/tips/singleton.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
