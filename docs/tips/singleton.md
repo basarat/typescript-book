@@ -3,22 +3,28 @@
 The conventional singleton pattern is really something this is used to overcome the fact that all code must be in a `class`.
 
 ```ts
-// USELESS PATTERN
 class Singleton {
-    /* ... lots of singleton logic ... */
-    public someMethod() { ... }
+    private static singleton: Singleton;
+    constructor() {
+        if (!Singleton.singleton) {
+            Singleton.singleton = this;			
+        }
+        return Singleton.singleton;
+    }
+    someMethod() { }
 }
 
-// Using
-var x = Singleton.getInstance();
-x.someMethod();
+var something = new Singleton();
+var somethingElse = new Singleton();
+
+console.log(something === somethingElse); // true;
 ```
 
-However its much simpler in TypeScript. Just use a `namespace`: 
+However if you don't want lazy initialization you can instead just use a `namespace`: 
 
 ```ts
 namespace Singleton {
-    export function someMethod() { ... }
+    export function someMethod() { }
 }
 // Usage
 Singleton.someMethod();
