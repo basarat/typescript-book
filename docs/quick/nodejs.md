@@ -2,7 +2,7 @@
 TypeScript has had *first class* support for NodeJS since inception. Here's how to get setup with a NodeJS project in TypeScript:
 
 1. Compile with `--module` set to `"commonjs"` (as we mentioned in [modules](../project/external-modules.md))
-1. Add `node.d.ts` (`typings install node --ambient`) to your [compilation context](../project/compilation-context.md).
+1. Add `node.d.ts` (`typings install dt~node --global`) to your [compilation context](../project/compilation-context.md).
 
 That's it! Now you can use all the built in node modules (e.g. `import fs = require('fs')`) with all the safety and developer ergonomics of TypeScript!
 
