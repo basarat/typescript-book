@@ -7,7 +7,8 @@ class Singleton {
     private static singleton: Singleton;
     constructor() {
         if (!Singleton.singleton) {
-            Singleton.singleton = this;			
+            Singleton.singleton = this;
+            // ... any one time initialization goes here ...
         }
         return Singleton.singleton;
     }
@@ -24,6 +25,7 @@ However if you don't want lazy initialization you can instead just use a `namesp
 
 ```ts
 namespace Singleton {
+    // ... any one time initialization goes here ...
     export function someMethod() { }
 }
 // Usage
