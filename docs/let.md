@@ -1,5 +1,6 @@
 ### let
-Variables in JavaScript are *function scoped*. This is different from many other languages (C# / Java etc.) where the variables are *block scoped*. If you bring a *block scoped* mindset to JavaScript you would expect the following to print `123`, instead it will print `456`
+
+`var` Variables in JavaScript are *function scoped*. This is different from many other languages (C# / Java etc.) where the variables are *block scoped*. If you bring a *block scoped* mindset to JavaScript you would expect the following to print `123`, instead it will print `456`
 
 ```ts
 var foo = 123;
