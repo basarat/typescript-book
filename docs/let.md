@@ -132,7 +132,7 @@ for (var j = 0; j < 3; j++) {
 Using a `let` instead of `var` creates a variable `i` unique to each loop iteration.
 
 #### Summary
-Despite a few limitations, we find `let` to be extremely useful to have for the vast majority of code. It can greatly enhance your code readability and decrease the chance of a programming error.
+`let` is extremely useful to have for the vast majority of code. It can greatly enhance your code readability and decrease the chance of a programming error.
 
 
 
