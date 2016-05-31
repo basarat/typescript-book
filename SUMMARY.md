@@ -17,6 +17,7 @@
   * [Template Strings](docs/template-strings.md)
   * [Spread Operator](docs/spread-operator.md)
   * [Enums](docs/enums.md)
+  * [Promise](docs/promise.md)
   * [Generators](docs/generators.md)
   * [Async Await](docs/async-await.md)
 * [Project](docs/project/project.md)
