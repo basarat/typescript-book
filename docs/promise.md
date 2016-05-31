@@ -122,7 +122,6 @@ loadJSON('good.json', function (err, data) {
         console.log(foo.bar);
     }
 });
-
 ```
 
 ```bash
