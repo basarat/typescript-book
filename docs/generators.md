@@ -124,7 +124,7 @@ So here is the summary:
 * the external system can push a value into the generator function body
 * the external system can throw an exception into the generator function body
 
-How is this useful? Jump to the next section []**async/await**][async-await] and find out.
+How is this useful? Jump to the next section [**async/await**][async-await] and find out.
 
 [iterator]:./iterators.md
 [async-await]:./async-await.md
