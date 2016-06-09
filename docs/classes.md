@@ -38,7 +38,7 @@ var Point = (function () {
 This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct. Note that `constructor` is optional.
 
 ### Inheritance
-Classes in TypeScript (like other langauges) support *single* inheritance using the `extends` keyword as shown below:
+Classes in TypeScript (like other languages) support *single* inheritance using the `extends` keyword as shown below:
 
 ```ts
 class Point3D extends Point {
