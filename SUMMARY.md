@@ -60,6 +60,7 @@
   * [Limit Property Setters](docs/tips/propertySetters.md)
   * [`null` is bad](docs/tips/null.md)
   * [`outFile` caution](docs/tips/outFile.md)
+  * [JQuery tips](docs/tips/jquery.md)
   * [static constructors](docs/tips/staticConstructor.md)
   * [singleton pattern](docs/tips/singleton.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
