@@ -12,4 +12,4 @@ interface JQuery {
 }
 ```
 
-And now you can use `$('something').foo({whateverYouWant:'hello jquery plugin'})`l
+And now you can use `$('something').foo({whateverYouWant:'hello jquery plugin'})`
