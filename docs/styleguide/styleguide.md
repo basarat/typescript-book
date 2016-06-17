@@ -221,6 +221,12 @@ The TypeScript compiler ships with a very nice formatting language service. What
 
 Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically format your code on the command line. Also your IDE (atom/vscode/vs/sublime) already has formatting support built-in.
 
+Examples: 
+```ts
+// Space before type i.e. foo:<space>string
+const foo: string = "hello";
+```
+
 ## Quotes
 
 * Prefer sing quotes (`'`) unless escaping.
