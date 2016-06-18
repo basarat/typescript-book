@@ -22,7 +22,7 @@ You can install it on the command line as
 npm install -g typescript@next
 ```
 
-> `alm` always tries to support the latest TypeScript version. Other IDEs can be configured to use nightly typescript as well
+Various IDEs support it too, e.g. `alm` always ships with the latest TypeScript version.
 
 ## TypeScript definitions
 TypeScript has a concept of a *declaration file* for external JavaScript code bases. *High quality* files exist for nearly 90% of the top JavaScript libraries out there in a project called [DefinitelyTyped](http://definitelytyped.org/). You will need `typings` to get these defintions. Don't worry, we will explain what this means later ... just install for now:
