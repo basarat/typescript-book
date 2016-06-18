@@ -14,7 +14,7 @@ TypeScript compiles into JavaScript. JavaScript is what you are actually going t
 
 ## TypeScript Version
 
-Instead of using the *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be associated with a version number yet. I generally recommend people to use the nightly version because after all *their test suite only improves over time*.
+Instead of using the *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be associated with a version number yet. I generally recommend people to use the nightly version because **the compiler test suite only catches more bugs over time**.
 
 You can install it on the command line as
 
