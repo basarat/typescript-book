@@ -1,5 +1,5 @@
-* [Getting Started with TypeScript](getting-started-with-typescript)
-* [TypeScript Version](typescript-version)
+* [Getting Started with TypeScript](#getting-started-with-typescript)
+* [TypeScript Version](#typescript-version)
 
 # Getting Started With TypeScript
 
