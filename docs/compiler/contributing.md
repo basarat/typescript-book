@@ -59,3 +59,7 @@ Test can be created by adding a new file `yourtest.ts` to `tests/cases/compiler`
 Run all of these in isolation using `jake runtests tests=compiler`, or just your new file using `jake runtests tests=compiler/yourtest`
 
 I will even often do `jake runtests tests=compiler/yourtest || jake baseline-accept[soft]` and get the diff in `git`.
+
+### Debugging Tests
+
+`jake runtests-browser tests=theNameOfYourTest` and debugging in-browser usually works pretty well.
