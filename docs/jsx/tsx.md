@@ -5,7 +5,7 @@ TypeScript supports JSX transpilation and code analysis. If you are unfamiliar w
 
 The motivation behind JSX is to allow users to write HTML like views *in JavaScript* so that you can:
 * Have the view Type Checked by the same code that is going to check your JavaScript
-* Have the view be aware of the context it is going to operate under (i.e. strethen the *controller-view* connection in traditional MVC)
+* Have the view be aware of the context it is going to operate under (i.e. strengthen the *controller-view* connection in traditional MVC)
 
 This decreases the chances of errors and increases the maintainability of your user interfaces. The main consumer of JSX at this point is [ReactJS from facebook](http://facebook.github.io/react/). This is the usage of JSX that we will discuss here.
 
