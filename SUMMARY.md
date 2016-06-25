@@ -45,7 +45,7 @@
   * [Readonly](docs/types/readonly.md)
   * [Type Inference](docs/types/type-inference.md)
   * [Type Compatibility](docs/types/typeCompatibility.md)
-  * [Descriminated Unions](docs/types/descriminated-unions.md)
+  * [Discriminated Unions](docs/types/discriminated-unions.md)
 * [JSX](docs/jsx/tsx.md)
 * [TIPs](docs/tips/main.md)
   * [Quick Object Return](docs/tips/quickObjectReturn.md)
