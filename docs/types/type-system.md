@@ -1,5 +1,5 @@
 # TypeScript Type System
-We covered the main features of the TypeScript Type System back when we disucssed *Why TypeScript?*. The following are a few key takeaways from that discussion which don't need further explanation:
+We covered the main features of the TypeScript Type System back when we discussed *Why TypeScript?*. The following are a few key takeaways from that discussion which don't need further explanation:
 * The type system in typescript is designed to be *optional* so that *your javascript is typescript*.
 * TypeScript does not block *JavaScript emit* in the presence of Type Errors, allowing you to *progressively update your JS to TS*.
 
