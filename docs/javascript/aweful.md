@@ -1,8 +1,8 @@
 # JavaScript the aweful parts
 
-Here are some aweful parts of JavaScript that you must know.
+Here are some aweful (misunderstood) parts of JavaScript that you must know.
 
-> Note: TypeScript is a superset of JavaScript. Just with documentation that can actaully be used by compilers / IDEs ;)
+> Note: TypeScript is a superset of JavaScript. Just with documentation that can actually be used by compilers / IDEs ;)
 
 ## Null and Undefined
 
@@ -28,7 +28,33 @@ So to check if a variable is defined or not at a *global* level you normally use
 
 ```ts
 if (typeof someglobal === 'undefined') {
-    // someglobal is now safe to use
-    console.log(someglobal);
+  // someglobal is now safe to use
+  console.log(someglobal);
 }
 ```
+
+## this
+
+Any access to `this` keyword within a function is actually controlled by how the function is actually called. It is commonly referred to as the `calling context`.
+
+Here is an example:
+
+```ts
+function foo() {
+  console.log(this);
+}
+
+foo(); // logs out the global e.g. `window` in browsers
+let bar = {
+  foo
+}
+bar.foo(); // Logs out `bar` as `foo` was called on `bar`
+```
+
+So be mindful of your usage of `this`. If you want to disconnect `this` in a class from the calling context use an arrow function, [more on that later][arrow].
+
+[arrow]:docs/arrow-functions.md
+
+## Next
+
+That's it. Those are the simple *misunderstood* portions of JavaScript that still result in various bug for developers that are new to the language 🌹.
