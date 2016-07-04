@@ -207,4 +207,64 @@ Note: Be careful with `--noLib`. Once you are in noLib land, if you chose to sha
 
 ### Compiler target effect on `lib.d.ts`
 
-Setting the compiler target to be `es6` causes the `lib.d.ts` to include *addtional* ambient declarations for more modern stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others its problematic as it conflates *code generation* with *code ambience*. For people that want to compile with both targets *and actually use the modern es6 features* using poly-fills, it is recommended that they compile with `--noLib` and include their own customized `lib.d.ts` as mentioned before.
+Setting the compiler target to be `es6` causes the `lib.d.ts` to include *addtional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others its problematic as it conflates *code generation* with *code ambience*.
+
+However if you want finer grained control of your environment you should use the `--lib` option which we discuss next.
+
+### lib Option
+
+Sometimes (many times) you want to decouple the relationship between the compile target (the generates JavaScript version) and the ambient library support. A common example is `Promise`, e.g today (in June 2016) you most likely want to `--target es5` but still use latest stuff like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
+
+> Note: using `--lib` decouples any lib magic from `--target` giving you better control.  
+
+You can provide this option on the command line or in `tsconfig.json` (recommended): 
+
+**Command line**:
+```
+tsc --target es5 --lib dom,es6
+``` 
+**tsconfig.json**: 
+```json
+"compilerOptions": {
+    "lib": ["dom", "es6"]
+}
+```
+
+The libs can be categorized into categories: 
+
+* JavaScript Bulk Feature: 
+    * es5
+    * es6
+    * es2015
+    * es7
+    * es2016
+    * es2017
+* Runtime Environment
+    * dom
+    * webworker
+    * scripthost
+* ESNext By-feature options (even smaller than bulk feature)
+    * es2015.core
+    * es2015.collection
+    * es2015.generator
+    * es2015.iterable
+    * es2015.promise
+    * es2015.proxy
+    * es2015.reflect
+    * es2015.symbol
+    * es2015.symbol.wellknown
+    * es2016.array.include
+    * es2017.object
+    * es2017.sharedmemory
+
+
+> NOTE: the `--lib` option provides extremely fine tuned control. So you most likey want to pick an item from the bulk + enviroment categories.
+
+My Personal Recommentation: 
+
+```json
+"compilerOptions": {
+    "target": "es5",
+    "lib": ["es6", "dom"]
+}
+``` 
