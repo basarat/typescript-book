@@ -1,12 +1,12 @@
 # JavaScript the aweful parts
 
-Here are some aweful parts of JavaScript that you must know. 
+Here are some aweful parts of JavaScript that you must know.
 
-> Note: TypeScript is a superset of JavaScript. Just with documentation that can actaully be used by compilers / IDEs ;) 
+> Note: TypeScript is a superset of JavaScript. Just with documentation that can actaully be used by compilers / IDEs ;)
 
-## Null and Undefined 
+## Null and Undefined
 
-Fact is you will need to deal with both. Just check for either with `==` check. 
+Fact is you will need to deal with both. Just check for either with `==` check.
 
 ```ts
 /// Image you are doing `foo.bar == undefined` where bar can be one of:
@@ -24,3 +24,11 @@ Remember how I said you should use `== null`. Of course you do (cause I just sai
 
 > You should use strict mode ... and in fact the TS compiler will insert it for you if you use modules ... more on those later in the book so you don't have to be explicit about it :)
 
+So to check if a variable is defined or not at a *global* level you normally use `typeof`:
+
+```ts
+if (typeof someglobal === 'undefined') {
+    // someglobal is now safe to use
+    console.log(someglobal);
+}
+```
