@@ -28,7 +28,7 @@ Even though the **error is valid** (and in most cases the inferred information w
 var foo = 123;
 var bar = 'hey';
 
-bar = <any>foo; // Okay!
+bar = foo as any; // Okay!
 ```
 
 In other places you might want to annotate something as `any` e.g.
