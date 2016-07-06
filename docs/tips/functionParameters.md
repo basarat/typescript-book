@@ -1,6 +1,6 @@
-# Function Arguments 
+# Function Parameters
 
-If you have a function that takes too many arguments, or arguments of the same type you might want to consider changing the function to take an object instead. 
+If you have a function that takes too many parameters, or parameters of the same type you might want to consider changing the function to take an object instead. 
 
 Consider the following function 
 
@@ -15,7 +15,7 @@ With such a funciton definition its quite easy to invoke it wrongly e.g. `foo(fl
 Instead of convert the function to take an object: 
 
 ```ts
-function foo(config: {flagA: boolean, flabB: boolean}) {
+function foo(config: {flagA: boolean, flagB: boolean}) {
   const {flagA, flagB} = config;
   // your awesome function body 
 }
