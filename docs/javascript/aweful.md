@@ -1,6 +1,6 @@
-# JavaScript the aweful parts
+# JavaScript the awful parts
 
-Here are some aweful (misunderstood) parts of JavaScript that you must know.
+Here are some awful (misunderstood) parts of JavaScript that you must know.
 
 > Note: TypeScript is a superset of JavaScript. Just with documentation that can actually be used by compilers / IDEs ;)
 
