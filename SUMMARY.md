@@ -3,7 +3,7 @@
 * [Getting Started](docs/getting-started.md)
   * [Why TypeScript](docs/why-typescript.md)
 * [JavaScript](docs/javascript/recap.md)
-  * [Aweful](docs/javascript/aweful.md)
+  * [Awful](docs/javascript/awful.md)
 * [Future JavaScript Now](docs/future-javascript.md)
   * [Classes](docs/classes.md)
     * [Classes Emit](docs/classes-emit.md)

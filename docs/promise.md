@@ -187,13 +187,13 @@ promise.catch((err) => {
 
 ```ts
 const promise = new Promise((resolve, reject) => {
-    reject(new Error("Something aweful happened"));
+    reject(new Error("Something awful happened"));
 });
 promise.then((res) => {
     // This is never called
 });
 promise.catch((err) => {
-    console.log('I get called:', err.message); // I get called: 'Something aweful happened'
+    console.log('I get called:', err.message); // I get called: 'Something awful happened'
 });
 ```
 
