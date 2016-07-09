@@ -21,9 +21,7 @@ cd your-project
         "jsx": "react"
     },
     "exclude": [
-        "node_modules",
-        "typings/browser",
-        "typings/browser.d.ts"
+        "node_modules"
     ],
     "compileOnSave": false
 }
@@ -83,11 +81,11 @@ npm install react react-dom --save-dev
 ```
 
 ```
-"./node_modules/.bin/typings" install react --ambient --save
+"./node_modules/.bin/typings" install dt~react --global --save
 ```
 
 ```
-"./node_modules/.bin/typings" install react-dom --ambient --save
+"./node_modules/.bin/typings" install dt~react-dom --global --save
 ```
 
 A demo `index.html`:
