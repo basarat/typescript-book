@@ -22,7 +22,16 @@ You can install it on the command line as
 npm install -g typescript@next
 ```
 
-Various IDEs support it too, e.g. `alm` always ships with the latest TypeScript version.
+And now the command line `tsc` will be the latest and greatest. Various IDEs support it too, e.g. 
+
+* `alm` always ships with the latest TypeScript version.
+* You can ask vscode to use this version by creating `.vscode/settings.json` with the following contents: 
+
+```json
+{
+  "typescript.tsdk": "./node_modules/typescript/lib"
+}
+```
 
 ## TypeScript definitions
 TypeScript has a concept of a *declaration file* for external JavaScript code bases. *High quality* files exist for nearly 90% of the top JavaScript libraries out there in a project called [DefinitelyTyped](http://definitelytyped.org/). You will need `typings` to get these defintions. Don't worry, we will explain what this means later ... just install for now:
