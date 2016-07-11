@@ -19,7 +19,9 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 [] + []; // JavaScript will give you "" (which makes little sense), TypeScript will error
 
 //
-// other things that are nonsensical in JavaScript but don't give an error (but TypeScript will)
+// other things that are nonsensical in JavaScript 
+// - don't give a runtime error (making debugging hard)
+// - but TypeScript will give a compile time error (making debugging unnecessary)
 //
 {} + []; // JS : 0, TS Error
 [] + {}; // JS : "[object Object]", TS Error  
