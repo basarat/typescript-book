@@ -21,8 +21,8 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 //
 // other things that are nonsensical in JavaScript but don't give an error (but TypeScript will)
 //
-{} + []; // JS : "[Object object]", TS Error  
-[] + {}; // JS : 0, TS Error  
+{} + []; // JS : 0, TS Error
+[] + {}; // JS : "[Object object]", TS Error  
 {} + {}; // JS : NaN, TS Error
 "hello" - 1; // JS : NaN, TS Error
 ```
