@@ -229,7 +229,7 @@ const foo: string = "hello";
 
 ## Quotes
 
-* Prefer sing quotes (`'`) unless escaping.
+* Prefer single quotes (`'`) unless escaping.
 
 > Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Its easier to type (no shift needed on most keyboards).
 
