@@ -1,3 +1,8 @@
+
+* [Freshness](#freshness)
+* [Allowing extra properties](#allowing-extra-properties)
+* [Use Case : React](#use-case--react-state)
+
 ## Freshness
 
 TypeScript provides a concept of **Freshness** (also called *strict object literal checking*) to make it easier to type check object literals that would otherwise be structurally type compatible.
