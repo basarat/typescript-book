@@ -58,3 +58,40 @@ A type can include an index signature to explicitly indicate that excess propert
 var x: { foo: number, [x: string]: any };
 x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 ```
+
+### Use Case : React State
+
+[Facebook ReactJS](https://facebook.github.io/react/) offers a nice use case for object freshness. Quite commonly in a component you call `setState` with only a few properties instead of passing in all the properties. i.e: 
+
+```ts
+// Assuming
+interface State {
+  foo: string;
+  bar: string;
+}
+
+// You want to do: 
+this.setState({foo: "Hello"}); // Error : missing property bar
+
+// But because state contains both `foo` and `bar` TypeScript would force you to do: 
+this.setState({foo: "Hello", bar: this.state.bar}};
+```
+
+Using the idea of freshness you would mark all the members as optional and *you still get to catch typos*!: 
+
+```ts
+// Assuming
+interface State {
+  foo?: string;
+  bar?: string;
+}
+
+// You want to do: 
+this.setState({foo: "Hello"}); // Yay works fine!
+
+// Because of freshness its protected against typos as well!
+this.setState({foos: "Hello"}}; // Error: Objects may only specify known properties
+
+// And still type checked
+this.setState({foo: 123}}; // Error: Cannot assign number to a string
+```
