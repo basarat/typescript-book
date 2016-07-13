@@ -16,7 +16,8 @@ Also you can mostly just edit the `.md` files in [`/docs`](https://github.com/ba
 All the code for the book is in the `/code` folder. Tested with `atom-typescript`.
 
 #### More Gitbook Tips
-Links best work if they are relative (e.g `./foo.md`) to the *current* file.
+* Links best work if they are relative (e.g `./foo.md`) to the *current* file.
+* For links in the same file (`#foo-bar` style links) best to click the heading on github to get what gitbook expects.
 
 ### TypeScript Compiler Docs
 Thanks to the TypeScript team for providing much of the docs : https://github.com/Microsoft/TypeScript/wiki/Architectural-Overview that are used to write the compiler story.
