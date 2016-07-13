@@ -1,3 +1,8 @@
+* [Arrow Functions](#arrow-functions)
+* [Tip: Arrow Function Need](#tip-arrow-function-need)
+* [Tip: Arrow Function Danger](#tip-arrow-function-danger)
+* [Tip: Libraries that use `this`](#tip-arrow-functions-with-libraries-that-use-this)
+
 ### Arrow Functions
 
 Lovingly called the *fat arrow* (because `->` is a thin arrow and `=>` is a fat arrow) and also called a *lambda function* (because of other languages). Another commonly used feature is the fat arrow function `()=>something`. The motivation for a *fat arrow* is:
