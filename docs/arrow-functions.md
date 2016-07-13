@@ -2,6 +2,7 @@
 * [Tip: Arrow Function Need](#tip-arrow-function-need)
 * [Tip: Arrow Function Danger](#tip-arrow-function-danger)
 * [Tip: Libraries that use `this`](#tip-arrow-functions-with-libraries-that-use-this)
+* [Tip: Arrow Function inheritance](#tip-arrow-functions-and-inheritance)
 
 ### Arrow Functions
 
