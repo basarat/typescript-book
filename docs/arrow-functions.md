@@ -96,3 +96,25 @@ something.each(function() {
     console.log(this); // the library passed value
 });
 ```
+
+#### Tip: Arrow functions and inheritance
+
+If you have an instance method as an arrow function then its goes on `this`. Since there is only one `this` such functions cannot participate in a call to `super` (`super` only works on prototype members). You can easily get around it by creating a copy of the method before overriding it in the child.
+
+```ts
+class Adder {
+    // This function is now safe to pass around
+    add = (b: string): string => {
+        return this.a + b;
+    }
+}
+
+class ExtendedAdder extends Adder {
+    // Create a copy of parent before creating our own
+    private superAdd = this.add;
+    // Now create our override
+    add = (b: string): string => {
+        return this.superAdd(b);
+    }
+}
+```
