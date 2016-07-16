@@ -22,7 +22,7 @@ console.log(false == undefined); // false
 
 ## Additional tips
 
-### Limit explict use of `undefined`
+### Limit explicit use of `undefined`
 Also because TypeScript gives you the opportunity to *document* your structures seperately from values instead of stuff like:
 ```ts
 function foo(){
