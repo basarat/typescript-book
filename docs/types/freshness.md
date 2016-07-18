@@ -53,7 +53,7 @@ logIfHasName(random); // okay
 logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
 ```
 
-The reason why only object literals are type checked this way is because having an object literal created on the spot and passed in with additional properties *that aren't actually used* is almost always a typo or a misunderstanding of the API.
+The reason why only object literals are type checked this way is because in this case additional properties *that aren't actually used* is almost always a typo or a misunderstanding of the API.
 
 ### Allowing extra properties
 
