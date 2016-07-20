@@ -1,3 +1,8 @@
+* [Parameter Annotations](#parameter-annotations)
+* [Return Type Annotation](#return-type-annotation)
+* [Optional Parameters](#optional-parameters)
+* [Overloading](#overloading)
+
 ## Functions
 The TypeScript type system pays a lot of love to functions, after all they are the core building block of a composable system.
 
