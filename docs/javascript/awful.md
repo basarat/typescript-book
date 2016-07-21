@@ -53,7 +53,7 @@ bar.foo(); // Logs out `bar` as `foo` was called on `bar`
 
 So be mindful of your usage of `this`. If you want to disconnect `this` in a class from the calling context use an arrow function, [more on that later][arrow].
 
-[arrow]:docs/arrow-functions.md
+[arrow]:../arrow-functions.md
 
 ## Next
 
