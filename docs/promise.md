@@ -38,7 +38,7 @@ There are three behaviors of this simple `loadJSONSync` function, a valid return
 ```ts
 import fs = require('fs');
 
-function loadJSON(filename: string, cb: (error: Error) => void) {
+function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) cb(err);
         else cb(null, JSON.parse(data));
