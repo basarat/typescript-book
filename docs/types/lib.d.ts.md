@@ -1,3 +1,11 @@
+* [lib.d.ts](#libdts)
+* [Example Usage](#example-usage)
+* [Inside look](#libdts-inside-look)
+* [Modifying Native types](#modifying-native-types)
+* [Using custom lib.d.ts](#using-your-own-custom-libdts)
+* [Compiler `target` effect on lib.d.ts](#compiler-target-effect-on-libdts)
+* [`lib` option](#lib-option)
+
 ## `lib.d.ts`
 
 A special declaration file `lib.d.ts` ships with every installation of TypeScript. This file contains the ambient declarations for various common JavaScript constructs present in JavaScript runtimes and the DOM.
