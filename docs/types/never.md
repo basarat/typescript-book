@@ -24,7 +24,7 @@ let foo: never = 123; // Error: Type number is not assignable to number
 let bar: never = (() => { throw new Error('Throw my hands in the air like I just dont care') })();
 ```
 
-And this property takes it to our use cases.
+Great. Now lets just jump into its key use case :)
 
 # Use case: Exhaustive Checks
 
