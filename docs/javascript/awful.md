@@ -16,7 +16,7 @@ console.log(0 == undefined); // false
 console.log('' == undefined); // false
 console.log(false == undefined); // false
 ```
-So `== undefined` or (`== null`) will work only for `undefined` or `null`. You generally don't want to make a distinction between the two.
+Recommend `== null` to check for both `undefined` or `null`. You generally don't want to make a distinction between the two.
 
 ## undefined
 
