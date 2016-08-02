@@ -27,7 +27,7 @@ Remember how I said you should use `== null`. Of course you do (cause I just sai
 So to check if a variable is defined or not at a *global* level you normally use `typeof`:
 
 ```ts
-if (typeof someglobal === 'undefined') {
+if (typeof someglobal !== 'undefined') {
   // someglobal is now safe to use
   console.log(someglobal);
 }
