@@ -35,3 +35,7 @@ import {Foo} from "./foo";
 ```ts
 import {/*here*/} from "./foo";
 ```
+
+> Bonus points: Better commonJs experience
+
+Also its makes for a horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {foo} = require('module/foo')`
