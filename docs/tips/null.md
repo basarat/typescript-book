@@ -1,5 +1,5 @@
 # Null is Bad
-JavaScript (and by extension TypeScript) has two bottom types : `null` and `undefined`. They are *intented* to mean different things:
+JavaScript (and by extension TypeScript) has two bottom types : `null` and `undefined`. They are *intended* to mean different things:
 
 * Something hasn't been initialized : `undefined`
 * Something is current unavailable: `null`
