@@ -1,8 +1,8 @@
 # Function Parameters
 
-If you have a function that takes too many parameters, or parameters of the same type you might want to consider changing the function to take an object instead. 
+If you have a function that takes too many parameters, or parameters of the same type, then you might want to consider changing the function to take an object instead. 
 
-Consider the following function 
+Consider the following function:
 
 ```ts
 function foo(flagA: boolean, flagB: boolean) {
@@ -10,9 +10,9 @@ function foo(flagA: boolean, flagB: boolean) {
 }
 ```
 
-With such a funciton definition its quite easy to invoke it wrongly e.g. `foo(flagB, flagA)` and you would get no help from the compiler. 
+With such a function definition it's quite easy to invoke it incorrectly e.g. `foo(flagB, flagA)` and you would get no help from the compiler. 
 
-Instead of convert the function to take an object: 
+Instead, convert the function to take an object: 
 
 ```ts
 function foo(config: {flagA: boolean, flagB: boolean}) {
@@ -20,6 +20,6 @@ function foo(config: {flagA: boolean, flagB: boolean}) {
   // your awesome function body 
 }
 ```
-Now the function calls will look like `foo({flagA, flagB})` which is much easier to code review and see for mistakes.
+Now the function calls will look like `foo({flagA, flagB})` which makes it much easier to spot mistakes and code review.
 
-> Note : If your function is simple enough and you don't expect much churn feel free to ignore this advice 🌹.
+> Note : If your function is simple enough, and you don't expect much churn, then feel free to ignore this advice 🌹.
