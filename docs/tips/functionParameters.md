@@ -10,7 +10,7 @@ function foo(flagA: boolean, flagB: boolean) {
 }
 ```
 
-With such a funciton definition its quite easy to invoke it wrongly e.g. `foo(flagB, flagA)` and you would get no help from the compiler. 
+With such a function definition its quite easy to invoke it wrongly e.g. `foo(flagB, flagA)` and you would get no help from the compiler. 
 
 Instead of convert the function to take an object: 
 
