@@ -316,7 +316,7 @@ Promise.resolve(123)
 ```
 
 
-### Convering a callback style function to return a promise
+### Converting a callback style function to return a promise
 
 Just wrap the function call in a promise and `reject` if an error occurs, and resolve if it is all good. E.g. lets wrap `fs.readFile`
 
