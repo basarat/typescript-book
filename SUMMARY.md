@@ -25,6 +25,7 @@
 * [Project](docs/project/project.md)
   * [Compilation Context](docs/project/compilation-context.md)
     * [tsconfig.json](docs/project/tsconfig.md)
+    * [Which Files?](docs/project/files.md)
   * [Declaration Spaces](docs/project/declarationspaces.md)
   * [Modules](docs/project/modules.md)
     * [File Module Details](docs/project/external-modules.md)
