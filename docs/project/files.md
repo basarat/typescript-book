@@ -19,7 +19,8 @@ or `include` and `exclude` to specify files. e.g.
         "./folder/**/*"
     ],
     "exclude":[
-        "./folder/**/*.spec.ts"
+        "./folder/**/*.spec.ts",
+        "./folder/someSubFolder"
     ]
 }
 ```
