@@ -96,7 +96,7 @@ function handler(event: Event) {
 }
 ```
 
-If you *still want TypeScript you can use a double assertion*, but first asserting to `any` which is compatible with all types and therefore the compiler no longer complains:
+If you *still want that Type, you can use a double assertion*, but first asserting to `any` which is compatible with all types and therefore the compiler no longer complains:
 
 ```ts
 function handler(event: Event) {
