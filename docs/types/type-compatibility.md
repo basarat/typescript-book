@@ -43,6 +43,28 @@ p = new Point2D(1,2);
 
 This allows you to create objects on the fly (like you do in pre JS) and still have safety for whenever it can be inferred.
 
+Also *more* data is considered fine:
+
+```ts
+interface Point2D {
+    x: number;
+    y: number;
+}
+interface Point3D {
+    x: number;
+    y: number;
+    z: number;
+}
+var point2D: Point2D = { x: 0, y: 10 }
+var point3D: Point3D = { x: 0, y: 10, z: 20 }
+function iTakePoint2D(point: Point2D) { /* do something */ }
+
+iTakePoint2D(point2D); // exact match okay
+iTakePoint2D(point3D); // extra information okay
+iTakePoint2D({ x: 0 }); // Error: missing information `y`
+```
+
+
 ## Variance
 
 Variance is an easy to understand and important concept for type compatibility analysis.
@@ -60,7 +82,127 @@ In type compatibility of complex types composed of such `Base` and `Child` depen
 
 > Note: For a completely sound type system in the presence of mutable data like JavaScript, `invariant` is the only valid option. But as mentioned *convenience* forces us to make unsound choices.
 
+## Functions
 
+There are a few subtle things to consider when comparing two functions.
+
+### Number of arguments
+Less arguments are okay (i.e. functions can chose to ignore additional args). After all you are guaranteed to be called with at least enough arguments.
+
+```ts
+let iTakeSomethingAndPassItAnErr
+    = (x: (err: Error, data: any) => void) => { /* do something */ };
+
+iTakeSomethingAndPassItAnErr(() => null) // Okay
+iTakeSomethingAndPassItAnErr((err) => null) // Okay
+iTakeSomethingAndPassItAnErr((err, data) => null) // Okay
+
+// ERROR: function may be called with `more` not being passed in
+iTakeSomethingAndPassItAnErr((err, data, more) => null); // ERROR
+```
+
+### Return Type
+`covariant`: The return type must contain at least enough data.
+
+```ts
+/** Type Heirarchy */
+interface Point2D { x: number; y: number; }
+interface Point3D { x: number; y: number; z: number; }
+
+/** Two sample functions */
+let iMakePoint2D = (): Point2D => ({ x: 0, y: 0 });
+let iMakePoint3D = (): Point3D => ({ x: 0, y: 0, z: 0 });
+
+/** Assignment */
+iMakePoint2D = iMakePoint3D; // Okay
+iMakePoint3D = iMakePoint2D; // ERROR: Point2D is not assignable to Point3D
+```
+
+
+### Types of arguments
+
+`bivariant` : This is designed to support common event handling scenarios
+
+```ts
+/** Event Hierarchy */
+interface Event { timestamp: number; }
+interface MouseEvent extends Event { x: number; y: number }
+interface KeyEvent extends Event { keyCode: number }
+
+/** Sample event listener */
+enum EventType { Mouse, Keyboard }
+function addEventListener(eventType: EventType, handler: (n: Event) => void) {
+    /* ... */
+}
+
+// Unsound, but useful and common. Works as function argument comparison is bivariant
+addEventListener(EventType.Mouse, (e: MouseEvent) => console.log(e.x + "," + e.y));
+
+// Undesirable alternatives in presence of soundness
+addEventListener(EventType.Mouse, (e: Event) => console.log((<MouseEvent>e).x + "," + (<MouseEvent>e).y));
+addEventListener(EventType.Mouse, <(e: Event) => void>((e: MouseEvent) => console.log(e.x + "," + e.y)));
+
+// Still disallowed (clear error). Type safety enforced for wholly incompatible types
+addEventListener(EventType.Mouse, (e: number) => console.log(e));
+```
+
+Also makes `Array<Child>` assignable to `Array<Base>` (covariance) as the functions are compatible. Array covariance requires all `Array<Child>` functions to be assignable to `Array<Base>` e.g. `push(t:Child)` is assignable to `push(t:Base)` which is made possible by function argument bivariance.
+
+**This can be confusing for people coming from other languages** who would expect the following to error but will not in TypeScript:
+
+```ts
+/** Type Heirarchy */
+interface Point2D { x: number; y: number; }
+interface Point3D { x: number; y: number; z: number; }
+
+/** Two sample functions */
+let iTakePoint2D = (point: Point2D) => { /* do something */ }
+let iTakePoint3D = (point: Point3D) => { /* do something */ }
+
+iTakePoint3D = iTakePoint2D; // Okay : Reasonable
+iTakePoint2D = iTakePoint3D; // Okay : WHAT
+```
+
+### Optional and Rest Parameters
+
+Optional (pre determined count) and Rest parameters (any count of arguments) are compatible, again for convenience.
+
+```ts
+let foo = (x:number, y: number) => { /* do something */ }
+let bar = (x?:number, y?: number) => { /* do something */ }
+let bas = (...args: number[]) => { /* do something */ }
+
+foo = bar = bas;
+bas = bar = foo;
+```
+
+> Note: optional (in our example `bar`) and non optional (in our example `foo`) are only compatible if strictNullChecks is false.
+
+## Enums
+
+* Enums are compatible with numbers, and numbers are compatible with enums.
+
+```ts
+enum Status { Ready, Waiting };
+
+let status = Status.Ready;
+let num = 0;
+
+status = num; // OKAY
+num = status; // OKAY
+```
+
+* Enum values from different enum types are considered incompatible. This makes enums useable *nominally* (as opposed to structurally)
+
+```ts
+enum Status { Ready, Waiting };
+enum Color { Red, Blue, Green };
+
+let status = Status.Ready;
+let color = Color.Red;
+
+status = color; // ERROR
+```
 
 ## FootNote: Invariance
 

@@ -11,6 +11,41 @@ var InCompat;
     str = num;
     num = str;
 })(InCompat = exports.InCompat || (exports.InCompat = {}));
+var FunctionArgsCount;
+(function (FunctionArgsCount) {
+    var iTakeSomethingAndPassItAnErr = function (x) { };
+    iTakeSomethingAndPassItAnErr(function () { return null; });
+    iTakeSomethingAndPassItAnErr(function (err) { return null; });
+    iTakeSomethingAndPassItAnErr(function (err, data) { return null; });
+    iTakeSomethingAndPassItAnErr(function (err, data, more) { return null; });
+})(FunctionArgsCount = exports.FunctionArgsCount || (exports.FunctionArgsCount = {}));
+var FunctionReturnCo;
+(function (FunctionReturnCo) {
+    var iMakePoint2D = function () { return ({ x: 0, y: 0 }); };
+    var iMakePoint3D = function () { return ({ x: 0, y: 0, z: 0 }); };
+    iMakePoint2D = iMakePoint3D;
+    iMakePoint3D = iMakePoint2D;
+})(FunctionReturnCo = exports.FunctionReturnCo || (exports.FunctionReturnCo = {}));
+var FunctionRest;
+(function (FunctionRest) {
+    var foo = function (x, y) { };
+    var bar = function (x, y) { };
+    var bas = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i - 0] = arguments[_i];
+        }
+    };
+    foo = bar = bas;
+    bas = bar = foo;
+})(FunctionRest = exports.FunctionRest || (exports.FunctionRest = {}));
+var FunctionArgsBi;
+(function (FunctionArgsBi) {
+    var iTakePoint2D = function (point) { };
+    var iTakePoint3D = function (point) { };
+    iTakePoint3D = iTakePoint2D;
+    iTakePoint2D = iTakePoint3D;
+})(FunctionArgsBi = exports.FunctionArgsBi || (exports.FunctionArgsBi = {}));
 var invariance;
 (function (invariance) {
     var Animal = (function () {
