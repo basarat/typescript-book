@@ -72,6 +72,7 @@
   * [singleton pattern](docs/tips/singleton.md)
   * [Function parameters](docs/tips/functionParameters.md)
   * [Truthy](docs/tips/truthy.md)
+  * [Generics in TSX](docs/tips/genericTSX.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
