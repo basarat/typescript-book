@@ -51,4 +51,56 @@ For simple types `Base` and `Child`, if `Child` is a child of `Base`, then insta
 
 > This is polymorphism 101
 
-In type compatibility of complex types composed of such `Base` and `Child` depending on where the `Base` and `Child` in similar scenarios is driven by variance.
+In type compatibility of complex types composed of such `Base` and `Child` depending on where the `Base` and `Child` in similar scenarios is driven by *variance*.
+
+* Covariant : (corporate) only in *same direction*
+* Contravariant : (contra aka negative) only in *opposite direction*
+* Bivariant : (bi aka both) both co and contra.
+* Invariant : if the types are aren't exact then they are incompatible.
+
+> Note: For a completely sound type system in the presence of mutable data like JavaScript, `invariant` is the only valid option. But as mentioned *convenience* forces us to make unsound choices.
+
+
+
+## FootNote: Invariance
+
+We said invariance is the only sound option. Here is an example where both `contra` and `co` variance are shown to be unsafe for arrays.
+
+```ts
+/** Heirarchy */
+class Animal { constructor(public name: string){} }
+class Cat extends Animal { meow() { } }
+
+/** An item of each */
+var animal = new Animal("animal");
+var cat = new Cat("cat");
+
+/**
+ * Demo : polymorphism 101
+ * Animal <= Cat
+ */
+animal = cat; // Okay
+cat = animal; // ERROR: cat extends animal
+
+/** Array of each to demonstrate variance */
+let animalArr: Animal[] = [animal];
+let catArr: Cat[] = [cat];
+
+/**
+ * Obviously Bad : Contravariance
+ * Animal <= Cat
+ * Animal[] >= Cat[]
+ */
+catArr = animalArr; // Okay if contravariant
+catArr[0].meow(); // Allowed but BANG 🔫 at runtime
+
+
+/**
+ * Also Bad : covariance
+ * Animal <= Cat
+ * Animal[] <= Cat[]
+ */
+animalArr = catArr; // Okay if covariant
+animalArr.push(new Animal('another animal')); // Just pushed an animal into catArr too!
+catArr.forEach(c => c.meow()); // Allowed but BANG 🔫 at runtime
+```
