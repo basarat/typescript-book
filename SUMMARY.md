@@ -47,7 +47,7 @@
   * [String Literal Type](docs/types/stringLiteralType.md)
   * [Readonly](docs/types/readonly.md)
   * [Type Inference](docs/types/type-inference.md)
-  * [Type Compatibility](docs/types/typeCompatibility.md)
+  * [Type Compatibility](docs/types/type-compatibility.md)
   * [Never Type](docs/types/never.md)
   * [Discriminated Unions](docs/types/discriminated-unions.md)
 * [JSX](docs/jsx/tsx.md)
