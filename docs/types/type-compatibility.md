@@ -1,6 +1,7 @@
 * [Type Compatibility](#type-compatibility)
 * [Soundness](#soundness)
 * [Structural](#structural)
+* [Generics](#generics)
 * [Variance](#variance)
 * [Functions](#functions)
   * [Return Type](#return-type)
@@ -9,11 +10,12 @@
   * [Types of arguments](#types-of-arguments)
 * [Enums](#enums)
 * [Classes](#classes)
+* [Generics](#generics)
 * [FootNote: Invariance](#footnote-invariance)
 
 ## Type Compatibility
 
-Type Compatibility determines if one thing can be assigned to another. E.g. `string` and `number` are not compatible:
+Type Compatibility (as we discuss here) determines if one thing can be assigned to another. E.g. `string` and `number` are not compatible:
 
 ```ts
 let str: string = "Hello";
@@ -76,7 +78,6 @@ iTakePoint2D(point2D); // exact match okay
 iTakePoint2D(point3D); // extra information okay
 iTakePoint2D({ x: 0 }); // Error: missing information `y`
 ```
-
 
 ## Variance
 
@@ -259,6 +260,45 @@ let size: Size;
 
 animal = size; // ERROR
 size = animal; // ERROR
+```
+
+## Generics
+
+Since TypeScript has a structural type system, type parameters only affect compatibility when used by member. For example, in the  following `T` has no impact on compatibility:
+
+```ts
+interface Empty<T> {
+}
+let x: Empty<number>;
+let y: Empty<string>;
+
+x = y;  // okay, y matches structure of x
+```
+
+However the if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
+
+```ts
+interface NotEmpty<T> {
+    data: T;
+}
+let x: NotEmpty<number>;
+let y: NotEmpty<string>;
+
+x = y;  // error, x and y are not compatible
+```
+
+In cases where generic arguments haven't been *instantiated* they are substituted by `any` before checking compatibility:
+
+```ts
+let identity = function<T>(x: T): T {
+    // ...
+}
+
+let reverse = function<U>(y: U): U {
+    // ...
+}
+
+identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
 ```
 
 ## FootNote: Invariance
