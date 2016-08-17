@@ -4,6 +4,7 @@
   * [Why TypeScript](docs/why-typescript.md)
 * [JavaScript](docs/javascript/recap.md)
   * [Awful](docs/javascript/awful.md)
+  * [Closure](docs/javascript/closure.md)
 * [Future JavaScript Now](docs/future-javascript.md)
   * [Classes](docs/classes.md)
     * [Classes Emit](docs/classes-emit.md)
