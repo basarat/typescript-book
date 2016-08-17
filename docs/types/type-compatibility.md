@@ -1,3 +1,16 @@
+* [Type Compatibility](#type-compatibility)
+* [Soundness](#soundness)
+* [Structural](#structural)
+* [Variance](#variance)
+* [Functions](#functions)
+  * [Return Type](#return-type)
+  * [Number of arguments](#number-of-arguments)
+  * [Optional and rest parameters](#optional-and-rest-parameters)
+  * [Types of arguments](#types-of-arguments)
+* [Enums](#enums)
+* [Classes](#classes)
+* [FootNote: Invariance](#footnote-invariance)
+
 ## Type Compatibility
 
 Type Compatibility determines if one thing can be assigned to another. E.g. `string` and `number` are not compatible:
@@ -86,21 +99,6 @@ In type compatibility of complex types composed of such `Base` and `Child` depen
 
 There are a few subtle things to consider when comparing two functions.
 
-### Number of arguments
-Less arguments are okay (i.e. functions can chose to ignore additional args). After all you are guaranteed to be called with at least enough arguments.
-
-```ts
-let iTakeSomethingAndPassItAnErr
-    = (x: (err: Error, data: any) => void) => { /* do something */ };
-
-iTakeSomethingAndPassItAnErr(() => null) // Okay
-iTakeSomethingAndPassItAnErr((err) => null) // Okay
-iTakeSomethingAndPassItAnErr((err, data) => null) // Okay
-
-// ERROR: function may be called with `more` not being passed in
-iTakeSomethingAndPassItAnErr((err, data, more) => null); // ERROR
-```
-
 ### Return Type
 `covariant`: The return type must contain at least enough data.
 
@@ -117,6 +115,36 @@ let iMakePoint3D = (): Point3D => ({ x: 0, y: 0, z: 0 });
 iMakePoint2D = iMakePoint3D; // Okay
 iMakePoint3D = iMakePoint2D; // ERROR: Point2D is not assignable to Point3D
 ```
+
+### Number of arguments
+Less arguments are okay (i.e. functions can chose to ignore additional args). After all you are guaranteed to be called with at least enough arguments.
+
+```ts
+let iTakeSomethingAndPassItAnErr
+    = (x: (err: Error, data: any) => void) => { /* do something */ };
+
+iTakeSomethingAndPassItAnErr(() => null) // Okay
+iTakeSomethingAndPassItAnErr((err) => null) // Okay
+iTakeSomethingAndPassItAnErr((err, data) => null) // Okay
+
+// ERROR: function may be called with `more` not being passed in
+iTakeSomethingAndPassItAnErr((err, data, more) => null); // ERROR
+```
+
+### Optional and Rest Parameters
+
+Optional (pre determined count) and Rest parameters (any count of arguments) are compatible, again for convenience.
+
+```ts
+let foo = (x:number, y: number) => { /* do something */ }
+let bar = (x?:number, y?: number) => { /* do something */ }
+let bas = (...args: number[]) => { /* do something */ }
+
+foo = bar = bas;
+bas = bar = foo;
+```
+
+> Note: optional (in our example `bar`) and non optional (in our example `foo`) are only compatible if strictNullChecks is false.
 
 
 ### Types of arguments
@@ -162,21 +190,6 @@ let iTakePoint3D = (point: Point3D) => { /* do something */ }
 iTakePoint3D = iTakePoint2D; // Okay : Reasonable
 iTakePoint2D = iTakePoint3D; // Okay : WHAT
 ```
-
-### Optional and Rest Parameters
-
-Optional (pre determined count) and Rest parameters (any count of arguments) are compatible, again for convenience.
-
-```ts
-let foo = (x:number, y: number) => { /* do something */ }
-let bar = (x?:number, y?: number) => { /* do something */ }
-let bas = (...args: number[]) => { /* do something */ }
-
-foo = bar = bas;
-bas = bar = foo;
-```
-
-> Note: optional (in our example `bar`) and non optional (in our example `foo`) are only compatible if strictNullChecks is false.
 
 ## Enums
 
