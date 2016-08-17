@@ -204,6 +204,50 @@ let color = Color.Red;
 status = color; // ERROR
 ```
 
+## Classes
+
+* Only instance members and methods are compared. *constructors* and *statics* play no part.
+
+```ts
+class Animal {
+    feet: number;
+    constructor(name: string, numFeet: number) { /** do something */ }
+}
+
+class Size {
+    feet: number;
+    constructor(meters: number) { /** do something */ }
+}
+
+let a: Animal;
+let s: Size;
+
+a = s;  // OK
+s = a;  // OK
+```
+
+* `private` and `protected` members *must originate from the same class*. Such members essentially make the class *nominal*.
+
+```ts
+/** A class hierarchy */
+class Animal { protected feet: number; }
+class Cat extends Animal { }
+
+let animal: Animal;
+let cat: Cat;
+
+animal = cat; // OKAY
+cat = animal; // OKAY
+
+/** Looks just like Animal */
+class Size { protected feet: number; }
+
+let size: Size;
+
+animal = size; // ERROR
+size = animal; // ERROR
+```
+
 ## FootNote: Invariance
 
 We said invariance is the only sound option. Here is an example where both `contra` and `co` variance are shown to be unsafe for arrays.

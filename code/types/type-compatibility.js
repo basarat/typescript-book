@@ -46,6 +46,33 @@ var FunctionArgsBi;
     iTakePoint3D = iTakePoint2D;
     iTakePoint2D = iTakePoint3D;
 })(FunctionArgsBi = exports.FunctionArgsBi || (exports.FunctionArgsBi = {}));
+var NominalClassMemebers;
+(function (NominalClassMemebers) {
+    var Animal = (function () {
+        function Animal() {
+        }
+        return Animal;
+    }());
+    var Cat = (function (_super) {
+        __extends(Cat, _super);
+        function Cat() {
+            _super.apply(this, arguments);
+        }
+        return Cat;
+    }(Animal));
+    var animal;
+    var cat;
+    animal = cat;
+    cat = animal;
+    var Size = (function () {
+        function Size() {
+        }
+        return Size;
+    }());
+    var size;
+    animal = size;
+    size = animal;
+})(NominalClassMemebers || (NominalClassMemebers = {}));
 var invariance;
 (function (invariance) {
     var Animal = (function () {

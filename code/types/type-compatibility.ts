@@ -54,6 +54,26 @@ export namespace FunctionArgsBi {
     iTakePoint2D = iTakePoint3D; // Okay : WHAT
 }
 
+namespace NominalClassMemebers {
+    /** A class hierarchy */
+    class Animal { protected feet: number; }
+    class Cat extends Animal { }
+
+    let animal: Animal;
+    let cat: Cat;
+
+    animal = cat; // OKAY
+    cat = animal; // OKAY
+
+    /** Looks just like Animal */
+    class Size { protected feet: number; }
+
+    let size: Size;
+
+    animal = size; // ERROR
+    size = animal; // ERROR
+}
+
 
 export namespace invariance {
     /** Heirarchy */
