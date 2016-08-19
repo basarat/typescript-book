@@ -51,7 +51,7 @@ The `namespace` keyword generates the same JavaScript that we saw earlier:
 ```ts
 (function (Utility) {
 
-// Add stuff to utility
+// Add stuff to Utility
 
 })(Utility || (Utility = {}));
 ```
