@@ -1,3 +1,12 @@
+* [Enums](#enums)
+* [Enums and numbers](#enums-and-numbers)
+* [Enums and strings](#enums-and-strings)
+* [Changing the number associated with an enum](#changing-the-number-associated-with-an-enum)
+* [Enums are open ended](#enums-are-open-ended)
+* [Enums as flags](#enums-as-flags)
+* [Const enums](#const-enums)
+* [Enum with static functions](#enum-with-static-functions)
+
 ### Enums
 An enum is a way to organize a collection of related values. Many other programming languages (C/C#/Java) have an `enum` data type but JavaScript does not. However TypeScript does. Here is an example definition of a TypeScript enum:
 
