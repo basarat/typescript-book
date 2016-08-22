@@ -81,6 +81,8 @@ enum Color {
 }
 ```
 
+> TIP: I quite commonly initialize the first enum with ` = 1` as it allows me to do a safe truthy check on an enum value.
+
 #### Enums are open ended
 Here is the generated JavaScript for an enum shown again:
 
