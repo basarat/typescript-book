@@ -4,7 +4,7 @@ There were (and will continue to be) a lot of competitors in *Some syntax* to *J
 
 ![](https://raw.githubusercontent.com/basarat/typescript-book/master/images/venn.png)
 
-However it does mean that *you need to learn JavaScript* (the good new is *you **only** need to learn JavaScript*). TypeScript is just standardizing all the ways you provide *good documentation* on JavaScript.
+However it does mean that *you need to learn JavaScript* (the good news is *you **only** need to learn JavaScript*). TypeScript is just standardizing all the ways you provide *good documentation* on JavaScript.
 
 * Just giving you a new syntax doesn't help fix bug (looking at you CoffeeScript).
 * Creating a new language abstracts you too far from your runtimes, communities (looking at you Dart).
