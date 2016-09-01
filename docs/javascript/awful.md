@@ -57,4 +57,4 @@ So be mindful of your usage of `this`. If you want to disconnect `this` in a cla
 
 ## Next
 
-That's it. Those are the simple *misunderstood* portions of JavaScript that still result in various bug for developers that are new to the language 🌹.
+That's it. Those are the simple *misunderstood* portions of JavaScript that still result in various bugs for developers that are new to the language 🌹.
