@@ -35,7 +35,7 @@ var Point = (function () {
     return Point;
 })();
 ```
-This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct. Note that `constructor` is optional.
+This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct. Note that in general `constructor` is optional, but in the case above it will compile with errors without its `constructor`.
 
 ### Inheritance
 Classes in TypeScript (like other languages) support *single* inheritance using the `extends` keyword as shown below:
