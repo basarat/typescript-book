@@ -35,7 +35,7 @@ var Point = (function () {
     return Point;
 })();
 ```
-This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct. Note that `constructor` is optional.
+This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct.
 
 ### Inheritance
 Classes in TypeScript (like other languages) support *single* inheritance using the `extends` keyword as shown below:
@@ -118,6 +118,15 @@ As always these modifiers work for both member properties and member functions.
 * `abstract` **classes** cannot be directly instantiated. Instead the user must create some `class` that inherit from the `abstract class`.
 * `abstract` **members** cannot be directly accessed and a child class must provide the functionality.
 
+### Constructor is optional
+
+The class does not need to have a constructor. e.g. the following is perfectly fine. 
+
+```ts
+class Foo {}
+let foo = new Foo();
+```
+
 ### Define using constructor
 
 Having a member in a class and initializing it like below:
@@ -150,3 +159,5 @@ class Foo {
     }
 }
 ```
+
+
