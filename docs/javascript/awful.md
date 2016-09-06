@@ -9,7 +9,7 @@ Here are some awful (misunderstood) parts of JavaScript that you must know.
 Fact is you will need to deal with both. Just check for either with `==` check.
 
 ```ts
-/// Image you are doing `foo.bar == undefined` where bar can be one of:
+/// Imagine you are doing `foo.bar == undefined` where bar can be one of:
 console.log(undefined == undefined); // true
 console.log(null == undefined); // true
 console.log(0 == undefined); // false
