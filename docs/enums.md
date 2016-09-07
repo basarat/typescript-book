@@ -125,11 +125,11 @@ enum Color {
 Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`)
 
 #### Enums as flags
-One excellent use of the ability to use enums as `Flags`. Consider the following example
+One excellent use of the ability to use enums as `Flags`. Flags allow you to check if a certain condition from a set of conditions is true. Consider the following example where we have a set of properties about animals:
 
 ```ts
 enum AnimalFlags {
-	None           = 0,
+    None           = 0,
     HasClaws       = 1 << 0,
     CanFly         = 1 << 1,
     EatsFish       = 1 << 2,
