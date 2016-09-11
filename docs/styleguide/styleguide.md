@@ -106,7 +106,7 @@ interface Foo {
 
 * Use `PascalCase` for names
 
-> Reason: Convention followed by the TypeScript team. Name are effectively just a class with static members. Class names are `PascalCase` => Namespace names are `PascalCase`
+> Reason: Convention followed by the TypeScript team. Namespaces are effectively just a class with static members. Class names are `PascalCase` => Namespace names are `PascalCase`
 
 **Bad**
 ```ts
