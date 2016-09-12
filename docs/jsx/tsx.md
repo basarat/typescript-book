@@ -13,7 +13,7 @@ This decreases the chances of errors and increases the maintainability of your u
 
 * Use files with the extension `.tsx` (instead of `.ts`).
 * Use `"jsx" : "react"` in your `tsconfig.json`'s `compilerOptions`.
-* Install the definitions for JSX and React into your project : (`typings install dt~react --save` && `typings install dt~react-dom --save`).
+* Install the definitions for JSX and React into your project : (`npm i -D @types/react` && `npm i -D @types/react-dom`).
 * Import react into your `.tsx` files (`import * as React from "react"`).
 
 ## HTML Tags vs. Components
