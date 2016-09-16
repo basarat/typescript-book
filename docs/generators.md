@@ -100,7 +100,7 @@ console.log(foo.value); // foo
 const nextThing = iterator.next('bar');
 ```
 
-The following example demonstrates `interator.throw(error)`:
+The following example demonstrates `iterator.throw(error)`:
 
 ```ts
 function* generator() {
