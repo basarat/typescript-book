@@ -60,7 +60,7 @@ let component = iteratorResult1.value; //Component { name: 'top' }
 Again. Iterator itself is not a TypeScript feature, this code could work without
 implementing Iterator and IteratorResult interfaces explicitly.
 However it is very helpful to use these common
-ES6 [interfaces](./types/ambient/interfaces.md) for code consistency.
+ES6 [interfaces](./types/interfaces.md) for code consistency.
 
 Ok, Nice, but could be more helpful. ES6 defines the *iterable protocol*
 which includes [Symbol.iterator] `symbol` if Iterable interface implemented:

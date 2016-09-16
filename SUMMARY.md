@@ -39,7 +39,7 @@
   * [Ambient Declarations](docs/types/ambient/intro.md)
     * [Declaration Files](docs/types/ambient/d.ts.md)
     * [Variables](docs/types/ambient/variables.md)
-    * [Interfaces](docs/types/ambient/interfaces.md)
+  * [Interfaces](docs/types/interfaces.md)
   * [`lib.d.ts`](docs/types/lib.d.ts.md)
   * [Functions](docs/types/functions.md)
   * [Type Assertion](docs/types/type-assertion.md)

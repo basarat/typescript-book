@@ -23,6 +23,7 @@
         "./assertion.ts",
         "./freshness/freshness.ts",
         "./functions.ts",
+        "./interfaces.ts",
         "./lib/exclude/nolibd.ts",
         "./lib/usage/libd.ts",
         "./migrating/migrating.ts",
