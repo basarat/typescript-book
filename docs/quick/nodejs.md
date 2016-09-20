@@ -15,3 +15,8 @@ You can even use other node modules written in TypeScript. As a module author, o
 
 
 Example package: `npm install csx` [for csx](https://www.npmjs.com/package/csx),  usage: `import csx = require('csx')`.
+
+
+## Bonus points
+
+Such NPM modules work just fine with browserify (using tsify) or webpack (using ts-loader).
