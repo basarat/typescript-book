@@ -9,6 +9,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * Its probably the Best TypeScript book out there. Good Job ([link](https://twitter.com/thelondonjs/status/756419561570852864))
 * Love how precise and clear the examples and explanations are! ([link](https://twitter.com/joe_mighty/status/758290957280346112))
 * For the low, low price of free, you get pages of pure awesomeness. Chock full of source code examples and clear, concise explanations, TypeScript Deep Dive will help you learn TypeScript development. ([link](https://www.nativescript.org/blog/details/free-book-typescript-deep-dive))
+* Just a big thank you ([link](https://www.gitbook.com/book/basarat/typescript/discussions/38))
 
 
 ## Get Started
