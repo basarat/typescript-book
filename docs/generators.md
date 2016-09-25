@@ -40,7 +40,7 @@ console.log(gen.next()); // { done: true }
 ```
 
 ### Externally Controlled Execution
-This is the part of generators that is try exciting. It essentially allows a function to pause its execution and pass control (fate) of the remainder of the function execution to the caller.
+This is the part of generators that is truly exciting. It essentially allows a function to pause its execution and pass control (fate) of the remainder of the function execution to the caller.
 
 A generator function does not execute when you call it. It just creates a generator object. Consider the following example along with a sample execution:
 
