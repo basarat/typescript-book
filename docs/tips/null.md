@@ -2,7 +2,7 @@
 JavaScript (and by extension TypeScript) has two bottom types : `null` and `undefined`. They are *intended* to mean different things:
 
 * Something hasn't been initialized : `undefined`
-* Something is current unavailable: `null`
+* Something is currently unavailable: `null`
 
 Most other languages only have one (commonly called `null`). Since by default JavaScript will evaluate an uninitialized variable / parameter / property to `undefined` (you don't get a choice) we recommend you just use that for your own *unavailable* status and don't bother with `null`.
 
@@ -43,7 +43,7 @@ function foo():{a:number,b?:number}{
 ```
 
 ### Node style callbacks
-Node style callback function (e.g. `(err,somethingElse)=>{ /* something */ }`) are generally called with `err` set to `null` if there isn't an error. You generally just use a truthy check for this anyways:
+Node style callback functions (e.g. `(err,somethingElse)=>{ /* something */ }`) are generally called with `err` set to `null` if there isn't an error. You generally just use a truthy check for this anyways:
 
 ```ts
 fs.readFile('someFile', 'utf8', (err,data) => {
@@ -53,7 +53,7 @@ fs.readFile('someFile', 'utf8', (err,data) => {
   // no error
 });
 ```
-When creating your own APIs its *okay* to use `null` in this case for consistency. In all sincerity for your own APIs you should look at promises, in that case you actually don't need to bother with absent error values (you handle them with `.then` vs. `.catch`).
+When creating your own APIs it's *okay* to use `null` in this case for consistency. In all sincerity for your own APIs you should look at promises, in that case you actually don't need to bother with absent error values (you handle them with `.then` vs. `.catch`).
 
 ### Don't use `undefined` as a means of denoting *validity*
 
