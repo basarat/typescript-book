@@ -106,3 +106,20 @@ function area(s: Shape) {
 ```
 
 [references-discriminated-union]:https://github.com/Microsoft/TypeScript/pull/9163
+
+### strictNullChecks 
+
+If using strictNullChecks and doing exhaustive checks you should return the `_exhaustiveCheck` variable (of type `never`) as well, otherwise TypeScirpt infers a possible return of `undefined`. So: 
+
+```ts
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.width * s.height;
+        case "circle": return Math.PI * s.radius * s.radius;
+        default: 
+          const _exhaustiveCheck: never = s;
+          return _exhaustiveCheck;
+    }
+}
+```
