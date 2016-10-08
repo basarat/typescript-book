@@ -55,6 +55,27 @@ class MyComponent extends React.Component<Props, {}> {
 <MyComponent foo="bar" />
 ```
 
+### JSX Tip : Interface for renderable
+
+React can render a few things like `JSX` or `string`. There are all consolidated into the type `React.ReactNode` so use it for when you want to accept renderables e.g.
+
+```ts
+interface Props {
+  header: React.ReactNode;
+  body: React.ReactNode;
+}
+class MyComponent extends React.Component<Props, {}> {
+    render() {
+        return <div>
+            {header}
+            {body}
+        </div>;
+    }
+}
+
+<MyComponent foo="bar" />
+```
+
 ## Non React JSX
 TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:
 
