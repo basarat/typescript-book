@@ -44,6 +44,9 @@ e.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/man
 readOnly: boolean | 'nocursor';
 ```
 
+#### Discriminated Unions
+
+We will cover [this later in the book](./discriminated-unions.md). 
 
 
 [](https://github.com/Microsoft/TypeScript/pull/5185)
