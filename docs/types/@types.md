@@ -1,3 +1,5 @@
+Docs : https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
 # `@types`
 
 [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped) is definitely one of TypeScript's greatest strengths. The community has effectively gone ahead and **documented** the nature of nearly 90% of the top JavaScript projects out there.
@@ -17,21 +19,8 @@ npm install @types/jquery --save-dev
 
 ### Global `@types`
 
-After installation, to use a type definition globally you simply add it to your tsconfig.json e.g. to use jquery
+By default any definitions that support global consumption are included automatically. e.g. for `jquery` you should be able to just start using `$` *globally* in your project.
 
-```
-{
-    "compilerOptions": {
-        "types": [
-            "jquery"
-        ]
-    }
-}
-```
-
-Now you should be able to use `$` or `jQuery` *globally* in your project.
-
-> Alternatively, if you don't include it in tsconfig.json, you can use it only in particular files simply by adding `/// <reference types="jquery" />` to the top of that file. (I personally don't do this).
 
 For *libraries* I generally recommend using *modules*:
 
