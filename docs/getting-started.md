@@ -6,7 +6,7 @@
 TypeScript compiles into JavaScript. JavaScript is what you are actually going to execute (either in the browser or on the server). So you are going to need the following:
 
 * TypeScript compiler (OSS available [in source](https://github.com/Microsoft/TypeScript/) and on [NPM](https://www.npmjs.com/package/typescript))
-* A TypeScript editor (you can use notepad if you want but I use [alm 🌹](http://alm.tools))
+* A TypeScript editor (you can use notepad if you want but I use [alm 🌹](http://alm.tools). Also there is a great list here : https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
 
 
 ![](https://raw.githubusercontent.com/alm-tools/alm-tools.github.io/master/screens/main.png)
@@ -22,10 +22,10 @@ You can install it on the command line as
 npm install -g typescript@next
 ```
 
-And now the command line `tsc` will be the latest and greatest. Various IDEs support it too, e.g. 
+And now the command line `tsc` will be the latest and greatest. Various IDEs support it too, e.g.
 
 * `alm` always ships with the latest TypeScript version.
-* You can ask vscode to use this version by creating `.vscode/settings.json` with the following contents: 
+* You can ask vscode to use this version by creating `.vscode/settings.json` with the following contents:
 
 ```json
 {
