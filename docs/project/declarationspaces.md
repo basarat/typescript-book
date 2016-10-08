@@ -95,3 +95,21 @@ declare let _foo: Foo;
 // Same as before
 let bar: typeof _foo.foo;
 ```
+
+### Capturing the type of magic strings
+
+Lots of JavaScript libraries and frameworks work off of raw JavaScript strings. You can use `const` variables to capture their type e.g.
+
+```ts
+// Capture both the *type* and *value* of magic string:
+const foo = "Hello World";
+
+// Use the captured type:
+let bar: typeof foo;
+
+// bar can only ever be assigned to `Hello World`
+bar = "Hello World"; // Okay!
+bar = "anything else "; // Error!
+```
+
+In this example `bar` has the literal type `"Hello World"`. We cover this more in the literal type section.

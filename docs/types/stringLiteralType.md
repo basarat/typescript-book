@@ -36,7 +36,7 @@ Valid use cases for string literal types are:
 
 [TypeScript enums are number based](../enums.md). You can use string literals with union types to mock a string based enum as we did in the `CardinalDirection` example above.
 
-#### Modeling existing JavaScript APIs
+#### Modelling existing JavaScript APIs
 
 e.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly) that can either be a `boolean` or the literal string `"nocursor"` (effective valid values `true,false,"nocursor"`).  It can be declared as:
 
