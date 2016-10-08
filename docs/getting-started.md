@@ -6,7 +6,7 @@
 TypeScript compiles into JavaScript. JavaScript is what you are actually going to execute (either in the browser or on the server). So you are going to need the following:
 
 * TypeScript compiler (OSS available [in source](https://github.com/Microsoft/TypeScript/) and on [NPM](https://www.npmjs.com/package/typescript))
-* A TypeScript editor (you can use notepad if you want but I use [alm 🌹](http://alm.tools). Also there is a great list here : https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+* A TypeScript editor (you can use notepad if you want but I use [alm 🌹](http://alm.tools). Also [lots of other IDES support it as well]( https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support))
 
 
 ![](https://raw.githubusercontent.com/alm-tools/alm-tools.github.io/master/screens/main.png)
