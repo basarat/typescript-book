@@ -1,4 +1,5 @@
-{ 
+{
+  "gitbook": ">=3.2.1",
   "plugins": ["edit-link", "github"],
   "pluginsConfig": {
     "edit-link": {
