@@ -1,5 +1,3 @@
-Docs : https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-
 # `@types`
 
 [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped) is definitely one of TypeScript's greatest strengths. The community has effectively gone ahead and **documented** the nature of nearly 90% of the top JavaScript projects out there.
@@ -21,8 +19,7 @@ npm install @types/jquery --save-dev
 
 By default any definitions that support global consumption are included automatically. e.g. for `jquery` you should be able to just start using `$` *globally* in your project.
 
-
-For *libraries* I generally recommend using *modules*:
+However for *libraries*  (like `jquery`) I generally recommend using *modules*:
 
 ### Module `@types`
 
@@ -33,3 +30,19 @@ import * as $ from "jquery";
 
 // Use $ at will in this module :)
 ```
+
+## Controlling Globals
+
+As can be seen having a definition that supports global leak in automatically can be a problem for some team so you can chose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.
+
+```
+{
+    "compilerOptions": {
+        "types" : [
+            "jquery"
+        ]
+    }
+}
+```
+
+The above shows a sample where only `jquery` will be allowed to be used an even if the person installs another definition like `npm install @types/node` it's globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code untill you add them.

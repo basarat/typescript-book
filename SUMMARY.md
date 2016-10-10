@@ -36,6 +36,7 @@
 * [Browser QuickStart](docs/quick/browser.md)
 * [TypeScript's Type System](docs/types/type-system.md)
   * [JS Migration Guide](docs/types/migrating.md)
+  * [@types](docs/types/@types.md)
   * [Ambient Declarations](docs/types/ambient/intro.md)
     * [Declaration Files](docs/types/ambient/d.ts.md)
     * [Variables](docs/types/ambient/variables.md)
