@@ -376,7 +376,7 @@ loadJSONAsync('good.json')
 ### Parallel control flow
 We have seen how trivial doing a serial sequence of async tasks is with promises. It is simply a matter of chaining `then` calls.
 
-However you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for n number of promises to complete. You provide it with an array of `n` promises and it gives you array of `n` resolved values. This is shown below:
+However you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for `n` number of promises to complete. You provide it with an array of `n` promises and it gives you array of `n` resolved values. This is shown below:
 
 ```ts
 // an async function to simulate loading an item from some server
