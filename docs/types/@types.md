@@ -23,7 +23,7 @@ However for *libraries*  (like `jquery`) I generally recommend using *modules*:
 
 ### Module `@types`
 
-After installation, no special configuration required really. You just use it like a module e.g.
+After installation, no special configuration is required really. You just use it like a module e.g.
 
 ```
 import * as $ from "jquery";
@@ -45,4 +45,4 @@ As can be seen having a definition that supports global leak in automatically ca
 }
 ```
 
-The above shows a sample where only `jquery` will be allowed to be used an even if the person installs another definition like `npm install @types/node` it's globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code untill you add them.
+The above shows a sample where only `jquery` will be allowed to be used and even if the person installs another definition like `npm install @types/node` it's globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code untill you add them.
