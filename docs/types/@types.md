@@ -45,4 +45,4 @@ As can be seen having a definition that supports global leak in automatically ca
 }
 ```
 
-The above shows a sample where only `jquery` will be allowed to be used and even if the person installs another definition like `npm install @types/node` it's globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code untill you add them.
+The above shows a sample where only `jquery` will be allowed to be used. Even if the person installs another definition like `npm install @types/node` it's globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code until you add them to the `tsconfig.json` types option.
