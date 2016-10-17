@@ -29,7 +29,7 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 "hello" - 1; // JS : NaN, TS Error
 ```
 
-Essentailly TypeScript is linting JavaScript. Just doing a better job at it than other linters that don't have *type information*.
+Essentially TypeScript is linting JavaScript. Just doing a better job at it than other linters that don't have *type information*.
 
 ## You still need to learn JavaScript
 
