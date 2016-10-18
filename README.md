@@ -11,6 +11,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * For the low, low price of free, you get pages of pure awesomeness. Chock full of source code examples and clear, concise explanations, TypeScript Deep Dive will help you learn TypeScript development. ([link](https://www.nativescript.org/blog/details/free-book-typescript-deep-dive))
 * Just a big thank you ([link](https://www.gitbook.com/book/basarat/typescript/discussions/38))
 * This gitbook got my project going pronto. Fluent easy read 5 stars. ([link](https://twitter.com/thebabellion/status/779888195559235584))
+* I recommend the online #typescript book by @basarat you'll love it.([link](https://twitter.com/markpieszak/status/788099306590969860))
 
 
 ## Get Started
