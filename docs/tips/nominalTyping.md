@@ -1,6 +1,35 @@
 ## Nominal Typing
 The TypeScript type system is structural [and this is one of the main motivating benefits](../why-typescript.md). However, there are real-world use cases for a system where you want two variables to be differentiated because they have a different *type name* even if they have the same structure. A very common use case is *identity* structures (which are generally just strings with semantics associated with their *name* in languages like C#/Java).
 
+There are a few patterns that have emerged in the community. I cover them in decrease order of personal preference:
+
+## Using literal types
+
+This pattern uses generics and literal types: 
+
+```ts
+/** Generic Id type */
+type Id<T extends string> = {
+  type: T,
+  value: string,
+}
+
+/** Specific Id types */
+type FooId = Id<'foo'>;
+type BarId = Id<'bar'>;
+
+/** Optional: contructors functions */
+const createFoo = (value: string): FooId => ({ type: 'foo', value });
+const createBar = (value: string): BarId => ({ type: 'bar', value });
+
+createFoo('sample') = createBar('sample'); // Error
+```
+
+* Advantages
+  - No need for any type assertions 
+* Disadvantage
+  - The structure `{type,value}` might not be desireable and need server serialization support
+
 ## Using Enums
 [Enums in TypeScript](../enums.md) offer a certain level of nominal typing. Two enum types aren't equal if they differ by name. We can use this fact to provide nominal typing to any other type that is structurally compatible.
 
