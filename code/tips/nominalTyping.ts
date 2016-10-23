@@ -13,8 +13,11 @@ namespace Literal {
   const createFoo = (value: string): FooId => ({ type: 'foo', value });
   const createBar = (value: string): BarId => ({ type: 'bar', value });
 
-  createFoo('sample') = createBar('sample'); // Error
+  let foo = createFoo('sample')
+  let bar = createBar('sample');
 
+  foo = bar; // Error
+  foo = foo; // Okay
 }
 
 namespace EnumDriven {
