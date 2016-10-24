@@ -127,7 +127,7 @@ The class does not need to have a constructor. e.g. the following is perfectly f
 
 ```ts
 class Foo {}
-let foo = new Foo();
+var foo = new Foo();
 ```
 
 ### Define using constructor
