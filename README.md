@@ -12,6 +12,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * Just a big thank you! **Best TypeScript 2 detailed explanation!** ([link](https://www.gitbook.com/book/basarat/typescript/discussions/38))
 * This gitbook got my project going pronto. Fluent easy read 5 stars. ([link](https://twitter.com/thebabellion/status/779888195559235584))
 * I recommend the online #typescript book by @basarat you'll love it.([link](https://twitter.com/markpieszak/status/788099306590969860))
+* I've always found this by @basarat really helpful. ([link](https://twitter.com/Brocco/status/789887640656945152))
 
 
 ## Get Started
