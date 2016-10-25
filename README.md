@@ -13,7 +13,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * This gitbook got my project going pronto. Fluent easy read 5 stars. ([link](https://twitter.com/thebabellion/status/779888195559235584))
 * I recommend the online #typescript book by @basarat you'll love it.([link](https://twitter.com/markpieszak/status/788099306590969860))
 * I've always found this by @basarat really helpful. ([link](https://twitter.com/Brocco/status/789887640656945152))
-
+* We must highlight TypeScript Deep Dive, an open source book.([link](https://www.siliconrepublic.com/enterprise/typescript-programming-javascript))
 
 ## Get Started
 If you are here to read the book online [get started](http://basarat.gitbooks.io/typescript/content/docs/getting-started.html).
