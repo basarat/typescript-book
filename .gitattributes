@@ -1,2 +1,4 @@
 # core.autocrlf
 * text=auto
+
+*.js linguist-language=TypeScript
