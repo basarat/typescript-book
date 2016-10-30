@@ -19,7 +19,7 @@ However using an arrow generic function will not:
 const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
 ```
 
-**Workaround**: Use force some `extends` on the generic parameter to hint the compiler that its a generic. e.g.
+**Workaround**: Use `extends` on the generic parameter to hint the compiler that its a generic. e.g.
 
 ```ts
 const foo = <T extends {}>(x: T) => x;
