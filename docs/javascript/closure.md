@@ -35,7 +35,7 @@ var innerFunction = outerFunction("hello closure!");
 innerFunction(); // logs hello closure!
 ```
 
-### Reason why its awesome
+### Reason why it's awesome
 It allows you to compose objects easily e.g. the revealing module pattern:
 
 ```ts
