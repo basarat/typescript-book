@@ -16,7 +16,7 @@ or `include` and `exclude` to specify files. e.g.
 ```json
 {
     "include":[
-        "./folder/**/*"
+        "./folder"
     ],
     "exclude":[
         "./folder/**/*.spec.ts",
@@ -28,4 +28,4 @@ or `include` and `exclude` to specify files. e.g.
 Some notes:
 
 * if `files` are specified other options are ignored
-* `**/*` means all folder and any files (the extensions `.ts`/`.tsx` will be included and even `.js`/`.jsx` if `allowJs` is true).
+* `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be included and even `.js`/`.jsx` if `allowJs` is true)
