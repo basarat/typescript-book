@@ -78,11 +78,11 @@ You can have static members as well as static functions.
 ### Access Modifiers
 TypeScript supports access modifiers `public`,`private` and `protected` which determine the accessibility of a `class` member as shown below:
 
-| accessible on   | `public` | `private` | `protected` |
-|-----------------|----------|-----------|-------------|
-| class instances | yes      | no        | no          |
-| class           | yes      | yes       | yes         |
-| class children  | yes      | no        | yes         |
+| accessible on   | `public` | `protected` | `private` |
+|-----------------|----------|-------------|-----------|
+| class           | yes      | yes         | yes       |
+| class children  | yes      | yes         | no        |
+| class instances | yes      | no          | no        |
 
 
 If an access modifier is not specified it is implicitly `public` as that matches the *convinient* nature of JavaScript 🌹.
