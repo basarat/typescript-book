@@ -52,6 +52,7 @@
   * [Type Compatibility](docs/types/type-compatibility.md)
   * [Never Type](docs/types/never.md)
   * [Discriminated Unions](docs/types/discriminated-unions.md)
+  * [Index Signatures](docs/types/index-signatures.md)
 * [JSX](docs/jsx/tsx.md)
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)

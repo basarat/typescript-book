@@ -20,6 +20,10 @@
         "!./node_modules/**/*"
     ],
     "files": [
-        "./freshness.ts"
-    ]
+        "./freshness.ts",
+        "./index-signatures.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }
