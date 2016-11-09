@@ -1,25 +1,32 @@
 # TypeScript with NodeJS
-TypeScript has had *first class* support for NodeJS since inception. Here's how to get setup with a NodeJS project in TypeScript:
+TypeScript has had *first class* support for NodeJS since inception. Here's how to setup a quick NodeJS project:
 
-1. Add `node.d.ts` (`npm install @types/node --save-dev`) to your [compilation context](../project/compilation-context.md).
-1. Compile with `--module` set to `"commonjs"`.
-1. Add node to the global resolution by simply adding it to `types` in your tsconfig.
+> Note: many of these steps are actually just common practice nodejs setup steps
 
-So your tsconfig will look like:
+1. Setup a nodejs project `package.json`. Quick one : `npm init -y`
+1. Add TypeScript (`npm install typescript --save-dev`)
+1. Add `node.d.ts` (`npm install @types/node --save-dev`)
+1. Init a `tsconfig.json` for TypeScript options (`node ./node_modules/.bin/tsc --init`)
+
+That's it! Fire up your IDE (e.g. `alm -o`) and play around. Now you can use all the built in node modules (e.g. `import fs = require('fs')`) with all the safety and developer ergonomics of TypeScript!
+
+## Bonus: Live compile + run
+* Add `ts-node` which we will use for live compile + run in node (`npm install ts-node --save-dev`)
+* Add `nodemon` which will invoke `ts-node` whenever a file is changed (`npm install nodemon --save-dev`)
+
+Now just add a `script` target to your `package.json` based on your application entry e.g. assuming its `index.ts`:
 
 ```json
-{
-    "compilerOptions": {
-        "module": "commonjs",
-        "types": [
-            "node"
-        ]
-    }
-}
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
+  },
 ```
+So you can now run `npm start` and as you edit `index.ts`: 
 
-That's it! Now you can use all the built in node modules (e.g. `import fs = require('fs')`) with all the safety and developer ergonomics of TypeScript!
-
+* nodemon rereuns its command (ts-node)
+* ts-node transpiles automatically picking up tsconfig.json and the installed typescript version
+* ts-node runs the output javascript through node.
 
 ## Creating TypeScript node modules
 
