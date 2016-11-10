@@ -4,21 +4,23 @@ The conventional singleton pattern is really something that is used to overcome 
 
 ```ts
 class Singleton {
-    private static singleton: Singleton;
-    constructor() {
-        if (!Singleton.singleton) {
-            Singleton.singleton = this;
+    private static instance: Singleton;
+    private constructor() {
+        // do something construct...
+    }
+    static getInstance() {
+        if (!Singleton.instance) {
+            Singleton.instance = new Singleton();
             // ... any one time initialization goes here ...
         }
-        return Singleton.singleton;
+        return Singleton.instance;
     }
     someMethod() { }
 }
 
-var something = new Singleton();
-var somethingElse = new Singleton();
+let something = new Singleton() // Error: constructor of 'Singleton' is private.
 
-console.log(something === somethingElse); // true;
+let instance = Singleton.getInstance() // do something with the instance...
 ```
 
 However if you don't want lazy initialization you can instead just use a `namespace`: 
