@@ -14,29 +14,11 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
-    "filesGlob": [
+    "include": [
         "./**/*.ts",
-        "./**/*.tsx",
-        "!./node_modules/**/*"
-    ],
-    "files": [
-        "./assertion.ts",
-        "./freshness/freshness.ts",
-        "./freshness/index-signatures.ts",
-        "./functions.ts",
-        "./generics.ts",
-        "./interfaces.ts",
-        "./lib/exclude/nolibd.ts",
-        "./lib/usage/libd.ts",
-        "./migrating/migrating.ts",
-        "./readonly.ts",
-        "./stringLiteralType.ts",
-        "./type-compatibility.ts",
-        "./type-inference.ts",
-        "./typeGuard.ts",
-        "./types.ts"
+        "./**/*.tsx"
     ],
     "atom": {
-        "rewriteTsconfig": true
+        "rewriteTsconfig": false
     }
 }

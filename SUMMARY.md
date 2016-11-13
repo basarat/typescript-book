@@ -46,7 +46,7 @@
   * [Type Assertion](docs/types/type-assertion.md)
   * [Freshness](docs/types/freshness.md)
   * [Type Guard](docs/types/typeGuard.md)
-  * [String Literal Type](docs/types/stringLiteralType.md)
+  * [Literal Types](docs/types/literal-types.md)
   * [Readonly](docs/types/readonly.md)
   * [Generics](docs/types/generics.md)
   * [Type Inference](docs/types/type-inference.md)
