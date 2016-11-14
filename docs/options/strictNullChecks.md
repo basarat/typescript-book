@@ -25,7 +25,7 @@ interface Member {
 }
 ```
 
-Not every member will provide theire age, so the `age` is an optional property. It means the value of  `age` will probably be `undefined`.
+Not every member will provide their age, so the `age` is an optional property. It means the value of `age` will probably be `undefined`.
 
 `undefined` is the root of all evil. It always lead to runtime error. We are always easy to write some code that will probably throw `Error`:
 
