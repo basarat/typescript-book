@@ -104,6 +104,7 @@ If you have an instance method as an arrow function then its goes on `this`. Sin
 
 ```ts
 class Adder {
+    constructor(public a: number) {}
     // This function is now safe to pass around
     add = (b: string): string => {
         return this.a + b;
