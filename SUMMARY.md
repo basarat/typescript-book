@@ -57,6 +57,7 @@
 * [JSX](docs/jsx/tsx.md)
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)
+  * [strictNullChecks](docs/options/strictNullChecks.md)
 * [TIPs](docs/tips/main.md)
   * [Quick Object Return](docs/tips/quickObjectReturn.md)
   * [String Based Enums](docs/tips/stringEnums.md)
