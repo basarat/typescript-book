@@ -281,7 +281,7 @@ Promise.resolve(123)
 
 
 ### TypeScript and promises
-The great thing about TypeScript is that it understands the flow of values throw a promise chain.
+The great thing about TypeScript is that it understands the flow of values through a promise chain.
 
 ```ts
 Promise.resolve(123)
