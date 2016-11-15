@@ -24,3 +24,5 @@ tsc --someBooleanOption
 ```
 
 > All of these are `false` by default.
+
+Click [here](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to see all compiler options. 
