@@ -37,7 +37,7 @@ This is because **interfaces in TypeScript are open ended**. This is a vital ten
 
 ## Classes can implement interfaces
 
-If you want to use *classes* that must follow and object structure that someone declared for you in an `interface` you can use the implements keyword to ensure compatibility.
+If you want to use *classes* that must follow an object structure that someone declared for you in an `interface` you can use the `implements` keyword to ensure compatibility.
 
 ```ts
 interface Point {
