@@ -1,24 +1,9 @@
 ### Template Strings
 Syntactically these are strings that use backticks ( i.e. \` ) instead of single (') or double (") quotes. The motivation of Template Strings is three fold:
 
-* Multiline Strings
 * String Interpolation
+* Multiline Strings
 * Tagged Templates
-
-#### Multiline Strings
-Ever wanted to put a newline in a JavaScript string? Perhaps you wanted to embed some lyrics? You would have needed to *escape the literal newline* using our favorite escape character `\`, and then put a new line into the string manually `\n` at the next line. This is shown below:
-
-```ts
-var lyrics = "Never gonna give you up \
-\nNever gonna let you down";
-```
-
-With TypeScript you can just use a template string:
-
-```ts
-var lyrics = `Never gonna give you up
-Never gonna let you down`;
-```
 
 #### String Interpolation
 Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* get their name from. Here's how you would potentially generate an html string previously:
@@ -38,6 +23,21 @@ Note that any placeholder inside the interpolation (`${` and `}`) is treated as 
 
 ```ts
 console.log(`1 and 1 make ${1 + 1}`);
+```
+
+#### Multiline Strings
+Ever wanted to put a newline in a JavaScript string? Perhaps you wanted to embed some lyrics? You would have needed to *escape the literal newline* using our favorite escape character `\`, and then put a new line into the string manually `\n` at the next line. This is shown below:
+
+```ts
+var lyrics = "Never gonna give you up \
+\nNever gonna let you down";
+```
+
+With TypeScript you can just use a template string:
+
+```ts
+var lyrics = `Never gonna give you up
+Never gonna let you down`;
 ```
 
 #### Tagged Templates
