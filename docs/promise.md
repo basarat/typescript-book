@@ -133,7 +133,7 @@ Error: Cannot read property 'bar' of undefined
 
 This is because our `loadJSON` function wrongfully wrapped the callback in a `try` block. There is a simple lesson to remember here.
 
-> Simple lesson: Contain all you sync code in a try catch, except when you call the callback.
+> Simple lesson: Contain all your sync code in a try catch, except when you call the callback.
 
 Following this simple lesson we have a fully functional async version of `loadJSON` as shown below:
 
