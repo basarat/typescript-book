@@ -28,7 +28,7 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 {} + {}; // JS : NaN, TS Error
 "hello" - 1; // JS : NaN, TS Error
 
-function add(a,b){
+function add(a,b) {
   return 
     a + b; // JS : undefined, TS Error 'unreachable code detected'
 }
