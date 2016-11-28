@@ -27,6 +27,11 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 [] + {}; // JS : "[object Object]", TS Error  
 {} + {}; // JS : NaN, TS Error
 "hello" - 1; // JS : NaN, TS Error
+
+function add(a,b){
+  return 
+    a + b; // JS : undefined, TS Error 'unreachable code detected'
+}
 ```
 
 Essentially TypeScript is linting JavaScript. Just doing a better job at it than other linters that don't have *type information*.
