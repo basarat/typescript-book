@@ -7,7 +7,7 @@ Programming language design does have a concept of *bottom* type that is a **nat
 The `never` type is used in TypeScript to denote this *bottom* type. Cases when it occurs naturally:
 
 * A function never returns (e.g. if the function body has `while(true){}`)
-* A function always throws (e.g. in `function foo(){throw new Error('Not Implemented')}` the return type of `foo` is `never`.
+* A function always throws (e.g. in `function foo(){throw new Error('Not Implemented')}` the return type of `foo` is `never`)
 
 Of course you can use this annotation your self as well
 
