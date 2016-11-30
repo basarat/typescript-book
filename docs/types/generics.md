@@ -37,7 +37,7 @@ console.log(queue.pop().toPrecision(1));
 console.log(queue.pop().toPrecision(1)); // RUNTIME ERROR
 ```
 
-One solution (and in fact the only one is langauges that don't support generics) is to go ahead and create *special* classes just for these contraints. e.g. a quick and dirty number queue:
+One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these contraints. e.g. a quick and dirty number queue:
 
 ```ts
 class QueueNumber {
