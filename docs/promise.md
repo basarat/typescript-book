@@ -38,7 +38,7 @@ There are three behaviors of this simple `loadJSONSync` function, a valid return
 ```ts
 import fs = require('fs');
 
-// A decent initial but bad attempt. We explain the reasons below
+// A decent initial attempt .... but not correct. We explain the reasons below
 function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) cb(err);
@@ -57,7 +57,7 @@ This simple function however fails to accommodate for point two. In fact `JSON.p
 ```ts
 import fs = require('fs');
 
-// A decent initial attempt .... but not correct. We explain the reasons below
+// A decent initial attempt .... but not correct
 function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) cb(err);
