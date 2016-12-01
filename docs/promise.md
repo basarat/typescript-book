@@ -55,9 +55,19 @@ Simple enough, it takes a callback, passes any file system errors to the callbac
 This simple function however fails to accommodate for point two. In fact `JSON.parse` throws an error if it is passed bad JSON and the callback never gets called and the application crashes. This is demonstrated in the below example:
 
 ```ts
+import fs = require('fs');
+
+// A decent initial but bad attempt. We explain the reasons below
+function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
+    fs.readFile(filename, function (err, data) {
+        if (err) cb(err);
+        else cb(null, JSON.parse(data));
+    });
+}
+
 // load invalid json
 loadJSON('bad.json', function (err, data) {
-    // NEVER GETS CALLED!
+    // This code never executes
     if (err) console.log('bad.json error', err.message);
     else console.log(data);
 });
