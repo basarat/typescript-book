@@ -113,3 +113,22 @@ bar = "anything else "; // Error!
 ```
 
 In this example `bar` has the literal type `"Hello World"`. We cover this more in the literal type section.
+
+### Capturing the name of the keys
+
+The `keyof` operator lets you capture the key names of a type. E.g. you can use it to capture the key names of a variable but first grabbing its type using `typeof`: 
+
+```ts
+const colors = {
+  red: 'red',
+  blue: 'blue'
+}
+type Colors = keyof typeof colors; 
+
+let color: Colors;
+color = 'red'; // okay
+color = 'blue'; // okay
+color = 'blue'; // Error
+```
+
+> TIP: TypeScript has a concept of literal types and we cover that later in its own section
