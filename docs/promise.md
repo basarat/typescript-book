@@ -131,6 +131,7 @@ loadJSON('good.json', function (err, data) {
     else {
         // lets simulate an error by trying to access a property on an undefined variable
         var foo;
+        // The following code throws and error `TypeError: cannot react property bar of undefined`
         console.log(foo.bar);
     }
 });
