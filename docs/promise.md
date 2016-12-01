@@ -156,12 +156,14 @@ import fs = require('fs');
 function loadJSON(filename: string, cb: (error: Error) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) return cb(err);
+        // Contain all your sync code in a try catch
         try {
             var parsed = JSON.parse(data);
         }
         catch (err) {
             return cb(err);
         }
+        // except when you call the callback
         return cb(null, parsed);
     });
 }
