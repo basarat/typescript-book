@@ -16,7 +16,7 @@ function loadJSONSync(filename: string) {
 // good json file
 console.log(loadJSONSync('good.json'));
 
-// non-existent json file
+// non-existent file, so fs.readFileSync fails
 try {
     console.log(loadJSONSync('absent.json'));
 }
@@ -24,12 +24,12 @@ catch (err) {
     console.log('absent.json error', err.message);
 }
 
-// invalid json file
+// invalid json file i.e. the file exists but contains invalid JSON so JSON.parse fails
 try {
-    console.log(loadJSONSync('bad.json'));
+    console.log(loadJSONSync('invalid.json'));
 }
 catch (err) {
-    console.log('bad.json error', err.message);
+    console.log('invalid.json error', err.message);
 }
 ```
 
@@ -66,7 +66,7 @@ function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
 }
 
 // load invalid json
-loadJSON('bad.json', function (err, data) {
+loadJSON('invalid.json', function (err, data) {
     // This code never executes
     if (err) console.log('bad.json error', err.message);
     else console.log(data);
@@ -95,7 +95,7 @@ function loadJSON(filename: string, cb: (error: Error) => void) {
 }
 
 // load invalid json
-loadJSON('bad.json', function (err, data) {
+loadJSON('invalid.json', function (err, data) {
     if (err) console.log('bad.json error', err.message);
     else console.log(data);
 });
@@ -376,7 +376,7 @@ loadJSONAsync('good.json')
 
 // invalid json file
     .then(function () {
-        return loadJSONAsync('bad.json');
+        return loadJSONAsync('invalid.json');
     })
     .then(function (val) { console.log(val); }) // never called
     .catch(function (err) {
