@@ -148,7 +148,7 @@ This is because our `loadJSON` function wrongfully wrapped the callback in a `tr
 
 > Simple lesson: Contain all your sync code in a try catch, except when you call the callback.
 
-Following this simple lesson we have a fully functional async version of `loadJSON` as shown below:
+Following this simple lesson, we have a fully functional async version of `loadJSON` as shown below:
 
 ```ts
 import fs = require('fs');
