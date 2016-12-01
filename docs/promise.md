@@ -57,7 +57,7 @@ This simple function however fails to accommodate for point two. In fact `JSON.p
 ```ts
 import fs = require('fs');
 
-// A decent initial but bad attempt. We explain the reasons below
+// A decent initial attempt .... but not correct. We explain the reasons below
 function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) cb(err);
@@ -78,6 +78,7 @@ A naïve attempt at fixing this would be to wrap the `JSON.parse` in a try catch
 ```ts
 import fs = require('fs');
 
+// A better attempt ... but still not correct
 function loadJSON(filename: string, cb: (error: Error) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) {
