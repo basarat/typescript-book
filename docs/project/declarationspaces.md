@@ -128,7 +128,7 @@ type Colors = keyof typeof colors;
 let color: Colors;
 color = 'red'; // okay
 color = 'blue'; // okay
-color = 'blue'; // Error
+color = 'anythingElse'; // Error
 ```
 
 > TIP: TypeScript has a concept of literal types and we cover that later in its own section
