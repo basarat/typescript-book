@@ -409,7 +409,7 @@ However you might potentially want to run a series of async tasks and then do so
 
 ```ts
 // an async function to simulate loading an item from some server
-function loadItem(id: string): Promise<{id: string}> {
+function loadItem(id: number): Promise<{id: number}> {
     return new Promise((resolve)=>{
         console.log('loading item', id);
         setTimeout(() => { // simulate a server delay
@@ -423,7 +423,7 @@ let item1, item2;
 loadItem(1)
     .then((res) => {
         item1 = res;
-        return loaditem(2);
+        return loadItem(2);
     })
     .then((res) => {
         item2 = res;
@@ -431,7 +431,7 @@ loadItem(1)
     }); // overall time will be around 2s
 
 // Parallel
-Promise.all([loadItem(1),loaditem(2)])
+Promise.all([loadItem(1),loadItem(2)])
     .then((res) => {
         [item1,item2] = res;
         console.log('done')    
