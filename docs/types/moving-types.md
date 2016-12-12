@@ -1,6 +1,8 @@
 TypeScripts type system is extremely powerful in that you can do supremely powerful things in the language moving / slicing / dicing types in ways that are not possible in any single language out there.
 
-This is because TypeScript is designed to allow you to work seamlessly with a *highly dynamic* language like JavaScript. Here we cover a few tricks for moving types around in TypeScript
+This is because TypeScript is designed to allow you to work seamlessly with a *highly dynamic* language like JavaScript. Here we cover a few tricks for moving types around in TypeScript.
+
+Key motivation for these : You change one thing and everything else just updates automatically and you get nice errors if something is going to break, like a well designed constraint system.
 
 #### Copying both the Type + Value
 
