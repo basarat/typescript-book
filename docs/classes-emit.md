@@ -1,4 +1,4 @@
-#### Whats up with the IIFE
+#### What's up with the IIFE
 The js generated for the class could have been:
 ```ts
 function Point(x, y) {
@@ -54,7 +54,7 @@ Here `d` refers to the derived class and `b` refers to the base class. This func
 1. copies the static members of the base class onto the child class i.e. `for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];`
 1. sets up the child class function's prototype to optionally lookup members on the parent's `proto` i.e. effectively `d.prototype.__proto__ = b.prototype`
 
-People rarely have trouble understanding 1, but many people struggle with 2. so an explanation is in order
+People rarely have trouble understanding 1, but many people struggle with 2. So an explanation is in order.
 
 #### `d.prototype.__proto__ = b.prototype`
 
@@ -100,7 +100,7 @@ var newFoo = new Foo();
 console.log(newFoo.bar); // 123
 ```
 
-Now the only other thing you need to know is that calling `new` on a function copies the `prototype` of the function into the `__proto__` of the newly created object that is returned from the function call. Here is code you can run to completely understand it:
+Now the only other thing you need to know is that calling `new` on a function copies the `prototype` of the function into the `__proto__` of the newly created object that is returned from the function call. Here is the code you can run to completely understand it:
 
 ```ts
 function Foo() { }
@@ -110,7 +110,7 @@ var foo = new Foo();
 console.log(foo.__proto__ === Foo.prototype); // True!
 ```
 
-That's it. Now look at the following straight out of `__extends`. I've take the liberty to number these lines:
+That's it. Now look at the following straight out of `__extends`. I've taken the liberty to number these lines:
 
 ```ts
 1  function __() { this.constructor = d; }
@@ -118,9 +118,9 @@ That's it. Now look at the following straight out of `__extends`. I've take the 
 3   d.prototype = new __();
 ```
 
-Reading this function in reverse the `d.prototype = new __()` on line 3 effectively means `d.prototype = {__proto__ : __.prototype}` (because of the effect of `new` on `prototype` and `__proto__`), combine it with the previous line (i.e. line 2 `__.prototype = b.prototype;`) you get `d.prototype = {__proto__ : b.prototype}`.
+Reading this function in reverse the `d.prototype = new __()` on line 3 effectively means `d.prototype = {__proto__ : __.prototype}` (because of the effect of `new` on `prototype` and `__proto__`), combining it with the previous line (i.e. line 2 `__.prototype = b.prototype;`) you get `d.prototype = {__proto__ : b.prototype}`.
 
-But wait we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, d.constructor = d}` (because of the effect of `new` on `this` inside the called function). So since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`.
+But wait, we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, d.constructor = d}` (because of the effect of `new` on `this` inside the called function). So, since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`.
 
 #### `d.prototype.__proto__ = b.prototype` significance
 
