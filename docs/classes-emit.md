@@ -59,6 +59,7 @@ People rarely have trouble understanding 1, but many people struggle with 2. So 
 #### `d.prototype.__proto__ = b.prototype`
 
 After having tutored many people about this I find the following explanation to be simplest. First we will explain how the code from `__extends` is equivalent to the simple `d.prototype.__proto__ = b.prototype`, and then why this line in itself is significant. To understand all this you need to know these things:
+
 1. `__proto__`
 1. `prototype`
 1. effect of `new` on `this` inside the called function
