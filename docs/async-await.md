@@ -1,7 +1,5 @@
 ## Async Await
 
-> NOTE: You cannot use async await in TypeScript in a meaningful way (the ES5 emitter is in progress). However that will change soon so we still have this chapter.
-
 As a thought experiment imagine the following, a way to tell the JavaScript runtime to pause the executing of code on the `await` keyword when used on a promise and resume *only* once (and if) the promise returned from the function is settled.
 
 ```ts
