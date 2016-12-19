@@ -18,7 +18,7 @@ let foo: never; // Okay
 However `never` *can only ever be assigned to another never*. e.g.
 
 ```ts
-let foo: never = 123; // Error: Type number is not assignable to number
+let foo: never = 123; // Error: Type number is not assignable to never
 
 // Okay as the function's return type is `never`
 let bar: never = (() => { throw new Error('Throw my hands in the air like I just dont care') })();
