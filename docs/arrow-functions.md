@@ -19,7 +19,7 @@ var inc = (x)=>x+1;
 
 ```ts
 function Person(age) {
-    this.age = age
+    this.age = age;
     this.growOld = function() {
         this.age++;
     }
@@ -32,7 +32,7 @@ setTimeout(function() { console.log(person.age); },2000); // 1, should have been
 If you run this code in the browser `this` within the function is going to point to `window` because `window` is going to be what executes the `growOld` function. Fix is to use an arrow function:
 ```ts
 function Person(age) {
-    this.age = age
+    this.age = age;
     this.growOld = () => {
         this.age++;
     }
@@ -45,7 +45,7 @@ setTimeout(function() { console.log(person.age); },2000); // 2
 The reason why this works is the reference to `this` is captured by the arrow function from outside the function body. This is equivalent to the following JavaScript code (which is what you would write yourself if you didn't have TypeScript):
 ```ts
 function Person(age) {
-    this.age = age
+    this.age = age;
     var _this = this;  // capture this
     this.growOld = function() {
         _this.age++;   // use the captured this
