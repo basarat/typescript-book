@@ -89,7 +89,7 @@ console.log(Foo.prototype); // {} i.e. it exists and is not undefined
 console.log(Foo.prototype.constructor === Foo); // Has a member called `constructor` pointing back to the function
 ```
 
-Now lets look at *effect of `new` on `this` inside the called function*. Basically `this` inside the called function is going to point to the newly created object that will be returned from the function. It's simple to see if you mutate a property on `this` inside the function:
+Now let's look at *effect of `new` on `this` inside the called function*. Basically `this` inside the called function is going to point to the newly created object that will be returned from the function. It's simple to see if you mutate a property on `this` inside the function:
 
 ```ts
 function Foo() {
