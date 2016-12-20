@@ -35,3 +35,16 @@ Singleton.someMethod();
 ```
 
 > Warning : Singleton is just a fancy name for [global](http://stackoverflow.com/a/142450/390330)
+
+For most projects `namespace` can additional be replaced by a *module*.
+
+```ts
+// someFile.ts
+// ... any one time initialization goes here ...
+export function someMethod() { }
+
+// Usage
+import {someMethod} from "./someFile";
+```
+
+
