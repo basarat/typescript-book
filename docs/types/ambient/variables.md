@@ -34,4 +34,4 @@ process.exitWithLogging = function() {
 }
 ```
 
-Lets look at interfaces in a bit more detail next.
+Let's look at interfaces in a bit more detail next.

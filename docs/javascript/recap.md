@@ -19,17 +19,17 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 [] + []; // JavaScript will give you "" (which makes little sense), TypeScript will error
 
 //
-// other things that are nonsensical in JavaScript 
+// other things that are nonsensical in JavaScript
 // - don't give a runtime error (making debugging hard)
 // - but TypeScript will give a compile time error (making debugging unnecessary)
 //
 {} + []; // JS : 0, TS Error
-[] + {}; // JS : "[object Object]", TS Error  
+[] + {}; // JS : "[object Object]", TS Error
 {} + {}; // JS : NaN, TS Error
 "hello" - 1; // JS : NaN, TS Error
 
 function add(a,b) {
-  return 
+  return
     a + b; // JS : undefined, TS Error 'unreachable code detected'
 }
 ```
@@ -38,4 +38,4 @@ Essentially TypeScript is linting JavaScript. Just doing a better job at it than
 
 ## You still need to learn JavaScript
 
-That said TypeScript is very pragmatic about the fact that *you do write JavaScript* so there are some things about JavaScript that you still need to know in order to not be caught off-guard. Lets discuss them next.
+That said TypeScript is very pragmatic about the fact that *you do write JavaScript* so there are some things about JavaScript that you still need to know in order to not be caught off-guard. Let's discuss them next.

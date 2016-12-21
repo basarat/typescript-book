@@ -24,7 +24,7 @@ let foo: never = 123; // Error: Type number is not assignable to never
 let bar: never = (() => { throw new Error('Throw my hands in the air like I just dont care') })();
 ```
 
-Great. Now lets just jump into its key use case :)
+Great. Now let's just jump into its key use case :)
 
 # Use case: Exhaustive Checks
 
@@ -57,7 +57,7 @@ As soon as someone tells you that `never` is returned when a function never exit
 
 A function that *returns* nothing returns a Unit `void`. However a function *that never returns* (or always throws) returns `never`. `void` is something that can be assigned (without `strictNullChecking`) but `never` can `never` be assigned to anything other than `never`.
 
-<!--  
+<!--
 PR: https://github.com/Microsoft/TypeScript/pull/8652
 Issue : https://github.com/Microsoft/TypeScript/issues/3076
 Concept : https://en.wikipedia.org/wiki/Bottom_type

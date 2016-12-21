@@ -17,7 +17,7 @@ You can exclude this file from the compilation context by specifying the `--noLi
 
 ### Example Usage
 
-As always lets look at examples of this file being used in action.
+As always let's look at examples of this file being used in action.
 
 ```ts
 var foo = 123;
@@ -39,7 +39,7 @@ The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g.
 
 The simplest way to discover what is what is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (atom-typescript has great support for this).
 
-Lets look at a sample *variable* declaration, e.g. `window` is defined as:
+Let's look at a sample *variable* declaration, e.g. `window` is defined as:
 ```ts
 declare var window: Window;
 ```
@@ -223,24 +223,24 @@ However if you want finer grained control of your environment you should use the
 
 Sometimes (many times) you want to decouple the relationship between the compile target (the generates JavaScript version) and the ambient library support. A common example is `Promise`, e.g today (in June 2016) you most likely want to `--target es5` but still use latest stuff like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
 
-> Note: using `--lib` decouples any lib magic from `--target` giving you better control.  
+> Note: using `--lib` decouples any lib magic from `--target` giving you better control.
 
-You can provide this option on the command line or in `tsconfig.json` (recommended): 
+You can provide this option on the command line or in `tsconfig.json` (recommended):
 
 **Command line**:
 ```
 tsc --target es5 --lib dom,es6
-``` 
-**tsconfig.json**: 
+```
+**tsconfig.json**:
 ```json
 "compilerOptions": {
     "lib": ["dom", "es6"]
 }
 ```
 
-The libs can be categorized into categories: 
+The libs can be categorized into categories:
 
-* JavaScript Bulk Feature: 
+* JavaScript Bulk Feature:
     * es5
     * es6
     * es2015
@@ -268,11 +268,11 @@ The libs can be categorized into categories:
 
 > NOTE: the `--lib` option provides extremely fine tuned control. So you most likey want to pick an item from the bulk + enviroment categories.
 
-My Personal Recommentation: 
+My Personal Recommentation:
 
 ```json
 "compilerOptions": {
     "target": "es5",
     "lib": ["es6", "dom"]
 }
-``` 
+```

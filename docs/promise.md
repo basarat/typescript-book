@@ -4,7 +4,7 @@ The `Promise` class is something that exists in many modern JavaScript engines a
 
 ### Callback style code
 
-In order to fully appreciate promises lets present a simple sample that proves the difficulty of creating reliable Async code with just callbacks. Consider the simple case of authoring an async version of loading JSON from a file. A synchronous version of this can be quite simply
+In order to fully appreciate promises let's present a simple sample that proves the difficulty of creating reliable Async code with just callbacks. Consider the simple case of authoring an async version of loading JSON from a file. A synchronous version of this can be quite simply
 
 ```ts
 import fs = require('fs');
@@ -129,7 +129,7 @@ loadJSON('good.json', function (err, data) {
 
     if (err) console.log('Error:', err.message);
     else {
-        // lets simulate an error by trying to access a property on an undefined variable
+        // let's simulate an error by trying to access a property on an undefined variable
         var foo;
         // The following code throws `Error: Cannot read property 'bar' of undefined`
         console.log(foo.bar);
@@ -176,7 +176,7 @@ A promise can be either `pending` or `resolved` or `rejected`.
 
 ![](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
 
-Lets look at creating a promise. Its a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state.
+Let's look at creating a promise. Its a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state.
 
 ```ts
 const promise = new Promise((resolve, reject) => {
@@ -255,7 +255,7 @@ Promise.reject(new Error('something bad happened'))
         return 123;
     })
     .catch((err) => {
-        console.log(err.message); // something bad happened        
+        console.log(err.message); // something bad happened
     });
 ```
 
@@ -344,7 +344,7 @@ Just wrap the function call in a promise and
 - `reject` if an error occurs,
 - `resolve` if it is all good.
 
-E.g. lets wrap `fs.readFile`
+E.g. let's wrap `fs.readFile`
 
 ```ts
 import fs = require('fs');
@@ -414,7 +414,7 @@ function loadItem(id: number): Promise<{id: number}> {
         console.log('loading item', id);
         setTimeout(() => { // simulate a server delay
             resolve({ id: id });
-        }, 1000);    
+        }, 1000);
     });
 }
 
@@ -434,7 +434,7 @@ loadItem(1)
 Promise.all([loadItem(1),loadItem(2)])
     .then((res) => {
         [item1,item2] = res;
-        console.log('done')    
+        console.log('done')
     }); // overall time will be around 1s
 ```
 
