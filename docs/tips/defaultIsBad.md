@@ -1,6 +1,6 @@
 ## `export default` can lead to problems
 
-Lets go with an example. Consider you have a file `foo.ts` with the following contents:
+Let's go with an example. Consider you have a file `foo.ts` with the following contents:
 
 ```ts
 class Foo {

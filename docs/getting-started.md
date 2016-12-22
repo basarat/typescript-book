@@ -41,4 +41,4 @@ The source for this book is available in the books github repository https://git
 // This will be the code under discussion
 ```
 
-With a dev setup out of the way lets jump into TypeScript syntax.
+With a dev setup out of the way let's jump into TypeScript syntax.

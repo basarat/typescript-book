@@ -49,7 +49,7 @@ let foo = ['World'];
 console.log(foo[0]); // World
 ```
 
-So that's JavaScript. Now lets look at TypeScript graceful handling of this concept.
+So that's JavaScript. Now let's look at TypeScript graceful handling of this concept.
 
 ## TypeScript Index Signature
 
@@ -100,7 +100,7 @@ So lesson 1:
 
 > TypeScript index signatures must be either `string` or `number`
 
-Quick note: `symbols` are also valid and supported by TypeScript. But lets not go there just yet. Baby steps.
+Quick note: `symbols` are also valid and supported by TypeScript. But let's not go there just yet. Baby steps.
 
 
 ### Declaring an index signature
