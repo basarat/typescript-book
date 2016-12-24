@@ -1,6 +1,6 @@
 ### let
 
-`var` Variables in JavaScript are *function scoped*. This is different from many other languages (C# / Java etc.) where the variables are *block scoped*. If you bring a *block scoped* mindset to JavaScript you would expect the following to print `123`, instead it will print `456`
+`var` Variables in JavaScript are *function scoped*. This is different from many other languages (C# / Java etc.) where the variables are *block scoped*. If you bring a *block scoped* mindset to JavaScript, you would expect the following to print `123`, instead it will print `456`:
 
 ```ts
 var foo = 123;
@@ -111,9 +111,9 @@ for (var j = 0; j < 3; j++) {
 ```
 Here the functions close over (hence called a `closure`) the *local* variable (conveniently named `local`) and use that instead of the loop variable `i`.
 
-> Note that closures come with a performance impact (they need to store the surrounding state)
+> Note that closures come with a performance impact (they need to store the surrounding state).
 
-The ES6 `let` keyword in a loop would have the same behavior as the previous example
+The ES6 `let` keyword in a loop would have the same behavior as the previous example:
 
 ```ts
 var funcs = [];
