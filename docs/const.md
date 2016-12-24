@@ -1,6 +1,6 @@
 ### const
 
-`const` is a very welcome addition offered by ES6 / TypeScript. It allows you to be immutable with variables. This is good from a documentation as well as a runtime perspective. To use const just replace `var` with `const`:
+`const` is a very welcomed addition offered by ES6 / TypeScript. It allows you to be immutable with variables. This is good from a documentation as well as a runtime perspective. To use const just replace `var` with `const`:
 
 ```ts
 const foo = 123;
