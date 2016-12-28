@@ -85,7 +85,7 @@ TypeScript supports access modifiers `public`,`private` and `protected` which de
 | class instances | yes      | no          | no        |
 
 
-If an access modifier is not specified it is implicitly `public` as that matches the *convinient* nature of JavaScript 🌹.
+If an access modifier is not specified it is implicitly `public` as that matches the *convenient* nature of JavaScript 🌹.
 
 Note that at runtime (in the generated JS) these have no significance but will give you compile time errors if you use them incorrectly. An example of each is shown below:
 
