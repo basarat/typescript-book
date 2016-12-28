@@ -14,7 +14,7 @@ var foo = {
     }
 };
 ```
-Without the awesome *structuring* support built into JavaScript creating new objects on the fly would indeed be very cumbersome. Destructuring brings the same level of convenience to getting data out of a structure.
+Without the awesome *structuring* support built into JavaScript, creating new objects on the fly would indeed be very cumbersome. Destructuring brings the same level of convenience to getting data out of a structure.
 
 #### Object Destructuring
 Destructuring is useful because it allows you to do in a single line, what would otherwise require multiple lines. Consider the following case:
@@ -47,7 +47,7 @@ var {bar: {bas}} = foo; // Effectively `var bas = foo.bar.bas;`
 ```
 
 #### Array Destructuring
-A common programming question : Swap two variables without using a third one. The TypeScript solution:
+A common programming question: "How to swap two variables without using a third one?". The TypeScript solution:
 
 ```ts
 var x = 1, y = 2;
