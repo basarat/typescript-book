@@ -44,7 +44,7 @@ for (var _i = 0; _i < someArray.length; _i++) {
 You can see that using `for...of` makes *intent* clearer and also decreases the amount of code you have to write (and variable names you need to come up with).
 
 #### Limitations
-If you are not targeting ES6 or above, the generated code assumes the property `length` exists on the object and that the object can be indexed via numbers e.g `obj[2]`. So it is only supported on `string` and `array` for these legacy JS engines.
+If you are not targeting ES6 or above, the generated code assumes the property `length` exists on the object and that the object can be indexed via numbers e.g. `obj[2]`. So it is only supported on `string` and `array` for these legacy JS engines.
 
 If TypeScript can see that you are not using an array or a string it will give you a clear error *"is not an array type or a string type"*;
 ```ts
