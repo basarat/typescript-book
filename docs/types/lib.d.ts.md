@@ -211,11 +211,11 @@ As we mentioned earlier using the `noLib` boolean compiler flag causes TypeScrip
 
 Once you have excluded the default `lib.d.ts` you can include a similarly named file into your compilation context and TypeScript will pick it up for type checking.
 
-Note: Be careful with `--noLib`. Once you are in noLib land, if you chose to share your project others, they will be *forced* into noLib land (or rather *your lib* land). Even worse if you bring *their* code into your project you might need to port it to *your lib* based code.
+Note: Be careful with `--noLib`. Once you are in noLib land, if you chose to share your project with others, they will be *forced* into noLib land (or rather *your lib* land). Even worse, if you bring *their* code into your project you might need to port it to *your lib* based code.
 
 ### Compiler target effect on `lib.d.ts`
 
-Setting the compiler target to be `es6` causes the `lib.d.ts` to include *addtional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others its problematic as it conflates *code generation* with *code ambience*.
+Setting the compiler target to be `es6` causes the `lib.d.ts` to include *additional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others its problematic as it conflates *code generation* with *code ambience*.
 
 However if you want finer grained control of your environment you should use the `--lib` option which we discuss next.
 
