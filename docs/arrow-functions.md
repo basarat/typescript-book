@@ -70,6 +70,8 @@ setTimeout(person.growOld,1000);
 setTimeout(function() { console.log(person.age); },2000); // 2
 ```
 
+> [A sweet video about this pattern 🌹](https://egghead.io/lessons/typescript-make-usages-of-this-safe-in-class-methods)
+
 #### Tip: Arrow Function Need
 Beyond the terse syntax, you only *need* to use the fat arrow if you are going to give the function to someone else to call. Effectively:
 ```ts
