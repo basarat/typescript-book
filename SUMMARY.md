@@ -79,6 +79,7 @@
   * [Function parameters](docs/tips/functionParameters.md)
   * [Truthy](docs/tips/truthy.md)
   * [Build Toggles](docs/tips/build-toggles.md)
+  * [Barrel](docs/tips/barrel.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
