@@ -105,7 +105,7 @@ $('.awesome').show(); // Okay!
 If you want you can build on this basic definition and provide more information to help protect you from errors:
 ```ts
 declare var $:{
-    (selector:string)=>any;
+    (selector:string): any;
 };
 $('.awesome').show(); // Okay!
 $(123).show(); // Error: selector needs to be a string
