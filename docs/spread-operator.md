@@ -22,7 +22,7 @@ foo(...args);
 Here we are *spreading* the `args` array into positional `arguments`.
 
 #### Destructuring
-We've already seen one usage of this in *destructuring*
+We've already seen one usage of this in *destructuring*:
 
 ```ts
 var [x, y, ...remaining] = [1, 2, 3, 4];
