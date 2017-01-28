@@ -4,7 +4,7 @@ The `Promise` class is something that exists in many modern JavaScript engines a
 
 ### Callback style code
 
-In order to fully appreciate promises let's present a simple sample that proves the difficulty of creating reliable Async code with just callbacks. Consider the simple case of authoring an async version of loading JSON from a file. A synchronous version of this can be quite simply
+In order to fully appreciate promises let's present a simple sample that proves the difficulty of creating reliable Async code with just callbacks. Consider the simple case of authoring an async version of loading JSON from a file. A synchronous version of this can be quite simple:
 
 ```ts
 import fs = require('fs');
@@ -33,7 +33,7 @@ catch (err) {
 }
 ```
 
-There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with a trivial error checking logic would be as follows,
+There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with a trivial error checking logic would be as follows:
 
 ```ts
 import fs = require('fs');
@@ -47,7 +47,7 @@ function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
 }
 ```
 
-Simple enough, it takes a callback, passes any file system errors to the callback. If no filesystem errors, it returns the `JSON.parse` result. A few points to keep in mind when working with async functions based on callbacks are
+Simple enough, it takes a callback, passes any file system errors to the callback. If no file system errors, it returns the `JSON.parse` result. A few points to keep in mind when working with async functions based on callbacks are:
 
 1. Never call the callback twice.
 1. Never throw an error.
@@ -73,7 +73,7 @@ loadJSON('invalid.json', function (err, data) {
 });
 ```
 
-A naïve attempt at fixing this would be to wrap the `JSON.parse` in a try catch as shown in the below example:
+A naive attempt at fixing this would be to wrap the `JSON.parse` in a try catch as shown in the below example:
 
 ```ts
 import fs = require('fs');
@@ -176,7 +176,7 @@ A promise can be either `pending` or `resolved` or `rejected`.
 
 ![](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
 
-Let's look at creating a promise. Its a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state.
+Let's look at creating a promise. It's a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state:
 
 ```ts
 const promise = new Promise((resolve, reject) => {
@@ -213,8 +213,8 @@ promise.catch((err) => {
 ```
 
 > TIP: Promise Shortcuts
-* Quickly creating an already resolved promise : `Promise.resolve(result)`
-* Quickly creating an already rejected promise : `Promise.reject(error)`
+* Quickly creating an already resolved promise: `Promise.resolve(result)`
+* Quickly creating an already rejected promise: `Promise.reject(error)`
 
 ### Chain-ability of Promises
 The chain-ability of promises **is the heart of the benefit that promises provide**. Once you have a promise, from that point on, you use the `then` function to create a chain of promises.
