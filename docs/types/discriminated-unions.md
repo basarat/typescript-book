@@ -20,7 +20,7 @@ type Shape = Square | Rectangle;
 
 If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on the *discriminant property* (here `kind`) TypeScript will realize that it means that the object must of the type that has that literal and do a type narrowing for you :)
 
-```
+```ts
 function area(s: Shape) {
     if (s.kind === "square") {
         // Now TypeScript *knows* that `s` must a square ;)
@@ -38,7 +38,7 @@ function area(s: Shape) {
 ### Exhaustive Checks
 Quite commonly you want to make sure that all members of a union have some code(action) against them.
 
-```
+```ts
 interface Square {
     kind: "square";
     size: number;
