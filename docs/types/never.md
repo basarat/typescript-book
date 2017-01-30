@@ -30,7 +30,7 @@ Great. Now let's just jump into its key use case :)
 
 You can call never functions in a never context
 
-```
+```ts
 function foo(x: string | number): boolean {
   if (typeof x === "string") {
     return true;
