@@ -219,7 +219,7 @@ promise.catch((err) => {
 ### Chain-ability of Promises
 The chain-ability of promises **is the heart of the benefit that promises provide**. Once you have a promise, from that point on, you use the `then` function to create a chain of promises.
 
-* If you return a promise from any function in the chain, `.then` is only called once the value is resolved
+* If you return a promise from any function in the chain, `.then` is only called once the value is resolved:
 
 ```ts
 Promise.resolve(123)
@@ -237,7 +237,7 @@ Promise.resolve(123)
     })
 ```
 
-* you can aggregate the error handling of any preceding portion of the chain with a single `catch`
+* You can aggregate the error handling of any preceding portion of the chain with a single `catch`:
 
 ```ts
 // Create a rejected promise
@@ -259,7 +259,7 @@ Promise.reject(new Error('something bad happened'))
     });
 ```
 
-* the `catch` actually returns a new promise (effectively creating a new promise chain):
+* The `catch` actually returns a new promise (effectively creating a new promise chain):
 
 ```ts
 // Create a rejected promise
@@ -277,7 +277,7 @@ Promise.reject(new Error('something bad happened'))
     })
 ```
 
-* Any synchronous errors thrown in a `then` (or `catch`) result in the returned promise to fail
+* Any synchronous errors thrown in a `then` (or `catch`) result in the returned promise to fail:
 
 ```ts
 Promise.resolve(123)
@@ -303,7 +303,7 @@ effectively provides us with an async programming paradigm that allows better er
 
 
 ### TypeScript and promises
-The great thing about TypeScript is that it understands the flow of values through a promise chain.
+The great thing about TypeScript is that it understands the flow of values through a promise chain:
 
 ```ts
 Promise.resolve(123)
@@ -344,11 +344,11 @@ Just wrap the function call in a promise and
 - `reject` if an error occurs,
 - `resolve` if it is all good.
 
-E.g. let's wrap `fs.readFile`
+E.g. let's wrap `fs.readFile`:
 
 ```ts
 import fs = require('fs');
-function readFileAsync(filename:string):Promise<any> {
+function readFileAsync(filename: string):Promise<any> {
     return new Promise((resolve,reject)=>{
         fs.readFile(filename,(err,result) => {
             if (err) reject(err);
@@ -434,7 +434,7 @@ loadItem(1)
 Promise.all([loadItem(1),loadItem(2)])
     .then((res) => {
         [item1,item2] = res;
-        console.log('done')
+        console.log('done');
     }); // overall time will be around 1s
 ```
 
