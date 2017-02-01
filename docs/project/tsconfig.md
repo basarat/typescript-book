@@ -6,7 +6,7 @@ It is extremely easy to get started with tsconfig.json as the basic file you nee
 i.e. an empty JSON file at the *root* of your project. This way TypeScript will include *all* the `.ts` files in this directory (and sub directories) as a part of the compilation context. It will also select a few sane default compiler options.
 
 ### compilerOptions
-You can customize the compiler options using `compilerOptions`.
+You can customize the compiler options using `compilerOptions`:
 
 ```json
 {

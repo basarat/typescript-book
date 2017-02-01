@@ -10,7 +10,7 @@ You can either use `files` to be explicit:
 }
 ```
 
-or `include` and `exclude` to specify files. e.g.
+or `include` and `exclude` to specify files. E.g.:
 
 
 ```json
