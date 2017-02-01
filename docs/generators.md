@@ -22,7 +22,7 @@ while (true) {
 }
 ```
 
-of course if the iterator does end, you get the result of `{done:true}` as demonstrated below:
+Of course if the iterator does end, you get the result of `{done:true}` as demonstrated below:
 
 ```ts
 function* idMaker(){
@@ -74,7 +74,7 @@ Execution resumed
 ```
 
 * The function only starts execution once `next` is called on the generator object.
-* The function *pauses* as soon as a `yield` statement is encountered
+* The function *pauses* as soon as a `yield` statement is encountered.
 * The function *resumes* when `next` is called.
 
 > So essentially the execution of the generator function is controllable by the generator object.
