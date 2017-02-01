@@ -22,7 +22,7 @@ while (true) {
 }
 ```
 
-Of course if the iterator does end, you get the result of `{done:true}` as demonstrated below:
+Of course if the iterator does end, you get the result of `{ done: true }` as demonstrated below:
 
 ```ts
 function* idMaker(){
