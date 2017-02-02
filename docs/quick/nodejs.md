@@ -22,6 +22,7 @@ Now just add a `script` target to your `package.json` based on your application 
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
   },
 ```
+
 So you can now run `npm start` and as you edit `index.ts`: 
 
 * nodemon reruns its command (ts-node)

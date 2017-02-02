@@ -7,11 +7,14 @@ If you are using TypeScript to create a web application here are my recommendati
 
 ## Project Setup
 * Create a project dir:
+
 ```
 mkdir your-project
 cd your-project
 ```
+
 * Create `tsconfig.json`. We discuss [modules here](../project/external-modules.md). Also good to have it setup for `tsx` compilation out of the box:
+
 ```json
 {
     "compilerOptions": {
@@ -26,19 +29,27 @@ cd your-project
     "compileOnSave": false
 }
 ```
+
 * Create an npm project:
+
 ```
 npm init -y
 ```
+
 * Install [TypeScript-nightly](https://github.com/Microsoft/TypeScript), [`webpack`](https://github.com/webpack/webpack), [`ts-loader`](https://github.com/TypeStrong/ts-loader/), [`typings`](https://github.com/typings/typings):
+
 ```
 npm install typescript@next webpack ts-loader typings --save-dev
 ```
+
 * Init typings (creates a `typings.json` file for you):
+
 ```
 "./node_modules/.bin/typings" init
 ```
+
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
+
 ```js
 module.exports = {
     entry: './src/app.tsx',
@@ -58,7 +69,9 @@ module.exports = {
     }
 }
 ```
+
 * Setup an npm script to run a build. Also have it run `typings install` on `npm install`. In your `package.json` add a `script` section:
+
 ```json
 "scripts": {
     "prepublish": "typings install",
@@ -90,6 +103,7 @@ npm install react react-dom --save-dev
 ```
 
 A demo `index.html`:
+
 ```
 <html>
     <head>
@@ -104,7 +118,9 @@ A demo `index.html`:
     </body>
 </html>
 ```
+
 A demo `./src/app.tsx`:
+
 ```ts
 import * as React from "react";
 import * as ReactDOM from "react-dom";
