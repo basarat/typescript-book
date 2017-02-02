@@ -6,12 +6,12 @@ If you are using TypeScript to create a web application here are my recommendati
 * Install [NodeJS](https://nodejs.org/en/download/)
 
 ## Project Setup
-* Create a project dir
+* Create a project dir:
 ```
 mkdir your-project
 cd your-project
 ```
-* Create `tsconfig.json`. We discuss [modules here](../project/external-modules.md). Also good to have it setup for `tsx` compilation out of the box.
+* Create `tsconfig.json`. We discuss [modules here](../project/external-modules.md). Also good to have it setup for `tsx` compilation out of the box:
 ```json
 {
     "compilerOptions": {
@@ -30,11 +30,11 @@ cd your-project
 ```
 npm init -y
 ```
-* Install TypeScript-nightly, webpack, [`ts-loader`](https://github.com/TypeStrong/ts-loader/), typings
+* Install [TypeScript-nightly](https://github.com/Microsoft/TypeScript), [`webpack`](https://github.com/webpack/webpack), [`ts-loader`](https://github.com/TypeStrong/ts-loader/), [`typings`](https://github.com/typings/typings):
 ```
 npm install typescript@next webpack ts-loader typings --save-dev
 ```
-* Init typings (creates a `typings.json` file for you).
+* Init typings (creates a `typings.json` file for you):
 ```
 "./node_modules/.bin/typings" init
 ```
@@ -104,7 +104,7 @@ A demo `index.html`:
     </body>
 </html>
 ```
-A demo `./src/app.tsx`
+A demo `./src/app.tsx`:
 ```ts
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -124,13 +124,13 @@ ReactDOM.render(
 );
 ```
 
-You can clone this demo project here : https://github.com/basarat/react-typescript
+You can clone this demo project here: https://github.com/basarat/react-typescript
 
 ## Live reload
 
 Add webpack dev server. Super easy: 
 
 * Install : `npm install webpack-dev-server` 
-* Add to your `package.json`: `"start":"webpack-dev-server --hot --inline --no-info --content-base ./build"`
+* Add to your `package.json`: `"start": "webpack-dev-server --hot --inline --no-info --content-base ./build"`
 
 Now when you run `npm start` it will start the webpack dev server with live reload.
