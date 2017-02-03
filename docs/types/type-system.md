@@ -1,5 +1,5 @@
 # TypeScript Type System
-We covered the main features of the TypeScript Type System back when we discussed *Why TypeScript?*. The following are a few key takeaways from that discussion which don't need further explanation:
+We covered the main features of the TypeScript Type System back when we discussed [Why TypeScript?](../why-typescript.md). The following are a few key takeaways from that discussion which don't need further explanation:
 * The type system in typescript is designed to be *optional* so that *your javascript is typescript*.
 * TypeScript does not block *JavaScript emit* in the presence of Type Errors, allowing you to *progressively update your JS to TS*.
 
@@ -8,7 +8,7 @@ Now let's start with the *syntax* of the TypeScript type system. This way you ca
 ## Basic Annotations
 As mentioned before Types are annotated using `:TypeAnnotation` syntax. Anything that is available in the type declaration space can be used as a Type Annotation.
 
-The following example demonstrates type annotations can be used for variables, function parameters and function return values.
+The following example demonstrates type annotations can be used for variables, function parameters and function return values:
 
 ```
 var num: number = 123;
@@ -55,7 +55,7 @@ boolArray = [true, 'false']; // Error!
 ```
 
 ### Interfaces
-Interfaces are the core way in TypeScript to compose multiple type annotations into a single named annotation. Consider the following example :
+Interfaces are the core way in TypeScript to compose multiple type annotations into a single named annotation. Consider the following example:
 
 ```ts
 interface Name {
@@ -77,6 +77,7 @@ name = {           // Error : `second` is the wrong type
     second: 1337
 };
 ```
+
 Here we've composed the annotations `first: string` + `second: string` into a new annotation `Name` that enforces the type checks on individual members. Interfaces have a lot of power in TypeScript and we will dedicate an entire section to how you can use that to your advantage.
 
 ### Inline Type Annotation
@@ -100,13 +101,14 @@ name = {           // Error : `second` is the wrong type
     second: 1337
 };
 ```
-Inline types are great for quickly providing a one off type annotation for something. It saves you the hassle of coming up with (a potentially bad) type name. However, if you find yourself putting in the same type annotation inline multiple times its a good idea to consider refactoring it into an interface (or a `type alias` covered later in this section).
+
+Inline types are great for quickly providing a one off type annotation for something. It saves you the hassle of coming up with (a potentially bad) type name. However, if you find yourself putting in the same type annotation inline multiple times it's a good idea to consider refactoring it into an interface (or a `type alias` covered later in this section).
 
 ## Special Types
-Beyond the primitive types that have covered there are few types that have special meaning in TypeScript. These are `any`, `null`, `undefined`, `void`.
+Beyond the primitive types that have been covered there are few types that have special meaning in TypeScript. These are `any`, `null`, `undefined`, `void`.
 
 ### any
-The `any` type holds a special place in the TypeScript type system. It gives you an escape hatch from the type system to tell the compiler to bugger off. `any` is compatible with *any and all* types in the type system. This means that *anything can be assigned to it* and *it can be assigned to anything*. This is demonstrated it the below example:
+The `any` type holds a special place in the TypeScript type system. It gives you an escape hatch from the type system to tell the compiler to bugger off. `any` is compatible with *any and all* types in the type system. This means that *anything can be assigned to it* and *it can be assigned to anything*. This is demonstrated in the example below:
 
 ```ts
 var power: any;
@@ -137,7 +139,7 @@ str = undefined;
 ```
 
 ### `:void`
-Use `:void` to signify that a function does not have a return type.
+Use `:void` to signify that a function does not have a return type:
 
 ```ts
 function log(message): void {
@@ -195,10 +197,11 @@ var reversedNums = numArr.reverse();
 
 reversedNums = ['1', '2']; // Error!
 ```
+
 We will discuss more about the `Array<T>` interface later when we present `lib.d.ts` in the section **Ambient Declarations**.
 
 ## Union Type
-Quite commonly in JavaScript you want to allow a property to be one of multiple types e.g *a `string` or a `number`*. This is where the *union type* (denoted by `|` in a type annotation e.g. `string|number`) comes in handy. A common use case is a function that can take a single object or an array of the object e.g.
+Quite commonly in JavaScript you want to allow a property to be one of multiple types e.g. *a `string` or a `number`*. This is where the *union type* (denoted by `|` in a type annotation e.g. `string|number`) comes in handy. A common use case is a function that can take a single object or an array of the object e.g.:
 
 ```ts
 function formatCommandline(command: string[]|string) {
@@ -209,7 +212,7 @@ function formatCommandline(command: string[]|string) {
         line = command.join(' ').trim();
     }
 
-    // Do stuff with line:string
+    // Do stuff with line: string
 }
 ```
 
@@ -250,7 +253,7 @@ nameNumber = ['Jenny', 8675309];
 nameNumber = ['Jenny', '867-5309'];
 ```
 
-Combine this with the destructuring support in TypeScript, tuples feel fairly first class despite being arrays underneath.
+Combine this with the destructuring support in TypeScript, tuples feel fairly first class despite being arrays underneath:
 
 ```ts
 var nameNumber: [string, number];
