@@ -6,7 +6,7 @@ This means that you can use these projects in a very interactive an exploratory 
 
 ## Using `@types`
 
-Installation is fairly simple as it just works on top of `npm`. So as an example you can install type definitions for `jquery` simply as :
+Installation is fairly simple as it just works on top of `npm`. So as an example you can install type definitions for `jquery` simply as:
 
 ```
 npm install @types/jquery --save-dev
@@ -17,15 +17,15 @@ npm install @types/jquery --save-dev
 
 ### Global `@types`
 
-By default any definitions that support global consumption are included automatically. e.g. for `jquery` you should be able to just start using `$` *globally* in your project.
+By default any definitions that support global consumption are included automatically. E.g. for `jquery` you should be able to just start using `$` *globally* in your project.
 
 However for *libraries*  (like `jquery`) I generally recommend using *modules*:
 
 ### Module `@types`
 
-After installation, no special configuration is required really. You just use it like a module e.g.
+After installation, no special configuration is required really. You just use it like a module e.g.:
 
-```
+```ts
 import * as $ from "jquery";
 
 // Use $ at will in this module :)
@@ -33,9 +33,9 @@ import * as $ from "jquery";
 
 ## Controlling Globals
 
-As can be seen having a definition that supports global leak in automatically can be a problem for some team so you can chose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.
+As can be seen having a definition that supports global leak in automatically can be a problem for some team so you can chose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.:
 
-```
+```json
 {
     "compilerOptions": {
         "types" : [
@@ -45,4 +45,4 @@ As can be seen having a definition that supports global leak in automatically ca
 }
 ```
 
-The above shows a sample where only `jquery` will be allowed to be used. Even if the person installs another definition like `npm install @types/node` it's globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code until you add them to the `tsconfig.json` types option.
+The above shows a sample where only `jquery` will be allowed to be used. Even if the person installs another definition like `npm install @types/node` its globals (e.g. [`process`](https://nodejs.org/api/process.html)) will not leak into your code until you add them to the `tsconfig.json` types option.
