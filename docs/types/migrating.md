@@ -2,7 +2,7 @@
 
 In general the process consists of the following steps:
 
-* Add a `tsconfig.json`
+* Add a `tsconfig.json`.
 * Change your source code file extensions from `.js` to `.ts`. Start *suppressing* errors using `any`.
 * Write new code in TypeScript and make as little use of `any` as possible.
 * Go back to the old code and start adding type annotations and fix identified bugs.
@@ -13,7 +13,7 @@ Let us discuss a few of these points further.
 Note that all JavaScript is *valid* TypeScript. That is to say that if you give the TypeScript compiler some JavaScript -> the JavaScript emitted by the TypeScript compiler will behave exactly the same as the original JavaScript. This means that changing the extension from `.js` to `.ts` will not adversely affect your codebase.
 
 ### Suppressing Errors
-TypeScript will immediately start TypeChecking your code, and your original JavaScript code *might not be as neat as you thought it was* and hence you get diagnostic errors. Many of these errors you can suppress with using `any` e.g.
+TypeScript will immediately start TypeChecking your code and your original JavaScript code *might not be as neat as you thought it was* and hence you get diagnostic errors. Many of these errors you can suppress with using `any` e.g.:
 
 ```ts
 var foo = 123;
@@ -31,7 +31,7 @@ var bar = 'hey';
 bar = foo as any; // Okay!
 ```
 
-In other places you might want to annotate something as `any` e.g.
+In other places you might want to annotate something as `any` e.g.:
 
 ```ts
 function foo() {
@@ -56,7 +56,7 @@ bar = foo(); // Okay!
 ### Third Party JavaScript
 You can change your JavaScript to TypeScript, but you can't change the whole world to use TypeScript. This is where TypeScript's ambient definition support comes in. In the beginning we recommend you create a `vendor.d.ts` (the `.d.ts` extension specifies the fact that this is a *declaration file*) and start adding dirty stuff to it. Alternatively create a file specific for the library e.g. `jquery.d.ts` for jquery.
 
-> Note : Well maintained and strongly typed definitions for nearly the top 90% JavaScript libraries out there exists in an OSS Repository called [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped). We recommend looking there before creating your own definitions as we present here. Nevertheless this quick and dirty way is vital knowledge to decrease your initial friction with TypeScript**.
+> Note: Well maintained and strongly typed definitions for nearly the top 90% JavaScript libraries out there exists in an OSS Repository called [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped). We recommend looking there before creating your own definitions as we present here. Nevertheless this quick and dirty way is vital knowledge to decrease your initial friction with TypeScript**.
 
 Consider the case of `jquery`, you can create a *trivial* definition for it quite easily:
 
@@ -90,11 +90,12 @@ And then you can import it in your file as needed:
 import * as $ from "jquery";
 ```
 
-> Again, a high quality `jquery.d.ts` exists at [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) that provides a much higher quality jquery module declaration. But it might exist for your library, so now you have a quick low friction way of continuing the migration 🌹
+> Again, a high quality `jquery.d.ts` exists at [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) that provides a much higher quality jquery module declaration. But it might not exist for your library, so now you have a quick low friction way of continuing the migration 🌹
 
 # External non js resources
 
 You can even allow import of any file e.g. `.css` files (if you are using something like webpack) with a simple `*` style declaration: 
+
 ```ts
 declare module "*.css";
 ```
