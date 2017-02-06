@@ -6,7 +6,7 @@ foo = 123; // Error: `foo` is not defined
 ```
 vs.
 ```ts
-declare var foo:any;
+declare var foo: any;
 foo = 123; // allowed
 ```
 
