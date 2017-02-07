@@ -19,7 +19,7 @@ When the promise settles execution continues,
 * if it was fulfilled then await will return the value,
 * if it's rejected an error will be thrown synchronously which we can catch.
 
-This suddenly (and magically) makes asynchronous programming as easy as synchronous programming.  Three things needed for this though experiment are:
+This suddenly (and magically) makes asynchronous programming as easy as synchronous programming.  Three things needed for this thought experiment are:
 
 * Ability to *pause function* execution.
 * Ability to *put a value inside* the function.
