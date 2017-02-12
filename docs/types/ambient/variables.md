@@ -18,7 +18,7 @@ We recommend using an interface wherever possible e.g.:
 ```ts
 interface Process {
     exit(code?: number): void;
-};
+}
 declare var process: Process;
 ```
 
@@ -27,7 +27,7 @@ This allows other people to *extend* the nature of these global variables while 
 ```ts
 interface Process {
     exitWithLogging(code?: number): void;
-};
+}
 process.exitWithLogging = function() {
     console.log("exiting");
     process.exit.apply(process, arguments);

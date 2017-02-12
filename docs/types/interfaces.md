@@ -1,4 +1,5 @@
 ## Interfaces
+
 Interfaces have *zero* runtime JS impact. There is a lot of power in TypeScript interfaces to declare the structure of variables.
 
 The following two are equivalent declarations, the first uses an *inline annotation*, the second uses an *interface*:
@@ -37,7 +38,7 @@ This is because **interfaces in TypeScript are open ended**. This is a vital ten
 
 ## Classes can implement interfaces
 
-If you want to use *classes* that must follow an object structure that someone declared for you in an `interface` you can use the `implements` keyword to ensure compatibility.
+If you want to use *classes* that must follow an object structure that someone declared for you in an `interface` you can use the `implements` keyword to ensure compatibility:
 
 ```ts
 interface Point {
@@ -49,7 +50,7 @@ class MyPoint implements Point {
 }
 ```
 
-Basically in the presence of that implements any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync.
+Basically in the presence of that implements any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync:
 
 ```ts
 interface Point {
@@ -62,9 +63,9 @@ class MyPoint implements Point { // ERROR : missing member `z`
 }
 ```
 
-Note that `implements` restricts the structure of the class *instances* i.e.
+Note that `implements` restricts the structure of the class *instances* i.e.:
 
-```
+```ts
 var foo: Point = new MyPoint();
 ```
 
@@ -75,9 +76,9 @@ And stuff like `foo: Point = MyPoint` is not the same thing.
 
 ### Not every interface is implementable easily
 
-Interfaces are designed to declare *any arbitrarily crazy* structure in that might be present in JavaScript.
+Interfaces are designed to declare *any arbitrarily crazy* structure that might be present in JavaScript.
 
-Consider the following interface where something is callable with `new`
+Consider the following interface where something is callable with `new`:
 
 ```ts
 interface Crazy {
@@ -86,15 +87,17 @@ interface Crazy {
     };
 }
 ```
+
 You would essentially have something like:
 
 ```ts
 class CrazyClass implements Crazy {
     constructor() {
-        return {hello: 123};
+        return { hello: 123 };
     }
 }
 // Because
 const crazy = new CrazyClass(); // crazy would be {hello:123}
 ```
+
 You can *declare* all the crazy JS out there with interfaces and even use them safely from TypeScript. Doesn't mean you can use TypeScript classes to implement them.
