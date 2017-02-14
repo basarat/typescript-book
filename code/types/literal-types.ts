@@ -50,5 +50,5 @@ namespace StringEnum {
 
   sample = Direction.North; // Okay
   sample = 'North'; // Okay
-  sample = 'AnythineElse'; // ERROR!
+  sample = 'AnythingElse'; // ERROR!
 }

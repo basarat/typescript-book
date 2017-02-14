@@ -77,7 +77,7 @@ let sample: Direction;
 
 sample = Direction.North; // Okay
 sample = 'North'; // Okay
-sample = 'AnythineElse'; // ERROR!
+sample = 'AnythingElse'; // ERROR!
 ```
 
 #### Modelling existing JavaScript APIs
