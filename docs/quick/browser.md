@@ -54,7 +54,7 @@ npm install typescript@next webpack ts-loader typings --save-dev
 module.exports = {
     entry: './src/app.tsx',
     output: {
-        path: './build',  
+        path: './dist',  
         filename: 'bundle.js'
     },
     resolve: {
