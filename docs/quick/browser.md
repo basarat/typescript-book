@@ -147,6 +147,6 @@ You can clone this demo project here: https://github.com/basarat/react-typescrip
 Add webpack dev server. Super easy: 
 
 * Install : `npm install webpack-dev-server` 
-* Add to your `package.json`: `"start": "webpack-dev-server --hot --inline --no-info --content-base ./build"`
+* Add to your `package.json`: `"start": "webpack-dev-server --hot --inline --no-info --content-base ./dist"`
 
 Now when you run `npm start` it will start the webpack dev server with live reload.
