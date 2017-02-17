@@ -29,6 +29,14 @@ move(1,"North"); // Okay
 move(1,"Nurth"); // Error!
 ```
 
+## Other literal types
+TypeScript also supports `boolean`, `numbers` as literals. e.g. 
+
+```ts
+type OneToFive = 1 | 2 | 3 | 4 | 5;
+type Bools = true | false;
+```
+
 ### Use cases
 Valid use cases for string literal types are:
 
