@@ -1,6 +1,6 @@
 ### Discriminated Union
 
-If you have a class with a *literal member* (the literal TypeScript supports at the moment are string literals) then you can use that property to discriminate between union members.
+If you have a class with a *literal member* (the literal TypeScript supports at the moment are string literals and enums) then you can use that property to discriminate between union members.
 
 As an example consider the union of a `Square` and `Rectangle`, here we have a member `kind` that exists on both union members and is of a particular *literal type*:
 
@@ -23,7 +23,7 @@ If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on th
 ```ts
 function area(s: Shape) {
     if (s.kind === "square") {
-        // Now TypeScript *knows* that `s` must a square ;)
+        // Now TypeScript *knows* that `s` must be a square ;)
         // So you can use its members safely :)
         return s.size * s.size;
     }
