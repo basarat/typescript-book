@@ -1,6 +1,6 @@
 ### Emitter SourceMaps
 
-We said that the bulk of the `emitter.ts` is the local function `emitJavaScript` (we showed the initialization routine of this function before). It basically sets up a bunch of locals and hits off to `emitSourceFile`. The following is a revisiting of the function, this time focusing on SourceMap stuff:
+We said that the bulk of the `emitter.ts` is the local function `emitJavaScript` (we showed the initialization routine of this function before). It basically sets up a bunch of locals and hits off to `emitSourceFile`. The following is a revisiting of the function, this time focusing on `SourceMap` stuff:
 
 ```ts
 function emitJavaScript(jsFilePath: string, root?: SourceFile) {
@@ -63,7 +63,7 @@ function emitJavaScript(jsFilePath: string, root?: SourceFile) {
     /// BUNCH OF LOCAL FUNCTIONS
 ```
 
-The imporant function call here : `initializeEmitterWithSourceMaps` which is a function local to `emitJavaScript` that overrides some locals that were already defined here. At the bottom of `initializeEmitterWithSourceMaps` you will notice the overriding:
+The important function call here : `initializeEmitterWithSourceMaps` which is a function local to `emitJavaScript` that overrides some locals that were already defined here. At the bottom of `initializeEmitterWithSourceMaps` you will notice the overriding:
 
 ```ts
     // end of `initializeEmitterWithSourceMaps`
@@ -78,4 +78,4 @@ The imporant function call here : `initializeEmitterWithSourceMaps` which is a f
     writeComment = writeCommentRangeWithMap;
 ```
 
-This means that the bulk of emitter code can not care about SourceMap and just use these local functions the same way with or without SourceMaps.
+This means that the bulk of emitter code can not care about `SourceMap` and just use these local functions the same way with or without SourceMaps.
