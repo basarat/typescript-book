@@ -1,5 +1,5 @@
 ### Global Namespace Merging
-Within `initializeTypeChecker` the following code exists :
+Within `initializeTypeChecker` the following code exists:
 
 ```ts
 // Initialize global symbol table

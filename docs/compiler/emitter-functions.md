@@ -5,7 +5,7 @@ Defined in `emitter.ts` here is the function signature:
 export function emitFiles(resolver: EmitResolver, host: EmitHost, targetSourceFile?: SourceFile): EmitResult {
 ```
 
-`EmitHost` is a just a simplified (as in narrowed down) version of `CompilerHost` (and is at runtime actually a CompilerHost for many use cases).
+`EmitHost` is a just a simplified (as in narrowed down) version of `CompilerHost` (and is at runtime actually a `CompilerHost` for many use cases).
 
 The most interesting call stack from `emitFiles` is the following:
 

@@ -29,8 +29,8 @@ function addDeclarationToSymbol(symbol: Symbol, node: Declaration, symbolFlags: 
 ```
 
 The important linking portions:
-* creates a link to the Symbol from the AST node (`node.symbol`).
-* add the node as *one of* the declarations of the Symbol (`symbol.declarations`).
+* Creates a link to the Symbol from the AST node (`node.symbol`).
+* Adds the node as *one of* the declarations of the Symbol (`symbol.declarations`).
 
 #### Declaration
 Declaration is just a `node` with an optional name. In `types.ts`

@@ -1,5 +1,5 @@
 ## Scanner
-The sourcecode for the TypeScript scanner is located entirely in `scanner.ts`. Scanner is *controlled* internally by the `Parser` to convert the source code to an AST. Here is what the desired outcome is.
+The source code for the TypeScript scanner is located entirely in `scanner.ts`. Scanner is *controlled* internally by the `Parser` to convert the source code to an AST. Here is what the desired outcome is.
 
 ```
 SourceCode ~~ scanner ~~> Token Stream ~~ parser ~~> AST

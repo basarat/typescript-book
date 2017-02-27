@@ -1,6 +1,6 @@
 ### SymbolTable
 
-Its implemented as a simple HashMap. Here is the interface (`types.ts`):
+SymbolTable is implemented as a simple HashMap. Here is the interface (`types.ts`):
 
 ```ts
 interface SymbolTable {
@@ -8,7 +8,7 @@ interface SymbolTable {
 }
 ```
 
-SymbolTables as initialized by binding. There are a few SymbolTables used by the compiler.
+SymbolTables are initialized by binding. There are a few SymbolTables used by the compiler:
 
 On `Node`:
 ```ts
@@ -25,7 +25,7 @@ exports?: SymbolTable;                  // Module exports
 Note: We saw `locals` getting initialized (to `{}`) by `bindChildren` based on `ContainerFlags`.
 
 #### SymbolTable population
-SymbolTable are populated with `Symbols` primarily by a call to `declareSymbol`. This function is presented below in entirety:
+SymbolTables are populated with `Symbols` primarily by a call to `declareSymbol`. This function is presented below in entirety:
 
 ```ts
 /**
@@ -100,7 +100,7 @@ function declareSymbol(symbolTable: SymbolTable, parent: Symbol, node: Declarati
 }
 ```
 
-Which SymbolTable gets populated is driven by the first argument to this function. e.g. when adding a declaration to a *container* of kind `SyntaxKind.ClassDeclaration` or `SytanxKind.ClassExpression` the function `declareClassMember` will get called which has the following code:
+Which SymbolTable is populated is driven by the first argument to this function. e.g. when adding a declaration to a *container* of kind `SyntaxKind.ClassDeclaration` or `SytanxKind.ClassExpression` the function `declareClassMember` will get called which has the following code:
 
 ```ts
 function declareClassMember(node: Declaration, symbolFlags: SymbolFlags, symbolExcludes: SymbolFlags) {

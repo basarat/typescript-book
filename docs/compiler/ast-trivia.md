@@ -1,5 +1,7 @@
 ### Trivia
-Trivia (called that because its `trivial`) represent the parts of the source text that are largely insignificant for normal understanding of the code, such as whitespace, comments, and even conflict markers. Trivia is *not stored* in the AST (to keep it lightweight). However it can be fetched *on demand* using a few `ts.` APIs. Before we show them you need to understand
+Trivia (called that because it's `trivial`) represent the parts of the source text that are largely insignificant for normal understanding of the code. For example; whitespace, comments, and even conflict markers. Trivia is *not stored* in the AST (to keep it lightweight). However it can be fetched *on demand* using a few `ts.*` APIs. 
+
+Before we show them you need to understand the following:
 
 #### Trivia Ownership
 In General:
@@ -7,13 +9,13 @@ In General:
 * Any comment *after that line* is associated with the following token.
 
 For leading and ending comments in a file:
-* The first token in the source file gets all the initial trivia
+* The first token in the source file gets all the initial trivia.
 * The last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
 
 The first token in the source file gets all the initial trivia, and the last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
 
 #### Trivia APIs
-For most basic uses, comments are the "interesting" trivia. The comments that belong to a Node which can be fetched through the following functions:
+For most basic uses, comments are the "interesting" trivia. The comments that belong to a Node can be fetched through the following functions:
 
 Function | Description
 ---------|------------

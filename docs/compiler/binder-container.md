@@ -120,4 +120,4 @@ function bindChildren(node: Node) {
 }
 ```
 
-As you might recall from section on binder functions : `bindChildren` is called from the `bind` function. So we have the recursive bindig setup : `bind` calls `bindChildren` calls `bind` for each child.
+As you might recall from section on binder functions : `bindChildren` is called from the `bind` function. So we have the recursive binding setup : `bind` calls `bindChildren` calls `bind` for each child.

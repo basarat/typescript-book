@@ -10,8 +10,8 @@ It is split into the follow key parts:
 
 Each of these get their own unique files in the source. These parts will be explained later on in this chapter.
 
-## NTypeScript
-We have a project called [NTypeScript](https://github.com/TypeStrong/ntypescript) which makes it easier to play around with the compiler API e.g. by exposing internal APIs. You use it the same way you would use `typescript` but just have an `n` prefix for all things (binary : `ntsc`, require: `ntypescript`). This is also the compiler used by atom-typescript and the one we will use to present these examples.
+## BYOTS
+We have a project called [Bring Your Own TypeScript (BYOTS)](https://github.com/basarat/byots) which makes it easier to play around with the compiler API e.g. by exposing internal APIs. You can use it to expose your local app's version of TypeScript globally.
 
 ## Syntax vs. Semantics
 Just because something is *syntactically* correct doesn't mean it is *semantically* correct. Consider the following piece of TypeScript code which although *syntactically* valid is *semantically* wrong
