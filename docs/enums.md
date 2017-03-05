@@ -48,7 +48,7 @@ enum Tristate {
     Unknown
 }
 ```
-generates the following JavaScript
+generates the following JavaScript:
 
 ```js
 var Tristate;
@@ -73,7 +73,8 @@ console.log(Tristate[Tristate.False]); // "False" because `Tristate.False == 0`
 ```
 
 #### Changing the number associated with an Enum
-By default enums are `0` based and then each subsequent value increments by 1 automatically. As an example consider the following
+By default enums are `0` based and then each subsequent value increments by 1 automatically. As an example consider the following:
+
 ```ts
 enum Color {
     Red,     // 0
@@ -81,8 +82,10 @@ enum Color {
     Blue     // 2
 }
 ```
+
 However you can change the number associated with any enum member by assigning to it specifically. This is demonstrated below where we start at 3 and start incrementing from there:
-```
+
+```ts
 enum Color {
     DarkRed = 3,  // 3
     DarkGreen,    // 4
@@ -122,7 +125,7 @@ enum Color {
 }
 ```
 
-Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`)
+Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`).
 
 #### Enums as flags
 One excellent use of the ability to use enums as `Flags`. Flags allow you to check if a certain condition from a set of conditions is true. Consider the following example where we have a set of properties about animals:
@@ -136,6 +139,7 @@ enum AnimalFlags {
     Endangered     = 1 << 3
 }
 ```
+
 Here we are using the left shift operator to move `1` around a certain level of bits to come up with bitwise disjoint numbers `0001`, `0010`, `0100` and `1000` (these are decimals `1`,`2`,`4`,`8` if you are curious). The bitwise operators `|` (or) / `&` (and) / `~` (not) are your best friend when working with flags and are demonstrated below:
 
 ```ts
@@ -174,7 +178,7 @@ Here:
 * a combination of `&=` and `~` to clear a flag
 * `|` to combine flags
 
-Note : you can combine flags to create convenient shortcuts within the enum definition e.g. `EndangeredFlyingClawedFishEating` below.
+Note: you can combine flags to create convenient shortcuts within the enum definition e.g. `EndangeredFlyingClawedFishEating` below:
 
 ```ts
 enum AnimalFlags {
@@ -201,6 +205,7 @@ enum Tristate {
 
 var lie = Tristate.False;
 ```
+
 the line `var lie = Tristate.False` is compiled to the JavaScript `var lie = Tristate.False` (yes output is same as input). This means that at execution the runtime will need to lookup `Tristate` and then `Tristate.False`. To get a performance boost here you can mark the `enum` as a `const enum`. This is demonstrated below:
 
 ```ts
@@ -212,20 +217,22 @@ const enum Tristate {
 
 var lie = Tristate.False;
 ```
+
 generates the JavaScript:
+
 ```js
 var lie = 0;
 ```
 
-i.e. the compiler :
-1. *inlines* any usages of the enum (`0` instead of `Tristate.False`).
-1. does not generate any JavaScript for the enum definition (there is no `Tristate` variable at runtime) as its usages are inlined.
+i.e. the compiler:
+1. *Inlines* any usages of the enum (`0` instead of `Tristate.False`).
+1. Does not generate any JavaScript for the enum definition (there is no `Tristate` variable at runtime) as its usages are inlined.
 
 ##### Const enum preserveConstEnums
 Inlining has obvious performance benefits. The fact that there is no `Tristate` variable at runtime is simply the compiler helping you out by not generating JavaScript that is not actually used at runtime. However you might want the compiler to still generate the JavaScript version of the enum definition for stuff like *number to string* or *string to number* lookups as we saw. In this case you can use the compiler flag `--preserveConstEnums` and it will still generate the `var Tristate` definition so that you can use `Tristate["False"]` or `Tristate[0]` manually at runtime if you want. This does not impact *inlining* in any way.
 
 ### Enum with static functions
-You can use the declaration `enum` + `namespace` merging to add static methods to an enum. The following demonstrates an example where we add a static member `isBusinessDay` to an enum `Weekday`
+You can use the declaration `enum` + `namespace` merging to add static methods to an enum. The following demonstrates an example where we add a static member `isBusinessDay` to an enum `Weekday`:
 
 ```ts
 enum Weekday {
