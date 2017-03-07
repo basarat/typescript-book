@@ -327,9 +327,9 @@ function iReturnPromiseAfter1Second():Promise<string> {
 }
 
 Promise.resolve(123)
-    .then((res)=>{
-         // res is inferred to be of type `number`
-         return iReturnPromiseAfter1Second(); // We are returning `Promise<string>`
+    .then((res) => {
+        // res is inferred to be of type `number`
+        return iReturnPromiseAfter1Second(); // We are returning `Promise<string>`
     })
     .then((res) => {
         // res is inferred to be of type `string`
