@@ -25,7 +25,7 @@ This suddenly (and magically) makes asynchronous programming as easy as synchron
 * Ability to *put a value inside* the function.
 * Ability to *throw an exception inside* the function.
 
-This is exactly what generators allowed us to do! The thought experiment *is actually real* and is the `async`/`await` implementation in TypeScript / JavaScript. Under the covers it just uses generators.
+This is exactly what generators allowed us to do! The thought experiment *is actually real* and so is the `async`/`await` implementation in TypeScript / JavaScript. Under the covers it just uses generators.
 
 ### Generated JavaScript
 
