@@ -14,6 +14,17 @@ That's it! Fire up your IDE (e.g. `alm -o`) and play around. Now you can use all
 * Add `ts-node` which we will use for live compile + run in node (`npm install ts-node --save-dev`)
 * Add `nodemon` which will invoke `ts-node` whenever a file is changed (`npm install nodemon --save-dev`)
 
+Let's explicitly tell `ts-node` where to look for types by editing `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "typeRoots": ["node_modules/@types"]
+  }
+}
+```
+
 Now just add a `script` target to your `package.json` based on your application entry e.g. assuming its `index.ts`:
 
 ```json
