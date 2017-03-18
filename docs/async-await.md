@@ -43,6 +43,6 @@ const foo = wrapToReturnPromise(function* () {
 });
 ```
 
-where the `wrapToReturnPromise` just executes the generator function to get the `generator` and then use `generator.next()`, if the value is a `promise` it would `then`+`catch` the promise and depending upon the result call `genertor.next(result)` or `genertor.throw(error)`. That's it!
+where the `wrapToReturnPromise` just executes the generator function to get the `generator` and then use `generator.next()`, if the value is a `promise` it would `then`+`catch` the promise and depending upon the result call `generator.next(result)` or `generator.throw(error)`. That's it!
 
 [generators]:./generators.md
