@@ -1,5 +1,5 @@
 ## Type Assertion
-TypeScript allows you to override its inferred and analyzed view of types any way you want to. This is done by a mechanism called "type assertion". TypeScript's type assertion are purely you telling the compiler that you know about the types better than it does, and that it should not second guess you.
+TypeScript allows you to override its inferred and analyzed view of types in any way you want to. This is done by a mechanism called "type assertion". TypeScript's type assertion is purely you telling the compiler that you know about the types better than it does, and that it should not second guess you.
 
 A common use case for type assertion is when you are porting over code from JavaScript to TypeScript. For example consider the following pattern:
 
@@ -8,6 +8,7 @@ var foo = {};
 foo.bar = 123; // error : property 'bar' does not exist on `{}`
 foo.bas = 'hello'; // error : property 'bas' does not exist on `{}`
 ```
+
 Here the code errors because the *inferred* type of `foo` is `{}` i.e. an object with zero properties. Therefore you are not allowed to add `bar` or `bas` to it. You can fix this simply by a type assertion `as Foo`:
 
 ```ts
@@ -65,7 +66,9 @@ var foo = <Foo>{
     // Also this code is likely to break if Foo gets refactored (e.g. a new property added)
 };
 ```
+
 but the hazard here is the same, if you forget a property the compiler will not complain. It is better if you do the following:
+
 ```ts
 interface Foo {
     bar: number;
@@ -75,12 +78,11 @@ var foo:Foo = {
     // the compiler will provide autocomplete for properties of Foo
 };
 ```
+
 In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
 
-
 ### Double assertion
-
-The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected
+The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:
 
 ```ts
 function handler (event: Event) {
