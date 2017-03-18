@@ -16,6 +16,7 @@ var sampleVariable: { bar: number }
 // function parameter
 function foo(sampleParameter: { bar: number }) { }
 ```
+
 Here I used inline type annotations. Of course you can use interfaces etc.
 
 ### Return type annotation
@@ -47,19 +48,20 @@ function foo(sample: Foo) {
 }
 ```
 
-However it is generally a good idea to add these annotation to help with errors e.g.
+However it is generally a good idea to add these annotation to help with errors e.g.:
 
 ```ts
 function foo() {
-    return { fou: 'John Doe' }; // You might not find this misspelling `foo` till its too late
+    return { fou: 'John Doe' }; // You might not find this misspelling `foo` till it's too late
 }
 
 sendAsJSON(foo());
 ```
+
 If you don't plan to return anything from a function to you can annotate it as `:void`. You can generally drop `:void` and leave it to the inference engine though.
 
 ### Optional Parameters
-You can mark a parameter as optional,
+You can mark a parameter as optional:
 
 ```ts
 function foo(bar: number, bas?: string): void {
@@ -67,7 +69,7 @@ function foo(bar: number, bas?: string): void {
 }
 
 foo(123);
-foo(123,'hello');
+foo(123, 'hello');
 ```
 
 Alternatively you can even provide a default value (using `= someValue` after the parameter declaration) which will get injected for you if the caller doesn't provide that argument.
@@ -101,12 +103,14 @@ function padding(a: number, b?: number, c?: number, d?: any) {
     };
 }
 ```
+
 If you look at the code carefully you realize the meaning of `a`,`b`,`c`,`d` change based on how many arguments are passed in. Also the function only expects `1`, `2` or `4` arguments. These constraints can be *enforced* and *documented* using function overloading. You just:
 
 * declare the function header multiple times,
 * the last function header is the one that is actually active *within* the function body but is not available to the outside world.
 
 This is shown below:
+
 ```ts
 // Overloads
 function padding(all: number);
@@ -130,7 +134,7 @@ function padding(a: number, b?: number, c?: number, d?: number) {
 }
 ```
 
-Here the first three function signatures are what a available as valid calls to `padding`:
+Here the first three function signatures are what is available as valid calls to `padding`:
 
 ```ts
 padding(1); // Okay : all
@@ -140,7 +144,7 @@ padding(1,1,1,1); // Okay : top, right, bottom, left
 padding(1,1,1); // Error: Not a part of the available overloads
 ```
 
-Of course its important for the final declaration (the true declaration as seen from inside the function) to be compatible with all the overloads. This is because that is the true nature of the function calls that the function body needs to account for.
+Of course it's important for the final declaration (the true declaration as seen from inside the function) to be compatible with all the overloads. This is because that is the true nature of the function calls that the function body needs to account for.
 
 > Function overloading in TypeScript doesn't come with any runtime overhead. It just allows you to document the manner you expect the function to be called in and the compiler holds the rest of your code in check.
 
