@@ -34,7 +34,7 @@ Now just add a `script` target to your `package.json` based on your application 
   },
 ```
 
-So you can now run `npm start` and as you edit `index.ts`: 
+So you can now run `npm start` and as you edit `index.ts`:
 
 * nodemon reruns its command (ts-node)
 * ts-node transpiles automatically picking up tsconfig.json and the installed typescript version,
@@ -42,12 +42,39 @@ So you can now run `npm start` and as you edit `index.ts`:
 
 ## Creating TypeScript node modules
 
-You can even use other node modules written in TypeScript. As a module author, one real thing you should do:
+Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
 
-* you might want to have a `typings` field (e.g. `src/index`) in your `package.json` similar to the `main` field to point to the default TypeScript definition export. For an example look at [`package.json` for csx](https://github.com/typestyle/csx/blob/master/package.json).
+Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:
+
+```
+package
+|_ package.json
+|_ tsconfig.json
+|_ src
+  |_ All your source files
+  |_ index.ts
+  |_ foo.ts
+  |_ ...
+|_ lib
+  |_ All your compiled files
+  |_ index.d.ts
+  |_ index.js
+  |_ foo.d.ts
+  |_ foo.js
+  |_ ...
+```
 
 
-Example package: `npm install csx` [for csx](https://www.npmjs.com/package/csx),  usage: `import csx = require('csx');`.
+* In your `tsconfig.json`
+  * have `compilerOptions`: `"outDir": "lib"` and `"declaration": true` < This generates declaration and js files in the lib folder
+  * Include all the files from `src` < This includes all the files from the src dir.
+
+* In your `package.json` have
+  * `"main": "lib/index"` < This tells NodeJS to load `lib/index.js`
+  * `"typings": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
+
+
+Example package: `npm install typestyle` [for TypeStyle](https://www.npmjs.com/package/typestyle),  usage: `import csx = require('typestyle');`.
 
 
 ## Bonus points
