@@ -74,7 +74,9 @@ package
   * `"typings": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
 
 
-Example package: `npm install typestyle` [for TypeStyle](https://www.npmjs.com/package/typestyle),  usage: `import csx = require('typestyle');`.
+Example package:
+* `npm install typestyle` [for TypeStyle](https://www.npmjs.com/package/typestyle)
+* Usage: `import { style } from 'typestyle';` will be completely type safe.
 
 MORE:
 
