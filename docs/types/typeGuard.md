@@ -46,7 +46,7 @@ doStuff(new Foo());
 doStuff(new Bar());
 ```
 
-TypeScript even understands `else` so when an `if` narrows out one type it knows that within the else *its definitely not that type*. Here is an example:
+TypeScript even understands `else` so when an `if` narrows out one type it knows that within the else *it's definitely not that type*. Here is an example:
 
 ```ts
 class Foo {
@@ -110,6 +110,6 @@ function doStuff(arg: Foo | Bar) {
     }
 }
 
-doStuff({foo:123,common:'123'});
-doStuff({bar:123,common:'123'});
+doStuff({ foo: 123, common: '123' });
+doStuff({ bar: 123, common: '123' });
 ```
