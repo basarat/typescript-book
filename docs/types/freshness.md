@@ -1,13 +1,13 @@
 
 * [Freshness](#freshness)
 * [Allowing extra properties](#allowing-extra-properties)
-* [Use Case : React](#use-case--react-state)
+* [Use Case: React](#use-case--react-state)
 
 ## Freshness
 
 TypeScript provides a concept of **Freshness** (also called *strict object literal checking*) to make it easier to type check object literals that would otherwise be structurally type compatible.
 
-Structural typing is *extremely convenient*. Consider the following piece of code. This allows you to *very conveniently* upgrade your JavaScript to TypeScript while still preserving a level of type safety.
+Structural typing is *extremely convenient*. Consider the following piece of code. This allows you to *very conveniently* upgrade your JavaScript to TypeScript while still preserving a level of type safety:
 
 ```ts
 function logName(something: { name: string }) {
@@ -20,10 +20,11 @@ var random = { note: `I don't have a name property` };
 
 logName(person); // okay
 logName(animal); // okay
-logName(random); // Error : property `name` is missing
+logName(random); // Error: property `name` is missing
 ```
 
 However *structural* typing has a weakness in that it allows you to misleadingly think that something accepts more data than it actually does. This is demonstrated in the following code which TypeScript will error on as shown:
+
 ```ts
 function logName(something: { name: string }) {
     console.log(something.name);
@@ -57,16 +58,16 @@ The reason why only object literals are type checked this way is because in this
 
 ### Allowing extra properties
 
-A type can include an index signature to explicitly indicate that excess properties are permitted.
+A type can include an index signature to explicitly indicate that excess properties are permitted:
 
 ```ts
 var x: { foo: number, [x: string]: any };
 x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 ```
 
-### Use Case : React State
+### Use Case: React State
 
-[Facebook ReactJS](https://facebook.github.io/react/) offers a nice use case for object freshness. Quite commonly in a component you call `setState` with only a few properties instead of passing in all the properties. i.e: 
+[Facebook ReactJS](https://facebook.github.io/react/) offers a nice use case for object freshness. Quite commonly in a component you call `setState` with only a few properties instead of passing in all the properties, i.e.: 
 
 ```ts
 // Assuming
@@ -76,7 +77,7 @@ interface State {
 }
 
 // You want to do: 
-this.setState({foo: "Hello"}); // Error : missing property bar
+this.setState({foo: "Hello"}); // Error: missing property bar
 
 // But because state contains both `foo` and `bar` TypeScript would force you to do: 
 this.setState({foo: "Hello", bar: this.state.bar}};
