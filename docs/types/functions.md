@@ -72,7 +72,7 @@ foo(123);
 foo(123, 'hello');
 ```
 
-Alternatively you can even provide a default value (using `= someValue` after the parameter declaration) which will get injected for you if the caller doesn't provide that argument.
+Alternatively you can even provide a default value (using `= someValue` after the parameter declaration) which will get injected for you if the caller doesn't provide that argument:
 
 ```ts
 function foo(bar: number, bas: string = 'hello') {
@@ -137,9 +137,9 @@ function padding(a: number, b?: number, c?: number, d?: number) {
 Here the first three function signatures are what is available as valid calls to `padding`:
 
 ```ts
-padding(1); // Okay : all
-padding(1,1); // Okay : topAndBottom, leftAndRight
-padding(1,1,1,1); // Okay : top, right, bottom, left
+padding(1); // Okay: all
+padding(1,1); // Okay: topAndBottom, leftAndRight
+padding(1,1,1,1); // Okay: top, right, bottom, left
 
 padding(1,1,1); // Error: Not a part of the available overloads
 ```
