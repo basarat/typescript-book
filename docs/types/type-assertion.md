@@ -5,8 +5,8 @@ A common use case for type assertion is when you are porting over code from Java
 
 ```ts
 var foo = {};
-foo.bar = 123; // error : property 'bar' does not exist on `{}`
-foo.bas = 'hello'; // error : property 'bas' does not exist on `{}`
+foo.bar = 123; // Error: property 'bar' does not exist on `{}`
+foo.bas = 'hello'; // Error: property 'bas' does not exist on `{}`
 ```
 
 Here the code errors because the *inferred* type of `foo` is `{}` i.e. an object with zero properties. Therefore you are not allowed to add `bar` or `bas` to it. You can fix this simply by a type assertion `as Foo`:
@@ -94,7 +94,7 @@ However the following is most likely an error and TypeScript will complain as sh
 
 ```ts
 function handler(event: Event) {
-    let element = event as HTMLElement; // Error : Neither 'Event' not type 'HTMLElement' is assignable to the other
+    let element = event as HTMLElement; // Error: Neither 'Event' not type 'HTMLElement' is assignable to the other
 }
 ```
 
