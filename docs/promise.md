@@ -438,5 +438,20 @@ Promise.all([loadItem(1),loadItem(2)])
     }); // overall time will be around 1s
 ```
 
+Sometimes, you want to run a series of async tasks, but you get all you need as long as any one of these tasks is settled. `Promise` provides a static `Promise.race` function for this scenario:
+
+```ts
+var task1 = new Promise(function(resolve, reject) { 
+    setTimeout(resolve, 1000, 'one'); 
+});
+var task2 = new Promise(function(resolve, reject) { 
+    setTimeout(resolve, 2000, 'two'); 
+});
+
+Promise.race([task1, task2]).then(function(value) {
+  console.log(value); // "one"
+  // Both resolve, but p2 is faster
+});
+```
 
 [polyfill]:https://github.com/stefanpenner/es6-promise
