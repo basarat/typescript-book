@@ -5,6 +5,7 @@ You can use a string literal as a type. For example:
 ```ts
 let foo: 'Hello';
 ```
+
 Here we have created a variable called `foo` that *will only allow the literal value `'Hello'` to be assigned to it*. This is demonstrated below:
 
 ```ts
@@ -30,7 +31,7 @@ move(1,"Nurth"); // Error!
 ```
 
 ## Other literal types
-TypeScript also supports `boolean`, `numbers` as literals. e.g. 
+TypeScript also supports `boolean`, `numbers` as literals, e.g.: 
 
 ```ts
 type OneToFive = 1 | 2 | 3 | 4 | 5;
@@ -53,6 +54,7 @@ function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
   }, Object.create(null));
 }
 ```
+
 And then generate the litreal type union using `keyof typeof`. Here is a complete example:
 
 ```ts
@@ -90,7 +92,7 @@ sample = 'AnythingElse'; // ERROR!
 
 #### Modelling existing JavaScript APIs
 
-e.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly) that can either be a `boolean` or the literal string `"nocursor"` (effective valid values `true,false,"nocursor"`).  It can be declared as:
+E.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly) that can either be a `boolean` or the literal string `"nocursor"` (effective valid values `true,false,"nocursor"`).  It can be declared as:
 
 ```ts
 readOnly: boolean | 'nocursor';
