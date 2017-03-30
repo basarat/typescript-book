@@ -2,14 +2,14 @@
 TypeScript's type system allows you to mark individual properties on an interface as `readonly`. This allows you to work in a functional way (unexpected mutation is bad):
 
 ```ts
-function foo(config:{
+function foo(config: {
     readonly bar: number,
     readonly bas: number
 }) {
     // ..
 }
 
-let config = {bar:123,bas:123};
+let config = { bar: 123, bas: 123 };
 foo(config);
 // You can be sure that `config` isn't changed 🌹
 ```
@@ -36,7 +36,7 @@ class Foo {
     readonly bar = 1; // OK
     readonly baz: string;
     constructor() {
-        this.baz = "hello";  // OK
+        this.baz = "hello"; // OK
     }
 }
 ```
@@ -44,7 +44,7 @@ class Foo {
 ### Various Use Cases
 
 #### ReactJS
-One library that loves immutability is ReactJS and its a great idea to mark your `Props` and `State` to be immutable e.g.
+One library that loves immutability is ReactJS and it's a great idea to mark your `Props` and `State` to be immutable e.g.:
 
 ```ts
 interface Props {
@@ -77,7 +77,7 @@ interface Foo {
  */
 let foo: Foo = { 0: 123, 2: 345 };
 console.log(foo[0]);   // Okay (reading)
-foo[0] = 456;          // Error (mutating) : Readonly
+foo[0] = 456;          // Error (mutating): Readonly
 ```
 
 This is great if you want to use native JavaScript arrays in an *immutable* fashion. In fact TypeScript ships with a `ReadonlyArray<T>` interface to allow you to do just that:
@@ -116,13 +116,16 @@ person.fullName = "Dear Reader"; // Error! fullName is readonly
 1. the property can modified because of aliasing
 
 Sample explaining 1:
+
 ```ts
 const foo = 123; // variable reference
 var bar: {
     readonly bar: number; // for property
 }
 ```
+
 Sample explaining 2:
+
 ```ts
 let foo: {
     readonly bar: number;
@@ -130,7 +133,7 @@ let foo: {
         bar: 123
     };
 
-function iMutateFoo(foo:{bar:number}) {
+function iMutateFoo(foo: { bar: number }) {
     foo.bar = 456;
 }
 
@@ -138,7 +141,7 @@ iMutateFoo(foo); // The foo argument is aliased by the foo parameter
 console.log(foo.bar); // 456!
 ```
 
-Basically `readonly` ensures that *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Ofcourse if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
+Basically `readonly` ensures that *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Of course if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
 
 ```ts
 interface Foo {
@@ -149,7 +152,7 @@ let foo: Foo = {
 };
 
 function iTakeFoo(foo: Foo) {
-    foo.bar = 456; // Error!  bar is readonly
+    foo.bar = 456; // Error! bar is readonly
 }
 
 iTakeFoo(foo); // The foo argument is aliased by the foo parameter
