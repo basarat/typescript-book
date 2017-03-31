@@ -307,7 +307,7 @@ The great thing about TypeScript is that it understands the flow of values throu
 
 ```ts
 Promise.resolve(123)
-    .then((res)=>{
+    .then((res) => {
          // res is inferred to be of type `number`
          return true;
     })
@@ -320,9 +320,9 @@ Promise.resolve(123)
 Of course it also understands unwrapping any function calls that might return a promise:
 
 ```ts
-function iReturnPromiseAfter1Second():Promise<string> {
-    return new Promise((resolve)=>{
-        setTimeout(()=>resolve("Hello world!"), 1000);
+function iReturnPromiseAfter1Second(): Promise<string> {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve("Hello world!"), 1000);
     });
 }
 
@@ -348,8 +348,8 @@ E.g. let's wrap `fs.readFile`:
 
 ```ts
 import fs = require('fs');
-function readFileAsync(filename: string):Promise<any> {
-    return new Promise((resolve,reject)=>{
+function readFileAsync(filename: string): Promise<any> {
+    return new Promise((resolve,reject) => {
         fs.readFile(filename,(err,result) => {
             if (err) reject(err);
             else resolve(result);
@@ -409,8 +409,8 @@ However you might potentially want to run a series of async tasks and then do so
 
 ```ts
 // an async function to simulate loading an item from some server
-function loadItem(id: number): Promise<{id: number}> {
-    return new Promise((resolve)=>{
+function loadItem(id: number): Promise<{ id: number }> {
+    return new Promise((resolve) => {
         console.log('loading item', id);
         setTimeout(() => { // simulate a server delay
             resolve({ id: id });
@@ -431,9 +431,9 @@ loadItem(1)
     }); // overall time will be around 2s
 
 // Parallel
-Promise.all([loadItem(1),loadItem(2)])
+Promise.all([loadItem(1), loadItem(2)])
     .then((res) => {
-        [item1,item2] = res;
+        [item1, item2] = res;
         console.log('done');
     }); // overall time will be around 1s
 ```
