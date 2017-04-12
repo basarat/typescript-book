@@ -5,7 +5,7 @@ For example to tell TypeScript about the [`process` variable](https://nodejs.org
 declare var process: any;
 ```
 
-> You don't *need* to do this for `process` as there is already a [community maintained `node.d.ts`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/node/index.d.ts).
+> You don't *need* to do this for `process` as there is already a [community maintained `node.d.ts`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node/index.d.ts).
 
 This allows you to use the `process` variable without TypeScript complaining:
 
