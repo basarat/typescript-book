@@ -35,13 +35,13 @@ foo = foo; // Okay
   - The structure `{type,value}` might not be desireable and need server serialization support
 
 ## Using Enums
-[Enums in TypeScript](../enums.md) offer a certain level of nominal typing. Two enum types aren't equal if they differ by name. We can use this fact to provide nominal typing to any other type that is structurally compatible.
+[Enums in TypeScript](../enums.md) offer a certain level of nominal typing. Two enum types aren't equal if they differ by name. We can use this fact to provide nominal typing for types that are otherwise structurally compatible.
 
 The workaround involves:
 * Creating a *brand* enum.
 * Creating the type as an *intersection* (`&`) of the brand enum + the actual structure.
 
-This is demonstrated below where the structure of the type is just a string:
+This is demonstrated below where the structure of the types is just a string:
 
 ```ts
 // FOO
