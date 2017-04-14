@@ -101,7 +101,7 @@ var newFoo = new Foo();
 console.log(newFoo.bar); // 123
 ```
 
-Now the only other thing you need to know is that calling `new` on a function copies the `prototype` of the function into the `__proto__` of the newly created object that is returned from the function call. Here is the code you can run to completely understand it:
+Now the only other thing you need to know is that calling `new` on a function assigns the `prototype` of the function to the `__proto__` of the newly created object that is returned from the function call. Here is the code you can run to completely understand it:
 
 ```ts
 function Foo() { }
