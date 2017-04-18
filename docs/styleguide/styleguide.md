@@ -18,6 +18,7 @@ Key Sections:
 * [Tabs vs. Spaces](#spaces)
 * [Use semicolons](#semicolons)
 * [Annotate Arrays as `Type[]`](#array)
+* [File Names](#filename)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -256,3 +257,8 @@ const foo: string = "hello";
 * Annotate arrays as `foos:Foo[]` instead of `foos:Array<Foo>`.
 
 > Reasons: Its easier to read. Its used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
+
+## Filename
+Name files with `camelCase`. E.g. `accordian.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` etc.
+
+> Reasons: Conventional accross many JS teams.
