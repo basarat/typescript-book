@@ -261,4 +261,4 @@ const foo: string = "hello";
 ## Filename
 Name files with `camelCase`. E.g. `accordian.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` etc.
 
-> Reasons: Conventional accross many JS teams.
+> Reason: Conventional across many JS teams.
