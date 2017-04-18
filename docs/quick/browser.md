@@ -55,7 +55,8 @@ module.exports = {
     entry: './src/app.tsx',
     output: {
         path: './dist',  
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/dist/'
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
@@ -147,6 +148,6 @@ You can clone this demo project here: https://github.com/basarat/react-typescrip
 Add webpack dev server. Super easy: 
 
 * Install : `npm install webpack-dev-server` 
-* Add to your `package.json`: `"start": "webpack-dev-server --hot --inline --no-info --content-base ./dist"`
+* Add to your `package.json`: `"start": "webpack-dev-server --hot --inline --no-info"`
 
 Now when you run `npm start` it will start the webpack dev server with live reload.
