@@ -71,7 +71,7 @@ package
 
 * In your `package.json` have
   * `"main": "lib/index"` < This tells NodeJS to load `lib/index.js`
-  * `"typings": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
+  * `"types": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
 
 
 Example package:
