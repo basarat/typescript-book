@@ -85,7 +85,8 @@ class Frame implements Iterable<Component> {
           }
         } else {
           return {
-            done: true
+            done: true,
+            value: null
           }
         }
       }
@@ -120,7 +121,8 @@ class Frame implements IterableIterator<Component> {
       }
     } else {
       return {
-        done: true
+        done: true,
+        value: null
       }
     }
   }
@@ -154,7 +156,8 @@ class Fib implements IterableIterator<number> {
         value: current
       }
     } return {
-      done: true
+      done: true,
+      value: null
     }
 
   }
