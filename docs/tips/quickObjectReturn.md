@@ -7,7 +7,7 @@ var foo = () => {
     bar: 123
 };
 ```
-is a parsed as a *block* containing a *JavaScript Label* by JavaScript runtimes (cause of the JavaScript specification). If that doesn't make sense, don't worry, as you get a nice compiler error from TypeScript saying "unused label" anyways. You can fix it by surrounding the object literal with `()`:
+is parsed as a *block* containing a *JavaScript Label* by JavaScript runtimes (cause of the JavaScript specification). If that doesn't make sense, don't worry, as you get a nice compiler error from TypeScript saying "unused label" anyways. You can fix it by surrounding the object literal with `()`:
 
 ```ts
 var foo = () => ({
