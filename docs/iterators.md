@@ -15,6 +15,14 @@ interface Iterator<T> {
 This interface allows to retrieve a value from some collection or sequence
 which belongs to the object.
 
+The `IteratorResult` is simply a `value`+`done` pair: 
+```ts
+interface IteratorResult<T> {
+    done: boolean;
+    value: T;
+}
+```
+
 Imagine that there's an object of some frame, which includes the list of
 components of which this frame consists. With Iterator interface it is possible
 to retrieve components from this frame object like below:
