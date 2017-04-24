@@ -100,7 +100,7 @@ function declareSymbol(symbolTable: SymbolTable, parent: Symbol, node: Declarati
 }
 ```
 
-Which SymbolTable is populated is driven by the first argument to this function. e.g. when adding a declaration to a *container* of kind `SyntaxKind.ClassDeclaration` or `SytanxKind.ClassExpression` the function `declareClassMember` will get called which has the following code:
+Which SymbolTable is populated is driven by the first argument to this function. e.g. when adding a declaration to a *container* of kind `SyntaxKind.ClassDeclaration` or `SyntaxKind.ClassExpression` the function `declareClassMember` will get called which has the following code:
 
 ```ts
 function declareClassMember(node: Declaration, symbolFlags: SymbolFlags, symbolExcludes: SymbolFlags) {
