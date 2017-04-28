@@ -25,6 +25,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * A book not only for typescript, a good one for deeper javascript knowledge as well. [link](https://www.gitbook.com/book/basarat/typescript/discussions/59)
 * In my new job, we're using @typescriptlang, which I am new to. This is insanely helpful huge thanks, @basarat! [link](https://twitter.com/netchkin/status/855339390566096896)
 * Thank you for writing TypeScript Deep Dive. I have learned so much. [link](https://twitter.com/buctwbzs/status/857198618704355328?refsrc=email&s=11)
+* Loving @basarat's @typescriptlang online book basarat.gitbooks.io/typescript/# loaded with great recipes! [link](https://twitter.com/ericliprandi/status/857608837309677568)
 
 ## Get Started
 If you are here to read the book online [get started](http://basarat.gitbooks.io/typescript/content/docs/getting-started.html).
