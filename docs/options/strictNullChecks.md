@@ -44,3 +44,20 @@ getMember()
     const stringifyAge = member.age.toString() // Object is possibly 'undefined'
   })
 ```
+
+### Non-Null Assertion Operator
+
+A new `!` post-fix expression operator may be used to assert that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact. For example: 
+
+```ts
+// Compiled with --strictNullChecks
+function validateEntity(e?: Entity) {
+    // Throw exception if e is null or invalid entity
+}
+
+function processEntity(e?: Entity) {
+    validateEntity(e);
+    let a = e.name;  // TS ERROR: e may be null.
+    let b = e!.name;  // Assert that e is non-null. This allows you to access name
+}
+```
