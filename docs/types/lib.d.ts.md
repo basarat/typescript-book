@@ -251,8 +251,10 @@ The libs can be categorized into categories:
     * es7
     * es2016
     * es2017
+    * esnext
 * Runtime Environment
     * dom
+    * dom.iterable
     * webworker
     * scripthost
 * ESNext By-feature options (even smaller than bulk feature)
@@ -268,9 +270,13 @@ The libs can be categorized into categories:
     * es2016.array.include
     * es2017.object
     * es2017.sharedmemory
+    * esnext.asynciterable
 
 
 > NOTE: the `--lib` option provides extremely fine tuned control. So you most likey want to pick an item from the bulk + enviroment categories.
+> If --lib is not specified a default library is injected:
+  - For --target es5 => es5, dom, scripthost
+  - For --target es6 => es6, dom, dom.iterable, scripthost
 
 My Personal Recommentation:
 
@@ -278,5 +284,15 @@ My Personal Recommentation:
 "compilerOptions": {
     "target": "es5",
     "lib": ["es6", "dom"]
+}
+```
+
+Example Including Symbol with ES5
+Symbol API is not included when target is es5. In fact, we receive an error like: [ts] Cannot find name 'Symbol'.
+We can use "target": "es5" in combination with "lib" to provide Symbol API in TypeScript:
+```json
+"compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom", "scripthost", "es2015.symbol"]
 }
 ```
