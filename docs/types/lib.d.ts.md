@@ -293,6 +293,6 @@ We can use "target": "es5" in combination with "lib" to provide Symbol API in Ty
 ```json
 "compilerOptions": {
     "target": "es5",
-    "lib": ["es6", "dom", "scripthost", "es2015.symbol"]
+    "lib": ["es5", "dom", "scripthost", "es2015.symbol"]
 }
 ```
