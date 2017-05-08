@@ -57,8 +57,24 @@ catch(e) {
   console.log(e);
 }
 ```
-*Don't do that*. Such raw strings result in a very painful debugging and error handling experience.
+*Don't do that*. The fundamental benefit of `Error` objects is that they automatically keep track of where they were built and originated as the `stack` property.
 
+Raw strings result in a very painful debugging experience and complicate error analysis from logs.
+
+## You don't have to `throw` an error
+It is okay to pass an `Error` object around. This is conventional in NodeJS callback style code which take callbacks with the first argument as an error object.
+
+```js
+function myFunction (callback: (e?: Error)) {
+  doSomethingAsync(function () {
+    if (somethingWrong) {
+      callback(new Error('This is my error'))
+    } else {
+      callback();
+    }
+  });
+}
+```
 
 ## Exceptional cases
 `Exceptions should be exceptional` is a common saying in computer science. There are few resons why this is true for JavaScript (and TypeScript) as well. 
@@ -127,4 +143,6 @@ function validate(value: number): {error?: string} {
   if (value < 0 || value > 100) return {error:'Invalid value'};
 }
 ```
-And not its represented in the type system.
+And now its represented in the type system. 
+
+> Unless you want to handle the error in a very generic (simple / catch-all etc) way, don't *throw* an error.
