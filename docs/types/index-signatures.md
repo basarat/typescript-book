@@ -166,6 +166,27 @@ foo['x']; // number
 let x = 'x'
 foo[x]; // number
 ```
+### Extending `string`
+
+An index signature can require that index strings be members of a "vocabulary" union of literal strings, because such a union extends `string`:
+
+```ts
+type Index = 'a' | 'b' | 'c'
+type FromIndex = { [k in Index]?: number }
+
+const good: FromIndex = {b:1, c:2}
+
+// Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.
+//  Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.
+const bad: FromIndex = {b:1, c:2, d:3} // 
+```
+This is often used together with `keyof typeof` to capture vocabulary types, described on the next page.
+
+The specification of the vocabulary can be deferred generically:
+
+```ts
+type FromSomeIndex<K extends string> = { [key in K]: number }
+```
 
 ### Having both `string` and `number` indexers
 
