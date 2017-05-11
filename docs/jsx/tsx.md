@@ -55,7 +55,7 @@ class MyComponent extends React.Component<Props, {}> {
 <MyComponent foo="bar" />
 ```
 
-### JSX Tip : Interface for renderable
+### React JSX Tip: Interface for renderable
 
 React can render a few things like `JSX` or `string`. There are all consolidated into the type `React.ReactNode` so use it for when you want to accept renderables e.g.
 
@@ -75,6 +75,16 @@ class MyComponent extends React.Component<Props, {}> {
 
 <MyComponent foo="bar" />
 ```
+
+### React JSX Tip: Accept an instance of a Component
+The react type definitions provide `React.ReactElement<T>` to allow you to annotate the result of a `<T/>` component instantiation. e.g. 
+
+```js
+const foo: React.ReactElement<MyAwesomeComponent> = <MyAwesomeComponent/>; // Okay
+const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent/>; // Error!
+```
+
+> Of course you can use this as a function argument annotation and even React component prop member.
 
 ## Non React JSX
 TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:
