@@ -55,7 +55,7 @@ function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
 }
 ```
 
-And then generate the litreal type union using `keyof typeof`. Here is a complete example:
+And then generate the literal type union using `keyof typeof`. Here is a complete example:
 
 ```ts
 /** Utility function to create a K:V from a list of strings */
