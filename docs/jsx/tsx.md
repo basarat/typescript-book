@@ -86,6 +86,22 @@ const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent/>; //
 
 > Of course you can use this as a function argument annotation and even React component prop member.
 
+### React JSX Tip: Generic components
+There's no syntax in JSX to apply generic parameters to a generic component; a type and constructor must first be created in Typescript proper.  Example:
+
+```ts
+/** A generic component */
+type SelectProps<T> = { items: T[] }
+class Select<T> extends React.Component<SelectProps<T>, any> { }
+
+/** Specialize Select to use with strings */
+interface IStringSelect { new (): Select<string> } ;
+/** Constructor function - must be capitalized for JSX
+const StringSelect = Select as IStringSelect;
+
+/** Usage */
+const Form = ()=> <StringSelect items={['a','b']} />;
+```
 ## Non React JSX
 TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:
 
