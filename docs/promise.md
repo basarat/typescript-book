@@ -450,7 +450,7 @@ var task2 = new Promise(function(resolve, reject) {
 
 Promise.race([task1, task2]).then(function(value) {
   console.log(value); // "one"
-  // Both resolve, but p2 is faster
+  // Both resolve, but task1 resolves faster
 });
 ```
 
