@@ -100,6 +100,18 @@ const StringSelect = Select as { new (): Select<string> };
 /** Usage */
 const Form = () => <StringSelect items={['a','b']} />;
 ```
+If your constructor takes props you can accomodate that too: 
+
+```ts
+/** Generic component */
+interface SelectProps<T> { items: T[] }
+class Select<T> extends Component<SelectProps<T>, any> {
+    constructor(props: SelectProps<T>) { super(props) }
+}
+/** Specialization */
+const StringSelect = Select as { new (props: SelectProps<string>): GenericList<string> };
+```
+
 ## Non React JSX
 TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:
 
