@@ -441,17 +441,48 @@ Promise.all([loadItem(1), loadItem(2)])
 Sometimes, you want to run a series of async tasks, but you get all you need as long as any one of these tasks is settled. `Promise` provides a static `Promise.race` function for this scenario:
 
 ```ts
-var task1 = new Promise(function(resolve, reject) { 
-    setTimeout(resolve, 1000, 'one'); 
+var task1 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 1000, 'one');
 });
-var task2 = new Promise(function(resolve, reject) { 
-    setTimeout(resolve, 2000, 'two'); 
+var task2 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 2000, 'two');
 });
 
 Promise.race([task1, task2]).then(function(value) {
   console.log(value); // "one"
   // Both resolve, but task1 resolves faster
 });
+```
+
+### Converting callback functions to promise
+
+The most reliable way to do this is to hand write it. e.g. converting `setTimeout` into a promisified `delay` function is super easy:
+
+```ts
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+```
+
+You can use generics to help you with this process if you want e.g. here is an automatic promisify function that works with node style callbacks that take a single `data` argument (this is meant as an example for people that are used to node / node-style callback functions):
+
+```ts
+type NodeStyleCallback<Ret> = (err: any, ret: Ret) => void;
+type ReturnsPromise1<Ret, Data1> = (data: Data1) => Promise<Ret>;
+type NodeStyleCallbackCallingFunction1<Ret, Data1> = { (data: Data1, cb: NodeStyleCallback<Ret>): void };
+
+export function promisify1<Data1, Ret>(func: NodeStyleCallbackCallingFunction<Data1, Ret>): ReturnsPromise<Data1, Ret> {
+  const promisified = (data: Data1): Promise<Ret> => {
+    return new Promise<Ret>((res, rej) => {
+      func(data, (err, ret) => {
+        err ? rej(err) : res(ret);
+      });
+    });
+  }
+  return promisified;
+}
+
+/** Sample usage */
+import fs = require('fs');
+const readFile = promisify1(fs.readFile);
 ```
 
 [polyfill]:https://github.com/stefanpenner/es6-promise
