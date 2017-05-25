@@ -92,15 +92,15 @@ Now if you make edits to your `ts` or `tsx` file webpack will generate `bundle.j
 If you are going to use React (which I highly recommend you give a look), here are a few more steps:
 
 ```
-npm install react react-dom --save-dev
+npm install react react-dom --save
 ```
 
 ```
-"./node_modules/.bin/typings" install dt~react --global --save
+npm i @types/react --save
 ```
 
 ```
-"./node_modules/.bin/typings" install dt~react-dom --global --save
+npm i @types/react-dom --save
 ```
 
 A demo `index.html`:
