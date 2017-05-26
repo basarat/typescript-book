@@ -205,7 +205,9 @@ interface ArrStr {
 }
 ```
 
-### TIP: API consideration when adding index signatures
+### Design Pattern: Nested index signature
+
+> API consideration when adding index signatures
 
 Quite commonly in the JS community you will see APIs that abuse string indexers. e.g. a common pattern among CSS in JS libraries:
 
