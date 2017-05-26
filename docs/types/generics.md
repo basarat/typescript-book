@@ -177,7 +177,7 @@ This is just an example, if you are considering on using this `require` typings 
 1. It's already there in `node.d.ts` you can install using `npm install @types/node --save-dev`.
 1. You should consider using the type definitions for your library e.g. for jquery `npm install @types/jquery --save-dev` instead of using raw `require`.
 
-### Caveat: Use generics to make it easier to annotate
+### Design Pattern: Convenience generic
 
 The previous example of `require<T>` was intentionally meant to make clear the fact that generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
 
