@@ -17,8 +17,8 @@ module aaa {
 module bbb {
   class QueueNumber {
     private data = [];
-    push = (item:number) => this.data.push(item);
-    pop = ():number => this.data.shift();
+    push = (item: number) => this.data.push(item);
+    pop = (): number => this.data.shift();
   }
 
   const queue = new QueueNumber();
@@ -32,8 +32,8 @@ module ccc {
   /** A class definition with a generic parameter */
   class Queue<T> {
     private data = [];
-    push = (item:T) => this.data.push(item);
-    pop = ():T => this.data.shift();
+    push = (item: T) => this.data.push(item);
+    pop = (): T => this.data.shift();
   }
 
   /** Again sample usage */
@@ -42,4 +42,30 @@ module ccc {
   queue.push("1"); // ERROR : cannot push a string. Only numbers allowed
 
   // ^ if that error is fixed the rest would be fine too
+}
+
+namespace ddd {
+  const getJSON = <T>(config: {
+    url: string,
+    headers?: { [key: string]: string },
+  }): Promise<T> => {
+    const fetchConfig = ({
+      method: 'GET',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...(config.headers || {})
+    });
+    return fetch(config.url, fetchConfig)
+      .then<T>(response => response.json());
+  }
+
+  type LoadUsersResponse = {
+    users: {
+      name: string;
+      email: string;
+    }[];
+  };
+  function loadUsers() {
+    return getJSON<LoadUsersResponse>({ url: 'https://example.com/users' });
+  }
 }
