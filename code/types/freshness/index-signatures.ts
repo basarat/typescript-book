@@ -1,29 +1,29 @@
 module a {
-  let foo:any = {};
+  let foo: any = {};
   foo['Hello'] = 'World';
   console.log(foo['Hello']); // World
 }
 module b {
   class Foo {
-    constructor(public message: string){};
-    log(){
+    constructor(public message: string) { };
+    log() {
       console.log(this.message)
     }
   }
 
-  let foo:any = {};
+  let foo: any = {};
   foo['Hello'] = new Foo('World');
   foo['Hello'].log(); // World
 }
 module c {
   let obj = {
-    toString(){
+    toString() {
       console.log('toString called')
       return 'Hello'
     }
   }
 
-  let foo:any = {};
+  let foo: any = {};
   foo[obj] = 'World'; // toString called
   console.log(foo[obj]); // toString called, World
   console.log(foo['Hello']); // World
@@ -36,12 +36,12 @@ module d {
 
 module e {
   let obj = {
-    toString(){
+    toString() {
       return 'Hello'
     }
   }
 
-  let foo:any = {};
+  let foo: any = {};
 
   // ERROR: the index signature must be string, number ...
   foo[obj] = 'World';
@@ -51,8 +51,8 @@ module e {
 }
 
 module f {
-  let obj = {message:'Hello'}
-  let foo:any = {};
+  let obj = { message: 'Hello' }
+  let foo: any = {};
 
   // ERROR: the index signature must be string, number ...
   foo[obj] = 'World';
@@ -67,7 +67,7 @@ module f {
 }
 
 module g {
-  let foo:{ [index:string] : {message: string} } = {};
+  let foo: { [index: string]: { message: string } } = {};
 
   /**
    * Must store stuff that conforms the structure
@@ -90,13 +90,13 @@ module mustConform {
 
   /** Okay */
   interface Foo {
-    [key:string]: number
+    [key: string]: number
     x: number;
     y: number;
   }
   /** Error */
   interface Bar {
-    [key:string]: number
+    [key: string]: number
     x: number;
     y: string; // Property `y` must of of type number
   }
@@ -104,10 +104,10 @@ module mustConform {
 
 module mustConform2 {
   interface Foo {
-    [key:string]: number
+    [key: string]: number
     x: number;
   }
-  let foo: Foo = {x:1,y:2};
+  let foo: Foo = { x: 1, y: 2 };
   foo['x']; // number
   let x = 'x'
   foo[x]; // number
@@ -121,5 +121,45 @@ module dual {
 
     // Just an example member
     length: number;
+  }
+}
+
+module jsland {
+  interface NestedCSS {
+    color?: string;
+    [selector: string]: string | NestedCSS;
+  }
+
+  const example: NestedCSS = {
+    color: 'red',
+    '.subclass': {
+      color: 'blue'
+    }
+  }
+
+  const failsSilently: NestedCSS = {
+    colour: 'red', // No error is `colour` is a valid string selector
+  }
+}
+
+module better {
+  interface NestedCSS {
+    color?: string;
+    nest?: {
+      [selector: string]: NestedCSS;
+    }
+  }
+
+  const example: NestedCSS = {
+    color: 'red',
+    nest: {
+      '.subclass': {
+        color: 'blue'
+      }
+    }
+  }
+
+  const failsSilently: NestedCSS = {
+    colour: 'red', // TS Error: unknown property `colour`
   }
 }
