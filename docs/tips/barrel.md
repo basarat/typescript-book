@@ -18,18 +18,18 @@ export class Baz {}
 Without a barrel, a consumer would need three import statements:
 
 ```ts
-import { Foo } from '../demo/foo.ts';
-import { Bar } from '../demo/bar.ts';
-import { Baz } from '../demo/baz.ts';
+import { Foo } from '../demo/foo';
+import { Bar } from '../demo/bar';
+import { Baz } from '../demo/baz';
 ```
 
 You can instead add a barrel `demo/index.ts` containing the following: 
 
 ```ts
 // demo/index.ts
-export * from './foo.ts'; // re-export all of its exports
-export * from './bar.ts'; // re-export all of its exports
-export * from './baz.ts'; // re-export all of its exports
+export * from './foo'; // re-export all of its exports
+export * from './bar'; // re-export all of its exports
+export * from './baz'; // re-export all of its exports
 ```
 
 Now the consumer can import what it needs from the barrel:
@@ -57,10 +57,10 @@ If you would rather not export `getBaz` / `setBaz` from demo you can instead put
 
 ```ts
 // demo/index.ts
-export * from './foo.ts'; // re-export all of its exports
-export * from './bar.ts'; // re-export all of its exports
+export * from './foo'; // re-export all of its exports
+export * from './bar'; // re-export all of its exports
 
-import * as baz from './baz.ts'; // import as a name
+import * as baz from './baz'; // import as a name
 export { baz }; // export the name
 ```
 
