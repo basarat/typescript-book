@@ -53,7 +53,7 @@ queue.push("1"); // ERROR : cannot push a string. Only numbers allowed
 // ^ if that error is fixed the rest would be fine too
 ```
 
-Of course this can quickly become painful e.g. if you want a string queue you have to go through all that effort again. What you really want is a way to say that whatever the type is of the stuff getting *pushed* it should be the same for whatever gets *poped*. This is done easily with a *generic* parameter (in this case on the class):
+Of course this can quickly become painful e.g. if you want a string queue you have to go through all that effort again. What you really want is a way to say that whatever the type is of the stuff getting *pushed* it should be the same for whatever gets *popped*. This is done easily with a *generic* parameter (in this case, at the class level):
 
 ```ts
 /** A class definition with a generic parameter */
@@ -172,9 +172,9 @@ declare function require(name: string): any;
 const something = require('something') as TypeOfSomething;
 ```
 
-This is just an example, if you are considering on using this `require` typings you don't need to cause:
+This is just an example; if you are considering on using this `require` typings, you don't need to because:
 
-1. It's already there in `node.d.ts` you can install using `npm install @types/node --save-dev`.
+1. It's already there in `node.d.ts`: you can install using `npm install @types/node --save-dev`.
 1. You should consider using the type definitions for your library e.g. for jquery `npm install @types/jquery --save-dev` instead of using raw `require`.
 
 ### Design Pattern: Convenience generic
