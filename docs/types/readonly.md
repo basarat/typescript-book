@@ -113,7 +113,7 @@ person.fullName = "Dear Reader"; // Error! fullName is readonly
 
 `readonly` is
 1. for a property
-1. the property can modified because of aliasing
+1. the property can be modified because of aliasing
 
 Sample explaining 1:
 
