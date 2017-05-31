@@ -56,7 +56,7 @@ let p: Point;
 p = new Point2D(1,2);
 ```
 
-This allows you to create objects on the fly (like you do in pre JS) and still have safety for whenever it can be inferred.
+This allows you to create objects on the fly (like you do in vanilla JS) and still have safety for whenever it can be inferred.
 
 Also *more* data is considered fine:
 
@@ -340,6 +340,6 @@ catArr[0].meow(); // Allowed but BANG 🔫 at runtime
  * Animal[] <= Cat[]
  */
 animalArr = catArr; // Okay if covariant
-animalArr.push(new Animal('another animal')); // Just pushed an animal into catArr too!
+animalArr.push(new Animal('another animal')); // Just pushed an animal into catArr!
 catArr.forEach(c => c.meow()); // Allowed but BANG 🔫 at runtime
 ```
