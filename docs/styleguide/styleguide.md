@@ -234,9 +234,9 @@ const foo: string = "hello";
 
 > Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Its easier to type (no shift needed on most keyboards).
 
-> Double quotes are not without merit: Allows easier copy paste of objects into JSON. Allows people to use other languages to work without changing their quote character. Allows you to use apostrophe s e.g. `He's not going.`. But I'd rather not deviate from where the JS Community is fairly decided.
+> Double quotes are not without merit: Allows easier copy paste of objects into JSON. Allows people to use other languages to work without changing their quote character. Allows you to use apostrophes e.g. `He's not going.`. But I'd rather not deviate from where the JS Community is fairly decided.
 
-* When you can't use double try back ticks (\`).
+* When you can't use double quotes, try using back ticks (\`).
 
 > Reason: These generally represent the intent of complex enough strings.
 
