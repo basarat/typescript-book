@@ -69,7 +69,7 @@ bar = "Hello World"; // Okay!
 bar = "anything else "; // Error!
 ```
 
-In this example `bar` has the literal type `"Hello World"`. We cover this more in the literal type section.
+In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](https://basarat.gitbooks.io/typescript/content/docs/types/literal-types.html "Literal Types").
 
 ### Capturing the name of the keys
 
@@ -88,4 +88,4 @@ color = 'blue'; // okay
 color = 'anythingElse'; // Error
 ```
 
-This allows you to have stuff like string enums + constants quite easy, as you just saw in the above example.
+This allows you to have stuff like string enums + constants quite easily, as you just saw in the above example.
