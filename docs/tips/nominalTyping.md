@@ -1,7 +1,7 @@
 ## Nominal Typing
 The TypeScript type system is structural [and this is one of the main motivating benefits](../why-typescript.md). However, there are real-world use cases for a system where you want two variables to be differentiated because they have a different *type name* even if they have the same structure. A very common use case is *identity* structures (which are generally just strings with semantics associated with their *name* in languages like C#/Java).
 
-There are a few patterns that have emerged in the community. I cover them in decrease order of personal preference:
+There are a few patterns that have emerged in the community. I cover them in decreasing order of personal preference:
 
 ## Using literal types
 
