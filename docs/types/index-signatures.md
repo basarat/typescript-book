@@ -84,7 +84,7 @@ foo[obj] = 'World';
 console.log(foo["[object Object]"]); // World
 ```
 
-Ofcourse `number` is supported because
+Of course `number` is supported because
 
 1. its needed for excellent Array / Tuple support.
 1. even if you use it for an `obj` its default `toString` implementation is nice (not `[object Object]`).
@@ -129,7 +129,7 @@ foo['a'].messages;
 
 > TIP: the name of the index signature e.g. `index` in `{ [index:string] : {message: string} }` has no significance for TypeScript and really for readability. e.g. if its user names you can do `{ [username:string] : {message: string} }` to help the next dev who looks at the code (which just might happen to be you).
 
-Ofcourse `number` indexes are also supported e.g. `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
+Of course `number` indexes are also supported e.g. `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
 
 ### All members must conform to the `string` index signature
 
