@@ -53,7 +53,7 @@ It was only supported for **target es6** transpiling directly to **ES6 generator
 
 **TypeScript 2.1** [added the capability to ES3 and ES5 run-times](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html), meaning you’ll be free to take advantage of it no matter what environment you’re using. It's important to notice that we can use async / await with TypeScript 2.1 and many browsers are supported, of course, having globally added a **polyfill for Promise**.
 
-Let's see this **example** and take a look to this code to figure out TypeScript async / await **notation** works: 
+Let's see this **example** and take a look at this code to figure out how TypeScript async / await **notation** works: 
 ```ts
 function delay(milliseconds: number, count: number): Promise<number> {
     return new Promise<number>(resolve => {
