@@ -50,6 +50,28 @@ var foo = { bar: { bas: 123 } };
 var {bar: {bas}} = foo; // Effectively `var bas = foo.bar.bas;`
 ```
 
+#### Object Destructuring with rest
+You can pick up any number of elements from the an object and get *an object* of the remaining elements using object destructuring with rest.
+
+```ts
+var {w, x, ...remaining} = {w: 1, x: 2, y: 3, z: 4};
+console.log(w, x, remaining); // 1, 2, {y:3,z:4}
+```
+A common use case is also to ignore certain properties. For example:
+```ts
+// Example function
+function goto(point2D: {x: number, y: number}) {
+  // Imagine some code that might break
+  // if you pass in an object
+  // with more items than desired
+}
+// Some point you get from somewhere
+const point3D = {x: 1, y: 2, z: 3};
+/** A nifty use of rest to remove extra properties */
+const { z, ...point2D } = point3D;
+goto(point2D);
+```
+
 #### Array Destructuring
 A common programming question: "How to swap two variables without using a third one?". The TypeScript solution:
 
