@@ -1,3 +1,3 @@
 ## String enums
 
-Sometimes you need a collection of strings collected under a common key. TypeScript does have enum support but [it is `number` based](../enums.md). However TypeScript does have [string literal types and you can use those as string based enums quite easily by combining with union types](../types/literal-types.md).
+Sometimes you need a collection of strings collected under a common key. Prior to TypeScript 2.4, TypeScript only supported number-based enums. If using versions prior to 2.4, a work-around is to use [string literal types to create string based enums by combining with union types](../types/literal-types.md).
