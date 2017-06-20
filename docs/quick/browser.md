@@ -51,10 +51,12 @@ npm install typescript@next webpack ts-loader typings --save-dev
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
 
 ```js
+const path = require('path');
+
 module.exports = {
     entry: './src/app.tsx',
     output: {
-        path: './dist',  
+        path: path.resolve(__dirname, 'dist'),  
         filename: 'bundle.js',
         publicPath: '/dist/'
     },
