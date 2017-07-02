@@ -294,10 +294,50 @@ Promise.resolve(123)
     })
 ```
 
+But be careful - if there are more than one catch block you have to keep in mind that the error will be intercepted by the closest one:
+
+```ts
+Promise.resolve(123)
+    .then((res) => {
+        throw new Error('something bad happened'); // throw a synchronous error
+        return 456;
+    })
+    .catch((err) => {
+        console.log('first catch: ' + err.message); // something bad happened
+    })
+    .then((res) => {
+        console.log(res);
+        return Promise.resolve(789);
+    })
+    .catch((err) => {
+        console.log('second catch: ' + err.message); // never called
+    })
+```
+
+but:
+
+```ts
+Promise.resolve(123)
+    .then((res) => {
+        return 456;
+    })
+    .catch((err) => {
+        console.log('first catch: ' + err.message); // never called
+    })
+    .then((res) => {
+        console.log(res);
+        throw new Error('something bad happened'); // throw a synchronous error
+        return Promise.resolve(789);
+    })
+    .catch((err) => {
+        console.log('second catch: ' + err.message); // something bad happened
+    })
+```
+
 The fact that:
 
-* errors jump to the tailing `catch` (and skip any middle `then` calls) and
-* synchronous errors also get caught by any tailing `catch`.
+* errors jump to the first `catch` after error location (and skip any middle `then` calls) and
+* synchronous errors also get caught by appropriate `catch`.
 
 effectively provides us with an async programming paradigm that allows better error handling than raw callbacks. More on this below.
 
