@@ -294,6 +294,39 @@ Promise.resolve(123)
     })
 ```
 
+* Only the relevant (nearest tailing) `catch` is called for a given error (as the catch starts a new promise chain).
+
+```ts
+Promise.resolve(123)
+    .then((res) => {
+        throw new Error('something bad happened'); // throw a synchronous error
+        return 456;
+    })
+    .catch((err) => {
+        console.log('first catch: ' + err.message); // something bad happened
+        return 123;
+    })
+    .then((res) => {
+        console.log(res); // 123
+        return Promise.resolve(789);
+    })
+    .catch((err) => {
+        console.log('second catch: ' + err.message); // never called
+    })
+```
+
+* A `catch` is only called in case of an error in the preceeding chain: 
+
+```ts
+Promise.resolve(123)
+    .then((res) => {
+        return 456;
+    })
+    .catch((err) => {
+        console.log("HERE"); // never called
+    })
+```
+
 The fact that:
 
 * errors jump to the tailing `catch` (and skip any middle `then` calls) and
