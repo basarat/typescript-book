@@ -66,3 +66,6 @@ Here is the tsconfig.json:
 - For further information read this article: [Dynamic Import Expressions and webpack 2 Code Splitting integration with TypeScript 2.4](https://blog.josequinto.com/2017/06/29/dynamic-import-expressions-and-webpack-code-splitting-integration-with-typescript-2-4/).
 
 
+You can see full example [here][dynamicimportcode].
+
+[dynamicimportcode]:../code/dynamic-import-expressions
