@@ -1,6 +1,6 @@
 {
   "gitbook": ">=3.2.1",
-  "plugins": ["edit-link", "github"],
+  "plugins": ["edit-link", "github", "adsense"],
   "pluginsConfig": {
     "edit-link": {
       "base": "https://github.com/basarat/typescript-book/tree/master",
@@ -8,6 +8,13 @@
     },
     "github": {
       "url": "https://github.com/basarat/typescript-book/"
+    },
+    "adsense": {
+      "client": "ca-pub-4656761253552116",
+      "slot": "2017468453",
+      "format": "auto",
+      "element": ".page-inner section",
+      "position": "top"
     }
   }
 }
