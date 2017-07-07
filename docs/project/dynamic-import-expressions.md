@@ -62,7 +62,6 @@ Here is the tsconfig.json:
 **Important notes**:
 
 - Using **"module": "esnext"** TypeScript produces the mimic impot() statement to be input for Webpack Code Splitting.
-- Currently (**TypeScript 2.4.1**) There is a bug using **"module": "esnext"**. Some external libraries like moment are not recognized by TypeScript if you don’t configure explicitely **"moduleResolution" : "node"**. **PLEASE, DON’T FORGET TO INCLUDE IT IN YOUR TSCONFIG.JSON.**
 - For further information read this article: [Dynamic Import Expressions and webpack 2 Code Splitting integration with TypeScript 2.4](https://blog.josequinto.com/2017/06/29/dynamic-import-expressions-and-webpack-code-splitting-integration-with-typescript-2-4/).
 
 
