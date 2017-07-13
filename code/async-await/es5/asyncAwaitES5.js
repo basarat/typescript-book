@@ -40,7 +40,7 @@ function delay(milliseconds, count) {
         }, milliseconds);
     });
 }
-// async function allways return a Promise
+// async function always return a Promise
 function dramaticWelcome() {
     return __awaiter(this, void 0, void 0, function () {
         var i, count;

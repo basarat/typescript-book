@@ -63,7 +63,7 @@ function delay(milliseconds: number, count: number): Promise<number> {
         });
 }
 
-// async function allways return a Promise
+// async function always return a Promise
 async function dramaticWelcome(): Promise<void> {
     console.log("Hello");
 
@@ -96,7 +96,7 @@ function delay(milliseconds, count) {
         }, milliseconds);
     });
 }
-// async function allways return a Promise
+// async function always return a Promise
 function dramaticWelcome() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("Hello");
@@ -157,7 +157,7 @@ function delay(milliseconds, count) {
         }, milliseconds);
     });
 }
-// async function allways return a Promise
+// async function always return a Promise
 function dramaticWelcome() {
     return __awaiter(this, void 0, void 0, function () {
         var i, count;

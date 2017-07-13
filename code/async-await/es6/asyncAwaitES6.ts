@@ -6,7 +6,7 @@ function delay(milliseconds: number, count: number): Promise<number> {
         });
 }
 
-// async function allways return a Promise
+// async function always return a Promise
 async function dramaticWelcome(): Promise<void> {
     console.log("Hello");
 
