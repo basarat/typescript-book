@@ -1,6 +1,6 @@
 ### Spread Operator
 
-The main objective of the spread operator is to *spread* the objects of an array. This is best explained with examples.
+The main objective of the spread operator is to *spread* the elements of an array or object. This is best explained with examples.
 
 #### Apply
 A common use case is to spread an array into the function arguments. Previously you would need to use `Function.prototype.apply`:
@@ -37,6 +37,24 @@ The spread operator allows you to easily place an *expanded version* of an array
 var list = [1, 2];
 list = [...list, 3, 4];
 console.log(list); // [1,2,3,4]
+```
+
+#### Object spread
+You can also spread an object into another object. A common use case is to simply add a property to an object without mutating the original:
+
+```ts
+const point2d = {x: 1, y: 2};
+/** Create a new object by using all the point2D props along with z */
+const point3D = {...point2D, z: 3};
+```
+
+Another common use case is a simple shallow extend:
+
+```ts
+const foo = {a: 1, b: 2};
+const bar = {c: 1, d: 2};
+/** Merge foo and bar */
+const fooBar = {...foo, ...bar};
 ```
 
 #### Summary

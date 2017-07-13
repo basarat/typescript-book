@@ -53,7 +53,7 @@ queue.push("1"); // ERROR : cannot push a string. Only numbers allowed
 // ^ if that error is fixed the rest would be fine too
 ```
 
-Of course this can quickly become painful e.g. if you want a string queue you have to go through all that effort again. What you really want is a way to say that whatever the type is of the stuff getting *pushed* it should be the same for whatever gets *poped*. This is done easily with a *generic* parameter (in this case on the class):
+Of course this can quickly become painful e.g. if you want a string queue you have to go through all that effort again. What you really want is a way to say that whatever the type is of the stuff getting *pushed* it should be the same for whatever gets *popped*. This is done easily with a *generic* parameter (in this case, at the class level):
 
 ```ts
 /** A class definition with a generic parameter */
@@ -172,7 +172,43 @@ declare function require(name: string): any;
 const something = require('something') as TypeOfSomething;
 ```
 
-This is just an example, if you are considering on using this `require` typings you don't need to cause:
+This is just an example; if you are considering on using this `require` typings, you don't need to because:
 
-1. It's already there in `node.d.ts` you can install using `npm install @types/node --save-dev`.
+1. It's already there in `node.d.ts`: you can install using `npm install @types/node --save-dev`.
 1. You should consider using the type definitions for your library e.g. for jquery `npm install @types/jquery --save-dev` instead of using raw `require`.
+
+### Design Pattern: Convenience generic
+
+The previous example of `require<T>` was intentionally meant to make clear the fact that generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
+
+An example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
+```ts
+const getJSON = <T>(config: {
+    url: string,
+    headers?: { [key: string]: string },
+  }): Promise<T> => {
+    const fetchConfig = ({
+      method: 'GET',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...(config.headers || {})
+    });
+    return fetch(config.url, fetchConfig)
+      .then<T>(response => response.json());
+  }
+```
+Note that you still have to explicitly annotate what you want, but the `getJSON<T>` signature `(config) => Promise<T>` saves you a few key strokes:
+
+```ts
+type LoadUsersResponse = {
+  users: {
+    name: string;
+    email: string;
+  }[];
+}
+function loadUsers() {
+  return getJSON<LoadUsersResponse>({ url: 'https://example.com/users' });
+}
+```
+
+Also `Promise<T>` as a return value is definitely better than alternatives like `Promise<any>`.

@@ -285,7 +285,9 @@ type Coordinates = [number, number];
 type Callback = (data: string) => void;
 ```
 
-> TIP: If you need to have deep hierarchies of Type annotations use an `interface`. Use a type alias for simpler object structures (like `Coordinates`) just to give them a semantic name.
+> TIP: If you need to have hierarchies of Type annotations use an `interface`. They can be used with `implements` and `extends`
+
+> TIP: Use a type alias for simpler object structures (like `Coordinates`) just to give them a semantic name. Also when you want to give semantic names to Union or Intersection types, a Type alias is the way to go.
 
 ## Summary
 Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in the TypeScript's Type System.

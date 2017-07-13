@@ -66,3 +66,9 @@ class Adder {
     }
 }
 ```
+
+Another alternative is to *manually* specify the type of the variable you are binding e.g. 
+
+```ts
+const add: typeof adder.add = adder.add.bind(adder);
+```

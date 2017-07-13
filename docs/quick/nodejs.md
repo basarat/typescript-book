@@ -46,22 +46,22 @@ Using modules written in TypeScript is super fun as you get great compile time s
 
 Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:
 
-```
+```text
 package
-|_ package.json
-|_ tsconfig.json
-|_ src
-  |_ All your source files
-  |_ index.ts
-  |_ foo.ts
-  |_ ...
-|_ lib
-  |_ All your compiled files
-  |_ index.d.ts
-  |_ index.js
-  |_ foo.d.ts
-  |_ foo.js
-  |_ ...
+├─ package.json
+├─ tsconfig.json
+├─ src
+│  ├─ All your source files
+│  ├─ index.ts
+│  ├─ foo.ts
+│  └─ ...
+└─ lib
+  ├─ All your compiled files
+  ├─ index.d.ts
+  ├─ index.js
+  ├─ foo.d.ts
+  ├─ foo.js
+  └─ ...
 ```
 
 

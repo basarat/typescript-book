@@ -84,7 +84,7 @@ foo[obj] = 'World';
 console.log(foo["[object Object]"]); // World
 ```
 
-Ofcourse `number` is supported because
+Of course `number` is supported because
 
 1. its needed for excellent Array / Tuple support.
 1. even if you use it for an `obj` its default `toString` implementation is nice (not `[object Object]`).
@@ -129,7 +129,7 @@ foo['a'].messages;
 
 > TIP: the name of the index signature e.g. `index` in `{ [index:string] : {message: string} }` has no significance for TypeScript and really for readability. e.g. if its user names you can do `{ [username:string] : {message: string} }` to help the next dev who looks at the code (which just might happen to be you).
 
-Ofcourse `number` indexes are also supported e.g. `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
+Of course `number` indexes are also supported e.g. `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
 
 ### All members must conform to the `string` index signature
 
@@ -166,9 +166,9 @@ foo['x']; // number
 let x = 'x'
 foo[x]; // number
 ```
-### Extending `string`
+### Using a limited set of string literals
 
-An index signature can require that index strings be members of a "vocabulary" union of literal strings, because such a union extends `string`:
+An index signature can require that index strings be members of a union of literal strings e.g.:
 
 ```ts
 type Index = 'a' | 'b' | 'c'
@@ -178,7 +178,7 @@ const good: FromIndex = {b:1, c:2}
 
 // Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.
 //  Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.
-const bad: FromIndex = {b:1, c:2, d:3} // 
+const bad: FromIndex = {b:1, c:2, d:3} //
 ```
 This is often used together with `keyof typeof` to capture vocabulary types, described on the next page.
 
@@ -202,5 +202,56 @@ interface ArrStr {
 
   // Just an example member
   length: number;
+}
+```
+
+### Design Pattern: Nested index signature
+
+> API consideration when adding index signatures
+
+Quite commonly in the JS community you will see APIs that abuse string indexers. e.g. a common pattern among CSS in JS libraries:
+
+```js
+interface NestedCSS {
+  color?: string;
+  [selector: string]: string | NestedCSS;
+}
+
+const example: NestedCSS = {
+  color: 'red',
+  '.subclass': {
+    color: 'blue'
+  }
+}
+```
+Try not to mix string indexers with *valid* values this way. E.g. a typo in the padding will remain uncaught:
+
+```js
+const failsSilently: NestedCSS = {
+  colour: 'red', // No error is `colour` is a valid string selector
+}
+```
+
+Instead seperate out the nesting into its own property e.g. in a name like `nest` (or `children` or `subnodes` etc.):
+
+```js
+interface NestedCSS {
+  color?: string;
+  nest?: {
+    [selector: string]: NestedCSS;
+  }
+}
+
+const example: NestedCSS = {
+  color: 'red',
+  nest: {
+    '.subclass': {
+      color: 'blue'
+    }
+  }
+}
+
+const failsSilently: NestedCSS = {
+  colour: 'red', // TS Error: unknown property `colour`
 }
 ```
