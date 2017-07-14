@@ -12,8 +12,6 @@ For leading and ending comments in a file:
 * The first token in the source file gets all the initial trivia.
 * The last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
 
-The first token in the source file gets all the initial trivia, and the last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
-
 #### Trivia APIs
 For most basic uses, comments are the "interesting" trivia. The comments that belong to a Node can be fetched through the following functions:
 
