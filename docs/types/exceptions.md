@@ -79,7 +79,7 @@ function myFunction (callback: (e?: Error)) {
 ## Exceptional cases
 `Exceptions should be exceptional` is a common saying in computer science. There are few resons why this is true for JavaScript (and TypeScript) as well. 
 
-### Unclear where is is thrown 
+### Unclear where it is thrown 
 Consider the following piece of code: 
 ```js
 try {
