@@ -84,6 +84,7 @@
   * [Barrel](docs/tips/barrel.md)
   * [Create Arrays](docs/tips/create-arrays.md)
   * [Promise Safety](docs/tips/promise-safety.md)
+  * [Typesafe Event Emitter](docs/tips/typed-event.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
 * [Common Errors](docs/errors/main.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
