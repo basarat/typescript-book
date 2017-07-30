@@ -31,12 +31,6 @@ import {Foo} from "./foo";
 ```
 
 
-> **Bonus points**: You even get autocomplete at this cursor location
+> **Bonus points**: You even get autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
 
-```ts
-import {/*here*/} from "./foo";
-```
-
-> **Bonus points**: Better commonJs experience
-
-Also its makes for a horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {foo} = require('module/foo')`
+> **Bonus points**: Better commonJs experience. With `default` there is horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
