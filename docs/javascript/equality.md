@@ -26,4 +26,4 @@ console.log(0 === ""); // false
 
 Similar to `==` vs. `===`, there is `!=` vs. `!==`
 
-So ProTip: Always use `===` and `!==` except for null checks, which we cover next.
+So ProTip: Always use `===` and `!==` except for null checks, which we cover later.
