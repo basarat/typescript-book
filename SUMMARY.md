@@ -4,6 +4,7 @@
   * [Why TypeScript](docs/why-typescript.md)
 * [JavaScript](docs/javascript/recap.md)
   * [Equality](docs/javascript/equality.md)
+  * [References](docs/javascript/references.md)
   * [Null vs. Undefined](docs/javascript/null-undefined.md)
   * [this](docs/javascript/this.md)
   * [Closure](docs/javascript/closure.md)
