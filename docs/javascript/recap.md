@@ -25,7 +25,7 @@ TypeScript will try to protect you from portions of JavaScript that never worked
 //
 {} + []; // JS : 0, TS Error
 [] + {}; // JS : "[object Object]", TS Error
-{} + {}; // JS : NaN, TS Error
+{} + {}; // JS : NaN or [object Object][object Object] depending upon browser, TS Error
 "hello" - 1; // JS : NaN, TS Error
 
 function add(a,b) {
