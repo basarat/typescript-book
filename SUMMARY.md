@@ -3,7 +3,7 @@
 * [Getting Started](docs/getting-started.md)
   * [Why TypeScript](docs/why-typescript.md)
 * [JavaScript](docs/javascript/recap.md)
-  * [Awful](docs/javascript/awful.md)
+  * [Null vs. Undefined](docs/javascript/null-undefined.md)
   * [Closure](docs/javascript/closure.md)
 * [Future JavaScript Now](docs/future-javascript.md)
   * [Classes](docs/classes.md)

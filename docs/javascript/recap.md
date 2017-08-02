@@ -39,3 +39,5 @@ Essentially TypeScript is linting JavaScript. Just doing a better job at it than
 ## You still need to learn JavaScript
 
 That said TypeScript is very pragmatic about the fact that *you do write JavaScript* so there are some things about JavaScript that you still need to know in order to not be caught off-guard. Let's discuss them next.
+
+> Note: TypeScript is a superset of JavaScript. Just with documentation that can actually be used by compilers / IDEs ;)
