@@ -7,23 +7,13 @@ TypeScript has had *first class* support for NodeJS since inception. Here's how 
 1. Add TypeScript (`npm install typescript --save-dev`)
 1. Add `node.d.ts` (`npm install @types/node --save-dev`)
 1. Init a `tsconfig.json` for TypeScript options (`node ./node_modules/typescript/lib/tsc --init`)
+1. Make sure you have `compilerOptions.module:commonjs` in your tsconfig.json
 
 That's it! Fire up your IDE (e.g. `alm -o`) and play around. Now you can use all the built in node modules (e.g. `import fs = require('fs');`) with all the safety and developer ergonomics of TypeScript!
 
 ## Bonus: Live compile + run
 * Add `ts-node` which we will use for live compile + run in node (`npm install ts-node --save-dev`)
 * Add `nodemon` which will invoke `ts-node` whenever a file is changed (`npm install nodemon --save-dev`)
-
-Let's explicitly tell `ts-node` where to look for types by editing `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    ...
-    "typeRoots": ["node_modules/@types"]
-  }
-}
-```
 
 Now just add a `script` target to your `package.json` based on your application entry e.g. assuming its `index.ts`:
 
