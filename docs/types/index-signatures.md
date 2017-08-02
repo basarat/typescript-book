@@ -42,7 +42,7 @@ console.log(foo['Hello']); // World
 ```
 Note that `toString` will get called whenever the `obj` is used in an index position.
 
-Arrays are slightly different. For `number` indexing JavaScript VMs will try to optimise (depending on things like is it actually and array and do the structures of items stored match etc.). So `number` should be considered as a valid object accessor in its own right (distinct from `string`). Here is a simple array example:
+Arrays are slightly different. For `number` indexing JavaScript VMs will try to optimise (depending on things like is it actually an array and do the structures of items stored match etc.). So `number` should be considered as a valid object accessor in its own right (distinct from `string`). Here is a simple array example:
 
 ```ts
 let foo = ['World'];
