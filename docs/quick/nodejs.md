@@ -32,6 +32,8 @@ So you can now run `npm start` and as you edit `index.ts`:
 
 ## Creating TypeScript node modules
 
+* [A lesson on creating typescript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
+
 Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
 
 Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:
