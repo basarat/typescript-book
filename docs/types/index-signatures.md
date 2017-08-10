@@ -176,9 +176,10 @@ type FromIndex = { [k in Index]?: number }
 
 const good: FromIndex = {b:1, c:2}
 
+// Error:
 // Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.
 //  Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.
-const bad: FromIndex = {b:1, c:2, d:3} //
+const bad: FromIndex = {b:1, c:2, d:3};
 ```
 This is often used together with `keyof typeof` to capture vocabulary types, described on the next page.
 
