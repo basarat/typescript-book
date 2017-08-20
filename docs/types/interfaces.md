@@ -82,22 +82,28 @@ Consider the following interface where something is callable with `new`:
 
 ```ts
 interface Crazy {
-    new (): {
         hello: number
-    };
+}
+
+interface CrazyConstructable {
+    new (n: number): Crazy;
 }
 ```
 
 You would essentially have something like:
 
 ```ts
+
+
 class CrazyClass implements Crazy {
-    constructor() {
-        return { hello: 123 };
+    constructor(public hello: number) {
     }
 }
 // Because
-const crazy = new CrazyClass(); // crazy would be {hello:123}
+    var crazyCtor: CrazyConstructable = CrazyClass;
+    const crazyObj = new crazyCtor(123); // crazyObj would be {hello:123}
 ```
 
 You can *declare* all the crazy JS out there with interfaces and even use them safely from TypeScript. Doesn't mean you can use TypeScript classes to implement them.
+In the case above, you cannot implement CrazyConstructable type as it cannot be instantiated due to the `new` member.
+CrazyConstructable can only be used as a constructor type for the Crazy type instantiation. 
