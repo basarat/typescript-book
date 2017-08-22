@@ -93,8 +93,6 @@ interface CrazyConstructable {
 You would essentially have something like:
 
 ```ts
-
-
 class CrazyClass implements Crazy {
     constructor(public hello: number) {
     }
