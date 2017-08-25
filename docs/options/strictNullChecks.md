@@ -61,3 +61,4 @@ function processEntity(e?: Entity) {
     let b = e!.name;  // Assert that e is non-null. This allows you to access name
 }
 ```
+> Note that it is just an assertion, and just like type assertions *you are responsible* for making sure the value is not null. A null assertion is essentially you telling the compiler "I know its not null so let me use it as though its not null".
