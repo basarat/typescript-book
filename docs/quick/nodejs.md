@@ -59,7 +59,7 @@ package
 
 * In your `tsconfig.json`
   * have `compilerOptions`: `"outDir": "lib"` and `"declaration": true` < This generates declaration and js files in the lib folder
-  * Include all the files from `src` < This includes all the files from the src dir.
+  * have `include: ["./src/**/*]"` < This includes all the files from the `src` dir.
 
 * In your `package.json` have
   * `"main": "lib/index"` < This tells NodeJS to load `lib/index.js`
