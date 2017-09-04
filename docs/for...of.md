@@ -20,10 +20,20 @@ for (var item of someArray) {
 Similarly TypeScript has no trouble going through a string character by character using `for...of`:
 
 ```ts
-var hello = "is it me you're looking for?";
+var hello = "world";
 for (var char of hello) {
-    console.log(char); // is it me you're looking for?
+    console.log(char);
 }
+
+
+// outputs //
+
+
+w
+o
+r
+l
+d
 ```
 
 #### JS Generation
