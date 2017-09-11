@@ -1,6 +1,9 @@
 {
   "plugins": ["edit-link", "github", "adsense"],
   "pluginsConfig": {
+    "lunr": {
+      "ignoreSpecialCharacters": true
+    },
     "edit-link": {
       "base": "https://github.com/basarat/typescript-book/tree/master",
       "label": "Edit This Page"
