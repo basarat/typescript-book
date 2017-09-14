@@ -50,7 +50,7 @@ var random = { note: `I don't have a name property` };
 
 logIfHasName(person); // okay
 logIfHasName(animal); // okay
-logIfHasName(random); // okay
+logIfHasName(random); // Error: Type '{ note: string; }' has no properties in common with type '{ name?: string; }'
 logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
 ```
 
