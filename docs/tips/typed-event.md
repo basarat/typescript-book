@@ -30,6 +30,7 @@ onBar.on((bar)=>console.log(bar));
 
 This has the following advantages: 
 * The types of events are easily discoverable as variables.
+* The event emitter variables are easily refactored independently.
 * Type safety for event data structures.
 
 ### Reference TypedEvent
