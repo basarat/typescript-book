@@ -62,7 +62,7 @@ catch(e) {
 Raw strings result in a very painful debugging experience and complicate error analysis from logs.
 
 ## You don't have to `throw` an error
-It is okay to pass an `Error` object around. This is conventional in NodeJS callback style code which take callbacks with the first argument as an error object.
+It is okay to pass an `Error` object around. This is conventional in Node.js callback style code which take callbacks with the first argument as an error object.
 
 ```js
 function myFunction (callback: (e?: Error)) {

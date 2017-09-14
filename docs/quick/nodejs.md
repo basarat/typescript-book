@@ -1,9 +1,9 @@
-# TypeScript with NodeJS
-TypeScript has had *first class* support for NodeJS since inception. Here's how to setup a quick NodeJS project:
+# TypeScript with Node.js
+TypeScript has had *first class* support for Node.js since inception. Here's how to setup a quick Node.js project:
 
-> Note: many of these steps are actually just common practice nodejs setup steps
+> Note: many of these steps are actually just common practice Node.js setup steps
 
-1. Setup a nodejs project `package.json`. Quick one : `npm init -y`
+1. Setup a Node.js project `package.json`. Quick one : `npm init -y`
 1. Add TypeScript (`npm install typescript --save-dev`)
 1. Add `node.d.ts` (`npm install @types/node --save-dev`)
 1. Init a `tsconfig.json` for TypeScript options (`node ./node_modules/typescript/lib/tsc --init`)
@@ -28,7 +28,7 @@ So you can now run `npm start` and as you edit `index.ts`:
 
 * nodemon reruns its command (ts-node)
 * ts-node transpiles automatically picking up tsconfig.json and the installed typescript version,
-* ts-node runs the output javascript through node.
+* ts-node runs the output javascript through Node.js.
 
 ## Creating TypeScript node modules
 
@@ -62,7 +62,7 @@ package
   * have `include: ["./src/**/*]"` < This includes all the files from the `src` dir.
 
 * In your `package.json` have
-  * `"main": "lib/index"` < This tells NodeJS to load `lib/index.js`
+  * `"main": "lib/index"` < This tells Node.js to load `lib/index.js`
   * `"types": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
 
 

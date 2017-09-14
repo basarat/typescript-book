@@ -3,7 +3,7 @@ If you are using TypeScript to create a web application here are my recommendati
 
 ## General Machine Setup
 
-* Install [NodeJS](https://nodejs.org/en/download/)
+* Install [Node.js](https://nodejs.org/en/download/)
 
 ## Project Setup
 * Create a project dir:

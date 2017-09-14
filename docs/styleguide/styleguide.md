@@ -182,7 +182,7 @@ return undefined;
 
 * Use `null` where its a part of the API or conventional
 
-> Reason: It is conventional in NodeJS e.g. `error` is `null` for NodeBack style callbacks.
+> Reason: It is conventional in Node.js e.g. `error` is `null` for NodeBack style callbacks.
 
 **Bad**
 ```ts
