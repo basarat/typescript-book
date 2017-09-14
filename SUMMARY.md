@@ -34,7 +34,7 @@
     * [globals.d.ts](docs/project/globals.md)
   * [Namespaces](docs/project/namespaces.md)
   * [Dynamic Import Expressions](docs/project/dynamic-import-expressions.md)
-* [NodeJS QuickStart](docs/quick/nodejs.md)
+* [Node.js QuickStart](docs/quick/nodejs.md)
 * [Browser QuickStart](docs/quick/browser.md)
 * [TypeScript's Type System](docs/types/type-system.md)
   * [JS Migration Guide](docs/types/migrating.md)

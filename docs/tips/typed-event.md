@@ -1,6 +1,6 @@
 ## Typesafe Event Emitter
 
-Conventionally in NodeJS and traditional JavaScript you have a single event emitter. This event emitter internally tracks listener for different event types e.g. 
+Conventionally in Node.js and traditional JavaScript you have a single event emitter. This event emitter internally tracks listener for different event types e.g. 
 
 ```js
 const emitter = new EventEmitter();

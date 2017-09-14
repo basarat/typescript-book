@@ -54,7 +54,7 @@ counter.increment();
 console.log(counter.getVal()); // 2
 ```
 
-At a high level it is also what makes something like nodejs possible (don't worry if it doesn't click in your brain right now. It will eventually 🌹):
+At a high level it is also what makes something like Node.js possible (don't worry if it doesn't click in your brain right now. It will eventually 🌹):
 
 ```ts
 // Pseudo code to explain the concept
