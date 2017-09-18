@@ -138,7 +138,7 @@ module jsland {
   }
 
   const failsSilently: NestedCSS = {
-    colour: 'red', // No error is `colour` is a valid string selector
+    colour: 'red', // No error as `colour` is a valid string selector
   }
 }
 
