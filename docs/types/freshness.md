@@ -46,11 +46,9 @@ function logIfHasName(something: { name?: string }) {
 }
 var person = { name: 'matt', job: 'being awesome' };
 var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
-var random = { note: `I don't have a name property` };
 
 logIfHasName(person); // okay
 logIfHasName(animal); // okay
-logIfHasName(random); // okay
 logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
 ```
 
