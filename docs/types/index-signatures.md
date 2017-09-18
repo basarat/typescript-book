@@ -229,7 +229,7 @@ Try not to mix string indexers with *valid* values this way. E.g. a typo in the 
 
 ```js
 const failsSilently: NestedCSS = {
-  colour: 'red', // No error is `colour` is a valid string selector
+  colour: 'red', // No error as `colour` is a valid string selector
 }
 ```
 
