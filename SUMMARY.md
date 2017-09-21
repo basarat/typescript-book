@@ -46,6 +46,7 @@
   * [Enums](docs/enums.md)
   * [`lib.d.ts`](docs/types/lib.d.ts.md)
   * [Functions](docs/types/functions.md)
+  * [Callable](docs/types/callable.md)
   * [Type Assertion](docs/types/type-assertion.md)
   * [Freshness](docs/types/freshness.md)
   * [Type Guard](docs/types/typeGuard.md)
