@@ -2,7 +2,7 @@
   var interval = setInterval(function(){
       var foo = document.querySelector('.search-noresults');
       if(foo) {
-          foo.innerHTML = '<a href="https://paypal.me/basaratali"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg"/></a>' + foo.innerHTML;
+          foo.innerHTML = '<a href="https://paypal.me/basaratali" style="display: block;text-align: center;"> Buy me a beer 🍻 🌹 <br><br><img src="https://img.shields.io/badge/Donate-PayPal-green.svg"><br><br></a>' + foo.innerHTML;
           clearInterval(interval);
       }
   },1000);
