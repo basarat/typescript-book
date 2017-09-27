@@ -1,4 +1,9 @@
 <script>
-  var foo = document.querySelector('.search-noresults');
-  foo.innerHTML = '<a href="https://paypal.me/basaratali"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg"/></a>' + foo.innerHTML;
+  var interval = setInterval(function(){
+      var foo = document.querySelector('.search-noresults');
+      if(foo) {
+          foo.innerHTML = '<a href="https://paypal.me/basaratali"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg"/></a>' + foo.innerHTML;
+          clearInterval(interval);
+      }
+  },1000);
 </script>
