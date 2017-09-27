@@ -1,6 +1,9 @@
 {
-  "plugins": ["edit-link", "github", "adsense"],
+  "plugins": ["edit-link", "github", "adsense","header"],
   "pluginsConfig": {
+    "layout": {
+      "headerPath" : "header.html"
+    },
     "lunr": {
       "ignoreSpecialCharacters": true
     },
