@@ -61,7 +61,7 @@ Here is the tsconfig.json:
 
 **Important notes**:
 
-- Using **"module": "esnext"** TypeScript produces the mimic impot() statement to be input for Webpack Code Splitting.
+- Using **"module": "esnext"** TypeScript produces the mimic import() statement to be input for Webpack Code Splitting.
 - For further information read this article: [Dynamic Import Expressions and webpack 2 Code Splitting integration with TypeScript 2.4](https://blog.josequinto.com/2017/06/29/dynamic-import-expressions-and-webpack-code-splitting-integration-with-typescript-2-4/).
 
 
