@@ -37,3 +37,23 @@ function log(someArg: any) {
   sendDataToServer(someArg);
 }
 ```
+
+### noImplicitAny and untyped imports
+
+If you're importing modules without type definitions, you'll get error TS7016 with `noImplicitAny`:
+
+> Could not find a declaration file for module 'foo'. '.../node_modules/foo/index.js' implicitly has an 'any' type.
+
+Try `npm i -D @types/foo` and if type definitions don't exist for your project, create a file like `untyped-modules.d.ts` and add a line for every untyped module to it:
+
+```ts
+declare module 'foo';
+```
+
+Then you can do:
+
+```ts
+import {foo} from 'foo';
+```
+
+as usual.
