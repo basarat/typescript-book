@@ -43,7 +43,7 @@ console.log(list); // [1,2,3,4]
 You can also spread an object into another object. A common use case is to simply add a property to an object without mutating the original:
 
 ```ts
-const point2d = {x: 1, y: 2};
+const point2D = {x: 1, y: 2};
 /** Create a new object by using all the point2D props along with z */
 const point3D = {...point2D, z: 3};
 ```
