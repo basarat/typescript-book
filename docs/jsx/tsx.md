@@ -77,11 +77,17 @@ class MyComponent extends React.Component<Props, {}> {
 ```
 
 ### React JSX Tip: Accept an instance of a Component
-The react type definitions provide `React.ReactElement<T>` to allow you to annotate the result of a `<T/>` component instantiation. e.g. 
+The react type definitions provide `React.ReactElement<T>` to allow you to annotate the result of a `<T/>` class component instantiation. e.g. 
 
 ```js
-const foo: React.ReactElement<MyAwesomeComponent> = <MyAwesomeComponent/>; // Okay
-const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent/>; // Error!
+class MyAwesomeComponent extends React.Component {
+  render() {
+    return <div>Hello</div>;
+  }
+}
+
+const foo: React.ReactElement<MyAwesomeComponent> = <MyAwesomeComponent />; // Okay
+const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent />; // Error!
 ```
 
 > Of course you can use this as a function argument annotation and even React component prop member.
