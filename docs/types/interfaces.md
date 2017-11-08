@@ -50,7 +50,7 @@ class MyPoint implements Point {
 }
 ```
 
-Basically in the presence of that implements any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync:
+Basically in the presence of that `implements`, any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync:
 
 ```ts
 interface Point {
