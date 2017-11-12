@@ -8,6 +8,7 @@
   * [Null vs. Undefined](docs/javascript/null-undefined.md)
   * [this](docs/javascript/this.md)
   * [Closure](docs/javascript/closure.md)
+  * [Numbers](docs/javascript/numbers.md)
 * [Future JavaScript Now](docs/future-javascript.md)
   * [Classes](docs/classes.md)
     * [Classes Emit](docs/classes-emit.md)
