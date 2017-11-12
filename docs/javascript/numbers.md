@@ -37,7 +37,7 @@ console.log(Number.MIN_SAFE_INTEGER - 2 === Number.MIN_SAFE_INTEGER - 1); // tru
 
 > For arbitrary precision integer math use `big.js` mentioned below.
 
-### Recommended Solution
+### big.js
 Whenever you use math for financial calculations (e.g. gst calculation, shopping cart items count etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
 * Perfect decimal math.
 * Safe out of bound integer values
