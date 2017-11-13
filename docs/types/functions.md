@@ -13,7 +13,7 @@ Of course you can annotate function parameters just like you can annotate other 
 // variable annotation
 var sampleVariable: { bar: number }
 
-// function parameter
+// function parameter annotation
 function foo(sampleParameter: { bar: number }) { }
 ```
 
