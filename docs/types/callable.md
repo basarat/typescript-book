@@ -46,13 +46,12 @@ const overloaded: {
 ```
 
 ### Arrow Syntax
-To make it easy to specify callable signatures TypeScript also allows simple arrow type annotations e.g. 
+To make it easy to specify callable signatures TypeScript also allows simple arrow type annotations e.g. a function that takes a `number` and returns a `string` can be annotated as: 
 
 ```js
 const simple: (foo: number) => string
     = (foo) => foo.toString();
 ```
-Note: The fat arrow (`=>`) can be used to indicate the return type of functions *expressions*.
 
 Only limitation of the arrow syntax: You can't specify overloads. For overloads you must use the full bodied `{ (someArgs): someReturn }` syntax. 
 
