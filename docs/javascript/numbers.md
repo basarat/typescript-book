@@ -38,7 +38,7 @@ console.log(Number.MIN_SAFE_INTEGER - 2 === Number.MIN_SAFE_INTEGER - 1); // tru
 > For arbitrary precision integer math use `big.js` mentioned below.
 
 ### big.js
-Whenever you use math for financial calculations (e.g. gst calculation, shopping cart items count etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
+Whenever you use math for financial calculations (e.g. GST calculation, money with cents addition etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
 * Perfect decimal math.
 * Safe out of bound integer values
 
@@ -49,5 +49,19 @@ npm install big.js @types/big.js
 
 > Do not use this library for math used for UI / performance intensive purposes e.g charts, canvas drawing etc.
 
-### NaN handling
-// TODO 🌹
+### NaN
+When some number calculation is not representable by a valid number, JavaScript returns a special `NaN` value. A  classic example is imaginary numbers:
+
+```js
+console.log(Math.sqrt(-1)); // NaN
+```
+
+Note: Equality checks **don't** work on `NaN` values. Instead use `Number.isNaN` instead:
+
+```js
+// Don't do this
+console.log(NaN === NaN); // false!!
+
+// Do this
+console.log(Number.isNaN(NaN)); // true
+```
