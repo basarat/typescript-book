@@ -36,7 +36,7 @@ const str = overloaded(''); // str is inferred string
 const number = overloaded(123); // num is inferred number
 ```
 
-Ofcourse like *all* bodies of interfaces / types you can use these as variable type annotations e.g. 
+Of course like *all* bodies of interfaces / types you can use these as variable type annotations e.g. 
 
 ```js
 const overloaded: {
@@ -52,6 +52,7 @@ To make it easy to specify callable signatures TypeScript also allows simple arr
 const simple: (foo: number) => string
     = (foo) => foo.toString();
 ```
+Note: The fat arrow (`=>`) can be used to indicate the return type of functions *expressions*.
 
 Only limitation of the arrow syntax: You can't specify overloads. For overloads you must use the full bodied `{ (someArgs): someReturn }` syntax. 
 
