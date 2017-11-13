@@ -36,7 +36,7 @@ const str = overloaded(''); // str is inferred string
 const number = overloaded(123); // num is inferred number
 ```
 
-Ofcourse like *all* bodies of interfaces / types you can use these as variable type annotations e.g. 
+Of course like *all* bodies of interfaces / types you can use these as variable type annotations e.g. 
 
 ```js
 const overloaded: {
