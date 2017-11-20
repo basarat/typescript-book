@@ -94,7 +94,7 @@ However the following is most likely an error and TypeScript will complain as sh
 
 ```ts
 function handler(event: Event) {
-    let element = event as HTMLElement; // Error: Neither 'Event' not type 'HTMLElement' is assignable to the other
+    let element = event as HTMLElement; // Error: Neither 'Event' nor type 'HTMLElement' is assignable to the other
 }
 ```
 
@@ -107,4 +107,4 @@ function handler(event: Event) {
 ```
 
 #### How typescript determines if a single assertion is not enough
-Basically it allows the assertion from type `S` to `T` succeed if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.
+Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.
