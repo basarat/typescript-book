@@ -19,6 +19,25 @@ Sample:
 
 Checkout the [section on modules][modules].
 
+## Catch clause variable cannot have a type annotation
+Sample: 
+```js
+try { something(); }
+catch (e: Error) { // Catch clause variable cannot have a type annotation
+}
+```
+TypeScript is protecting you from JavaScript code in the wild being wrong. Use a type guard instead: 
+```js
+try { something(); }
+catch (e) {
+  if (e instanceof Error){ 
+    // Here you go.
+  }
+}
+```
+
+
+
 ## For search indexing
 You can ignore reading this. This section is for search engine indexing.
 
