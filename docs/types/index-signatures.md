@@ -168,7 +168,7 @@ foo[x]; // number
 ```
 ### Using a limited set of string literals
 
-An index signature can require that index strings be members of a union of literal strings e.g.:
+An index signature can require that index strings be members of a union of literal strings by using *Mapped Types* e.g.:
 
 ```ts
 type Index = 'a' | 'b' | 'c'
