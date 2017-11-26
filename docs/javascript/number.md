@@ -56,7 +56,7 @@ export const foo = new Big('111.11111111111111111111');
 export const bar = foo.plus(new Big('0.00000000000000000001'));
 
 // To get a number: 
-const x:Number = Number(bar.toString()); // Looses the precision
+const x: number = Number(bar.toString()); // Looses the precision
 ```
 
 > Do not use this library for math used for UI / performance intensive purposes e.g charts, canvas drawing etc.
