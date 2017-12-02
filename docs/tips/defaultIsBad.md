@@ -30,13 +30,12 @@ And then:
 import {Foo} from "./foo";
 ```
 
+> **Bonus points**: You even get autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
 
-> **Bonus points**: You even get autocomplete at this cursor location
+> **Bonus points**: Better commonJs experience. With `default` there is horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
 
-```ts
-import {/*here*/} from "./foo";
-```
+> **Bonus points**: You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
 
-> **Bonus points**: Better commonJs experience
+> **Bonus points**: Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` caus its a well defined name exported from a module.
 
-Also its makes for a horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {foo} = require('module/foo')`
+> **Bonus points**: Reexporting is unnecessarily hard. Reexporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).

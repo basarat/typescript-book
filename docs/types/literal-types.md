@@ -1,4 +1,7 @@
-## String Literal Type
+## Literals
+Literals are *exact* values that are JavaScript primitives. 
+
+### String Literals
 
 You can use a string literal as a type. For example:
 
@@ -30,12 +33,33 @@ move(1,"North"); // Okay
 move(1,"Nurth"); // Error!
 ```
 
-## Other literal types
+### Other literal types
 TypeScript also supports `boolean`, `numbers` as literals, e.g.: 
 
 ```ts
 type OneToFive = 1 | 2 | 3 | 4 | 5;
 type Bools = true | false;
+```
+
+### Inference 
+Quite commonly you get an error like `Type string is not assignable to type "foo"`. The following example demonstrates this.
+
+```js
+function iTakeFoo(foo: 'foo') { }
+const test = {
+  someProp: 'foo'
+};
+iTakeFoo(test.someProp); // Error: Argument of type string is not assignable to parameter of type 'foo'
+```
+
+This is because `test` is inferred to be of type `{someProp: string}`. The fix here is to use a simple type assertion to tell TypeScript the literal you want it to infer as shown below: 
+
+```js
+function iTakeFoo(foo: 'foo') { }
+const test = {
+  someProp: 'foo' as 'foo'
+};
+iTakeFoo(test.someProp); // Okay!
 ```
 
 ### Use cases

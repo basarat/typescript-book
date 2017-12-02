@@ -1,0 +1,17 @@
+{
+  "name": "dynamic-import-expressions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dynamicImportExpression.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Quinto Zamora - https://blog.josequinto.com",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^2.4.1"
+  },
+  "dependencies": {
+    "moment": "^2.18.1"
+  }
+}

@@ -28,8 +28,6 @@ components of which this frame consists. With Iterator interface it is possible
 to retrieve components from this frame object like below:
 
 ```ts
-'use strict';
-
 class Component {
   constructor (public name: string) {}
 }
@@ -79,12 +77,10 @@ class Frame implements Iterable<Component> {
   constructor(public name: string, public components: Component[]) {}
 
   [Symbol.iterator]() {
-
     let pointer = 0;
     let components = this.components;
 
     return {
-
       next(): IteratorResult<Component> {
         if (pointer < components.length) {
           return {
@@ -98,11 +94,8 @@ class Frame implements Iterable<Component> {
           }
         }
       }
-
     }
-
   }
-
 }
 
 let frame = new Frame("Door", [new Component("top"), new Component("bottom"), new Component("left"), new Component("right")]);
@@ -158,16 +151,16 @@ class Fib implements IterableIterator<number> {
     var current = this.fn1;
     this.fn1 = this.fn2;
     this.fn2 = current + this.fn1;
-    if (this.maxValue && current <= this.maxValue) {
+    if (this.maxValue != null && current >= this.maxValue) {
       return {
-        done: false,
-        value: current
-      }
-    } return {
-      done: true,
-      value: null
+        done: true,
+        value: null
+      } 
+    } 
+    return {
+      done: false,
+      value: current
     }
-
   }
 
   [Symbol.iterator](): IterableIterator<number> {

@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",                          
+        "module": "esnext",                     
+        "lib": [
+            "dom",
+            "es5",
+            "scripthost",
+            "es2015.promise"
+        ],                                        
+        "strict": true,                           
+        "moduleResolution": "node"            
+    },
+    "files": [
+      "./dynamicImportExpression.ts"
+  ]
+}

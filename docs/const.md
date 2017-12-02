@@ -62,4 +62,4 @@ foo.bar = 456; // Allowed!
 console.log(foo); // { bar: 456 }
 ```
 
-For this reason I recommend using `const` with literals or immutable data structures.
+For this reason I recommend using `const` with primitives or immutable data structures.

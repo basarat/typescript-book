@@ -2,7 +2,7 @@
 
 > An unofficial TypeScript StyleGuide
 
-People have asked me for my opinions on this. Personally I don't enforce these a lot my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](../tips/main.md) (e.g. type assertion is bad, property setters are bad) 🌹.
+People have asked me for my opinions on this. Personally I don't enforce these a lot on my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](../tips/main.md) (e.g. type assertion is bad, property setters are bad) 🌹.
 
 Key Sections:
 
@@ -182,7 +182,7 @@ return undefined;
 
 * Use `null` where its a part of the API or conventional
 
-> Reason: It is conventional in NodeJS e.g. `error` is `null` for NodeBack style callbacks.
+> Reason: It is conventional in Node.js e.g. `error` is `null` for NodeBack style callbacks.
 
 **Bad**
 ```ts
@@ -232,7 +232,7 @@ const foo: string = "hello";
 
 * Prefer single quotes (`'`) unless escaping.
 
-> Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Its easier to type (no shift needed on most keyboards).
+> Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Its easier to type (no shift needed on most keyboards). [Prettier team recommends single quotes as well](https://github.com/prettier/prettier/issues/1105)
 
 > Double quotes are not without merit: Allows easier copy paste of objects into JSON. Allows people to use other languages to work without changing their quote character. Allows you to use apostrophes e.g. `He's not going.`. But I'd rather not deviate from where the JS Community is fairly decided.
 

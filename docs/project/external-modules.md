@@ -35,7 +35,7 @@ import foo = require('foo');
 
 will generate *different* JavaScript based on the compiler *module* option (`--module commonjs` or `--module amd` or `--module umd` or `--module system`).
 
-Personal recommendation: use `--module commonjs` and then your code will work as it is for NodeJS and for frontend you can use something like `webpack`.
+Personal recommendation: use `--module commonjs` and then your code will work as it is for Node.js and for frontend you can use something like `webpack`.
 
 ### Import type only
 The following statement:

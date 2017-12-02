@@ -27,5 +27,5 @@ or `include` and `exclude` to specify files. E.g.:
 
 Some notes:
 
-* if `files` are specified other options are ignored
+* if `files` is specified, other options are ignored
 * `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be included and even `.js`/`.jsx` if `allowJs` is true)

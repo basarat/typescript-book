@@ -42,7 +42,7 @@ console.log(foo['Hello']); // World
 ```
 Note that `toString` will get called whenever the `obj` is used in an index position.
 
-Arrays are slightly different. For `number` indexing JavaScript VMs will try to optimise (depending on things like is it actually and array and do the structures of items stored match etc.). So `number` should be considered as a valid object accessor in its own right (distinct from `string`). Here is a simple array example:
+Arrays are slightly different. For `number` indexing JavaScript VMs will try to optimise (depending on things like is it actually an array and do the structures of items stored match etc.). So `number` should be considered as a valid object accessor in its own right (distinct from `string`). Here is a simple array example:
 
 ```ts
 let foo = ['World'];
@@ -168,7 +168,7 @@ foo[x]; // number
 ```
 ### Using a limited set of string literals
 
-An index signature can require that index strings be members of a union of literal strings e.g.:
+An index signature can require that index strings be members of a union of literal strings by using *Mapped Types* e.g.:
 
 ```ts
 type Index = 'a' | 'b' | 'c'
@@ -176,9 +176,10 @@ type FromIndex = { [k in Index]?: number }
 
 const good: FromIndex = {b:1, c:2}
 
+// Error:
 // Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.
 //  Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.
-const bad: FromIndex = {b:1, c:2, d:3} //
+const bad: FromIndex = {b:1, c:2, d:3};
 ```
 This is often used together with `keyof typeof` to capture vocabulary types, described on the next page.
 
@@ -228,7 +229,7 @@ Try not to mix string indexers with *valid* values this way. E.g. a typo in the 
 
 ```js
 const failsSilently: NestedCSS = {
-  colour: 'red', // No error is `colour` is a valid string selector
+  colour: 'red', // No error as `colour` is a valid string selector
 }
 ```
 

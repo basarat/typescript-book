@@ -2,7 +2,12 @@
 * [User Defined Type Guards](#user-defined-type-guards)
 
 ## Type Guard
-Type Guards allow you to narrow down the type of an object within a conditional block. TypeScript is aware of the usage of the JavaScript `instanceof` and `typeof` operators. If you use these in a conditional block, TypeScript will understand the type of the variable to be different within that conditional block. Here is a quick example where TypeScript realizes that a particular function does not exist on `string` and points out what was probably a user typo:
+Type Guards allow you to narrow down the type of an object within a conditional block. 
+
+
+### typeof
+
+TypeScript is aware of the usage of the JavaScript `instanceof` and `typeof` operators. If you use these in a conditional block, TypeScript will understand the type of the variable to be different within that conditional block. Here is a quick example where TypeScript realizes that a particular function does not exist on `string` and points out what was probably a user typo:
 
 ```ts
 function doSomething(x: number | string) {
@@ -13,6 +18,8 @@ function doSomething(x: number | string) {
     x.substr(1); // Error: There is no guarantee that `x` is a `string`
 }
 ```
+
+### instanceof
 
 Here is an example with a class and `instanceof`:
 
@@ -70,6 +77,32 @@ function doStuff(arg: Foo | Bar) {
 
 doStuff(new Foo());
 doStuff(new Bar());
+```
+
+### Literal Type Guard
+
+When you have literal types in a union you can check them to discriminate e.g. 
+
+```ts
+type Foo = {
+  kind: 'foo', // Literal type 
+  foo: number
+}
+type Bar = {
+  kind: 'bar', // Literal type 
+  bar: number
+}
+
+function doStuff(arg: Foo | Bar) {
+    if (arg.kind === 'foo') {
+        console.log(arg.foo); // OK
+        console.log(arg.bar); // Error!
+    }
+    else {  // MUST BE Bar!
+        console.log(arg.foo); // Error!
+        console.log(arg.bar); // OK
+    }
+}
 ```
 
 ### User Defined Type Guards

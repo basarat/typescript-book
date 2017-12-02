@@ -158,7 +158,7 @@ const Form = ()=> <StringSelect items={['a', 'b']} />;
 
 ## Useless Generic
 
-I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you probably have a useless generic. E.g. people have attempted to type the nodejs `require` function as:
+I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you probably have a useless generic. E.g. people have attempted to type the Node.js `require` function as:
 
 ```ts
 declare function require<T>(name: string): T;

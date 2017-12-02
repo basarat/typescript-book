@@ -7,7 +7,7 @@ foo = null; // Okay
 foo = undefined; // Okay
 ```
 
-This is modelled after how a lot of people write JavaScript. However like all things TypeScript allows you to be *explicit* about what *can and cannot be* assigned a `null` or `undefined`.
+This is modelled after how a lot of people write JavaScript. However like all things, TypeScript allows you to be *explicit* about what *can and cannot be* assigned a `null` or `undefined`.
 
 In strict null checking mode, `null` and `undefined` are different:
 
@@ -25,18 +25,18 @@ interface Member {
 }
 ```
 
-Not every member will provide their age, so the `age` is an optional property. It means the value of `age` will probably be `undefined`.
+Not every `Member` will provide their age, so `age` is an optional property, meaning the value of `age` may or may not be `undefined`.
 
-`undefined` is the root of all evil. It always lead to runtime error. We are always easy to write some code that will probably throw `Error`:
+`undefined` is the root of all evil. It often leads to runtime errors. It is easy to write code that will throw `Error` at runtime:
 
 ```ts
 getMember()
   .then(member: Member => {
-    const stringifyAge = member.age.toString() // probably throw Cannot read property 'toString' of undefined
+    const stringifyAge = member.age.toString() // Cannot read property 'toString' of undefined
   })
 ```
 
-But in strict null checking mode, it will throw an error at compile time:
+But in strict null checking mode, this error will be caught at compile time:
 
 ```ts
 getMember()
@@ -61,3 +61,4 @@ function processEntity(e?: Entity) {
     let b = e!.name;  // Assert that e is non-null. This allows you to access name
 }
 ```
+> Note that it is just an assertion, and just like type assertions *you are responsible* for making sure the value is not null. A null assertion is essentially you telling the compiler "I know its not null so let me use it as though its not null".

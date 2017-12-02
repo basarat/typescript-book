@@ -438,7 +438,7 @@ The reason why this function was simpler is because the "`loadFile`(async) + `JS
 ### Parallel control flow
 We have seen how trivial doing a serial sequence of async tasks is with promises. It is simply a matter of chaining `then` calls.
 
-However you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for `n` number of promises to complete. You provide it with an array of `n` promises and it gives you array of `n` resolved values. Below we show Chaining as well as Parallel:
+However you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for `n` number of promises to complete. You provide it with an array of `n` promises and it gives you an array of `n` resolved values. Below we show Chaining as well as Parallel:
 
 ```ts
 // an async function to simulate loading an item from some server
@@ -495,27 +495,13 @@ The most reliable way to do this is to hand write it. e.g. converting `setTimeou
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 ```
 
-You can use generics to help you with this process if you want e.g. here is an automatic promisify function that works with node style callbacks that take a single `data` argument (this is meant as an example for people that are used to node / node-style callback functions):
+Note that there is a handy dandy function in NodeJS that does this `node style function => promise returning function` magic for you:
 
 ```ts
-type NodeStyleCallback<Ret> = (err: any, ret: Ret) => void;
-type ReturnsPromise1<Ret, Data1> = (data: Data1) => Promise<Ret>;
-type NodeStyleCallbackCallingFunction1<Ret, Data1> = { (data: Data1, cb: NodeStyleCallback<Ret>): void };
-
-export function promisify1<Data1, Ret>(func: NodeStyleCallbackCallingFunction<Data1, Ret>): ReturnsPromise<Data1, Ret> {
-  const promisified = (data: Data1): Promise<Ret> => {
-    return new Promise<Ret>((res, rej) => {
-      func(data, (err, ret) => {
-        err ? rej(err) : res(ret);
-      });
-    });
-  }
-  return promisified;
-}
-
 /** Sample usage */
 import fs = require('fs');
-const readFile = promisify1(fs.readFile);
+import util = require('util');
+const readFile = util.promisify1(fs.readFile);
 ```
 
 [polyfill]:https://github.com/stefanpenner/es6-promise

@@ -48,7 +48,7 @@ declare module "foo" {
 This makes the module `"foo"`, *importable*.
 
 ## Node Modules
-The node module resolution is actually pretty much the same one used by NodeJS / NPM ([official nodejs docs](https://nodejs.org/api/modules.html#modules_all_together)). Here is a simple mental model I have:
+The node module resolution is actually pretty much the same one used by Node.js / NPM ([official nodejs docs](https://nodejs.org/api/modules.html#modules_all_together)). Here is a simple mental model I have:
 
 * module `foo/bar` will resolve to some file : `node_modules/foo` (the module) + `foo/bar`
 

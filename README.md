@@ -27,6 +27,8 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * Thank you for writing TypeScript Deep Dive. I have learned so much. [link](https://twitter.com/buctwbzs/status/857198618704355328?refsrc=email&s=11)
 * Loving @basarat's @typescriptlang online book basarat.gitbooks.io/typescript/# loaded with great recipes! [link](https://twitter.com/ericliprandi/status/857608837309677568)
 * Microsoft doc is great already, but if want to "dig deeper" into TypeScript I find this book of great value  [link](https://twitter.com/caludio/status/876729910550831104)
+* Thanks, this is a great book 🤓🤓 [link](https://twitter.com/jjwonmin/status/885666375548547073)
+* Deep dive to typescript is awesome in so many levels. i find it very insightful. Thanks [link](https://twitter.com/orenmizr/status/891083492787970053)
 
 ## Get Started
 If you are here to read the book online [get started](http://basarat.gitbooks.io/typescript/content/docs/getting-started.html).
