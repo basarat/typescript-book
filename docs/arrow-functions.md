@@ -3,6 +3,7 @@
 * [Tip: Arrow Function Danger](#tip-arrow-function-danger)
 * [Tip: Libraries that use `this`](#tip-arrow-functions-with-libraries-that-use-this)
 * [Tip: Arrow Function inheritance](#tip-arrow-functions-and-inheritance)
+* [Tip: Quick object return](#tip-quick-object-return)
 
 ### Arrow Functions
 
@@ -121,4 +122,27 @@ class ExtendedAdder extends Adder {
         return this.superAdd(b);
     }
 }
+```
+
+### Tip: Quick object return
+
+Sometimes you need a function that just returns a simple object literal. However, something like
+
+```ts
+// WRONG WAY TO DO IT
+var foo = () => {
+    bar: 123
+};
+```
+is parsed as a *block* containing a *JavaScript Label* by JavaScript runtimes (cause of the JavaScript specification).
+
+>  If that doesn't make sense, don't worry, as you get a nice compiler error from TypeScript saying "unused label" anyways. Labels are an old (and mostly unused) JavaScript feature that you can ignore as a modern *GOTO considered bad* experienced developer 🌹
+
+You can fix it by surrounding the object literal with `()`:
+
+```ts
+// Correct 🌹
+var foo = () => ({
+    bar: 123
+});
 ```
