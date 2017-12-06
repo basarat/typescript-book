@@ -79,6 +79,28 @@ doStuff(new Foo());
 doStuff(new Bar());
 ```
 
+### in 
+
+The `in` operator does a safe check for the existance of a property on an object and can be used as a type guard. E.g. 
+
+```ts
+interface A {
+  x: number;
+}
+interface B {
+  y: string;
+}
+
+function doStuff(q: A | B) {
+  if ('x' in q) {
+    // q: A
+  }
+  else {
+    // q: B
+  }
+}
+```
+
 ### Literal Type Guard
 
 When you have literal types in a union you can check them to discriminate e.g. 
