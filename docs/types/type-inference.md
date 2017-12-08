@@ -76,7 +76,7 @@ Similarly for arrays:
 const bar = [1,2,3];
 // bar[0] = "hello"; // Would error: cannot assign `string` to a `number`
 ```
-And ofcourse any nesting:
+And of course any nesting:
 
 ```ts
 let foo = {
@@ -125,13 +125,13 @@ We have already seen how [Type Guards](./typeGuard.md) help change and narrow do
 
 ### Be careful around parameters
 
-Types do not flow into the function parameters if it cannot be inferred from an assignment. e.g. in the following case the compiler does not to know the type of `foo` so it cannot infer the type of `a` or `b`
+Types do not flow into the function parameters if it cannot be inferred from an assignment. For example in the following case the compiler does not know the type of `foo` so it cannot infer the type of `a` or `b`.
 
 ```t
 const foo = (a,b) => { /* do something */ };
 ```
 
-However if `foo` was typed the function parameters type can be inferred (`a`,`b` are both inferred to be number below).
+However if `foo` was typed the function parameters type can be inferred (`a`,`b` are both inferred to be of type number in the example below).
 
 ```ts
 type TwoNumberFunction = (a: number, b: number) => void;
@@ -140,7 +140,7 @@ const foo: TwoNumberFunction = (a, b) => { /* do something */ };
 
 ### Be careful around return
 
-Although TypeScript can generally infer the return type of a function, it might not be what you expect. e.g. here function `foo` has a return type of `any`
+Although TypeScript can generally infer the return type of a function, it might not be what you expect. For example here function `foo` has a return type of `any`.
 ```ts
 function foo(a: number, b: number) {
     return a + addOne(b);
@@ -159,7 +159,7 @@ There are other cases that one can imagine, but the good news is that there is a
 
 ## `noImplicitAny`
 
-There is a boolean compiler flag `noImplicitAny` where the compiler will actually raise an error if it cannot infer the type of a variable (and therefore can only have it as an *implicit* `any` type). You can then
+The flag `noImplicitAny` instructs the compiler to raise an error if it cannot infer the type of a variable (and therefore can only have it as an *implicit* `any` type). You can then
 
-* either say that *yes I want it to be an `any`* by *explicitly* adding an `: any` type annotation
+* either say that *yes I want it to be of type `any`* by *explicitly* adding an `: any` type annotation
 * help the compiler out by adding a few more *correct* annotations.
