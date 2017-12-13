@@ -5,6 +5,7 @@
 * [Using custom lib.d.ts](#using-your-own-custom-libdts)
 * [Compiler `target` effect on lib.d.ts](#compiler-target-effect-on-libdts)
 * [`lib` option](#lib-option)
+* [Polyfill for old JavaScript engines](#polyfill-for-old-javascript-engines)
 
 ## `lib.d.ts`
 
@@ -296,3 +297,20 @@ We can use "target": "es5" in combination with "lib" to provide Symbol API in Ty
     "lib": ["es5", "dom", "scripthost", "es2015.symbol"]
 }
 ```
+
+# Polyfill for old JavaScript engines
+
+> [Egghead Video on this subject](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
+
+There are quite a few runtime features that are like `Map` / `Set` and even `Promise` (this list will ofcourse change over time) that you can use with modern `lib` options. To use these all you need to do is use `core-js`. Simply install: 
+
+```
+npm install core-js --save-dev
+```
+And add an import to your application entry point: 
+
+```js
+import "core-js";
+```
+
+And it should polyfill these runtime features for you 🌹.
