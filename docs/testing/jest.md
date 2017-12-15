@@ -4,10 +4,9 @@
 
 No testing solution out there is in my opinion perfect. That said, jest is an excellent unit testing option which provides great TypeScript support. 
 
-### Install 
 > Note: We assume you start off with a simple node package.json setup. Also all TypeScript files should be in a `src` folder which is always recommended (even without Jest) for a clean project setup.
 
-#### Step 1
+## Step 1: Install
 Install the following using npm: 
 ```
 npm i jest @types/jest ts-jest -D
@@ -20,7 +19,7 @@ Explanation:
 * Save all of these to your dev dependencies (testing is almost always a npm dev-dependency)
 
 
-#### Step 2
+## Step 2: Configure Jest
 Add the following `jest.config.js` file to the root of your project: 
 ```js
 module.exports = {
@@ -49,11 +48,12 @@ Explanation:
 * The `testRegex` tells Jest to look for tests in any `__tests__` folder AND also any files anywhere that use the `(.test|.spec).(js|jsx|ts|tsx)` extension e.g. `asdf.test.tsx` etc.
 * The `moduleFileExtensions` tells jest to our file extensions. This is needed as we add `ts`/`tsx` into the defaults (`js|jsx|json|node`).
 
-### Step 3
+### Step 3: Configure NPM scripts
 Add a test target to your `package.json`. A super simple setup that will work: 
 
-```
+```json
 {
   "test": "jest"
 }
 ```
+This allows you to run the tests with a simple `npm run test`
