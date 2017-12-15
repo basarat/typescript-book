@@ -36,40 +36,30 @@ cd your-project
 npm init -y
 ```
 
-* Install [TypeScript-nightly](https://github.com/Microsoft/TypeScript), [`webpack`](https://github.com/webpack/webpack), [`ts-loader`](https://github.com/TypeStrong/ts-loader/), [`typings`](https://github.com/typings/typings):
+* Install [TypeScript-nightly](https://github.com/Microsoft/TypeScript), [`webpack`](https://github.com/webpack/webpack), [`ts-loader`](https://github.com/TypeStrong/ts-loader/)
 
 ```
-npm install typescript@next webpack ts-loader typings --save-dev
-```
-
-* Init typings (creates a `typings.json` file for you):
-
-```
-"./node_modules/.bin/typings" init
+npm install typescript@next webpack ts-loader --save-dev
 ```
 
 * Create a `webpack.config.js` to bundle your modules into a single `bundle.js` file that contains all your resources:
 
 ```js
-const path = require('path');
-
 module.exports = {
-    entry: './src/app.tsx',
-    output: {
-        path: path.resolve(__dirname, 'dist'),  
-        filename: 'bundle.js',
-        publicPath: '/dist/'
-    },
-    resolve: {
-        // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-    },
-    module: {
-        loaders: [
-            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            { test: /\.tsx?$/, loader: 'ts-loader' }
-        ]
-    }
+  devtool: 'inline-source-map',
+  entry: './src/app.tsx',
+  output: {
+    path: __dirname + '/public',
+    filename: 'build/app.js'
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
+  module: {
+    rules: [
+      { test: /\.tsx?$/, loader: 'ts-loader' }
+    ]
+  }
 }
 ```
 
@@ -77,7 +67,6 @@ module.exports = {
 
 ```json
 "scripts": {
-    "prepublish": "typings install",
     "watch": "webpack --watch"
 },
 ```
