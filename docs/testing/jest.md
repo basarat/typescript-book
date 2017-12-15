@@ -48,12 +48,42 @@ Explanation:
 * The `testRegex` tells Jest to look for tests in any `__tests__` folder AND also any files anywhere that use the `(.test|.spec).(js|jsx|ts|tsx)` extension e.g. `asdf.test.tsx` etc.
 * The `moduleFileExtensions` tells jest to our file extensions. This is needed as we add `ts`/`tsx` into the defaults (`js|jsx|json|node`).
 
-### Step 3: Configure NPM scripts
-Add a test target to your `package.json`. A super simple setup that will work: 
+### Step 3: Run tests
+You can run jest simply as `npx jest`. 
+
+### Optional: Add script target for npm scripts
+Add `package.json`:
 
 ```json
 {
   "test": "jest"
 }
 ```
-This allows you to run the tests with a simple `npm run test`
+This allows you to run the tests with a simple `npm run test`. 
+
+### Optional: Run jest in watch mode 
+* `npx jest -w`
+
+
+### Example
+* For a file `foo.ts`: 
+```js
+export const sum
+  = (...a: number[]) =>
+    a.reduce((acc, val) => acc + val, 0);
+```
+* A simple `foo.test.ts`: 
+```js
+import { sum } from '../';
+
+test('basic', () => {
+  expect(sum()).toBe(0);
+});
+
+test('basic again', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+```
+Notes: 
+* Jest provides the global `test` function.
+* Jest comes prebuilt with assertions in the form of the global `expect`.
