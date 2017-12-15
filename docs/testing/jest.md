@@ -2,7 +2,7 @@
 
 > [Pro egghead lesson on Jest / TypeScript](https://egghead.io/lessons/typescript-getting-started-with-jest-using-typescript)
 
-No testing solution out there is in my opinion perfect. That said, jest is an excellent unit testing option which provides great TypeScript support. 
+No testing solution out there is perfect. That said, jest is an excellent unit testing option which provides great TypeScript support. 
 
 > Note: We assume you start off with a simple node package.json setup. Also all TypeScript files should be in a `src` folder which is always recommended (even without Jest) for a clean project setup.
 
