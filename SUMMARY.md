@@ -65,6 +65,8 @@
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)
   * [strictNullChecks](docs/options/strictNullChecks.md)
+* [Testing](docs/testing/intro.md)
+  * [Jest](docs/testing/jest.md)
 * [TIPs](docs/tips/main.md)
   * [String Based Enums](docs/tips/stringEnums.md)
   * [Nominal Typing](docs/tips/nominalTyping.md)
