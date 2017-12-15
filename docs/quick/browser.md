@@ -83,20 +83,12 @@ Now if you make edits to your `ts` or `tsx` file webpack will generate `bundle.j
 If you are going to use React (which I highly recommend you give a look), here are a few more steps:
 
 ```
-npm install react react-dom --save
-```
-
-```
-npm i @types/react --save
-```
-
-```
-npm i @types/react-dom --save
+npm i react react-dom @types/react @types/react-dom --save
 ```
 
 A demo `index.html`:
 
-```
+```html
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -113,7 +105,7 @@ A demo `index.html`:
 
 A demo `./src/app.tsx`:
 
-```ts
+```js
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
