@@ -6,7 +6,7 @@ TypeScript has had *first class* support for Node.js since inception. Here's how
 1. Setup a Node.js project `package.json`. Quick one : `npm init -y`
 1. Add TypeScript (`npm install typescript --save-dev`)
 1. Add `node.d.ts` (`npm install @types/node --save-dev`)
-1. Init a `tsconfig.json` for TypeScript options (`node ./node_modules/typescript/lib/tsc --init`)
+1. Init a `tsconfig.json` for TypeScript options (`npx tsc --init`)
 1. Make sure you have `compilerOptions.module:commonjs` in your tsconfig.json
 
 That's it! Fire up your IDE (e.g. `alm -o`) and play around. Now you can use all the built in node modules (e.g. `import fs = require('fs');`) with all the safety and developer ergonomics of TypeScript!
