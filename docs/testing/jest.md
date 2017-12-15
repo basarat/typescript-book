@@ -91,5 +91,11 @@ Notes:
 * Jest provides the global `test` function.
 * Jest comes prebuilt with assertions in the form of the global `expect`.
 
-## More 
-* [Checkout all the details on jest at their homepage](http://facebook.github.io/jest/)
+## Reasons why we like jest 
+> [For details on these features see jest website](http://facebook.github.io/jest/)
+
+* Built-in assertion library. 
+* Great TypeScript support.
+* Very reliable test watcher.
+* Snapshot testing.
+* Built-in coverage reports.
