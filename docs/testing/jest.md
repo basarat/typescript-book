@@ -78,11 +78,11 @@ export const sum
 ```js
 import { sum } from '../';
 
-test('basic', async () => {
+test('basic', () => {
   expect(sum()).toBe(0);
 });
 
-test('basic again', async () => {
+test('basic again', () => {
   expect(sum(1, 2)).toBe(3);
 });
 ```
@@ -90,6 +90,20 @@ test('basic again', async () => {
 Notes: 
 * Jest provides the global `test` function.
 * Jest comes prebuilt with assertions in the form of the global `expect`.
+
+### Example async
+Jest has built-in async/await support. e.g. 
+
+```js
+test('basic',async () => {
+  expect(sum()).toBe(0);
+});
+
+test('basic again', async () => {
+  expect(sum(1, 2)).toBe(3);
+}, 1000 /* optional timeout */);
+```
+
 
 ## Reasons why we like jest 
 > [For details on these features see jest website](http://facebook.github.io/jest/)
