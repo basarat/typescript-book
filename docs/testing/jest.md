@@ -78,11 +78,11 @@ export const sum
 ```js
 import { sum } from '../';
 
-test('basic', () => {
+test('basic', async () => {
   expect(sum()).toBe(0);
 });
 
-test('basic again', () => {
+test('basic again', async () => {
   expect(sum(1, 2)).toBe(3);
 });
 ```
@@ -99,3 +99,4 @@ Notes:
 * Very reliable test watcher.
 * Snapshot testing.
 * Built-in coverage reports.
+* Built-in async/await support.
