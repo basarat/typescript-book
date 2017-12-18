@@ -59,7 +59,8 @@ Add `package.json`:
   "test": "jest"
 }
 ```
-This allows you to run the tests with a simple `npm run test`. 
+* This allows you to run the tests with a simple `npm t`. 
+* And even in watch mode with `npm t -- --watch`. 
 
 ### Optional: Run jest in watch mode 
 * `npx jest -w`
