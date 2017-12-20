@@ -275,7 +275,7 @@ let y: Empty<string>;
 x = y;  // okay, y matches structure of x
 ```
 
-However the if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
+However if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
 
 ```ts
 interface NotEmpty<T> {
@@ -306,7 +306,7 @@ identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
 We said invariance is the only sound option. Here is an example where both `contra` and `co` variance are shown to be unsafe for arrays.
 
 ```ts
-/** Heirarchy */
+/** Hierarchy */
 class Animal { constructor(public name: string){} }
 class Cat extends Animal { meow() { } }
 
