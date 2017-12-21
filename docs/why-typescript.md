@@ -9,7 +9,7 @@ The desire for these goals is motivated below.
 
 You might be wondering "**Why add types to JavaScript?**"
 
-Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
+Types have proven ability to enhance code quality and understandability. Large teams (Google, Microsoft, Facebook) have continually arrived at this conclusion. Specifically:
 
 * Types increase your agility when doing refactoring. *It's better for the compiler to catch errors than to have things fail at runtime*.
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
@@ -99,12 +99,12 @@ $('.awesome').show(); // Error: cannot find name `$`
 ```
 As a quick fix *you can tell TypeScript* that there is indeed something called `$`:
 ```ts
-declare var $:any;
+declare var $: any;
 $('.awesome').show(); // Okay!
 ```
 If you want you can build on this basic definition and provide more information to help protect you from errors:
 ```ts
-declare var $:{
+declare var $: {
     (selector:string): any;
 };
 $('.awesome').show(); // Okay!
@@ -127,13 +127,13 @@ class Point {
 
 var p1 = new Point(0, 10);
 var p2 = new Point(10, 20);
-var p3 = p1.add(p2); // {x:10,y:30}
+var p3 = p1.add(p2); // { x: 10, y: 30 }
 ```
 
 and the lovely fat arrow function:
 
 ```ts
-var inc = (x)=>x+1;
+var inc = x => x+1;
 ```
 
 ### Summary
