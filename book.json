@@ -1,4 +1,5 @@
 {
+  "language": "en",
   "plugins": ["edit-link", "github", "adsense","header"],
   "pluginsConfig": {
     "layout": {
