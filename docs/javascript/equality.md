@@ -37,7 +37,7 @@ console.log({a:123} === {a:123}); // False
 ```
 To do such checks use the [deep-equal](https://www.npmjs.com/package/deep-equal) npm package e.g. 
 
-```
+```js
 import * as deepEqual from "deep-equal";
 
 console.log(deepEqual({a:123},{a:123})); // True
