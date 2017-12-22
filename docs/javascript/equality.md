@@ -27,3 +27,18 @@ console.log(0 === ""); // false
 Similar to `==` vs. `===`, there is `!=` vs. `!==`
 
 So ProTip: Always use `===` and `!==` except for null checks, which we cover later.
+
+## Structural Equality 
+If you want to compare two objects for structural equality `==`/`===` are ***not*** sufficient. e.g. 
+
+```js
+console.log({a:123} == {a:123}); // False
+console.log({a:123} === {a:123}); // False
+```
+To do such checks use the [deep-equal](https://www.npmjs.com/package/deep-equal) npm package e.g. 
+
+```js
+import * as deepEqual from "deep-equal";
+
+console.log(deepEqual({a:123},{a:123})); // True
+```
