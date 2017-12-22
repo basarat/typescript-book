@@ -1,4 +1,4 @@
-# `--outFile` is BAD
+# `--outFile` is BAD {#outFile}
 
 Its a bad idea for you to use because of the following reasons:
 
@@ -102,4 +102,4 @@ So `a.ts` [cannot be compiled in isolation](https://github.com/Microsoft/TypeScr
 
 https://twitter.com/nycdotnet/status/613705850574778368 
 
-![](https://pbs.twimg.com/media/CIRSOBmWsAQdzvP.jpg)
+![The Bas Signal](https://pbs.twimg.com/media/CIRSOBmWsAQdzvP.jpg)
