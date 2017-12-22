@@ -67,4 +67,4 @@ Here is the tsconfig.json:
 
 You can see full example [here][dynamicimportcode].
 
-[dynamicimportcode]:../code/dynamic-import-expressions
+[dynamicimportcode]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/dynamic-import-expressions/dynamicImportExpression.js

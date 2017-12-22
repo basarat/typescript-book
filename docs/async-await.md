@@ -193,5 +193,5 @@ You can see full example [here][asyncawaites5code].
 **We can see what browsers DO have Promise support (native and polyfilled) [here](https://kangax.github.io/compat-table/es6/#test-Promise).**
 
 [generators]:./generators.md
-[asyncawaites5code]:../code/async-await/es5/asyncAwaitES5.js
-[asyncawaites6code]:../code/async-await/es6/asyncAwaitES6.js
+[asyncawaites5code]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es5/asyncAwaitES5.js
+[asyncawaites6code]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es6/asyncAwaitES6.js
