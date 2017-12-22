@@ -9,7 +9,7 @@ TypeScript compiles into JavaScript. JavaScript is what you are actually going t
 * A TypeScript editor (you can use notepad if you want but I use [alm 🌹](http://alm.tools). Also [lots of other IDES support it as well]( https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support))
 
 
-![](https://raw.githubusercontent.com/alm-tools/alm-tools.github.io/master/screens/main.png)
+![alm editor window](https://raw.githubusercontent.com/alm-tools/alm-tools.github.io/master/screens/main.png)
 
 
 ## TypeScript Version
