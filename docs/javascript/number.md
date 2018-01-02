@@ -21,18 +21,26 @@ console.log({max: Number.MAX_SAFE_INTEGER, min: Number.MIN_SAFE_INTEGER});
 // {max: 9007199254740991, min: -9007199254740991}
 ```
 
-**Safe** in this context refers to the ability to still carry out `1` more arithmetic calculation.
+**Safe** in this context refers to the fact that the value *cannot be the result of a rounding error*.
+
+The unsafe values are `+1 / -1` away from these safe values and any amount of addition / subtraction will *round* the result to those *unsafe* values.
 
 ```js
-console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER); // false
-console.log(Number.MIN_SAFE_INTEGER - 1 === Number.MIN_SAFE_INTEGER); // false
+console.log(Number.MAX_SAFE_INTEGER + 20 === Number.MAX_SAFE_INTEGER + 1); // true!
+console.log(Number.MIN_SAFE_INTEGER - 20 === Number.MIN_SAFE_INTEGER - 1); // true!
 ```
 
-Out of bound (`2` or more) integer arithmetic is cut off to these max values (`+1/-1`):
+To check safety you can use ES6 `Number.isSafeInteger`:
 
 ```js
-console.log(Number.MAX_SAFE_INTEGER + 2 === Number.MAX_SAFE_INTEGER + 1); // true!
-console.log(Number.MIN_SAFE_INTEGER - 2 === Number.MIN_SAFE_INTEGER - 1); // true!
+// Safe value
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER)); // true
+
+// Unsafe value
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1)); // false
+
+// Because it might have been rounded to it due to overflow
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 10)); // false
 ```
 
 > For arbitrary precision integer math use `big.js` mentioned below.
@@ -47,7 +55,7 @@ Installation is simple:
 npm install big.js @types/big.js
 ```
 
-Quick Usage example: 
+Quick Usage example:
 
 ```js
 import { Big } from 'big.js';
@@ -55,7 +63,7 @@ import { Big } from 'big.js';
 export const foo = new Big('111.11111111111111111111');
 export const bar = foo.plus(new Big('0.00000000000000000001'));
 
-// To get a number: 
+// To get a number:
 const x: number = Number(bar.toString()); // Looses the precision
 ```
 
@@ -78,26 +86,33 @@ console.log(NaN === NaN); // false!!
 console.log(Number.isNaN(NaN)); // true
 ```
 
-### Infinity
-The outer bounds of values representable in Number are available as static `Number.MAX_VALUE` and `Number.MIN_VALUE` values.
+### Infinity and Infinitesimal Values
+The outer bounds of values representable in Number are available as static `Number.MAX_VALUE` and `-Number.MAX_VALUE` values.
 
 ```js
-console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
-console.log(Number.MIN_VALUE); // 5e-324
+console.log(Number.MAX_VALUE);  // 1.7976931348623157e+308
+console.log(-Number.MAX_VALUE); // -1.7976931348623157e+308
+```
+
+The smallest non-zero values representable in Number are available as static `Number.MIN_VALUE` and `-Number.MIN_VALUE` values.
+
+```js
+console.log(Number.MIN_VALUE);  // 5e-324
+console.log(-Number.MIN_VALUE); // -5e-324
 ```
 
 Values outside the range where precision isn't changed are clamped to these limits e.g.
 
 ```js
-console.log(Number.MAX_VALUE + 1 == Number.MAX_VALUE); // true!
-console.log(Number.MIN_VALUE - 1 == Number.MIN_VALUE); // true!
+console.log(Number.MAX_VALUE + 1 == Number.MAX_VALUE);   // true!
+console.log(-Number.MAX_VALUE - 1 == -Number.MAX_VALUE); // true!
 ```
 
 Values outside the range where precision is changed resolve to special values `Infinity`/`-Infinity` e.g.
 
 ```js
-console.log(Number.MAX_VALUE + 10**1000); // Infinity
-console.log(Number.MIN_VALUE - 10**1000); // -Infinity
+console.log(Number.MAX_VALUE + 10**1000);  // Infinity
+console.log(-Number.MAX_VALUE - 10**1000); // -Infinity
 ```
 
 Of-course, these special infinity values also show up with arithmetic that requires it e.g.
@@ -110,7 +125,7 @@ console.log(-1 / 0); // -Infinity
 You can use these `Infinity` values manually or using static members of the `Number` class as shown below:
 
 ```js
-console.log(Number.POSITIVE_INFINITY === Infinity); // true
+console.log(Number.POSITIVE_INFINITY === Infinity);  // true
 console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
 ```
 
