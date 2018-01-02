@@ -28,7 +28,7 @@ Great. Now let's just jump into its key use case :)
 
 # Use case: Exhaustive Checks
 
-You can call never functions in a never context
+You can call never functions in a never context.
 
 ```ts
 function foo(x: string | number): boolean {
@@ -43,10 +43,10 @@ function foo(x: string | number): boolean {
   // - Or Unreachable code detected
   // But because typescript understands that `fail` function returns `never`
   // It can allow you to call it as you might be using it for runtime safety / exhaustive checks.
-  fail("Unexhaustive!");
+  return fail("Unexhaustive!");
 }
 
-function fail(message: string) { throw new Error(message); }
+function fail(message: string): never { throw new Error(message); }
 ```
 
 And because `never` is only assignable to another `never` you can use it for *compile time* exhaustive checks as well. This is covered in the [*discriminated union* section](./discriminated-unions.md).
