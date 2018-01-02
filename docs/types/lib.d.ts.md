@@ -300,7 +300,7 @@ We can use "target": "es5" in combination with "lib" to provide Symbol API in Ty
 
 # Polyfill for old JavaScript engines
 
-> [Egghead Video on this subject](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
+> [Egghead PRO Video on this subject](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
 
 There are quite a few runtime features that are like `Map` / `Set` and even `Promise` (this list will ofcourse change over time) that you can use with modern `lib` options. To use these all you need to do is use `core-js`. Simply install: 
 
