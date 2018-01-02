@@ -21,18 +21,26 @@ console.log({max: Number.MAX_SAFE_INTEGER, min: Number.MIN_SAFE_INTEGER});
 // {max: 9007199254740991, min: -9007199254740991}
 ```
 
-**Safe** in this context refers to the ability to still carry out `1` more arithmetic calculation.
+**Safe** in this context refers to the fact that the value *cannot be the result of a rounding error*.
+
+The unsafe values are `+1 / -1` away from these safe values and any amount of addition / subtraction will *round* the result to those *unsafe* values.
 
 ```js
-console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER); // false
-console.log(Number.MIN_SAFE_INTEGER - 1 === Number.MIN_SAFE_INTEGER); // false
+console.log(Number.MAX_SAFE_INTEGER + 20 === Number.MAX_SAFE_INTEGER + 1); // true!
+console.log(Number.MIN_SAFE_INTEGER - 20 === Number.MIN_SAFE_INTEGER - 1); // true!
 ```
 
-Out of bound (`2` or more) integer arithmetic is cut off to these max values (`+1/-1`):
+To check safety you can use ES6 `Number.isSafeInteger`:
 
 ```js
-console.log(Number.MAX_SAFE_INTEGER + 2 === Number.MAX_SAFE_INTEGER + 1); // true!
-console.log(Number.MIN_SAFE_INTEGER - 2 === Number.MIN_SAFE_INTEGER - 1); // true!
+// Safe value
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER)); // true
+
+// Unsafe value
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1)); // false
+
+// Because it might have been rounded to it due to overflow
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 10)); // false
 ```
 
 > For arbitrary precision integer math use `big.js` mentioned below.
@@ -47,7 +55,7 @@ Installation is simple:
 npm install big.js @types/big.js
 ```
 
-Quick Usage example: 
+Quick Usage example:
 
 ```js
 import { Big } from 'big.js';
@@ -55,7 +63,7 @@ import { Big } from 'big.js';
 export const foo = new Big('111.11111111111111111111');
 export const bar = foo.plus(new Big('0.00000000000000000001'));
 
-// To get a number: 
+// To get a number:
 const x: number = Number(bar.toString()); // Looses the precision
 ```
 
