@@ -78,26 +78,33 @@ console.log(NaN === NaN); // false!!
 console.log(Number.isNaN(NaN)); // true
 ```
 
-### Infinity
-The outer bounds of values representable in Number are available as static `Number.MAX_VALUE` and `Number.MIN_VALUE` values.
+### Infinity and Infinitesimal Values
+The outer bounds of values representable in Number are available as static `Number.MAX_VALUE` and `-Number.MAX_VALUE` values.
 
 ```js
-console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
-console.log(Number.MIN_VALUE); // 5e-324
+console.log(Number.MAX_VALUE);  // 1.7976931348623157e+308
+console.log(-Number.MAX_VALUE); // -1.7976931348623157e+308
+```
+
+The smallest non-zero values representable in Number are available as static `Number.MIN_VALUE` and `-Number.MIN_VALUE` values.
+
+```js
+console.log(Number.MIN_VALUE);  // 5e-324
+console.log(-Number.MIN_VALUE); // -5e-324
 ```
 
 Values outside the range where precision isn't changed are clamped to these limits e.g.
 
 ```js
-console.log(Number.MAX_VALUE + 1 == Number.MAX_VALUE); // true!
-console.log(Number.MIN_VALUE - 1 == Number.MIN_VALUE); // true!
+console.log(Number.MAX_VALUE + 1 == Number.MAX_VALUE);   // true!
+console.log(-Number.MAX_VALUE - 1 == -Number.MAX_VALUE); // true!
 ```
 
 Values outside the range where precision is changed resolve to special values `Infinity`/`-Infinity` e.g.
 
 ```js
-console.log(Number.MAX_VALUE + 10**1000); // Infinity
-console.log(Number.MIN_VALUE - 10**1000); // -Infinity
+console.log(Number.MAX_VALUE + 10**1000);  // Infinity
+console.log(-Number.MAX_VALUE - 10**1000); // -Infinity
 ```
 
 Of-course, these special infinity values also show up with arithmetic that requires it e.g.
@@ -110,7 +117,7 @@ console.log(-1 / 0); // -Infinity
 You can use these `Infinity` values manually or using static members of the `Number` class as shown below:
 
 ```js
-console.log(Number.POSITIVE_INFINITY === Infinity); // true
+console.log(Number.POSITIVE_INFINITY === Infinity);  // true
 console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
 ```
 
