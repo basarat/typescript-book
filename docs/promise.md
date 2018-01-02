@@ -174,7 +174,7 @@ Admittedly this is not hard to follow once you've done it a few times but noneth
 
 A promise can be either `pending` or `fulfilled` or `rejected`.
 
-![](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
+![promise states and fates](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
 
 Let's look at creating a promise. It's a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state:
 

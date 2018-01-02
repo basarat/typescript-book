@@ -1,4 +1,7 @@
 {
+  "language": "en",
+  "author": "Basarat Ali Syed",
+  "title": "TypeScript Deep Dive",
   "plugins": ["edit-link", "github", "adsense","header"],
   "pluginsConfig": {
     "layout": {

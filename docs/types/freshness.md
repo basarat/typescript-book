@@ -1,7 +1,7 @@
 
 * [Freshness](#freshness)
 * [Allowing extra properties](#allowing-extra-properties)
-* [Use Case: React](#use-case--react-state)
+* [Use Case: React](#use-case-react-state)
 
 ## Freshness
 

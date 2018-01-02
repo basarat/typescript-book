@@ -3,7 +3,7 @@
       var el = document.querySelector('.search-noresults');
       if(el) {
         var elChild = document.createElement('div');
-        elChild.innerHTML = '<a href="https://paypal.me/basaratali" style="display: block;text-align: center;"> Buy me a beer / coffee 🍻 ☕️ 🌹 <br><br><img src="https://img.shields.io/badge/Donate-PayPal-green.svg"><br><br></a>';
+        elChild.innerHTML = '<a href="https://paypal.me/basaratali" style="display: block;text-align: center;"> Buy me a beer / coffee 🍻 ☕️ 🌹 <br><br><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="donate"><br><br></a>';
         el.insertBefore(elChild, el.firstChild);
         clearInterval(interval);
       }
