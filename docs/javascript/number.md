@@ -86,19 +86,12 @@ console.log(NaN === NaN); // false!!
 console.log(Number.isNaN(NaN)); // true
 ```
 
-### Infinity and Infinitesimal Values
+### Infinity
 The outer bounds of values representable in Number are available as static `Number.MAX_VALUE` and `-Number.MAX_VALUE` values.
 
 ```js
 console.log(Number.MAX_VALUE);  // 1.7976931348623157e+308
 console.log(-Number.MAX_VALUE); // -1.7976931348623157e+308
-```
-
-The smallest non-zero values representable in Number are available as static `Number.MIN_VALUE` and `-Number.MIN_VALUE` values.
-
-```js
-console.log(Number.MIN_VALUE);  // 5e-324
-console.log(-Number.MIN_VALUE); // -5e-324
 ```
 
 Values outside the range where precision isn't changed are clamped to these limits e.g.
@@ -134,4 +127,18 @@ Fortunately comparison operators (`<` / `>`) work reliably on infinity values:
 ```js
 console.log( Infinity >  1); // true
 console.log(-Infinity < -1); // true
+```
+
+### Infinitesimal
+
+The smallest non-zero value representable in Number is available as static `Number.MIN_VALUE`
+
+```js
+console.log(Number.MIN_VALUE);  // 5e-324
+```
+
+Values smaller than `MIN_VALUE` ("underflow values") are converted to 0.
+
+```js
+console.log(Number.MIN_VALUE / 10);  // 0
 ```
