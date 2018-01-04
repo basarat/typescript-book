@@ -20,22 +20,28 @@ Sample:
 Checkout the [section on modules][modules].
 
 ## Catch clause variable cannot have a type annotation
-Sample: 
+Sample:
 ```js
 try { something(); }
 catch (e: Error) { // Catch clause variable cannot have a type annotation
 }
 ```
-TypeScript is protecting you from JavaScript code in the wild being wrong. Use a type guard instead: 
+TypeScript is protecting you from JavaScript code in the wild being wrong. Use a type guard instead:
 ```js
 try { something(); }
 catch (e) {
-  if (e instanceof Error){ 
+  if (e instanceof Error){
     // Here you go.
   }
 }
 ```
 
+## Interface `ElementClass` cannot simultaneously extend types `Component` and `Component`
+This happens when you have two `react.d.ts` (`@types/react/index.d.ts`) in the compilation context.
+
+**Fix**:
+* Delete `node_modules` and any `package-lock` (or yarn lock) and `npm install` again.
+* If it doesn't work, find the invalid module (all modules used by your project should have `react.d.ts` as a `peerDependency` and not a hard `dependency`) and report it on their project.
 
 
 ## For search indexing
