@@ -142,3 +142,5 @@ Values smaller than `MIN_VALUE` ("underflow values") are converted to 0.
 ```js
 console.log(Number.MIN_VALUE / 10);  // 0
 ```
+
+> Further intuition: Just like values bigger than `Number.MAX_VALUE` get clamped to INFINITY, values smaller than `Number.MIN_VALUE` get clamped to `0`.
