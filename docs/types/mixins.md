@@ -13,9 +13,9 @@ The idea is simple, instead of a *class A extending class B* to get its function
 
 > [A mixin is] a function that
  1. takes a constructor,
- 1. declares a class that extends that constructor,
- 1. adds members to that new class, and
- 1. returns the class itself.
+ 1. creates a class that extends that constructor, with new functionality
+ 1. returns the new class
+
 
 
 A complete example
@@ -29,9 +29,9 @@ type Constructor<T = {}> = new (...args: any[]) => T;
 
 // A mixin that adds a property
 function Timestamped<TBase extends Constructor>(Base: TBase) {
- return class extends Base {
-   timestamp = Date.now();
- };
+  return class extends Base {
+    timestamp = Date.now();
+  };
 }
 
 // a mixin that adds a property and methods
@@ -50,23 +50,54 @@ function Activatable<TBase extends Constructor>(Base: TBase) {
 }
 
 ////////////////////
-// Usage
+// Usage to compose classes
 ////////////////////
 
 // Simple class
 class User {
-  name: string
+  name = '';
 }
 
-// User with timestamp
-class TimestampedUser extends TimeStamp(class {
-  name: string
-})
+// User that is Timestampted
+const TimestampedUser = Timestamped(User);
 
-// User that is TimeStamped and Activatable
-class TimestampedActivableUser extends TimeStamped(Activatable(class {
-  name: string
-})
+// User that is Timestamped and Activatable
+const TimestampedActivatableUser = Timestamped(Activatable(User));
+
+////////////////////
+// Using the composed classes
+////////////////////
+
+const timestampedUserExample = new TimestampedUser();
+console.log(timestampedUserExample.timestamp);
+
+const timestampedActivatableUserExample = new TimestampedActivatableUser();
+console.log(timestampedActivatableUserExample.timestamp);
+console.log(timestampedActivatableUserExample.isActivated);
+
 ```
 
 Let's decompose this example.
+
+# Take a constructor
+Mixins take a class and extend it with new functionality. So we need to define what is a *constructor*. Easy as:
+
+```js
+// Needed for all mixins
+type Constructor<T = {}> = new (...args: any[]) => T;
+```
+
+# Extend the class and return it
+
+Pretty easy:
+
+```js
+// A mixin that adds a property
+function Timestamped<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    timestamp = Date.now();
+  };
+}
+```
+
+And that is it 🌹

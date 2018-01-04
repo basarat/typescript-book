@@ -61,7 +61,7 @@
   * [Index Signatures](docs/types/index-signatures.md)
   * [Moving Types](docs/types/moving-types.md)
   * [Exception Handling](docs/types/exceptions.md)
-  * [Mixins](docs/types/mixins-wip.md)
+  * [Mixins](docs/types/mixins.md)
 * [JSX](docs/jsx/tsx.md)
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)
