@@ -301,6 +301,25 @@ let reverse = function<U>(y: U): U {
 identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
 ```
 
+Generics involving classes are matched by relevant class compatability as mentioned before. e.g. 
+
+```ts
+class List<T> {
+  add(val: T) { }
+}
+
+class Animal { name: string; }
+class Cat extends Animal { meow() { } }
+
+const animals = new List<Animal>();
+animals.add(new Animal()); // Okay 
+animals.add(new Cat()); // Okay 
+
+const cats = new List<Cat>();
+cats.add(new Animal()); // Error 
+cats.add(new Cat()); // Okay
+```
+
 ## FootNote: Invariance
 
 We said invariance is the only sound option. Here is an example where both `contra` and `co` variance are shown to be unsafe for arrays.
