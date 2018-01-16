@@ -63,3 +63,6 @@ I will even often do `jake runtests tests=compiler/yourtest || jake baseline-acc
 ### Debugging Tests
 
 `jake runtests-browser tests=theNameOfYourTest` and debugging in-browser usually works pretty well.
+
+### More 
+* An article by Remo : https://dev.to/remojansen/learn-how-to-contribute-to-the-typescript-compiler-on-github-through-a-real-world-example-4df0 🌹
