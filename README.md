@@ -29,6 +29,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * Microsoft doc is great already, but if want to "dig deeper" into TypeScript I find this book of great value  [link](https://twitter.com/caludio/status/876729910550831104)
 * Thanks, this is a great book 🤓🤓 [link](https://twitter.com/jjwonmin/status/885666375548547073)
 * Deep dive to typescript is awesome in so many levels. i find it very insightful. Thanks [link](https://twitter.com/orenmizr/status/891083492787970053)
+* @basarat's intro to @typescriptlang is still one of the best going (if not THE best) [link](https://twitter.com/stevealee/status/953953255968698368)
 
 ## Get Started
 If you are here to read the book online [get started](http://basarat.gitbooks.io/typescript/content/docs/getting-started.html).
