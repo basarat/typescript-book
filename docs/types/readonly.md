@@ -44,19 +44,21 @@ class Foo {
 ### Various Use Cases
 
 #### ReactJS
-One library that loves immutability is ReactJS and it's a great idea to mark your `Props` and `State` to be immutable e.g.:
+One library that loves immutability is ReactJS and it's a great idea to mark your `Props` and `State` to be immutable. Since it's considered an antipattern to mutate either directly, we can save ourselves time by marking the entire object as immutable using Typescript's built-in `Readonly` type:
 
 ```ts
 interface Props {
-    readonly foo: number;
+    foo: number;
+    bar: string;
 }
 interface State {
-    readonly bar: number;
+    baz: number;
+    qux: string;
 }
-export class Something extends React.Component<Props,State> {
+export class Something extends React.Component<Readonly<Props>, Readonly<State>> {
     // You can rest assured no one is going to do
     // this.props.foo = 123; (props are immutable)
-    // this.state.bar = 456; (one should use this.setState)
+    // this.state.baz = 456; (one should use this.setState)
 }
 ```
 
