@@ -54,9 +54,11 @@ interface State {
     readonly bar: number;
 }
 export class Something extends React.Component<Props,State> {
+  someMethod() {
     // You can rest assured no one is going to do
-    // this.props.foo = 123; (props are immutable)
-    // this.state.bar = 456; (one should use this.setState)
+    this.props.foo = 123; // ERROR: (props are immutable)
+    this.state.baz = 456; // ERROR: (one should use this.setState)  
+  }
 }
 ```
 
