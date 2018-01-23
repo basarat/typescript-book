@@ -1,5 +1,7 @@
 ## Async Await
 
+> [A PRO egghead video course that covers the same material](https://egghead.io/courses/async-await-using-typescript)
+
 As a thought experiment imagine the following: a way to tell the JavaScript runtime to pause the executing of code on the `await` keyword when used on a promise and resume *only* once (and if) the promise returned from the function is settled:
 
 ```ts
