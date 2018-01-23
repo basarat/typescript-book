@@ -73,6 +73,24 @@ if (true) {
 }
 ```
 
+#### Switch
+You can wrap your `case` bodies in `{}` to reuse variable names reliably in different `case` statement as shown below: 
+
+```ts
+switch (name) {
+    case 'x': {
+        let x = 5;
+        // ...
+        break;
+    }
+    case 'y': {
+        let x = 10;
+        // ...
+        break;
+    }
+}
+```
+
 #### let in closures
 A common programming interview question for a JavaScript developer is what is the log of this simple file:
 
