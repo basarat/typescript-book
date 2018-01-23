@@ -35,7 +35,7 @@ var foo = 123;
 // Start the scanning
 var token = scanner.scan();
 while (token != ts.SyntaxKind.EndOfFileToken) {
-    console.log(ts.syntaxKindToName(token));
+    console.log(ts.formatSyntaxKind(token));
     token = scanner.scan();
 }
 ```
@@ -63,7 +63,7 @@ var foo = 123;
 // Start the scanning
 var token = scanner.scan();
 while (token != ts.SyntaxKind.EndOfFileToken) {
-    let currentToken = ts.syntaxKindToName(token);
+    let currentToken = ts.formatSyntaxKind(token);
     let tokenStart = scanner.getStartPos();
     token = scanner.scan();
     let tokenEnd = scanner.getStartPos();
