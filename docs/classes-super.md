@@ -33,6 +33,8 @@ var Child = (function (_super) {
 Notice `_super.prototype.log.call(this)`.
 
 This means that you cannot use `super` on member properties. Instead you should just use `this`.
+-> Hi. I can't understand the line above. The code above using super.log() works fine. Why can't I use super in this context?
+-> Sorry, commenting didn't work, thats why I forked...
 
 ```ts
 class Base {
