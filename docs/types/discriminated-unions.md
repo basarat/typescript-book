@@ -18,7 +18,7 @@ interface Rectangle {
 type Shape = Square | Rectangle;
 ```
 
-If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on the *discriminant property* (here `kind`) TypeScript will realize that it means that the object must of the type that has that literal and do a type narrowing for you :)
+If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on the *discriminant property* (here `kind`) TypeScript will realize that the object must be of the type that has that specific literal and do a type narrowing for you :)
 
 ```ts
 function area(s: Shape) {
