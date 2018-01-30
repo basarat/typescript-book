@@ -50,7 +50,7 @@ type Foo = {
   bas: number;
 }
 
-type ReadonlyFoo = Readonly<Foo>; 
+type FooReadonly = Readonly<Foo>; 
 
 let foo:Foo = {bar: 123, bas: 456};
 let fooReadonly:FooReadonly = {bar: 123, bas: 456};
