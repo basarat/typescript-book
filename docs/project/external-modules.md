@@ -1,6 +1,29 @@
 ## External modules
 There is a lot of power and usability packed into the TypeScript external module pattern. Here we discuss its power and some patterns needed to reflect real world usages.
 
+### Clarification: commonjs, amd, es modules
+
+First up we need to clarify the (awful) inconsistency of the module systems out there. I'll just give you my *current* recommendation and remove the noise i.e. not show you all the *other* ways things can work.
+
+From the *same TypeScript* you can generate different *JavaScript* depending upon the `module` option. Here are things you can ignore (I am not interested in explaining dead tech):
+
+* AMD: Do not use. Was browser only.
+* SystemJS: Was a good experiment. Superseded by ES modules.
+* ES Modules: Not ready yet.
+
+Now these are just the options for *generating the JavaScript*. How you *write* TypeScript modules is also a bit of a mess. Again here is how not to do it *today*:
+
+* `import foo = require('foo')`. i.e. `import/require`. Use ES module syntax instead.
+
+Cool, with that out of the way, lets look at the ES module syntax.
+
+> Summary: Use `module:commonjs` and use the ES module syntax to import / export / author modules.
+
+### ES Module syntax
+
+
+
+
 ### File lookup
 The following statement:
 
