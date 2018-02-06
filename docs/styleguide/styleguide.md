@@ -19,6 +19,7 @@ Key Sections:
 * [Use semicolons](#semicolons)
 * [Annotate Arrays as `Type[]`](#array)
 * [File Names](#filename)
+* [`type` vs `interface`](#type-vs-interface)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -222,7 +223,7 @@ The TypeScript compiler ships with a very nice formatting language service. What
 
 Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically format your code on the command line. Also your IDE (atom/vscode/vs/sublime) already has formatting support built-in.
 
-Examples: 
+Examples:
 ```ts
 // Space before type i.e. foo:<space>string
 const foo: string = "hello";
@@ -262,3 +263,26 @@ const foo: string = "hello";
 Name files with `camelCase`. E.g. `accordian.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` etc.
 
 > Reason: Conventional across many JS teams.
+
+## type vs. interface
+
+* Use `type` when you *might* need a union or intersection:
+
+```
+type Foo = number | { someProperty: number }
+```
+* Use `interface` when you want `extends` or `implements` e.g
+
+```
+interface Foo {
+  foo: string;
+}
+interface FooBar extends Foo {
+  bar: string;
+}
+class X implements FooBar {
+  foo: string;
+  bar: string;
+}
+```
+* Otherwise use whatever makes you happy that day.
