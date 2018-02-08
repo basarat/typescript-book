@@ -74,7 +74,7 @@ function area(s: Shape) {
 }
 ```
 
-You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example:
+You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example if you add the exhastive check you get a nice error:
 
 ```ts
 function area(s: Shape) {
@@ -90,6 +90,27 @@ function area(s: Shape) {
     }
 }
 ```
+
+That forces you to handle this new case : 
+
+```ts
+function area(s: Shape) {
+    if (s.kind === "square") {
+        return s.size * s.size;
+    }
+    else if (s.kind === "rectangle") {
+        return s.width * s.height;
+    }
+    else if (s.kind === "circle") {
+        return Math.PI * (s.radius **2);
+    }
+    else {
+        // Okay once more
+        const _exhaustiveCheck: never = s;
+    }
+}
+```
+
 
 ### Switch
 TIP: of course you can also do it in a `switch` statement:
