@@ -26,8 +26,8 @@ console.log({max: Number.MAX_SAFE_INTEGER, min: Number.MIN_SAFE_INTEGER});
 The unsafe values are `+1 / -1` away from these safe values and any amount of addition / subtraction will *round* the result to those *unsafe* values.
 
 ```js
-console.log(Number.MAX_SAFE_INTEGER + 20 === Number.MAX_SAFE_INTEGER + 1); // true!
-console.log(Number.MIN_SAFE_INTEGER - 20 === Number.MIN_SAFE_INTEGER - 1); // true!
+console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true!
+console.log(Number.MIN_SAFE_INTEGER - 1 === Number.MIN_SAFE_INTEGER - 2); // true!
 ```
 
 To check safety you can use ES6 `Number.isSafeInteger`:
