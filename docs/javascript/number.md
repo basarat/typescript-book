@@ -23,11 +23,17 @@ console.log({max: Number.MAX_SAFE_INTEGER, min: Number.MIN_SAFE_INTEGER});
 
 **Safe** in this context refers to the fact that the value *cannot be the result of a rounding error*.
 
-The unsafe values are `+1 / -1` away from these safe values and any amount of addition / subtraction will *round* the result to those *unsafe* values.
+The unsafe values are `+1 / -1` away from these safe values and any amount of addition / subtraction will *round* the result.
 
 ```js
 console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true!
 console.log(Number.MIN_SAFE_INTEGER - 1 === Number.MIN_SAFE_INTEGER - 2); // true!
+
+console.log(Number.MAX_SAFE_INTEGER);      // 9007199254740991
+console.log(Number.MAX_SAFE_INTEGER + 1);  // 9007199254740992 - Correct
+console.log(Number.MAX_SAFE_INTEGER + 2);  // 9007199254740992 - Rounded!
+console.log(Number.MAX_SAFE_INTEGER + 3);  // 9007199254740994 - Rounded - correct by luck
+console.log(Number.MAX_SAFE_INTEGER + 4);  // 9007199254740996 - Rounded!
 ```
 
 To check safety you can use ES6 `Number.isSafeInteger`:
