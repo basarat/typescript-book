@@ -7,6 +7,8 @@ If you are using TypeScript to create a web application here are my recommendati
 * Install [Git](https://git-scm.com/downloads)
 
 ## Project Setup Quick
+Use [https://github.com/basarat/react-typescript] as a base. 
+
 ```
 git clone https://github.com/basarat/react-typescript.git
 cd react-typescript
@@ -68,7 +70,6 @@ cd your-project
   }
 }
 ```
-> You can get the latest packages using `npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest ts-loader@latest webpack-dev-server@latest --save-dev --save-exact`
 
 * Create a `webpack.config.js` to bundle your modules into a single `app.js` file that contains all your resources:
 
@@ -124,6 +125,8 @@ ReactDOM.render(
 ```
 
 # Develop your amazing application 
+
+> You can get the latest packages using `npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest ts-loader@latest webpack-dev-server@latest --save-dev --save-exact`
 
 * Do live development by running `npm start`. 
     * Visit [http://localhost:8080](http://localhost:8080)
