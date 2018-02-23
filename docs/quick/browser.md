@@ -7,7 +7,7 @@ If you are using TypeScript to create a web application here are my recommendati
 * Install [Git](https://git-scm.com/downloads)
 
 ## Project Setup Quick
-Use [https://github.com/basarat/react-typescript] as a base. 
+Use [https://github.com/basarat/react-typescript](https://github.com/basarat/react-typescript) as a base. 
 
 ```
 git clone https://github.com/basarat/react-typescript.git
