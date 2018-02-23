@@ -124,6 +124,7 @@ ReactDOM.render(
 ```
 
 # Develop your amazing application 
+
 * Do live development by running `npm start`. 
     * Visit [http://localhost:8080](http://localhost:8080)
     * Edit the `app.tsx` (or any ts/tsx file in `src`) and application live reloads. 
