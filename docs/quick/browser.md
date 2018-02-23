@@ -14,6 +14,7 @@ git clone https://github.com/basarat/react-typescript.git
 cd react-typescript
 npm install
 ```
+
 Now jump to [develop your amazing application](#develop-your-amazing-application)
 
 ## Project Setup Detailed
