@@ -7,7 +7,12 @@ If you are using TypeScript to create a web application here are my recommendati
 * Install [Git](https://git-scm.com/downloads)
 
 ## Project Setup Quick
-You can just clone https://github.com/basarat/react-typescript and follow the README.
+```
+git clone https://github.com/basarat/react-typescript.git
+cd react-typescript
+npm install
+```
+Now jump to [develop your amazing application](#develop-your-amazing-application)
 
 ## Project Setup Detailed
 To see how that project is created, its documented below.
@@ -119,6 +124,8 @@ ReactDOM.render(
 ```
 
 # Develop your amazing application 
-
-* Do live development by running `npm start`. Edit the `app.tsx` (or any ts/tsx file in `src`) and application live reloads. 
-* Deploy by running `npm run build` and serve the `public` folder from your server.
+* Do live development by running `npm start`. 
+    * Visit [http://localhost:8080](http://localhost:8080)
+    * Edit the `app.tsx` (or any ts/tsx file in `src`) and application live reloads. 
+* Build production assets by running `npm run build`. 
+    * Serve the `public` folder (which contains the built assets) from your server.
