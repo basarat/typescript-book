@@ -103,6 +103,60 @@ test('basic again', async () => {
 }, 1000 /* optional timeout */);
 ```
 
+### Example enzyme
+Enzyme allows you to test react components with dom support. 
+
+* Setup `npm install enzyme @types/enzyme -D`
+
+* `checkboxWithLabel.tsx`: 
+
+```
+import * as React from 'react';
+
+export class CheckboxWithLabel extends React.Component<{labelOn: string, labelOff: string}, {isChecked: boolean}> {
+  constructor(props) {
+    super(props);
+    this.state = {isChecked: false};
+  }
+
+  onChange = () => {
+    this.setState({isChecked: !this.state.isChecked});
+  }
+
+  render() {
+    return (
+      <label>
+        <input
+          type="checkbox"
+          checked={this.state.isChecked}
+          onChange={this.onChange}
+        />
+        {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+      </label>
+    );
+  }
+}
+```
+
+* `checkboxWithLabel.test.tsx`: 
+
+```ts
+import * as React from 'react';
+import { shallow } from 'enzyme';
+import { CheckboxWithLabel } from '../checkboxWithLabel';
+
+test('CheckboxWithLabel changes the text after click', () => {
+  // Render a checkbox with label in the document
+  const checkbox = shallow(<CheckboxWithLabel labelOn="On" labelOff="Off" />);
+
+  expect(checkbox.text()).toEqual('Off');
+
+  checkbox.find('input').simulate('change');
+
+  expect(checkbox.text()).toEqual('On');
+});
+```
+
 
 ## Reasons why we like jest 
 > [For details on these features see jest website](http://facebook.github.io/jest/)
