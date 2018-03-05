@@ -110,7 +110,7 @@ Enzyme allows you to test react components with dom support.
 
 * `checkboxWithLabel.tsx`: 
 
-```
+```ts
 import * as React from 'react';
 
 export class CheckboxWithLabel extends React.Component<{labelOn: string, labelOff: string}, {isChecked: boolean}> {
