@@ -37,7 +37,7 @@ module.exports = {
     "jsx",
     "json",
     "node"
-  ]
+  ],
 }
 ```
 Explanation:
