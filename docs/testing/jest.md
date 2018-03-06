@@ -119,7 +119,7 @@ module.exports = {
 ```
 3. Create `src/setupEnzyme.ts` file. 
 
-```
+```js
 import { configure } from 'enzyme';
 import * as EnzymeAdapter from 'enzyme-adapter-react-16';
 
