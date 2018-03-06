@@ -106,7 +106,37 @@ test('basic again', async () => {
 ### Example enzyme
 Enzyme allows you to test react components with dom support. 
 
-* Setup `npm install enzyme @types/enzyme -D`
+* Install `npm install enzyme @types/enzyme enzyme-adapter-react-16 -D`
+* Add `"setupTestFrameworkScriptFile"` to your `jest.config.js`. The whole `jest.config.js` should become: 
+
+```js
+module.exports = {
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
+  "setupTestFrameworkScriptFile": "<rootDir>/src/setupEnzyme.ts",
+}
+```
+* Create `src/setupEnzyme.ts` file. 
+
+```
+import { configure } from 'enzyme';
+import * as EnzymeAdapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new EnzymeAdapter() });
+```
 
 * `checkboxWithLabel.tsx`: 
 
