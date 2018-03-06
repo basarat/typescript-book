@@ -159,7 +159,7 @@ export class CheckboxWithLabel extends React.Component<{labelOn: string, labelOf
 ```ts
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { CheckboxWithLabel } from '../checkboxWithLabel';
+import { CheckboxWithLabel } from './checkboxWithLabel';
 
 test('CheckboxWithLabel changes the text after click', () => {
   // Render a checkbox with label in the document
