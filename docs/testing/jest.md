@@ -129,14 +129,19 @@ configure({ adapter: new EnzymeAdapter() });
 ```ts
 import * as React from 'react';
 
-export class CheckboxWithLabel extends React.Component<{labelOn: string, labelOff: string}, {isChecked: boolean}> {
+export class CheckboxWithLabel extends React.Component<{
+  labelOn: string,
+  labelOff: string
+}, {
+    isChecked: boolean
+  }> {
   constructor(props) {
     super(props);
-    this.state = {isChecked: false};
+    this.state = { isChecked: false };
   }
 
   onChange = () => {
-    this.setState({isChecked: !this.state.isChecked});
+    this.setState({ isChecked: !this.state.isChecked });
   }
 
   render() {
@@ -152,6 +157,7 @@ export class CheckboxWithLabel extends React.Component<{labelOn: string, labelOf
     );
   }
 }
+
 ```
 
 * `checkboxWithLabel.test.tsx`: 
