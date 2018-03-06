@@ -12,6 +12,14 @@ console.log(false == undefined); // false
 ```
 Recommend `== null` to check for both `undefined` or `null`. You generally don't want to make a distinction between the two.
 
+```ts
+function foo(arg: string | null | undefined) {
+  if (arg != null) {
+    // arg must be a string as `!=` rules out both null and undefined. 
+  }
+}
+```
+
 ## undefined
 
 Remember how I said you should use `== null`. Of course you do (cause I just said it ^). Don't use it for root level things. In strict mode if you use `foo` and `foo` is undefined you get a `ReferenceError` **exception** and the whole call stack unwinds.
