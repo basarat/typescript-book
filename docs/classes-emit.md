@@ -10,7 +10,7 @@ Point.prototype.add = function (point) {
 };
 ```
 
-The reason its wrapped in an Immediately-Invoked Function Expression (IIFE) i.e.
+The reason it's wrapped in an Immediately-Invoked Function Expression (IIFE) i.e.
 
 ```ts
 (function () {
