@@ -104,6 +104,9 @@ test('basic again', async () => {
 ```
 
 ### Example enzyme
+
+> [Pro egghead lesson on Enzyme / Jest / TypeScript](https://egghead.io/lessons/react-test-react-components-and-dom-using-enzyme)
+
 Enzyme allows you to test react components with dom support. There are three steps to setting up enzyme:
 
 1. Install enzyme and enzyme-adapter-react for your react version `npm i enzyme @types/enzyme enzyme-adapter-react-16 -D`
