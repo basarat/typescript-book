@@ -111,6 +111,8 @@ Enzyme allows you to test react components with dom support. There are three ste
 
 ```js
 module.exports = {
+  // OTHER PORTIONS AS MENTIONED BEFORE
+
   // Setup Enzyme
   "setupTestFrameworkScriptFile": "<rootDir>/src/setupEnzyme.ts",
 }
