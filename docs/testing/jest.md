@@ -117,6 +117,7 @@ module.exports = {
   // OTHER PORTIONS AS MENTIONED BEFORE
 
   // Setup Enzyme
+  "snapshotSerializers": ["enzyme-to-json/serializer"], 
   "setupTestFrameworkScriptFile": "<rootDir>/src/setupEnzyme.ts",
 }
 ```
@@ -126,9 +127,6 @@ module.exports = {
 import { configure } from 'enzyme';
 import * as EnzymeAdapter from 'enzyme-adapter-react-16';
 configure({ adapter: new EnzymeAdapter() });
-
-import { createSerializer } from 'enzyme-to-json';
-expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
 ```
 
 Now here is an example react component and test:
