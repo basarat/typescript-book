@@ -109,8 +109,8 @@ test('basic again', async () => {
 
 Enzyme allows you to test react components with dom support. There are three steps to setting up enzyme:
 
-1. Install enzyme and enzyme-adapter-react for your react version `npm i enzyme @types/enzyme enzyme-adapter-react-16 -D`
-2. Add `"setupTestFrameworkScriptFile"` to your `jest.config.js`:  
+1. Install enzyme, types for enzyme, a better snapshot serializer for enzyme, enzyme-adapter-react for your react version `npm i enzyme @types/enzyme enzyme-to-json enzyme-adapter-react-16 -D`
+2. Add `"snapshotSerializers"` and `"setupTestFrameworkScriptFile"` to your `jest.config.js`:  
 
 ```js
 module.exports = {
@@ -125,8 +125,10 @@ module.exports = {
 ```js
 import { configure } from 'enzyme';
 import * as EnzymeAdapter from 'enzyme-adapter-react-16';
-
 configure({ adapter: new EnzymeAdapter() });
+
+import { createSerializer } from 'enzyme-to-json';
+expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
 ```
 
 Now here is an example react component and test:
