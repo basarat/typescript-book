@@ -29,10 +29,24 @@ declare module JSX {
 }
 ```
 
-### Components
+### Stateless Functional Components 
+You can define stateless components simply with the `React.SFC` interface e.g. 
+
+```ts
+interface Props {
+  foo: string;
+}
+const MyComponent: React.SFC<Props> = (props) => {
+    return <span>{props.foo}</span>
+}
+
+<MyComponent foo="bar" />
+```
+
+### Stateful Components
 Components are type checked based on the `props` property of the component. This is modeled after how JSX is transformed i.e. the attributes become the `props` of the component.
 
-To create React components we recommend using ES6 classes. The `react.d.ts` file defines the `React.Component<Props,State>` class which you should extend in your own class providing your own `Props` and `State` interfaces. This is demonstrated below:
+To create React Stateful components you use ES6 classes. The `react.d.ts` file defines the `React.Component<Props,State>` class which you should extend in your own class providing your own `Props` and `State` interfaces. This is demonstrated below:
 
 ```ts
 interface Props {
