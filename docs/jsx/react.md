@@ -1,3 +1,5 @@
+> [PRO Egghead course on TypeScript and React](https://egghead.io/courses/use-typescript-to-develop-react-applications)
+
 ## Setup
 Our [browser quickstart already sets you up to develop react applications](../quick/browser.md). Here are the key highlights. 
 
