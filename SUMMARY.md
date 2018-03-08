@@ -63,6 +63,7 @@
   * [Mixins](docs/types/mixins.md)
 * [JSX](docs/jsx/tsx.md)
   * [React](docs/jsx/react.md)
+  * [Non React JSX](docs/jsx/others.md)
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)
   * [strictNullChecks](docs/options/strictNullChecks.md)
