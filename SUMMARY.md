@@ -62,6 +62,7 @@
   * [Exception Handling](docs/types/exceptions.md)
   * [Mixins](docs/types/mixins.md)
 * [JSX](docs/jsx/tsx.md)
+  * [React](docs/jsx/react.md)
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)
   * [strictNullChecks](docs/options/strictNullChecks.md)
