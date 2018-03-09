@@ -123,3 +123,58 @@ class Select<T> extends Component<SelectProps<T>, any> {
 /** Specialization */
 const StringSelect = Select as { new (props: SelectProps<string>): GenericList<string> };
 ```
+
+## Default Props 
+
+* Stateful components with default props: You can tell TypeScript that a property will be provided externally (by React) by using a *null assertion* operator (this isn't ideal but is the simplest minimum *extra code* solution I could think of).
+
+```tsx
+class Hello extends React.Component<{
+  compiler?: string,
+  framework: string
+}> {
+  static defaultProps = {
+    compiler: 'TypeScript'
+  }
+  render() {
+    const compiler = this.props.compiler!;
+    return (
+      <div>
+        <div>{compiler}</div>
+        <div>{this.props.framework}</div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Hello framework="React" />, // TypeScript React
+  document.getElementById("root")
+);
+```
+
+* SFC with default props: Recommend leveraging simple JavaScript patterns as they work well with TypeScript's type system e.g.
+
+```tsx
+const Hello: React.SFC<{
+  compiler?: string,
+  framework: string
+}> = ({
+  compiler = 'TypeScript', // Default prop
+  framework
+}) => {
+    return (
+      <div>
+        <div>{compiler}</div>
+        <div>{framework}</div>
+      </div>
+    );
+  };
+
+
+ReactDOM.render(
+  <Hello framework="React" />, // TypeScript React
+  document.getElementById("root")
+);
+```
+
