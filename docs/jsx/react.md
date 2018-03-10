@@ -121,7 +121,7 @@ class Select<T> extends Component<SelectProps<T>, any> {
     constructor(props: SelectProps<T>) { super(props) }
 }
 /** Specialization */
-const StringSelect = Select as { new (props: SelectProps<string>): GenericList<string> };
+const StringSelect = Select as { new (props: SelectProps<string>): Select<string> };
 ```
 
 ## Default Props 
