@@ -44,7 +44,7 @@ Explanation:
 * We always recommend having *all* TypeScript files in a `src` folder in your project. We assume this is true and specify this using `roots` option.
 * The `transform` config just tells `jest` to use `ts-jest` for ts / tsx files. 
 * The `testRegex` tells Jest to look for tests in any `__tests__` folder AND also any files anywhere that use the `(.test|.spec).(js|jsx|ts|tsx)` extension e.g. `asdf.test.tsx` etc.
-* The `moduleFileExtensions` tells jest to our file extensions. This is needed as we add `ts`/`tsx` into the defaults (`js|jsx|json|node`).
+* The `moduleFileExtensions` tells jest to recognize our file extensions. This is needed as we add `ts`/`tsx` into the defaults (`js|jsx|json|node`).
 
 ## Step 3: Run tests
 Run `npx jest` from your project root and jest will execute any tests you have.

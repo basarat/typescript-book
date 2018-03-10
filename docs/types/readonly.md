@@ -80,7 +80,7 @@ export class Something extends React.Component<Props,State> {
 }
 ```
 
-You do no need to however as the type definitions for React mark these as `readonly` for you (by internally wrapping the passed in generic types with the `Readonly` type mentioned above). 
+You do not need to, however, as the type definitions for React mark these as `readonly` already (by internally wrapping the passed in generic types with the `Readonly` type mentioned above).
 
 ```ts
 export class Something extends React.Component<{ foo: number }, { baz: number }> {

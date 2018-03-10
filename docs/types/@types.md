@@ -33,7 +33,7 @@ import * as $ from "jquery";
 
 ## Controlling Globals
 
-As can be seen having a definition that supports global leak in automatically can be a problem for some team so you can chose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.:
+As can be seen, having a definition that allows global leak-in automatically can be a problem for some teams. So you can chose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.:
 
 ```json
 {
