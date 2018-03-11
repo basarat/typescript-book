@@ -130,6 +130,9 @@ const StringSelect = Select as { new (props: SelectProps<string>): GenericList<s
 
 ```tsx
 class Hello extends React.Component<{
+  /** 
+   * @default 'TypeScript'
+   */
   compiler?: string,
   framework: string
 }> {
@@ -157,6 +160,9 @@ ReactDOM.render(
 
 ```tsx
 const Hello: React.SFC<{
+  /** 
+   * @default 'TypeScript'
+   */
   compiler?: string,
   framework: string
 }> = ({
