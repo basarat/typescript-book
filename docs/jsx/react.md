@@ -73,8 +73,8 @@ interface Props {
 class MyComponent extends React.Component<Props, {}> {
     render() {
         return <div>
-            {header}
-            {body}
+            {this.props.header}
+            {this.props.body}
         </div>;
     }
 }

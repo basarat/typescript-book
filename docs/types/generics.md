@@ -30,7 +30,7 @@ class Queue {
 
 const queue = new Queue();
 queue.push(0);
-queue.push("1"); // Ops a mistake
+queue.push("1"); // Oops a mistake
 
 // a developer walks into a bar
 console.log(queue.pop().toPrecision(1));

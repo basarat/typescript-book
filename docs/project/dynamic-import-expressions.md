@@ -9,7 +9,7 @@ At first glance, it’s natural to think (if we are using webpack in our dev wor
 
 The thing is that webpack code splitting supports two similar techniques to achieve this goal: using **import()** (preferred, ECMAScript proposal) and **require.ensure()** (legacy, webpack specific). And what that means is the expected TypeScript output is **leave the import() statement as it is** instead of transpile it to anything else.
 
-Let’s see and example to figure out how to configure webpack + TypeScript 2.4.
+Let’s see an example to figure out how to configure webpack + TypeScript 2.4.
 
 In the following code I want to **lazy load the library moment** but I am interested on code splitting as well, which means, having moment library in a separate chunk of JS (javascript file) and that will be loaded only when required.
 
