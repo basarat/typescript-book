@@ -1,4 +1,4 @@
-# Prettier 
+## Prettier 
 
 Prettier is a great tool by facebook that makes code formatting so much easier that its worth mentioning. Setting up with TypeScript using our recommended project sets is super easy: 
 

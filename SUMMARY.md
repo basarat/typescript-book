@@ -64,6 +64,8 @@
 * [JSX](docs/jsx/tsx.md)
   * [React](docs/jsx/react.md)
   * [Non React JSX](docs/jsx/others.md)
+* [Tools](docs/tools/intro.md)
+  * [Prettier](docs/tools/prettier.md)
 * [Options](docs/options/intro.md)
   * [noImplicitAny](docs/options/noImplicitAny.md)
   * [strictNullChecks](docs/options/strictNullChecks.md)
