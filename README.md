@@ -37,6 +37,7 @@ If you are here to read the book online [get started](http://basarat.gitbooks.io
 ## Translations 
 Book is completely free so you can copy paste whatever you want without requiring permission. If you have a translation you want me to link here. [Send a PR](https://github.com/basarat/typescript-book/edit/master/README.md).
 * [Filipino](https://github.com/themarshann/typescript-book-fil)
+* [Italian](https://github.com/TizioFittizio/typescript-book)
 
 ## Other Options
 You can also download one of the following:
