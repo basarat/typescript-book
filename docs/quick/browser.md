@@ -1,4 +1,5 @@
 # TypeScript in the browser
+
 If you are using TypeScript to create a web application here are my recommendations to get a quick TypeScript + React (my UI framework of choice) project setup.
 
 ## General Machine Setup
@@ -60,14 +61,15 @@ cd your-project
     "start": "webpack-dev-server ./webpack.config.js --content-base ./public"
   },
   "dependencies": {
-    "@types/react": "16.0.18",
-    "@types/react-dom": "16.0.2",
-    "react": "16.0.0",
-    "react-dom": "16.0.0",
-    "ts-loader": "3.0.5",
+    "@types/react": "16.0.40",
+    "@types/react-dom": "16.0.4",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "ts-loader": "4.0.1",
     "typescript": "2.7.2",
-    "webpack": "3.8.1",
-    "webpack-dev-server": "2.9.3"
+    "webpack": "4.1.1",
+    "webpack-cli": "2.0.11",
+    "webpack-dev-server": "3.1.1"
   }
 }
 ```
@@ -127,7 +129,7 @@ ReactDOM.render(
 
 # Develop your amazing application 
 
-> You can get the latest packages using `npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest ts-loader@latest webpack-dev-server@latest --save-dev --save-exact`
+> You can get the latest packages using `npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest ts-loader@latest webpack-dev-server@latest webpack-cli@latest`
 
 * Do live development by running `npm start`. 
     * Visit [http://localhost:8080](http://localhost:8080)
