@@ -57,7 +57,7 @@ cd your-project
     "url": "https://github.com/basarat/typescript-react.git"
   },
   "scripts": {
-    "build": "webpack ./webpack.config.js",
+    "build": "webpack ./webpack.config.js -p",
     "start": "webpack-dev-server ./webpack.config.js --content-base ./public"
   },
   "dependencies": {
