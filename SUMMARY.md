@@ -71,6 +71,7 @@
   * [Jest](docs/testing/jest.md)
 * [Tools](docs/tools/intro.md)
   * [Prettier](docs/tools/prettier.md)
+  * [Husky](docs/tools/husky.md)
 * [TIPs](docs/tips/main.md)
   * [String Based Enums](docs/tips/stringEnums.md)
   * [Nominal Typing](docs/tips/nominalTyping.md)
