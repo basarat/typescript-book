@@ -33,7 +33,7 @@ declare module JSX {
 You can define stateless components simply with the `React.SFC` interface e.g. 
 
 ```ts
-interface Props {
+type Props = {
   foo: string;
 }
 const MyComponent: React.SFC<Props> = (props) => {
@@ -49,7 +49,7 @@ Components are type checked based on the `props` property of the component. This
 To create React Stateful components you use ES6 classes. The `react.d.ts` file defines the `React.Component<Props,State>` class which you should extend in your own class providing your own `Props` and `State` interfaces. This is demonstrated below:
 
 ```ts
-interface Props {
+type Props = {
   foo: string;
 }
 class MyComponent extends React.Component<Props, {}> {
@@ -66,7 +66,7 @@ class MyComponent extends React.Component<Props, {}> {
 React can render a few things like `JSX` or `string`. There are all consolidated into the type `React.ReactNode` so use it for when you want to accept renderables e.g.
 
 ```ts
-interface Props {
+type Props = {
   header: React.ReactNode;
   body: React.ReactNode;
 }
@@ -115,12 +115,13 @@ const Form = () => <StringSelect items={['a','b']} />;
 If your constructor takes props you can accomodate that too: 
 
 ```ts
-/** Generic component */
-interface SelectProps<T> { items: T[] }
+/** A generic component */
+type SelectProps<T> = { items: T[] }
 class Select<T> extends Component<SelectProps<T>, any> {
     constructor(props: SelectProps<T>) { super(props) }
 }
-/** Specialization */
+
+/** Specialize Select to use with strings */
 const StringSelect = Select as { new (props: SelectProps<string>): Select<string> };
 ```
 
