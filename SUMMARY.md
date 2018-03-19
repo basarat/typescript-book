@@ -83,7 +83,6 @@
   * [Classes are Useful](docs/tips/classesAreUseful.md)
   * [Avoid Export Default](docs/tips/defaultIsBad.md)
   * [Limit Property Setters](docs/tips/propertySetters.md)
-  * [`null` is bad](docs/tips/null.md)
   * [`outFile` caution](docs/tips/outFile.md)
   * [JQuery tips](docs/tips/jquery.md)
   * [static constructors](docs/tips/staticConstructor.md)

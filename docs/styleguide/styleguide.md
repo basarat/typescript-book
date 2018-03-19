@@ -216,8 +216,6 @@ if (error !== null)
 if (error != undefined)
 ```
 
-PS: [More about `null`](../tips/null.md)
-
 ## Formatting
 The TypeScript compiler ships with a very nice formatting language service. Whatever output it gives by default is good enough to reduce the cognitive overload on the team.
 
