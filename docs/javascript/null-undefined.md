@@ -6,6 +6,8 @@ Fact is you will need to deal with both. Just check for either with `==` check.
 /// Imagine you are doing `foo.bar == undefined` where bar can be one of:
 console.log(undefined == undefined); // true
 console.log(null == undefined); // true
+
+// You don't have to worry about falsy values making through this check
 console.log(0 == undefined); // false
 console.log('' == undefined); // false
 console.log(false == undefined); // false
