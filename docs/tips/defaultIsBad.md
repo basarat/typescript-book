@@ -30,6 +30,8 @@ And then:
 import {Foo} from "./foo";
 ```
 
+> **Bonus points**: Discoverability is very poor for default exports. You cannot explore a module with intellisense to see if it has a default export or not.
+
 > **Bonus points**: You even get autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
 
 > **Bonus points**: Better commonJs experience. With `default` there is horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
