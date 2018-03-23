@@ -52,8 +52,8 @@ console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 10)); // false
 > For arbitrary precision integer math use `big.js` mentioned below.
 
 ### big.js
-Whenever you use math for financial calculations (e.g. GST calculation, money with cents addition etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
-* Perfect decimal math.
+Whenever you use math for financial calculations (e.g. GST calculation, money with cents, addition etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
+* Perfect decimal math
 * Safe out of bound integer values
 
 Installation is simple:
