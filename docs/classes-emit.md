@@ -81,7 +81,7 @@ delete foo.__proto__.bar; // remove from foo.__proto__
 console.log(foo.bar); // undefined
 ```
 
-Cool so you understand `__proto__`. Another useful information is that all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function. This is shown below:
+Cool so you understand `__proto__`. Another useful fact is that all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function. This is shown below:
 
 ```ts
 function Foo() { }
