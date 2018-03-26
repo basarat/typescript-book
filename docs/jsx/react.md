@@ -99,31 +99,17 @@ const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent />; /
 > Of course you can use this as a function argument annotation and even React component prop member.
 
 ### React JSX Tip: Generic components
-There's no syntax in JSX to apply generic parameters to a generic component. You must first store the generic class in a variable that removes any generic parameters with concrete types. As an example we replace `T` with the concrete `string` type:
+It works exactly as exptected. Here is an example:
 
 ```ts
 /** A generic component */
 type SelectProps<T> = { items: T[] }
 class Select<T> extends React.Component<SelectProps<T>, any> { }
 
-/** Specialize Select to use with strings */
-const StringSelect = Select as { new (): Select<string> };
-
 /** Usage */
-const Form = () => <StringSelect items={['a','b']} />;
+const Form = () => <Select<string> items={['a','b']} />;
 ```
-If your constructor takes props you can accomodate that too: 
 
-```ts
-/** A generic component */
-type SelectProps<T> = { items: T[] }
-class Select<T> extends Component<SelectProps<T>, any> {
-    constructor(props: SelectProps<T>) { super(props) }
-}
-
-/** Specialize Select to use with strings */
-const StringSelect = Select as { new (props: SelectProps<string>): Select<string> };
-```
 
 ## Default Props 
 
