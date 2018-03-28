@@ -99,7 +99,7 @@ const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent />; /
 > Of course you can use this as a function argument annotation and even React component prop member.
 
 ### React JSX Tip: Generic components
-It works exactly as exptected. Here is an example:
+It works exactly as expected. Here is an example:
 
 ```ts
 /** A generic component */
