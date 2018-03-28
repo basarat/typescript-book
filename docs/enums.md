@@ -95,38 +95,6 @@ enum Color {
 
 > TIP: I quite commonly initialize the first enum with ` = 1` as it allows me to do a safe truthy check on an enum value.
 
-#### Enums are open ended
-Here is the generated JavaScript for an enum shown again:
-
-```js
-var Tristate;
-(function (Tristate) {
-    Tristate[Tristate["False"] = 0] = "False";
-    Tristate[Tristate["True"] = 1] = "True";
-    Tristate[Tristate["Unknown"] = 2] = "Unknown";
-})(Tristate || (Tristate = {}));
-```
-
-We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `TriState` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object.
-
-This means that you can split (and extend) an enum definition across multiple files. For example below we have split the definition for `Color` into two blocks
-
-```ts
-enum Color {
-    Red,
-    Green,
-    Blue
-}
-
-enum Color {
-    DarkRed = 3,
-    DarkGreen,
-    DarkBlue
-}
-```
-
-Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`).
-
 #### Enums as flags
 One excellent use of enums is the ability to use enums as `Flags`. Flags allow you to check if a certain condition from a set of conditions is true. Consider the following example where we have a set of properties about animals:
 
@@ -261,3 +229,38 @@ const sun = Weekday.Sunday;
 console.log(Weekday.isBusinessDay(mon)); // true
 console.log(Weekday.isBusinessDay(sun)); // false
 ```
+
+#### Enums are open ended
+
+> NOTE: open ended enums are only relevant if you are not using modules. You should be using modules. Hence this section is last.
+
+Here is the generated JavaScript for an enum shown again:
+
+```js
+var Tristate;
+(function (Tristate) {
+    Tristate[Tristate["False"] = 0] = "False";
+    Tristate[Tristate["True"] = 1] = "True";
+    Tristate[Tristate["Unknown"] = 2] = "Unknown";
+})(Tristate || (Tristate = {}));
+```
+
+We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `TriState` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object.
+
+This means that you can split (and extend) an enum definition across multiple files. For example below we have split the definition for `Color` into two blocks
+
+```ts
+enum Color {
+    Red,
+    Green,
+    Blue
+}
+
+enum Color {
+    DarkRed = 3,
+    DarkGreen,
+    DarkBlue
+}
+```
+
+Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`).
