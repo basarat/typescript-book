@@ -146,7 +146,7 @@ interface Foo {
 interface Bar {
   [key:string]: number
   x: number;
-  y: string; // Property `y` must of of type number
+  y: string; // Property `y` must be of type string
 }
 ```
 
