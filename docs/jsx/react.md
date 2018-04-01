@@ -110,6 +110,29 @@ class Select<T> extends React.Component<SelectProps<T>, any> { }
 const Form = () => <Select<string> items={['a','b']} />;
 ```
 
+### Generic functions
+
+Something like the following works fine:
+
+```ts
+function foo<T>(x: T): T { return x; }
+```
+
+However using an arrow generic function will not:
+
+```ts
+const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
+```
+
+**Workaround**: Use `extends` on the generic parameter to hint the compiler that it's a generic, e.g.:
+
+```ts
+const foo = <T extends {}>(x: T) => x;
+```
+
+### Type Assertions 
+
+Use `as Foo` syntax for type assertions as we [mentioned before](./type-assertion.md#as-foo-vs-foo).
 
 ## Default Props 
 
