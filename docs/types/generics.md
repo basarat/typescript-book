@@ -115,24 +115,33 @@ class Utility {
 I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you might have a useless generic. E.g. the following function
 
 ```ts
-declare function foo<T>(name: string): T;
+declare function foo<T>(arg: T): void;
+```
+Here the generic `T` is completely useless as it is only used in an *single* argument position. It might as well be: 
+
+```ts
+declare function foo(arg: any): void;
+```
+
+### Design Pattern: Convenience generic
+
+Consider the function: 
+
+```ts
+declare function parse<T>(name: string): T;
 ```
 
 In this case you can see that the type `T` is only used in one place. So there is no constraint *between* members. You would be equivalent to a type assertion in terms of type safety:
 
 ```ts
-declare function foo(name: string): any;
+declare function parse(name: string): any;
 
-const something = foo('something') as TypeOfSomething;
+const something = parse('something') as TypeOfSomething;
 ```
 
-> You might use these for convenience if that is a deliberate choice as presented next.
+Generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
 
-### Design Pattern: Convenience generic
-
-The previous example of `foo<T>` was intentionally meant to make clear the fact that generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
-
-An example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
+A more obvious example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
 ```ts
 const getJSON = <T>(config: {
     url: string,
