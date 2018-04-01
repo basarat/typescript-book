@@ -68,7 +68,7 @@ class Person {
 var person = new Person(1);
 setTimeout(person.growOld,1000);
 
-setTimeout(function() { console.log(person.age); },2000); // 2
+setTimeout(() => { console.log(person.age); },2000); // 2
 ```
 
 > [A sweet video about this pattern 🌹](https://egghead.io/lessons/typescript-make-usages-of-this-safe-in-class-methods)
