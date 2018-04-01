@@ -112,28 +112,25 @@ class Utility {
 
 ## Useless Generic
 
-I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you probably have a useless generic. E.g. people have attempted to type the Node.js `require` function as:
+I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you might have a useless generic. E.g. the following function
 
 ```ts
-declare function require<T>(name: string): T;
+declare function foo<T>(name: string): T;
 ```
 
-In this case you can see that the type `T` is only used in one place. So there is not constraint *between* members. You would be better off with a type assertion in this case:
+In this case you can see that the type `T` is only used in one place. So there is no constraint *between* members. You would be equivalent to a type assertion in terms of type safety:
 
 ```ts
-declare function require(name: string): any;
+declare function foo(name: string): any;
 
-const something = require('something') as TypeOfSomething;
+const something = foo('something') as TypeOfSomething;
 ```
 
-This is just an example; if you are considering on using this `require` typings, you don't need to because:
-
-1. It's already there in `node.d.ts`: you can install using `npm install @types/node --save-dev`.
-1. You should consider using the type definitions for your library e.g. for jquery `npm install @types/jquery --save-dev` instead of using raw `require`.
+> You might use these for convenience if that is a deliberate choice as presented next.
 
 ### Design Pattern: Convenience generic
 
-The previous example of `require<T>` was intentionally meant to make clear the fact that generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
+The previous example of `foo<T>` was intentionally meant to make clear the fact that generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
 
 An example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
 ```ts
@@ -151,7 +148,8 @@ const getJSON = <T>(config: {
       .then<T>(response => response.json());
   }
 ```
-Note that you still have to explicitly annotate what you want, but the `getJSON<T>` signature `(config) => Promise<T>` saves you a few key strokes:
+
+Note that you still have to explicitly annotate what you want, but the `getJSON<T>` signature `(config) => Promise<T>` saves you a few key strokes (you don't need to annotate the return type of `loadUsers` as it can be inferred):
 
 ```ts
 type LoadUsersResponse = {
