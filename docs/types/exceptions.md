@@ -33,7 +33,7 @@ console.log(notValidVar); // ReferenceError: notValidVar is not defined
 Creates an instance representing a syntax error that occurs while parsing code that isn't valid JavaScript.
 
 ```js
-1***3; // SyntaxError: Unexpectd token *
+1***3; // SyntaxError: Unexpected token *
 ```
 ### TypeError
 Creates an instance representing an error that occurs when a variable or parameter is not of a valid type.
