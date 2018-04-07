@@ -96,4 +96,21 @@ class C {
 }
 ```
 
+You can also use this assertion with simple variable declarations e.g.: 
+
+```ts
+let a: number[]; // No assertion
+let b!: number[]; // Assert
+
+initialize();
+
+a.push(4); // TS ERROR: variable used before assignment
+b.push(4); // OKAY: because of the assertion
+
+function initialize() {
+  a = [0, 1, 2, 3];
+  b = [0, 1, 2, 3];
+}
+```
+
 > Like all assertions, you are telling the compiler to trust you. The compiler will not complain even if the code doesn't actually always assign the property.
