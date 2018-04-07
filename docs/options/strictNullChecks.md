@@ -58,7 +58,42 @@ function validateEntity(e?: Entity) {
 function processEntity(e?: Entity) {
     validateEntity(e);
     let a = e.name;  // TS ERROR: e may be null.
-    let b = e!.name;  // Assert that e is non-null. This allows you to access name
+    let b = e!.name;  // OKAY. We are asserting that e is non-null.
 }
 ```
 > Note that it is just an assertion, and just like type assertions *you are responsible* for making sure the value is not null. A non-null assertion is essentially you telling the compiler "I know it's not null so let me use it as though it's not null".
+
+### Definite Assignment Assertion Operator
+
+TypeScript will also complain about properties in classes not being initialized e.g.: 
+
+```ts
+class C {
+  foo: number; // OKAY as assigned in constrcutor
+  bar: string = "hello"; // OKAY as has property initializer
+  baz: boolean; // TS ERROR: Property 'baz' has no initializer and is not assigned directly in the constructor. 
+  constructor() {
+    this.foo = 42;
+  }
+}
+```
+
+You can use the definite assignment assertion postfixed to the property name to tell TypeScript that you are initlizing it somewhere other than the constructor e.g. 
+
+```ts
+class C {
+  foo!: number;
+  // ^
+  // Notice this exclamation point!
+  // This is the "definite assignment assertion" modifier.
+  
+  constructor() {
+    this.initialize();
+  }
+  initialize() {
+    this.foo = 0;
+  }
+}
+```
+
+> Like all assertions, you are telling the compiler to trust you. The compiler will not complain even if the code doesn't actually always assign the property.
