@@ -22,9 +22,7 @@ interface Complex {
 }
 ```
 
-When an interface has more than one callable member,
-it defines a type that is callable with *all* of those signatures.
-This interface can be used to type an overloaded function. For example:
+An interface can provide multiple callable annotations to specify function overloading. For example:
 
 ```ts
 interface Overloaded {
@@ -50,25 +48,10 @@ const str = overloaded(''); // type of `str` is inferred as `string`
 const num = overloaded(123); // type of `num` is inferred as `number`
 ```
 
-This makes sense when we think about what it means for an interface to have multiple members.
-The definition above for `Overloaded` is equivalent to:
-
-```ts
-interface A {
-  (foo: string): string
-}
-
-interface B {
-  (foo: number): number
-}
-
-type Overloaded = A & B;
-```
-
 Of course, like the body of *any* interface, you can use the body of a callable interface as a type annotation for a variable. For example:
 
 ```ts
-const identity: {
+const overloaded: {
   (foo: string): string
   (foo: number): number
 } = (foo: any) => foo;
@@ -81,6 +64,8 @@ To make it easy to specify callable signatures, TypeScript also allows simple ar
 const simple: (foo: number) => string
     = (foo) => foo.toString();
 ```
+
+> Only limitation of the arrow syntax: You can't specify overloads. For overloads you must use the full bodied `{ (someArgs): someReturn }` syntax.
 
 ### Newable
 
