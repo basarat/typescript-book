@@ -61,7 +61,7 @@ Add `package.json`:
 * And even in watch mode with `npm t -- --watch`. 
 
 ### Optional: Run jest in watch mode 
-* `npx jest -w`
+* `npx jest --watch`
 
 
 ### Example
