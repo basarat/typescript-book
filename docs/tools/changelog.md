@@ -9,20 +9,41 @@ The most common convention is the *angular* commit messages convention which is 
 ### Setup
 * Install: 
 
-```
-npm install conventional-changelog -D
-```
-
-* Generate an initial `CHANGELOG.md`:
-
-```
-npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+```bash
+npm install standard-version -D
 ```
 
-* Then keep it updated by adding a `script` target to your `package.json`: 
+* Add a `script` target to your `package.json`: 
 
-```
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+```js
+{
+  "scripts": {
+    "release": "standard-version"
+  }
+}
 ```
 
-And now you can add `npm run changelog` to your build / push / release process to keep it up to date.
+* Optionally : To automatically push the new *git commit and tag* plus publish to npm add a `postrelease` script: 
+
+```js
+{
+  "scripts": {
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin master && npm publish"
+  }
+}
+```
+
+### Releasing 
+
+Simply run: 
+
+```bash
+npm run release
+```
+
+Based on the commit messages `major` | `minor` | `patch` is automatically determined. To *explicitly* specify a version you can specify `--release-as` e.g.: 
+
+```bash
+npm run release -- --release-as minor
+```
