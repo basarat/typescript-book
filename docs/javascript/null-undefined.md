@@ -73,8 +73,9 @@ Node style callback functions (e.g. `(err,somethingElse)=>{ /* something */ }`) 
 fs.readFile('someFile', 'utf8', (err,data) => {
   if (err) {
     // do something
+  } else {
+    // no error
   }
-  // no error
 });
 ```
 When creating your own APIs it's *okay* to use `null` in this case for consistency. In all sincerity for your own APIs you should look at promises, in that case you actually don't need to bother with absent error values (you handle them with `.then` vs. `.catch`).
