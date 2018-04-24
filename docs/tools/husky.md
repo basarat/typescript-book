@@ -6,7 +6,7 @@ If you want to run some JavaScript / TypeScript code before a commit takes place
 
 For example you can use husky to make sure files are formatted by prettier automatically so you don't have to worry about manually formatting files ever again and focus on the objective of the code instead. Here is the setup: 
 
-* `npm install huksy -D`
+* `npm install husky -D`
 * Add `scripts` to `package.json`: 
 
 ```
