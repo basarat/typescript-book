@@ -10,7 +10,7 @@ You can either use `files` to be explicit:
 }
 ```
 
-or `include` and `exclude` to specify files. E.g.:
+or `include` and `exclude` to specify files / folders / globs. E.g.:
 
 
 ```json
@@ -27,5 +27,4 @@ or `include` and `exclude` to specify files. E.g.:
 
 Some notes:
 
-* if `files` is specified, other options are ignored
-* `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be included and even `.js`/`.jsx` if `allowJs` is true)
+* For globs : `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be assumed and if `allowJs:true` so will `.js`/`.jsx`)
