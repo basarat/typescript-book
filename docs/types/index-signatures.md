@@ -166,6 +166,7 @@ foo['x']; // number
 let x = 'x'
 foo[x]; // number
 ```
+
 ### Using a limited set of string literals
 
 An index signature can require that index strings be members of a union of literal strings by using *Mapped Types* e.g.:
@@ -255,4 +256,29 @@ const example: NestedCSS = {
 const failsSilently: NestedCSS = {
   colour: 'red', // TS Error: unknown property `colour`
 }
+```
+
+### Excluding certain properties from the index signature 
+Sometimes you need to combine properties into the index signature. This is not advised, and you *should* use the Nested index signature pattern mentioned above. However if you are modeling existing JavaScript you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
+
+```js
+type FieldState = {
+  value: string
+}
+
+type FormState = {
+  isValid: boolean  // Error: Does not conform to the index signature
+  [fieldName: string]: FieldState 
+}
+```
+Here is the workaround with using an intersection type: 
+
+```js
+type FieldState = {
+  value: string
+}
+
+type FormState =
+  { isValid: boolean }
+  & { [fieldName: number]: FieldState } 
 ```
