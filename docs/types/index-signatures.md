@@ -280,5 +280,5 @@ type FieldState = {
 
 type FormState =
   { isValid: boolean }
-  & { [fieldName: number]: FieldState } 
+  & { [fieldName: string]: FieldState } 
 ```
