@@ -98,6 +98,16 @@ const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent />; /
 
 > Of course you can use this as a function argument annotation and even React component prop member.
 
+### React JSX Tip: Accept a *component* that can be act on props and be rendered using JSX 
+The type `React.Component<Props>` consolidates `React.ComponentClass<P> | React.StatelessComponent<P>` so you can accept *something* that takes type `Props` and renders it using JSX e.g. 
+
+```ts
+const X: React.Component<Props> = foo; // from somewhere 
+
+// Render X with some props: 
+<X {...props}/>;
+```
+
 ### React JSX Tip: Generic components
 It works exactly as expected. Here is an example:
 
