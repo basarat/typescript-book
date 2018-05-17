@@ -234,7 +234,7 @@ const failsSilently: NestedCSS = {
 }
 ```
 
-Instead seperate out the nesting into its own property e.g. in a name like `nest` (or `children` or `subnodes` etc.):
+Instead separate out the nesting into its own property e.g. in a name like `nest` (or `children` or `subnodes` etc.):
 
 ```js
 interface NestedCSS {
