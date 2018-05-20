@@ -53,7 +53,7 @@ So that's JavaScript. Now let's look at TypeScript graceful handling of this con
 
 ## TypeScript Index Signature
 
-First off, because JavaScript *implicitly* calls `toString` on any object index signature, TypeScript will give you an error to prevent beginners from shooting themselves in the foot (I see users shooting themselves in their feet when using JavaScript all the time on stackoverflow):
+First off, because JavaScript *implicitly* calls `toString` on any object index signature, TypeScript will give you an error to prevent beginners from shooting themselves in the foot (I see users shooting themselves in the foot when using JavaScript all the time on stackoverflow):
 
 ```ts
 let obj = {
