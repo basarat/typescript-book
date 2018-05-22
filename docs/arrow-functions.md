@@ -102,8 +102,26 @@ something.each(function() {
 ```
 
 #### Tip: Arrow functions and inheritance
+Arrow functions as properties on classes work fine with inheritance: 
 
-If you have an instance method as an arrow function then it goes on `this`. Since there is only one `this` such functions cannot participate in a call to `super` (`super` only works on prototype members). You can easily get around it by creating a copy of the method before overriding it in the child.
+```ts
+class Adder {
+    constructor(public a: number) {}
+    add = (b: number): number => {
+        return this.a + b;
+    }
+}
+class Child extends Adder {
+    callAdd(b: number) {
+        return this.add(b);
+    }
+}
+// Demo to show it works
+const child = new Child(123);
+console.log(child.callAdd(123)); // 246
+```
+
+However they do not work with the `super` keyword when you try to override the function in a child class. Properties go on `this`. Since there is only one `this` such functions cannot participate in a call to `super` (`super` only works on prototype members). You can easily get around it by creating a copy of the method before overriding it in the child.
 
 ```ts
 class Adder {
