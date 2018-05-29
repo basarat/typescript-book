@@ -501,7 +501,7 @@ Note that there is a handy dandy function in NodeJS that does this `node style f
 /** Sample usage */
 import fs = require('fs');
 import util = require('util');
-const readFile = util.promisify1(fs.readFile);
+const readFile = util.promisify(fs.readFile);
 ```
 
 [polyfill]:https://github.com/stefanpenner/es6-promise
