@@ -31,6 +31,8 @@ let foo = {
 
 This is also great for code review and code maintainability purposes.
 
+> The quick fix and middle ground *lazy* initialization patterns described below suffer from *mistakingly forgetting to initialize a property*. 
+
 ### Quick Fix
 
 If you have a large JavaScript code base that you are migrating to TypeScript the ideal fix might not be a viable solution for you. In that case you can carefully use a *type assertion* to silence the compiler:
