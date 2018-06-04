@@ -54,11 +54,11 @@ cd your-project
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/basarat/typescript-react.git"
+    "url": "https://github.com/basarat/react-typescript.git"
   },
   "scripts": {
-    "build": "webpack ./webpack.config.js -p",
-    "start": "webpack-dev-server ./webpack.config.js --content-base ./public"
+    "build": "webpack -p",
+    "start": "webpack-dev-server -d --content-base ./public"
   },
   "dependencies": {
     "@types/react": "16.0.40",
@@ -78,8 +78,6 @@ cd your-project
 
 ```js
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
   entry: './src/app/app.tsx',
   output: {
     path: __dirname + '/public',
