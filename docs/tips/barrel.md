@@ -39,7 +39,7 @@ import { Foo, Bar, Baz } from '../demo'; // demo/index.ts is implied
 ```
 
 ### Named exports
-Instead of exporting * you can chose to export the module in a name. Eg. assume that `baz.ts` has functions:
+Instead of exporting `*`, you can choose to export the module in a name. E.g., assume that `baz.ts` has functions:
 
 ```ts
 // demo/foo.ts
