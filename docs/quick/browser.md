@@ -128,7 +128,7 @@ ReactDOM.render(
 
 # Develop your amazing application 
 
-> You can get the latest packages using `npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest ts-loader@latest webpack-dev-server@latest webpack-cli@latest`
+> You can get the latest packages using `npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest ts-loader@latest webpack-dev-server@latest webpack-cli@latest --save-exact`
 
 * Do live development by running `npm start`. 
     * Visit [http://localhost:8080](http://localhost:8080)
