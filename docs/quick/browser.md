@@ -36,7 +36,11 @@ cd your-project
     "sourceMap": true,
     "module": "commonjs",
     "target": "es5",
-    "jsx": "react"
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es6"
+    ]
   },
   "include": [
     "src"
