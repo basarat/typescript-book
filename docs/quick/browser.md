@@ -65,15 +65,15 @@ cd your-project
     "start": "webpack-dev-server -d --content-base ./public"
   },
   "dependencies": {
-    "@types/react": "16.0.40",
-    "@types/react-dom": "16.0.4",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "ts-loader": "4.0.1",
-    "typescript": "2.7.2",
-    "webpack": "4.1.1",
-    "webpack-cli": "2.0.11",
-    "webpack-dev-server": "3.1.1"
+    "@types/react": "16.4.2",
+    "@types/react-dom": "16.0.6",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "ts-loader": "4.4.1",
+    "typescript": "2.9.2",
+    "webpack": "4.12.1",
+    "webpack-cli": "3.0.8",
+    "webpack-dev-server": "3.1.4"
   }
 }
 ```
