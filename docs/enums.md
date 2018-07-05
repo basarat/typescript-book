@@ -25,7 +25,9 @@ var card = CardSuit.Clubs;
 card = "not a member of card suit"; // Error : string is not assignable to type `CardSuit`
 ```
 
-#### Enums and Numbers
+These enums values are `number`s so I'll call them Number Enums from hence forth.
+
+#### Number Enums and Numbers
 TypeScript enums are number based. This means that numbers can be assigned to an instance of the enum, and so can anything else that is compatible with `number`.
 
 ```ts
@@ -38,7 +40,7 @@ var col = Color.Red;
 col = 0; // Effectively same as Color.Red
 ```
 
-#### Enums and Strings
+#### Number Enums and Strings
 Before we look further into enums let's look at the JavaScript that it generates, here is a sample TypeScript:
 
 ```ts
@@ -72,7 +74,7 @@ console.log(Tristate["False"]); // 0
 console.log(Tristate[Tristate.False]); // "False" because `Tristate.False == 0`
 ```
 
-#### Changing the number associated with an Enum
+#### Changing the number associated with a Number Enum
 By default enums are `0` based and then each subsequent value increments by 1 automatically. As an example consider the following:
 
 ```ts
@@ -95,7 +97,7 @@ enum Color {
 
 > TIP: I quite commonly initialize the first enum with ` = 1` as it allows me to do a safe truthy check on an enum value.
 
-#### Enums as flags
+#### Number Enums as flags
 One excellent use of enums is the ability to use enums as `Flags`. Flags allow you to check if a certain condition from a set of conditions is true. Consider the following example where we have a set of properties about animals:
 
 ```ts
@@ -157,6 +159,32 @@ enum AnimalFlags {
     Endangered     = 1 << 3,
 
 	EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered,
+}
+```
+
+#### String Enums
+We've only looked at enums where the member values are `number`s. You are actually allowed to have enum members with string values as well. e.g. 
+
+```ts
+export enum EvidenceTypeEnum {
+  UNKNOWN = '',
+  PASSPORT_VISA = 'passport_visa',
+  PASSPORT = 'passport',
+  SIGHTED_STUDENT_CARD = 'sighted_tertiary_edu_id',
+  SIGHTED_KEYPASS_CARD = 'sighted_keypass_card',
+  SIGHTED_PROOF_OF_AGE_CARD = 'sighted_proof_of_age_card',
+}
+```
+
+These can be easier to deal with and debug as they provide meaning-ful / debuggable string values. 
+
+You can use these values to do simple string comparisons. e.g. 
+
+```ts
+const value = someStringFromBackend as EvidenceTypeEnum; 
+if (value === EvidenceTypeEnum.PASSPORT){
+    console.log('You provided a passport');
+    console.log(value); // `passport`
 }
 ```
 
