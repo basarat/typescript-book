@@ -181,7 +181,10 @@ These can be easier to deal with and debug as they provide meaning-ful / debugga
 You can use these values to do simple string comparisons. e.g. 
 
 ```ts
+// Where `someStringFromBackend` will be '' | 'passport_visa' | 'passport' ... etc.
 const value = someStringFromBackend as EvidenceTypeEnum; 
+
+// Sample use in code
 if (value === EvidenceTypeEnum.PASSPORT){
     console.log('You provided a passport');
     console.log(value); // `passport`
