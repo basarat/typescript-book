@@ -144,6 +144,19 @@ cy.wait('@load')
 // Now the data is loaded
 ```
 
+## Tip: Sharing code between UI and test
+Cypress tests are compiled / packed and run in the browser. So feel free to import any project code into your test.
+
+For example you can share Id values between UI and Tests to make sure the CSS selectors don't break:
+
+```
+import { Ids } from '../../../src/app/constants'; 
+
+// Later 
+cy.get(`#${Ids.username}`)
+  .type('john')
+```
+
 ## Resources 
 * Website: https://www.cypress.io/
 * Recipes: https://docs.cypress.io/examples/examples/recipes.html. Lists recipies with descriptions. Click on headings to navigate to the source code for the recipe.
