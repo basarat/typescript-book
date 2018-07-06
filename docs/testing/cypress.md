@@ -70,6 +70,24 @@ describe('google search', () => {
 
 You can run cypress tests in ci mode using `npm run cypress:run`.
 
+## Tip: Waiting for an HTTP request
+A lot of tests have been traditially brittle due to all arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
+* create an alias for backend calls
+* wait for them to occur
+
+e.g. 
+
+```ts
+cy.server()
+  .route('POST', 'https://example.com/api/application/load')
+  .as('load') // create an alias
+
+cy.visit('/')
+cy.wait('@load') // wait for the call
+
+// Now the data is loaded
+```
+
 ## Resources 
 * Website: https://www.cypress.io/
 * Recipes: https://docs.cypress.io/examples/examples/recipes.html. Lists recipies with descriptions. Click on headings to navigate to the source code for the recipe.
