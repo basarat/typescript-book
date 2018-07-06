@@ -69,7 +69,7 @@
   * [strictNullChecks](docs/options/strictNullChecks.md)
 * [Testing](docs/testing/intro.md)
   * [Jest](docs/testing/jest.md)
-  * [Cypress](docs/test/cypress.md)
+  * [Cypress](docs/testing/cypress.md)
 * [Tools](docs/tools/intro.md)
   * [Prettier](docs/tools/prettier.md)
   * [Husky](docs/tools/husky.md)
