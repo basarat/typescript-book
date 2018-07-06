@@ -4,6 +4,7 @@ Cypress is a great E2E testing tool. Here are a few great reasons to consider it
 * A single npm install.
 * Provides a nice interactive google chrome debug experience. This is very similar to how UI devs mostly work manually.
 * Provides the ability to mock out backend XHR with fixtures, this allows easier data setup and tested error handling in real live application code.
+* First class TypeScript support. Ships with TypeScript definitions *and* ability to write tests in TypeScript out of the box.
 
 ## Installation
 
