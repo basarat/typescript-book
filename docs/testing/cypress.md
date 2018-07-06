@@ -44,7 +44,7 @@ This will setup the project for you with the cypress folder.
 ## Key Files
 Under the `e2e` folder you now have these files: 
 
-* `/cypress.json`: Configure cypress
+* `/cypress.json`: Configure cypress. The default is empty and that is all you need.
 * `/cypress` Subfolders: 
     * `/integration`: All your tests. 
         * Comes with an `examples` folder. You can safely delete it.
