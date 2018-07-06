@@ -82,8 +82,11 @@ cy.server()
   .route('POST', 'https://example.com/api/application/load')
   .as('load') // create an alias
 
+// Start test
 cy.visit('/')
-cy.wait('@load') // wait for the call
+
+// wait for the call
+cy.wait('@load') 
 
 // Now the data is loaded
 ```
