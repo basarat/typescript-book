@@ -33,7 +33,8 @@ Add a few scripts to the `e2e/package.json` file:
 }
 ```
 
-## First run
+## Running in development
+Open the cypress IDE using the following command.
 
 ```sh
 npm run cypress:open
@@ -65,7 +66,7 @@ describe('google search', () => {
 });
 ```
 
-## On a build server
+## Running on a build server
 
 You can run cypress tests in ci mode using `npm run cypress:run`.
 
