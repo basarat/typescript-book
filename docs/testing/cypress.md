@@ -1,48 +1,84 @@
 # Why Cypress
 Cypress is a great E2E testing tool. Here are a few great reasons to consider it:
 
-* A single npm install.
+* Isolated installation possible.
 * Provides a nice interactive google chrome debug experience. This is very similar to how UI devs mostly work manually.
 * Provides the ability to mock out backend XHR with fixtures, this allows easier data setup and tested error handling in real live application code.
-* First class TypeScript support. Ships with TypeScript definitions *and* ability to write tests in TypeScript out of the box.
+* First class TypeScript support. Ships with TypeScript definitions out of the box.
 
 ## Installation
 
-Create an e2e directory and install cypress and typescript:
+Create an e2e directory and install cypress and its dependencies for TypeScript transpiling:
 
 ```sh
 mkdir e2e
 cd e2e
 npm init -y
-npm install cypress typescript
-npx tsc --init
+npm install cypress webpack @cypress/webpack-preprocessor typescript ts-loader
 ```
 
-Here are a few reasons for creating a seperate `e2e` folder especially for cypress: 
+> Here are a few reasons for creating a seperate `e2e` folder especially for cypress: 
 * Creating a seperate directory or `e2e` makes it easier to isolate its `package.json` dependencies from the rest of your project. This results in less dependency conflicts.
-* Testing frameworks have a habit of polluting the global namespace with stuff like `describe` `it` `expect`. It is best to keep the e2e category `tsconfig.json` seperate to prevent global type definition conflicts.
+* Testing frameworks have a habit of polluting the global namespace with stuff like `describe` `it` `expect`. It is best to keep the e2e `tsconfig.json` and `node_modules` in this special `e2e` folder to prevent global type definition conflicts.
 
-## `package.json` Scripts: 
-
-Add a few scripts to the `e2e/package.json` file:
+Setup TypeScript `tsconfig.json` e.g. 
 
 ```json
-"scripts": {
-  "cypress:open": "cypress open",
-  "cypress:run": "cypress run"
+{
+  "compilerOptions": {
+    "strict": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "jsx": "react",
+    "experimentalDecorators": true
+  },
+  "compileOnSave": false
 }
 ```
 
-## Running in development
-Open the cypress IDE using the following command.
+Do a first dry run of cypress to prime the cypress folder structure. The Cypress IDE will open. You can close it after you see the welcome message.
 
 ```sh
-npm run cypress:open
+npx cypress open
 ```
 
-This will setup the project for you with the cypress folder.
+Setup cypress for transpiling typescript by editing `e2e/cypress/plugins/index.js` to match the following:
 
-## Key Files
+```js
+const wp = require('@cypress/webpack-preprocessor')
+module.exports = (on) => {
+  const options = {
+    webpackOptions: {
+      resolve: {
+        extensions: [".ts", ".tsx", ".js"]
+      },
+      module: {
+        rules: [
+          { test: /\.tsx?$/, loader: "ts-loader" }
+        ]
+      }
+    },
+  }
+  on('file:preprocessor', wp(options))
+}
+```
+
+
+Optionally add a few scripts to the `e2e/package.json` file:
+
+```json
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+```
+
+## More description of key Files
 Under the `e2e` folder you now have these files: 
 
 * `/cypress.json`: Configure cypress. The default is empty and that is all you need.
@@ -66,9 +102,22 @@ describe('google search', () => {
 });
 ```
 
+## Running in development
+Open the cypress IDE using the following command.
+
+```sh
+npm run cypress:open
+```
+
+And select a test to run.
+
 ## Running on a build server
 
-You can run cypress tests in ci mode using `npm run cypress:run`.
+You can run cypress tests in ci mode using the following command.
+
+```sh
+npm run cypress:run
+```
 
 ## Tip: Waiting for an HTTP request
 A lot of tests have been traditially brittle due to all arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
