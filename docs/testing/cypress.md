@@ -59,7 +59,11 @@ module.exports = (on) => {
       },
       module: {
         rules: [
-          { test: /\.tsx?$/, loader: "ts-loader" }
+          {
+            test: /\.tsx?$/,
+            loader: "ts-loader",
+            options: { transpileOnly: true }
+          }
         ]
       }
     },
