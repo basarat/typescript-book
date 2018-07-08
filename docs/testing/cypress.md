@@ -188,4 +188,5 @@ cy.get('#logoutNotification').should('be.visible');
 
 ## Resources 
 * Website: https://www.cypress.io/
-* Recipes: https://docs.cypress.io/examples/examples/recipes.html. Lists recipies with descriptions. Click on headings to navigate to the source code for the recipe.
+* Write your first cypress test (gives a nice tour of the cypress IDE) : https://docs.cypress.io/guides/getting-started/writing-your-first-test.html
+* Recipes (Lists recipies with descriptions. Click on headings to navigate to the source code for the recipe): https://docs.cypress.io/examples/examples/recipes.html
