@@ -126,6 +126,19 @@ You can run cypress tests in ci mode using the following command.
 npm run cypress:run
 ```
 
+## Tip: Sharing code between UI and test
+Cypress tests are compiled / packed and run in the browser. So feel free to import any project code into your test.
+
+For example you can share Id values between UI and Tests to make sure the CSS selectors don't break:
+
+```
+import { Ids } from '../../../src/app/constants'; 
+
+// Later 
+cy.get(`#${Ids.username}`)
+  .type('john')
+```
+
 ## Tip: Waiting for an HTTP request
 A lot of tests have been traditially brittle due to all arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
 * create an alias for backend calls
@@ -147,17 +160,30 @@ cy.wait('@load')
 // Now the data is loaded
 ```
 
-## Tip: Sharing code between UI and test
-Cypress tests are compiled / packed and run in the browser. So feel free to import any project code into your test.
-
-For example you can share Id values between UI and Tests to make sure the CSS selectors don't break:
-
+## Tip: Mocking an HTTP request response
+You can also easily mock out a request response using `route`: 
+```ts
+cy.server()
+  .route('POST', 'https://example.com/api/application/load', /* Example payload response */{success:true})
 ```
-import { Ids } from '../../../src/app/constants'; 
 
-// Later 
-cy.get(`#${Ids.username}`)
-  .type('john')
+## Tip: Mocking time 
+You can use `wait` to pause test for some time e.g. to test automatic "you are about to be logged out" notification screen:.
+
+```ts
+cy.visit('/');
+cy.wait(waitMilliseconds);
+cy.get('#logoutNotification').should('be.visible');
+```
+
+However it is recommended to mock time using `cy.clock` and forwarding time using `cy.tick` e.g. 
+
+```ts
+cy.clock();
+
+cy.visit('/');
+cy.tick(waitMilliseconds);
+cy.get('#logoutNotification').should('be.visible');
 ```
 
 ## Resources 
