@@ -1,6 +1,6 @@
 ## `export default` can lead to problems
 
-Let's go with an example. Consider you have a file `foo.ts` with the following contents:
+Consider you have a file `foo.ts` with the following contents:
 
 ```ts
 class Foo {
@@ -34,7 +34,7 @@ import {Foo} from "./foo";
 
 > **Bonus points**: You even get autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
 
-> **Bonus points**: Better commonJs experience. With `default` there is horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
+> **Bonus points**: Better commonJS experience. With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
 
 > **Bonus points**: You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
 

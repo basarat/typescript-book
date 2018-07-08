@@ -1,6 +1,6 @@
 ## Build Toggles
 
-It is common to switch in JavaScript projects based on where they are being run. You can do this quite easily with webpack as its supports *dead code elimination* based on environment variables.
+It is common to switch in JavaScript projects based on where they are being run. You can do this quite easily with webpack as it supports *dead code elimination* based on environment variables.
 
 Add different targets in your `package.json` `scripts`:
 
