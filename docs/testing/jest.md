@@ -1,26 +1,30 @@
-## Using Jest with TypeScript
+# Using Jest with TypeScript
 
 > [Pro egghead lesson on Jest / TypeScript](https://egghead.io/lessons/typescript-getting-started-with-jest-using-typescript)
 
-No testing solution out there is perfect. That said, jest is an excellent unit testing option which provides great TypeScript support. 
+No testing solution out there is perfect. That said, jest is an excellent unit testing option which provides great TypeScript support.
 
 > Note: We assume you start off with a simple node package.json setup. Also all TypeScript files should be in a `src` folder which is always recommended (even without Jest) for a clean project setup.
 
 ## Step 1: Install
-Install the following using npm: 
-```
+
+Install the following using npm:
+
+```shell
 npm i jest @types/jest ts-jest -D
 ```
 
-Explanation: 
-* Install `jest` framwork (`jest`) 
+Explanation:
+
+* Install `jest` framework (`jest`)
 * Install the types for `jest` (`@types/jest`)
 * Install the TypeScript preprocessor for jest (`ts-jest`) which allows jest to transpile TypeScript on the fly and have source-map support built in.
 * Save all of these to your dev dependencies (testing is almost always a npm dev-dependency)
 
-
 ## Step 2: Configure Jest
-Add the following `jest.config.js` file to the root of your project: 
+
+Add the following `jest.config.js` file to the root of your project:
+
 ```js
 module.exports = {
   "roots": [
@@ -40,16 +44,20 @@ module.exports = {
   ],
 }
 ```
+
 Explanation:
-* We always recommend having *all* TypeScript files in a `src` folder in your project. We assume this is true and specify this using `roots` option.
-* The `transform` config just tells `jest` to use `ts-jest` for ts / tsx files. 
+
+* We always recommend having *all* TypeScript files in a `src` folder in your project. We assume this is true and specify this using the `roots` option.
+* The `transform` config just tells `jest` to use `ts-jest` for ts / tsx files.
 * The `testRegex` tells Jest to look for tests in any `__tests__` folder AND also any files anywhere that use the `(.test|.spec).(ts|tsx)` extension e.g. `asdf.test.tsx` etc.
 * The `moduleFileExtensions` tells jest to recognize our file extensions. This is needed as we add `ts`/`tsx` into the defaults (`js|jsx|json|node`).
 
 ## Step 3: Run tests
+
 Run `npx jest` from your project root and jest will execute any tests you have.
 
 ### Optional: Add script target for npm scripts
+
 Add `package.json`:
 
 ```json
@@ -57,22 +65,25 @@ Add `package.json`:
   "test": "jest"
 }
 ```
-* This allows you to run the tests with a simple `npm t`. 
-* And even in watch mode with `npm t -- --watch`. 
 
-### Optional: Run jest in watch mode 
+* This allows you to run the tests with a simple `npm t`.
+* And even in watch mode with `npm t -- --watch`.
+
+### Optional: Run jest in watch mode
+
 * `npx jest --watch`
 
-
 ### Example
-* For a file `foo.ts`: 
+
+* For a file `foo.ts`:
+
 ```js
 export const sum
   = (...a: number[]) =>
     a.reduce((acc, val) => acc + val, 0);
 ```
 
-* A simple `foo.test.ts`: 
+* A simple `foo.test.ts`:
 
 ```js
 import { sum } from '../';
@@ -86,12 +97,14 @@ test('basic again', () => {
 });
 ```
 
-Notes: 
+Notes:
+
 * Jest provides the global `test` function.
 * Jest comes prebuilt with assertions in the form of the global `expect`.
 
 ### Example async
-Jest has built-in async/await support. e.g. 
+
+Jest has built-in async/await support. e.g.
 
 ```js
 test('basic',async () => {
@@ -117,11 +130,12 @@ module.exports = {
   // OTHER PORTIONS AS MENTIONED BEFORE
 
   // Setup Enzyme
-  "snapshotSerializers": ["enzyme-to-json/serializer"], 
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
   "setupTestFrameworkScriptFile": "<rootDir>/src/setupEnzyme.ts",
 }
 ```
-3. Create `src/setupEnzyme.ts` file. 
+
+3. Create `src/setupEnzyme.ts` file.
 
 ```js
 import { configure } from 'enzyme';
@@ -131,7 +145,7 @@ configure({ adapter: new EnzymeAdapter() });
 
 Now here is an example react component and test:
 
-* `checkboxWithLabel.tsx`: 
+* `checkboxWithLabel.tsx`:
 
 ```ts
 import * as React from 'react';
@@ -167,7 +181,7 @@ export class CheckboxWithLabel extends React.Component<{
 
 ```
 
-* `checkboxWithLabel.test.tsx`: 
+* `checkboxWithLabel.test.tsx`:
 
 ```ts
 import * as React from 'react';
@@ -177,21 +191,21 @@ import { CheckboxWithLabel } from './checkboxWithLabel';
 test('CheckboxWithLabel changes the text after click', () => {
   const checkbox = shallow(<CheckboxWithLabel labelOn="On" labelOff="Off" />);
   
-  // Interacton demo 
+  // Interaction demo
   expect(checkbox.text()).toEqual('Off');
   checkbox.find('input').simulate('change');
   expect(checkbox.text()).toEqual('On');
   
-  // Snapshot demo 
+  // Snapshot demo
   expect(shallow).toMatchSnapshot();
 });
 ```
 
+## Reasons why we like jest
 
-## Reasons why we like jest 
 > [For details on these features see jest website](http://facebook.github.io/jest/)
 
-* Built-in assertion library. 
+* Built-in assertion library.
 * Great TypeScript support.
 * Very reliable test watcher.
 * Snapshot testing.

@@ -2,7 +2,7 @@
 
 [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped) is definitely one of TypeScript's greatest strengths. The community has effectively gone ahead and **documented** the nature of nearly 90% of the top JavaScript projects out there.
 
-This means that you can use these projects in a very interactive and exploratory manner, no need to have the docs open in a seperate window and making sure you don't make a typo.
+This means that you can use these projects in a very interactive and exploratory manner, no need to have the docs open in a separate window and making sure you don't make a typo.
 
 ## Using `@types`
 
@@ -33,7 +33,7 @@ import * as $ from "jquery";
 
 ## Controlling Globals
 
-As can be seen, having a definition that allows global leak-in automatically can be a problem for some teams. So you can chose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.:
+As can be seen, having a definition that allows global leak-in automatically can be a problem for some teams. So you can choose to *explicitly* only bring in the types that make sense using the `tsconfig.json` `compilerOptions.types` e.g.:
 
 ```json
 {

@@ -166,8 +166,8 @@ When I say *places that are checked* I mean that the following things are checke
 
 * If the place is a file, e.g. `foo.ts`, hurray!
 * else if the place is a folder and there is a file `foo/index.ts`, hurray!
-* else if the place is a folder and there a `foo/package.json` and there is a file specified in the `types` key in the package.json that exists, then hurray!
-* else if the place is a folder and there a `package.json` and there is a file specified in the `main` key in the package.json that exists, then hurray!
+* else if the place is a folder and there is a `foo/package.json` and a file specified in the `types` key in the package.json that exists, then hurray!
+* else if the place is a folder and there is a `package.json` and a file specified in the `main` key in the package.json that exists, then hurray!
 
 By file I actually mean `.ts` / `.d.ts` and `.js`.
 

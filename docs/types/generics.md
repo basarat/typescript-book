@@ -19,7 +19,7 @@ class Queue {
 }
 ```
 
-One issue with this implementation is that it allows people to add *anything* to the queue and when they pop it - it can be *anything*. This is shown below, where someone can push a `string` onto the queue while the usage actually assumes that only `numbers` where pushed in:
+One issue with this implementation is that it allows people to add *anything* to the queue and when they pop it - it can be *anything*. This is shown below, where someone can push a `string` onto the queue while the usage actually assumes that only `numbers` were pushed in:
 
 ```ts
 class Queue {
@@ -37,7 +37,7 @@ console.log(queue.pop().toPrecision(1));
 console.log(queue.pop().toPrecision(1)); // RUNTIME ERROR
 ```
 
-One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these contraints. E.g. a quick and dirty number queue:
+One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these constraints. E.g. a quick and dirty number queue:
 
 ```ts
 class QueueNumber {
@@ -117,7 +117,7 @@ I've seen people use generics just for the heck of it. The question to ask is *w
 ```ts
 declare function foo<T>(arg: T): void;
 ```
-Here the generic `T` is completely useless as it is only used in an *single* argument position. It might as well be: 
+Here the generic `T` is completely useless as it is only used in a *single* argument position. It might as well be: 
 
 ```ts
 declare function foo(arg: any): void;
@@ -131,7 +131,7 @@ Consider the function:
 declare function parse<T>(name: string): T;
 ```
 
-In this case you can see that the type `T` is only used in one place. So there is no constraint *between* members. You would be equivalent to a type assertion in terms of type safety:
+In this case you can see that the type `T` is only used in one place. So there is no constraint *between* members. This is equivalent to a type assertion in terms of type safety:
 
 ```ts
 declare function parse(name: string): any;
@@ -165,7 +165,7 @@ type LoadUsersResponse = {
   users: {
     name: string;
     email: string;
-  }[];
+  }[];  // array of user objects
 }
 function loadUsers() {
   return getJSON<LoadUsersResponse>({ url: 'https://example.com/users' });

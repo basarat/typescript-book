@@ -69,7 +69,7 @@ However it is very helpful to use these common
 ES6 [interfaces](./types/interfaces.md) for code consistency.
 
 Ok, Nice, but could be more helpful. ES6 defines the *iterable protocol*
-which includes [Symbol.iterator] `symbol` if Iterable interface implemented:
+which includes the [Symbol.iterator] `symbol` if the Iterable interface is implemented:
 ```ts
 //...
 class Frame implements Iterable<Component> {

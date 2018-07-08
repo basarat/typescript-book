@@ -5,7 +5,7 @@ Defined in `emitter.ts` here is the function signature:
 export function emitFiles(resolver: EmitResolver, host: EmitHost, targetSourceFile?: SourceFile): EmitResult {
 ```
 
-`EmitHost` is a just a simplified (as in narrowed down) version of `CompilerHost` (and is at runtime actually a `CompilerHost` for many use cases).
+`EmitHost` is just a simplified (as in narrowed down) version of `CompilerHost` (and is at runtime actually a `CompilerHost` for many use cases).
 
 The most interesting call stack from `emitFiles` is the following:
 
@@ -111,7 +111,7 @@ function emitJavaScript(jsFilePath: string, root?: SourceFile) {
 }
 ```
 
-Basically it sets up a bunch of locals (these function form the *bulk* of `emitter.ts`) and then hands off to a local function `emitSourceFile` which kicks off the emit. The `emitSourceFile` function just sets up the `currentSourceFile` and in turn hands off to a local `emit` function.
+Basically it sets up a bunch of locals (these functions form the *bulk* of `emitter.ts`) and then hands off to a local function `emitSourceFile` which kicks off the emit. The `emitSourceFile` function just sets up the `currentSourceFile` and in turn hands off to a local `emit` function.
 
 ```ts
 function emitSourceFile(sourceFile: SourceFile): void {

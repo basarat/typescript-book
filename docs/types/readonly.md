@@ -173,7 +173,7 @@ iMutateFoo(foo); // The foo argument is aliased by the foo parameter
 console.log(foo.bar); // 456!
 ```
 
-Basically `readonly` ensures that *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Of course if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
+Basically `readonly` ensures that a property *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Of course if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
 
 ```ts
 interface Foo {

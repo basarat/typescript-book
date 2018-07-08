@@ -1,4 +1,5 @@
-## Non React JSX
+# Non React JSX
+
 TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:
 
 * You can disable `react` style emit by using `"jsx" : "preserve"` option. This means that JSX is emitted *as is* and then you can use your own custom transpiler to transpile the JSX portions.
@@ -14,7 +15,7 @@ Passing `--reactNamespace <JSX factory Name>` along with `--jsx react` allows fo
 
 The new factory name will be used to call `createElement` functions.
 
-##### Example
+### Example
 
 ```ts
 import {jsxFactory} from "jsxFactory";

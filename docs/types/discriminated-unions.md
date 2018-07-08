@@ -74,7 +74,7 @@ function area(s: Shape) {
 }
 ```
 
-You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example if you add the exhastive check you get a nice error:
+You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example if you add the exhaustive check you get a nice error:
 
 ```ts
 function area(s: Shape) {
@@ -207,4 +207,4 @@ store.dispatch({ type: 'DECREMENT' })
 // 1
 ```
 
-Using it with TypeScript gives you safety against typo errors, increased refactor-ability and self documenting code .
+Using it with TypeScript gives you safety against typo errors, increased refactor-ability and self documenting code.
