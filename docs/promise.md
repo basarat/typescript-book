@@ -315,7 +315,7 @@ Promise.resolve(123)
     })
 ```
 
-* A `catch` is only called in case of an error in the preceeding chain: 
+* A `catch` is only called in case of an error in the preceding chain: 
 
 ```ts
 Promise.resolve(123)
