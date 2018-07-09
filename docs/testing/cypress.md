@@ -2,9 +2,10 @@
 Cypress is a great E2E testing tool. Here are a few great reasons to consider it:
 
 * Isolated installation possible.
+* Ships with TypeScript definitions out of the box.
 * Provides a nice interactive google chrome debug experience. This is very similar to how UI devs mostly work manually.
-* Provides the ability to mock out backend XHR with fixtures, this allows easier data setup and tested error handling in real live application code.
-* First class TypeScript support. Ships with TypeScript definitions out of the box.
+* Provides the ability to mock out and observe backend XHRs easily without changing your application code (more on this in the tips below).
+* Has implicit assertions to provide more meaningful debug experience with less brittle tests (more on this in the tips below).
 
 ## Installation
 
@@ -184,6 +185,35 @@ cy.clock();
 cy.visit('/');
 cy.tick(waitMilliseconds);
 cy.get('#logoutNotification').should('be.visible');
+```
+
+## Tip: Smart delays
+Cypress will automatically wait for many async things e.g. 
+```
+// If there is no request against the `foo` alias cypress will wait for 4 seconds automatically 
+cy.wait('@foo') 
+// If there is no element with id #foo cypress will wait for 4 seconds automatically 
+cy.get('#foo')
+```
+This keeps you from having to constantly add arbitrary timeouts in your test code flow. 
+
+## Tip: Implicit assertion 
+Whenver a cypress command fails you get a nice error (instead of something like `null` with many other frameworks) so you fail quickly and know exactly when a test fails e.g. 
+
+```
+cy.get('#foo') 
+// If there is no element with id #foo cypress will wait for 4 seconds automatically 
+// If still not found you get an error here ^ 
+// \/ This will not trigger till an element #foo is found
+  .should('have.text', 'something') 
+```
+
+## Tip: Explicit assertion 
+Cypress ships with quite a few assertion helps for the web e.g. chai-jquery https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery. You use them with `.should` command passing in the chainer as a string e.g.
+
+```
+cy.get('#foo') 
+  .should('have.text', 'something') 
 ```
 
 ## Resources 
