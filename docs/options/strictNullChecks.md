@@ -1,4 +1,5 @@
-## `strictNullChecks`
+# `strictNullChecks`
+
 By default `null` and `undefined` are assignable to all types in TypeScript e.g.
 
 ```ts
@@ -14,9 +15,9 @@ In strict null checking mode, `null` and `undefined` are different:
 ```ts
 let foo = undefined;
 foo = null; // NOT Okay
-``` 
+```
 
-Let say we have a `Member` interface:
+Let's say we have a `Member` interface:
 
 ```ts
 interface Member {
@@ -45,9 +46,9 @@ getMember()
   })
 ```
 
-### Non-Null Assertion Operator
+## Non-Null Assertion Operator
 
-A new `!` post-fix expression operator may be used to assert that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact. For example: 
+A new `!` post-fix expression operator may be used to assert that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact. For example:
 
 ```ts
 // Compiled with --strictNullChecks
@@ -61,24 +62,25 @@ function processEntity(e?: Entity) {
     let b = e!.name;  // OKAY. We are asserting that e is non-null.
 }
 ```
+
 > Note that it is just an assertion, and just like type assertions *you are responsible* for making sure the value is not null. A non-null assertion is essentially you telling the compiler "I know it's not null so let me use it as though it's not null".
 
 ### Definite Assignment Assertion Operator
 
-TypeScript will also complain about properties in classes not being initialized e.g.: 
+TypeScript will also complain about properties in classes not being initialized e.g.:
 
 ```ts
 class C {
-  foo: number; // OKAY as assigned in constrcutor
+  foo: number; // OKAY as assigned in constructor
   bar: string = "hello"; // OKAY as has property initializer
-  baz: boolean; // TS ERROR: Property 'baz' has no initializer and is not assigned directly in the constructor. 
+  baz: boolean; // TS ERROR: Property 'baz' has no initializer and is not assigned directly in the constructor.
   constructor() {
     this.foo = 42;
   }
 }
 ```
 
-You can use the definite assignment assertion postfixed to the property name to tell TypeScript that you are initlizing it somewhere other than the constructor e.g. 
+You can use the definite assignment assertion postfixed to the property name to tell TypeScript that you are initializing it somewhere other than the constructor e.g.
 
 ```ts
 class C {
@@ -96,7 +98,7 @@ class C {
 }
 ```
 
-You can also use this assertion with simple variable declarations e.g.: 
+You can also use this assertion with simple variable declarations e.g.:
 
 ```ts
 let a: number[]; // No assertion

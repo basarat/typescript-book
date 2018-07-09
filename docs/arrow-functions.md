@@ -154,7 +154,7 @@ var foo = () => {
 ```
 is parsed as a *block* containing a *JavaScript Label* by JavaScript runtimes (cause of the JavaScript specification).
 
->  If that doesn't make sense, don't worry, as you get a nice compiler error from TypeScript saying "unused label" anyways. Labels are an old (and mostly unused) JavaScript feature that you can ignore as a modern *GOTO considered bad* experienced developer 🌹
+>  If that doesn't make sense, don't worry, as you get a nice compiler error from TypeScript saying "unused label" anyways. Labels are an old (and mostly unused) JavaScript feature that you can ignore as a modern GOTO (considered bad by experienced developers 🌹)
 
 You can fix it by surrounding the object literal with `()`:
 

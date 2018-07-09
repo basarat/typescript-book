@@ -33,7 +33,7 @@ catch (err) {
 }
 ```
 
-There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with a trivial error checking logic would be as follows:
+There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with trivial error checking logic would be as follows:
 
 ```ts
 import fs = require('fs');
@@ -315,7 +315,7 @@ Promise.resolve(123)
     })
 ```
 
-* A `catch` is only called in case of an error in the preceding chain: 
+* A `catch` is only called in case of an error in the preceding chain:
 
 ```ts
 Promise.resolve(123)

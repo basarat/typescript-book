@@ -1,8 +1,8 @@
-## Mixins
+# Mixins
 
 TypeScript (and JavaScript) classes support strict single inheritance. So you *cannot* do:
 
-```
+```ts
 class User extends Tagged, Timestamped { // ERROR : no multiple inheritance
 }
 ```
@@ -13,13 +13,12 @@ The idea is simple, instead of a *class A extending class B* to get its function
 
 > [A mixin is] a function that
  1. takes a constructor,
- 1. creates a class that extends that constructor, with new functionality
+ 1. creates a class that extends that constructor with new functionality
  1. returns the new class
 
-
-
 A complete example
-```js
+
+```ts
 // Needed for all mixins
 type Constructor<T = {}> = new (...args: any[]) => T;
 
@@ -58,7 +57,7 @@ class User {
   name = '';
 }
 
-// User that is Timestampted
+// User that is Timestamped
 const TimestampedUser = Timestamped(User);
 
 // User that is Timestamped and Activatable
@@ -79,19 +78,20 @@ console.log(timestampedActivatableUserExample.isActivated);
 
 Let's decompose this example.
 
-# Take a constructor
+## Take a constructor
+
 Mixins take a class and extend it with new functionality. So we need to define what is a *constructor*. Easy as:
 
-```js
+```ts
 // Needed for all mixins
 type Constructor<T = {}> = new (...args: any[]) => T;
 ```
 
-# Extend the class and return it
+## Extend the class and return it
 
 Pretty easy:
 
-```js
+```ts
 // A mixin that adds a property
 function Timestamped<TBase extends Constructor>(Base: TBase) {
   return class extends Base {

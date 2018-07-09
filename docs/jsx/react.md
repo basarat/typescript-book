@@ -1,7 +1,10 @@
+# React JSX
+
 > [PRO Egghead course on TypeScript and React](https://egghead.io/courses/use-typescript-to-develop-react-applications)
 
 ## Setup
-Our [browser quickstart already sets you up to develop react applications](../quick/browser.md). Here are the key highlights. 
+
+Our [browser quickstart already sets you up to develop react applications](../quick/browser.md). Here are the key highlights.
 
 * Use files with the extension `.tsx` (instead of `.ts`).
 * Use `"jsx" : "react"` in your `tsconfig.json`'s `compilerOptions`.
@@ -9,11 +12,13 @@ Our [browser quickstart already sets you up to develop react applications](../qu
 * Import react into your `.tsx` files (`import * as React from "react"`).
 
 ## HTML Tags vs. Components
+
 React can either render HTML tags (strings) or React components (classes). The JavaScript emit for these elements is different (`React.createElement('div')` vs. `React.createElement(MyComponent)`). The way this is determined is by the *case* of the *first* letter. `foo` is treated as an HTML tag and `Foo` is treated as a component.
 
 ## Type Checking
 
 ### HTML Tags
+
 An HTML Tag `foo` is to be of the type `JSX.IntrinsicElements.foo`. These types are already defined for all the major tags in a file `react-jsx.d.ts` which we had you install as a part of the setup. Here is a sample of the  the contents of the file:
 
 ```ts
@@ -29,8 +34,9 @@ declare module JSX {
 }
 ```
 
-### Stateless Functional Components 
-You can define stateless components simply with the `React.SFC` interface e.g. 
+### Stateless Functional Components
+
+You can define stateless components simply with the `React.SFC` interface e.g.
 
 ```ts
 type Props = {
@@ -44,6 +50,7 @@ const MyComponent: React.SFC<Props> = (props) => {
 ```
 
 ### Stateful Components
+
 Components are type checked based on the `props` property of the component. This is modeled after how JSX is transformed i.e. the attributes become the `props` of the component.
 
 To create React Stateful components you use ES6 classes. The `react.d.ts` file defines the `React.Component<Props,State>` class which you should extend in your own class providing your own `Props` and `State` interfaces. This is demonstrated below:
@@ -63,7 +70,7 @@ class MyComponent extends React.Component<Props, {}> {
 
 ### React JSX Tip: Interface for renderable
 
-React can render a few things like `JSX` or `string`. There are all consolidated into the type `React.ReactNode` so use it for when you want to accept renderables e.g.
+React can render a few things like `JSX` or `string`. These are all consolidated into the type `React.ReactNode` so use it for when you want to accept renderables e.g.
 
 ```ts
 type Props = {
@@ -83,7 +90,8 @@ class MyComponent extends React.Component<Props, {}> {
 ```
 
 ### React JSX Tip: Accept an instance of a Component
-The react type definitions provide `React.ReactElement<T>` to allow you to annotate the result of a `<T/>` class component instantiation. e.g. 
+
+The react type definitions provide `React.ReactElement<T>` to allow you to annotate the result of a `<T/>` class component instantiation. e.g.
 
 ```js
 class MyAwesomeComponent extends React.Component {
@@ -98,17 +106,19 @@ const bar: React.ReactElement<MyAwesomeComponent> = <NotMyAwesomeComponent />; /
 
 > Of course you can use this as a function argument annotation and even React component prop member.
 
-### React JSX Tip: Accept a *component* that can be act on props and be rendered using JSX 
-The type `React.Component<Props>` consolidates `React.ComponentClass<P> | React.StatelessComponent<P>` so you can accept *something* that takes type `Props` and renders it using JSX e.g. 
+### React JSX Tip: Accept a *component* that can act on props and be rendered using JSX
+
+The type `React.Component<Props>` consolidates `React.ComponentClass<P> | React.StatelessComponent<P>` so you can accept *something* that takes type `Props` and renders it using JSX e.g.
 
 ```ts
-const X: React.Component<Props> = foo; // from somewhere 
+const X: React.Component<Props> = foo; // from somewhere
 
-// Render X with some props: 
+// Render X with some props:
 <X {...props}/>;
 ```
 
 ### React JSX Tip: Generic components
+
 It works exactly as expected. Here is an example:
 
 ```ts
@@ -140,17 +150,17 @@ const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
 const foo = <T extends {}>(x: T) => x;
 ```
 
-### Type Assertions 
+### Type Assertions
 
 Use `as Foo` syntax for type assertions as we [mentioned before](./type-assertion.md#as-foo-vs-foo).
 
-## Default Props 
+## Default Props
 
 * Stateful components with default props: You can tell TypeScript that a property will be provided externally (by React) by using a *null assertion* operator (this isn't ideal but is the simplest minimum *extra code* solution I could think of).
 
 ```tsx
 class Hello extends React.Component<{
-  /** 
+  /**
    * @default 'TypeScript'
    */
   compiler?: string,
@@ -180,7 +190,7 @@ ReactDOM.render(
 
 ```tsx
 const Hello: React.SFC<{
-  /** 
+  /**
    * @default 'TypeScript'
    */
   compiler?: string,
@@ -203,4 +213,3 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
-

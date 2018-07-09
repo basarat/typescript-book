@@ -18,8 +18,8 @@ npm init -y
 npm install cypress webpack @cypress/webpack-preprocessor typescript ts-loader
 ```
 
-> Here are a few reasons for creating a seperate `e2e` folder especially for cypress: 
-* Creating a seperate directory or `e2e` makes it easier to isolate its `package.json` dependencies from the rest of your project. This results in less dependency conflicts.
+> Here are a few reasons for creating a separate `e2e` folder especially for cypress: 
+* Creating a separate directory or `e2e` makes it easier to isolate its `package.json` dependencies from the rest of your project. This results in less dependency conflicts.
 * Testing frameworks have a habit of polluting the global namespace with stuff like `describe` `it` `expect`. It is best to keep the e2e `tsconfig.json` and `node_modules` in this special `e2e` folder to prevent global type definition conflicts.
 
 Setup TypeScript `tsconfig.json` e.g. 
@@ -132,7 +132,7 @@ Cypress tests are compiled / packed and run in the browser. So feel free to impo
 
 For example you can share Id values between UI and Tests to make sure the CSS selectors don't break:
 
-```
+```ts
 import { Ids } from '../../../src/app/constants'; 
 
 // Later 
@@ -141,7 +141,7 @@ cy.get(`#${Ids.username}`)
 ```
 
 ## Tip: Waiting for an HTTP request
-A lot of tests have been traditially brittle due to all arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
+A lot of tests have been traditionally brittle due to all the arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
 * create an alias for backend calls
 * wait for them to occur
 
@@ -169,7 +169,7 @@ cy.server()
 ```
 
 ## Tip: Mocking time 
-You can use `wait` to pause test for some time e.g. to test automatic "you are about to be logged out" notification screen:.
+You can use `wait` to pause a test for some time e.g. to test an automatic "you are about to be logged out" notification screen:
 
 ```ts
 cy.visit('/');
@@ -219,5 +219,5 @@ cy.get('#foo')
 ## Resources 
 * Website: https://www.cypress.io/
 * Write your first cypress test (gives a nice tour of the cypress IDE) : https://docs.cypress.io/guides/getting-started/writing-your-first-test.html
-* Setting up a CI enviroment (e.g. the provided docker image that works out of the box with `cypress run`): https://docs.cypress.io/guides/guides/continuous-integration.html
-* Recipes (Lists recipies with descriptions. Click on headings to navigate to the source code for the recipe): https://docs.cypress.io/examples/examples/recipes.html
+* Setting up a CI environment (e.g. the provided docker image that works out of the box with `cypress run`): https://docs.cypress.io/guides/guides/continuous-integration.html
+* Recipes (Lists recipes with descriptions. Click on headings to navigate to the source code for the recipe): https://docs.cypress.io/examples/examples/recipes.html

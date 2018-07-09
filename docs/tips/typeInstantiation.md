@@ -8,7 +8,7 @@ class Foo<T>{
 }
 ```
 
-You want to create a specialized version for it for a particular type. The pattern is to copy the item into a new variable and give it the type annotation with the generics replaced with concrete types. E.g if you want a class `Foo<number>`:
+You want to create a specialized version for it for a particular type. The pattern is to copy the item into a new variable and give it the type annotation with the generics replaced with concrete types. E.g. if you want a class `Foo<number>`:
 
 ```ts
 class Foo<T>{

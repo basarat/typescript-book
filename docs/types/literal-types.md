@@ -34,7 +34,7 @@ move(1,"Nurth"); // Error!
 ```
 
 ### Other literal types
-TypeScript also supports `boolean`, `numbers` as literals, e.g.: 
+TypeScript also supports `boolean` and `number` literal types, e.g.: 
 
 ```ts
 type OneToFive = 1 | 2 | 3 | 4 | 5;
