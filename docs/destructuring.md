@@ -36,11 +36,11 @@ To assign an extracted variable to a new variable name you can do the following:
 
 ```ts
 // structure
-const obj = {"key": "value"};
+const obj = {"some property": "some value"};
 
 // destructure
-const {"key": newKey} = obj;
-console.log(newKey === "value"); // true
+const {"some property": someProperty} = obj;
+console.log(someProperty === "some value"); // true
 ```
 
 Additionally you can get *deep* data out of a structure using destructuring. This is shown in the following example:

@@ -228,7 +228,7 @@ i.e. the compiler:
 1. *Inlines* any usages of the enum (`0` instead of `Tristate.False`).
 1. Does not generate any JavaScript for the enum definition (there is no `Tristate` variable at runtime) as its usages are inlined.
 
-##### Const Enums and --preserveConstEnums
+##### Const enum preserveConstEnums
 Inlining has obvious performance benefits. The fact that there is no `Tristate` variable at runtime is simply the compiler helping you out by not generating JavaScript that is not actually used at runtime. However you might want the compiler to still generate the JavaScript version of the enum definition for stuff like *number to string* or *string to number* lookups as we saw. In this case you can use the compiler flag `--preserveConstEnums` and it will still generate the `var Tristate` definition so that you can use `Tristate["False"]` or `Tristate[0]` manually at runtime if you want. This does not impact *inlining* in any way.
 
 ### Enum with static functions
