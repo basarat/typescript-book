@@ -262,7 +262,9 @@ const failsSilently: NestedCSS = {
 
 ### Excluding certain properties from the index signature
 
-Sometimes you need to combine properties into the index signature. This is not advised, and you *should* use the Nested index signature pattern mentioned above. However if you are modeling existing JavaScript you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
+Sometimes you need to combine properties into the index signature. This is not advised, and you *should* use the Nested index signature pattern mentioned above. 
+
+However if you are modeling *existing JavaScript* you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
 
 ```ts
 type FieldState = {
@@ -285,4 +287,28 @@ type FieldState = {
 type FormState =
   { isValid: boolean }
   & { [fieldName: string]: FieldState }
+```
+
+Note that even though you can declare it to model existing JavaScript, you cannot create such an object using TypeScript:  
+
+```ts
+type FieldState = {
+  value: string
+}
+
+type FormState =
+  { isValid: boolean }
+  & { [fieldName: string]: FieldState }
+
+
+// Use it for some JavaScript object you are gettting from somewhere 
+declare const foo:FormState; 
+
+const isValidBool = foo.isValid;
+const somethingFieldState = foo['something'];
+
+// Using it to create a TypeScript object will not work
+const bar: FormState = { // Error `isValid` not assignable to `FieldState
+  isValid: false
+}
 ```
