@@ -140,6 +140,51 @@ cy.get(`#${Ids.username}`)
   .type('john')
 ```
 
+## Tip: Implicit assertion 
+Whenver a cypress command fails you get a nice error (instead of something like `null` with many other frameworks) so you fail quickly and know exactly when a test fails e.g. 
+
+```
+cy.get('#foo') 
+// If there is no element with id #foo cypress will wait for 4 seconds automatically 
+// If still not found you get an error here ^ 
+// \/ This will not trigger till an element #foo is found
+  .should('have.text', 'something') 
+```
+
+## Tip: Explicit assertion 
+Cypress ships with quite a few assertion helps for the web e.g. chai-jquery https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery. You use them with `.should` command passing in the chainer as a string e.g.
+
+```
+cy.get('#foo') 
+  .should('have.text', 'something') 
+```
+
+## Tip: Commands and Chaining 
+Every function call in a cypress chain is a `command`. The `should` command is an assertion. It is conventional to start distinct *category* of chains and actions seperately e.g. 
+
+```ts
+// Don't do this 
+cy.get(/**something*/) 
+  .should(/**something*/)
+  .click()
+  .should(/**something*/)
+  .get(/**something else*/) 
+  .should(/**something*/)
+
+// Prefer seperating the two gets 
+cy.get(/**something*/) 
+  .should(/**something*/)
+  .click()
+  .should(/**something*/)
+
+cy.get(/**something else*/) 
+  .should(/**something*/)
+```
+
+Some other libraries that *evaluate and run* the code at the same time. That forces you to have a single chain which can be nightmare to debug with selectors and assertions minggled in. 
+
+Cypress commands are essentially *declarations* to the cypress runtime to execute the commands later. Simple words: Cypress makes it easier. 
+
 ## Tip: Waiting for an HTTP request
 A lot of tests have been traditionally brittle due to all the arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
 * create an alias for backend calls
@@ -196,25 +241,6 @@ cy.wait('@foo')
 cy.get('#foo')
 ```
 This keeps you from having to constantly add arbitrary timeouts in your test code flow. 
-
-## Tip: Implicit assertion 
-Whenver a cypress command fails you get a nice error (instead of something like `null` with many other frameworks) so you fail quickly and know exactly when a test fails e.g. 
-
-```
-cy.get('#foo') 
-// If there is no element with id #foo cypress will wait for 4 seconds automatically 
-// If still not found you get an error here ^ 
-// \/ This will not trigger till an element #foo is found
-  .should('have.text', 'something') 
-```
-
-## Tip: Explicit assertion 
-Cypress ships with quite a few assertion helps for the web e.g. chai-jquery https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery. You use them with `.should` command passing in the chainer as a string e.g.
-
-```
-cy.get('#foo') 
-  .should('have.text', 'something') 
-```
 
 ## Resources 
 * Website: https://www.cypress.io/
