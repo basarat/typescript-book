@@ -141,7 +141,7 @@ cy.get(`#${Ids.username}`)
 ```
 
 ## Tip: Implicit assertion 
-Whenver a cypress command fails you get a nice error (instead of something like `null` with many other frameworks) so you fail quickly and know exactly when a test fails e.g. 
+Whenever a cypress command fails you get a nice error (instead of something like `null` with many other frameworks) so you fail quickly and know exactly when a test fails e.g. 
 
 ```
 cy.get('#foo') 
