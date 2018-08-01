@@ -257,7 +257,7 @@ cy.tick(waitMilliseconds);
 cy.get('#logoutNotification').should('be.visible');
 ```
 
-## Tip: Smart delays
+## Tip: Smart delays and retries
 Cypress will automatically wait (and retry) for many async things e.g. 
 ```
 // If there is no request against the `foo` alias cypress will wait for 4 seconds automatically 
@@ -266,6 +266,24 @@ cy.wait('@foo')
 cy.get('#foo')
 ```
 This keeps you from having to constantly add arbitrary timeout (and retry) logic in your test code flow. 
+
+
+## Tip: Unit testing applicaiton code
+You can also use cypress to unit test your application code in isolation e.g.
+
+```js
+import { once } from '../../../src/app/utils'; 
+
+// Later 
+it('should only call function once', () => {
+  let called = 0;
+  const callMe = once(()=>called++);
+  callMe();
+  callMe();
+  expect(called).to.equal(1);
+});
+```
+
 
 ## Resources 
 * Website: https://www.cypress.io/
