@@ -133,12 +133,36 @@ Cypress tests are compiled / packed and run in the browser. So feel free to impo
 
 For example you can share Id values between UI and Tests to make sure the CSS selectors don't break:
 
-```ts
+```js
 import { Ids } from '../../../src/app/constants'; 
 
 // Later 
 cy.get(`#${Ids.username}`)
   .type('john')
+```
+
+## Tip: Creating Page Objects
+Creating objects that provide a convenient handle for all the interactions that various tests need to do with a page is a common testing convention. You can create page objects using TypeScript classes with getters and methods e.g. 
+
+```js
+import { Ids } from '../../../src/app/constants'; 
+
+class LoginPage {
+  visit() {
+    cy.visit('/login');
+  }
+  
+  get username() {
+    return cy.get(`#${Ids.username}`);
+  }
+}
+const page = new LoginPage();
+
+// Later
+page.visit();
+
+page.username.type('john');
+
 ```
 
 ## Tip: Implicit assertion 
