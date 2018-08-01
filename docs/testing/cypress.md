@@ -4,8 +4,9 @@ Cypress is a great E2E testing tool. Here are a few great reasons to consider it
 * Isolated installation possible.
 * Ships with TypeScript definitions out of the box.
 * Provides a nice interactive google chrome debug experience. This is very similar to how UI devs mostly work manually.
-* Provides the ability to mock out and observe backend XHRs easily without changing your application code (more on this in the tips below).
+* Has command - execution seperation which allows for more powerfull debugging and test stability (more on this below).
 * Has implicit assertions to provide more meaningful debug experience with less brittle tests (more on this in the tips below).
+* Provides the ability to mock out and observe backend XHRs easily without changing your application code (more on this in the tips below).
 
 ## Installation
 
@@ -181,7 +182,7 @@ cy.get(/**something else*/)
   .should(/**something*/)
 ```
 
-Some other libraries that *evaluate and run* the code at the same time. That forces you to have a single chain which can be nightmare to debug with selectors and assertions minggled in. 
+Some other libraries *evaluate and run* the code at the same time. Those libraries force you to have a single chain which can be nightmare to debug with selectors and assertions minggled in. 
 
 Cypress commands are essentially *declarations* to the cypress runtime to execute the commands later. Simple words: Cypress makes it easier. 
 
