@@ -233,14 +233,14 @@ cy.get('#logoutNotification').should('be.visible');
 ```
 
 ## Tip: Smart delays
-Cypress will automatically wait for many async things e.g. 
+Cypress will automatically wait (and retry) for many async things e.g. 
 ```
 // If there is no request against the `foo` alias cypress will wait for 4 seconds automatically 
 cy.wait('@foo') 
-// If there is no element with id #foo cypress will wait for 4 seconds automatically 
+// If there is no element with id #foo cypress will wait for 4 seconds automatically and keep retrying
 cy.get('#foo')
 ```
-This keeps you from having to constantly add arbitrary timeouts in your test code flow. 
+This keeps you from having to constantly add arbitrary timeout (and retry) logic in your test code flow. 
 
 ## Resources 
 * Website: https://www.cypress.io/
