@@ -10,6 +10,8 @@ Cypress is a great E2E testing tool. Here are a few great reasons to consider it
 
 ## Installation
 
+> The steps provided in this installation process will give you a nice `e2e` folder that you can use as boiler plate for your organization. You can just copy paste this `e2e` folder into any existing projects that you want to test with cypress.
+
 Create an e2e directory and install cypress and its dependencies for TypeScript transpiling:
 
 ```sh
