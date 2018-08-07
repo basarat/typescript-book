@@ -68,7 +68,7 @@
   * [noImplicitAny](docs/options/noImplicitAny.md)
   * [strictNullChecks](docs/options/strictNullChecks.md)
 * [Errors in TypeScript](docs/errors/main.md)
-  * [Reading Errors](docs/errors/reading-errors.md)
+  * [Interpreting Errors](docs/errors/interpreting-errors.md)
   * [Common Errors](docs/errors/common-errors.md)
 * [Testing](docs/testing/intro.md)
   * [Jest](docs/testing/jest.md)
