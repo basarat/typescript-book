@@ -47,7 +47,7 @@ Argument of type '{ foo: number; bar: () => string; }' is not assignable to para
   Types of property 'bar' are incompatible.
     Type '() => string' is not assignable to type 'string'.
 ```
-The objective of the detailed error message is to *guide* the user to the reason why some error (type incompatability in this case) is happening. You should read this as a chain of responses to the developer question `Why?` between lines i.e 
+The objective of the detailed error message is to *guide* the user to the reason why some error (type incompatability in this case) is happening. The first line is same as the succint, followed by a chain. You should read this chain as a series of responses to the developer question `WHY?` between lines i.e 
 
 ```
 ERROR: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
@@ -61,12 +61,15 @@ CAUSE ERROR: Type '() => string' is not assignable to type 'string'.
 
 So the root cause is,
 * for property `bar`
-* there is a function with signature `() => string` while it was expected as a `string`. This is because of the developer bug (they forgot to invoke `()` the function).
+* there is a function `() => string` while it was expected as a `string`. 
+
+This should help the developer fix the bug for the `bar` property (they forgot to invoke `()` the function).
 
 ## How it shows up in an IDE Tooltip 
 
-The IDE normally shows the detailed followed by the succint version in a tooltip as shown below: 
+The IDE normally shows the `detailed` followed by the `succint` version in a tooltip as shown below: 
 
 ![IDE error message example](https://raw.githubusercontent.com/basarat/typescript-book/master/images/errors/interpreting-errors/ide.png)
 
-Based on the above explanation on detailed error messages you should be able to read them better. 
+* You normally just read the `detailed` version forming the `WHY?` chain in your head. 
+* You use the succint version if you want to search for similar errors (using the `TSXXXX` error code or portions of the error message)
