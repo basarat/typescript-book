@@ -10,7 +10,7 @@ The `?` annotation can be used before a function argument or member of an interf
 ## Specialized Parameters
 
 ## Function Overloads
-The JavaScript runtime does not have runtime support for function overloading. There can be only a single function body for any given name in scope. However people do support function overloading by utilizing the highly dynamic nature of JavaScript e.g. a getter and a setter:
+The JavaScript runtime does not have runtime support for function overloading. There can be only a single function body for any given name in scope. However, people do support function overloading by utilizing the highly dynamic nature of JavaScript e.g. a getter and a setter:
 
 ```ts
 var _value;
@@ -44,7 +44,7 @@ getOrSet(1); // set : 1
 console.log(getOrSet()); // get : 1
 ```
 
-Note that when you define function overloads this way, *the last signature is actually not callable*. You have to provide it however to help the implementer of the function be aware of the consequences of his overload signatures. For example in the following example the function with the signature `function callMe(v1?: any, v2?: any): any` is not open to public use:
+Note that when you define function overloads this way, *the last signature is actually not callable*. You have to provide it however, to help the implementer of the function be aware of the consequences of his overload signatures. For example, in the following example the function with the signature `function callMe(v1?: any, v2?: any): any` is not open to public use:
 
 ```ts
 function callMe(): number;

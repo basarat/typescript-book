@@ -195,7 +195,7 @@ type FromSomeIndex<K extends string> = { [key in K]: number }
 
 This is not a common use case, but TypeScript compiler supports it nonetheless.
 
-However it has the restriction that the `string` indexer is more strict than the `number` indexer. This is intentional e.g. to allow typing stuff like:
+However, it has the restriction that the `string` indexer is more strict than the `number` indexer. This is intentional e.g. to allow typing stuff like:
 
 ```ts
 interface ArrStr {
@@ -264,7 +264,7 @@ const failsSilently: NestedCSS = {
 
 Sometimes you need to combine properties into the index signature. This is not advised, and you *should* use the Nested index signature pattern mentioned above. 
 
-However if you are modeling *existing JavaScript* you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
+However, if you are modeling *existing JavaScript* you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
 
 ```ts
 type FieldState = {

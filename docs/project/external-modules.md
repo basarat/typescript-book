@@ -252,7 +252,7 @@ Type inference needs to be done *upfront*. This means that if you want to use so
 import foo = require('foo');
 var bar: foo.SomeType;
 ```
-However you might want to only load the file `foo` at runtime under certain conditions. For such cases you should use the `import`ed name only in *type annotations* and **not** as a *variable*. This removes any *upfront* runtime dependency code being injected by TypeScript. Then *manually import* the actual module using code that is specific to your module loader.
+However, you might want to only load the file `foo` at runtime under certain conditions. For such cases you should use the `import`ed name only in *type annotations* and **not** as a *variable*. This removes any *upfront* runtime dependency code being injected by TypeScript. Then *manually import* the actual module using code that is specific to your module loader.
 
 As an example, consider the following `commonjs` based code where we only load a module `'foo'` on a certain function call:
 
@@ -288,7 +288,7 @@ Similar to the lazy loading use case certain module loaders (commonjs/node and a
 
 ### Use case: Ensure Import
 
-Sometimes you want to load a file just for the side effect (e.g. the module might register itself with some library like [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.). However if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.:
+Sometimes you want to load a file just for the side effect (e.g. the module might register itself with some library like [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.). However, if you just do a `import/require` the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a `ensureImport` variable to ensure that the compiled JavaScript takes a dependency on the module e.g.:
 
 ```ts
 import foo = require('./foo');

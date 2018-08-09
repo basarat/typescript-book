@@ -139,7 +139,7 @@ Types do not flow into the function parameters if it cannot be inferred from an 
 const foo = (a,b) => { /* do something */ };
 ```
 
-However if `foo` was typed the function parameters type can be inferred (`a`,`b` are both inferred to be of type `number` in the example below).
+However, if `foo` was typed the function parameters type can be inferred (`a`,`b` are both inferred to be of type `number` in the example below).
 
 ```ts
 type TwoNumberFunction = (a: number, b: number) => void;

@@ -276,7 +276,7 @@ let y: Empty<string>;
 x = y;  // okay, y matches structure of x
 ```
 
-However if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
+However, if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
 
 ```ts
 interface NotEmpty<T> {

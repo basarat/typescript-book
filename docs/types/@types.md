@@ -19,7 +19,7 @@ npm install @types/jquery --save-dev
 
 By default any definitions that support global consumption are included automatically. E.g. for `jquery` you should be able to just start using `$` *globally* in your project.
 
-However for *libraries*  (like `jquery`) I generally recommend using *modules*:
+However, for *libraries*  (like `jquery`) I generally recommend using *modules*:
 
 ### Module `@types`
 

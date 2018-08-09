@@ -23,7 +23,7 @@ let something = new Singleton() // Error: constructor of 'Singleton' is private.
 let instance = Singleton.getInstance() // do something with the instance...
 ```
 
-However if you don't want lazy initialization you can instead just use a `namespace`: 
+However, if you don't want lazy initialization you can instead just use a `namespace`: 
 
 ```ts
 namespace Singleton {

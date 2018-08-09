@@ -249,7 +249,7 @@ cy.wait(waitMilliseconds);
 cy.get('#logoutNotification').should('be.visible');
 ```
 
-However it is recommended to mock time using `cy.clock` and forwarding time using `cy.tick` e.g. 
+However, it is recommended to mock time using `cy.clock` and forwarding time using `cy.tick` e.g. 
 
 ```ts
 cy.clock();

@@ -57,7 +57,7 @@ if (true) {
     var foo = 123;
 }
 ```
-However if the variable name is already taken by the surrounding scope then a new variable name is generated as shown (notice `foo_1`):
+However, if the variable name is already taken by the surrounding scope then a new variable name is generated as shown (notice `foo_1`):
 
 ```ts
 var foo = '123';
