@@ -81,4 +81,4 @@ SemicolonToken 13 14
 ```
 
 ### Standalone scanner
-Even though the typescript parser has a singleton scanner you can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.
+Even though the TypeScript parser has a singleton scanner you can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.

@@ -27,12 +27,12 @@ Now just add a `script` target to your `package.json` based on your application 
 So you can now run `npm start` and as you edit `index.ts`:
 
 * nodemon reruns its command (ts-node)
-* ts-node transpiles automatically picking up tsconfig.json and the installed typescript version,
-* ts-node runs the output javascript through Node.js.
+* ts-node transpiles automatically picking up tsconfig.json and the installed TypeScript version,
+* ts-node runs the output JavaScript through Node.js.
 
 ## Creating TypeScript node modules
 
-* [A lesson on creating typescript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
+* [A lesson on creating TypeScript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
 
 Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
 

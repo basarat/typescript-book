@@ -106,5 +106,5 @@ function handler(event: Event) {
 }
 ```
 
-#### How typescript determines if a single assertion is not enough
+#### How TypeScript determines if a single assertion is not enough
 Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.
