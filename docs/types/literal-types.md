@@ -62,6 +62,19 @@ const test = {
 iTakeFoo(test.someProp); // Okay!
 ```
 
+or use a type annotation that helps TypeScript infer the correct thing at the point of declaration: 
+
+```
+function iTakeFoo(foo: 'foo') { }
+type Test = {
+  someProp: 'foo',
+}
+const test: Test = { // Annotate - inferred someProp is always === 'foo'
+  someProp: 'foo' 
+}; 
+iTakeFoo(test.someProp); // Okay!
+```
+
 ### Use cases
 Valid use cases for string literal types are:
 
