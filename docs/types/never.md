@@ -41,7 +41,7 @@ function foo(x: string | number): boolean {
   // Without a never type we would error :
   // - Not all code paths return a value (strict null checks)
   // - Or Unreachable code detected
-  // But because typescript understands that `fail` function returns `never`
+  // But because TypeScript understands that `fail` function returns `never`
   // It can allow you to call it as you might be using it for runtime safety / exhaustive checks.
   return fail("Unexhaustive!");
 }

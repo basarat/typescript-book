@@ -11,7 +11,7 @@ The thing is that webpack code splitting supports two similar techniques to achi
 
 Let’s see an example to figure out how to configure webpack + TypeScript 2.4.
 
-In the following code I want to **lazy load the library _moment_** but I am interested in code splitting as well, which means, having the moment library in a separate chunk of JS (javascript file) that will be loaded only when required.
+In the following code I want to **lazy load the library _moment_** but I am interested in code splitting as well, which means, having the moment library in a separate chunk of JS (JavaScript file) that will be loaded only when required.
 
 ```ts
 import(/* webpackChunkName: "momentjs" */ "moment")

@@ -1,6 +1,6 @@
 # TypeScript Type System
 We covered the main features of the TypeScript Type System back when we discussed [Why TypeScript?](../why-typescript.md). The following are a few key takeaways from that discussion which don't need further explanation:
-* The type system in typescript is designed to be *optional* so that *your javascript is typescript*.
+* The type system in TypeScript is designed to be *optional* so that *your JavaScript is TypeScript*.
 * TypeScript does not block *JavaScript emit* in the presence of Type Errors, allowing you to *progressively update your JS to TS*.
 
 Now let's start with the *syntax* of the TypeScript type system. This way you can start using these annotations in your code immediately and see the benefit. This will prepare you for a deeper dive later.
