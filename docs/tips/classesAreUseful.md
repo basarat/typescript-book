@@ -23,7 +23,7 @@ function foo() {
 
 This is known as the *revealing module pattern* and quite common in JavaScript (taking advantage of JavaScript closure).
 
-If you use [*file modules* (which you really should as global scope is bad)](../project/modules.md) then *your file is effectively the same*. However there are too many cases where people will write code like the following:
+If you use [*file modules* (which you really should as global scope is bad)](../project/modules.md) then *your file is effectively the same*. However, there are too many cases where people will write code like the following:
 
 ```ts
 let someProperty;

@@ -138,7 +138,7 @@ Something like the following works fine:
 function foo<T>(x: T): T { return x; }
 ```
 
-However using an arrow generic function will not:
+However, using an arrow generic function will not:
 
 ```ts
 const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag

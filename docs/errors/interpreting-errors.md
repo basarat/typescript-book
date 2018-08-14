@@ -36,7 +36,7 @@ The objective of the succint error message is to provide an example *conventiona
 ```
 TS2345: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
 ```
-It is fairly self explanatory. However it doesn't provide a deeper breakdown of *why* the error is happening. That is what the *detiled* error message is for.
+It is fairly self explanatory. However, it doesn't provide a deeper breakdown of *why* the error is happening. That is what the *detiled* error message is for.
 
 ### Detailed
 For this example the detailed version looks like: 

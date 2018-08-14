@@ -48,7 +48,7 @@ function foo(sample: Foo) {
 }
 ```
 
-However it is generally a good idea to add these annotation to help with errors e.g.:
+However, it is generally a good idea to add these annotation to help with errors e.g.:
 
 ```ts
 function foo() {

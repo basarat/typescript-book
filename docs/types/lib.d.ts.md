@@ -187,7 +187,7 @@ Similar variables and interfaces exist for other things that have both static an
 
 ### Example `string` redux
 
-We recommended creating a `global.d.ts` for maintainability reasons. However you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
+We recommended creating a `global.d.ts` for maintainability reasons. However, you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
 
 ```ts
 // Ensure this is treated as a module.
@@ -222,7 +222,7 @@ Once you have excluded the default `lib.d.ts` you can include a similarly named 
 
 Setting the compiler target to `es6` causes the `lib.d.ts` to include *additional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others it's problematic as it conflates *code generation* with *code ambience*.
 
-However if you want finer grained control of your environment, you should use the `--lib` option which we discuss next.
+However, if you want finer grained control of your environment, you should use the `--lib` option which we discuss next.
 
 ### lib option
 

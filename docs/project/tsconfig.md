@@ -68,7 +68,7 @@ You can customize the compiler options using `compilerOptions`:
 These (and more) compiler options will be discussed later.
 
 ### TypeScript compiler
-Good IDEs come with built in support for on the fly `ts` to `js` compilation. If however you want to run the TypeScript compiler manually from the command line when using `tsconfig.json` you can do it in a few ways.
+Good IDEs come with built in support for on the fly `ts` to `js` compilation. However, if you want to run the TypeScript compiler manually from the command line when using `tsconfig.json`, you can do it in a few ways:
 * Just run `tsc` and it will look for `tsconfig.json` in the current as well as all parent folders till it finds it.
 * Run `tsc -p ./path-to-project-directory`. Of course the path can be absolute or relative to the current directory.
 

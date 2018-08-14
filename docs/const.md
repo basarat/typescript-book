@@ -54,7 +54,7 @@ const foo = { bar: 123 };
 foo = { bar: 456 }; // ERROR : Left hand side of an assignment expression cannot be a constant
 ```
 
-However it still allows sub properties of objects to be mutated, as shown below:
+However, it still allows sub properties of objects to be mutated, as shown below:
 
 ```ts
 const foo = { bar: 123 };
