@@ -1,69 +1,81 @@
 ## Callable
-You can annotate callables as a part of a type or an interface as follows 
+You can annotate callables as a part of a type or an interface as follows
 
-```js
+```ts
 interface ReturnString {
   (): string
 }
 ```
-An instance of such an interface would be a function that returns a string e.g. 
+An instance of such an interface would be a function that returns a string e.g.
 
-```js
+```ts
 declare const foo: ReturnString;
 const bar = foo(); // bar is inferred as a string
 ```
 
 ### Obvious examples
-Of course such a *callable* annotation can also specify any arguments / optional arguments / rest arguments as needed. e.g. here is a complex example: 
+Of course such a *callable* annotation can also specify any arguments / optional arguments / rest arguments as needed. e.g. here is a complex example:
 
-```js
+```ts
 interface Complex {
   (foo: string, bar?: number, ...others: boolean[]): number;
 }
 ```
-They can even specify overloads: 
-```js
+
+An interface can provide multiple callable annotations to specify function overloading. For example:
+
+```ts
 interface Overloaded {
-  (foo: string): string
-  (foo: number): number
+    (foo: string): string
+    (foo: number): number
 }
 
 // example implementation
-const overloaded: Overloaded = (foo) => foo;
+function stringOrNumber(foo: number): number;
+function stringOrNumber(foo: string): string;
+function stringOrNumber(foo: any): any {
+    if (typeof foo === 'number') {
+        return foo * foo;
+    } else if (typeof foo === 'string') {
+        return `hello ${foo}`;
+    }
+}
+
+const overloaded: Overloaded = stringOrNumber;
 
 // example usage
-const str = overloaded(''); // str is inferred string
-const number = overloaded(123); // num is inferred number
+const str = overloaded(''); // type of `str` is inferred as `string`
+const num = overloaded(123); // type of `num` is inferred as `number`
 ```
 
-Of course like *all* bodies of interfaces / types you can use these as variable type annotations e.g. 
+Of course, like the body of *any* interface, you can use the body of a callable interface as a type annotation for a variable. For example:
 
-```js
+```ts
 const overloaded: {
   (foo: string): string
   (foo: number): number
-} = (foo) => foo;
+} = (foo: any) => foo;
 ```
 
 ### Arrow Syntax
-To make it easy to specify callable signatures TypeScript also allows simple arrow type annotations e.g. a function that takes a `number` and returns a `string` can be annotated as: 
+To make it easy to specify callable signatures, TypeScript also allows simple arrow type annotations. For example, a function that takes a `number` and returns a `string` can be annotated as:
 
-```js
+```ts
 const simple: (foo: number) => string
     = (foo) => foo.toString();
 ```
 
-Only limitation of the arrow syntax: You can't specify overloads. For overloads you must use the full bodied `{ (someArgs): someReturn }` syntax. 
+> Only limitation of the arrow syntax: You can't specify overloads. For overloads you must use the full bodied `{ (someArgs): someReturn }` syntax.
 
 ### Newable
 
-Newable is just a special type of *callable* type annotation with the prefix `new`. It simply means that you need to *invoke* with `new` e.g. 
+Newable is just a special type of *callable* type annotation with the prefix `new`. It simply means that you need to *invoke* with `new` e.g.
 
-```js
+```ts
 interface CallMeWithNewToGetString {
   new(): string
 }
-// Usage 
+// Usage
 declare const Foo: CallMeWithNewToGetString;
-const bar = new Foo(); // bar is inferred to be of type string 
+const bar = new Foo(); // bar is inferred to be of type string
 ```

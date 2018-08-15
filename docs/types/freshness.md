@@ -1,7 +1,7 @@
 
 * [Freshness](#freshness)
 * [Allowing extra properties](#allowing-extra-properties)
-* [Use Case: React](#use-case--react-state)
+* [Use Case: React](#use-case-react-state)
 
 ## Freshness
 
@@ -23,7 +23,7 @@ logName(animal); // okay
 logName(random); // Error: property `name` is missing
 ```
 
-However *structural* typing has a weakness in that it allows you to misleadingly think that something accepts more data than it actually does. This is demonstrated in the following code which TypeScript will error on as shown:
+However, *structural* typing has a weakness in that it allows you to misleadingly think that something accepts more data than it actually does. This is demonstrated in the following code which TypeScript will error on as shown:
 
 ```ts
 function logName(something: { name: string }) {

@@ -34,7 +34,7 @@ move(1,"Nurth"); // Error!
 ```
 
 ### Other literal types
-TypeScript also supports `boolean`, `numbers` as literals, e.g.: 
+TypeScript also supports `boolean` and `number` literal types, e.g.: 
 
 ```ts
 type OneToFive = 1 | 2 | 3 | 4 | 5;
@@ -59,6 +59,19 @@ function iTakeFoo(foo: 'foo') { }
 const test = {
   someProp: 'foo' as 'foo'
 };
+iTakeFoo(test.someProp); // Okay!
+```
+
+or use a type annotation that helps TypeScript infer the correct thing at the point of declaration: 
+
+```
+function iTakeFoo(foo: 'foo') { }
+type Test = {
+  someProp: 'foo',
+}
+const test: Test = { // Annotate - inferred someProp is always === 'foo'
+  someProp: 'foo' 
+}; 
 iTakeFoo(test.someProp); // Okay!
 ```
 

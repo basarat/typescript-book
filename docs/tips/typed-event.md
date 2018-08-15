@@ -2,7 +2,7 @@
 
 Conventionally in Node.js and traditional JavaScript you have a single event emitter. This event emitter internally tracks listener for different event types e.g. 
 
-```js
+```ts
 const emitter = new EventEmitter();
 // Emit: 
 emitter.emit('foo', foo);
@@ -12,11 +12,11 @@ emitter.on('foo', (foo)=>console.log(foo));
 emitter.on('bar', (bar)=>console.log(bar));
 ```
 Essentially `EventEmitter` internally stores data in the form of mapped arrays: 
-```js
+```ts
 {foo: [fooListeners], bar: [barListeners]}
 ```
 Instead, for the sake of *event* type safety, you can create an emitter *per* event type:
-```js
+```ts
 const onFoo = new TypedEvent<Foo>();
 const onBar = new TypedEvent<Bar>();
 
@@ -34,7 +34,7 @@ This has the following advantages:
 * Type safety for event data structures.
 
 ### Reference TypedEvent
-```js
+```ts
 export interface Listener<T> {
   (event: T): any;
 }

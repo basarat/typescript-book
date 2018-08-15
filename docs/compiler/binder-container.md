@@ -40,7 +40,7 @@ function getContainerFlags(node: Node): ContainerFlags {
 
         case SyntaxKind.Block:
             // do not treat blocks directly inside a function as a block-scoped-container.
-            // Locals that reside in this block should go to the function locals. Othewise 'x'
+            // Locals that reside in this block should go to the function locals. Otherwise 'x'
             // would not appear to be a redeclaration of a block scoped local in the following
             // example:
             //
@@ -69,7 +69,7 @@ It is *only* invoked from the binder's `bindChildren` function which sets up a n
 // the getLocalNameOfContainer function in the type checker to validate that the local name
 // used for a container is unique.
 function bindChildren(node: Node) {
-    // Before we recurse into a node's chilren, we first save the existing parent, container
+    // Before we recurse into a node's children, we first save the existing parent, container
     // and block-container.  Then after we pop out of processing the children, we restore
     // these saved values.
     let saveParent = parent;
@@ -94,7 +94,7 @@ function bindChildren(node: Node) {
     // Finally, if this is a block-container, then we clear out any existing .locals object
     // it may contain within it.  This happens in incremental scenarios.  Because we can be
     // reusing a node from a previous compilation, that node may have had 'locals' created
-    // for it.  We must clear this so we don't accidently move any stale data forward from
+    // for it.  We must clear this so we don't accidentally move any stale data forward from
     // a previous compilation.
     let containerFlags = getContainerFlags(node);
     if (containerFlags & ContainerFlags.IsContainer) {
@@ -120,4 +120,4 @@ function bindChildren(node: Node) {
 }
 ```
 
-As you might recall from section on binder functions : `bindChildren` is called from the `bind` function. So we have the recursive binding setup : `bind` calls `bindChildren` calls `bind` for each child.
+As you might recall from the section on binder functions : `bindChildren` is called from the `bind` function. So we have the recursive binding setup : `bind` calls `bindChildren` calls `bind` for each child.

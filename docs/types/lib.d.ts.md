@@ -5,6 +5,7 @@
 * [Using custom lib.d.ts](#using-your-own-custom-libdts)
 * [Compiler `target` effect on lib.d.ts](#compiler-target-effect-on-libdts)
 * [`lib` option](#lib-option)
+* [Polyfill for old JavaScript engines](#polyfill-for-old-javascript-engines)
 
 ## `lib.d.ts`
 
@@ -31,9 +32,9 @@ If you use the same sample code with the `noLib` option you get a type check err
 var foo = 123;
 var bar = foo.toString(); // ERROR: Property 'toString' does not exist on type 'number'.
 ```
-So now that you understand the importance of `lib.d.ts` what does its contents look like? We examine that next.
+So now that you understand the importance of `lib.d.ts`, what do its contents look like? We examine that next.
 
-### `lib.d.ts` inside look
+### `lib.d.ts` Inside Look
 
 The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`.
 
@@ -55,13 +56,13 @@ interface Window extends EventTarget, WindowTimers, WindowSessionStorage, Window
     // so on and so forth...
 }
 ```
-You can see that here is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisense`.
+You can see that there is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisense`.
 
 There is a good reason for using *interfaces* for these globals. It allows you to *add additional properties* to these globals *without* a need to change `lib.d.ts`. We will cover this concept next.
 
-### Modifying native types
+### Modifying Native Types
 
-Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to get associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../project/globals.md) for this purpose.
+Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to be associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../project/globals.md) for this purpose.
 
 Here are a few example cases where we add stuff to `window`, `Math`, `Date`:
 
@@ -122,7 +123,7 @@ Math.seedrandom("Any string you want!");
 
 #### Example `Date`
 
-If you will look on the definition of the `Date` *variable* in `lib.d.ts` you will find:
+If you look at the definition of the `Date` *variable* in `lib.d.ts` you will find:
 
 ```ts
 declare var Date: DateConstructor;
@@ -165,7 +166,7 @@ var todayAfter1second = today.addMilliseconds(1000);
 
 #### Example `string`
 
-If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface impacts string *literals* as well as demonstrated in the below code sample:
+If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface also impacts string *literals* as demonstrated in the below code sample:
 
 ```ts
 
@@ -182,11 +183,11 @@ console.log('foo bar'.endsWith('bas')); // false
 console.log('foo bas'.endsWith('bas')); // true
 ```
 
-Similar variable / interfaces exist for other things that have both static and instance member like `Number`, `Boolean`, `RegExp`, etc. and these interfaces affect literal instances of these types as well.
+Similar variables and interfaces exist for other things that have both static and instance members like `Number`, `Boolean`, `RegExp`, etc. and these interfaces affect literal instances of these types as well.
 
 ### Example `string` redux
 
-We recommended creating a `global.d.ts` for maintainability reasons. However you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
+We recommended creating a `global.d.ts` for maintainability reasons. However, you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
 
 ```ts
 // Ensure this is treated as a module.
@@ -208,24 +209,24 @@ console.log('foo bas'.endsWith('bas')); // true
 ```
 
 ### Using your own custom lib.d.ts
-As we mentioned earlier using the `noLib` boolean compiler flag causes TypeScript to exclude the automatic inclusion of `lib.d.ts`. There are various reasons why this is a useful feature. Here are a few of the common ones:
+As we mentioned earlier, using the `--noLib` boolean compiler flag causes TypeScript to exclude the automatic inclusion of `lib.d.ts`. There are various reasons why this is a useful feature. Here are a few of the common ones:
 
 * You are running in a custom JavaScript environment that differs *significantly* from the standard browser based runtime environment.
 * You like to have *strict* control over the *globals* available in your code. E.g. lib.d.ts defines `item` as a global variable and you don't want this to leak into your code.
 
 Once you have excluded the default `lib.d.ts` you can include a similarly named file into your compilation context and TypeScript will pick it up for type checking.
 
-> Note: be careful with `--noLib`. Once you are in noLib land, if you chose to share your project with others, they will be *forced* into noLib land (or rather *your lib* land). Even worse, if you bring *their* code into your project you might need to port it to *your lib* based code.
+> Note: be careful with `--noLib`. Once you are in noLib land, if you choose to share your project with others, they will be *forced* into noLib land (or rather *your lib* land). Even worse, if you bring *their* code into your project you might need to port it to *your lib* based code.
 
 ### Compiler target effect on `lib.d.ts`
 
-Setting the compiler target to be `es6` causes the `lib.d.ts` to include *additional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others it's problematic as it conflates *code generation* with *code ambience*.
+Setting the compiler target to `es6` causes the `lib.d.ts` to include *additional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others it's problematic as it conflates *code generation* with *code ambience*.
 
-However if you want finer grained control of your environment you should use the `--lib` option which we discuss next.
+However, if you want finer grained control of your environment, you should use the `--lib` option which we discuss next.
 
 ### lib option
 
-Sometimes (many times) you want to decouple the relationship between the compile target (the generated JavaScript version) and the ambient library support. A common example is `Promise`, e.g. today (in June 2016) you most likely want to `--target es5` but still use latest stuff like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
+Sometimes (many times) you want to decouple the relationship between the compile target (the generated JavaScript version) and the ambient library support. A common example is `Promise`, e.g. today (in June 2016) you most likely want to `--target es5` but still use the latest features like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
 
 > Note: using `--lib` decouples any lib magic from `--target` giving you better control.
 
@@ -242,7 +243,7 @@ tsc --target es5 --lib dom,es6
 }
 ```
 
-The libs can be categorized into categories:
+The libs can be categorized as follows:
 
 * JavaScript Bulk Feature:
     * es5
@@ -257,7 +258,7 @@ The libs can be categorized into categories:
     * dom.iterable
     * webworker
     * scripthost
-* ESNext By-feature options (even smaller than bulk feature)
+* ESNext By-Feature Options (even smaller than bulk feature)
     * es2015.core
     * es2015.collection
     * es2015.generator
@@ -272,13 +273,12 @@ The libs can be categorized into categories:
     * es2017.sharedmemory
     * esnext.asynciterable
 
-
-> NOTE: the `--lib` option provides extremely fine tuned control. So you most likey want to pick an item from the bulk + enviroment categories.
+> NOTE: the `--lib` option provides extremely fine tuned control. So you most likely want to pick an item from the bulk + environment categories.
 > If --lib is not specified a default library is injected:
   - For --target es5 => es5, dom, scripthost
   - For --target es6 => es6, dom, dom.iterable, scripthost
 
-My Personal Recommentation:
+My Personal Recommendation:
 
 ```json
 "compilerOptions": {
@@ -287,12 +287,31 @@ My Personal Recommentation:
 }
 ```
 
-Example Including Symbol with ES5
+Example Including Symbol with ES5:
+
 Symbol API is not included when target is es5. In fact, we receive an error like: [ts] Cannot find name 'Symbol'.
 We can use "target": "es5" in combination with "lib" to provide Symbol API in TypeScript:
+
 ```json
 "compilerOptions": {
     "target": "es5",
     "lib": ["es5", "dom", "scripthost", "es2015.symbol"]
 }
 ```
+
+## Polyfill for old JavaScript engines
+
+> [Egghead PRO Video on this subject](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
+
+There are quite a few runtime features that are like `Map` / `Set` and even `Promise` (this list will of course change over time) that you can use with modern `lib` options. To use these all you need to do is use `core-js`. Simply install:
+
+```
+npm install core-js --save-dev
+```
+And add an import to your application entry point: 
+
+```js
+import "core-js";
+```
+
+And it should polyfill these runtime features for you 🌹.

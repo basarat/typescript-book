@@ -29,7 +29,7 @@ var foo: any;
 var bar = <string> foo; // bar is now of type "string"
 ```
 
-However there is an ambiguity in the language grammar when using `<foo>` style assertions in JSX:
+However, there is an ambiguity in the language grammar when using `<foo>` style assertions in JSX:
 
 ```ts
 var foo = <string>bar;
@@ -39,10 +39,10 @@ var foo = <string>bar;
 Therefore it is now recommended that you just use `as foo` for consistency.
 
 ### Type Assertion vs. Casting
-The reason why it's not called "type casting" is that *casting* generally implies some sort of runtime support. However *type assertions* are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.
+The reason why it's not called "type casting" is that *casting* generally implies some sort of runtime support. However, *type assertions* are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.
 
 ### Assertion considered harmful
-In many cases assertion will allow you to easily migrate legacy code (and even copy paste other code samples into your codebase), however you should be careful with your use of assertions. Take our original code as a sample, the compiler will not protect you from forgetting to *actually add the properties you promised*:
+In many cases assertion will allow you to easily migrate legacy code (and even copy paste other code samples into your codebase). However, you should be careful with your use of assertions. Take our original code as a sample, the compiler will not protect you from forgetting to *actually add the properties you promised*:
 
 ```ts
 interface Foo {
@@ -82,7 +82,7 @@ var foo:Foo = {
 In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
 
 ### Double assertion
-The type assertion despite being a bit unsafe as we've shown, is not *completely open season*. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:
+The type assertion, despite being a bit unsafe as we've shown, is not *completely open season*. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:
 
 ```ts
 function handler (event: Event) {
@@ -90,7 +90,7 @@ function handler (event: Event) {
 }
 ```
 
-However the following is most likely an error and TypeScript will complain as shown despite the user's type assertion:
+However, the following is most likely an error and TypeScript will complain as shown despite the user's type assertion:
 
 ```ts
 function handler(event: Event) {
@@ -106,5 +106,5 @@ function handler(event: Event) {
 }
 ```
 
-#### How typescript determines if a single assertion is not enough
+#### How TypeScript determines if a single assertion is not enough
 Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.

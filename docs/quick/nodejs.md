@@ -6,7 +6,7 @@ TypeScript has had *first class* support for Node.js since inception. Here's how
 1. Setup a Node.js project `package.json`. Quick one : `npm init -y`
 1. Add TypeScript (`npm install typescript --save-dev`)
 1. Add `node.d.ts` (`npm install @types/node --save-dev`)
-1. Init a `tsconfig.json` for TypeScript options (`node ./node_modules/typescript/lib/tsc --init`)
+1. Init a `tsconfig.json` for TypeScript options (`npx tsc --init`)
 1. Make sure you have `compilerOptions.module:commonjs` in your tsconfig.json
 
 That's it! Fire up your IDE (e.g. `alm -o`) and play around. Now you can use all the built in node modules (e.g. `import fs = require('fs');`) with all the safety and developer ergonomics of TypeScript!
@@ -27,12 +27,12 @@ Now just add a `script` target to your `package.json` based on your application 
 So you can now run `npm start` and as you edit `index.ts`:
 
 * nodemon reruns its command (ts-node)
-* ts-node transpiles automatically picking up tsconfig.json and the installed typescript version,
-* ts-node runs the output javascript through Node.js.
+* ts-node transpiles automatically picking up tsconfig.json and the installed TypeScript version,
+* ts-node runs the output JavaScript through Node.js.
 
 ## Creating TypeScript node modules
 
-* [A lesson on creating typescript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
+* [A lesson on creating TypeScript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
 
 Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
 
@@ -72,8 +72,8 @@ Example package:
 
 MORE:
 
-* If you package depends on other TypeScript authored packages, put them in `dependencies`/`devDependencies`/`peerDependencies` just like you would with raw JS packages.
-* If you package depends on other JavaScript authored packages and you want to use it type safely in your project, put their types e.g. `@types/foo` in `devDependencies`. JavaScript types should be managed *out of bound* from the main NPM streams. The JavaScript ecosystem breaks types without semantic versioning too commonly, so if your users need types for these they should install the `@types/foo` version that works for them.
+* If your package depends on other TypeScript authored packages, put them in `dependencies`/`devDependencies`/`peerDependencies` just like you would with raw JS packages.
+* If your package depends on other JavaScript authored packages and you want to use it with type safety in your project, put their types (e.g. `@types/foo`) in `devDependencies`. JavaScript types should be managed *out of bound* from the main NPM streams. The JavaScript ecosystem breaks types without semantic versioning too commonly, so if your users need types for these they should install the `@types/foo` version that works for them.
 
 ## Bonus points
 

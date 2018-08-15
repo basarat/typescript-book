@@ -33,7 +33,7 @@ catch (err) {
 }
 ```
 
-There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with a trivial error checking logic would be as follows:
+There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with trivial error checking logic would be as follows:
 
 ```ts
 import fs = require('fs');
@@ -52,7 +52,7 @@ Simple enough, it takes a callback, passes any file system errors to the callbac
 1. Never call the callback twice.
 1. Never throw an error.
 
-This simple function however fails to accommodate for point two. In fact `JSON.parse` throws an error if it is passed bad JSON and the callback never gets called and the application crashes. This is demonstrated in the below example:
+However, this simple function fails to accommodate for point two. In fact, `JSON.parse` throws an error if it is passed bad JSON and the callback never gets called and the application crashes. This is demonstrated in the below example:
 
 ```ts
 import fs = require('fs');
@@ -102,7 +102,7 @@ loadJSON('invalid.json', function (err, data) {
 });
 ```
 
-However there is a subtle bug in this code. If the callback (`cb`), and not `JSON.parse`, throws an error, since we wrapped it in a `try`/`catch`, the `catch` executes and we call the callback again i.e. the callback gets called twice! This is demonstrated in the example below:
+However, there is a subtle bug in this code. If the callback (`cb`), and not `JSON.parse`, throws an error, since we wrapped it in a `try`/`catch`, the `catch` executes and we call the callback again i.e. the callback gets called twice! This is demonstrated in the example below:
 
 ```ts
 import fs = require('fs');
@@ -174,7 +174,7 @@ Admittedly this is not hard to follow once you've done it a few times but noneth
 
 A promise can be either `pending` or `fulfilled` or `rejected`.
 
-![](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
+![promise states and fates](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
 
 Let's look at creating a promise. It's a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state:
 
@@ -315,7 +315,7 @@ Promise.resolve(123)
     })
 ```
 
-* A `catch` is only called in case of an error in the preceeding chain: 
+* A `catch` is only called in case of an error in the preceding chain:
 
 ```ts
 Promise.resolve(123)
@@ -438,7 +438,7 @@ The reason why this function was simpler is because the "`loadFile`(async) + `JS
 ### Parallel control flow
 We have seen how trivial doing a serial sequence of async tasks is with promises. It is simply a matter of chaining `then` calls.
 
-However you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for `n` number of promises to complete. You provide it with an array of `n` promises and it gives you an array of `n` resolved values. Below we show Chaining as well as Parallel:
+However, you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for `n` number of promises to complete. You provide it with an array of `n` promises and it gives you an array of `n` resolved values. Below we show Chaining as well as Parallel:
 
 ```ts
 // an async function to simulate loading an item from some server
@@ -501,7 +501,7 @@ Note that there is a handy dandy function in NodeJS that does this `node style f
 /** Sample usage */
 import fs = require('fs');
 import util = require('util');
-const readFile = util.promisify1(fs.readFile);
+const readFile = util.promisify(fs.readFile);
 ```
 
 [polyfill]:https://github.com/stefanpenner/es6-promise

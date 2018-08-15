@@ -1,6 +1,6 @@
 # TypeScript Type System
 We covered the main features of the TypeScript Type System back when we discussed [Why TypeScript?](../why-typescript.md). The following are a few key takeaways from that discussion which don't need further explanation:
-* The type system in typescript is designed to be *optional* so that *your javascript is typescript*.
+* The type system in TypeScript is designed to be *optional* so that *your JavaScript is TypeScript*.
 * TypeScript does not block *JavaScript emit* in the presence of Type Errors, allowing you to *progressively update your JS to TS*.
 
 Now let's start with the *syntax* of the TypeScript type system. This way you can start using these annotations in your code immediately and see the benefit. This will prepare you for a deeper dive later.
@@ -8,7 +8,7 @@ Now let's start with the *syntax* of the TypeScript type system. This way you ca
 ## Basic Annotations
 As mentioned before Types are annotated using `:TypeAnnotation` syntax. Anything that is available in the type declaration space can be used as a Type Annotation.
 
-The following example demonstrates type annotations can be used for variables, function parameters and function return values:
+The following example demonstrates type annotations for variables, function parameters and function return values:
 
 ```
 var num: number = 123;
@@ -105,7 +105,7 @@ name = {           // Error : `second` is the wrong type
 Inline types are great for quickly providing a one off type annotation for something. It saves you the hassle of coming up with (a potentially bad) type name. However, if you find yourself putting in the same type annotation inline multiple times it's a good idea to consider refactoring it into an interface (or a `type alias` covered later in this section).
 
 ## Special Types
-Beyond the primitive types that have been covered there are few types that have special meaning in TypeScript. These are `any`, `null`, `undefined`, `void`.
+Beyond the primitive types that have been covered there are a few types that have special meaning in TypeScript. These are `any`, `null`, `undefined`, `void`.
 
 ### any
 The `any` type holds a special place in the TypeScript type system. It gives you an escape hatch from the type system to tell the compiler to bugger off. `any` is compatible with *any and all* types in the type system. This means that *anything can be assigned to it* and *it can be assigned to anything*. This is demonstrated in the example below:
@@ -148,7 +148,7 @@ function log(message): void {
 ```
 
 ## Generics
-Many algorithms and data structures in computer science do not depend on the *actual type* of the object. However you still want to enforce a constraint between various variables. A simple toy example is a function that takes a list of items and returns a reversed list of items. The constraint here is between what is passed in to the function and what is returned by the function:
+Many algorithms and data structures in computer science do not depend on the *actual type* of the object. However, you still want to enforce a constraint between various variables. A simple toy example is a function that takes a list of items and returns a reversed list of items. The constraint here is between what is passed in to the function and what is returned by the function:
 
 ```ts
 function reverse<T>(items: T[]): T[] {
@@ -290,4 +290,4 @@ type Callback = (data: string) => void;
 > TIP: Use a type alias for simpler object structures (like `Coordinates`) just to give them a semantic name. Also when you want to give semantic names to Union or Intersection types, a Type alias is the way to go.
 
 ## Summary
-Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in the TypeScript's Type System.
+Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in TypeScript's Type System.

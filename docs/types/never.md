@@ -9,13 +9,13 @@ The `never` type is used in TypeScript to denote this *bottom* type. Cases when 
 * A function never returns (e.g. if the function body has `while(true){}`)
 * A function always throws (e.g. in `function foo(){throw new Error('Not Implemented')}` the return type of `foo` is `never`)
 
-Of course you can use this annotation your self as well
+Of course you can use this annotation yourself as well
 
 ```ts
 let foo: never; // Okay
 ```
 
-However `never` *can only ever be assigned to another never*. e.g.
+However, `never` *can only ever be assigned to another never*. e.g.
 
 ```ts
 let foo: never = 123; // Error: Type number is not assignable to never
@@ -28,7 +28,7 @@ Great. Now let's just jump into its key use case :)
 
 # Use case: Exhaustive Checks
 
-You can call never functions in a never context
+You can call never functions in a never context.
 
 ```ts
 function foo(x: string | number): boolean {
@@ -41,21 +41,21 @@ function foo(x: string | number): boolean {
   // Without a never type we would error :
   // - Not all code paths return a value (strict null checks)
   // - Or Unreachable code detected
-  // But because typescript understands that `fail` function returns `never`
+  // But because TypeScript understands that `fail` function returns `never`
   // It can allow you to call it as you might be using it for runtime safety / exhaustive checks.
-  fail("Unexhaustive!");
+  return fail("Unexhaustive!");
 }
 
-function fail(message: string) { throw new Error(message); }
+function fail(message: string): never { throw new Error(message); }
 ```
 
 And because `never` is only assignable to another `never` you can use it for *compile time* exhaustive checks as well. This is covered in the [*discriminated union* section](./discriminated-unions.md).
 
 # Confusion with `void`
 
-As soon as someone tells you that `never` is returned when a function never exits gracefully you intutively want to think of it as the same as `void` However `void` is a Unit. `never` is a falsum.
+As soon as someone tells you that `never` is returned when a function never exits gracefully you intuitively want to think of it as the same as `void` However, `void` is a Unit. `never` is a falsum.
 
-A function that *returns* nothing returns a Unit `void`. However a function *that never returns* (or always throws) returns `never`. `void` is something that can be assigned (without `strictNullChecking`) but `never` can `never` be assigned to anything other than `never`.
+A function that *returns* nothing returns a Unit `void`. However, a function *that never returns* (or always throws) returns `never`. `void` is something that can be assigned (without `strictNullChecking`) but `never` can `never` be assigned to anything other than `never`.
 
 <!--
 PR: https://github.com/Microsoft/TypeScript/pull/8652
