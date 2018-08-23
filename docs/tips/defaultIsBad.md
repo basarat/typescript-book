@@ -27,17 +27,36 @@ export class Foo {
 And then:
 
 ```ts
-import {Foo} from "./foo";
+import { Foo } from "./foo";
 ```
 
-> **Bonus points**: Discoverability is very poor for default exports. You cannot explore a module with intellisense to see if it has a default export or not.
+Below I also present a few more reasons.
 
-> **Bonus points**: You even get autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+### Poor Discoverability
+Discoverability is very poor for default exports. You cannot explore a module with intellisense to see if it has a default export or not.
 
-> **Bonus points**: Better commonJS experience. With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
+With export default you get nothing here (maybe it does export default / maybe it doesn't `¯\_(ツ)_/¯`):
+```
+import /* here */ from 'something';
+```
 
-> **Bonus points**: You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
+Without export default you get a nice intellisense here: 
 
-> **Bonus points**: Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module.
+```
+import { /* here */ } from 'something';
+```
 
-> **Bonus points**: Re-exporting is unnecessarily hard. Re-exporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
+### Autocomplete 
+Irrespective of if you know about the exports, you evenautocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+
+### CommonJS interop
+With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`. You will most likely want to rename the `default` export to something else when you import it.
+
+### Typo Protection
+You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
+
+### TypeScript auto-import
+Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module. Some tools out there will try to magic read and *infer* a name for a default export but magic is flaky.
+
+### Re-exporting
+Re-exporting is unnecessarily hard. Re-exporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
