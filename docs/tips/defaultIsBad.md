@@ -60,3 +60,11 @@ Auto import quickfix works better. You use `Foo` and auto import will write down
 
 ### Re-exporting
 Re-exporting is unnecessarily hard. Re-exporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
+
+### Dynamic Imports
+Default exports expose themselves badly named as `default` in dynamic `import`s e.g. 
+
+```
+const HighChart = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+Highcharts.default.chart('container', { ... }); // Notice `.default`
+```
