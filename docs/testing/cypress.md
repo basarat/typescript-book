@@ -174,7 +174,9 @@ Whenever a cypress command fails you get a nice error (instead of something like
 cy.get('#foo') 
 // If there is no element with id #foo cypress will wait for 4 seconds automatically 
 // If still not found you get an error here ^ 
-// \/ This will not trigger till an element #foo is found
+
+
+// This \/ will not trigger till an element #foo is found
   .should('have.text', 'something') 
 ```
 
@@ -211,6 +213,19 @@ cy.get(/**something else*/)
 Some other libraries *evaluate and run* the code at the same time. Those libraries force you to have a single chain which can be nightmare to debug with selectors and assertions minggled in. 
 
 Cypress commands are essentially *declarations* to the cypress runtime to execute the commands later. Simple words: Cypress makes it easier. 
+
+## Tip: Using `contains` for easier querying
+
+The following shows an example:
+
+```
+cy.get('#foo') 
+  // Once #foo is found the following:
+  .contains('Submit') 
+  // ^ will continue to search for something that has text `Submit` and fail if it times out.
+  .click()
+  // ^ will trigger a click on the HTML Node that contained the text `Submit`.
+```
 
 ## Tip: Waiting for an HTTP request
 A lot of tests have been traditionally brittle due to all the arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
