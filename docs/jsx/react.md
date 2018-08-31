@@ -175,7 +175,7 @@ class Use {
 And the same with ref's for native elements e.g. 
 
 ```ts
-class SelfFocusingInput extends React.Component<{ value: string, onChange: (value: string) => any }, {}>{
+class FocusingInput extends React.Component<{ value: string, onChange: (value: string) => any }, {}>{
   input: HTMLInputElement | null = null;
     
   render() {
@@ -187,8 +187,8 @@ class SelfFocusingInput extends React.Component<{ value: string, onChange: (valu
         />
       );
     }
-    componentDidMount() {
-        this.input.focus();
+    focus() {
+      if (this.input != null) { this.input.focus() }
     }
 }
 ```
