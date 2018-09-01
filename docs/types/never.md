@@ -8,6 +8,8 @@ The `never` type is used in TypeScript to denote this *bottom* type. Cases when 
 
 * A function never returns (e.g. if the function body has `while(true){}`)
 * A function always throws (e.g. in `function foo(){throw new Error('Not Implemented')}` the return type of `foo` is `never`)
+* A particular piece of code will never execute (e.g. previous flow control statements ensure it never gets there)
+
 
 Of course you can use this annotation yourself as well
 
@@ -28,25 +30,35 @@ Great. Now let's just jump into its key use case :)
 
 # Use case: Exhaustive Checks
 
-You can call never functions in a never context.
 
 ```ts
 function foo(x: string | number): boolean {
   if (typeof x === "string") {
+    // We will only ever up in this block if x is of type string, so the
+    // compiler knows x will definitely be a string here. If you try calling
+    // number methods on x here, the compiler will throw an error.
     return true;
   } else if (typeof x === "number") {
+    // Similar to above, this code block only gets executed if x is a number. We
+    // also know that x cannot be a string because of the previous if check.
     return false;
   }
 
-  // Without a never type we would error :
-  // - Not all code paths return a value (strict null checks)
-  // - Or Unreachable code detected
-  // But because TypeScript understands that `fail` function returns `never`
-  // It can allow you to call it as you might be using it for runtime safety / exhaustive checks.
-  return fail("Unexhaustive!");
+  // What is the type of x here? We can only ever end up executing code past
+  // this line if x isn't a string and isn't a number. But the type of x says it
+  // can only be number or a string. So this code doesn't seem it will ever
+  // run but if asked what is the type of x here typescript has to give us
+  // something. So it gives us the bottom type aka never.
+
+  // Thus calling the fail function here type-checks because the fail function
+  // wants to take an x of type never. However, if we forget to handle the case
+  // of x being string, for example, Typescript will see that we are calling a
+  // function that wants an argument of type never with an argument of type
+  // string and that is a type error.
+  return fail(x, "Unexhaustive!");
 }
 
-function fail(message: string): never { throw new Error(message); }
+function fail(val: never, message: string): never { throw new Error(message); }
 ```
 
 And because `never` is only assignable to another `never` you can use it for *compile time* exhaustive checks as well. This is covered in the [*discriminated union* section](./discriminated-unions.md).
