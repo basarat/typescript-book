@@ -150,6 +150,49 @@ const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
 const foo = <T extends {}>(x: T) => x;
 ```
 
+### React Tip: Strongly Typed Refs 
+You basically initialize a variable as a union of the ref and `null` and then initiazlie it as as callback  e.g. 
+
+```ts
+class Example extends React.Component {
+  example() {
+    // ... something
+  }
+  
+  render() { return <div>Foo</div> }
+}
+
+
+class Use {
+  exampleRef: Example | null = null; 
+  
+  render() {
+    return <Example ref={exampleRef => this.exampleRef = exampleRef } />
+  }
+}
+```
+
+And the same with ref's for native elements e.g. 
+
+```ts
+class FocusingInput extends React.Component<{ value: string, onChange: (value: string) => any }, {}>{
+  input: HTMLInputElement | null = null;
+    
+  render() {
+    return (
+      <input
+        ref={(input) => this.input = input}
+        value={this.props.value}
+        onChange={(e) => { this.props.onChange(this.ctrls.input.value) } }
+        />
+      );
+    }
+    focus() {
+      if (this.input != null) { this.input.focus() }
+    }
+}
+```
+
 ### Type Assertions
 
 Use `as Foo` syntax for type assertions as we [mentioned before](./type-assertion.md#as-foo-vs-foo).
