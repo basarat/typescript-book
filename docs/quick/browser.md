@@ -35,6 +35,8 @@ cd your-project
   "compilerOptions": {
     "sourceMap": true,
     "module": "commonjs",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "target": "es5",
     "jsx": "react",
     "lib": [
