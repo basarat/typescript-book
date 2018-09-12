@@ -8,7 +8,7 @@ TypeScript has had *first class* support for Node.js since inception. Here's how
 1. Add `node.d.ts` (`npm install @types/node --save-dev`)
 1. Init a `tsconfig.json` for TypeScript options with a few key options in your tsconfig.json (`npx tsc --init --esModuleInterop --resolveJsonModule --lib es6,dom  --module commonjs`)
 
-That's it! Fire up your IDE (e.g. `alm -o`) and play around. Now you can use all the built in node modules (e.g. `import fs = require('fs');`) with all the safety and developer ergonomics of TypeScript!
+That's it! Fire up your IDE (e.g. `code .`) and play around. Now you can use all the built in node modules (e.g. `import * as fs from 'fs';`) with all the safety and developer ergonomics of TypeScript!
 
 ## Bonus: Live compile + run
 * Add `ts-node` which we will use for live compile + run in node (`npm install ts-node --save-dev`)
@@ -19,7 +19,7 @@ Now just add a `script` target to your `package.json` based on your application 
 ```json
   "scripts": {
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
   },
 ```
 
