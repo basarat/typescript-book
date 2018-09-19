@@ -54,7 +54,7 @@ Explanation:
 
 ## Step 3: Run tests
 
-Run `npx jest` from your project root and jest will execute any tests you have.
+Run `npm jest` from your project root and jest will execute any tests you have.
 
 ### Optional: Add script target for npm scripts
 
@@ -71,7 +71,7 @@ Add `package.json`:
 
 ### Optional: Run jest in watch mode
 
-* `npx jest --watch`
+* `npm jest --watch`
 
 ### Example
 
