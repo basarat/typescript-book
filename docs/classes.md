@@ -48,7 +48,7 @@ class Point3D extends Point {
         this.z = z;
     }
     add(point: Point3D) {
-        var point2D = super.add(point);
+        point2D: Point = super.add(point);
         return new Point3D(point2D.x, point2D.y, this.z + point.z);
     }
 }
