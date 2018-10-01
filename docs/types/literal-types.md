@@ -20,7 +20,7 @@ They are not very useful on their own but can be combined in a type union to cre
 
 ```ts
 type CardinalDirection =
-    "North"
+    | "North"
     | "East"
     | "South"
     | "West";
