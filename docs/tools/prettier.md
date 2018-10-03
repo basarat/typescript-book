@@ -1,6 +1,6 @@
 # Prettier 
 
-Prettier is a great tool by facebook that makes code formatting so much easier that it's worth mentioning. Setting up with TypeScript using our recommended project sets is super easy: 
+Prettier is a great tool by facebook that makes code formatting so much easier that it's worth mentioning. Setting up with TypeScript using our recommended project setup (aka everything in `src` folder) is super easy: 
 
 ## Setup 
 
