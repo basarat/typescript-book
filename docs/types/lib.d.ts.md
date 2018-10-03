@@ -38,7 +38,7 @@ So now that you understand the importance of `lib.d.ts`, what do its contents lo
 
 The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`.
 
-The simplest way to discover what is what is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (atom-typescript has great support for this).
+The simplest way to discover what is declared is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (atom-typescript has great support for this).
 
 Let's look at a sample *variable* declaration, e.g. `window` is defined as:
 ```ts
