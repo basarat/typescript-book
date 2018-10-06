@@ -53,7 +53,7 @@ And because `never` is only assignable to another `never` you can use it for *co
 
 # Confusion with `void`
 
-As soon as someone tells you that `never` is returned when a function never exits gracefully you intuitively want to think of it as the same as `void` However, `void` is a Unit. `never` is a falsum.
+As soon as someone tells you that `never` is returned when a function never exits gracefully you intuitively want to think of it as the same as `void`. However, `void` is a Unit. `never` is a falsum.
 
 A function that *returns* nothing returns a Unit `void`. However, a function *that never returns* (or always throws) returns `never`. `void` is something that can be assigned (without `strictNullChecking`) but `never` can `never` be assigned to anything other than `never`.
 
