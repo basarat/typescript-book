@@ -114,14 +114,16 @@ enum AnimalFlags {
 Here we are using the left shift operator to move `1` around a certain level of bits to come up with bitwise disjoint numbers `0001`, `0010`, `0100` and `1000` (these are decimals `1`,`2`,`4`,`8` if you are curious). The bitwise operators `|` (or) / `&` (and) / `~` (not) are your best friends when working with flags and are demonstrated below:
 
 ```ts
-
 enum AnimalFlags {
     None           = 0,
     HasClaws       = 1 << 0,
     CanFly         = 1 << 1,
 }
+type Animal = {
+    flags: AnimalFlags
+}
 
-function printAnimalAbilities(animal) {
+function printAnimalAbilities(animal: Animal) {
     var animalFlags = animal.flags;
     if (animalFlags & AnimalFlags.HasClaws) {
         console.log('animal has claws');
@@ -134,7 +136,7 @@ function printAnimalAbilities(animal) {
     }
 }
 
-var animal = { flags: AnimalFlags.None };
+let animal: Animal = { flags: AnimalFlags.None };
 printAnimalAbilities(animal); // nothing
 animal.flags |= AnimalFlags.HasClaws;
 printAnimalAbilities(animal); // animal has claws
