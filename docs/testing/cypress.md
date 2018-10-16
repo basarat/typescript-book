@@ -322,7 +322,7 @@ import * as takeme from 'takeme';
 
 describe('should work', () => {
   it('should stub it', () => {
-    cy.stub(takeme);
+    cy.stub(takeme, 'navigate');
     foo();
     expect(takeme.navigate).to.have.been.calledWith('/foo');
   })
