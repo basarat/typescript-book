@@ -72,7 +72,7 @@ function htmlEscape(literals: TemplateStringsArray, ...placeholders: string[]) {
     return result;
 }
 ```
-> Note: You can annotate `placeholders` to be any `[]`. Whetever you annotate it as, TypeScript will type check to make sure the placeholders used to call the tag match the annotation. For example if you expect to deal with `string` or `number`s you can annotate `...placeholders:(string | number)[]`
+> Note: You can annotate `placeholders` to be any `[]`. Whatever you annotate it as, TypeScript will type check to make sure the placeholders used to call the tag match the annotation. For example if you expect to deal with `string` or `number`s you can annotate `...placeholders:(string | number)[]`
 
 #### Generated JS
 For pre ES6 compile targets the code is fairly simple. Multiline strings become escaped strings. String interpolation becomes *string concatenation*. Tagged Templates become function calls.
