@@ -5,14 +5,16 @@
 `npm` is a binary that comes with default `node` installations used to manage community shared JavaScript / TypeScript packages.
 
 
-* NPM packages are hosted at (and installed from) https://www.npmjs.com/
+* NPM packages are hosted at (and installed from) https://www.npmjs.com/ (the ☁️).
 
 ## Quick common setup
 
 * npm packages are configured using `package.json` file. You can generate a quick file using `npm init -y`.
 * packages get installed into a `./node_modules` folder. You normally have this folder in your `.gitignore`.
 
-Even though you might be building an application, having a `package.json` essentially makes your project a package as well. So the terms your `project | package` can be used interchangably.
+> Even though you might be building an application, having a `package.json` essentially makes your project a package as well. So the terms your `project | package` can be used interchangably.
+
+When you checkout someone's (your team's) package, it will have a `package.json` that will list the dependencies you need to run the project. You simply run `npm install` and npm will bring them down from the cloud ☁️.
  
 ## Installing a package
 You can run `npm install <something>`. Most people will use the shorthand `npm i <something>` e.g. 
@@ -52,6 +54,8 @@ You can run an audit on your node project by simply running `npm audit`. This wi
 ```
 
 Note that commonly the issues are found in *development* dependencies (e.g. jest in this case). Since these aren't are a part of your production deployments, most likely your production application is not vulnerable. But still good practice to keep vulnerabilities to `0`.
+
+Simply add `npm audit` as a part of your deployment to ensure the projects stay up to date.
 
 ## Public vs. Private packages
 You don't need this when *using* any of the common public npm packages. Just know its there for enterprise / commercial customers.
