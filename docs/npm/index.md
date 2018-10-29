@@ -55,7 +55,7 @@ You can run an audit on your node project by simply running `npm audit`. This wi
 
 Note that commonly the issues are found in *development* dependencies (e.g. jest in this case). Since these aren't are a part of your production deployments, most likely your production application is not vulnerable. But still good practice to keep vulnerabilities to `0`.
 
-Simply add `npm audit` as a part of your deployment to ensure the projects stay up to date.
+Simply add `npm audit` (the command exist with error code `1` in case of error) as a part of your deployment to ensure the projects stay up to date.
 
 ## Public vs. Private packages
 You don't need this when *using* any of the common public npm packages. Just know its there for enterprise / commercial customers.
