@@ -30,7 +30,7 @@ Quite commonly it helps to be explicit that the intent is to treat the value as 
 
 It is common to use this pattern in lots of places e.g.
 
-```ts
+```js
 // Direct variables
 const hasName = !!name;
 
@@ -39,6 +39,6 @@ const someObj = {
   hasName: !!name
 }
 
-// e.g. ReactJS
+// e.g. in ReactJS JSX
 {!!someName && <div>{someName}</div>}
 ```
