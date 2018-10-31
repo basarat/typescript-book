@@ -40,6 +40,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [Filipino](https://github.com/themarshann/typescript-book-fil)
 * [Italian](https://github.com/TizioFittizio/typescript-book)
 * [Chinese](https://github.com/jkchao/typescript-book-chinese)
+* [Russian](https://github.com/etroynov/typescript-book)
 
 ## Other Options
 You can also download one of the following:
