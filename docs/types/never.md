@@ -15,7 +15,7 @@ Of course you can use this annotation yourself as well
 let foo: never; // Okay
 ```
 
-However, `never` *can only ever be assigned to another never*. e.g.
+However, *only `never` can be assigned to another never*. e.g.
 
 ```ts
 let foo: never = 123; // Error: Type number is not assignable to never
