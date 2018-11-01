@@ -57,6 +57,40 @@ Note that commonly the issues are found in *development* dependencies (e.g. jest
 
 Simply add `npm audit` (the command exist with error code `1` in case of error) as a part of your deployment to ensure the projects stay up to date.
 
+## NPM Scripts 
+
+### What is with `--` in scripts 
+You can build a base script with a limited set of command line arguments e.g. here is a script target that runs `tsc` for the TypeScript compiler: 
+
+```json
+{
+  "scripts": {
+    "build": "tsc -p ."
+  }
+}
+```
+
+You can create a `build:watch` target to run `tsc -p . -w` or alternatively asking npm to run `build` with the additional `-w` flag like so: 
+
+```json
+{
+  "scripts": {
+    "build": "tsc -p .",
+    "build:watch": "npm run build -- -w"
+  }
+}
+```
+You can pass in as many flags as you want after `--` e.g. in the following example `build:more` has the same effect as `something --foo -f -d --bar`
+
+```json
+{
+  "scripts": {
+    "build": "something --foo",
+    "build:more": "npm run build -- -f -d --bar"
+  }
+}
+```
+
 ## Public vs. Private packages
 You don't need this when *using* any of the common public npm packages. Just know its there for enterprise / commercial customers.
 
