@@ -1,7 +1,7 @@
 Глубокое погружение в TypeScript
 =======
 
-Просматирвая проблемы которые часто возникают у людей при использовании TypeScript, у меня возникла идея этой книги. Материалом для книги послужил [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) и огромный опыт [сообщества TypeScript](https://github.com/TypeStrong/). Вы можете [отслеживать обновления](https://twitter.com/basarat) и [не забудьте поставить ★ на GitHub](https://github.com/basarat/typescript-book) 🌹
+Помогая в решении проблем которые часто возникают у людей при использовании TypeScript, у меня возникла идея этой книги. Материалом для книги послужил [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) и огромный опыт [сообщества TypeScript](https://github.com/TypeStrong/). Вы можете [отслеживать обновления](https://twitter.com/basarat) и [не забудьте поставить ★ на GitHub](https://github.com/basarat/typescript-book) 🌹
 
 ## Отзывы
 
@@ -41,7 +41,7 @@
 * [Итальянский](https://github.com/TizioFittizio/typescript-book)
 * [Китайский](https://github.com/jkchao/typescript-book-chinese)
 
-## Другие возможности
+## Электронная версия
 Вы так же можете скачать книгу по следующим ссылкам:
 * [EPUB для iPad, iPhone, Mac](https://www.gitbook.com/download/epub/book/basarat/typescript)
 * [PDF для Windows и других](https://www.gitbook.com/download/pdf/book/basarat/typescript)
