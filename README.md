@@ -33,7 +33,7 @@
 * Это мило! так много #typescript фишек! [ссылка](https://twitter.com/pauliescanlon/status/989898852474998784)
 
 ## С чего начать?
-Если вы здесь для того что бы прочесть эту книгу, вам следует прейти по ссылке [с чего начать](http://basarat.gitbooks.io/typescript/content/docs/getting-started.html).
+Если вы здесь для того что бы прочесть эту книгу, вам следует прейти по [ссылке](https://github.com/etroynov/typescript-book/blob/master/SUMMARY.md).
 
 ## Перевод
 Книга полностью бесплатная, таким образом вы можете копировать из нее все что вам нужно не запрашивая разрешения на это. Если у вас есть перевод и вы хотели бы разместить здесь ссылку. [отправте мне PR](https://github.com/basarat/typescript-book/edit/master/README.md).
