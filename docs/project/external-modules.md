@@ -100,7 +100,7 @@ export { someVar as aDifferentName } from './foo';
 ```
 
 ### Default exports/imports
-As you will learn later, I am not a fan of default exports. Neverthless here is syntax for export and using default exports
+As you will learn later, I am not a fan of default exports. Nevertheless here is syntax for export and using default exports
 
 * Export using `export default`
   * before a variable (no `let / const / var` needed)
