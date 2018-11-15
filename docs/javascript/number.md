@@ -82,7 +82,7 @@ When some number calculation is not representable by a valid number, JavaScript 
 console.log(Math.sqrt(-1)); // NaN
 ```
 
-Note: Equality checks **don't** work on `NaN` values. Instead use `Number.isNaN` instead:
+Note: Equality checks **don't** work on `NaN` values. Use `Number.isNaN` instead:
 
 ```js
 // Don't do this

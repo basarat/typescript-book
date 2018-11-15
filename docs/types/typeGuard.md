@@ -168,3 +168,37 @@ function doStuff(arg: Foo | Bar) {
 doStuff({ foo: 123, common: '123' });
 doStuff({ bar: 123, common: '123' });
 ```
+
+### Type Guards and callbacks
+
+TypeScript doesn't assume type guards remain active in callbacks as making this assumption is dangerous. e.g. 
+
+```js
+// Example Setup
+declare var foo:{bar?: {baz: string}};
+function immediate(callback: ()=>void) {
+  callback();
+}
+
+
+// Type Guard
+if (foo.bar) {
+  console.log(foo.bar.baz); // Okay
+  functionDoingSomeStuff(() => {
+    console.log(foo.bar.baz); // TS error: Object is possibly 'undefined'"
+  });
+}
+```
+
+The fix is as easy as storing the inferred safe value in a local variable, automatically ensuring it doesn't get changed externally, and TypeScript can easily understand that: 
+
+```js
+// Type Guard
+if (foo.bar) {
+  console.log(foo.bar.baz); // Okay
+  const bar = foo.bar;
+  functionDoingSomeStuff(() => {
+    console.log(bar.baz); // Okay
+  });
+}
+```
