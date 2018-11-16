@@ -31,6 +31,7 @@ module.exports = {
     "<rootDir>/src"
   ],
   "transform": {
+  	"^.+\\.jsx?$': 'babel-jest",
     "^.+\\.tsx?$": "ts-jest"
   },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
@@ -48,7 +49,7 @@ module.exports = {
 Explanation:
 
 * We always recommend having *all* TypeScript files in a `src` folder in your project. We assume this is true and specify this using the `roots` option.
-* The `transform` config just tells `jest` to use `ts-jest` for ts / tsx files.
+* The `transform` config just tells `jest` to use `ts-jest` for ts / tsx files and permits es6.
 * The `testRegex` tells Jest to look for tests in any `__tests__` folder AND also any files anywhere that use the `(.test|.spec).(ts|tsx)` extension e.g. `asdf.test.tsx` etc.
 * The `moduleFileExtensions` tells jest to recognize our file extensions. This is needed as we add `ts`/`tsx` into the defaults (`js|jsx|json|node`).
 
