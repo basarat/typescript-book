@@ -9,7 +9,7 @@
   * [this](docs/javascript/this.md)
   * [Closure](docs/javascript/closure.md)
   * [Number](docs/javascript/number.md)
-  * [Truthy](docs/tips/truthy.md)
+  * [Truthy](docs/javascript/truthy.md)
 * [Future JavaScript Now](docs/future-javascript.md)
   * [Classes](docs/classes.md)
     * [Classes Emit](docs/classes-emit.md)
