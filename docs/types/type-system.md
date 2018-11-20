@@ -10,7 +10,7 @@ As mentioned before Types are annotated using `:TypeAnnotation` syntax. Anything
 
 The following example demonstrates type annotations for variables, function parameters and function return values:
 
-```
+```ts
 var num: number = 123;
 function identity(num: number): number {
     return num;
