@@ -4,14 +4,14 @@ Just use a chain of fat arrow functions:
 
 ```ts
 // A curried function
-let add = (x: number) => (y: number) => x + y;
+let divide = (x: number) => (y: number) => y / x;
 
 // Simple usage
-add(123)(456);
+divide(2)(6); //returns 3
 
 // partially applied
-let add123 = add(123);
+let divideBy2 = divide(2);
 
 // fully apply the function
-add123(456);
+divideBy2(6);  //returns 3
 ```
