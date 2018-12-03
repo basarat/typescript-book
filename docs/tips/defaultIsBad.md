@@ -74,12 +74,15 @@ Highcharts.default.chart('container', { ... }); // Notice `.default`
 Can be one statement for function / class e.g. 
 
 ```ts
-export default function() {
+export default function foo() {
 }
 ```
 
 But needs two statements otherwise:
 ```ts
-const foo = 123;
+const foo = {
+  notAFunction: 'Yeah, I am not a function or a class',
+  soWhat: 'The export is now *removed* from the declaration'
+};
 export default foo;
 ```
