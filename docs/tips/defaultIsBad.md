@@ -68,3 +68,18 @@ Default exports expose themselves badly named as `default` in dynamic `import`s 
 const HighChart = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
 Highcharts.default.chart('container', { ... }); // Notice `.default`
 ```
+
+### Needs two lines for non-class / non-function
+
+Can be one statement for function / class e.g. 
+
+```ts
+export default function() {
+}
+```
+
+But needs two statements otherwise:
+```ts
+const foo = 123;
+export default foo;
+```
