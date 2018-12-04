@@ -42,6 +42,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [Chinese](https://github.com/jkchao/typescript-book-chinese)
 * [Russian](https://github.com/etroynov/typescript-book)
 * [Portuguese](https://github.com/overlineink/typescript-book)
+* [Japanese](https://github.com/yohamta/typescript-book)
 
 ## Other Options
 You can also download one of the following:
