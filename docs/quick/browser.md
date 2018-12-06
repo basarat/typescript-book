@@ -37,6 +37,7 @@ cd your-project
     "module": "commonjs",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "target": "es5",
     "jsx": "react",
     "lib": [
