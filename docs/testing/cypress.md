@@ -337,6 +337,22 @@ First make sure you have chrome developer tools (lovingly called dev tools) open
 * Application code breakpoints: Use a `debugger` statement in your application code and the test runner will stop on that just like standard web developement. 
 * Test code breakpoints: You can use the `.debug()` command and cypress test execution will stop at it. Alternatively you can use a `debugger` statement in a `.then` command callback to cause a pause. e.g `.then(() => { debugger })`. You can even use it to grab some element `cy.get('#foo').then(($ /* a reference to the dom element */) => { debugger; })` or a network call e.g. `cy.request('https://someurl').then((res /* network response */) => { debugger });`. However idiomatic way is `cy.get('#foo').debug()` and then when the test runner is paused on `debug` you can click on the `get` in the command log to automatically `console.log` any information you might need about the `.get('#foo')` command (and similarly for any other commands you want to debug).
 
+## Tip: Start server and test 
+If you need to start a local server before your tests can run you can add `start-server-and-test` https://github.com/bahmutov/start-server-and-test as a dependency. It takes the following arguments
+* an npm script to *run* the server (aka server) 
+* an endpoint to check if the server has booted up (aka start)
+* an npm script to initiate the testing (aka test)
+
+Example package.json: 
+```json
+{
+    "scripts": {
+        "start-server": "npm start",
+        "run-tests": "mocha e2e-spec.js",
+        "ci": "start-server-and-test start-server http://localhost:8080 run-tests"
+    }
+}
+```
 
 ## Resources 
 * Website: https://www.cypress.io/
