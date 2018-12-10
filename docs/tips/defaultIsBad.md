@@ -78,9 +78,19 @@ export default function foo() {
 }
 ```
 
+Can be one statement for *non named / type annotated* objects e.g.: 
+
+```ts
+export default {
+  notAFunction: 'Yeah, I am not a function or a class',
+  soWhat: 'The export is now *removed* from the declaration'
+};
+```
+
 But needs two statements otherwise:
 ```ts
-const foo = {
+// If you need to name it (here `foo`) for local use OR need to annotate type (here `Foo`)
+const foo: Foo = {
   notAFunction: 'Yeah, I am not a function or a class',
   soWhat: 'The export is now *removed* from the declaration'
 };
