@@ -102,6 +102,28 @@ function toInt(str: string): { valid: boolean, int?: number } {
 }
 ```
 
+### JSON and serialization
+
+The JSON standard has support for encoding `null` but not `undefined`.
+
+```ts
+JSON.stringify(null); // "null" (a string representing null)
+typeof( JSON.stringify(null) ); // "string"
+JSON.parse( JSON.stringify(null) ); // null
+
+JSON.stringify(undefined); // undefined (JSON.stringify didn't return a string!)
+typeof( JSON.stringify(undefined) ); // "undefined"
+JSON.parse( JSON.stringify( undefined ) ); // SyntaxError
+```
+
+As a result, JSON-based databases may support `null` values but not `undefined` values.
+When JSON-encoding an object with an attribute that is null, the attribute will be included with its null value, whereas an attribute with an undefined value will be excluded entirely.
+
+```ts
+JSON.stringify({n: null, u: undefined}); // "{"n":null}"
+```
+
+Setting attribute values to undefined can save of storage and transmission costs, as the attribute names will not be encoded. However, this can complicate the semantics of clearing values, as you cannot communicate the intent to clear an attribute by settings its value to undefined before encoding it. Since attributes set to `null` are encoded, you can transmit the intent to clear an attribute by settings its value to `null` before encoding and transmitting the object to a remote store (though often at the cost of causing the attribute name to be stored).
 
 ### Final thoughts
 TypeScript team doesn't use `null` : [TypeScript coding guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined) and it hasn't caused any problems. Douglas Crockford thinks [`null` is a bad idea](https://www.youtube.com/watch?v=PSGEjv3Tqo0&feature=youtu.be&t=9m21s) and we should all just use `undefined`.
