@@ -77,5 +77,4 @@ foo.bas = "Hello World";
 
 // later in the codebase:
 foo.bar = 'Hello Stranger'; // Error: You probably misspelled `bas` as `bar`, cannot assign string to number
-}
 ```
