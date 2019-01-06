@@ -216,7 +216,7 @@ Quite commonly in the JS community you will see APIs that abuse string indexers.
 
 ```ts
 interface NestedCSS {
-  color?: string;
+  color: string;
   [selector: string]: string | NestedCSS;
 }
 
@@ -240,7 +240,7 @@ Instead separate out the nesting into its own property e.g. in a name like `nest
 
 ```ts
 interface NestedCSS {
-  color?: string;
+  color: string;
   nest?: {
     [selector: string]: NestedCSS;
   }
