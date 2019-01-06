@@ -240,7 +240,7 @@ Instead separate out the nesting into its own property e.g. in a name like `nest
 
 ```ts
 interface NestedCSS {
-  color: string;
+  color?: string;
   nest?: {
     [selector: string]: NestedCSS;
   }
