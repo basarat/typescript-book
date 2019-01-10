@@ -58,9 +58,6 @@ You don't get typos like one dev doing `import Foo from "./foo";` and another do
 ### TypeScript auto-import
 Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module. Some tools out there will try to magic read and *infer* a name for a default export but magic is flaky.
 
-### Re-exporting
-Re-exporting is unnecessarily hard. Re-exporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
-
 ### Dynamic Imports
 Default exports expose themselves badly named as `default` in dynamic `import`s e.g. 
 
