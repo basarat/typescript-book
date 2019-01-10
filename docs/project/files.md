@@ -15,11 +15,11 @@ Use `include` and `exclude` to specify files / folders / globs. E.g.:
 }
 ```
 
-# Globs
+### Globs
 
 * For globs : `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be assumed and if `allowJs:true` so will `.js`/`.jsx`)
 
-# `files` option
+### `files` option
 You can either use `files` to be explicit. 
 
 ```json
