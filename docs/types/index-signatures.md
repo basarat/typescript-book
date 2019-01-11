@@ -217,7 +217,7 @@ Quite commonly in the JS community you will see APIs that abuse string indexers.
 ```ts
 interface NestedCSS {
   color?: string;
-  [selector: string]: string | NestedCSS;
+  [selector: string]: string | NestedCSS | undefined;
 }
 
 const example: NestedCSS = {
