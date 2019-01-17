@@ -83,7 +83,6 @@
   * [String Based Enums](docs/tips/stringEnums.md)
   * [Nominal Typing](docs/tips/nominalTyping.md)
   * [Stateful Functions](docs/tips/statefulFunctions.md)
-  * [Bind is Bad](docs/tips/bind.md)
   * [Currying](docs/tips/currying.md)
   * [Type Instantiation](docs/tips/typeInstantiation.md)
   * [Lazy Object Literal Initialization](docs/tips/lazyObjectLiteralInitialization.md)
