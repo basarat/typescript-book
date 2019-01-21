@@ -86,7 +86,7 @@ class MyComponent extends React.Component<Props, {}> {
     }
 }
 
-<MyComponent foo="bar" />
+<MyComponent header={<h1>Header</h1>} body={<i>body</i>} />
 ```
 
 ### React JSX Tip: Accept an instance of a Component
@@ -183,7 +183,7 @@ class FocusingInput extends React.Component<{ value: string, onChange: (value: s
       <input
         ref={(input) => this.input = input}
         value={this.props.value}
-        onChange={(e) => { this.props.onChange(this.ctrls.input.value) } }
+        onChange={(e) => { this.props.onChange(this.input.value) } }
         />
       );
     }
