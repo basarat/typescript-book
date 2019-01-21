@@ -183,7 +183,7 @@ class FocusingInput extends React.Component<{ value: string, onChange: (value: s
       <input
         ref={(input) => this.input = input}
         value={this.props.value}
-        onChange={(e) => { this.props.onChange(this.input.value) } }
+        onChange={(e) => { this.props.onChange(e.target.value) } }
         />
       );
     }
