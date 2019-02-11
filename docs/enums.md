@@ -3,7 +3,7 @@
 * [Number Enums and strings](#number-enums-and-strings)
 * [Changing the number associated with a number enum](#changing-the-number-associated-with-a-number-enum)
 * [Enums are open ended](#enums-are-open-ended)
-* [Number Enums as flags](#number enums-as-flags)
+* [Number Enums as flags](#number-enums-as-flags)
 * [String Enums](#string-enums)
 * [Const enums](#const-enums)
 * [Enum with static functions](#enum-with-static-functions)
