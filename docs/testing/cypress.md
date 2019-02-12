@@ -222,9 +222,38 @@ The following shows an example:
 cy.get('#foo') 
   // Once #foo is found the following:
   .contains('Submit') 
-  // ^ will continue to search for something that has text `Submit` and fail if it times out.
   .click()
-  // ^ will trigger a click on the HTML Node that contained the text `Submit`.
+  // ^ will continue to search for something that has text `Submit` and fail if it times out.
+  // ^ After it is found trigger a click on the HTML Node that contained the text `Submit`.
+```
+## Tip: Implicit assertion
+Cypress has a concept of implicit assertion. These only kick in if a future command is erroring because of a previous command. E.g. The following will not error if there is no text with `Submit`: 
+
+```ts
+cy.get('#foo') 
+  // Once #foo is found the following:
+  .contains('Submit') 
+```
+However the following will error at `contains` (after automatic retries of course) as nothing found can get `click`ed: 
+
+```ts
+cy.get('#foo') 
+  // Once #foo is found the following:
+  .contains('Submit') 
+  .click()
+  // ^ Error: #foo does not have anything that `contains` `'Submit'`
+```
+
+If you want to assert *use an explicit assertion* and don't rely on implicit assertions. e.g. instead of `contains` you would `cy.should('contain','Submit')` e.g. 
+
+```ts
+// Bad. No error.
+cy.get('#foo') 
+  .contains('Submit') 
+
+// Good. Error: `#foo` does not contain `Submit`
+cy.get('#foo') 
+  .should('contain', 'Submit')
 ```
 
 ## Tip: Waiting for an HTTP request
