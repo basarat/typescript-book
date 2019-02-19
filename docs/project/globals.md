@@ -7,4 +7,4 @@ Nevertheless, if you have beginning TypeScript developers you can give them a `g
 > For any code that is going to generate *JavaScript* we highly recommend using *file modules*.
 
 * `globals.d.ts` is great for adding extensions to `lib.d.ts` if you need to.
-* It's good for quick `declare module "some-library-you-dont-care-to-get-defs-for";` when doing TS to JS migrations.
+* It's good for quick `declare module "some-library-you-dont-care-to-get-defs-for";` when doing JS to TS migrations.
