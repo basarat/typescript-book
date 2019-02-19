@@ -151,7 +151,7 @@ const foo = <T extends {}>(x: T) => x;
 ```
 
 ### React Tip: Strongly Typed Refs 
-You basically initialize a variable as a union of the ref and `null` and then initiazlie it as as callback  e.g. 
+You basically initialize a variable as a union of the ref and `null` and then initialize it as as callback  e.g. 
 
 ```ts
 class Example extends React.Component {
