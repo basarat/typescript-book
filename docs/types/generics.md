@@ -110,18 +110,6 @@ class Utility {
 
 > TIP: You can call the generic parameter whatever you want. It is conventional to use `T`, `U`, `V` when you have simple generics. If you have more than one generic argument try to use meaningful names e.g. `TKey` and `TValue` (conventional to prefix with `T` as generics are also called *templates* in other languages e.g. C++).
 
-## Useless Generic
-
-I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you might have a useless generic. E.g. the following function
-
-```ts
-declare function foo<T>(arg: T): void;
-```
-Here the generic `T` is completely useless as it is only used in a *single* argument position. It might as well be: 
-
-```ts
-declare function foo(arg: any): void;
-```
 
 ### Design Pattern: Convenience generic
 
@@ -173,3 +161,19 @@ function loadUsers() {
 ```
 
 Also `Promise<T>` as a return value is definitely better than alternatives like `Promise<any>`.
+
+Another example is where a generic is only used as an argument: 
+
+```ts
+declare function send<T>(arg: T): void;
+```
+
+Here the generic `T` can be used to annote the type that you want the argument to match e.g. 
+
+```ts
+send<Something>({
+  x:123,
+  // Also you get autocomplete  
+}); // Will TSError if `x:123` does not match the structure expected for Something
+
+```
