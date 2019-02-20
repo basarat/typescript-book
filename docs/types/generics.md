@@ -14,8 +14,8 @@ Consider the simple `Queue` (first in, first out) data structure implementation.
 ```ts
 class Queue {
   private data = [];
-  push = (item) => this.data.push(item);
-  pop = () => this.data.shift();
+  push(item) { this.data.push(item); }
+  pop() { return this.data.shift(); }
 }
 ```
 
@@ -24,8 +24,8 @@ One issue with this implementation is that it allows people to add *anything* to
 ```ts
 class Queue {
   private data = [];
-  push = (item) => this.data.push(item);
-  pop = () => this.data.shift();
+  push(item) { this.data.push(item); }
+  pop() { return this.data.shift(); }
 }
 
 const queue = new Queue();
@@ -40,10 +40,9 @@ console.log(queue.pop().toPrecision(1)); // RUNTIME ERROR
 One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these constraints. E.g. a quick and dirty number queue:
 
 ```ts
-class QueueNumber {
-  private data = [];
-  push = (item: number) => this.data.push(item);
-  pop = (): number => this.data.shift();
+class QueueNumber extends Queue {
+  push(item: number) { super.push(item); }
+  pop(): number { returnthis.data.shift(); }
 }
 
 const queue = new QueueNumber();
@@ -59,8 +58,8 @@ Of course this can quickly become painful e.g. if you want a string queue you ha
 /** A class definition with a generic parameter */
 class Queue<T> {
   private data = [];
-  push = (item: T) => this.data.push(item);
-  pop = (): T => this.data.shift();
+  push(item: T) { this.data.push(item); }
+  pop(): T | undefined { return this.data.shift(); }
 }
 
 /** Again sample usage */
