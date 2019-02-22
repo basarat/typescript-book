@@ -1,23 +1,23 @@
-## References
+## Ссылки
 
-Beyond literals, any Object in JavaScript (including functions, arrays, regexp etc) are references. This means the following
+Кроме литералов, любой Объект в JavaScript (включая функции, массивы, регэкспы и т.п.) является ссылкой. Это означает следующее:
 
-### Mutations are across all references
+### Мутации происходят по всем ссылкам
 
 ```js
 var foo = {};
-var bar = foo; // bar is a reference to the same object
+var bar = foo; // bar - это ссылка на тот же объект
 
 foo.baz = 123;
 console.log(bar.baz); // 123
 ```
 
-### Equality is for references
+### Равенство ссылок
 
 ```js
 var foo = {};
-var bar = foo; // bar is a reference
-var baz = {}; // baz is a *new object* distinct from `foo`
+var bar = foo; // bar - это ссылка
+var baz = {}; // baz - это *новый объект* в отличие от `foo`
 
 console.log(foo === bar); // true
 console.log(foo === baz); // false
