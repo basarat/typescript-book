@@ -50,5 +50,5 @@
 ## Отдельное спасибо
 Всем отличным [контрибьюторам](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
 
-## Поделится
-публичная ссылка: http://basarat.gitbooks.io/typescript/
+## Поделиться
+Публичная ссылка: http://basarat.gitbooks.io/typescript/
