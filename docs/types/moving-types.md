@@ -88,8 +88,8 @@ type Colors = keyof typeof colors;
 let color: Colors; // same as let color: "red" | "blue"
 color = 'red'; // okay
 color = 'blue'; // okay
-color = 'reddish; // Error: Type '"reddish"' is not assignable to type '"red" | "blue"'.
-color = 'anythingElse'; // Error: Type '"anythingElse"' is not assignable to type '"red" | "blue"'.
+color = 'reddish; // Error: Type '"reddish"' is not assignable to type '"red" | "blue"'
+color = 'anythingElse'; // Error: Type '"anythingElse"' is not assignable to type '"red" | "blue"'
 ```
 
 This allows you to have stuff like string enums + constants quite easily, as you just saw in the above example.
