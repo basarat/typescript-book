@@ -61,7 +61,7 @@ let bar: typeof _foo.foo; // `bar` has type `number`
 Lots of JavaScript libraries and frameworks work off of raw JavaScript strings. You can use `const` variables to capture their type e.g.
 
 ```ts
-// Capture both the *type* and *value* of magic string:
+// Capture both the *type* _and_ *value* of magic string:
 const foo = "Hello World";
 
 // Use the captured type:
