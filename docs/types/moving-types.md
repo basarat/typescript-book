@@ -80,8 +80,8 @@ The `keyof` operator lets you capture the key names of a type. E.g. you can use 
 
 ```ts
 const colors = {
-  red: 'red',
-  blue: 'blue'
+  red: 'reddish',
+  blue: 'bluish'
 }
 type Colors = keyof typeof colors;
 
