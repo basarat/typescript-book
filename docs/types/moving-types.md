@@ -53,7 +53,7 @@ class Foo {
 declare let _foo: Foo;
 
 // Same as before
-let bar: typeof _foo.foo;
+let bar: typeof _foo.foo; // `bar` has type `number`
 ```
 
 ## Capturing the type of magic strings
