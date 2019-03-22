@@ -62,4 +62,6 @@ foo.bar = 456; // Allowed!
 console.log(foo); // { bar: 456 }
 ```
 
-For this reason I recommend using `const` with primitives or immutable data structures.
+#### Prefer const
+
+Always use `const`, unless you plan to either lazily initialization of a variable, or do a reassignment (use `let` for those cases).
