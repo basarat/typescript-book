@@ -391,6 +391,22 @@ function readFileAsync(filename: string): Promise<any> {
 }
 ```
 
+The most reliable way to do this is to hand write it and it doesn't have to be as verbose as the previous example e.g. converting `setTimeout` into a promisified `delay` function is super easy:
+
+```ts
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+```
+
+Note that there is a handy dandy function in NodeJS that does this `node style function => promise returning function` magic for you:
+
+```ts
+/** Sample usage */
+import fs from 'fs';
+import util from 'util';
+const readFile = util.promisify(fs.readFile);
+```
+
+> Webpack supports the `util` module out for the box and you can use it in the browser as well.
 
 ### Revisiting the JSON example
 
@@ -485,23 +501,6 @@ Promise.race([task1, task2]).then(function(value) {
   console.log(value); // "one"
   // Both resolve, but task1 resolves faster
 });
-```
-
-### Converting callback functions to promise
-
-The most reliable way to do this is to hand write it. e.g. converting `setTimeout` into a promisified `delay` function is super easy:
-
-```ts
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-```
-
-Note that there is a handy dandy function in NodeJS that does this `node style function => promise returning function` magic for you:
-
-```ts
-/** Sample usage */
-import fs = require('fs');
-import util = require('util');
-const readFile = util.promisify(fs.readFile);
 ```
 
 [polyfill]:https://github.com/stefanpenner/es6-promise
