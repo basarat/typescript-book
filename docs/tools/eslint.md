@@ -1,6 +1,6 @@
 # ESLint
 
-ESLint existed to lint JavaScript, but no it is also becoming the defacto linter for [TypeScript](https://github.com/Microsoft/TypeScript/issues/29288), thanks to the [collaboration](https://eslint.org/blog/2019/01/future-typescript-eslint) between the two teams.
+ESLint existed to lint JavaScript, but now it is also becoming the defacto linter for [TypeScript](https://github.com/Microsoft/TypeScript/issues/29288), thanks to the [collaboration](https://eslint.org/blog/2019/01/future-typescript-eslint) between the two teams.
 
 ## Install
 
