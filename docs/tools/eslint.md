@@ -52,6 +52,8 @@ In your `package.json` add to `scripts`:
 }
 ```
 
+Now you can `npm run lint` to validate.
+
 ## Configure VSCode 
 
 * Install extension https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
