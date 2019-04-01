@@ -40,6 +40,18 @@ module.exports = {
 }
 ```
 
+## Run
+
+In your `package.json` add to `scripts`: 
+
+```json
+{
+  "scripts": {
+    "lint": "eslint src/**"
+  }
+}
+```
+
 ## Configure VSCode 
 
 * Install extension https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
