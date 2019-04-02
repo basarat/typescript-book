@@ -42,7 +42,7 @@ One solution (and in fact the only one in languages that don't support generics)
 ```ts
 class QueueNumber extends Queue {
   push(item: number) { super.push(item); }
-  pop(): number { returnthis.data.shift(); }
+  pop(): number { return this.data.shift(); }
 }
 
 const queue = new QueueNumber();
