@@ -10,12 +10,14 @@ JavaScript (and by extension TypeScript) has two bottom types : `null` and `unde
 
 ### Checking for either
 
-Fact is you will need to deal with both. Just check for either with `==` check.
+Fact is you will need to deal with both. Interestingly in JavaScript with `==`, `null` and `undefined` are only equal to each other:
 
 ```ts
-/// Imagine you are doing `foo.bar == undefined` where bar can be one of:
-console.log(undefined == undefined); // true
+// Both null and undefined are only `==` to themselves and each other:
+console.log(null == null); // true (of course)
+console.log(undefined == undefined); // true (of course)
 console.log(null == undefined); // true
+
 
 // You don't have to worry about falsy values making through this check
 console.log(0 == undefined); // false
@@ -32,7 +34,9 @@ function foo(arg: string | null | undefined) {
 }
 ```
 
-One exception, root level undefined values which we discuss next.
+> You could also do `== undefined`, but `== null` is more conventional/shorter.
+
+One exception, root level `undefined` values which we discuss next.
 
 ### Checking for root level undefined
 
