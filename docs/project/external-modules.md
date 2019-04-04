@@ -69,6 +69,7 @@ import { someVar as aDifferentName } from './foo';
 ```
 
 * Import everything from a module into a name with `import * as` e.g.
+
 ```js
 // file `bar.ts`
 import * as foo from './foo';
