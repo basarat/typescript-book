@@ -167,19 +167,6 @@ page.username.type('john');
 
 ```
 
-## Tip: Implicit assertion 
-Whenever a cypress command fails you get a nice error (instead of something like `null` with many other frameworks) so you fail quickly and know exactly when a test fails e.g. 
-
-```
-cy.get('#foo') 
-// If there is no element with id #foo cypress will wait for 4 seconds automatically 
-// If still not found you get an error here ^ 
-
-
-// This \/ will not trigger till an element #foo is found
-  .should('have.text', 'something') 
-```
-
 ## Tip: Explicit assertion 
 Cypress ships with quite a few assertion helps for the web e.g. chai-jquery https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery. You use them with `.should` command passing in the chainer as a string e.g.
 
@@ -243,6 +230,8 @@ cy.get('#foo')
   .click()
   // ^ Error: #foo does not have anything that `contains` `'Submit'`
 ```
+
+In traditional frameworks you would get a horrible error like `click` doesn't exist on `null`. In Cypress you get a nice error `#foo` does not contain `Submit`. This error is a form of a n implicit assertion.
 
 If you want to assert *use an explicit assertion* and don't rely on implicit assertions. e.g. instead of `contains` you would `cy.should('contain','Submit')` e.g. 
 
