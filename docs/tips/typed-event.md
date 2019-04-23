@@ -69,8 +69,10 @@ export class TypedEvent<T> {
     this.listeners.forEach((listener) => listener(event));
 
     /** Clear the `once` queue */
-    this.listenersOncer.forEach((listener) => listener(event));
-    this.listenersOncer = [];
+    if (this.listenersOncer.length > 0) {
+      this.listenersOncer.forEach((listener) => listener(event));
+      this.listenersOncer = [];
+    }
   }
 
   pipe = (te: TypedEvent<T>): Disposable => {
