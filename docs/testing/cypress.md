@@ -213,15 +213,19 @@ cy.get('#foo')
   // ^ will continue to search for something that has text `Submit` and fail if it times out.
   // ^ After it is found trigger a click on the HTML Node that contained the text `Submit`.
 ```
-## Tip: Implicit assertion
-Cypress has a concept of implicit assertion. These only kick in if a future command is erroring because of a previous command. E.g. The following will not error if there is no text with `Submit`: 
 
-```ts
-cy.get('#foo') 
-  // Once #foo is found the following:
-  .contains('Submit') 
+## Tip: Smart delays and retries
+Cypress will automatically wait (and retry) for many async things e.g. 
 ```
-However the following will error at `contains` (after automatic retries of course) as nothing found can get `click`ed: 
+// If there is no request against the `foo` alias cypress will wait for 4 seconds automatically 
+cy.wait('@foo') 
+// If there is no element with id #foo cypress will wait for 4 seconds automatically and keep retrying
+cy.get('#foo')
+```
+This keeps you from having to constantly add arbitrary timeout (and retry) logic in your test code flow. 
+
+## Tip: Implicit assertion
+Cypress has a concept of implicit assertion. These kick in if a future command is erroring because of a previous command. E.g. the following will error at `contains` (after automatic retries of course) as nothing found can get `click`ed: 
 
 ```ts
 cy.get('#foo') 
@@ -231,19 +235,7 @@ cy.get('#foo')
   // ^ Error: #foo does not have anything that `contains` `'Submit'`
 ```
 
-In traditional frameworks you would get a horrible error like `click` doesn't exist on `null`. In Cypress you get a nice error `#foo` does not contain `Submit`. This error is a form of a n implicit assertion.
-
-If you want to assert *use an explicit assertion* and don't rely on implicit assertions. e.g. instead of `contains` you would `cy.should('contain','Submit')` e.g. 
-
-```ts
-// Bad. No error.
-cy.get('#foo') 
-  .contains('Submit') 
-
-// Good. Error: `#foo` does not contain `Submit`
-cy.get('#foo') 
-  .should('contain', 'Submit')
-```
+In traditional frameworks you would get a horrible error like `click` doesn't exist on `null`. In Cypress you get a nice error `#foo` does not contain `Submit`. This error is a form of an implicit assertion.
 
 ## Tip: Waiting for an HTTP request
 A lot of tests have been traditionally brittle due to all the arbitrary timeouts needed for XHRs that an application makes. `cy.server` makes it easy to 
@@ -291,17 +283,6 @@ cy.visit('/');
 cy.tick(waitMilliseconds);
 cy.get('#logoutNotification').should('be.visible');
 ```
-
-## Tip: Smart delays and retries
-Cypress will automatically wait (and retry) for many async things e.g. 
-```
-// If there is no request against the `foo` alias cypress will wait for 4 seconds automatically 
-cy.wait('@foo') 
-// If there is no element with id #foo cypress will wait for 4 seconds automatically and keep retrying
-cy.get('#foo')
-```
-This keeps you from having to constantly add arbitrary timeout (and retry) logic in your test code flow. 
-
 
 ## Tip: Unit testing application code
 You can also use cypress to unit test your application code in isolation e.g.
