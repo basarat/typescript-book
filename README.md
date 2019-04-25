@@ -36,7 +36,7 @@
 
 ## 언어별 번역
 
-책은 완전히 무료이므로 허가없이 복사할 수 있습니다. 번역본이 있다면 여기에 링크를 해서 보내주세요. [번역본 링크 포함해서 보내기](https://github.com/basarat/typescript-book/edit/master/README.md).
+책은 완전히 무료이므로 허가없이 복사할 수 있습니다. 번역본이 있다면 여기에 링크를 해서 보내주세요. [링크](https://github.com/basarat/typescript-book/edit/master/README.md).
 
 -   [필리핀](https://github.com/themarshann/typescript-book-fil)
 -   [이탈리아](https://github.com/TizioFittizio/typescript-book)
