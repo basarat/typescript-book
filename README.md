@@ -44,6 +44,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [Portuguese](https://github.com/overlineink/typescript-book)
 * [Japanese](https://github.com/yohamta/typescript-book)
 * [Spanish](https://github.com/melissarofman/typescript-book)
+* [Korean](https://github.com/radlohead/typescript-book)
 
 ## Other Options
 You can also download one of the following:
