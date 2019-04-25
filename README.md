@@ -45,6 +45,7 @@
 -   [포르투갈](https://github.com/overlineink/typescript-book)
 -   [일본](https://github.com/yohamta/typescript-book)
 -   [스페인](https://github.com/melissarofman/typescript-book)
+-   [한국](https://github.com/radlohead/typescript-book)
 
 ## 그 외
 
