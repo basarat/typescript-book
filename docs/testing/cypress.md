@@ -168,12 +168,28 @@ page.username.type('john');
 ```
 
 ## Tip: Explicit assertion 
-Cypress ships with quite a few assertion helps for the web e.g. chai-jquery https://docs.cypress.io/guides/references/assertions.html#Chai-jQuery. You use them with `.should` command passing in the chainer as a string e.g.
+Cypress ships with (built in) chai and chai-query assertion libraries to help testing webpages. You use them with `.should` command passing in the chainer as a string, replacing `.to.foo` with `should('foo')` e.g. with chai-jquery you would `expect($(#foo)).to.have.text('something')`, with cypress you would `cy.get('#foo').should('have.text', 'something')`: 
 
 ```
 cy.get('#foo') 
   .should('have.text', 'something') 
 ```
+> You get intellisense for `should` chainers as cypress ships with correct TypeScript definitions 👍🏻
+
+The complete list of chainers is available here : https://docs.cypress.io/guides/references/assertions.html
+
+If you want something complex you can even use `should(callback)` and e.g. 
+
+```
+cy.get('div')
+  .should(($div) => {
+    expect($div).to.have.length(1);
+    expect($div[0].className).to.contain('heading');
+  })
+// This is just an example. Normally you would `.should('have.class', 'heading')
+```
+
+> TIP: cypress with do automatic retries on the callback as well, so they are just as flake free as standard string chainers.
 
 ## Tip: Commands and Chaining 
 Every function call in a cypress chain is a `command`. The `should` command is an assertion. It is conventional to start distinct *category* of chains and actions seperately e.g. 
