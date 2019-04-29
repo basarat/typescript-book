@@ -278,7 +278,21 @@ cy.wait('@load')
 You can also easily mock out a request response using `route`: 
 ```ts
 cy.server()
-  .route('POST', 'https://example.com/api/application/load', /* Example payload response */{success:true})
+  .route('POST', 'https://example.com/api/application/load', /* Example payload response */{success:true});
+```
+
+### Tip: Asserting an Http request response
+You can assert requests withtout mocking using `route` `onRequest` / `onResponse` e.g. 
+
+```ts
+cy.route({
+  method: 'POST',
+  url: 'https://example.com/api/application/load',
+  onRequest: (xhr) => {
+    // Example assertion
+    expect(xhr.request.body.data).to.deep.equal({success:true});
+  }
+})
 ```
 
 ## Tip: Mocking time 
