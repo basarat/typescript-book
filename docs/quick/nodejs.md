@@ -34,50 +34,6 @@ So you can now run `npm start` and as you edit `index.ts`:
 
 And when you are ready to deploy your JavaScript application run `npm run build`.
 
-## Creating TypeScript node modules
-
-* [A lesson on creating TypeScript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
-
-Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
-
-Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:
-
-```text
-package
-├─ package.json
-├─ tsconfig.json
-├─ src
-│  ├─ All your source files
-│  ├─ index.ts
-│  ├─ foo.ts
-│  └─ ...
-└─ lib
-  ├─ All your compiled files
-  ├─ index.d.ts
-  ├─ index.js
-  ├─ foo.d.ts
-  ├─ foo.js
-  └─ ...
-```
-
-
-* In your `tsconfig.json`
-  * have `compilerOptions`: `"outDir": "lib"` and `"declaration": true` < This generates declaration and js files in the lib folder
-  * have `include: ["./src/**/*"]` < This includes all the files from the `src` dir.
-
-* In your `package.json` have
-  * `"main": "lib/index"` < This tells Node.js to load `lib/index.js`
-  * `"types": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
-
-
-Example package:
-* `npm install typestyle` [for TypeStyle](https://www.npmjs.com/package/typestyle)
-* Usage: `import { style } from 'typestyle';` will be completely type safe.
-
-MORE:
-
-* If your package depends on other TypeScript authored packages, put them in `dependencies`/`devDependencies`/`peerDependencies` just like you would with raw JS packages.
-* If your package depends on other JavaScript authored packages and you want to use it with type safety in your project, put their types (e.g. `@types/foo`) in `devDependencies`. JavaScript types should be managed *out of bound* from the main NPM streams. The JavaScript ecosystem breaks types without semantic versioning too commonly, so if your users need types for these they should install the `@types/foo` version that works for them.
 
 ## Bonus points
 

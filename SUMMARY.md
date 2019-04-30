@@ -37,6 +37,7 @@
   * [Dynamic Import Expressions](docs/project/dynamic-import-expressions.md)
 * [Node.js QuickStart](docs/quick/nodejs.md)
 * [Browser QuickStart](docs/quick/browser.md)
+* [Library QuickStart](docs/quick/library.md)
 * [TypeScript's Type System](docs/types/type-system.md)
   * [JS Migration Guide](docs/types/migrating.md)
   * [@types](docs/types/@types.md)
