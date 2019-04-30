@@ -4,7 +4,7 @@
 
 ## 리뷰
 
--   멋진 책 고마워요 그 책에서 많은 것을 배웠어요. ([링크](https://www.gitbook.com/book/basarat/typescript/discussions/21#comment-1468279131934))
+-   멋진 책 고마워요 이 책에서 많은 것을 배웠어요. ([링크](https://www.gitbook.com/book/basarat/typescript/discussions/21#comment-1468279131934))
 -   아마 이 책은 최고의 타입스크립트 책입니다.([링크](https://twitter.com/thelondonjs/status/756419561570852864))
 -   예시와 설명이 정확하고 명확합니다. ([링크](https://twitter.com/joe_mighty/status/758290957280346112))
 -   당신은 저렴한 가격에 순수하고 굉장한 문서를 얻을 수 있습니다. 소스 코드 예제와 간결한 설명으로 타입스크립트를 학습하는데 도움이 될 것 입니다. ([링크](https://www.nativescript.org/blog/details/free-book-typescript-deep-dive))
@@ -36,7 +36,7 @@
 
 ## 언어별 번역
 
-책은 완전히 무료이므로 허가없이 복사할 수 있습니다. 번역본이 있다면 여기에 링크를 해서 보내주세요. [번역본 링크 포함해서 보내기](https://github.com/basarat/typescript-book/edit/master/README.md).
+책은 완전히 무료이므로 허가없이 복사할 수 있습니다. 번역본이 있다면 여기에 링크를 해서 보내주세요. [링크](https://github.com/basarat/typescript-book/edit/master/README.md).
 
 -   [필리핀](https://github.com/themarshann/typescript-book-fil)
 -   [이탈리아](https://github.com/TizioFittizio/typescript-book)
