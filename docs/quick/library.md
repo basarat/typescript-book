@@ -13,21 +13,20 @@ package
 ├─ package.json
 ├─ tsconfig.json
 ├─ src
-│  ├─ All your source files
 │  ├─ index.ts
 │  ├─ foo.ts
-│  └─ ...
+│  └─ ...All your source files (Authored)
 └─ lib
-  ├─ All your compiled files
   ├─ index.d.ts.map
   ├─ index.d.ts
   ├─ index.js
   ├─ foo.d.ts.map
   ├─ foo.d.ts
   ├─ foo.js
-  └─ ...
+  └─ ... All your compiled files (Generated)
 ```
 
+* `src/index.ts`: Here you would export anything you expect to be consumed from your project. E.g `export { Foo } from './foo';`. Exporting from this file makes it available for consumption when someone does `import { /* Here */ } from 'example';`
 
 * In your `tsconfig.json`
   * have `compilerOptions`: `"outDir": "lib"` + `"declaration": true` + `"declarationMap" : true` < This generates `.js` (JavaScript) `.d.ts` (declarations for TypeSafety) and `.d.ts.map` (enables `declaration .d.ts` => `source .ts` IDE navigation) in the lib folder.
@@ -36,7 +35,6 @@ package
 * In your `package.json` have
   * `"main": "lib/index"` < This tells to load `lib/index.js` for runtime code.
   * `"types": "lib/index"` < This tells TypeScript to load `lib/index.d.ts` for type checking. 
-
 
 Example package:
 * `npm install typestyle` [for TypeStyle](https://www.npmjs.com/package/typestyle)
