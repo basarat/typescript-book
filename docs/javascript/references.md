@@ -1,24 +1,24 @@
 ## References
 
-Beyond literals, any Object in JavaScript (including functions, arrays, regexp etc) are references. This means the following
+자바스크립트에서 객체는 (functions, arrays, regexp etc)에 해당하고 이것은 다음을 의미합니다.
 
-### Mutations are across all references
+### 참조에 대한 레퍼런스
 
 ```js
-var foo = {};
-var bar = foo; // bar is a reference to the same object
+var foo = {}
+var bar = foo // bar is a reference to the same object
 
-foo.baz = 123;
-console.log(bar.baz); // 123
+foo.baz = 123
+console.log(bar.baz) // 123
 ```
 
-### Equality is for references
+### 참조에 대한 일치연산자 레퍼런스
 
 ```js
-var foo = {};
-var bar = foo; // bar is a reference
-var baz = {}; // baz is a *new object* distinct from `foo`
+var foo = {}
+var bar = foo // bar is a reference
+var baz = {} // baz is a *new object* distinct from `foo`
 
-console.log(foo === bar); // true
-console.log(foo === baz); // false
+console.log(foo === bar) // true
+console.log(foo === baz) // false
 ```
