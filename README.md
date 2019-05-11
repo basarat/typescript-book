@@ -2,6 +2,10 @@
 
 나는 사람들이 타입스크립트를 사용할 때 자주 발생하는 문제에 대해서 살펴보았습니다. 이것은 스택오브플로우에 등록된 문제를 바탕으로 합니다. [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) 타입스크립트 커뮤니티에 참여하실 수 있습니다. [타입스크립트 커뮤니티](https://github.com/TypeStrong/) / [업데이트 확인](https://twitter.com/basarat) / [GitHub에서 별을 주는 것을 잊지 마십시요](https://github.com/basarat/typescript-book) 🌹
 
+## 한국어 번역 진행사항
+
+한국어 번역은 시간이 날 때마다 틈틈히 진행중입니다. 번역에 참여하고 싶으신 분은 하나의 1page이상 번역진행을 하신 후에 저에게 PR을 보내주세요. 감사합니다.
+
 ## 리뷰
 
 -   멋진 책 고마워요 이 책에서 많은 것을 배웠어요. ([링크](https://www.gitbook.com/book/basarat/typescript/discussions/21#comment-1468279131934))
