@@ -202,3 +202,15 @@ if (foo.bar) {
   });
 }
 ```
+
+### null and undefined with `strictNullChecks`
+
+TypeScript is smart enough to rule out `null` and `undefined` with a `== null` / `!= null` checks. E.g.
+
+```ts
+function foo(a?: number | null) {
+  if (a == null) return;
+
+  // a is number now.
+}
+```
