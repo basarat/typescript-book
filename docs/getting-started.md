@@ -34,5 +34,6 @@ O Código Fonte deste livro esta disponível no repositório de livros do github
 `este/sera/o/link/para/o/codigo.ts`
 ```ts
 // Este será o código em discussão.
+```
 
 Com as configurações de desenvolvimento terminadas vamos pular para sintaxe do TypeScript. 
