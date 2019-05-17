@@ -1,7 +1,7 @@
 # Summary
 
-* [Getting Started](docs/getting-started.md)
-  * [Why TypeScript](docs/why-typescript.md)
+* [Primeiros passos](docs/getting-started.md)
+  * [Por que TypeScript](docs/why-typescript.md)
 * [JavaScript](docs/javascript/recap.md)
   * [Equality](docs/javascript/equality.md)
   * [References](docs/javascript/references.md)
