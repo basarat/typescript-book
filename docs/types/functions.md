@@ -145,7 +145,25 @@ Of course it's important for the final declaration (the true declaration as seen
 
 > Function overloading in TypeScript doesn't come with any runtime overhead. It just allows you to document the manner you expect the function to be called in and the compiler holds the rest of your code in check.
 
-[](### Declaring Functions)
-[](With lambda, with interfaces which allow overloading declarations)
+### Declaring Functions
+> Quick Tip: *Type Declarations* are how you describe the types of existing implementations. 
+
+There are two ways to *delcare* the type of a function without providing an implementation. E.g. 
+
+```ts
+type LongHand = {
+    (a: number): number;
+};
+
+type ShortHand = (a: number) => number;
+```
+The example above are both *exactly* equivalent. The differences exist when you want to add overloads. You can only add overloads in the long hand declaration version e.g. 
+
+```ts
+type LongHandAllowsOverloadDeclarations = {
+    (a: number): number;
+    (a: string): string;
+};
+```
 
 [](### Type Compatibility)
