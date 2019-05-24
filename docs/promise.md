@@ -408,6 +408,12 @@ const readFile = util.promisify(fs.readFile);
 
 > Webpack supports the `util` module out for the box and you can use it in the browser as well.
 
+If you have a node callback style function as a *member* be sure to `bind` it as well to make sure it has the correct `this`: 
+
+```ts
+const dbGet = util.promisify(db.get).bind(db);
+```
+
 ### Revisiting the JSON example
 
 Now let's revisit our `loadJSON` example and rewrite an async version that uses promises. All that we need to do is read the file contents as a promise, then parse them as JSON and we are done. This is illustrated in the below example:
