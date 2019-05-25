@@ -473,7 +473,7 @@ function loadItem(id: number): Promise<{ id: number }> {
     });
 }
 
-// Chaining
+// Chained / Sequential
 let item1, item2;
 loadItem(1)
     .then((res) => {
@@ -485,7 +485,7 @@ loadItem(1)
         console.log('done');
     }); // overall time will be around 2s
 
-// Parallel
+// Concurrent / Parallel
 Promise.all([loadItem(1), loadItem(2)])
     .then((res) => {
         [item1, item2] = res;
