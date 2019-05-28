@@ -28,7 +28,7 @@ var bar = Bar; // ERROR: "cannot find name 'Bar'"
 The reason why it says `cannot find name` is because the name `Bar` *is not defined* in the *variable* declaration space. That brings us to the next topic "Variable Declaration Space".
 
 ### Variable Declaration Space
-The variable declaration space contains stuff that you can use as a variable. We saw that having `class Foo` contributes a type `Foo` to the *type* declaration space. Guess what? it also contributes a *variable* `Foo` to the *variable* declaration space as shown below:
+The variable declaration space contains stuff that you can use as a variable. We saw that having `class Foo` contributes a type `Foo` to the *type* declaration space. Guess what? It also contributes a *variable* `Foo` to the *variable* declaration space as shown below:
 
 ```ts
 class Foo {};
