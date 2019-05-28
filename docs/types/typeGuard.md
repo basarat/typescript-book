@@ -103,7 +103,23 @@ function doStuff(q: A | B) {
 
 ### Literal Type Guard
 
-When you have literal types in a union you can check them to discriminate e.g. 
+You can use `===` / `==` / `!==` / `!=` to distinguish between literal values
+
+```ts
+type TriState = 'yes' | 'no' | 'unknown';
+
+function logOutState(state:TriState) {
+  if (state == 'yes') {
+    console.log('User selected yes');
+  } else if (state == 'no') {
+    console.log('User selected no');
+  } else {
+    console.log('User has not made a selection yet');
+  }
+}
+```
+
+This even works when you have literal types in a union. You can check the value of a shared property name to discriminate the union e.g. 
 
 ```ts
 type Foo = {
@@ -124,6 +140,18 @@ function doStuff(arg: Foo | Bar) {
         console.log(arg.foo); // Error!
         console.log(arg.bar); // OK
     }
+}
+```
+
+### null and undefined with `strictNullChecks`
+
+TypeScript is smart enough to rule out both `null` and `undefined` with a `== null` / `!= null` check. For example:
+
+```ts
+function foo(a?: number | null) {
+  if (a == null) return;
+
+  // a is number now.
 }
 ```
 
@@ -200,17 +228,5 @@ if (foo.bar) {
   functionDoingSomeStuff(() => {
     console.log(bar.baz); // Okay
   });
-}
-```
-
-### null and undefined with `strictNullChecks`
-
-TypeScript is smart enough to rule out `null` and `undefined` with a `== null` / `!= null` checks. E.g.
-
-```ts
-function foo(a?: number | null) {
-  if (a == null) return;
-
-  // a is number now.
 }
 ```
