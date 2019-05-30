@@ -282,7 +282,7 @@ cy.server()
 ```
 
 ### Tip: Asserting an Http request response
-You can assert requests withtout mocking using `route` `onRequest` / `onResponse` e.g. 
+You can assert requests without mocking using `route` `onRequest` / `onResponse` e.g. 
 
 ```ts
 cy.route({
