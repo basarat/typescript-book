@@ -117,7 +117,7 @@ The JSON standard has support for encoding `null` but not `undefined`. When JSON
 JSON.stringify({willStay: null, willBeGone: undefined}); // {"willStay":null}
 ```
 
-As a result, JSON-based databases may support `null` values but not `undefined` values. Since attributes set to `null` are encoded, you can transmit the intent to clear an attribute by settings its value to `null` before encoding and transmitting the object to a remote store.
+As a result, JSON-based databases may support `null` values but not `undefined` values. Since attributes set to `null` are encoded, you can transmit the intent to clear an attribute by setting its value to `null` before encoding and transmitting the object to a remote store.
 
 Setting attribute values to undefined can save of storage and transmission costs, as the attribute names will not be encoded. However, this can complicate the semantics of clearing values vs. absent values.
 
