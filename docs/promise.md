@@ -406,7 +406,7 @@ import util from 'util';
 const readFile = util.promisify(fs.readFile);
 ```
 
-> Webpack supports the `util` module out for the box and you can use it in the browser as well.
+> Webpack supports the `util` module out of the box and you can use it in the browser as well.
 
 If you have a node callback style function as a *member* be sure to `bind` it as well to make sure it has the correct `this`: 
 

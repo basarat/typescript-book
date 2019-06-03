@@ -148,7 +148,7 @@ Of course it's important for the final declaration (the true declaration as seen
 ### Declaring Functions
 > Quick Tip: *Type Declarations* are how you describe the types of existing implementations. 
 
-There are two ways to *delcare* the type of a function without providing an implementation. E.g. 
+There are two ways to *declare* the type of a function without providing an implementation. E.g. 
 
 ```ts
 type LongHand = {
