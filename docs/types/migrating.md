@@ -111,3 +111,6 @@ Similarly if you are using html templates (e.g. angular) you can:
 ```ts
 declare module "*.html";
 ```
+
+# More 
+If you want to be more silent about your upgrade because you couldn't get team buy in to move to TypeScript (not something I would recommend), [TypeScript has a blog post on it](https://devblogs.microsoft.com/typescript/how-to-upgrade-to-typescript-without-anybody-noticing-part-1/).
