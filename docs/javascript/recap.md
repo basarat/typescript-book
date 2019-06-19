@@ -11,7 +11,7 @@ However, it does mean that *you need to learn JavaScript* (the good news is *you
 
 TypeScript is just JavaScript with docs.
 
-> JSNext is open to interpretation, not everything people propose for the nest version of JS makes it actually to browsers. TypeScript does add support for proposals till they reach stage-3.
+> JSNext is open to interpretation, not everything people propose for the nest version of JS makes it actually to browsers. TypeScript does add support for proposals till [they reach stage-3](https://tc39.es/process-document/).
 
 ## Making JavaScript Better
 
