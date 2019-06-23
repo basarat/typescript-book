@@ -1,83 +1,88 @@
 ### Spread Operator
 
-The main objective of the spread operator is to *spread* the elements of an array or object. This is best explained with examples.
+전개 연산자의 주된 목표는 배열 혹은 객체요소를 전개하는 것입니다. 이것은 예제에 대한 최고의 설명 입니다.
 
 #### Apply
-A common use case is to spread an array into the function arguments. Previously you would need to use `Function.prototype.apply`:
+
+전개를 함수에 인자로 사용하는 방법이 흔하게 사용됩니다. 이전에는 `Function.prototype.apply` 를 사용할 필요가 있었습니다.
 
 ```ts
-function foo(x, y, z) { }
-var args = [0, 1, 2];
-foo.apply(null, args);
+function foo(x, y, z) {}
+var args = [0, 1, 2]
+foo.apply(null, args)
 ```
 
-Now you can do this simply by prefixing the arguments with `...` as shown below:
+이제는 `...` 를 인자의 앞에 붙이면 간단합니다. 아래를 참고하십시요.
 
 ```ts
-function foo(x, y, z) { }
-var args = [0, 1, 2];
-foo(...args);
+function foo(x, y, z) {}
+var args = [0, 1, 2]
+foo(...args)
 ```
 
-Here we are *spreading* the `args` array into positional `arguments`.
+여기 `args` 배열이 `arguments` 안으로 전개됩니다.
 
 #### Destructuring
-We've already seen one usage of this in *destructuring*:
+
+우리는 이미 비구조화를 하면 이미 사용해봤습니다.
 
 ```ts
-var [x, y, ...remaining] = [1, 2, 3, 4];
-console.log(x, y, remaining); // 1,2,[3,4]
+var [x, y, ...remaining] = [1, 2, 3, 4]
+console.log(x, y, remaining) // 1,2,[3,4]
 ```
-The motivation here is to simply make it easy for you to capture the remaining elements of an array when destructuring.
+
+단순히 비구조화 할당을 할때 배열의 나머지 요소를 쉽게 캡쳐할 수 있도록 하는 것입니다.
 
 #### Array Assignment
-The spread operator allows you to easily place an *expanded version* of an array into another array. This is demonstrated in the example below:
+
+전개연사자를 쉽게 사용하는 방법은 배열내에서 다른 배열과 같이 사용하는 것입니다. 아래에 그 예제가 있습니다.
 
 ```ts
-var list = [1, 2];
-list = [...list, 3, 4];
-console.log(list); // [1,2,3,4]
+var list = [1, 2]
+list = [...list, 3, 4]
+console.log(list) // [1,2,3,4]
 ```
 
-You can put the expanded array in at any position, and get the effect you'd expect:
+당신은 배열내에 아무곳에서나 전개를 사용할 수 있습니다.
 
 ```ts
-var list = [1, 2];
-list = [0, ...list, 4];
-console.log(list); // [0,1,2,4]
+var list = [1, 2]
+list = [0, ...list, 4]
+console.log(list) // [0,1,2,4]
 ```
 
 #### Object spread
-You can also spread an object into another object. A common use case is to simply add a property to an object without mutating the original:
+
+게다가 당신은 전개를 객체 내에서 다른 객체와 사용할 수 있습니다. 일반적인 방법은 원본을 변경하지 않고 단순히 객체에 속성을 추가하는 것입니다.
 
 ```ts
-const point2D = {x: 1, y: 2};
+const point2D = { x: 1, y: 2 }
 /** Create a new object by using all the point2D props along with z */
-const point3D = {...point2D, z: 3};
+const point3D = { ...point2D, z: 3 }
 ```
 
-For objects, the order of where you put the spread matters.  This works something like `Object.assign`, and does what you'd expect: what comes first is 'overridden' by what comes later:
+객체를 전개할때 문제는 `Object.assign` 와 같은 효과를 기대하지만 먼저 오는 것은 나중에 오는 것에 의해 오버라이드 됩니다.
 
 ```ts
-const point2D = {x: 1, y: 2};
-const anotherPoint3D = {x: 5, z: 4, ...point2D};
-console.log(anotherPoint3D); // {x: 1, y: 2, z: 4}
-const yetAnotherPoint3D = {...point2D, x: 5, z: 4}
-console.log(yetAnotherPoint3D); // {x: 5, y: 2, z: 4}
+const point2D = { x: 1, y: 2 }
+const anotherPoint3D = { x: 5, z: 4, ...point2D }
+console.log(anotherPoint3D) // {x: 1, y: 2, z: 4}
+const yetAnotherPoint3D = { ...point2D, x: 5, z: 4 }
+console.log(yetAnotherPoint3D) // {x: 5, y: 2, z: 4}
 ```
 
-Another common use case is a simple shallow extend:
+또 다른 일반적인 전개에 대한 간단한 사용방법 입니다.
 
 ```ts
-const foo = {a: 1, b: 2, c: 0};
-const bar = {c: 1, d: 2};
+const foo = { a: 1, b: 2, c: 0 }
+const bar = { c: 1, d: 2 }
 /** Merge foo and bar */
-const fooBar = {...foo, ...bar};
+const fooBar = { ...foo, ...bar }
 // fooBar is now {a: 1, b: 2, c: 1, d: 2}
 ```
 
 #### Summary
-`apply` is something that you often use in JavaScript, so it's good to have a better syntax where you don't have that ugly `null` for the `this` argument. Also having a dedicated syntax for moving arrays out of (destructuring) or into (assignment) other arrays provides a neat syntax for when you are doing array processing on partial arrays.
 
+자바스크립트를 사용할때 `apply` 는 자주 사용되고 그것은 괜찮은 문법을 가지고 있습니다. `this` 인자에 `null` 을 사용하지 않는 것이 좋습니다. 배열을 다른 배열로 할당하기 위한 전용구문을 사용하면 배열에서 배열처리를 수행할때 깔끔한 구문을 사용할 수 있습니다.
 
 [](https://github.com/Microsoft/TypeScript/pull/1931)
