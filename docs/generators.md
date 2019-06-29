@@ -1,66 +1,66 @@
 ## Generators
 
-`function *` is the syntax used to create a *generator function*. Calling a generator function returns a *generator object*. The generator object just follows the [iterator][iterator] interface (i.e. the `next`, `return` and `throw` functions). 
+*제네레이터 함수*의 문법은 `function *`으로 작성합니다. 제네레이터 함수는 호출중에 제네레이터 객체를 리턴합니다. 제네레이터 객체는 [iterator][iterator] 인터페이스를 따라갑니다. (예: `next`, `return`그리고 `throw`함수가 있습니다.)
 
-There are two key motivations behind generator functions: 
+제네레이터 함수에는 두가지 주요동기가 있습니다.
 
 ### Lazy Iterators
 
-Generator functions can be used to create lazy iterators e.g. the following function returns an **infinite** list of integers on demand:
+제네레이터 함수를 이용하면 lazy iterators를 만드는데 사용할 수 있습니다. 예: 다음 함수는 필요에 따라 **infinite** 숫자 목록을 반환합니다.
 
 ```ts
 function* infiniteSequence() {
-    var i = 0;
-    while(true) {
-        yield i++;
+    var i = 0
+    while (true) {
+        yield i++
     }
 }
 
-var iterator = infiniteSequence();
+var iterator = infiniteSequence()
 while (true) {
-    console.log(iterator.next()); // { value: xxxx, done: false } forever and ever
+    console.log(iterator.next()) // { value: xxxx, done: false } forever and ever
 }
 ```
 
-Of course if the iterator does end, you get the result of `{ done: true }` as demonstrated below:
+물론 iterator가 끝나면 `{ done: true }`의 결과를 얻습니다. 아래에 그 예가 있습니다.
 
 ```ts
-function* idMaker(){
-  let index = 0;
-  while(index < 3)
-    yield index++;
+function* idMaker() {
+    let index = 0
+    while (index < 3) yield index++
 }
 
-let gen = idMaker();
+let gen = idMaker()
 
-console.log(gen.next()); // { value: 0, done: false }
-console.log(gen.next()); // { value: 1, done: false }
-console.log(gen.next()); // { value: 2, done: false }
-console.log(gen.next()); // { done: true }
+console.log(gen.next()) // { value: 0, done: false }
+console.log(gen.next()) // { value: 1, done: false }
+console.log(gen.next()) // { value: 2, done: false }
+console.log(gen.next()) // { done: true }
 ```
 
 ### Externally Controlled Execution
-This is the part of generators that is truly exciting. It essentially allows a function to pause its execution and pass control (fate) of the remainder of the function execution to the caller.
 
-A generator function does not execute when you call it. It just creates a generator object. Consider the following example along with a sample execution:
+일부 제네레이터 함수는 정말 흥미진진합니다. 기본적으로 함수가 실행을 일시중지하고 나머지 함수실행을 호출자에게 전달할 수 있습니다.
+
+호출해도 제네레이터 함수가 실행되지 않습니다. 그것은 단지 제네레이터 객체를 생성합니다. 샘플 실행과 함께 다음 예제를 고려하십시요.
 
 ```ts
-function* generator(){
-    console.log('Execution started');
-    yield 0;
-    console.log('Execution resumed');
-    yield 1;
-    console.log('Execution resumed');
+function* generator() {
+    console.log('Execution started')
+    yield 0
+    console.log('Execution resumed')
+    yield 1
+    console.log('Execution resumed')
 }
 
-var iterator = generator();
-console.log('Starting iteration'); // This will execute before anything in the generator function body executes
-console.log(iterator.next()); // { value: 0, done: false }
-console.log(iterator.next()); // { value: 1, done: false }
-console.log(iterator.next()); // { value: undefined, done: true }
+var iterator = generator()
+console.log('Starting iteration') // This will execute before anything in the generator function body executes
+console.log(iterator.next()) // { value: 0, done: false }
+console.log(iterator.next()) // { value: 1, done: false }
+console.log(iterator.next()) // { value: undefined, done: true }
 ```
 
-If you run this you get the following output:
+이것을 실행하면 다음과 같은 결과값을 얻을 수 있습니다.
 
 ```
 $ node outside.js
@@ -73,63 +73,63 @@ Execution resumed
 { value: undefined, done: true }
 ```
 
-* The function only starts execution once `next` is called on the generator object.
-* The function *pauses* as soon as a `yield` statement is encountered.
-* The function *resumes* when `next` is called.
+-   제네레이터 함수를 시작하는 방법은 오직 `next`를 이용해서 호출할때 실행되며 이것은 제네레이터 객체에 해당됩니다.
+-   제네레이터 함수를 중지하는 방법은 `yield`를 이용해야 합니다.
+-   제레레이터 함수를 다시 시작하려면 `next`를 호출해야 합니다.
 
-> So essentially the execution of the generator function is controllable by the generator object.
+> 본질적으로 제네레이터 함수의 실행은 제네레이터 객체에 의해 제어 가능합니다.
 
-Our communication using the generator has been mostly one way with the generator returning values for the iterator. One extremely powerful feature of generators in JavaScript is that they allow two way communications (with caveats).
+제네레이터를 사용한 우리가 배웠던 방법은 대부분 이터레이터를 이용한 값을 반환하는 한가지 방법입니다. 자바스크립트의 제네레이터에는 하나의 매우 강력한 기능은 양방향 통신을 허용한다는 것입니다.
 
-* you can control the resulting value of the `yield` expression using `iterator.next(valueToInject)`
-* you can throw an exception at the point of the `yield` expression using `iterator.throw(error)`
+-   당신은 `iterator.next(valueToInject)`를 이용해서 `yield` 표현식의 결과값을 제어 할 수 있습니다.
+-   당신은 `iterator.throw(error)`를 이용해서 `yield` 표현식의 시점에서 예외처리를 할 수 있습니다.
 
-The following example demonstrates `iterator.next(valueToInject)`:
+`iterator.next(valueToInject)`를 예제에서 증명하고 있습니다.
 
 ```ts
 function* generator() {
-    const bar = yield 'foo'; // bar may be *any* type
-    console.log(bar); // bar!
+    const bar = yield 'foo' // bar may be *any* type
+    console.log(bar) // bar!
 }
 
-const iterator = generator();
+const iterator = generator()
 // Start execution till we get first yield value
-const foo = iterator.next();
-console.log(foo.value); // foo
+const foo = iterator.next()
+console.log(foo.value) // foo
 // Resume execution injecting bar
-const nextThing = iterator.next('bar');
+const nextThing = iterator.next('bar')
 ```
 
-Since `yield` returns the parameter passed to the iterator's `next` function, and all iterators' `next` functions accept a parameter of any type, TypeScript will always assign the `any` type to the result of the `yield` operator (`bar` above).
+`yield`는 이터레이터의 `next`함수에 전달된 매개변수를 반환하기 때문에 그리고 모든 이터레이터는 `next`함수는 모든 유형의 매개변수를 허용하고, 타입스크립트는 `yield`연산자의 결과에 `any`타입을 할당합니다.
 
-> You are on your own to coerce the result to the type you expect, and ensure that only values of that type are passed to next (such as by scaffolding an additional type-enforcement layer that calls `next` for you.) If strong typing is important to you, you may want to avoid two-way communication altogether, as well as packages that rely heavily on it (e.g., redux-saga).
+> 당신은 당신이 기대하는 타입으로 결과를 강요하려고 합니다. 그리고 그것은 오직 값만 전달하는지 확인하십시요. 만약 당신이 강력한 타이핑이 중요한 경우에는 양방향 바인딩을 피하고 패키지를 많이 사용하는 패키지를 피할 수 있습니다. (예: redux-saga)
 
-The following example demonstrates `iterator.throw(error)`:
+`iterator.throw(error)`의 예제를 아래에서 증명합니다.
 
 ```ts
 function* generator() {
     try {
-        yield 'foo';
-    }
-    catch(err) {
-        console.log(err.message); // bar!
+        yield 'foo'
+    } catch (err) {
+        console.log(err.message) // bar!
     }
 }
 
-var iterator = generator();
+var iterator = generator()
 // Start execution till we get first yield value
-var foo = iterator.next();
-console.log(foo.value); // foo
+var foo = iterator.next()
+console.log(foo.value) // foo
 // Resume execution throwing an exception 'bar'
-var nextThing = iterator.throw(new Error('bar'));
+var nextThing = iterator.throw(new Error('bar'))
 ```
 
-So here is the summary:
-* `yield` allows a generator function to pause its communication and pass control to an external system
-* the external system can push a value into the generator function body
-* the external system can throw an exception into the generator function body
+여기에 설명이 있습니다.
 
-How is this useful? Jump to the next section [**async/await**][async-await] and find out.
+-   제네레이터 함수는 `yield`를 통해 통신을 일시중지하고 외부 시스템에 제어를 전달할 수 있게 합니다.
+-   외부 시스템에서 값을 제네레이터 함수안으로 밀어넣을수 있습니다.
+-   외부 시스템에서 예외를 제네레이터 함수안으로 던질 수 있습니다.
 
-[iterator]:./iterators.md
-[async-await]:./async-await.md
+이것은 어떻게 활용할 수 있나요? 다음장에서 [**async/await**][async-await]으로 이동하여 알아보십시요.
+
+[iterator]: ./iterators.md
+[async-await]: ./async-await.md
