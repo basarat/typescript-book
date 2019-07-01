@@ -1,4 +1,4 @@
-## Readonly
+## readonly
 TypeScript's type system allows you to mark individual properties on an interface as `readonly`. This allows you to work in a functional way (unexpected mutation is bad):
 
 ```ts
@@ -41,10 +41,28 @@ class Foo {
 }
 ```
 
+## Readonly
+There is a type `Readonly` that takes a type `T` and marks all of its properties as `readonly` using mapped types. Here is a demo that uses it in practice: 
+
+```ts
+type Foo = {
+  bar: number;
+  bas: number;
+}
+
+type FooReadonly = Readonly<Foo>; 
+
+let foo:Foo = {bar: 123, bas: 456};
+let fooReadonly:FooReadonly = {bar: 123, bas: 456};
+
+foo.bar = 456; // Okay
+fooReadonly.bar = 456; // ERROR: bar is readonly
+```
+
 ### Various Use Cases
 
 #### ReactJS
-One library that loves immutability is ReactJS and it's a great idea to mark your `Props` and `State` to be immutable e.g.:
+One library that loves immutability is ReactJS, you *could* mark your `Props` and `State` to be immutable e.g.:
 
 ```ts
 interface Props {
@@ -54,9 +72,23 @@ interface State {
     readonly bar: number;
 }
 export class Something extends React.Component<Props,State> {
+  someMethod() {
     // You can rest assured no one is going to do
-    // this.props.foo = 123; (props are immutable)
-    // this.state.bar = 456; (one should use this.setState)
+    this.props.foo = 123; // ERROR: (props are immutable)
+    this.state.baz = 456; // ERROR: (one should use this.setState)  
+  }
+}
+```
+
+You do not need to, however, as the type definitions for React mark these as `readonly` already (by internally wrapping the passed in generic types with the `Readonly` type mentioned above).
+
+```ts
+export class Something extends React.Component<{ foo: number }, { baz: number }> {
+  // You can rest assured no one is going to do
+  someMethod() {
+    this.props.foo = 123; // ERROR: (props are immutable)
+    this.state.baz = 456; // ERROR: (one should use this.setState)  
+  }
 }
 ```
 
@@ -141,7 +173,7 @@ iMutateFoo(foo); // The foo argument is aliased by the foo parameter
 console.log(foo.bar); // 456!
 ```
 
-Basically `readonly` ensures that *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Of course if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
+Basically `readonly` ensures that a property *cannot be modified by me*, but if you give it to someone that doesn't have that guarantee (allowed for type compatibility reasons) they can modify it. Of course if `iMutateFoo` said that they do not mutate `foo.bar` the compiler would correctly flag it as an error as shown:
 
 ```ts
 interface Foo {

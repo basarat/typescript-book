@@ -18,7 +18,7 @@ interface Rectangle {
 type Shape = Square | Rectangle;
 ```
 
-If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on the *discriminant property* (here `kind`) TypeScript will realize that it means that the object must of the type that has that literal and do a type narrowing for you :)
+If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on the *discriminant property* (here `kind`) TypeScript will realize that the object must be of the type that has that specific literal and do a type narrowing for you :)
 
 ```ts
 function area(s: Shape) {
@@ -74,7 +74,7 @@ function area(s: Shape) {
 }
 ```
 
-You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example:
+You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example if you add the exhaustive check you get a nice error:
 
 ```ts
 function area(s: Shape) {
@@ -90,6 +90,27 @@ function area(s: Shape) {
     }
 }
 ```
+
+That forces you to handle this new case : 
+
+```ts
+function area(s: Shape) {
+    if (s.kind === "square") {
+        return s.size * s.size;
+    }
+    else if (s.kind === "rectangle") {
+        return s.width * s.height;
+    }
+    else if (s.kind === "circle") {
+        return Math.PI * (s.radius **2);
+    }
+    else {
+        // Okay once more
+        const _exhaustiveCheck: never = s;
+    }
+}
+```
+
 
 ### Switch
 TIP: of course you can also do it in a `switch` statement:
@@ -109,7 +130,7 @@ function area(s: Shape) {
 
 ### strictNullChecks
 
-If using strictNullChecks and doing exhaustive checks you should return the `_exhaustiveCheck` variable (of type `never`) as well, otherwise TypeScirpt infers a possible return of `undefined`. So:
+If using strictNullChecks and doing exhaustive checks, TypeScript might complain "not all code paths return a value". You can silence that by simply returning the `_exhaustiveCheck` variable (of type `never`). So:
 
 ```ts
 function area(s: Shape) {
@@ -170,7 +191,7 @@ let store = createStore(counter)
 
 // You can use subscribe() to update the UI in response to state changes.
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
-// However it can also be handy to persist the current state in the localStorage.
+// However, it can also be handy to persist the current state in the localStorage.
 
 store.subscribe(() =>
   console.log(store.getState())
@@ -186,4 +207,4 @@ store.dispatch({ type: 'DECREMENT' })
 // 1
 ```
 
-Using it with TypeScript gives you safety against typo errors, increased refactor-ability and self documenting code .
+Using it with TypeScript gives you safety against typo errors, increased refactor-ability and self documenting code.

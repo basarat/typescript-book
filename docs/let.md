@@ -57,7 +57,7 @@ if (true) {
     var foo = 123;
 }
 ```
-However if the variable name is already taken by the surrounding scope then a new variable name is generated as shown (notice `_foo`):
+However, if the variable name is already taken by the surrounding scope then a new variable name is generated as shown (notice `foo_1`):
 
 ```ts
 var foo = '123';
@@ -69,7 +69,25 @@ if (true) {
 
 var foo = '123';
 if (true) {
-    var _foo = 123; // Renamed
+    var foo_1 = 123; // Renamed
+}
+```
+
+#### Switch
+You can wrap your `case` bodies in `{}` to reuse variable names reliably in different `case` statement as shown below:
+
+```ts
+switch (name) {
+    case 'x': {
+        let x = 5;
+        // ...
+        break;
+    }
+    case 'y': {
+        let x = 10;
+        // ...
+        break;
+    }
 }
 ```
 

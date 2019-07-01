@@ -27,7 +27,7 @@ num = str; // ERROR: `string` is not assignable to `number`
 
 ## Soundness
 
-TypeScript's type system is designed to be convenient and allows for *unsound* behaviours e.g. anything can be assigned to `any` which essentially means you telling the compiler to allow you to do whatever you want:
+TypeScript's type system is designed to be convenient and allows for *unsound* behaviours e.g. anything can be assigned to `any` which means telling the compiler to allow you to do whatever you want:
 
 ```ts
 let foo: any = 123;
@@ -56,7 +56,7 @@ let p: Point;
 p = new Point2D(1,2);
 ```
 
-This allows you to create objects on the fly (like you do in vanilla JS) and still have safety for whenever it can be inferred.
+This allows you to create objects on the fly (like you do in vanilla JS) and still have safety whenever it can be inferred.
 
 Also *more* data is considered fine:
 
@@ -83,16 +83,16 @@ iTakePoint2D({ x: 0 }); // Error: missing information `y`
 
 Variance is an easy to understand and important concept for type compatibility analysis.
 
-For simple types `Base` and `Child`, if `Child` is a child of `Base`, then instances of `Child` can be assigned to a variable to type `Base`.
+For simple types `Base` and `Child`, if `Child` is a child of `Base`, then instances of `Child` can be assigned to a variable of type `Base`.
 
 > This is polymorphism 101
 
-In type compatibility of complex types composed of such `Base` and `Child` depending on where the `Base` and `Child` in similar scenarios is driven by *variance*.
+In type compatibility of complex types composed of such `Base` and `Child` types depends on where the `Base` and `Child` in similar scenarios is driven by *variance*.
 
-* Covariant : (corporate) only in *same direction*
+* Covariant : (co aka joint) only in *same direction*
 * Contravariant : (contra aka negative) only in *opposite direction*
 * Bivariant : (bi aka both) both co and contra.
-* Invariant : if the types are aren't exact then they are incompatible.
+* Invariant : if the types aren't exactly the same then they are incompatible.
 
 > Note: For a completely sound type system in the presence of mutable data like JavaScript, `invariant` is the only valid option. But as mentioned *convenience* forces us to make unsound choices.
 
@@ -101,10 +101,11 @@ In type compatibility of complex types composed of such `Base` and `Child` depen
 There are a few subtle things to consider when comparing two functions.
 
 ### Return Type
+
 `covariant`: The return type must contain at least enough data.
 
 ```ts
-/** Type Heirarchy */
+/** Type Hierarchy */
 interface Point2D { x: number; y: number; }
 interface Point3D { x: number; y: number; z: number; }
 
@@ -118,7 +119,8 @@ iMakePoint3D = iMakePoint2D; // ERROR: Point2D is not assignable to Point3D
 ```
 
 ### Number of arguments
-Less arguments are okay (i.e. functions can chose to ignore additional args). After all you are guaranteed to be called with at least enough arguments.
+
+Fewer arguments are okay (i.e. functions can choose to ignore additional parameters). After all you are guaranteed to be called with at least enough arguments.
 
 ```ts
 let iTakeSomethingAndPassItAnErr
@@ -128,8 +130,8 @@ iTakeSomethingAndPassItAnErr(() => null) // Okay
 iTakeSomethingAndPassItAnErr((err) => null) // Okay
 iTakeSomethingAndPassItAnErr((err, data) => null) // Okay
 
-// ERROR: function may be called with `more` not being passed in
-iTakeSomethingAndPassItAnErr((err, data, more) => null); // ERROR
+// ERROR: Argument of type '(err: any, data: any, more: any) => null' is not assignable to parameter of type '(err: Error, data: any) => void'.
+iTakeSomethingAndPassItAnErr((err, data, more) => null);
 ```
 
 ### Optional and Rest Parameters
@@ -146,7 +148,6 @@ bas = bar = foo;
 ```
 
 > Note: optional (in our example `bar`) and non optional (in our example `foo`) are only compatible if strictNullChecks is false.
-
 
 ### Types of arguments
 
@@ -180,7 +181,7 @@ Also makes `Array<Child>` assignable to `Array<Base>` (covariance) as the functi
 **This can be confusing for people coming from other languages** who would expect the following to error but will not in TypeScript:
 
 ```ts
-/** Type Heirarchy */
+/** Type Hierarchy */
 interface Point2D { x: number; y: number; }
 interface Point3D { x: number; y: number; z: number; }
 
@@ -264,7 +265,7 @@ size = animal; // ERROR
 
 ## Generics
 
-Since TypeScript has a structural type system, type parameters only affect compatibility when used by member. For example, in the  following `T` has no impact on compatibility:
+Since TypeScript has a structural type system, type parameters only affect compatibility when used by a member. For example, in the  following `T` has no impact on compatibility:
 
 ```ts
 interface Empty<T> {
@@ -275,7 +276,7 @@ let y: Empty<string>;
 x = y;  // okay, y matches structure of x
 ```
 
-However the if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
+However, if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
 
 ```ts
 interface NotEmpty<T> {
@@ -301,12 +302,31 @@ let reverse = function<U>(y: U): U {
 identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
 ```
 
+Generics involving classes are matched by relevant class compatibility as mentioned before. e.g. 
+
+```ts
+class List<T> {
+  add(val: T) { }
+}
+
+class Animal { name: string; }
+class Cat extends Animal { meow() { } }
+
+const animals = new List<Animal>();
+animals.add(new Animal()); // Okay 
+animals.add(new Cat()); // Okay 
+
+const cats = new List<Cat>();
+cats.add(new Animal()); // Error 
+cats.add(new Cat()); // Okay
+```
+
 ## FootNote: Invariance
 
 We said invariance is the only sound option. Here is an example where both `contra` and `co` variance are shown to be unsafe for arrays.
 
 ```ts
-/** Heirarchy */
+/** Hierarchy */
 class Animal { constructor(public name: string){} }
 class Cat extends Animal { meow() { } }
 

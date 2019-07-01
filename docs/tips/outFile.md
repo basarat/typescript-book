@@ -1,4 +1,4 @@
-# `--outFile` is BAD
+# `--outFile` is BAD {#outFile}
 
 Its a bad idea for you to use because of the following reasons:
 
@@ -57,7 +57,7 @@ If you use `--out` then single `.ts` files cannot be codegened into single `.js`
 Also source maps are positionally sensitive and run-length encoded so most of the map has to be rebuilt on a recompile if you use source maps (which you should!). At high-10s to 100s kloc combined it’s going to get slow.
 
 ## Global Scope
-Sure you can use name spaces but its still on `window` if you run it in the browser. Namespaces are just an unnecessary workaround. Also `/// <reference` comments introduce an global context in *your code* that can get hard to maintain.
+Sure you can use name spaces but its still on `window` if you run it in the browser. Namespaces are just an unnecessary workaround. Also `/// <reference` comments introduce a global context in *your code* that can get hard to maintain.
 
 Also if your company has several teams working independently and then someone decides to try integrating two independently written apps there is a high likelihood of a name conflict.
 
@@ -102,4 +102,4 @@ So `a.ts` [cannot be compiled in isolation](https://github.com/Microsoft/TypeScr
 
 https://twitter.com/nycdotnet/status/613705850574778368 
 
-![](https://pbs.twimg.com/media/CIRSOBmWsAQdzvP.jpg)
+![The Bas Signal](https://pbs.twimg.com/media/CIRSOBmWsAQdzvP.jpg)

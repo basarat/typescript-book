@@ -1,0 +1,14 @@
+<script>
+  var interval = setInterval(function(){
+      var el = document.querySelector('.search-noresults');
+      var content = '<a href="https://paypal.me/basaratali" style="display: block;text-align: center;"> Buy me a beer / coffee 🍻 ☕️ 🌹 <br><br><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="donate"><br><br></a>';
+      if(el) {
+        if (el.innerHTML.indexOf(content) === -1){
+          var elChild = document.createElement('div');
+          elChild.innerHTML = content;
+          el.insertBefore(elChild, el.firstChild);
+        }
+        clearInterval(interval);
+      }
+  },1000);
+</script>

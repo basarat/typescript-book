@@ -27,7 +27,7 @@ Before we dig too deep into the parser internals, here is a sample code that use
 import * as ts from "ntypescript";
 
 function printAllChildren(node: ts.Node, depth = 0) {
-    console.log(new Array(depth + 1).join('----'), ts.syntaxKindToName(node.kind), node.pos, node.end);
+    console.log(new Array(depth + 1).join('----'), ts.formatSyntaxKind(node.kind), node.pos, node.end);
     depth++;
     node.getChildren().forEach(c=> printAllChildren(c, depth));
 }

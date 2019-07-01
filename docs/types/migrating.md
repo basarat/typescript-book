@@ -1,6 +1,10 @@
 ## Migrating From JavaScript
 
-In general the process consists of the following steps:
+Assuming:
+* you know JavaScript.
+* you know patterns and build tools (e.g. webpack) used in the project. 
+
+With that assumption out of the way, in general the process consists of the following steps:
 
 * Add a `tsconfig.json`.
 * Change your source code file extensions from `.js` to `.ts`. Start *suppressing* errors using `any`.
@@ -94,10 +98,16 @@ import * as $ from "jquery";
 
 # External non js resources
 
-You can even allow import of any file e.g. `.css` files (if you are using something like webpack) with a simple `*` style declaration: 
+You can even allow import of any file e.g. `.css` files (if you are using something like webpack style loaders or css modules) with a simple `*` style declaration (ideally in a [`globals.d.ts` file](../project/globals.md)): 
 
 ```ts
 declare module "*.css";
 ```
 
 Now people can `import * as foo from "./some/file.css";`
+
+Similarly if you are using html templates (e.g. angular) you can: 
+
+```ts
+declare module "*.html";
+```

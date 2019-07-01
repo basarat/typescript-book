@@ -2,7 +2,7 @@
 
 > An unofficial TypeScript StyleGuide
 
-People have asked me for my opinions on this. Personally I don't enforce these a lot my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](../tips/main.md) (e.g. type assertion is bad, property setters are bad) 🌹.
+People have asked me for my opinions on this. Personally I don't enforce these a lot on my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](../tips/main.md) (e.g. type assertion is bad, property setters are bad) 🌹.
 
 Key Sections:
 
@@ -19,6 +19,7 @@ Key Sections:
 * [Use semicolons](#semicolons)
 * [Annotate Arrays as `Type[]`](#array)
 * [File Names](#filename)
+* [`type` vs `interface`](#type-vs-interface)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -215,14 +216,12 @@ if (error !== null)
 if (error != undefined)
 ```
 
-PS: [More about `null`](../tips/null.md)
-
 ## Formatting
 The TypeScript compiler ships with a very nice formatting language service. Whatever output it gives by default is good enough to reduce the cognitive overload on the team.
 
 Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically format your code on the command line. Also your IDE (atom/vscode/vs/sublime) already has formatting support built-in.
 
-Examples: 
+Examples:
 ```ts
 // Space before type i.e. foo:<space>string
 const foo: string = "hello";
@@ -250,7 +249,7 @@ const foo: string = "hello";
 
 * Use semicolons.
 
-> Reasons: Explicit semicolons helps language formatting tools give consistent results. Missing ASI (automatic semicolon insertion) can trip new devs e.g. `foo() \n (function(){})` will be a single statement (not two).
+> Reasons: Explicit semicolons helps language formatting tools give consistent results. Missing ASI (automatic semicolon insertion) can trip new devs e.g. `foo() \n (function(){})` will be a single statement (not two). Recommended by TC39 as well.
 
 ## Array
 
@@ -262,3 +261,26 @@ const foo: string = "hello";
 Name files with `camelCase`. E.g. `accordian.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` etc.
 
 > Reason: Conventional across many JS teams.
+
+## type vs. interface
+
+* Use `type` when you *might* need a union or intersection:
+
+```
+type Foo = number | { someProperty: number }
+```
+* Use `interface` when you want `extends` or `implements` e.g
+
+```
+interface Foo {
+  foo: string;
+}
+interface FooBar extends Foo {
+  bar: string;
+}
+class X implements FooBar {
+  foo: string;
+  bar: string;
+}
+```
+* Otherwise use whatever makes you happy that day.

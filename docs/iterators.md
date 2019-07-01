@@ -11,7 +11,7 @@ interface Iterator<T> {
     throw?(e?: any): IteratorResult<T>;
 }
 ```
-
+([More on that `<T>` notation later](./types/generics.html))  
 This interface allows to retrieve a value from some collection or sequence
 which belongs to the object.
 
@@ -28,8 +28,6 @@ components of which this frame consists. With Iterator interface it is possible
 to retrieve components from this frame object like below:
 
 ```ts
-'use strict';
-
 class Component {
   constructor (public name: string) {}
 }
@@ -67,11 +65,11 @@ let component = iteratorResult1.value; //Component { name: 'top' }
 ```
 Again. Iterator itself is not a TypeScript feature, this code could work without
 implementing Iterator and IteratorResult interfaces explicitly.
-However it is very helpful to use these common
+However, it is very helpful to use these common
 ES6 [interfaces](./types/interfaces.md) for code consistency.
 
 Ok, Nice, but could be more helpful. ES6 defines the *iterable protocol*
-which includes [Symbol.iterator] `symbol` if Iterable interface implemented:
+which includes the [Symbol.iterator] `symbol` if the Iterable interface is implemented:
 ```ts
 //...
 class Frame implements Iterable<Component> {
@@ -79,12 +77,10 @@ class Frame implements Iterable<Component> {
   constructor(public name: string, public components: Component[]) {}
 
   [Symbol.iterator]() {
-
     let pointer = 0;
     let components = this.components;
 
     return {
-
       next(): IteratorResult<Component> {
         if (pointer < components.length) {
           return {
@@ -98,11 +94,8 @@ class Frame implements Iterable<Component> {
           }
         }
       }
-
     }
-
   }
-
 }
 
 let frame = new Frame("Door", [new Component("top"), new Component("bottom"), new Component("left"), new Component("right")]);
@@ -158,16 +151,16 @@ class Fib implements IterableIterator<number> {
     var current = this.fn1;
     this.fn1 = this.fn2;
     this.fn2 = current + this.fn1;
-    if (this.maxValue && current <= this.maxValue) {
+    if (this.maxValue != null && current >= this.maxValue) {
       return {
-        done: false,
-        value: current
-      }
-    } return {
-      done: true,
-      value: null
+        done: true,
+        value: null
+      } 
+    } 
+    return {
+      done: false,
+      value: current
     }
-
   }
 
   [Symbol.iterator](): IterableIterator<number> {
@@ -195,7 +188,7 @@ for(let num of fibMax21) {
 ```
 
 #### Building code with iterators for ES5 target
-Code examples above require ES6 target, however it could work
+Code examples above require ES6 target. However, it could work
 with ES5 target as well if target JS engine supports `Symbol.iterator`.
 This can be achieved by using ES6 lib with ES5 target
 (add es6.d.ts to your project) to make it compile.

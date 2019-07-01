@@ -1,5 +1,5 @@
 ### Trivia
-Trivia (called that because it's `trivial`) represent the parts of the source text that are largely insignificant for normal understanding of the code. For example; whitespace, comments, and even conflict markers. Trivia is *not stored* in the AST (to keep it lightweight). However it can be fetched *on demand* using a few `ts.*` APIs. 
+Trivia (called that because it's `trivial`) represent the parts of the source text that are largely insignificant for normal understanding of the code. For example; whitespace, comments, and even conflict markers. Trivia is *not stored* in the AST (to keep it lightweight). However, it can be fetched *on demand* using a few `ts.*` APIs. 
 
 Before we show them you need to understand the following:
 

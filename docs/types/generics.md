@@ -19,7 +19,7 @@ class Queue {
 }
 ```
 
-One issue with this implementation is that it allows people to add *anything* to the queue and when they pop it - it can be *anything*. This is shown below, where someone can push a `string` onto the queue while the usage actually assumes that only `numbers` where pushed in:
+One issue with this implementation is that it allows people to add *anything* to the queue and when they pop it - it can be *anything*. This is shown below, where someone can push a `string` onto the queue while the usage actually assumes that only `numbers` were pushed in:
 
 ```ts
 class Queue {
@@ -30,14 +30,14 @@ class Queue {
 
 const queue = new Queue();
 queue.push(0);
-queue.push("1"); // Ops a mistake
+queue.push("1"); // Oops a mistake
 
 // a developer walks into a bar
 console.log(queue.pop().toPrecision(1));
 console.log(queue.pop().toPrecision(1)); // RUNTIME ERROR
 ```
 
-One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these contraints. E.g. a quick and dirty number queue:
+One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these constraints. E.g. a quick and dirty number queue:
 
 ```ts
 class QueueNumber {
@@ -110,78 +110,38 @@ class Utility {
 
 > TIP: You can call the generic parameter whatever you want. It is conventional to use `T`, `U`, `V` when you have simple generics. If you have more than one generic argument try to use meaningful names e.g. `TKey` and `TValue` (conventional to prefix with `T` as generics are also called *templates* in other languages e.g. C++).
 
-## Generics in TSX
-
-Because `.tsx` / `.jsx` uses syntax like `<div>` to denote JSX blocks it offers a few unique challenges for Generics.
-
-> Quick Tip:  Use `as Foo` syntax for type assertions as we [mentioned before][type-assertion].
-
-[type-assertion]:./type-assertion.md#as-foo-vs-foo
-
-
-### Generic functions
-
-Something like the following works fine:
-
-```ts
-function foo<T>(x: T): T { return x; }
-```
-
-However using an arrow generic function will not:
-
-```ts
-const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
-```
-
-**Workaround**: Use `extends` on the generic parameter to hint the compiler that it's a generic, e.g.:
-
-```ts
-const foo = <T extends {}>(x: T) => x;
-```
-
-### Generic Components
-
-Since JSX doesn't have a syntax for providing a generic parameter you need to specialize the component using a type assertion before creating it, e.g.:
-
-```ts
-/** Generic component */
-type SelectProps<T> = { items: T[] }
-class Select<T> extends React.Component<SelectProps<T>, any> { }
-
-/** Specialization */
-interface StringSelect { new (): Select<string> };
-const StringSelect = Select as StringSelect;
-
-/** Usage */
-const Form = ()=> <StringSelect items={['a', 'b']} />;
-```
-
 ## Useless Generic
 
-I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you probably have a useless generic. E.g. people have attempted to type the Node.js `require` function as:
+I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you might have a useless generic. E.g. the following function
 
 ```ts
-declare function require<T>(name: string): T;
+declare function foo<T>(arg: T): void;
 ```
-
-In this case you can see that the type `T` is only used in one place. So there is not constraint *between* members. You would be better off with a type assertion in this case:
+Here the generic `T` is completely useless as it is only used in a *single* argument position. It might as well be: 
 
 ```ts
-declare function require(name: string): any;
-
-const something = require('something') as TypeOfSomething;
+declare function foo(arg: any): void;
 ```
-
-This is just an example; if you are considering on using this `require` typings, you don't need to because:
-
-1. It's already there in `node.d.ts`: you can install using `npm install @types/node --save-dev`.
-1. You should consider using the type definitions for your library e.g. for jquery `npm install @types/jquery --save-dev` instead of using raw `require`.
 
 ### Design Pattern: Convenience generic
 
-The previous example of `require<T>` was intentionally meant to make clear the fact that generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
+Consider the function: 
 
-An example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
+```ts
+declare function parse<T>(name: string): T;
+```
+
+In this case you can see that the type `T` is only used in one place. So there is no constraint *between* members. This is equivalent to a type assertion in terms of type safety:
+
+```ts
+declare function parse(name: string): any;
+
+const something = parse('something') as TypeOfSomething;
+```
+
+Generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
+
+A more obvious example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
 ```ts
 const getJSON = <T>(config: {
     url: string,
@@ -197,14 +157,15 @@ const getJSON = <T>(config: {
       .then<T>(response => response.json());
   }
 ```
-Note that you still have to explicitly annotate what you want, but the `getJSON<T>` signature `(config) => Promise<T>` saves you a few key strokes:
+
+Note that you still have to explicitly annotate what you want, but the `getJSON<T>` signature `(config) => Promise<T>` saves you a few key strokes (you don't need to annotate the return type of `loadUsers` as it can be inferred):
 
 ```ts
 type LoadUsersResponse = {
   users: {
     name: string;
     email: string;
-  }[];
+  }[];  // array of user objects
 }
 function loadUsers() {
   return getJSON<LoadUsersResponse>({ url: 'https://example.com/users' });

@@ -1,6 +1,6 @@
-## `export default` can lead to problems
+## `export default` considered harmful
 
-Let's go with an example. Consider you have a file `foo.ts` with the following contents:
+Consider you have a file `foo.ts` with the following contents:
 
 ```ts
 class Foo {
@@ -15,7 +15,7 @@ import Foo from "./foo";
 ```
 
 There are a few maintainability concerns here:
-* If you refactor `Foo` in `foo.ts` it will not rename it in `bar.ts`
+* If you refactor `Foo` in `foo.ts` it will not rename it in `bar.ts`.
 * If you end up needing to export more stuff from `foo.ts` (which is what many of your files will have) then you have to juggle the import syntax.
 
 For this reason I recommend simple exports + destructured import. E.g. `foo.ts`:
@@ -27,15 +27,44 @@ export class Foo {
 And then:
 
 ```ts
-import {Foo} from "./foo";
+import { Foo } from "./foo";
 ```
 
-> **Bonus points**: You even get autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+Below I also present a few more reasons.
 
-> **Bonus points**: Better commonJs experience. With `default` there is horrible experience for commonjs users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`
+### Poor Discoverability
+Discoverability is very poor for default exports. You cannot explore a module with intellisense to see if it has a default export or not.
 
-> **Bonus points**: You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
+With export default you get nothing here (maybe it does export default / maybe it doesn't `¯\_(ツ)_/¯`):
+```
+import /* here */ from 'something';
+```
 
-> **Bonus points**: Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` caus its a well defined name exported from a module.
+Without export default you get a nice intellisense here: 
 
-> **Bonus points**: Reexporting is unnecessarily hard. Reexporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
+```
+import { /* here */ } from 'something';
+```
+
+### Autocomplete 
+Irrespective of if you know about the exports, you evenautocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+
+### CommonJS interop
+With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`. You will most likely want to rename the `default` export to something else when you import it.
+
+### Typo Protection
+You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
+
+### TypeScript auto-import
+Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module. Some tools out there will try to magic read and *infer* a name for a default export but magic is flaky.
+
+### Re-exporting
+Re-exporting is unnecessarily hard. Re-exporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
+
+### Dynamic Imports
+Default exports expose themselves badly named as `default` in dynamic `import`s e.g. 
+
+```
+const HighChart = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+Highcharts.default.chart('container', { ... }); // Notice `.default`
+```

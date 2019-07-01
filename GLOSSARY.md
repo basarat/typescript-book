@@ -1,8 +1,8 @@
-# Duck Typing
-If it walks like a duck and quacks like a duck, it is a duck. For TypeScript if it has all the members structurally then it is okay for other things (irrespecitive of name) that accept that structure.
+# Утиная типизация
+Если это ходит как утка и квакает как утка, это утка. Для TypeScript если это имеет всех членов структурно, тогда это хорошо для других вещей (безответственных имени), которые принимают эту структуру.
 
 # OE
-Operating Environment. I'd like to use the term Operating System, but that is not necessarily what I mean here. Think Browser,Node.js,WScriptHost etc.
+Оперативное окружение. Это не тот же термин что и Операционной системе, но это не обязательно то, что я имею в виду здесь. Благодаря браузеру,Node.js,WScriptHost и т.д.
 
-# Incremental Parsing
-Re-Parsing as the user edits the code.
+# Инкрементный анализ
+Обрабатывается аналогично тому как пишется код.

@@ -1,7 +1,5 @@
 ## Generators
 
-> NOTE: You cannot use generators in TypeScript in a meaningful way (the ES5 emitter is in progress). However that will change soon so we still have this chapter.
-
 `function *` is the syntax used to create a *generator function*. Calling a generator function returns a *generator object*. The generator object just follows the [iterator][iterator] interface (i.e. the `next`, `return` and `throw` functions). 
 
 There are two key motivations behind generator functions: 

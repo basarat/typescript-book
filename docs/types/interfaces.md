@@ -15,7 +15,7 @@ interface Point {
 declare var myPoint: Point;
 ```
 
-However the beauty of *Sample B* is that if someone authors a library that builds on the `myPoint` library to add new members, they can easily add to the existing declaration of `myPoint`:
+However, the beauty of *Sample B* is that if someone authors a library that builds on the `myPoint` library to add new members, they can easily add to the existing declaration of `myPoint`:
 
 ```ts
 // Lib a.d.ts
@@ -50,7 +50,7 @@ class MyPoint implements Point {
 }
 ```
 
-Basically in the presence of that implements any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync:
+Basically in the presence of that `implements`, any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync:
 
 ```ts
 interface Point {

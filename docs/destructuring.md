@@ -51,7 +51,7 @@ var {bar: {bas}} = foo; // Effectively `var bas = foo.bar.bas;`
 ```
 
 #### Object Destructuring with rest
-You can pick up any number of elements from the an object and get *an object* of the remaining elements using object destructuring with rest.
+You can pick up any number of elements from an object and get *an object* of the remaining elements using object destructuring with rest.
 
 ```ts
 var {w, x, ...remaining} = {w: 1, x: 2, y: 3, z: 4};
@@ -83,7 +83,7 @@ console.log(x, y); // 2,1
 Note that array destructuring is effectively the compiler doing the `[0], [1], ...` and so on for you. There is no guarantee that these values will exist.
 
 #### Array Destructuring with rest
-You can pick up any number of elements from the array and get *an array* of the remaining elements using array destructuring with rest.
+You can pick up any number of elements from an array and get *an array* of the remaining elements using array destructuring with rest.
 
 ```ts
 var [x, y, ...remaining] = [1, 2, 3, 4];

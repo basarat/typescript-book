@@ -1,5 +1,7 @@
 ## Async Await
 
+> [A PRO egghead video course that covers the same material](https://egghead.io/courses/async-await-using-typescript)
+
 As a thought experiment imagine the following: a way to tell the JavaScript runtime to pause the executing of code on the `await` keyword when used on a promise and resume *only* once (and if) the promise returned from the function is settled:
 
 ```ts
@@ -63,7 +65,7 @@ function delay(milliseconds: number, count: number): Promise<number> {
         });
 }
 
-// async function always return a Promise
+// async function always returns a Promise
 async function dramaticWelcome(): Promise<void> {
     console.log("Hello");
 
@@ -96,7 +98,7 @@ function delay(milliseconds, count) {
         }, milliseconds);
     });
 }
-// async function always return a Promise
+// async function always returns a Promise
 function dramaticWelcome() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("Hello");
@@ -157,7 +159,7 @@ function delay(milliseconds, count) {
         }, milliseconds);
     });
 }
-// async function always return a Promise
+// async function always returns a Promise
 function dramaticWelcome() {
     return __awaiter(this, void 0, void 0, function () {
         var i, count;
@@ -189,9 +191,9 @@ dramaticWelcome();
 You can see full example [here][asyncawaites5code].
 
 
-**Note**: for both target scenarios, we need to make sure our run-time has an ECMAScript-compliant Promise available globally. That might involve grabbing a polyfill for Promise. We also need to make sure that TypeScript knows Promise exists by setting your lib flag to something like "dom", "es2015" or "dom", "es2015.promise", "es5". 
+**Note**: for both target scenarios, we need to make sure our run-time has an ECMAScript-compliant Promise available globally. That might involve grabbing a polyfill for Promise. We also need to make sure that TypeScript knows Promise exists by setting our lib flag to something like "dom", "es2015" or "dom", "es2015.promise", "es5". 
 **We can see what browsers DO have Promise support (native and polyfilled) [here](https://kangax.github.io/compat-table/es6/#test-Promise).**
 
 [generators]:./generators.md
-[asyncawaites5code]:../code/async-await/es5/asyncAwaitES5.js
-[asyncawaites6code]:../code/async-await/es6/asyncAwaitES6.js
+[asyncawaites5code]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es5/asyncAwaitES5.js
+[asyncawaites6code]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es6/asyncAwaitES6.js

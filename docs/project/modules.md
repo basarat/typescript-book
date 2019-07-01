@@ -31,9 +31,9 @@ var bar = foo; // ERROR: "cannot find name 'foo'"
 If you want to use stuff from `foo.ts` in `bar.ts` *you need to explicitly import it*. This is shown in an updated `bar.ts` below:
 
 ```ts
-import {foo} from "./foo";
+import { foo } from "./foo";
 var bar = foo; // allowed
 ```
-Using an `import` in `bar.ts` not only allows you to bring in stuff from other files, but also marks the file `bar.ts` as a *module* and therefore declarations in `bar.ts` doesn't pollute the global namespace either.
+Using an `import` in `bar.ts` not only allows you to bring in stuff from other files, but also marks the file `bar.ts` as a *module* and therefore, declarations in `bar.ts` don't pollute the global namespace either.
 
 What JavaScript is generated from a given TypeScript file that uses external modules is driven by the compiler flag called `module`.

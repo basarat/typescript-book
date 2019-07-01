@@ -9,12 +9,12 @@ The desire for these goals is motivated below.
 
 You might be wondering "**Why add types to JavaScript?**"
 
-Types have proven ability to enhance code quality and understandability. Large teams (google,microsoft,facebook) have continually arrived at this conclusion. Specifically:
+Types have proven ability to enhance code quality and understandability. Large teams (Google, Microsoft, Facebook) have continually arrived at this conclusion. Specifically:
 
 * Types increase your agility when doing refactoring. *It's better for the compiler to catch errors than to have things fail at runtime*.
 * Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
 
-However types have a way of being unnecessarily ceremonious. TypeScript is very particular about keeping the barrier to entry as low as possible. Here's how:
+However, types have a way of being unnecessarily ceremonious. TypeScript is very particular about keeping the barrier to entry as low as possible. Here's how:
 
 ### Your JavaScript is TypeScript
 TypeScript provides compile time type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code `.js` file can be renamed to a `.ts` file and TypeScript will still give you back valid `.js` equivalent to the original JavaScript file. TypeScript is *intentionally* and strictly a superset of JavaScript with optional Type checking.
@@ -31,7 +31,7 @@ foo = '456'; // Error: cannot assign `string` to `number`
 This type inference is well motivated. If you do stuff like shown in this example, then, in the rest of your code, you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later.
 
 ### Types can be Explicit
-As we've mentioned before, TypeScript will infer as much as it can safely, however you can use annotations to:
+As we've mentioned before, TypeScript will infer as much as it can safely. However, you can use annotations to:
 1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
 1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
 
@@ -99,12 +99,12 @@ $('.awesome').show(); // Error: cannot find name `$`
 ```
 As a quick fix *you can tell TypeScript* that there is indeed something called `$`:
 ```ts
-declare var $:any;
+declare var $: any;
 $('.awesome').show(); // Okay!
 ```
 If you want you can build on this basic definition and provide more information to help protect you from errors:
 ```ts
-declare var $:{
+declare var $: {
     (selector:string): any;
 };
 $('.awesome').show(); // Okay!
@@ -114,7 +114,7 @@ $(123).show(); // Error: selector needs to be a string
 We will discuss the details of creating TypeScript definitions for existing JavaScript in detail later once you know more about TypeScript (e.g. stuff like `interface` and the `any`).
 
 ## Future JavaScript => Now
-TypeScript provides a number of features that are planned in ES6 for current JavaScript engines (that only support ES5 etc). The typescript team is actively adding these features and this list is only going to get bigger over time and we will cover this in its own section. But just as a specimen here is an example of a class:
+TypeScript provides a number of features that are planned in ES6 for current JavaScript engines (that only support ES5 etc). The TypeScript team is actively adding these features and this list is only going to get bigger over time and we will cover this in its own section. But just as a specimen here is an example of a class:
 
 ```ts
 class Point {
@@ -127,13 +127,13 @@ class Point {
 
 var p1 = new Point(0, 10);
 var p2 = new Point(10, 20);
-var p3 = p1.add(p2); // {x:10,y:30}
+var p3 = p1.add(p2); // { x: 10, y: 30 }
 ```
 
 and the lovely fat arrow function:
 
 ```ts
-var inc = (x)=>x+1;
+var inc = x => x+1;
 ```
 
 ### Summary

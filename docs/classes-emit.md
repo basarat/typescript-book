@@ -10,7 +10,7 @@ Point.prototype.add = function (point) {
 };
 ```
 
-The reason its wrapped in an Immediately-Invoked Function Expression (IIFE) i.e.
+The reason it's wrapped in an Immediately-Invoked Function Expression (IIFE) i.e.
 
 ```ts
 (function () {
@@ -81,7 +81,7 @@ delete foo.__proto__.bar; // remove from foo.__proto__
 console.log(foo.bar); // undefined
 ```
 
-Cool so you understand `__proto__`. Another useful information is that all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function. This is shown below:
+Cool so you understand `__proto__`. Another useful fact is that all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function. This is shown below:
 
 ```ts
 function Foo() { }
@@ -121,7 +121,7 @@ That's it. Now look at the following straight out of `__extends`. I've taken the
 
 Reading this function in reverse the `d.prototype = new __()` on line 3 effectively means `d.prototype = {__proto__ : __.prototype}` (because of the effect of `new` on `prototype` and `__proto__`), combining it with the previous line (i.e. line 2 `__.prototype = b.prototype;`) you get `d.prototype = {__proto__ : b.prototype}`.
 
-But wait, we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, d.constructor = d}` (because of the effect of `new` on `this` inside the called function). So, since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`.
+But wait, we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, constructor : d}` (because of the effect of `new` on `this` inside the called function). So, since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`.
 
 #### `d.prototype.__proto__ = b.prototype` significance
 

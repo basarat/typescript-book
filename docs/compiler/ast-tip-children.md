@@ -23,7 +23,7 @@ export function forEachChild<T>(node: Node, cbNode: (node: Node) => T, cbNodeArr
             // .... lots more
 ```
 
-Basically it checks `node.kind` and based on that assumes an interface offered by the `node` and calls the `cbNode` on the children. Note, however that this function doesn't call `visitNode` for *all* children (e.g. SyntaxKind.SemicolonToken). If you want *all* the children of a node in the AST just call `.getChildren` member function of the `Node`.
+Basically, it checks `node.kind` and based on that assumes an interface offered by the `node` and calls the `cbNode` on the children. However, note that this function doesn't call `visitNode` for *all* children (e.g. SyntaxKind.SemicolonToken). If you want *all* the children of a node in the AST just call `.getChildren` member function of the `Node`.
 
 E.g. here is a function that prints the verbose `AST` of a node:
 

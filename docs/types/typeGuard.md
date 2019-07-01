@@ -79,6 +79,28 @@ doStuff(new Foo());
 doStuff(new Bar());
 ```
 
+### in 
+
+The `in` operator does a safe check for the existance of a property on an object and can be used as a type guard. E.g. 
+
+```ts
+interface A {
+  x: number;
+}
+interface B {
+  y: string;
+}
+
+function doStuff(q: A | B) {
+  if ('x' in q) {
+    // q: A
+  }
+  else {
+    // q: B
+  }
+}
+```
+
 ### Literal Type Guard
 
 When you have literal types in a union you can check them to discriminate e.g. 
@@ -145,4 +167,38 @@ function doStuff(arg: Foo | Bar) {
 
 doStuff({ foo: 123, common: '123' });
 doStuff({ bar: 123, common: '123' });
+```
+
+### Type Guards and callbacks
+
+TypeScript doesn't assume type guards remain active in callbacks as making this assumption is dangerous. e.g. 
+
+```js
+// Example Setup
+declare var foo:{bar?: {baz: string}};
+function immediate(callback: ()=>void) {
+  callback();
+}
+
+
+// Type Guard
+if (foo.bar) {
+  console.log(foo.bar.baz); // Okay
+  functionDoingSomeStuff(() => {
+    console.log(foo.bar.baz); // TS error: Object is possibly 'undefined'"
+  });
+}
+```
+
+The fix is as easy as storing the inferred safe value in a local variable, automatically ensuring it doesn't get changed externally, and TypeScript can easily understand that: 
+
+```js
+// Type Guard
+if (foo.bar) {
+  console.log(foo.bar.baz); // Okay
+  const bar = foo.bar;
+  functionDoingSomeStuff(() => {
+    console.log(bar.baz); // Okay
+  });
+}
 ```
