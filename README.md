@@ -1,5 +1,4 @@
 Глубокое погружение в TypeScript
-=======
 
 Помогая в решении проблем которые часто возникают у людей при использовании TypeScript, у меня возникла идея этой книги. Материалом для книги послужил [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) и огромный опыт [сообщества TypeScript](https://github.com/TypeStrong/). Вы можете [отслеживать обновления](https://twitter.com/basarat) и [не забудьте поставить ★ на GitHub](https://github.com/basarat/typescript-book) 🌹
 
@@ -50,5 +49,5 @@
 ## Отдельное спасибо
 Всем отличным [контрибьюторам](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
 
-## Поделится
-публичная ссылка: http://basarat.gitbooks.io/typescript/
+## Поделиться
+Публичная ссылка: http://basarat.gitbooks.io/typescript/
