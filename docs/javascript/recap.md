@@ -1,7 +1,6 @@
 # Ваш JavaScript - это TypeScript
 
-Существовало (и будет существовать) множество соперников среди компиляторов *Какого-то синтаксиса* в *JavaScript*. TypeScript отличается от них тем, что *Ваш JavaScript - это TypeScript*.
-There were (and will continue to be) a lot of competitors in *Some syntax* to *JavaScript* compilers. TypeScript отличает is different from them in that *Your JavaScript is TypeScript*. Вот диаграмма:
+Существовало (и будет существовать) множество соперников среди компиляторов *Какого-нибудь синтаксиса* в *JavaScript*. TypeScript отличается от них тем, что *Ваш JavaScript - это TypeScript*. Вот диаграмма:
 
 ![JavaScript is TypeScript](https://raw.githubusercontent.com/basarat/typescript-book/master/images/venn.png)
 
@@ -15,7 +14,6 @@ TypeScript - это просто JavaScript с документацией.
 ## Делая JavaScript лучше
 
 TypeScript будет стараться защитить вас от кусков JavaScript, которые никогда не работали (чтобы вам не нужно было запоминать их):
-TypeScript will try to protect you from portions of JavaScript that never worked (so you don't need to remember this stuff):
 
 ```ts
 [] + []; // JavaScript вываст вам "" (немного смысла в этом есть), TypeScript выдаст ошибку
