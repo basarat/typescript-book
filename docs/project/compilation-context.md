@@ -1,2 +1,3 @@
 ## Compilation Context
-The compilation context is basically just a fancy term for grouping of the files that TypeScript will parse and analyze to determine what is valid and what isn't. Along with the information about which files, the compilation context contains information about *which compiler options* are in use. A great way to define this logical grouping (we also like to use the term *project*) is using a `tsconfig.json` file.
+
+컴파일 컨텍스트는 근본적으로 집단에서 사용하는 용어이며 타입스크립트는 유효한 것을 분석하고 해석합니다. 어떤 파일의 정보와 함께 컴파일 컨텍스트에는 사용중인 컴파일러 옵션에 대한 정보가 들어있습니다. 이 논리그룹을 정의하는 가장 좋은 방법은 `tsconfig.json` 파일을 사용하는 것 입니다.
