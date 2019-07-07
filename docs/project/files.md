@@ -1,33 +1,26 @@
 ## Which files?
 
-Use `include` and `exclude` to specify files / folders / globs. E.g.:
-
+파일 / 폴더를 지정하려면 `include`와 `exclude`를 사용하십시요.
 
 ```json
 {
-    "include":[
-        "./folder"
-    ],
-    "exclude":[
-        "./folder/**/*.spec.ts",
-        "./folder/someSubFolder"
-    ]
+    "include": ["./folder"],
+    "exclude": ["./folder/**/*.spec.ts", "./folder/someSubFolder"]
 }
 ```
 
 ### Globs
 
-* For globs : `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be assumed and if `allowJs:true` so will `.js`/`.jsx`)
+-   전체를 선택하려면 `**/*`을 사용해야 합니다. (예: `somefolder/**/*`) 이것의 의미는 모든 폴더 그리고 모든 파일을 의미합니다. (확장자 `.ts`/`.tsx`와 그리고 `allowJs:true`인 경우 `.js`/`.jsx`가 됩니다.)
 
 ### `files` option
-You can either use `files` to be explicit. 
+
+당신은 명시적으로 `files`를 사용할 수 있습니다.
 
 ```json
 {
-    "files":[
-        "./some/file.ts"
-    ]
+    "files": ["./some/file.ts"]
 }
 ```
 
-But it is not recommended as you have to keep updating it. Instead use `include` to just add the containing folder. 
+하지만 계속 업데이트 해야하므로 권장하지 않습니다. 대신에 `include`에 폴더를 추가해서 사용할 수 있습니다.
