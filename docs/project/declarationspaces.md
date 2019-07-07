@@ -1,48 +1,53 @@
 ## Declaration Spaces
 
-There are two declaration spaces in TypeScript: the *variable* declaration space and the *type* declaration space. These concepts are explored below.
+타입스크립트에서는 두가지 선언 공간이 있습니다. 변수 선언 공간과 타입 선언 공간이 있습니다. 이 개념은 아래에서 탐구됩니다.
 
 ### Type Declaration Space
-The type declaration space contains stuff that can be used as a type annotation. E.g. the following are a few type declarations:
+
+타입 선언 공간은 타입 annotation으로 사용할 수 있는 것을 포함합니다. 예: 타입들을 선언하는 방법을 제시합니다.
 
 ```ts
-class Foo {};
-interface Bar {};
-type Bas = {};
+class Foo {}
+interface Bar {}
+type Bas = {}
 ```
-This means that you can use `Foo`, `Bar`, `Bas`, etc. as a type annotation. E.g.:
+
+즉 `Foo`, `Bar`, `Bas`을 타입 주석으로 사용할 수 있습니다.
 
 ```ts
-var foo: Foo;
-var bar: Bar;
-var bas: Bas;
+var foo: Foo
+var bar: Bar
+var bas: Bas
 ```
 
-Notice that even though you have `interface Bar`, *you can't use it as a variable* because it doesn't contribute to the *variable declaration space*. This is shown below:
+당신은 `interface Bar`를 가지고 있긴 하지만 그것을 변수로 사용할 수 없습니다. 왜냐하면 그것은 변수 선언 공간에 기여하지 않기때문입니다. 아래에 설명이 있습니다.
 
 ```ts
-interface Bar {};
-var bar = Bar; // ERROR: "cannot find name 'Bar'"
+interface Bar {}
+var bar = Bar // ERROR: "cannot find name 'Bar'"
 ```
 
-The reason why it says `cannot find name` is because the name `Bar` *is not defined* in the *variable* declaration space. That brings us to the next topic "Variable Declaration Space".
+`cannot find name`을 출력하는 이유로는 `Bar`는 변수 선언 공간에 정의되지 않았기 때문입니다. 다음 주제는 "Variable Declaration Space" 입니다.
 
 ### Variable Declaration Space
-The variable declaration space contains stuff that you can use as a variable. We saw that having `class Foo` contributes a type `Foo` to the *type* declaration space. Guess what? it also contributes a *variable* `Foo` to the *variable* declaration space as shown below:
+
+변수 선언 공간은 변수로 사용할 수 있는 항목들이 들어있습니다. 우리는 앞에서 `class Foo`가 타입 선언 공간에 `Foo`를 제공한다는 것을 알았습니다. 또한 변수 선언 공간에 `Foo`를 제공하고 있습니다.
 
 ```ts
-class Foo {};
-var someVar = Foo;
-var someOtherVar = 123;
+class Foo {}
+var someVar = Foo
+var someOtherVar = 123
 ```
-This is great as sometimes you want to pass classes around as variables. Remember that:
 
-* we couldn't use something like an `interface` that is *only* in the *type* declaration space as a variable.
+때때로 클래스를 변수에 할당하고자 할때 훌륭한 방법입니다.
 
-Similarly something that you declare with `var`, is *only* in the *variable* declaration space and cannot be used as a type annotation:
+-   우리는 때때로 `interface`를 사용하지 못할수도 있습니다. 타입 선언 공간에서 `interface`와 같은 것을 변수로 사용할 수 없습니다.
+
+마찬가지로 `var`로 선언한것은 그것은 오직 변수 선언 공간으로 사용되며 타입 annotation으로는 사용되지 않습니다.
 
 ```ts
-var foo = 123;
-var bar: foo; // ERROR: "cannot find name 'foo'"
+var foo = 123
+var bar: foo // ERROR: "cannot find name 'foo'"
 ```
-The reason why it says `cannot find name` is because the name `foo` *is not defined* in the *type* declaration space.
+
+`cannot find name` 메세지가 출력된 이유는 `foo` 가 타입 선언 공간에 선언되어 있지 않기 때문입니다.
