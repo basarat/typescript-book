@@ -86,13 +86,15 @@ cd your-project
 * Create a `webpack.config.js` to bundle your modules into a single `app.js` file that contains all your resources:
 
 ```js
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/app/app.tsx',
   plugins: [
-    new CleanWebpackPlugin(['public/build']),
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['public/build']
+    }),
     new HtmlWebpackPlugin({
       template: 'src/templates/index.html'
     }),
