@@ -9,7 +9,7 @@
   "author": "Jose Quinto Zamora - https://blog.josequinto.com",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^2.4.1"
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "moment": "^2.18.1"
