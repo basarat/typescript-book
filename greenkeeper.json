@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "code/compiler/package.json",
+        "code/dynamic-import-expressions/package.json"
+      ]
+    }
+  }
+}
