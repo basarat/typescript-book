@@ -75,7 +75,7 @@ export const sum
 * A simple `foo.test.ts`:
 
 ```js
-import { sum } from '../';
+import { sum } from '../foo';
 
 test('basic', () => {
   expect(sum()).toBe(0);
