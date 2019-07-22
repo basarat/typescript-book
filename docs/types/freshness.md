@@ -70,8 +70,8 @@ x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 ```ts
 // Assuming
 interface State {
-  foo: string;
-  bar: string;
+    foo: string;
+    bar: string;
 }
 
 // You want to do: 
@@ -86,8 +86,8 @@ Using the idea of freshness you would mark all the members as optional and *you 
 ```ts
 // Assuming
 interface State {
-  foo?: string;
-  bar?: string;
+    foo?: string;
+    bar?: string;
 }
 
 // You want to do: 
