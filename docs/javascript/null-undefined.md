@@ -92,7 +92,7 @@ When creating your own APIs it's *okay* to use `null` in this case for consisten
 For example an awful function like this:
 
 ```ts
-function toInt(str:string) {
+function toInt(str: string) {
   return str ? parseInt(str) : undefined;
 }
 ```
