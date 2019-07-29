@@ -70,15 +70,15 @@ x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 ```ts
 // Assuming
 interface State {
-  foo: string;
-  bar: string;
+    foo: string;
+    bar: string;
 }
 
 // You want to do: 
 this.setState({foo: "Hello"}); // Error: missing property bar
 
 // But because state contains both `foo` and `bar` TypeScript would force you to do: 
-this.setState({foo: "Hello", bar: this.state.bar}};
+this.setState({foo: "Hello", bar: this.state.bar});
 ```
 
 Using the idea of freshness you would mark all the members as optional and *you still get to catch typos*!: 
@@ -86,16 +86,16 @@ Using the idea of freshness you would mark all the members as optional and *you 
 ```ts
 // Assuming
 interface State {
-  foo?: string;
-  bar?: string;
+    foo?: string;
+    bar?: string;
 }
 
 // You want to do: 
 this.setState({foo: "Hello"}); // Yay works fine!
 
 // Because of freshness it's protected against typos as well!
-this.setState({foos: "Hello"}}; // Error: Objects may only specify known properties
+this.setState({foos: "Hello"}); // Error: Objects may only specify known properties
 
 // And still type checked
-this.setState({foo: 123}}; // Error: Cannot assign number to a string
+this.setState({foo: 123}); // Error: Cannot assign number to a string
 ```
