@@ -22,11 +22,21 @@ console.log("" === "0"); // false
 console.log(0 === ""); // false
 ```
 
+To make the understanding clear, here's a table that summarizes this issue from [dorey's awesome website](https://dorey.github.io/JavaScript-Equality-Table/): 
+
+Loose equality(`==`):
+
+![loose equality table](../../images/loose-equality-table.png)
+
+Strict equality(`===`):
+
+![strict equality table](../../images/strict-equality-table.png)
+
+As you can notice, strict equality clears any doubts. If you don't have a particular reason, always go for `===`. So ProTip: Always use `===` and `!==` except for null checks, which we cover later.
+
 > Note that `string == number` and `string === number` are both compile time errors in TypeScript, so you don't normally need to worry about this.
 
 Similar to `==` vs. `===`, there is `!=` vs. `!==`
-
-So ProTip: Always use `===` and `!==` except for null checks, which we cover later.
 
 ## Structural Equality 
 If you want to compare two objects for structural equality `==`/`===` are ***not*** sufficient. e.g. 

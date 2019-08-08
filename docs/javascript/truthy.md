@@ -21,6 +21,9 @@ Here's a handy table for your reference.
 | `undefined`     | always                   | never                    |
 | Any other Object including empty ones like `{}`,`[]` | never | always |
 
+For further reference, have a look at the table [dorey has made](https://dorey.github.io/JavaScript-Equality-Table/):
+
+![if table](../../images/if-table.png)
 
 ### Being explicit
 
