@@ -34,7 +34,7 @@
         -   [파일을 이용한 모듈화](docs/project/external-modules.md)
         -   [globals.d.ts](docs/project/globals.md)
     -   [네임스페이스](docs/project/namespaces.md)
-    -   [동적으로 모듈화 하기](docs/project/dynamic-import-expressions.md)
+    -   [동적 표현식 가져오기](docs/project/dynamic-import-expressions.md)
 -   [Node.js 시작하기](docs/quick/nodejs.md)
 -   [Browser 시작하기](docs/quick/browser.md)
 -   [타입스크립트 타입 시스템](docs/types/type-system.md)
