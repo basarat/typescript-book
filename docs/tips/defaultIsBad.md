@@ -64,10 +64,18 @@ Re-exporting is common for the root `index` file in npm packages, and forces you
 ### Dynamic Imports
 Default exports expose themselves badly named as `default` in dynamic `import`s e.g. 
 
-```
+```ts
 const HighChart = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
 Highcharts.default.chart('container', { ... }); // Notice `.default`
 ```
+
+Much nicer with named exports: 
+
+```ts
+const {HighChart} = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+Highcharts.chart('container', { ... }); // Notice `.default`
+```
+
 
 ### Needs two lines for non-class / non-function
 
