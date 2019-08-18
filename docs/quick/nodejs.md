@@ -1,22 +1,24 @@
 # TypeScript with Node.js
-TypeScript has had *first class* support for Node.js since inception. Here's how to setup a quick Node.js project:
 
-> Note: many of these steps are actually just common practice Node.js setup steps
+타입스크립트는 처음부터 Node.js에 대해 *first class*를 지원했습니다. 빠르게 Node.js로 프로젝트를 구성하는 방법은 다음과 같습니다.
 
-1. Setup a Node.js project `package.json`. Quick one : `npm init -y`
-1. Add TypeScript (`npm install typescript --save-dev`)
-1. Add `node.d.ts` (`npm install @types/node --save-dev`)
-1. Init a `tsconfig.json` for TypeScript options with a few key options in your tsconfig.json (`npx tsc --init --rootDir src --outDir lib --esModuleInterop --resolveJsonModule --lib es6,dom  --module commonjs`)
+> 메모: 이러한 많은 단계는 일반적인 Node.js 설정 단계입니다.
 
-That's it! Fire up your IDE (e.g. `code .`) and play around. Now you can use all the built in node modules (e.g. `import * as fs from 'fs';`) with all the safety and developer ergonomics of TypeScript! 
+1. Node.js 프로젝트 설정에는 `package.json`이 필요합니다. 이 파일을 빠르게 생성하는 방법은 `npm init -y`
+1. 타입스크립트를 추가 (`npm install typescript --save-dev`)
+1. `node.d.ts`를 추가 (`npm install @types/node --save-dev`)
+1. 타입스크립트 옵션은 `tsconfig.json`을 이용해서 초기화하고 설정할수 있습니다. (`npx tsc --init --rootDir src --outDir lib --esModuleInterop --resolveJsonModule --lib es6,dom --module commonjs`)
 
-All your TypeScript code goes in `src` and the generated JavaScript goes in `lib`. 
+타입스크립트는 node modules에 설치된 모든것을 (예: `import * as fs from 'fs';`)를 이용해서 안전하게 가져올수 있습니다.
 
-## Bonus: Live compile + run
-* Add `ts-node` which we will use for live compile + run in node (`npm install ts-node --save-dev`)
-* Add `nodemon` which will invoke `ts-node` whenever a file is changed (`npm install nodemon --save-dev`)
+타입스크립트 `src`에 있는 모든 코드는 자바스크립트의 `lib`에 생성됩니다.
 
-Now just add a `script` target to your `package.json` based on your application entry e.g. assuming its `index.ts`:
+## 보너스: Live compile + run (실시간 컴파일 + 실행)
+
+-   `ts-node`는 어떤것이든 실행이후 실시간 컴파일을 지원합니다. 추가는 (`npm install ts-node --save-dev`)
+-   `nodemon`은 `ts-node`가 파일이 변경될때마다 동작합니다. 추가는 (`npm install nodemon --save-dev`)
+
+`package.json`에서 `script`를 지정할 수 있고 기본적인 진입점을 가정하면 예:`index.ts`:
 
 ```json
   "scripts": {
@@ -26,21 +28,21 @@ Now just add a `script` target to your `package.json` based on your application 
   },
 ```
 
-So you can now run `npm start` and as you edit `index.ts`:
+이제 `npm start`를 실행하면 `index.ts`를 수정할 수 있습니다.
 
-* nodemon reruns its command (ts-node)
-* ts-node transpiles automatically picking up tsconfig.json and the installed TypeScript version,
-* ts-node runs the output JavaScript through Node.js.
+-   nodemon이 해당 명령어를 재실행합니다. (ts-node)
+-   ts-node 트랜스파일이 tsconfig.json 및 설치된 타입스크립트 버전을 자동으로 선택합니다.
+-   Node.js를 통해 ts-node가 실행되면 자바스크립트를 출력합니다.
 
-And when you are ready to deploy your JavaScript application run `npm run build`.
+자바스크립트 애플리케이션을 배포할 준비가 되면 `npm run build`를 실행하십시요.
 
-## Creating TypeScript node modules
+## 타입스크립트에서 node modules를 생성
 
-* [A lesson on creating TypeScript node modules](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
+-   [타입스크립트에서 node modules를 생성하는 수업](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
 
-Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
+컴파일 시간 안정성과 자동완성 기능이 향상되어 타입스크립트로 작성된 모듈을 사용하는 것은 매우 재미있습니다.
 
-Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:
+고품질의 타입스크립트 모듈을 만드는 것은 간단합니다. 패키지에 대해 원하는 폴더 구조를 가정하십시요.
 
 ```text
 package
@@ -60,25 +62,25 @@ package
   └─ ...
 ```
 
+-   내부에 `tsconfig.json`가 있고
 
-* In your `tsconfig.json`
-  * have `compilerOptions`: `"outDir": "lib"` and `"declaration": true` < This generates declaration and js files in the lib folder
-  * have `include: ["./src/**/*"]` < This includes all the files from the `src` dir.
+    -   옵션에는 `compilerOptions`: `"outDir": "lib"` 그리고 `"declaration": true` 이것은 컴파일된 js파일을 lib폴더 생성 하겠다고 선언한것입니다.
+    -   또 다른 옵션으로는 `include: ["./src/**/*"]` 포함할 모든 파일은 `src`폴더에 지정
 
-* In your `package.json` have
-  * `"main": "lib/index"` < This tells Node.js to load `lib/index.js`
-  * `"types": "lib/index"` < This tells TypeScript to load `lib/index.d.ts`
+-   그리고 `package.json` 파일도 있습니다.
+    -   `"main": "lib/index"` Node.js로 로드할 경우 `lib/index.js`를 지정
+    -   `"types": "lib/index"` 타입도 마찬가지로 `lib/index.d.ts`를 지정
 
+Example 패키지:
 
-Example package:
-* `npm install typestyle` [for TypeStyle](https://www.npmjs.com/package/typestyle)
-* Usage: `import { style } from 'typestyle';` will be completely type safe.
+-   `npm install typestyle` [타입스타일](https://www.npmjs.com/package/typestyle)
+-   Usage: `import { style } from 'typestyle';` 타입을 안전하게 사용하는 방법.
 
 MORE:
 
-* If your package depends on other TypeScript authored packages, put them in `dependencies`/`devDependencies`/`peerDependencies` just like you would with raw JS packages.
-* If your package depends on other JavaScript authored packages and you want to use it with type safety in your project, put their types (e.g. `@types/foo`) in `devDependencies`. JavaScript types should be managed *out of bound* from the main NPM streams. The JavaScript ecosystem breaks types without semantic versioning too commonly, so if your users need types for these they should install the `@types/foo` version that works for them.
+-   패키지가 다른 타입스크립트 패키지에 의존하는 경우 원시 JS 패키지와 마찬가지로 `dependencies`/`devDependencies`/`peerDependencies`에 넣으십시요.
+-   패키지가 다른 자바스크립트 패키지에 의존하는 경우에는 프로젝트에 안전하게 타입을 이용하려면 (예: `@types/foo`) 를 `devDependencies`에 넣으십시요. 자바스크립트 타입은 NPM 스트림에서 *out of bound*로 관리되어야 합니다. 자바스크립트는 일반적으로 타입을 구분하므로 만약 당신이 `@types/foo` 타입이 필요한 경우에는 해당 버전을 설치하십시요.
 
-## Bonus points
+## 보너스 포인트
 
-Such NPM modules work just fine with browserify (using tsify) or webpack (using ts-loader).
+앞에서 이미 언급한 NPM 모듈은 browserify에서 (tsify) 사용하거나 웹팩에서 (ts-loader)를 사용
