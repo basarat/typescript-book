@@ -1,6 +1,6 @@
 ## Generics
 
-The key motivation for generics is to provide meaningful type constraints between members. The members can be:
+The key motivation for generics is to document meaningful type dependencies between members. The members can be:
 
 * Class instance members
 * Class methods
