@@ -145,6 +145,40 @@ function area(s: Shape) {
 }
 ```
 
+### Throw in exhaustive checks
+You can write a function that takes a `never` (and therefore can only be called with a variable that is inferred as `never`) and then throws an error if its body ever executes: 
+
+```ts
+function assertNever(x:never): never {
+    throw new Error('Unexpected value. Should have been never.');
+}
+```
+
+Example use with the area function: 
+
+```ts
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Rectangle {
+    kind: "rectangle";
+    width: number;
+    height: number;
+}
+type Shape = Square | Rectangle;
+
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.width * s.height;
+		// If a new case is added at compile time you will get a compile error
+		// If a new value appears at runtime you will get a runtime error
+        default: return assertNever(s);
+    }
+}
+```
+
 ### Retrospective Versioning
 Say you have a data structure of the form: 
 
