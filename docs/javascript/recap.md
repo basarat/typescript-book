@@ -6,8 +6,8 @@ There were (and will continue to be) a lot of competitors in *Some syntax* to *J
 
 However, it does mean that *you need to learn JavaScript* (the good news is *you **only** need to learn JavaScript*). TypeScript is just standardizing all the ways you provide *good documentation* on JavaScript.
 
-* Just giving you a new syntax doesn't help fix bugs (looking at you CoffeeScript).
-* Creating a new language abstracts you too far from your runtimes and communities (looking at you Dart).
+* Just giving you a new syntax doesn't help catch bugs - but might help you write cleaner / less bugs (e.g. CoffeeScript).
+* Creating a new language abstracts you too far from your runtimes and communities - but might help on-board you easier if its an already familiar flavour (e.g. Dart - closer for Java / C# devs).
 
 TypeScript is just JavaScript with docs.
 
