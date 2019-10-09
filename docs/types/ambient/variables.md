@@ -1,19 +1,19 @@
 ### Variables
-For example to tell TypeScript about the [`process` variable](https://nodejs.org/api/process.html) you *can* do:
+예를 들어 타입스크립트에게 [`process` 변수](https://nodejs.org/api/process.html) 에 대해 알려주기 위해 이렇게 할 수 있습니다:
 
 ```ts
 declare var process: any;
 ```
 
-> You don't *need* to do this for `process` as there is already a [community maintained `node.d.ts`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node/index.d.ts).
+> 하지만 [커뮤니티에서 `node.d.ts` 를 관리하고 있기 때문에](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node/index.d.ts) `process` 에 대해서 이런 식으로 정의할 필요가 없습니다.
 
-This allows you to use the `process` variable without TypeScript complaining:
+따라서 `process` 변수를 Typescript 에서 따로 선언하지 않고 사용할 수 있습니다:
 
 ```ts
 process.exit();
 ```
 
-We recommend using an interface wherever possible e.g.:
+우리는 아래와 같이 interface 를 쓰는 것을 추천합니다:
 
 ```ts
 interface Process {
@@ -22,7 +22,7 @@ interface Process {
 declare var process: Process;
 ```
 
-This allows other people to *extend* the nature of these global variables while still telling TypeScript about such modifications. E.g. consider the following case where we add an `exitWithLogging` function to process for our amusement:
+이는 글로벌 변수들을 *extend* 할 수 있게 하면서도, 타입스크립트가 글로벌 변수의 변경사항에 대해 알 수 있게 합니다. 예를 들어, 다음의 예제는 필요에 의해 process 에 `exitWithLogging` 함수를 추가한 예제입니다:
 
 ```ts
 interface Process {
@@ -34,4 +34,4 @@ process.exitWithLogging = function() {
 };
 ```
 
-Let's look at interfaces in a bit more detail next.
+인터페이스에 대해서는 뒤에서 자세히 다루도록 하겠습니다.
