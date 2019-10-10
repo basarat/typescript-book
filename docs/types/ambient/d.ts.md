@@ -1,18 +1,18 @@
 ### Declaration file
-You can tell TypeScript that you are trying to describe code that exists elsewhere (e.g. written in JavaScript/CoffeeScript/The runtime environment like the browser or Node.js) using the `declare` keyword. As a quick example:
+다른 곳에 존재하는(e.g. 자바스크립트/커피스크립트/브라우저/Node 등등) 자바스크립트코드를 설명하기 위해 Typescript 에서는 `declare` 라는 키워드를 쓸 수 있습니다. 간단한 예제를 살펴보면:
 
 ```ts
-foo = 123; // Error: `foo` is not defined
+foo = 123; // 에러: `foo` is not defined
 ```
 vs.
 ```ts
 declare var foo: any;
-foo = 123; // allowed
+foo = 123; // 가능함
 ```
 
-You have the option of putting these declarations in a `.ts` file or in a `.d.ts` file. We highly recommend that in your real world projects you use a separate `.d.ts` (start with one called something like `globals.d.ts` or `vendor.d.ts`).
+이러한 declarations 는 `.ts` 파일이나 `.d.ts` 파일에 포함될 수 있습니다. 실제 프로젝트에서는 이를 `.d.ts` 에 포함시키는 것을 추천합니다. (`globals.d.ts` 나 `vendor.d.ts` 를 보고 시작해보세요)
 
-If a file has the extension `.d.ts` then each root level definition must have the `declare` keyword prefixed to it. This helps make it clear to the author that there will be *no code emitted by TypeScript*. The author needs to ensure that the declared item will exist at runtime.
+만약 어떤 파일이 `.d.ts` 라는 확장자를 가졌다면, 모든 루트 레벨의 정의는 `declare` 키워드가 맨 앞에 선언되어야 합니다. 이는 *타입스크립트로부터 영향받는 코드가 없다* 라는 것을 확실하게 해줍니다. 작성자는 선언된 아이템이 런타임에 존재하는지 확인해야 합니다.
 
-> * Ambient declarations is a promise that you are making with the compiler. If these do not exist at runtime and you try to use them, things will break without warning.
-* Ambient declarations are like docs. If the source changes the docs need to be kept updated. So you might have new behaviours that work at runtime but no one's updated the ambient declaration and hence you get compiler errors.
+> * Ambient declarations 는 컴파일러에게 하는 약속입니다. 만약 런타임 때 해당 아이템이 존재하지 않은 채로 사용하려고 한다면, 경고 없이 프로그램이 망가질 것입니다.
+* Ambient declarations 는 문서와 같습니다. 소스의 변화가 있다면 문서가 업데이트되어야 합니다. 따라서 런타임에서 새로운 동작이 생겼을 때 ambient declaration 을 업데이트하지 않는다면 컴파일 에러가 날 것입니다.
