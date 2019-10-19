@@ -1,6 +1,6 @@
 ## this
 
-Any access to `this` keyword within a function is actually controlled by how the function is actually called. It is commonly referred to as the “calling context.”
+Any access to `this` keyword within a function is controlled by how the function is actually called. It is commonly referred to as the “calling context.”
 
 Here is an example:
 
