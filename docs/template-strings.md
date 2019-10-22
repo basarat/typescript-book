@@ -1,18 +1,18 @@
-### Template Strings
-Syntactically these are strings that use backticks ( i.e. \` ) instead of single (') or double (") quotes. The motivation of Template Strings is three fold:
+### Template Literals (Template Strings)
+Syntactically these are strings that use backticks ( i.e. \` ) instead of single (') or double (") quotes. The motivation of Template Literals is three fold:
 
 * String Interpolation
 * Multiline Strings
 * Tagged Templates
 
 #### String Interpolation
-Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* get their name from. Here's how you would potentially generate an html string previously:
+Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* originally got their name from. They have since been oficially renamed to *template literals*. Here's how you would potentially generate an html string previously:
 
 ```ts
 var lyrics = 'Never gonna give you up';
 var html = '<div>' + lyrics + '</div>';
 ```
-Now with template strings you can just do:
+Now with template literals you can just do:
 
 ```ts
 var lyrics = 'Never gonna give you up';
@@ -25,7 +25,7 @@ Note that any placeholder inside the interpolation (`${` and `}`) is treated as 
 console.log(`1 and 1 make ${1 + 1}`);
 ```
 
-#### Multiline Strings
+#### Multiline Literals
 Ever wanted to put a newline in a JavaScript string? Perhaps you wanted to embed some lyrics? You would have needed to *escape the literal newline* using our favorite escape character `\`, and then put a new line into the string manually `\n` at the next line. This is shown below:
 
 ```ts
