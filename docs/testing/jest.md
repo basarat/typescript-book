@@ -120,7 +120,7 @@ module.exports = {
 
   // Setup Enzyme
   "snapshotSerializers": ["enzyme-to-json/serializer"],
-  "setupTestFrameworkScriptFile": "<rootDir>/src/setupEnzyme.ts",
+  "setupFilesAfterEnv": ["<rootDir>/src/setupEnzyme.ts"],
 }
 ```
 
@@ -128,7 +128,7 @@ module.exports = {
 
 ```js
 import { configure } from 'enzyme';
-import * as EnzymeAdapter from 'enzyme-adapter-react-16';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
 configure({ adapter: new EnzymeAdapter() });
 ```
 
