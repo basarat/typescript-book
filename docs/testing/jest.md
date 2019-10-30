@@ -30,8 +30,12 @@ module.exports = {
   "roots": [
     "<rootDir>/src"
   ],
+  testMatch: [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
   "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.(ts|tsx)?$": "ts-jest"
   },
 }
 ```
@@ -39,6 +43,7 @@ module.exports = {
 Explanation:
 
 * We always recommend having *all* TypeScript files in a `src` folder in your project. We assume this is true and specify this using the `roots` option.
+* The `testMatch` config is a glob pattern matcher for discovering .test / .spec files in ts / tsx / js format.
 * The `transform` config just tells `jest` to use `ts-jest` for ts / tsx files.
 
 ## Step 3: Run tests
