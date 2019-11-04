@@ -297,6 +297,6 @@ import bar = require('./bar');
 import bas = require('./bas');
 const ensureImport: any =
     foo
-    || bar
-    || bas;
+    && bar
+    && bas;
 ```
