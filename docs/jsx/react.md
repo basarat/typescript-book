@@ -197,7 +197,7 @@ class FocusingInput extends React.Component<{ value: string, onChange: (value: s
 
 ### Type Assertions
 
-Use `as Foo` syntax for type assertions as we [mentioned before](./type-assertion.md#as-foo-vs-foo).
+Use `as Foo` syntax for type assertions as we [mentioned before](../types/type-assertion.md#as-foo-vs-foo).
 
 ## Default Props
 
