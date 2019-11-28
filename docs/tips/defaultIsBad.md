@@ -1,4 +1,4 @@
-## `export default` considered harmful
+## `export default` concerns
 
 Consider you have a file `foo.ts` with the following contents:
 
