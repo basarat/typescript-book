@@ -6,7 +6,7 @@ Syntactically these are strings that use backticks ( i.e. \` ) instead of single
 * Tagged Templates
 
 #### String Interpolation
-Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* originally got their name from. They have since been oficially renamed to *template literals*. Here's how you would potentially generate an html string previously:
+Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* originally got their name from. They have since been officially renamed to *template literals*. Here's how you would potentially generate an html string previously:
 
 ```ts
 var lyrics = 'Never gonna give you up';
