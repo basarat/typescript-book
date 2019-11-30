@@ -36,7 +36,7 @@ The objective of the succinct error message is to provide an example *convention
 ```
 TS2345: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
 ```
-It is fairly self explanatory. However, it doesn't provide a deeper breakdown of *why* the error is happening. That is what the *detiled* error message is for.
+It is fairly self explanatory. However, it doesn't provide a deeper breakdown of *why* the error is happening. That is what the *detailed* error message is for.
 
 ### Detailed
 For this example the detailed version looks like: 
@@ -47,7 +47,7 @@ Argument of type '{ foo: number; bar: () => string; }' is not assignable to para
   Types of property 'bar' are incompatible.
     Type '() => string' is not assignable to type 'string'.
 ```
-The objective of the detailed error message is to *guide* the user to the reason why some error (type incompatability in this case) is happening. The first line is same as the succinct, followed by a chain. You should read this chain as a series of responses to the developer question `WHY?` between lines i.e 
+The objective of the detailed error message is to *guide* the user to the reason why some error (type incompatibility in this case) is happening. The first line is same as the succinct, followed by a chain. You should read this chain as a series of responses to the developer question `WHY?` between lines i.e 
 
 ```
 ERROR: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
