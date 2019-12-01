@@ -47,7 +47,7 @@ import { /* here */ } from 'something';
 ```
 
 ### Autocomplete 
-Irrespective of if you know about the exports, you evenautocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+Irrespective of if you know about the exports, you even autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
 
 ### CommonJS interop
 With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`. You will most likely want to rename the `default` export to something else when you import it.
