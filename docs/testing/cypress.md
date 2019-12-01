@@ -336,6 +336,7 @@ it('should only call function once', () => {
 If you are unit testing modules in your application you can provide mocks using `cy.stub` e.g. if you want to ensure that `navigate` is called in a function `foo`:
 
 * `foo.ts`
+
 ```ts
 import { navigate } from 'takeme';
 
@@ -345,6 +346,7 @@ export function foo() {
 ```
 
 * You can do this as in `some.spec.ts`:
+
 ```ts
 /// <reference types="cypress"/>
 
