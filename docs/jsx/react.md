@@ -15,7 +15,7 @@ Our [browser quickstart already sets you up to develop react applications](../qu
 
 ## HTML Tags vs. Components
 
-React can either render HTML tags (strings) or React components (classes). The JavaScript emit for these elements is different (`React.createElement('div')` vs. `React.createElement(MyComponent)`). The way this is determined is by the *case* of the *first* letter. `foo` is treated as an HTML tag and `Foo` is treated as a component.
+React can either render HTML tags (strings) or React components. The JavaScript emit for these elements is different (`React.createElement('div')` vs. `React.createElement(MyComponent)`). The way this is determined is by the *case* of the *first* letter. `foo` is treated as an HTML tag and `Foo` is treated as a component.
 
 ## Type Checking
 
