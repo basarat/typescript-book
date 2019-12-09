@@ -1,6 +1,6 @@
 # TypeScript in the browser
 
-[![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)][https://designtsx.com]
+[![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)](https://designtsx.com)
 
 If you are using TypeScript to create a web application here are my recommendations to get a quick TypeScript + React (my UI framework of choice) project setup.
 

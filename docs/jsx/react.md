@@ -4,7 +4,7 @@
 
 > [PRO Egghead course on TypeScript and React](https://egghead.io/courses/use-typescript-to-develop-react-applications)
 
-[![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)][https://designtsx.com]
+[![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)](https://designtsx.com)
 
 ## Setup
 
