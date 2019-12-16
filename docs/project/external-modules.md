@@ -179,7 +179,7 @@ You can declare a module *globally* for your project by using `declare module 's
 
 e.g.
 ```ts
-// globals.d.ts
+// global.d.ts
 declare module 'foo' {
   // Some variable declarations
   export var bar: number; /*sample*/
