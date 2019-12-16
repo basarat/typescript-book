@@ -205,15 +205,15 @@ if (error === null)
 if (error)
 ```
 
-* Use `== undefined` / `!= undefined` (not `===` / `!==`) to check for `null` / `undefined` on primitives as it works for both `null`/`undefined` but not other falsy values (like `''`,`0`,`false`) e.g.
+* Use `== null` / `!= null` (not `===` / `!==`) to check for `null` / `undefined` on primitives as it works for both `null`/`undefined` but not other falsy values (like `''`,`0`,`false`) e.g.
 
 **Bad**
 ```ts
-if (error !== null)
+if (error !== null) // does not rule out undefined
 ```
 **Good**
 ```ts
-if (error != undefined)
+if (error != null) // rules out both null and undefined
 ```
 
 ## Formatting
