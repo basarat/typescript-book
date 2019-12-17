@@ -62,7 +62,7 @@ There is a good reason for using *interfaces* for these globals. It allows you t
 
 ### Modifying Native Types
 
-Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to be associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../project/globals.md) for this purpose.
+Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to be associated with `lib.d.ts`. We even recommend creating a special file called [`global.d.ts`](../project/globals.md) for this purpose.
 
 Here are a few example cases where we add stuff to `window`, `Math`, `Date`:
 

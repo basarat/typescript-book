@@ -98,7 +98,7 @@ import * as $ from "jquery";
 
 # External non js resources
 
-You can even allow import of any file e.g. `.css` files (if you are using something like webpack style loaders or css modules) with a simple `*` style declaration (ideally in a [`globals.d.ts` file](../project/globals.md)): 
+You can even allow import of any file e.g. `.css` files (if you are using something like webpack style loaders or css modules) with a simple `*` style declaration (ideally in a [`global.d.ts` file](../project/globals.md)): 
 
 ```ts
 declare module "*.css";

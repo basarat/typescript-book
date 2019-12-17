@@ -32,7 +32,7 @@
   * [Declaration Spaces](docs/project/declarationspaces.md)
   * [Modules](docs/project/modules.md)
     * [File Module Details](docs/project/external-modules.md)
-    * [globals.d.ts](docs/project/globals.md)
+    * [global.d.ts](docs/project/globals.md)
   * [Namespaces](docs/project/namespaces.md)
   * [Dynamic Import Expressions](docs/project/dynamic-import-expressions.md)
 * [Node.js QuickStart](docs/quick/nodejs.md)
