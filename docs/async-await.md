@@ -2,7 +2,7 @@
 
 > [동일한 자료를 다루는 프로 에그비디오 코스](https://egghead.io/courses/async-await-using-typescript)
 
-다음의 실험적인 상상: 자바스크립트는 실행중에 `await`코드를 입력하면 중지 할 수 있습니다. 이것은 프로미스에서 사용되며 단 하나의 프로미스 함수를 반환합니다.
+Promise가 사용될때 `await` 키워드에서 코드 실행을 일시적으로 중지하고, 함수에서 반환된 Promise가 가능한 한번만 실행되도록 Javascript 런타임에 명령하는 방법을 실험으로 가정해봅니다:
 
 ```ts
 // Not actual code. A thought experiment
@@ -16,23 +16,21 @@ async function foo() {
 }
 ```
 
-프로미스가 해결되면 실행은 계속 됩니다.
+Promise가 수행을 계속한다면,
+- 만약 await가 실행된다면, 값을 반환하며,
+- 에러로 인하여 reject 된다면 catch에서 잡을 수 있도록 에러를 반환합니다.
 
--   만약 그것은 await가 수행되면 값을 반환합니다.
--   만약 그것이 reject 되었다면 에러를 동기적으로 던질것 입니다. 우리는 catch에서 에러를 받을 수 있습니다.
-
-갑자기(그리고 이상하게) 비동기 프로그래밍이 동기 프로그래밍 만큼 쉽게 만듭니다. 대신 아래의 세가지가 필요합니다.
+이러한 수행은 갑자기 (신기할정도로) 비동기 프로그램을 동기프로그래밍처럼 쉽게 만들고 있습니다. 이러한 실험에는 세가지 사항이 필요합니다.
 
 -   함수를 일시 중지하는 기능
 -   함수안의 값을 출력하는 기능
 -   함수내의 예외를 던질 수 있는 기능
 
-이것은 정확하게 제네레이터가 우리에게 허용한 것 입니다.
-This is exactly what generators allowed us to do! The thought experiment _is actually real_ and so is the `async`/`await` implementation in TypeScript / JavaScript. Under the covers it just uses generators.
+이것은 꼭 제네레이터가 실행되는 원리 같습니다! 이러한 실험은 실제 발생할 수 있으며, Typescript / Javascript의 `async`/`await`에 대한 구현입니다. 실제로 async/await는 제네레이터를 사용하여 구현됩니다.
 
 ### Generated JavaScript
 
-당신은 이것을 이해할 수 필요가 없습니다. 하지만 당신이 제네레이터를 읽었다면 꽤 간단합니다. [제네레이터][generators]. 다음의`foo` 함수는 간단하게 감쌀수 있습니다.
+이 원리를 꼭 이해할 필요는 없지만, [제네레이터][generators]를 읽었다면, 간단히 이해할 수 있습니다. `foo` 함수는 다음과 같이 간단히 정리할 수 있습니다.
 
 ```ts
 const foo = wrapToReturnPromise(function*() {
@@ -45,8 +43,7 @@ const foo = wrapToReturnPromise(function*() {
 })
 ```
 
-`wrapToReturnPromise` 는 제네레이터 함수를 실행하여 `generator`를 얻은 다음 `generator.next()`를 사용합니다. 만약 값이 `promise` 라면 `then`+`catch`하고 결과값을 `generator.next(result)`또는 `generator.thorw(error)` 로 호출해야 합니다.
-그게 전부입니다.
+`wrapToReturnPromise`는 제네레이터 함수를 사용하여 `generator` 객체를 반환받은 다음, `generator.next()`를 사용합니다. 만약 값이 `promise` 라면 `then`+`catch`하고 결과값을 `generator.next(result)`또는 `generator.thorw(error)` 로 호출해야 합니다. 그게 전부입니다.
 
 ### Async Await Support in TypeScript
 
@@ -54,7 +51,7 @@ const foo = wrapToReturnPromise(function*() {
 
 **ES6 generators**는 트랜스파일링을 통해 오직 **es6**를 지원합니다.
 
-**TypeScript 2.1** [added the capability to ES3 and ES5 run-times](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html), 의미는 당신은 항상 자유로운 이점을 가지고 있고 그것은 아무 문제없이 어떤 환경에서도 사용할수 있습니다. 중요한 공지를 하자면 우리는 타입스크립트 2.1과 함께 async / await 를 사용할 수 있다는 것을 알아두는 것이 중요합니다. 물론 **promise**에 대해 **polyfill**을 전역으로 추가하여 많은 브라우저가 지원됩니다.
+**TypeScript 2.1** [added the capability to ES3 and ES5 run-times](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html)은 ES3 및 ES5 런타임에 제네레이터 기능을 추가했습니다. 즉, 사용중인 환경에 관계없이 자유롭게 활용이 가능합니다. Typescript2.1에서 async/await를 사용할 수 잇으며, **Promise**에 대한 **polyfill**을 전역으로 추가하여 다양한 브라우저에 대응할 수 있습니다.
 
 **예제**를 보고 타입스크립트에서 async /await 표기법이 어떻게 작동하는지 알아봅니다.
 
@@ -83,7 +80,7 @@ async function dramaticWelcome(): Promise<void> {
 dramaticWelcome()
 ```
 
-**Transpiling to ES6 (--target es6)**
+**ES6로 트랜스파일링하기 (--target es6)**
 
 ```js
 var __awaiter =
@@ -138,9 +135,9 @@ function dramaticWelcome() {
 dramaticWelcome()
 ```
 
-당신은 전체 예제를 볼 수 있습니다. [여기][asyncawaites6code].
+전체 예제는 [여기][asyncawaites6code]에서 확인하실 수 있습니다.
 
-**Transpiling to ES5 (--target es5)**
+**ES5로 트랜스파일링 하기 (--target es5)**
 
 ```js
 var __awaiter =
@@ -316,10 +313,10 @@ function dramaticWelcome() {
 dramaticWelcome()
 ```
 
-당신은 전체 예제를 볼 수 있습니다. [here][asyncawaites5code].
+전체 예제는 [여기][asyncawaites5code]에서 확인하실 수 있습니다.
 
-**메모**: 두가지 예상 시나리오, 우리는 ECMA스크립트를 컴파일된 코드가 런타임에서 전역으로 필요합니다. 우리는 타입스크립트에서 프로미스가 존재하는 것을 알고 있습니다. 우리는 또한 lib 플래그를 "dom", "es2015" 또는 "dom", "es2015.promise", "es5"와 같은 것으로 설정하여 타입스크립트가 프로미스를 인식하는지 확인해야 합니다.
-**우리는 브라우저가 프로미스를 지원하는지 볼수 있습니다. (native 그리고 polyfilled) [여기](https://kangax.github.io/compat-table/es6/#test-Promise)**
+**참고**: 두가지(ES6, ES5) 시나리오 모두에 대해서 런타임에 ECMAScript가 호환되는 Promise를 전역에 사용할 수 있는지 확인해야 합니다. 이 경우 Promise용 polyfill을 설정해야 할 수도 있습니다. 또한, tsc내 lib 플래그를 "dom", "es2015" 또는 "dom", "es2015.promise", "es5"와 같은 형식으로 설정하여 Typescript에 Promise가 포함되어 있음을 확인해야 합니다.
+**우리는 브라우저가 native 혹은 polyfill을 이용하여 프로미스를 지원하는지 볼수 있습니다. [여기](https://kangax.github.io/compat-table/es6/#test-Promise)를 클릭해주세요**
 
 [generators]: ./generators.md
 [asyncawaites5code]: https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es5/asyncAwaitES5.js
