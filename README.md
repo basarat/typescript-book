@@ -57,4 +57,4 @@ You can also download one of the following:
 All the amazing [contributors](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
 
 ## Share
-Share URL: http://basarat.gitbooks.io/typescript/
+Share URL: https://basarat-ali-syed.gitbook.io/typescript/
