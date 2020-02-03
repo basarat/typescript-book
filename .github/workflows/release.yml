@@ -40,7 +40,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./output/typescript-book.pdf
-          asset_name: typescript-book-${{ github.ref }}.pdf
+          asset_name: typescript-book.pdf
           asset_content_type: application/pdf
       - name: upload epub artifact
         uses: actions/upload-release-asset@v1.0.1
@@ -49,7 +49,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./output/typescript-book.epub
-          asset_name: typescript-book-${{ github.ref }}.epub
+          asset_name: typescript-book.epub
           asset_content_type: application/epub+zip
       - name: upload mobi artifact
         uses: actions/upload-release-asset@v1.0.1
@@ -58,5 +58,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./output/typescript-book.mobi
-          asset_name: typescript-book-${{ github.ref }}.mobi
+          asset_name: typescript-book.mobi
           asset_content_type: application/x-mobipocket-ebook
