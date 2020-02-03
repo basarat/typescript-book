@@ -72,7 +72,7 @@ bar = "Hello World"; // Okay!
 bar = "anything else "; // Error!
 ```
 
-In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](https://basarat.gitbooks.io/typescript/content/docs/types/literal-types.html "Literal Types").
+In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](./literal-types.md).
 
 ## Capturing Key Names
 
