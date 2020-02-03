@@ -1,0 +1,62 @@
+name: Create a new release and upload complied ebooks
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: sudo apt update
+      - run: sudo apt install calibre-bin
+      - run: sudo npm install -g gitbook-cli
+      - run: gitbook install
+      - run: mkdir output
+      - run: gitbook pdf . ./output/typescript-book.pdf
+      - run: gitbook epub . ./output/typescript-book.epub
+      - run: gitbook mobi . ./output/typescript-book.mobi
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: upload pdf artifact
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./output/typescript-book.pdf
+          asset_name: typescript-book-${{ github.ref }}.pdf
+          asset_content_type: application/pdf
+      - name: upload epub artifact
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./output/typescript-book.epub
+          asset_name: typescript-book-${{ github.ref }}.epub
+          asset_content_type: application/epub+zip
+      - name: upload mobi artifact
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./output/typescript-book.mobi
+          asset_name: typescript-book-${{ github.ref }}.mobi
+          asset_content_type: application/x-mobipocket-ebook
