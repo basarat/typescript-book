@@ -140,10 +140,12 @@ person.fullName = "Dear Reader"; // Error! fullName is readonly
 
 ### Difference from `const`
 `const`
+
 1. is for a variable reference
 1. the variable cannot be reassigned to anything else.
 
 `readonly` is
+
 1. for a property
 1. the property can be modified because of aliasing
 
