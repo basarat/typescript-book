@@ -32,6 +32,7 @@ This type inference is well motivated. If you do stuff like shown in this exampl
 
 ### Types can be Explicit
 As we've mentioned before, TypeScript will infer as much as it can safely. However, you can use annotations to:
+
 1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
 1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
 
