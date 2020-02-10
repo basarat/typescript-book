@@ -12,9 +12,10 @@ Another way of building up classes from reusable components is to build them by 
 The idea is simple, instead of a *class A extending class B* to get its functionality, *function B takes class A* and returns a new class with this added functionality. Function `B` is a mixin.  
 
 > [A mixin is] a function that
- 1. takes a constructor,
- 1. creates a class that extends that constructor with new functionality
- 1. returns the new class
+>
+> 1. takes a constructor,
+> 1. creates a class that extends that constructor with new functionality
+> 1. returns the new class
 
 A complete example
 
