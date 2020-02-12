@@ -260,3 +260,27 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
+
+## Declaring a webcomponent
+
+If you are using a web component the default React type definitions (`@types/react`) will not know about it. But you can declare it easily e.g. to declare a webcomponent called `my-awesome-slider` that takes Props `MyAwesomeSliderProps` you would: 
+
+```tsx
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-awesome-slider': MyAwesomeSliderProps;
+    }
+
+    interface MyAwesomeSliderProps extends React.Attributes {
+      name: string;
+    }
+  }
+}
+```
+
+Now you can use it in TSX:
+
+```tsx
+<my-awesome-slider name='amazing'/>
+```
