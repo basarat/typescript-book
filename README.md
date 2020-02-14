@@ -33,7 +33,7 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * This is sweet! So many #typescript goodies! [link](https://twitter.com/pauliescanlon/status/989898852474998784)
 
 ## Get Started
-If you are here to read the book online [get started](http://basarat.gitbooks.io/typescript/content/docs/getting-started.html).
+If you are here to read the book online [get started](http://basarat.gitbook.io/typescript/content/docs/getting-started.html).
 
 ## Translations 
 Book is completely free so you can copy paste whatever you want without requiring permission. If you have a translation you want me to link here. [Send a PR](https://github.com/basarat/typescript-book/edit/master/README.md).
