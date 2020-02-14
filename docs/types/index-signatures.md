@@ -138,13 +138,13 @@ As soon as you have a `string` index signature, all explicit members must also c
 ```ts
 /** Okay */
 interface Foo {
-  [key:string]: number
+  [key:string]: number;
   x: number;
   y: number;
 }
 /** Error */
 interface Bar {
-  [key:string]: number
+  [key:string]: number;
   x: number;
   y: string; // ERROR: Property `y` must be of type number
 }
@@ -154,7 +154,7 @@ This is to provide safety so that any string access gives the same result:
 
 ```ts
 interface Foo {
-  [key:string]: number
+  [key:string]: number;
   x: number;
 }
 let foo: Foo = {x:1,y:2};
