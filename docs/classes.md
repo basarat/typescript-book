@@ -120,7 +120,36 @@ As always these modifiers work for both member properties and member functions.
 `abstract` can be thought of as an access modifier. We present it separately because opposed to the previously mentioned modifiers it can be on a `class` as well as any member of the class. Having an `abstract` modifier primarily means that such functionality *cannot be directly invoked* and a child class must provide the functionality.
 
 * `abstract` **classes** cannot be directly instantiated. Instead the user must create some `class` that inherits from the `abstract class`.
+
+```ts
+abstract class FooCommand {}
+
+class BarCommand extends FooCommand {}
+
+const fooCommand: FooCommand = new FooCommand(); // Cannot create an instance of an abstract class.
+
+const barCommand = new BarCommand(); // You can create an instance of a class that inherits from an abstract class.
+```
+
 * `abstract` **members** cannot be directly accessed and a child class must provide the functionality.
+
+```ts
+abstract class FooCommand {
+  abstract execute(): string;
+}
+
+class BarErrorCommand  extends FooCommand {} // 'BarErrorCommand' needs implement abstract member 'execute'.
+
+class BarCommand extends FooCommand {
+  execute() {
+    return `Command Bar executed`;
+  }
+}
+
+const barCommand = new BarCommand();
+
+barCommand.execute(); // Command Bar executed
+```
 
 ### Constructor is optional
 
