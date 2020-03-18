@@ -48,10 +48,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [French](https://github.com/HachemiH/typescript-book)
 
 ## Other Options
-You can also download one of the following:
-* [EPUB for iPad, iPhone, Mac](https://www.gitbook.com/download/epub/book/basarat/typescript)
-* [PDF for Windows and others](https://www.gitbook.com/download/pdf/book/basarat/typescript)
-* [MOBI for Kindle](https://www.gitbook.com/download/mobi/book/basarat/typescript)
+You can also download one of the Epub, Mobi, or PDF formats from the [actions tab](https://github.com/basarat/typescript-book/actions) by clicking on the latest build run. You will find the files in the artifacts section.
 
 ## Special Thanks
 All the amazing [contributors](https://github.com/basarat/typescript-book/graphs/contributors) 🌹
