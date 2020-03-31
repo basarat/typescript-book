@@ -115,7 +115,7 @@ let foo:{ [index:string] : {message: string} } = {};
  */
 /** Ok */
 foo['a'] = { message: 'some message' };
-/** Error: must contain a `message` or type string. You have a typo in `message` */
+/** Error: must contain a `message` of type string. You have a typo in `message` */
 foo['a'] = { messages: 'some message' };
 
 /**
