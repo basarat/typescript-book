@@ -1,21 +1,21 @@
 ## this
 
-Any access to `this` keyword within a function is actually controlled by how the function is actually called. It is commonly referred to as the “calling context.”
+Любой доступ к `this` слову внутри функции подконтролен тому как функция была вызвана. Обычно это называют "контекстом вызова".
 
-Here is an example:
+Пример:
 
 ```ts
 function foo() {
   console.log(this);
 }
 
-foo(); // logs out the global e.g. `window` in browsers
+foo(); // Выводит глобальный объект, например `window` в браузерах
 let bar = {
   foo
 }
-bar.foo(); // Logs out `bar` as `foo` was called on `bar`
+bar.foo(); // Выводит `bar` так как `foo` была вызвана на `bar`
 ```
 
-So be mindful of your usage of `this`. If you want to disconnect `this` in a class from the calling context use an arrow function, [more on that later][arrow].
+Так что будьте внимательны с вашим использованием `this`. Если вы хотите отделить `this` в классе от контекста вызова - используйте стрелочную функцию [больше об этом позже][arrow].
 
 [arrow]:../arrow-functions.md
