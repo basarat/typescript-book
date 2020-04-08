@@ -73,6 +73,15 @@ namespace overloads {
         };
     }
 }
+    
+    
+    namespace parameter {
+    // variable annotation
+    var sampleVariable: { bar: number }
+
+    // function parameter
+    function foo(sampleParameter: { bar: number }) { }
+}
 
 namespace overloadsDone {
     export function padding(all: number);
