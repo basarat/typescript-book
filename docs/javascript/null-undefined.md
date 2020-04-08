@@ -120,5 +120,3 @@ JSON.stringify({willStay: null, willBeGone: undefined}); // {"willStay":null}
 Команда TypeScript не использует `null` : [TypeScript coding guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined) и это не вызвало никаких проблем. Дуглас Крокфорд считает, что [`null` - это плохая идея](https://www.youtube.com/watch?v=PSGEjv3Tqo0&feature=youtu.be&t=9m21s) и всем нам лучше использовать `undefined`.
 
 Как бы то ни было, стиль NodeJS использует `null` для аргументов Error в качестве стандарта, посколько это означает `Что-то в настоящий момент недоступно`. Лично я не хочу разрываться между ними двумя, ведь большинство проектов используют библиотеки с разными подходами, и в обоих случаях использую просто `== null`.
-
-I personally don't care to distinguish between the two as most projects use libraries with differing opinions and just rule out both with .
