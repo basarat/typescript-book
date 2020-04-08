@@ -39,6 +39,11 @@
 * [Филипинский](https://github.com/themarshann/typescript-book-fil)
 * [Итальянский](https://github.com/TizioFittizio/typescript-book)
 * [Китайский](https://github.com/jkchao/typescript-book-chinese)
+* [Португальский](https://github.com/overlineink/typescript-book)
+* [Японский](https://github.com/yohamta/typescript-book)
+* [Испанский](https://github.com/melissarofman/typescript-book)
+* [Корейский](https://github.com/radlohead/typescript-book)
+* [Французкий](https://github.com/HachemiH/typescript-book)
 
 ## Электронная версия
 Вы так же можете скачать книгу по следующим ссылкам:
