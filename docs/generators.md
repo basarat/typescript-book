@@ -94,7 +94,7 @@ function* generator() {
 
 const iterator = generator();
 // Start execution till we get first yield value
-const foo = iterator.next();
+const foo = iterator.next("bar");
 console.log(foo.value); // foo
 // Resume execution injecting bar
 const nextThing = iterator.next('bar');
