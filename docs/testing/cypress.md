@@ -40,6 +40,7 @@ Setup TypeScript `tsconfig.json` e.g.
       "dom",
       "es6"
     ],
+    "types": ["cypress"],
     "jsx": "react",
     "experimentalDecorators": true
   },
@@ -105,8 +106,6 @@ Under the `e2e` folder you now have these files:
 * create a file `/cypress/integration/first.spec.ts` with the following contents:
 
 ```ts
-/// <reference types="cypress"/>
-
 describe('google search', () => {
   it('should work', () => {
     cy.visit('http://www.google.com');
