@@ -56,16 +56,11 @@ Under the `e2e` folder you now have these files:
 
 * `/cypress.json`: Configure cypress. The default is empty and that is all you need.
 * `/cypress` Subfolders:
-    * `/fixtures`: Test fixtures
-        * Comes with `example.json`. Feel free to delete it.
-        * You can create simple `.json` files that can be used to provide sample data (aka fixtures) for usage across tests.
     * `/integration`: All your tests.
-        * Comes with an `examples` folder. You can safely delete it.
-        * Name tests with `.spec.ts` e.g. `something.spec.ts`.
         * Feel free to create tests under subfolders for better organization e.g. `/someFeatureFolder/something.spec.ts`.
 
 ## First test
-* create a file `/cypress/integration/first.spec.ts` with the following contents:
+* create a file `/cypress/integration/first.ts` with the following contents:
 
 ```ts
 describe('google search', () => {
