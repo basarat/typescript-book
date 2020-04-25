@@ -30,10 +30,11 @@ I've been looking at the issues that turn up commonly when people start using Ty
 * Thanks, this is a great book 🤓🤓 [link](https://twitter.com/jjwonmin/status/885666375548547073)
 * Deep dive to typescript is awesome in so many levels. i find it very insightful. Thanks [link](https://twitter.com/orenmizr/status/891083492787970053)
 * @basarat's intro to @typescriptlang is still one of the best going (if not THE best) [link](https://twitter.com/stevealee/status/953953255968698368)
+* 
 * This is sweet! So many #typescript goodies! [link](https://twitter.com/pauliescanlon/status/989898852474998784)
 
 ## Get Started
-If you are here to read the book online [get started](http://basarat.gitbook.io/typescript/content/docs/getting-started.html).
+If you are here to read the book online [get started](https://basarat.gitbook.io/typescript/getting-started).
 
 ## Translations 
 Book is completely free so you can copy paste whatever you want without requiring permission. If you have a translation you want me to link here. [Send a PR](https://github.com/basarat/typescript-book/edit/master/README.md).
