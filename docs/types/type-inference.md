@@ -155,12 +155,12 @@ function foo(a: number, b: number) {
     return a + addOne(b);
 }
 // Some external function in a library someone wrote in JavaScript
-function addOne(a) {
-    return a + 1;
+function addOne(c) {
+    return c + 1;
 }
 ```
 
-This is because the return type is impacted by the poor type definition for `addOne` (`a` is `any` so the return of `addOne` is `any` so the return of `foo` is `any`).
+This is because the return type is impacted by the poor type definition for `addOne` (`c` is `any` so the return of `addOne` is `any` so the return of `foo` is `any`).
 
 > I find it simplest to always be explicit about function returns. After all, these annotations are a theorem and the function body is the proof.
 
