@@ -1,44 +1,45 @@
 ## Truthy
 
-JavaScript has a concept of `truthy` i.e. things that evaluate like `true` would in certain positions (e.g. `if` conditions and the boolean `&&` `||` operators). The following things are truthy in JavaScript. An example is any number other than `0` e.g.
+В JavaScript есть концепция `truthy`, согласно которой выражения оцениваются как истинные (`true`) в определенных ситуациях (например, `if` условия и логические операторы `&&` `||`). Следующие выражения интерпретируются как истинные в JavaScript. Например, любое число, кроме `0`.
 
 ```ts
-if (123) { // Will be treated like `true`
+if (123) { // будет интерпретировано как `true`
   console.log('Any number other than 0 is truthy');
 }
 ```
 
-Something that isn't truthy is called `falsy`.
+Все, что не интерпретируется как истинное, называется `falsy`.
 
-Here's a handy table for your reference.
+Вот таблица для справки.
 
-| Variable Type   | When it is *falsy*       | When it is *truthy*      |
+| Тип переменной  | Когда это *falsy*       | Когда это *truthy*      |
 |-----------------|--------------------------|--------------------------|
 | `boolean`       | `false`                  | `true`                   |
-| `string`        | `''` (empty string)      | any other string         |
-| `number`        | `0`  `NaN`               | any other number         |
-| `null`          | always                   | never                    |
-| `undefined`     | always                   | never                    |
-| Any other Object including empty ones like `{}`,`[]` | never | always |
+| `string`        | `''` (пустая строка)     | любая другая строка      |
+| `number`        | `0`  `NaN`               | любое другое число       |
+| `null`          | всегда                   | никогда                  |
+| `undefined`     | всегда                   | никогда                  |
+| Любой объект, включая пустые `{}`,`[]` | никогда | всегда |
 
 
-### Being explicit
+### Явное преобразование
 
-> The `!!` pattern
+> Паттерн `!!`
 
-Quite commonly it helps to be explicit that the intent is to treat the value as a `boolean` and convert it into a *true boolean* (one of `true`|`false`). You can easily convert values to a true boolean by prefixing it with `!!` e.g. `!!foo`. Its just `!` used *twice*. The first `!` converts the variable (in this case `foo`) to a boolean but inverts the logic (*truthy* -`!`> `false`, *falsy* -`!`> `true`). The second one toggles it again to match the nature of the original object (e.g. *truthy* -`!`> `false` -`!`> `true`).
+Как правило, полезно явно указывать, что значение нужно трактовать как `boolean` и конвертировать его в *явный boolean* (один из `true`|`false`). Вы можете легко конвертировать значения в логические с помощью префикса `!!`, например `!!foo`.
+Это просто *двойное* использование `!`. Первый `!` конвертирует значение (в данном примере `foo`) в логический тип, но переворачивает логику (*истинное* -`!`> `false`, *ложное* -`!`> `true`). Второй `!` переворачивает логику еще раз, чтобы соответствовать первоначальному значению (e.g. *истинное* -`!`> `false` -`!`> `true`).
 
-It is common to use this pattern in lots of places e.g.
+Этот паттерн используется во многих случаях, например: 
 
 ```js
-// Direct variables
+// С переменными
 const hasName = !!name;
 
-// As members of objects
+// С полями объекта
 const someObj = {
   hasName: !!name
 }
 
-// e.g. in ReactJS JSX
+// или в ReactJS JSX
 {!!someName && <div>{someName}</div>}
 ```
