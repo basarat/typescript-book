@@ -1,4 +1,4 @@
-# Future JavaScript: Now
-One of the main selling points of TypeScript is that it allows you to use a bunch of features from ES6 and beyond in current (ES3 and ES5 level) JavaScript engines (like current browsers and Node.js). Here we deep dive into why these features are useful followed by how these features are implemented in TypeScript.
+# Будущее JavaScript: Сейчас
+Одним из главных достоинств TypeScript является то, что он позволяет использовать множество фичей из ES6 и выше в текущих (ES3 и ES5) движках JavaScript (например, в текущих версиях браузеров и Node.js). Далее мы углубимся в то, почему эти фичи полезны и как они реализованы в TypeScript.
 
-Note: Not all of these features are slated for immediate addition to JavaScript but provide great utility to your code organization and maintenance. Also note that you are free to ignore any of the constructs that don't make sense for your project, although you will end up using most of them eventually ;)
+Помните: Не все эти фичи предназначены для немедленного добавления в JavaScript, но они улучшают организацию и поддержку вашего кода. Также обратите внимание, что вы можете игнорировать любые конструкции, которые не имеют смысла для вашего проекта, но в конечном счете вы будете использовать большинство из них ;)
