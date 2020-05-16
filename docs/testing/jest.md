@@ -40,6 +40,8 @@ module.exports = {
 }
 ```
 
+(If your `package.json` file contains `"type": "module"`, which causes Node to assume modules are in es6 format, you can convert the above to es6 format by replacing the top line to `export default { ` .)
+
 Explanation:
 
 * We always recommend having *all* TypeScript files in a `src` folder in your project. We assume this is true and specify this using the `roots` option.
