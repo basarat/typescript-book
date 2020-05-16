@@ -301,7 +301,7 @@ type FormState =
   & { [fieldName: string]: FieldState }
 
 
-// Use it for some JavaScript object you are gettting from somewhere 
+// Use it for some JavaScript object you are getting from somewhere 
 declare const foo:FormState; 
 
 const isValidBool = foo.isValid;
