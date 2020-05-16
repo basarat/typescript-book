@@ -1,6 +1,6 @@
 # 타입스크립트 심화 학습
 
-나는 사람들이 타입스크립트를 사용할 때 자주 발생하는 문제에 대해서 살펴보았습니다. 이것은 스택오브플로우에 등록된 문제를 바탕으로 합니다. [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) 타입스크립트 커뮤니티에 참여하실 수 있습니다. [타입스크립트 커뮤니티](https://github.com/TypeStrong/) / [업데이트 확인](https://twitter.com/basarat) / [GitHub에서 별을 주는 것을 잊지 마십시요](https://github.com/basarat/typescript-book) 🌹
+나는 사람들이 타입스크립트를 사용할 때 자주 발생하는 문제에 대해서 살펴보았습니다. 이것은 스택오버플로우에 등록된 문제를 바탕으로 합니다. [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) 타입스크립트 커뮤니티에 참여하실 수 있습니다. [타입스크립트 커뮤니티](https://github.com/TypeStrong/) / [업데이트 확인](https://twitter.com/basarat) / [GitHub에서 별을 주는 것을 잊지 마십시요](https://github.com/basarat/typescript-book) 🌹
 
 ## 한국어 번역 진행사항
 
