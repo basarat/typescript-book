@@ -1,4 +1,4 @@
 # Testing
-TypeScript can be used with any JavaScript testing framework that you want. In the worst case you can always do a simple `TypeScript -> JavaScript` transform and go your merry way. 
+모든 자바스크립트 테스트 프레임워크를 타입스크립트에 사용할 수 있습니다. 최악의 경우에도 `타입스크립트-> 자바스크립트` 로의 간단한 변환을 통해 어떤 자바스크립트 테스트 프레임워크라도 사용할 수 있습니다.
 
-That said, in this section look at options that we have enjoyed greatly 🌹
+이 단원에서는 타입 스크립트에서 주로 사용되는 테스트 프레임워크를 살펴보도록 하겠습니다.🌹
