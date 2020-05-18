@@ -141,7 +141,7 @@ var inc = x => x+1;
 In this section we have provided you with the motivation and design goals of TypeScript. With this out of the way we can dig into the nitty gritty details of TypeScript.
 
 [](Interfaces are open ended)
-[](Type Inferernce rules)
+[](Type Inference rules)
 [](Cover all the annotations)
 [](Cover all ambients : also that there are no runtime enforcement)
 [](.ts vs. .d.ts)

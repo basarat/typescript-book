@@ -81,7 +81,7 @@ doStuff(new Bar());
 
 ### in 
 
-The `in` operator does a safe check for the existance of a property on an object and can be used as a type guard. E.g. 
+The `in` operator does a safe check for the existence of a property on an object and can be used as a type guard. E.g. 
 
 ```ts
 interface A {

@@ -21,7 +21,7 @@ However, *only `never` can be assigned to another never*. e.g.
 let foo: never = 123; // Error: Type number is not assignable to never
 
 // Okay as the function's return type is `never`
-let bar: never = (() => { throw new Error('Throw my hands in the air like I just dont care') })();
+let bar: never = (() => { throw new Error(`Throw my hands in the air like I just don't care`) })();
 ```
 
 Great. Now let's just jump into its key use case :)
