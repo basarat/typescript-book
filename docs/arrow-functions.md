@@ -1,22 +1,22 @@
-* [Arrow Functions](#arrow-functions)
-* [Tip: Arrow Function Need](#tip-arrow-function-need)
-* [Tip: Arrow Function Danger](#tip-arrow-function-danger)
-* [Tip: Libraries that use `this`](#tip-arrow-functions-with-libraries-that-use-this)
-* [Tip: Arrow Function inheritance](#tip-arrow-functions-and-inheritance)
-* [Tip: Quick object return](#tip-quick-object-return)
+* [Стрелочная функция](#arrow-functions)
+* [Совет: Необходимость стрелочных функций](#tip-arrow-function-need)
+* [Совет: Опасность стрелочных функций](#tip-arrow-function-danger)
+* [Совет: Стрелочные функции и библиотеки, которые используют `this`](#tip-arrow-functions-with-libraries-that-use-this)
+* [Совет: Стрелочные функции и наследование](#tip-arrow-functions-and-inheritance)
+* [Совет: Быстрый возврат объекта](#tip-quick-object-return)
 
-### Arrow Functions
+### Стрелочная функция
 
-Lovingly called the *fat arrow* (because `->` is a thin arrow and `=>` is a fat arrow) and also called a *lambda function* (because of other languages). Another commonly used feature is the fat arrow function `()=>something`. The motivation for a *fat arrow* is:
-1. You don't need to keep typing `function`
-2. It lexically captures the meaning of `this`
-2. It lexically captures the meaning of `arguments`
+Заботливо называемая *толстой стрелкой* (потому что `->` это тонкая стрелка и `=>` это толстая стрелка), а также называемая *лямбда-функцией* (как в других языках). Наиболее часто используемый вариант `()=>something`. Мотивация для использования *толстой стрелки* - это:
+1. Вам не нужно печатать `function`
+2. Лексически отражает значение `this`
+2. Лексически отражает значение `arguments`
 
-For a language that claims to be functional, in JavaScript you tend to be typing `function` quite a lot. The fat arrow makes it simple for you to create a function
+Для языка, который претендует на функциональность, в JavaScript вы обычно набираете `function` достаточно часто. Стрелочная функция упрощает создание функции
 ```ts
 var inc = (x)=>x+1;
 ```
-`this` has traditionally been a pain point in JavaScript. As a wise man once said "I hate JavaScript as it tends to lose the meaning of `this` all too easily". Fat arrows fix it by capturing the meaning of `this` from the surrounding context. Consider this pure JavaScript class:
+`this` традиционно был болезненным пунктом в JavaScript. Как сказал однажды мудрый человек "Я ненавижу JavaScript, так как он слишком легко теряет значение `this`". Стрелочная функция решает это проблему, фиксируя значение `this` из окружающего контекста. Рассмотрим чистый JavaScript класс:
 
 ```ts
 function Person(age) {
@@ -28,9 +28,10 @@ function Person(age) {
 var person = new Person(1);
 setTimeout(person.growOld,1000);
 
-setTimeout(function() { console.log(person.age); },2000); // 1, should have been 2
+setTimeout(function() { console.log(person.age); },2000); // 1, должен быть 2
 ```
-If you run this code in the browser `this` within the function is going to point to `window` because `window` is going to be what executes the `growOld` function. Fix is to use an arrow function:
+Если вы запустите этот код в браузере, `this` внутри функции будет указывать на `window`, потому что `window` будет контекстом выполнения функции `growOld`. Исправить это можно использованием стрелочной функции:
+
 ```ts
 function Person(age) {
     this.age = age;
@@ -43,13 +44,15 @@ setTimeout(person.growOld,1000);
 
 setTimeout(function() { console.log(person.age); },2000); // 2
 ```
-The reason why this works is the reference to `this` is captured by the arrow function from outside the function body. This is equivalent to the following JavaScript code (which is what you would write yourself if you didn't have TypeScript):
+
+Это работает, потому что в стрелочной функции `this` ссылается на окружающий контекст. Это равнозначно следующему коду на JavaScript (вы бы написали это сами, если бы у вас не было TypeScript):
+
 ```ts
 function Person(age) {
     this.age = age;
-    var _this = this;  // capture this
+    var _this = this;  // сохраняем this
     this.growOld = function() {
-        _this.age++;   // use the captured this
+        _this.age++;   // используем сохраненный this
     }
 }
 var person = new Person(1);
@@ -57,7 +60,9 @@ setTimeout(person.growOld,1000);
 
 setTimeout(function() { console.log(person.age); },2000); // 2
 ```
-Note that since you are using TypeScript you can be even sweeter in syntax and combine arrows with classes:
+
+Обратите внимание, что используя TypeScript, вы можете писать более приятный код и комбинировать стрелочные функции и фичи классов:
+
 ```ts
 class Person {
     constructor(public age:number) {}
@@ -71,38 +76,39 @@ setTimeout(person.growOld,1000);
 setTimeout(function() { console.log(person.age); },2000); // 2
 ```
 
-> [A sweet video about this pattern 🌹](https://egghead.io/lessons/typescript-make-usages-of-this-safe-in-class-methods)
+> [Видео об этом паттерне 🌹](https://egghead.io/lessons/typescript-make-usages-of-this-safe-in-class-methods)
 
-#### Tip: Arrow Function Need
-Beyond the terse syntax, you only *need* to use the fat arrow if you are going to give the function to someone else to call. Effectively:
+#### Совет: Необходимость стрелочных функций
+Помимо краткого синтаксиса, вам *следует* использовать стрелочную функцию только в том случае, если хотите передать функцию кому-то для вызова.  Фактически:
 ```ts
 var growOld = person.growOld;
-// Then later someone else calls it:
+// Позже кто-то вызовет ее:
 growOld();
 ```
-If you are going to call it yourself, i.e.
+Если же вы сами ее вызываете:
 ```ts
 person.growOld();
 ```
-then `this` is going to be the correct calling context (in this example `person`).
+тогда `this` будет использовать корректный контекст вызова (в примере это `person`).
 
-#### Tip: Arrow Function Danger
+#### Совет: Опасность стрелочных функций
 
-In fact if you want `this` *to be the calling context* you should *not use the arrow function*. This is the case with callbacks used by libraries like jquery, underscore, mocha and others. If the documentation mentions functions on `this` then you should probably just use a `function` instead of a fat arrow. Similarly if you plan to use `arguments` don't use an arrow function.
+На самом деле, если вы хотите, чтобы *именно `this` был контекстом вызова*, тогда *не нужно использовать стрелочные функции*. Это относится к обратным вызовам, используемым библиотеками, типа jquery, underscore, mocha и другими. Если в документации указан вызов функции для `this`, тогда вам следует использовать обычную `function` вместо стрелочной функции. Точно также, если вы планируете использовать `arguments`, то не прибегайте к стрелочным функциям.
 
-#### Tip: Arrow functions with libraries that use `this`
-Many libraries do this e.g. `jQuery` iterables (one example https://api.jquery.com/jquery.each/) will use `this` to pass you the object that it is currently iterating over. In this case if you want to access the library passed `this` as well as the surrounding context just use a temp variable like `_self` like you would in the absence of arrow functions.
+#### Совет: Стрелочные функции и библиотеки, которые используют `this`
+Многие библиотеки используют `this`, например итератор в `jQuery` (один из примеров https://api.jquery.com/jquery.each/) будет использовать `this`, чтобы передать вам объект, который он в данный момент перебирает. В данном случае, если вам нужен доступ и к окружающему контекту, и к `this`, переданному из библиотеки, просто используйте дополнительную переменную, например `_self`, 
+ для хранения ссылки на окружающий контекст.
 
 ```ts
 let _self = this;
 something.each(function() {
-    console.log(_self); // the lexically scoped value
-    console.log(this); // the library passed value
+    console.log(_self); // внешний контекст
+    console.log(this); // контекст функции .each()
 });
 ```
 
-#### Tip: Arrow functions and inheritance
-Arrow functions as properties on classes work fine with inheritance: 
+#### Совет: Стрелочные функции и наследование
+Стрелочные функции как методы классов прекрасно работают с наследованием:
 
 ```ts
 class Adder {
@@ -116,50 +122,50 @@ class Child extends Adder {
         return this.add(b);
     }
 }
-// Demo to show it works
+// Демонстрация работы
 const child = new Child(123);
 console.log(child.callAdd(123)); // 246
 ```
 
-However, they do not work with the `super` keyword when you try to override the function in a child class. Properties go on `this`. Since there is only one `this` such functions cannot participate in a call to `super` (`super` only works on prototype members). You can easily get around it by creating a copy of the method before overriding it in the child.
+Однако, они не работают с `super`, когда вы пытаетесь переопределить метод базового класса в дочернем. Свойства копируются на `this`. Поскольку существует только один `this`, такие функции не могут участвовать в вызове `super` (`super` работает только с членами-прототипами). Вы можете легко обойти это, создав копию метода перед тем, как переопределить его.
 
 ```ts
 class Adder {
     constructor(public a: number) {}
-    // This function is now safe to pass around
+    // Теперь эту функцию можно безопасно передавать
     add = (b: number): number => {
         return this.a + b;
     }
 }
 
 class ExtendedAdder extends Adder {
-    // Create a copy of parent before creating our own
+    // Создание копии метода родителького класса
     private superAdd = this.add;
-    // Now create our override
+    // Переопределение
     add = (b: number): number => {
         return this.superAdd(b);
     }
 }
 ```
 
-### Tip: Quick object return
+### Совет: Быстрый возврат объекта
 
-Sometimes you need a function that just returns a simple object literal. However, something like
+Иногда вам нужна функция, которая возвращает простой объект. Что-то вроде
 
 ```ts
-// WRONG WAY TO DO IT
+// неправильный способ сделать это
 var foo = () => {
     bar: 123
 };
 ```
-is parsed as a *block* containing a *JavaScript Label* by JavaScript runtimes (cause of the JavaScript specification).
+парсится как *блок*, содержащий *JavaScript Label*, во время выполнения (в соответствии со спецификацией JavaScript).
 
->  If that doesn't make sense, don't worry, as you get a nice compiler error from TypeScript saying "unused label" anyways. Labels are an old (and mostly unused) JavaScript feature that you can ignore as a modern GOTO (considered bad by experienced developers 🌹)
+>  Вы в любом случае получите ошибку компилятора TypeScript о "неиспользуемой метке (label)". Метки - это старая (и в основном неиспользуемая) функция JavaScript, которую вы можете игнорировать как современный GOTO (которую опытные разработчики считают плохой 🌹).
 
-You can fix it by surrounding the object literal with `()`:
+Вы можете исправить ошибку, обернув объект в `()`:
 
 ```ts
-// Correct 🌹
+// корректно 🌹
 var foo = () => ({
     bar: 123
 });
