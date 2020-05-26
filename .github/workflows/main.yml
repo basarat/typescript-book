@@ -3,7 +3,8 @@ name: AUTO
 on:
   push:
     branches: 
-      '*.md'
+      - test.md
+      #'*.md'
 jobs:
     createPullRequest:
       runs-on: ubuntu-latest
@@ -22,7 +23,7 @@ jobs:
             body: |
               New report
             draft: true
-            branch: auto-pr
+            branch: auto
             request-to-parent: false
         - name: Check outputs
           run: |
