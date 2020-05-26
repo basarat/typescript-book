@@ -7,8 +7,10 @@ on:
 jobs:
     createPullRequest:
       runs-on: ubuntu-latest
-      if: contains(github.event.head_commit.message, 'Done')
+      # if: contains(github.event.head_commit.message, 'Done')
       steps:
+        - uses: actions/checkout@v2
+          
         - name: Create Pull Request
           id: cpr
           uses: peter-evans/create-pull-request@v2.8.0
