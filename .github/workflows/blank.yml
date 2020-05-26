@@ -1,0 +1,25 @@
+name: AUTOPR
+
+on:
+  push:
+    branches: 
+      - test.md
+ 
+jobs:
+    pull-request:
+      runs-on: ubuntu-latest
+      # if: contains(github.event.head_commit.message, 'Done')
+      steps:
+        - uses: actions/checkout@v2
+          
+        - name: pull-request
+          uses: repo-sync/pull-request@v2
+          with: 
+            destination_branch: 'russian1'
+            pr_title: '[Example] Add report file'
+            pr_body: |
+              New report
+            pr-draft: true
+        - name: Check outputs
+          run: |
+            echo "Pull Request Number"
