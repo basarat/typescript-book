@@ -1,9 +1,10 @@
-name: AUTO-PR
+name: AUTO
 
 on:
   push:
     branches: 
-      '*.md'
+     # '*.md'
+       - master
 jobs:
     createPullRequest:
       runs-on: ubuntu-latest
