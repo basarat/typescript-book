@@ -3,8 +3,7 @@ name: AUTO
 on:
   push:
     branches: 
-     # '*.md'
-       - master
+      '*.md'
 jobs:
     createPullRequest:
       runs-on: ubuntu-latest
@@ -22,8 +21,8 @@ jobs:
             title: '[Example] Add report file'
             body: |
               New report
-            draft: false
-            branch: russian
+            draft: true
+            branch: auto-pr
             request-to-parent: false
         - name: Check outputs
           run: |
