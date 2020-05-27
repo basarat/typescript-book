@@ -86,7 +86,9 @@ var growOld = person.growOld;
 // Позже кто-то вызовет ее:
 growOld();
 ```
+
 Если же вы сами ее вызываете:
+
 ```ts
 person.growOld();
 ```
