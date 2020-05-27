@@ -1,10 +1,10 @@
 ### Классы
-The reason why it's important to have classes in JavaScript as a first class item is that:
-1. [Classes offer a useful structural abstraction](./tips/classesAreUseful.md)
-1. Provides a consistent way for developers to use classes instead of every framework (emberjs,reactjs etc) coming up with their own version.
-1. Object Oriented Developers already understand classes.
+Причина, по которой важно иметь классы в JavaScript:
+1. [Классы предлагают полезную структурную абстракцию](./tips/classesAreUseful.md)
+1. Предоставляют разработчикам согласованный единый способ использования классов вместо разных версий, предлагаемых фреймворками (emberjs, reactjs).
+1. Разработчики с опытом ООП уже понимают классы
 
-Finally JavaScript developers can *have `class`*. Here we have a basic class called Point:
+На текущий момент JavaScript разработчики *могут использовать `class`*. Далее реализация базового класса Point:
 ```ts
 class Point {
     x: number;
@@ -22,7 +22,7 @@ var p1 = new Point(0, 10);
 var p2 = new Point(10, 20);
 var p3 = p1.add(p2); // {x:10,y:30}
 ```
-This class generates the following JavaScript on ES5 emit:
+Этот класс компилируется в следующий код для ES5:
 ```ts
 var Point = (function () {
     function Point(x, y) {
@@ -35,10 +35,10 @@ var Point = (function () {
     return Point;
 })();
 ```
-This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct.
+Это традиционная базовая модель класса в JavaScript.
 
-### Inheritance
-Classes in TypeScript (like other languages) support *single* inheritance using the `extends` keyword as shown below:
+### Наследование
+Классы в TypeScript (как и в других языках) поддерживают *одиночное* наследование с помощью ключевого слова `extends`:
 
 ```ts
 class Point3D extends Point {
@@ -53,12 +53,12 @@ class Point3D extends Point {
     }
 }
 ```
-If you have a constructor in your class then you *must* call the parent constructor from your constructor (TypeScript will point this out to you). This ensures that the stuff that it needs to set on `this` gets set. Followed by the call to `super` you can add any additional stuff you want to do in your constructor (here we add another member `z`).
+Если в вашем классе есть конструктор, то вы *должны* вызвать конструктор класса-родителя из конструктора класса-наследника (TypeScript укажет на это). Это гарантирует, что все члены класса, которые должны быть добавлены в `this`, будут добавлены корректно. После вызова `super` вы можете добавить любые дополнительные члены, которые необходимы в конструкторе (в примере мы добавляем новый член `z`).
 
-Note that you override parent member functions easily (here we override `add`) and still use the functionality of the super class in your members (using `super.` syntax).
+Обратите внимание, что вы легко переопределяете члены класса-родителя (в примере мы переопределяем `add`) и все еще используете функциональность класса-родителя (использование `super.`).
 
-### Statics
-TypeScript classes support `static` properties that are shared by all instances of the class. A natural place to put (and access) them is on the class itself and that is what TypeScript does:
+### Static
+Классы в TypeScript поддерживают `static` свойства, которые являются общими для всех экземпляров класса. Естественное место для их размещения (и доступа к ним) - это сам класс:
 
 ```ts
 class Something {
@@ -73,21 +73,20 @@ var s2 = new Something();
 console.log(Something.instances); // 2
 ```
 
-You can have static members as well as static functions.
+Вы можете использовать как `static` члены, так и `static` методы.
 
-### Access Modifiers
-TypeScript supports access modifiers `public`,`private` and `protected` which determine the accessibility of a `class` member as shown below:
+### Модификаторы доступа
+TypeScript поддерживает модификаторы доступа `public`,`private` и `protected`, которые определяют доступность членов класса:
 
-| accessible on   | `public` | `protected` | `private` |
+| доступ к   | `public` | `protected` | `private` |
 |-----------------|----------|-------------|-----------|
-| class           | yes      | yes         | yes       |
-| class children  | yes      | yes         | no        |
-| class instances | yes      | no          | no        |
+| класс           | да      | да         | да       |
+| дочерний класс  | да      | да         | нет        |
+| экземпляр класса | да      | нет          | нет        |
 
+Если модификатор доступа не опеределен, то он неявно интерпретируется как `public`, поскольку это соответствует природе JavaScript 🌹.
 
-If an access modifier is not specified it is implicitly `public` as that matches the *convenient* nature of JavaScript 🌹.
-
-Note that at runtime (in the generated JS) these have no significance but will give you compile time errors if you use them incorrectly. An example of each is shown below:
+Обратите внимание, что во время выполнения (в сгенерированном JS) это не имеет значения, но во время компиляции вы получите ошибки при некорректном использовании модификаторов доступа. Как показано в примере ниже для каждого модификатора:
 
 ```ts
 class FooBase {
@@ -96,43 +95,43 @@ class FooBase {
     protected z: number;
 }
 
-// EFFECT ON INSTANCES
+// для экземпляра класса
 var foo = new FooBase();
-foo.x; // okay
-foo.y; // ERROR : private
-foo.z; // ERROR : protected
+foo.x; // Ок
+foo.y; // ошибка : private
+foo.z; // ошибка : protected
 
-// EFFECT ON CHILD CLASSES
+// для класса-наследника
 class FooChild extends FooBase {
     constructor() {
       super();
-        this.x; // okay
-        this.y; // ERROR: private
-        this.z; // okay
+        this.x; // Ок
+        this.y; // ошибка: private
+        this.z; // Ок
     }
 }
 ```
 
-As always these modifiers work for both member properties and member functions.
+Как обычно, эти модификаторы работают и для члена класса, и для метода.
 
 ### Abstract
-`abstract` can be thought of as an access modifier. We present it separately because opposed to the previously mentioned modifiers it can be on a `class` as well as any member of the class. Having an `abstract` modifier primarily means that such functionality *cannot be directly invoked* and a child class must provide the functionality.
+`abstract` можно рассматривать как модификатор доступа. Мы рассматриваем его отдельно, потому что в отличие от предыдущих модификаторов он может использоваться как для `class`, так и для любого члена класса. Наличие `abstract` модификатора в первую очередь означает, что данная функциональность *не может быть вызвана напрямую*, класс-наследник должен обеспечивать функциональность.
 
-* `abstract` **classes** cannot be directly instantiated. Instead the user must create some `class` that inherits from the `abstract class`.
-* `abstract` **members** cannot be directly accessed and a child class must provide the functionality.
+* **Экземпляр** `abstract` **класса** не может быть создан напрямую. Вместо этого должен быть создан какой-либо `class`, который наследуется от `abstract class`.
+* `abstract` **члены класса** недоступны напрямую и функциональность предоставляется только через класс-наследник.
 
-### Constructor is optional
+### Конструктор опционален
 
-The class does not need to have a constructor. e.g. the following is perfectly fine. 
+Конструктор для класса не обязателен. Пример ниже прекрасно работает: 
 
 ```ts
 class Foo {}
 var foo = new Foo();
 ```
 
-### Define using constructor
+### Определение с помощью конструктора
 
-Having a member in a class and initializing it like below:
+Добавление членов класса и инициализация, как на примере ниже:
 
 ```ts
 class Foo {
@@ -142,7 +141,7 @@ class Foo {
     }
 }
 ```
-is such a common pattern that TypeScript provides a shorthand where you can prefix the member with an *access modifier* and it is automatically declared on the class and copied from the constructor. So the previous example can be re-written as (notice `public x:number`):
+это настолько общий паттерн, что TypeScript предоставляет сокращенный вариант, в котором достаточно добавить *модификатор доступа* перед членом класса и он автоматически будет проинициализирован и скопирован из конструктора. Поэтому предыдущий пример может быть переписан как:
 
 ```ts
 class Foo {
@@ -151,12 +150,12 @@ class Foo {
 }
 ```
 
-### Property initializer
-This is a nifty feature supported by TypeScript (from ES7 actually). You can initialize any member of the class outside the class constructor, useful to provide default (notice `members = []`)
+### Инициализация свойств
+Это прекрасная функция, поддерживаемая TypeScript (из ES7). Вы можете инициализировать любой член класса вне конструктора, обычно с дефолтным значением.
 
 ```ts
 class Foo {
-    members = [];  // Initialize directly
+    members = [];  // инициализация
     add(x) {
         this.members.push(x);
     }
