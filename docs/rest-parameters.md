@@ -8,4 +8,5 @@ function iTakeItAll(first, second, ...allOthers) {
 iTakeItAll('foo', 'bar'); // []
 iTakeItAll('foo', 'bar', 'bas', 'qux'); // ['bas','qux']
 ```
+
 Rest параметры могут быть использованы в любой функции, будь то `function`/`()=>`/`class member`.
