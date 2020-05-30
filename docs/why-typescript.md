@@ -161,7 +161,7 @@ var inc = x => x + 1
 이것을 벗어나서 우리는 타입스크립트의 핵심세부사항들을 파헤칠 수 있습니다.
 
 [](Interfaces are open ended)
-[](Type Inferernce rules)
+[](Type Inference rules)
 [](Cover all the annotations)
 [](Cover all ambients : also that there are no runtime enforcement)
 [](.ts vs. .d.ts)
