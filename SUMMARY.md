@@ -13,7 +13,7 @@
 * [Будущее JavaScript](docs/future-javascript.md)
   * [Классы](docs/classes.md)
     * [Объявление классов](docs/classes-emit.md)
-  * [стрелочные функции](docs/arrow-functions.md)
+  * [Стрелочные функции](docs/arrow-functions.md)
   * [Rest параметры](docs/rest-parameters.md)
   * [Директива let](docs/let.md)
   * [Директива const](docs/const.md)
