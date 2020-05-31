@@ -38,3 +38,6 @@ And when you are ready to deploy your JavaScript application run `npm run build`
 ## Bonus points
 
 Such NPM modules work just fine with browserify (using tsify) or webpack (using ts-loader).
+
+Reference Links for More
+How to Hire a Great Node.js Developer Link => https://www.toptal.com/nodejs#hiring-guide
