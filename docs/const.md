@@ -1,65 +1,65 @@
 ### const
 
-`const` is a very welcomed addition offered by ES6 / TypeScript. It allows you to be immutable with variables. This is good from a documentation as well as a runtime perspective. To use const just replace `var` with `const`:
+`const` - это очень полезное дополнение, предлагаемое ES6 / TypeScript. Это позволяет делать переменные неизменяемыми. Это хорошо как с точки зрения документации, так и во время выполнения. Чтобы использовать в коде, просто замените `var` на `const`:
 
 ```ts
 const foo = 123;
 ```
 
-> The syntax is much better (IMHO) than other languages that force the user to type something like `let constant foo` i.e. a variable + behavior specifier.
+> Предлагаемый синтаксис намного лучше, чем в других языках, которые вынуждают использовать что-то типа `let constant foo`, т. е. переменная + спецификатор поведения.
 
-`const` is a good practice for both readability and maintainability and avoids using *magic literals* e.g.
+`const` является хорошей практикой для читаемости и для поддерживаемости кода, позволяет избегать такого использования:
 
 ```ts
-// Low readability
+// нечитаемо
 if (x > 10) {
 }
 
-// Better!
+// намного лучше!
 const maxRows = 10;
 if (x > maxRows) {
 }
 ```
 
-#### const declarations must be initialized
-The following is a compiler error:
+#### const переменные нужно инициализировать
+Пример ниже вызовет ошибку компилятора:
 
 ```ts
-const foo; // ERROR: const declarations must be initialized
+const foo; // Ошибка: const переменная должна быть инициализирована
 ```
 
-#### Left hand side of assignment cannot be a constant
-Constants are immutable after creation, so if you try to assign them to a new value it is a compiler error:
+#### Левая часть выражения не может быть константой
+Константы являются неизменными после создания, поэтому если вы попробуете присвоить ей новое значение, вы получите ошибку компиляции:
 
 ```ts
 const foo = 123;
-foo = 456; // ERROR: Left-hand side of an assignment expression cannot be a constant
+foo = 456; // Ошибка: Левая часть выражения не может быть константой
 ```
 
-#### Block Scoped
-A `const` is block scoped like we saw with [`let`](./let.md):
+#### Контекст блока
+`const` создается в контексте блока, как и [`let`](./let.md):
 
 ```ts
 const foo = 123;
 if (true) {
-    const foo = 456; // Allowed as its a new variable limited to this `if` block
+    const foo = 456; // Корректно, потому что новая переменная ограничена контекстом блока `if`
 }
 ```
 
-#### Deep immutability
-A `const` works with object literals as well, as far as protecting the variable *reference* is concerned:
+#### Глубокая неизменность
+`const` работает с объектами, а также защищает "ссылки" на переменные: 
 
 ```ts
 const foo = { bar: 123 };
-foo = { bar: 456 }; // ERROR : Left hand side of an assignment expression cannot be a constant
+foo = { bar: 456 }; // Ошибка : Левая часть выражения не может быть константой
 ```
 
-However, it still allows sub properties of objects to be mutated, as shown below:
+Однако, `const` позволяет изменять подсвойства объектов:
 
 ```ts
 const foo = { bar: 123 };
-foo.bar = 456; // Allowed!
+foo.bar = 456; // Корректно!
 console.log(foo); // { bar: 456 }
 ```
 
-For this reason I recommend using `const` with primitives or immutable data structures.
+Поэтому я рекомендую использовать `const` с примитивами или неизменяемыми структурами данных.
