@@ -113,7 +113,7 @@ function dramaticWelcome() {
 }
 dramaticWelcome();
 ```
-You can see full example [here][asyncawaites6code].
+Możesz zobaczyć pełny przykład [tutaj][asyncawaites6code].
 
 
 **Transpilowanie do ES5 (--target es5)**
@@ -193,6 +193,7 @@ Możesz zobaczyć pełny przykład [tutaj][asyncawaites5code].
 
 
 **Uwaga**: w obu scenariuszach docelowych musimy upewnić się, że nasze środowisko wykonawcze ma obietnicę zgodną z ECMAScript dostępną na całym świecie. Może to obejmować złapanie polifillu dla obietnicy. Musimy także upewnić się, że TypeScript wie, że istnieje Promise, ustawiając flagę lib na coś podobnego do "dom", "es2015" lub "dom", "es2015.promise", "es5". 
+
 **Widzimy, jakie przeglądarki mają obsługę Promise (natywną i polyfilled) [tutaj](https://kangax.github.io/compat-table/es6/#test-Promise).**
 
 [generatory]:./generators.md
