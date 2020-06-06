@@ -47,6 +47,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [Spanish](https://github.com/melissarofman/typescript-book)
 * [Korean](https://github.com/radlohead/typescript-book)
 * [French](https://github.com/HachemiH/typescript-book)
+* [Polish](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
 
 ## Other Options
 You can also download one of the Epub, Mobi, or PDF formats from the [actions tab](https://github.com/basarat/typescript-book/actions) by clicking on the latest build run. You will find the files in the artifacts section.
