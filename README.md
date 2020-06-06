@@ -1,7 +1,7 @@
 Głębokie nurkowanie w TypeScript
 =======
 
-Patrzyłem na problemy, które często pojawiają się, gdy ludzie zaczynają używać TypeScript. Jest to oparte na swego rodzaju lekcjach ze [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) i ogólnym zaangażowaniu [społeczności TypeScript](https://github.com/TypeStrong/). Możesz [obserwować](https://twitter.com/basarat) aby być na bieżąco i [nie zapomnij kliknąć ★ na GitHub](https://github.com/basarat/typescript-book) 🌹
+Patrzyłem na problemy, które często pojawiają się, gdy ludzie zaczynają używać TypeScript. Jest to oparte na swego rodzaju lekcjach ze [Stack Overflow](http://stackoverflow.com/tags/typescript/topusers) / [DefinitelyTyped](https://github.com/DefinitelyTyped/) i ogólnym zaangażowaniu [społeczności TypeScript](https://github.com/TypeStrong/). Możesz [obserwować](https://twitter.com/basarat) Twitter, aby być na bieżąco i [nie zapomnij kliknąć ★ na GitHub](https://github.com/basarat/typescript-book) 🌹
 
 ## Opinie
 
