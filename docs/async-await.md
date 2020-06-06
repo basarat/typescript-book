@@ -1,8 +1,8 @@
 ## Async Await
 
-> [A PRO egghead video course that covers the same material](https://egghead.io/courses/async-await-using-typescript)
+> [Profesjonalny kurs wideo egghead, który obejmuje ten sam materiał](https://egghead.io/courses/async-await-using-typescript)
 
-As a thought experiment imagine the following: a way to tell the JavaScript runtime to pause the executing of code on the `await` keyword when used on a promise and resume *only* once (and if) the promise returned from the function is settled:
+Jako eksperyment myślowy wyobraź sobie takie coś: sposób na poinformowanie środowiska wykonawczego JavaScript, aby wstrzymało wykonanie kodu słowa kluczowego `await`, gdy jest używane w ramach obietnicy (promise), i wznowiło *tylko* raz (i jeśli) obietnica zwrócona z funkcji jest ustalona:
 
 ```ts
 // Not actual code. A thought experiment
@@ -17,21 +17,21 @@ async function foo() {
 }
 ```
 
-When the promise settles execution continues,
-* if it was fulfilled then await will return the value,
-* if it's rejected an error will be thrown synchronously which we can catch.
+Kiedy obietnica się zakończy, realizacja trwa,
+* jeśli zostało spełnione, await zwróci wartość,
+* jeśli zostanie odrzucone, błąd zostanie wyrzucony synchronicznie, który możemy złapać.
 
-This suddenly (and magically) makes asynchronous programming as easy as synchronous programming.  Three things needed for this thought experiment are:
+To nagle (i magicznie) sprawia, że programowanie asynchroniczne jest tak proste, jak programowanie synchroniczne. Trzy rzeczy potrzebne do tego eksperymentu myślowego to:
 
-* Ability to *pause function* execution.
-* Ability to *put a value inside* the function.
-* Ability to *throw an exception inside* the function.
+* Możliwość *wykonania funkcji pauzy*.
+* Możliwość *wstawienia wartości do* funkcji.
+* Możliwość *rzucenia wyjątku wewnątrz* funkcji.
 
-This is exactly what generators allowed us to do! The thought experiment *is actually real* and so is the `async`/`await` implementation in TypeScript / JavaScript. Under the covers it just uses generators.
+Właśnie na to pozwoliły nam generatory! Eksperyment myślowy *jest aktualnie rzeczywisty*, podobnie jak implementacja `async`/`await` w TypeScript / JavaScript. Pod przykryciem używa tylko generatorów.
 
-### Generated JavaScript
+### Wygenerowany JavaScript
 
-You don't have to understand this, but it's fairly simple if you've [read up on generators][generators]. The function `foo` can be simply wrapped up as follows:
+Nie musisz tego rozumieć, ale jest to dość proste, jeśli [przeczytałeś o generatorach][generators]. Funkcję `foo` można prosto opakować w następujący sposób:
 
 ```ts
 const foo = wrapToReturnPromise(function* () {
@@ -45,17 +45,18 @@ const foo = wrapToReturnPromise(function* () {
 });
 ```
 
-where the `wrapToReturnPromise` just executes the generator function to get the `generator` and then use `generator.next()`, if the value is a `promise` it would `then`+`catch` the promise and depending upon the result call `generator.next(result)` or `generator.throw(error)`. That's it!
+Tam gdzie `wrapToReturnPromise` po prostu wykonuje funkcję generatora, aby uzyskać `generator` i wtedy użyć `generator.next()`, jeśli wartość jest `promise` byłoby `then`+`catch` obietnicy i w zależności od wyniku wywołania `generator.next(result)` lub `generator.throw(error)`. To wszystko!
 
 
 
-### Async Await Support in TypeScript
-**Async - Await** has been supported by [TypeScript since version 1.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html). Asynchronous functions are prefixed with the *async* keyword; *await* suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the *Promise* returned.
-It was only supported for **target es6** transpiling directly to **ES6 generators**.
+### Wsparcie Async Await w TypeScript
+**Async - Await** jest obsługiwane przez [TypeScript od wersji 1.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html). Funkcje asynchroniczne są poprzedzone słowem kluczowym *async*; *await* zawiesza wykonanie do momentu spełnienia obietnicy powrotu funkcji asynchronicznej i rozpakowuje wartość ze zwróconej *obietnicy*.
+Obsługiwane było tylko w przypadku transpilacji **docelowej ES6** bezpośrednio do **generatorów ES6**.
 
-**TypeScript 2.1** [added the capability to ES3 and ES5 run-times](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html), meaning you’ll be free to take advantage of it no matter what environment you’re using. It's important to notice that we can use async / await with TypeScript 2.1 and many browsers are supported, of course, having globally added a **polyfill for Promise**.
+**TypeScript 2.1** [dodano możliwość uruchamiania ES3 i ES5](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html), co oznacza, że będziesz mógł z niego korzystać bez względu na to, z jakiego środowiska korzystasz. Należy zauważyć, że możemy używać async / await na TypeScript 2.1, i wiele przeglądarek jest oczywiście obsługiwanych, ponieważ globalnie dodano **polyfill dla Promise**.
 
-Let's see this **example** and take a look at this code to figure out how TypeScript async / await **notation** works: 
+Zobaczmy ten **przykład** i spójrzmy na ten kod, aby dowiedzieć się, jak działa async / await **notacji** TypeScript:
+
 ```ts
 function delay(milliseconds: number, count: number): Promise<number> {
     return new Promise<number>(resolve => {
@@ -81,7 +82,7 @@ async function dramaticWelcome(): Promise<void> {
 dramaticWelcome();
 ```
 
-**Transpiling to ES6 (--target es6)**
+**Transpilowanie do ES6 (--target es6)**
 ```js
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -115,7 +116,7 @@ dramaticWelcome();
 You can see full example [here][asyncawaites6code].
 
 
-**Transpiling to ES5 (--target es5)**
+**Transpilowanie do ES5 (--target es5)**
 ```js
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -188,12 +189,12 @@ function dramaticWelcome() {
 }
 dramaticWelcome();
 ```
-You can see full example [here][asyncawaites5code].
+Możesz zobaczyć pełny przykład [tutaj][asyncawaites5code].
 
 
-**Note**: for both target scenarios, we need to make sure our run-time has an ECMAScript-compliant Promise available globally. That might involve grabbing a polyfill for Promise. We also need to make sure that TypeScript knows Promise exists by setting our lib flag to something like "dom", "es2015" or "dom", "es2015.promise", "es5". 
-**We can see what browsers DO have Promise support (native and polyfilled) [here](https://kangax.github.io/compat-table/es6/#test-Promise).**
+**Uwaga**: w obu scenariuszach docelowych musimy upewnić się, że nasze środowisko wykonawcze ma obietnicę zgodną z ECMAScript dostępną na całym świecie. Może to obejmować złapanie polifillu dla obietnicy. Musimy także upewnić się, że TypeScript wie, że istnieje Promise, ustawiając flagę lib na coś podobnego do "dom", "es2015" lub "dom", "es2015.promise", "es5". 
+**Widzimy, jakie przeglądarki mają obsługę Promise (natywną i polyfilled) [tutaj](https://kangax.github.io/compat-table/es6/#test-Promise).**
 
-[generators]:./generators.md
+[generatory]:./generators.md
 [asyncawaites5code]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es5/asyncAwaitES5.js
 [asyncawaites6code]:https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es6/asyncAwaitES6.js
