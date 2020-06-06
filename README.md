@@ -49,7 +49,7 @@ Książka jest całkowicie darmowa, więc możesz kopiować i wklejać, co chces
 * [francuski](https://github.com/HachemiH/typescript-book)
 * [polski](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
 
-## Inne opinie
+## Inne opcje
 Możesz także pobrać jeden z formatów Epub, Mobi lub PDF z karty [akcje](https://github.com/basarat/typescript-book/actions) klikając w najnowszą wersję kompilacji. Pliki znajdziesz w sekcji przedmiotów.
 
 ## Specjalne podziękowania
