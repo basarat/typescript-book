@@ -98,13 +98,13 @@ function handler(event: Event) {
 }
 ```
 
-If you *still want that Type, you can use a double assertion*, but first asserting to `any` which is compatible with all types and therefore the compiler no longer complains:
+If you *still want that Type, you can use a double assertion*, but first asserting to `unknown` (or `any`) which is compatible with all types and therefore the compiler no longer complains:
 
 ```ts
 function handler(event: Event) {
-    let element = event as any as HTMLElement; // Okay!
+    let element = event as unknown as HTMLElement; // Okay!
 }
 ```
 
 #### How TypeScript determines if a single assertion is not enough
-Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.
+Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `unknown` (or `any`) to be that unsafe.
