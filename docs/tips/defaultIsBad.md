@@ -76,7 +76,6 @@ const {HighCharts} = await import('https://code.highcharts.com/js/es-modules/mas
 HighCharts.chart('container', { ... }); // Notice `.default`
 ```
 
-
 ### Needs two lines for non-class / non-function
 
 Can be one statement for function / class e.g. 
@@ -103,4 +102,18 @@ const foo: Foo = {
   soWhat: 'The export is now *removed* from the declaration'
 };
 export default foo;
+```
+
+### Type annotations for default export
+Default exports [cannot be annotated](https://github.com/microsoft/TypeScript/issues/13626)
+
+```ts
+const HighCharts: React.FC = ...
+export default HighCharts;
+```
+
+Can be one statement for named exports: 
+
+```ts
+export const HighCharts: React.FC = ...
 ```
