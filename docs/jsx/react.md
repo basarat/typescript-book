@@ -151,7 +151,7 @@ const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
 **Workaround**: Use `extends` on the generic parameter to hint the compiler that it's a generic, e.g.:
 
 ```ts
-const foo = <T extends {}>(x: T) => x;
+const foo = <T extends unknown>(x: T) => x;
 ```
 
 ### React Tip: Strongly Typed Refs 
