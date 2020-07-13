@@ -125,7 +125,7 @@ import someLocalNameForThisFile from "../foo";
 
 ### Module paths
 
-> I am just going to assume `moduleResolution: commonjs`. This is the option you should have in your TypeScript config. This setting is implied automatically by `module:commonjs`.
+> I am just going to assume `moduleResolution: "Node"`. This is the option you should have in your TypeScript config. This setting is implied automatically by `module:commonjs`.
 
 There are two distinct kinds of modules. The distinction is driven by the path section of the import statement (e.g. `import foo from 'THIS IS THE PATH SECTION'`).
 
