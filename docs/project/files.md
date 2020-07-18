@@ -1,6 +1,6 @@
-## Which files?
+## Какие файлы?
 
-You can either use `files` to be explicit:
+Для большей явности вы можете использовать `files`:
 
 ```json
 {
@@ -10,7 +10,7 @@ You can either use `files` to be explicit:
 }
 ```
 
-or `include` and `exclude` to specify files / folders / globs. E.g.:
+или `include` и` exclude` для указания файлов / папок / шаблонов. Например:
 
 
 ```json
@@ -25,6 +25,6 @@ or `include` and `exclude` to specify files / folders / globs. E.g.:
 }
 ```
 
-Some notes:
+Некоторые примечания:
 
-* For globs : `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be assumed and if `allowJs:true` so will `.js`/`.jsx`)
+* Для шаблонов: `**/*` (например, использованиe `somefolder/**/*`) означает что все папки и любые файлы (c расширениями `.ts`/`.tsx` будут задействованы, а если `allowJs:true` также и `.js`/`.jsx`)
