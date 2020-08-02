@@ -1,42 +1,42 @@
 
-* [Freshness](#freshness)
-* [Allowing extra properties](#allowing-extra-properties)
-* [Use Case: React](#use-case-react-state)
+- [Freshness](#freshness)
+  - [Разрешение дополнительных свойств](#разрешение-дополнительных-свойств)
+  - [Пример использования: React State](#пример-использования-react-state)
 
 ## Freshness
 
-TypeScript provides a concept of **Freshness** (also called *strict object literal checking*) to make it easier to type check object literals that would otherwise be structurally type compatible.
+TypeScript предоставляет концепцию **Freshness** (также называемую *строгой проверкой литеральных объектов*), чтобы упростить проверку типов литеральных объектов, которые без этой особой проверки были бы структурно совместимы.
 
-Structural typing is *extremely convenient*. Consider the following piece of code. This allows you to *very conveniently* upgrade your JavaScript to TypeScript while still preserving a level of type safety:
+Структурная типизация *крайне удобна*. Рассмотрим следующий фрагмент кода. Это позволяет вам *очень удобно* обновить ваш JavaScript до TypeScript, предохраняя типы на определённом уровне:
 
 ```ts
 function logName(something: { name: string }) {
     console.log(something.name);
 }
 
-var person = { name: 'matt', job: 'being awesome' };
-var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
-var random = { note: `I don't have a name property` };
+var person = { name: 'мэтт', job: 'быть потрясающим' };
+var animal = { name: 'корова', diet: 'веган, но употребляет молоко собственного вида' };
+var random = { note: `У меня нет свойства name` };
 
 logName(person); // okay
 logName(animal); // okay
-logName(random); // Error: property `name` is missing
+logName(random); // Ошибка: свойство `name` не найдено
 ```
 
-However, *structural* typing has a weakness in that it allows you to misleadingly think that something accepts more data than it actually does. This is demonstrated in the following code which TypeScript will error on as shown:
+Тем не менее, *структурная* типизация имеет недостаток: она вводит в заблуждение мыслью, что что-то способно принимает больше данных, чем на самом деле. Это показано в следующем коде, на котором TypeScript будет выдавать ошибку:
 
 ```ts
 function logName(something: { name: string }) {
     console.log(something.name);
 }
 
-logName({ name: 'matt' }); // okay
-logName({ name: 'matt', job: 'being awesome' }); // Error: object literals must only specify known properties. `job` is excessive here.
+logName({ name: 'мэтт' }); // okay
+logName({ name: 'мэтт', job: 'быть потрясающим' }); // Ошибка: литералы объекта должны указывать только известные свойства. `job` здесь лишнее.
 ```
 
-Note that this error *only happens on object literals*. Without this error one might look at the call `logName({ name: 'matt', job: 'being awesome' })` and think that *logName* would do something useful with `job` where as in reality it will completely ignore it.
+Обратите внимание, что эта ошибка *возникает только для литералов объекта*. До этой ошибки можно посмотреть на вызов `logName({ name: 'мэтт', job: 'быть потрясающим' })` и подумать, что *logName* выполнится с `job`, когда на деле жестко отклоняет его.
 
-Another big use case is with interfaces that have optional members, without such object literal checking, a typo would type check just fine. This is demonstrated below:
+Другой важный пример использования относится к интерфейсам, которые имеют необязательные элементы, и, следовательно, не подлежат такой же проверке типа, как и литеральные объекты. Но и в этом случае опечатка будет проверена на тип просто великолепно. Это продемонстрировано ниже:
 
 ```ts
 function logIfHasName(something: { name?: string }) {
@@ -44,58 +44,58 @@ function logIfHasName(something: { name?: string }) {
         console.log(something.name);
     }
 }
-var person = { name: 'matt', job: 'being awesome' };
-var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
+var person = { name: 'мэтт', job: 'быть потрясающим' };
+var animal = { name: 'корова', diet: 'веган, но употребляет молоко собственного вида' };
 
 logIfHasName(person); // okay
 logIfHasName(animal); // okay
-logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
+logIfHasName({neme: 'Я просто неправильно написал name как neme'}); // Ошибка: литералы объекта должны указывать только известные свойства. Здесь `neme` лишнее.
 ```
 
-The reason why only object literals are type checked this way is because in this case additional properties *that aren't actually used* is almost always a typo or a misunderstanding of the API.
+Причина, по которой только объектные литералы проверяются по типу таким образом, заключается в том, что в этом случае дополнительные свойства, *которые на самом деле не используются*, почти всегда являются опечаткой или неправильным пониманием API.
 
-### Allowing extra properties
+### Разрешение дополнительных свойств
 
-A type can include an index signature to explicitly indicate that excess properties are permitted:
+Тип может включать сигнатуру индекса, чтобы явно указать, что дополнительные свойства разрешены:
 
 ```ts
 var x: { foo: number, [x: string]: any };
-x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
+x = { foo: 1, baz: 2 };  // Ok, `baz` соответствует сигнатуре индекса
 ```
 
-### Use Case: React State
+### Пример использования: React State
 
-[Facebook ReactJS](https://facebook.github.io/react/) offers a nice use case for object freshness. Quite commonly in a component you call `setState` with only a few properties instead of passing in all the properties, i.e.: 
+[Facebook ReactJS](https://facebook.github.io/react/) предлагает хороший вариант использования для freshness объекта. Довольно часто в компоненте вы вызываете `setState` с несколькими свойствами вместо того, чтобы передавать все свойства, т.е.
 
 ```ts
-// Assuming
+// Допустим
 interface State {
   foo: string;
   bar: string;
 }
 
-// You want to do: 
-this.setState({foo: "Hello"}); // Error: missing property bar
+// Вы хотите сделать:
+this.setState({foo: "Hello"}); // Ошибка: отсутствует свойство bar
 
-// But because state contains both `foo` and `bar` TypeScript would force you to do: 
+// Но так как state содержит и `foo` и `bar` TypeScript заставит вас сделать это:
 this.setState({foo: "Hello", bar: this.state.bar}};
 ```
 
-Using the idea of freshness you would mark all the members as optional and *you still get to catch typos*!: 
+Используя идею freshness, вы пометите все элементы как необязательные и *вы все равно сможете отловить опечатки*!:
 
 ```ts
-// Assuming
+// Допустим
 interface State {
   foo?: string;
   bar?: string;
 }
 
-// You want to do: 
-this.setState({foo: "Hello"}); // Yay works fine!
+// Вы хотите сделать:
+this.setState({foo: "Hello"}); // Ура работает отлично!
 
-// Because of freshness it's protected against typos as well!
-this.setState({foos: "Hello"}}; // Error: Objects may only specify known properties
+// Благодаря freshness также защищено от опечаток!
+this.setState({foos: "Hello"}}; // Ошибка: объекты могут указывать только известные свойства
 
-// And still type checked
-this.setState({foo: 123}}; // Error: Cannot assign number to a string
+// И тип тоже проверяется
+this.setState({foo: 123}}; // Ошибка: невозможно присвоить номер строке
 ```
