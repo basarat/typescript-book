@@ -1,22 +1,22 @@
-## Literals
-Literals are *exact* values that are JavaScript primitives. 
+## Литералы
+Литералы - это *фиксированные* значения, которые являются примитивами JavaScript.
 
-### String Literals
+### Строковые литералы
 
-You can use a string literal as a type. For example:
+Вы можете использовать строковый литерал в качестве типа. Например:
 
 ```ts
 let foo: 'Hello';
 ```
 
-Here we have created a variable called `foo` that *will only allow the literal value `'Hello'` to be assigned to it*. This is demonstrated below:
+Здесь мы создали переменную с именем `foo`, которая *позволяет присваивать ей только литеральное значение `'Hello'`*. Это продемонстрировано ниже:
 
 ```ts
 let foo: 'Hello';
-foo = 'Bar'; // Error: "Bar" is not assignable to type "Hello"
+foo = 'Bar'; // Ошибка: "Bar" нельзя назначить типу "Hello"
 ```
 
-They are not very useful on their own but can be combined in a type union to create a powerful (and useful) abstraction e.g.:
+Они не очень полезны сами по себе, но могут быть собраны в тип объединение для создания мощной (и полезной) абстракции, например:
 
 ```ts
 type CardinalDirection =
@@ -30,29 +30,29 @@ function move(distance: number, direction: CardinalDirection) {
 }
 
 move(1,"North"); // Okay
-move(1,"Nurth"); // Error!
+move(1,"Nurth"); // Ошибка!
 ```
 
-### Other literal types
-TypeScript also supports `boolean` and `number` literal types, e.g.: 
+### Другие литеральные типы
+TypeScript также поддерживает литеральные типы `boolean` и `number`, например:
 
 ```ts
 type OneToFive = 1 | 2 | 3 | 4 | 5;
 type Bools = true | false;
 ```
 
-### Inference 
-Quite commonly you get an error like `Type string is not assignable to type "foo"`. The following example demonstrates this.
+### Логический вывод
+Как правило, вы получаете сообщение об ошибке: `Тип string не может быть назначен для типа "foo"`. Следующий пример демонстрирует это.
 
 ```js
 function iTakeFoo(foo: 'foo') { }
 const test = {
   someProp: 'foo'
 };
-iTakeFoo(test.someProp); // Error: Argument of type string is not assignable to parameter of type 'foo'
+iTakeFoo(test.someProp); // Ошибка: Аргумент типа string не может быть назначен параметру типа 'foo'
 ```
 
-This is because `test` is inferred to be of type `{someProp: string}`. The fix here is to use a simple type assertion to tell TypeScript the literal you want it to infer as shown below: 
+Это потому, что `test` подразумевает тип `{someProp: string}`. Решением в этом случае было бы использование простого утверждения типа. Для того чтобы сообщить TypeScript литерал, который вы хотите, чтобы он выводил, как показано ниже:
 
 ```js
 function iTakeFoo(foo: 'foo') { }
@@ -62,28 +62,28 @@ const test = {
 iTakeFoo(test.someProp); // Okay!
 ```
 
-or use a type annotation that helps TypeScript infer the correct thing at the point of declaration: 
+или используйте описание типа, которое поможет TypeScript понять правильный тип в точке объявления:
 
-```
+```js
 function iTakeFoo(foo: 'foo') { }
 type Test = {
   someProp: 'foo',
 }
-const test: Test = { // Annotate - inferred someProp is always === 'foo'
+const test: Test = { // Пометки - подразумевается, что someProp всегда === 'foo'
   someProp: 'foo' 
 }; 
 iTakeFoo(test.someProp); // Okay!
 ```
 
-### Use cases
-Valid use cases for string literal types are:
+### Случаи использования
+Возможные варианты использования для строковых литералов:
 
-#### String based enums
+#### Тип перечисление на основе строк
 
-[TypeScript enums are number based](../enums.md). You can use string literals with union types to mock a string based enum as we did in the `CardinalDirection` example above. You can even generate a `Key:Value` structure using the following function: 
+[Тип перечисление в TypeScript основан на числах](../enums.md). Вы можете использовать строковые литералы вместе с объединенными типами, чтобы сымитировать перечисление на основе строки, как мы это делали в примере `CardinalDirection` выше. Вы даже можете сгенерировать структуру `Key: Value`, используя следующую функцию:
 
 ```ts
-/** Utility function to create a K:V from a list of strings */
+/** Утилита для создания K:V из списка строк */
 function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
   return o.reduce((res, key) => {
     res[key] = key;
@@ -92,10 +92,11 @@ function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
 }
 ```
 
-And then generate the literal type union using `keyof typeof`. Here is a complete example:
+А затем сгенерируйте тип объединение из литеральных типов, используя `keyof typeof`. Вот полный пример:
 
 ```ts
-/** Utility function to create a K:V from a list of strings */
+
+/** Утилита для создания K:V из списка строк */
 function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
   return o.reduce((res, key) => {
     res[key] = key;
@@ -104,40 +105,40 @@ function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
 }
 
 /**
-  * Sample create a string enum
+  * Пример создания типа объединение на основе строк
   */
 
-/** Create a K:V */
+/** Создать K:V */
 const Direction = strEnum([
   'North',
   'South',
   'East',
   'West'
 ])
-/** Create a Type */
+/** Создать тип */
 type Direction = keyof typeof Direction;
 
 /** 
-  * Sample using a string enum
+  * Пример использования типа объединение на основе строк
   */
 let sample: Direction;
 
 sample = Direction.North; // Okay
 sample = 'North'; // Okay
-sample = 'AnythingElse'; // ERROR!
+sample = 'AnythingElse'; // ОШИБКА!
 ```
 
-#### Modelling existing JavaScript APIs
+#### Моделирование имеющихся JavaScript API
 
-E.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly) that can either be a `boolean` or the literal string `"nocursor"` (effective valid values `true,false,"nocursor"`).  It can be declared as:
+Например [В редакторе CodeMirror есть опция `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly), которая может быть либо `boolean`, либо литеральной строкой `"nocursor"` (валидные допустимые значения `true,false,"nocursor"`). Это может быть объявлено как:
 
 ```ts
 readOnly: boolean | 'nocursor';
 ```
 
-#### Discriminated Unions
+#### Размеченные объединения
 
-We will cover [this later in the book](./discriminated-unions.md).
+Мы расскажем [об этом позже в книге](./discriminated-unions.md).
 
 
 [](https://github.com/Microsoft/TypeScript/pull/5185)
