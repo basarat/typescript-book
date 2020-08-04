@@ -1,15 +1,15 @@
-## Generics
+## Обобщёния(generics)
 
-The key motivation for generics is to provide meaningful type constraints between members. The members can be:
+Ключевой причиной использования обобщений является предоставление выразительных ограничителей типов используемых в нескольких частях кода. Частями могут быть:
 
-* Class instance members
-* Class methods
-* function arguments
-* function return value
+* члены экземпляра класса
+* методы класса
+* параметры функции
+* возвращаемое значение функции
 
-## Motivation and samples
+## Мотивация и примеры
 
-Consider the simple `Queue` (first in, first out) data structure implementation. A simple one in TypeScript / JavaScript looks like:
+Рассмотрим простую реализацию структуры данных `Очередь` (первым пришел, первым вышел).  Простая в TypeScript / JavaScript выглядит так:
 
 ```ts
 class Queue {
@@ -19,7 +19,7 @@ class Queue {
 }
 ```
 
-One issue with this implementation is that it allows people to add *anything* to the queue and when they pop it - it can be *anything*. This is shown below, where someone can push a `string` onto the queue while the usage actually assumes that only `numbers` were pushed in:
+Одной из проблем этой реализации является то, что она позволяет людям добавлять *что угодно* в очередь, а когда они это удаляют - это тоже может быть *что угодно*. Это показано ниже, где кто-то может добавить `строку` в очередь, в то время как использование фактически предполагает, чтобы были добавлены только` числа`:
 
 ```ts
 class Queue {
@@ -30,14 +30,14 @@ class Queue {
 
 const queue = new Queue();
 queue.push(0);
-queue.push("1"); // Oops a mistake
+queue.push("1"); // Упс - ошибка
 
-// a developer walks into a bar
+// и тут разработчик начинает
 console.log(queue.pop().toPrecision(1));
-console.log(queue.pop().toPrecision(1)); // RUNTIME ERROR
+console.log(queue.pop().toPrecision(1)); // ОШИБКА ВО ВРЕМЯ ВЫПОЛНЕНИЯ
 ```
 
-One solution (and in fact the only one in languages that don't support generics) is to go ahead and create *special* classes just for these constraints. E.g. a quick and dirty number queue:
+Одно из решений (и на самом деле единственное в языках, которые не поддерживают обобщения) состоит в том, чтобы пойти дальше и создать *специальные* классы с этими ограничениями. Например очередь номеров по-быстрому:
 
 ```ts
 class QueueNumber {
@@ -48,30 +48,30 @@ class QueueNumber {
 
 const queue = new QueueNumber();
 queue.push(0);
-queue.push("1"); // ERROR : cannot push a string. Only numbers allowed
+queue.push("1"); // ОШИБКА : не может добавить строку. Разрешены только номера
 
-// ^ if that error is fixed the rest would be fine too
+// ^ если эта ошибка исправлена, остальное тоже будет хорошо
 ```
 
-Of course this can quickly become painful e.g. if you want a string queue you have to go through all that effort again. What you really want is a way to say that whatever the type is of the stuff getting *pushed* it should be the same for whatever gets *popped*. This is done easily with a *generic* parameter (in this case, at the class level):
+Конечно, это может быстро превратится в боль, например, если вам нужна очередь строк, вам придется написать всё заново. На самом деле вы просто хотите чтобы независимо от того, какой тип элемента *добавляется*, он должен быть одинаковым для всего, что *удаляется*. Это легко сделать с помощью параметра *обобщение* (в данном случае на уровне класса):
 
 ```ts
-/** A class definition with a generic parameter */
+/** Определение класса с обобщённым параметром */
 class Queue<T> {
   private data = [];
   push = (item: T) => this.data.push(item);
   pop = (): T => this.data.shift();
 }
 
-/** Again sample usage */
+/** Снова пример использования */
 const queue = new Queue<number>();
 queue.push(0);
-queue.push("1"); // ERROR : cannot push a string. Only numbers allowed
+queue.push("1"); // ОШИБКА : не может добавить строку. Разрешены только номера
 
-// ^ if that error is fixed the rest would be fine too
+// ^ если эта ошибка исправлена, остальное тоже будет хорошо
 ```
 
-Another example that we have already seen is that of a *reverse* function, here the constraint is between what gets passed into the function and what the function returns:
+Другой пример, который мы уже видели - это функция *reverse*, здесь есть общий ограничитель на то, что передается в функцию, и то, что возвращает функция:
 
 ```ts
 function reverse<T>(items: T[]): T[] {
@@ -86,15 +86,15 @@ var sample = [1, 2, 3];
 var reversed = reverse(sample);
 console.log(reversed); // 3,2,1
 
-// Safety!
-reversed[0] = '1';     // Error!
-reversed = ['1', '2']; // Error!
+// Защита!
+reversed[0] = '1';     // Ошибка!
+reversed = ['1', '2']; // Ошибка!
 
 reversed[0] = 1;       // Okay
 reversed = [1, 2];     // Okay
 ```
 
-In this section you have seen examples of generics being defined *at class level* and at *function level*. One minor addition worth mentioning is that you can have generics created just for a member function. As a toy example consider the following where we move the `reverse` function into a `Utility` class:
+В этом разделе вы видели примеры определения обобщений *на уровне класса* и *на уровне функций*. Незначительное дополнение: вы можете создавать обобщения только для методов класса. В качестве мини-примера рассмотрим следующий, где мы перемещаем функцию «reverse» в класс «Utility»:
 
 ```ts
 class Utility {
@@ -108,30 +108,30 @@ class Utility {
 }
 ```
 
-> TIP: You can call the generic parameter whatever you want. It is conventional to use `T`, `U`, `V` when you have simple generics. If you have more than one generic argument try to use meaningful names e.g. `TKey` and `TValue` (conventional to prefix with `T` as generics are also called *templates* in other languages e.g. C++).
+> СОВЕТ: Вы можете называть параметр обобщения как хотите. Обычно используется `T`,` U`, `V`, когда у вас есть простые обобщения. Если у вас более одного параметра попробуйте использовать значимые имена, например, `TKey` и `TValue` (обычно обобщения с префиксом `T` также называют *шаблонами* на других языках, например C ++).
 
-## Useless Generic
+## Бесполезные обобщения
 
-I've seen people use generics just for the heck of it. The question to ask is *what constraint are you trying to describe*. If you can't answer it easily you might have a useless generic. E.g. the following function
+Я видел, как люди используют обобщения просто так. Вопрос, который нужно задать, это *какое ограничение вы пытаетесь описать*. Если вы не можете ответить на него легко, у вас может быть бесполезное обобщение. Например. следующая функция
 
 ```ts
 declare function foo<T>(arg: T): void;
 ```
-Here the generic `T` is completely useless as it is only used in a *single* argument position. It might as well be: 
+Здесь обобщение `T` совершенно бесполезно, поскольку оно используется только в *единственном* месте - в параметре. Это могло бы быть просто:
 
 ```ts
 declare function foo(arg: any): void;
 ```
 
-### Design Pattern: Convenience generic
+### Шаблон проектирования: целесообразные обобщения
 
-Consider the function: 
+Рассмотрим функцию:
 
 ```ts
 declare function parse<T>(name: string): T;
 ```
 
-In this case you can see that the type `T` is only used in one place. So there is no constraint *between* members. This is equivalent to a type assertion in terms of type safety:
+В этом случае вы можете видеть, что тип `T` используется только в одном месте. Таким образом, нет никаких ограничителей переиспользуемых *между* частями функции или класса. Это эквивалентно утверждению типа с точки зрения проверок:
 
 ```ts
 declare function parse(name: string): any;
@@ -139,9 +139,9 @@ declare function parse(name: string): any;
 const something = parse('something') as TypeOfSomething;
 ```
 
-Generics used *only once* are no better than an assertion in terms of type safety. That said they do provide *convenience* to your API.
+Обобщения, используемые *только один раз*, не лучше, чем утверждение с точки зрения надежности проверки типов. Тем не менее, они обеспечивают *удобство* для вашего API.
 
-A more obvious example is a function that loads a json response. It returns a promise of *whatever type you pass in*:
+Более очевидный пример - функция, которая загружает ответ json. Она возвращает промис *любого типа, который вы передадите*:
 ```ts
 const getJSON = <T>(config: {
     url: string,
@@ -158,18 +158,18 @@ const getJSON = <T>(config: {
   }
 ```
 
-Note that you still have to explicitly annotate what you want, but the `getJSON<T>` signature `(config) => Promise<T>` saves you a few key strokes (you don't need to annotate the return type of `loadUsers` as it can be inferred):
+Обратите внимание, что вам все равно нужно явно описывать то, что вы хотите, но сигнатура `getJSON<T>`  `(config) => Promise<T>` сохраняет вам несколько нажатий клавиш (вам не придётся описывать возвращаемый тип `loadUsers`):
 
 ```ts
 type LoadUsersResponse = {
   users: {
     name: string;
     email: string;
-  }[];  // array of user objects
+  }[];  // массив пользователей
 }
 function loadUsers() {
   return getJSON<LoadUsersResponse>({ url: 'https://example.com/users' });
 }
 ```
 
-Also `Promise<T>` as a return value is definitely better than alternatives like `Promise<any>`.
+Также `Promise<T>` в качестве возвращаемого значения определенно лучше, чем альтернативы, такие как `Promise<any>`.
