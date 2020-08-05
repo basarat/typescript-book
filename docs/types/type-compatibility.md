@@ -1,45 +1,44 @@
-* [Type Compatibility](#type-compatibility)
-* [Soundness](#soundness)
-* [Structural](#structural)
-* [Generics](#generics)
-* [Variance](#variance)
-* [Functions](#functions)
-  * [Return Type](#return-type)
-  * [Number of arguments](#number-of-arguments)
-  * [Optional and rest parameters](#optional-and-rest-parameters)
-  * [Types of arguments](#types-of-arguments)
-* [Enums](#enums)
-* [Classes](#classes)
-* [Generics](#generics)
-* [FootNote: Invariance](#footnote-invariance)
+- [Совместимость типов](#совместимость-типов)
+- [Разумность](#разумность)
+- [Структурность](#структурность)
+- [Расхождение](#расхождение)
+- [Функции](#функции)
+  - [Тип возвращаемого значения](#тип-возвращаемого-значения)
+  - [Количество параметров](#количество-параметров)
+  - [Необязательные и остальные параметры](#необязательные-и-остальные-параметры)
+  - [Типы параметров](#типы-параметров)
+- [Перечисления](#перечисления)
+- [Классы](#классы)
+- [Обобщения](#обобщения)
+- [Примечание: инвариантность](#примечание-инвариантность)
 
-## Type Compatibility
+## Совместимость типов
 
-Type Compatibility (as we discuss here) determines if one thing can be assigned to another. E.g. `string` and `number` are not compatible:
+Совместимость типов (как мы здесь обсуждаем) определяет, можно ли назначить один другому. Например, `string` и `number` несовместимы:
 
 ```ts
 let str: string = "Hello";
 let num: number = 123;
 
-str = num; // ERROR: `number` is not assignable to `string`
-num = str; // ERROR: `string` is not assignable to `number`
+str = num; // ОШИБКА: число не может быть присвоено строке
+num = str; // ОШИБКА: строка не может быть присвоена числу
 ```
 
-## Soundness
+## Разумность
 
-TypeScript's type system is designed to be convenient and allows for *unsound* behaviours e.g. anything can be assigned to `any` which means telling the compiler to allow you to do whatever you want:
+Система типов TypeScript устроена так, чтобы быть удобной и допускать *нерациональное* поведение, например что угодно может быть присвоено для типа `any`, что означает сказать компилятору разрешить вам делать все, что вы захотите:
 
 ```ts
 let foo: any = 123;
 foo = "Hello";
 
-// Later
-foo.toPrecision(3); // Allowed as you typed it as `any`
+// Позже
+foo.toPrecision(3); // Разрешено, потому что вы описали foo как `any`
 ```
 
-## Structural
+## Структурность
 
-TypeScript objects are structurally typed. This means the *names* don't matter as long as the structures match
+Объекты TypeScript структурно типизированы. Это означает, что *имена типов* не имеют значения, пока структуры совпадают.
 
 ```ts
 interface Point {
@@ -52,13 +51,13 @@ class Point2D {
 }
 
 let p: Point;
-// OK, because of structural typing
+// всё в порядке из-за структурной типизации
 p = new Point2D(1,2);
 ```
 
-This allows you to create objects on the fly (like you do in vanilla JS) and still have safety whenever it can be inferred.
+Это позволяет вам сходу создавать объекты (как в ванильном JS) и при этом сохранять проверку типов всякий раз, когда это можно логически вывести.
 
-Also *more* data is considered fine:
+Также *лишние* данные не считаются ошибкой:
 
 ```ts
 interface Point2D {
@@ -72,130 +71,130 @@ interface Point3D {
 }
 var point2D: Point2D = { x: 0, y: 10 }
 var point3D: Point3D = { x: 0, y: 10, z: 20 }
-function iTakePoint2D(point: Point2D) { /* do something */ }
+function iTakePoint2D(point: Point2D) { /* сделать что-то */ }
 
-iTakePoint2D(point2D); // exact match okay
-iTakePoint2D(point3D); // extra information okay
-iTakePoint2D({ x: 0 }); // Error: missing information `y`
+iTakePoint2D(point2D); // точное совпадение - okay
+iTakePoint2D(point3D); // дополнительная информация - okay
+iTakePoint2D({ x: 0 }); // Ошибка: отсутствует `y`
 ```
 
-## Variance
+## Расхождение
 
-Variance is an easy to understand and important concept for type compatibility analysis.
+Расхождение - это простая и важная для понимания концепция анализа совместимости типов.
 
-For simple types `Base` and `Child`, if `Child` is a child of `Base`, then instances of `Child` can be assigned to a variable of type `Base`.
+Для простых типов `Base` и `Child`, если `Child` является дочерним по отношению к `Base`, то экземпляры `Child` могут быть присвоены переменной типа `Base`.
 
-> This is polymorphism 101
+> Это полиморфизм 101
 
-In type compatibility of complex types composed of such `Base` and `Child` types depends on where the `Base` and `Child` in similar scenarios is driven by *variance*.
+Совместимость сложных типов зависит от *расхождения*:
 
-* Covariant : (co aka joint) only in *same direction*
-* Contravariant : (contra aka negative) only in *opposite direction*
-* Bivariant : (bi aka both) both co and contra.
-* Invariant : if the types aren't exactly the same then they are incompatible.
+* Ковариантный: (ко === совместный) только в одном направлении.
+* Контравариантный: (контра === обратный) только в противоположном направлении.
+* Бивариантный: (би === оба) как ко, так и контра.
+* Инвариантный: если типы не совпадают абсолютно полностью, то они несовместимы.
 
-> Note: For a completely sound type system in the presence of mutable data like JavaScript, `invariant` is the only valid option. But as mentioned *convenience* forces us to make unsound choices.
+> Примечание: для максимально безопасной системы типов при присутствии мутабельности данных, как в JavaScript, `инвариантный` - единственный правильный вариант. Но, как уже упоминалось, *удобство* заставляет нас выбирать менее безопасный вариант.
 
-## Functions
+## Функции
 
-There are a few subtle things to consider when comparing two functions.
+При сравнении двух функций следует учитывать несколько важных моментов.
 
-### Return Type
+### Тип возвращаемого значения
 
-`covariant`: The return type must contain at least enough data.
+`Ковариантный`: Тип возвращаемого значения должен содержать хотя бы необходимые данные.
 
 ```ts
-/** Type Hierarchy */
+/** Иерархия типов */
 interface Point2D { x: number; y: number; }
 interface Point3D { x: number; y: number; z: number; }
 
-/** Two sample functions */
+/** Два примера-функции */
 let iMakePoint2D = (): Point2D => ({ x: 0, y: 0 });
 let iMakePoint3D = (): Point3D => ({ x: 0, y: 0, z: 0 });
 
-/** Assignment */
+/** Присвоение */
 iMakePoint2D = iMakePoint3D; // Okay
-iMakePoint3D = iMakePoint2D; // ERROR: Point2D is not assignable to Point3D
+iMakePoint3D = iMakePoint2D; // ОШИБКА: Point2D не может быть присвоен Point3D
 ```
 
-### Number of arguments
+### Количество параметров
 
-Fewer arguments are okay (i.e. functions can choose to ignore additional parameters). After all you are guaranteed to be called with at least enough arguments.
+Допускается меньшее количество параметров (т.е. функции могут игнорировать дополнительные параметры). Ведь они гарантированно вызываются хотя бы с необходимыми параметрами.
 
 ```ts
 let iTakeSomethingAndPassItAnErr
-    = (x: (err: Error, data: any) => void) => { /* do something */ };
+    = (x: (err: Error, data: any) => void) => { /* сделать что-то */ };
 
 iTakeSomethingAndPassItAnErr(() => null) // Okay
 iTakeSomethingAndPassItAnErr((err) => null) // Okay
 iTakeSomethingAndPassItAnErr((err, data) => null) // Okay
 
-// ERROR: Argument of type '(err: any, data: any, more: any) => null' is not assignable to parameter of type '(err: Error, data: any) => void'.
+// ОШИБКА: параметр типа '(err: any, data: any, more: any) => null' не может быть назначен параметру типа '(err: Error, data: any) => void'.
 iTakeSomethingAndPassItAnErr((err, data, more) => null);
 ```
 
-### Optional and Rest Parameters
+### Необязательные и остальные параметры
 
-Optional (pre determined count) and Rest parameters (any count of arguments) are compatible, again for convenience.
+Необязательные (предварительно определенное количество) и остальные параметры (любое количество параметров) совместимы, опять же для удобства.
 
 ```ts
-let foo = (x:number, y: number) => { /* do something */ }
-let bar = (x?:number, y?: number) => { /* do something */ }
-let bas = (...args: number[]) => { /* do something */ }
+let foo = (x:number, y: number) => { /* сделать что-то */ }
+let bar = (x?:number, y?: number) => { /* сделать что-то */ }
+let bas = (...args: number[]) => { /* сделать что-то */ }
 
 foo = bar = bas;
 bas = bar = foo;
 ```
 
-> Note: optional (in our example `bar`) and non optional (in our example `foo`) are only compatible if strictNullChecks is false.
+> Примечание: необязательные (в нашем примере `bar`) и обязательные (в нашем примере `foo`) совместимы, только если strictNullChecks имеет значение false.
 
-### Types of arguments
+### Типы параметров
 
-`bivariant` : This is designed to support common event handling scenarios
+`бивариантный`: разработан для поддержки общих сценариев обработки событий
 
 ```ts
-/** Event Hierarchy */
+/** Иерархия событий */
 interface Event { timestamp: number; }
 interface MouseEvent extends Event { x: number; y: number }
 interface KeyEvent extends Event { keyCode: number }
 
-/** Sample event listener */
+/** Пример слушателя событий */
 enum EventType { Mouse, Keyboard }
 function addEventListener(eventType: EventType, handler: (n: Event) => void) {
     /* ... */
 }
 
-// Unsound, but useful and common. Works as function argument comparison is bivariant
+// Неидеально, но полезно и распространено. Работает как двувариантная функция сравнения параметров
 addEventListener(EventType.Mouse, (e: MouseEvent) => console.log(e.x + "," + e.y));
 
-// Undesirable alternatives in presence of soundness
+// Нежелательные альтернативы для достижения идеальности
 addEventListener(EventType.Mouse, (e: Event) => console.log((<MouseEvent>e).x + "," + (<MouseEvent>e).y));
 addEventListener(EventType.Mouse, <(e: Event) => void>((e: MouseEvent) => console.log(e.x + "," + e.y)));
 
-// Still disallowed (clear error). Type safety enforced for wholly incompatible types
+// Не допускается (явная ошибка). Проверка типов применена для полностью несовместимых типов
 addEventListener(EventType.Mouse, (e: number) => console.log(e));
 ```
 
-Also makes `Array<Child>` assignable to `Array<Base>` (covariance) as the functions are compatible. Array covariance requires all `Array<Child>` functions to be assignable to `Array<Base>` e.g. `push(t:Child)` is assignable to `push(t:Base)` which is made possible by function argument bivariance.
+Также делает `Array<Child>` присваиваемым  `Array<Base>` (ковариационным), поскольку функции совместимы. Ковариационный массив требует, чтобы все функции `Array<Child>` могли быть присвоены `Array<Base>`, например `push(t:Child)` назначается `push(t:Base)`, что стало возможным благодаря двувариантным параметрам функции.
 
-**This can be confusing for people coming from other languages** who would expect the following to error but will not in TypeScript:
+**Это может сбивать с толку людей, пришедших из других языков**, которые ожидали бы следующей ошибки, но не в TypeScript:
 
 ```ts
-/** Type Hierarchy */
+/** Иерархия типов */
 interface Point2D { x: number; y: number; }
 interface Point3D { x: number; y: number; z: number; }
 
-/** Two sample functions */
-let iTakePoint2D = (point: Point2D) => { /* do something */ }
-let iTakePoint3D = (point: Point3D) => { /* do something */ }
+/** Два примера-функции */
+let iTakePoint2D = (point: Point2D) => { /* сделать что-то */ }
+let iTakePoint3D = (point: Point3D) => { /* сделать что-то */ }
 
-iTakePoint3D = iTakePoint2D; // Okay : Reasonable
-iTakePoint2D = iTakePoint3D; // Okay : WHAT
+iTakePoint3D = iTakePoint2D; // Okay : Разумно
+iTakePoint2D = iTakePoint3D; // Okay : ЧЕГО?
 ```
 
-## Enums
+## Перечисления
 
-* Enums are compatible with numbers, and numbers are compatible with enums.
+* Перечисления совместимы с числами, а числа совместимы с перечислениями.
 
 ```ts
 enum Status { Ready, Waiting };
@@ -207,7 +206,7 @@ status = num; // OKAY
 num = status; // OKAY
 ```
 
-* Enum values from different enum types are considered incompatible. This makes enums useable *nominally* (as opposed to structurally)
+* Значения перечислений из разных типов перечислений считаются несовместимыми. Это делает перечисления пригодными для  *формального* использования(в отличие от структурных типов)
 
 ```ts
 enum Status { Ready, Waiting };
@@ -216,22 +215,22 @@ enum Color { Red, Blue, Green };
 let status = Status.Ready;
 let color = Color.Red;
 
-status = color; // ERROR
+status = color; // ОШИБКА
 ```
 
-## Classes
+## Классы
 
-* Only instance members and methods are compared. *constructors* and *statics* play no part.
+* Сравниваются только члены экземпляра и методы. *конструкторы* и *статика* роли не играют.
 
 ```ts
 class Animal {
     feet: number;
-    constructor(name: string, numFeet: number) { /** do something */ }
+    constructor(name: string, numFeet: number) { /** сделать что-то */ }
 }
 
 class Size {
     feet: number;
-    constructor(meters: number) { /** do something */ }
+    constructor(meters: number) { /** сделать что-то */ }
 }
 
 let a: Animal;
@@ -241,10 +240,10 @@ a = s;  // OK
 s = a;  // OK
 ```
 
-* `private` and `protected` members *must originate from the same class*. Such members essentially make the class *nominal*.
+* `private` и` protected` члены *должны происходить из одного класса*. Такие члены по сути делают класс *именным*.
 
 ```ts
-/** A class hierarchy */
+/** Иерархия классов */
 class Animal { protected feet: number; }
 class Cat extends Animal { }
 
@@ -254,18 +253,18 @@ let cat: Cat;
 animal = cat; // OKAY
 cat = animal; // OKAY
 
-/** Looks just like Animal */
+/** Похож на Animal */
 class Size { protected feet: number; }
 
 let size: Size;
 
-animal = size; // ERROR
-size = animal; // ERROR
+animal = size; // ОШИБКА
+size = animal; // ОШИБКА
 ```
 
-## Generics
+## Обобщения
 
-Since TypeScript has a structural type system, type parameters only affect compatibility when used by a member. For example, in the  following `T` has no impact on compatibility:
+Поскольку TypeScript имеет систему структурных типов, параметры типа влияют на совместимость только когда используются. Например, в следующем примере `T` не влияет на совместимость:
 
 ```ts
 interface Empty<T> {
@@ -273,10 +272,10 @@ interface Empty<T> {
 let x: Empty<number>;
 let y: Empty<string>;
 
-x = y;  // okay, y matches structure of x
+x = y;  // okay, y соответствует структуре x
 ```
 
-However, if `T` is used, it will play a role in compatibility based on its *instantiation* as shown below:
+Однако, если используется `T`, он будет играть роль в совместимости на основе его *конкретизации*, как показано ниже:
 
 ```ts
 interface NotEmpty<T> {
@@ -285,10 +284,10 @@ interface NotEmpty<T> {
 let x: NotEmpty<number>;
 let y: NotEmpty<string>;
 
-x = y;  // error, x and y are not compatible
+x = y;  // ошибка, x и y несовместимы
 ```
 
-In cases where generic arguments haven't been *instantiated* they are substituted by `any` before checking compatibility:
+В случаях, когда общие параметры не были *созданы*, они заменяются на `any` перед проверкой совместимости:
 
 ```ts
 let identity = function<T>(x: T): T {
@@ -299,10 +298,10 @@ let reverse = function<U>(y: U): U {
     // ...
 }
 
-identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
+identity = reverse;  // Okay, потому что (x: any)=>any совпадает с (y: any)=>any
 ```
 
-Generics involving classes are matched by relevant class compatibility as mentioned before. e.g. 
+Обобщения, включающие классы, сопоставляются по совместимости на уровне классов, как мы упоминали ранее. Например:
 
 ```ts
 class List<T> {
@@ -317,49 +316,49 @@ animals.add(new Animal()); // Okay
 animals.add(new Cat()); // Okay 
 
 const cats = new List<Cat>();
-cats.add(new Animal()); // Error 
+cats.add(new Animal()); // Ошибка 
 cats.add(new Cat()); // Okay
 ```
 
-## FootNote: Invariance
+## Примечание: инвариантность
 
-We said invariance is the only sound option. Here is an example where both `contra` and `co` variance are shown to be unsafe for arrays.
+Мы сказали, что инвариантность - самый разумный вариант. Вот пример, в котором показывается, что `контравариантный` и `ковариантный` небезопасны для массивов.
 
 ```ts
-/** Hierarchy */
+/** Иерархия */
 class Animal { constructor(public name: string){} }
 class Cat extends Animal { meow() { } }
 
-/** An item of each */
+/** По одному экземпляру каждого */
 var animal = new Animal("animal");
 var cat = new Cat("cat");
 
 /**
- * Demo : polymorphism 101
+ * Демонстрация: полиморфизм 101
  * Animal <= Cat
  */
 animal = cat; // Okay
-cat = animal; // ERROR: cat extends animal
+cat = animal; // ОШИБКА: cat наследуется от animal
 
-/** Array of each to demonstrate variance */
+/** Массив экземпляров каждого для демонстрации расхождения */
 let animalArr: Animal[] = [animal];
 let catArr: Cat[] = [cat];
 
 /**
- * Obviously Bad : Contravariance
+ * Очевидно плохо: Контравариантность
  * Animal <= Cat
  * Animal[] >= Cat[]
  */
-catArr = animalArr; // Okay if contravariant
-catArr[0].meow(); // Allowed but BANG 🔫 at runtime
+catArr = animalArr; // Okay, если контравариантный
+catArr[0].meow(); // Разрешено, но БЭМС 🔫 во время выполнения
 
 
 /**
- * Also Bad : covariance
+ * Также плохо: ковариантный
  * Animal <= Cat
  * Animal[] <= Cat[]
  */
-animalArr = catArr; // Okay if covariant
-animalArr.push(new Animal('another animal')); // Just pushed an animal into catArr!
-catArr.forEach(c => c.meow()); // Allowed but BANG 🔫 at runtime
+animalArr = catArr; // Okay, если ковариантный
+animalArr.push(new Animal('another animal')); // Просто добавили animal в catArr!
+catArr.forEach(c => c.meow()); // Разрешено, но БЭМС 🔫 во время выполнения
 ```
