@@ -1,13 +1,13 @@
-# JSX Support
+# Поддержка JSX
 
-TypeScript supports JSX transpilation and code analysis. If you are unfamiliar with JSX here is an excerpt from the [official website](https://facebook.github.io/jsx/):
+TypeScript поддерживает транспиляцию JSX и анализ кода. Если вы не знакомы с JSX, вот выдержка с [официального сайта](https://facebook.github.io/jsx/):
 
-> JSX is an XML-like syntax extension to ECMAScript without any defined semantics. It's NOT intended to be implemented by engines or browsers. It's NOT a proposal to incorporate JSX into the ECMAScript spec itself. It's intended to be used by various preprocessors (transpilers) to transform these tokens into standard ECMAScript.
+> JSX - это XML-подобное расширение синтаксиса для ECMAScript без какой-либо определенной семантики. Он НЕ предназначен для имплементации в движках или браузерах. Это НЕ предложение включить JSX в саму спецификацию ECMAScript. Он предназначен для использования различными препроцессорами (транспиляторами) для преобразования этих токенов в стандартный ECMAScript.
 
-The motivation behind JSX is to allow users to write HTML like views *in JavaScript* so that you can:
+Причина использовать JSX состоит в том, чтобы позволить разработчикам писать HTML для пользовательских интерфейсов *прямо в JavaScript*, чтобы вы могли:
 
-* Have the view Type Checked by the same code that is going to check your JavaScript
-* Have the view be aware of the context it is going to operate under (i.e. strengthen the *controller-view* connection in traditional MVC).
-* Reuse JavaScript patterns for HTML maintenance e.g. `Array.prototype.map`, `?:`, `switch` etc instead of creating new (and probably poorly typed) alternatives.
+* Проверить типы представления тем же кодом, который проверяет ваш JavaScript.
+* Заставить представление знать о контексте, в котором оно будет работать (т.е. укрепить соединение *контроллер-представление* в традиционном MVC).
+* Использовать шаблоны JavaScript для поддержки HTML, например `Array.prototype.map`, `?:`, `switch` и т.д. Вместо создания новых (и, вероятно, плохо типизированных) альтернатив.
 
-This decreases the chances of errors and increases the maintainability of your user interfaces. The main consumer of JSX at this point is [ReactJS from facebook](http://facebook.github.io/react/). This is the usage of JSX that we will discuss here.
+Это снижает вероятность ошибок и повышает удобство поддержки ваших пользовательских интерфейсов. Основным потребителем JSX на данный момент является [ReactJS из Facebook](http://facebook.github.io/react/). Это использование JSX, которое мы обсудим здесь.
