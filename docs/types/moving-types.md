@@ -1,22 +1,22 @@
-# Moving Types
+# Перемещаемые типы
 
-TypeScript's type system is extremely powerful and allows moving and slicing types in ways not possible in any other single language out there.
+Система типов TypeScript чрезвычайно мощна и позволяет перемещать и нарезать типы способами, невозможными ни на одном другом языке.
 
-This is because TypeScript is designed to allow you to work seamlessly with a *highly dynamic* language like JavaScript. Here we cover a few tricks for moving types around in TypeScript.
+Это потому, что TypeScript разработан, чтобы позволить вам беспрепятственно работать с *высокодинамичным* языком, таким как JavaScript. Здесь мы рассмотрим несколько приемов перемещения типов в TypeScript.
 
-Key motivation for these : You change one thing and everything else just updates automatically and you get nice errors if something is going to break, like a well designed constraint system.
+Ключевая причина использовать их: вы меняете одну вещь, а все остальное обновляется автоматически, и вы получаете полезные ошибки, если что-то ломается, как в хорошо разработанной системе ограничений.
 
-## Copying both the Type + Value
+## Копирование как типа, так и значения
 
-If you want to move a class around, you might be tempted to do the following:
+Если вы хотите переместить класс, у вас может возникнуть соблазн сделать следующее:
 
 ```ts
 class Foo { }
 var Bar = Foo;
-var bar: Bar; // ERROR: cannot find name 'Bar'
+var bar: Bar; // ОШИБКА: не могу найти имя 'Bar'
 ```
 
-This is an error because `var` only copied the `Foo` into the *variable* declaration space and you therefore cannot use `Bar` as a type annotation. The proper way is to use the `import` keyword. Note that you can only use the `import` keyword in such a way if you are using *namespaces* or *modules* (more on these later):
+Это ошибка, потому что `var` скопировал `Foo` только в область объявления *переменной*, и поэтому вы не можете использовать `Bar` в качестве описания типа. Правильный способ - использовать ключевое слово `import`. Обратите внимание, что вы можете использовать ключевое слово `import` таким образом, только если вы используете *пространства имен* или *модули* (подробнее об этом позже):
 
 ```ts
 namespace importing {
@@ -27,68 +27,74 @@ import Bar = importing.Foo;
 var bar: Bar; // Okay
 ```
 
-This `import` trick only works for things that are *both type and variable*.
+Этот трюк с `import` работает только для того что имеет *и тип и переменную*.
 
-## Capturing the type of a variable
+## Захват типа переменной
 
-You can actually use a variable in a type annotation using the `typeof` operator. This allows you to tell the compiler that one variable is the same type as another. Here is an example to demonstrate this:
+На самом деле вы можете использовать переменную в описании типа, используя оператор `typeof`. Это позволяет вам сообщить компилятору, что одна переменная имеет тот же тип, что и другая. Вот пример, демонстрирующий это:
 
 ```ts
 var foo = 123;
-var bar: typeof foo; // `bar` has the same type as `foo` (here `number`)
+var bar: typeof foo; // `bar` имеет тот же тип, что и `foo` (здесь `number`)
 bar = 456; // Okay
-bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
+bar = '789'; // ОШИБКА: Тип `string` не может быть назначен типу `number`
 ```
 
-## Capturing the type of a class member
+## Захват типа члена класса
 
-Similar to capturing the type of a variable, you just declare a variable purely for type capturing purposes:
+Вы можете погрузиться в объект любого типа (кроме null), чтобы получить тип свойства:
 
 ```ts
 class Foo {
-  foo: number; // some member whose type we want to capture
+  foo: number; // член класса, тип которого мы хотим захватить
 }
 
-// Purely to capture type
-declare let _foo: Foo;
-
-// Same as before
-let bar: typeof _foo.foo;
+let bar: Foo['foo']; // `bar` имеет тип `number`
 ```
 
-## Capturing the type of magic strings
-
-Lots of JavaScript libraries and frameworks work off of raw JavaScript strings. You can use `const` variables to capture their type e.g.
+В качестве альтернативы, как и при захвате типа переменной, вы можете просто объявить переменную только для целей захвата типа:
 
 ```ts
-// Capture both the *type* and *value* of magic string:
-const foo = "Hello World";
+// Только для захвата типа
+declare let _foo: Foo;
 
-// Use the captured type:
-let bar: typeof foo;
-
-// bar can only ever be assigned to `Hello World`
-bar = "Hello World"; // Okay!
-bar = "anything else "; // Error!
+// То же, что и раньше
+let bar: typeof _foo.foo; // `bar` имеет тип  `number`
 ```
 
-In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](https://basarat.gitbooks.io/typescript/content/docs/types/literal-types.html "Literal Types").
+## Захват типа магических строк
 
-## Capturing Key Names
+Многие JavaScript библиотеки и фреймворки работают с необработанными строками JavaScript. Вы можете использовать переменные `const` для захвата их типа, например:
 
-The `keyof` operator lets you capture the key names of a type. E.g. you can use it to capture the key names of a variable by first grabbing its type using `typeof`:
+```ts
+// Захватываем и *тип* и *значение* магической строки:
+const foo = "Hello World";
+
+// Используем захваченный тип:
+let bar: typeof foo;
+
+// на bar может быть назначено только `Hello World`
+bar = "Hello World"; // Okay!
+bar = "anything else "; // Ошибка!
+```
+
+В этом примере `bar` имеет литеральный тип `Hello World`. Мы рассматриваем это подробнее в [разделе литеральных типов](./literal-types.md).
+
+## Захват типа по имени ключей
+
+Оператор `keyof` позволяет вам захватывать тип по имени ключей. Например. вы можете использовать его для захвата типов имен ключей переменной, сначала получая её тип с помощью `typeof`:
 
 ```ts
 const colors = {
-  red: 'red',
-  blue: 'blue'
+  red: 'reddish',
+  blue: 'bluish'
 }
 type Colors = keyof typeof colors;
 
-let color: Colors; // same as let color: "red" | "blue"
+let color: Colors; // тоже самое что и let color: "red" | "blue"
 color = 'red'; // okay
 color = 'blue'; // okay
-color = 'anythingElse'; // Error
+color = 'anythingElse'; // Ошибка: Тип '"anythingElse"' не возможно присвоить типу '"red" | "blue"'
 ```
 
-This allows you to have stuff like string enums + constants quite easily, as you just saw in the above example.
+Это позволяет вам легко создавать такие вещи, как строковые перечисления + константы, как вы только что видели в приведенном выше примере.
