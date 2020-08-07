@@ -1,88 +1,88 @@
-# Exception Handling
+# Обработка исключений
 
-JavaScript has an `Error` class that you can use for exceptions. You throw an error with the `throw` keyword. You can catch it with a `try` / `catch` block pair e.g.
+В JavaScript есть класс `Error`, который можно использовать для исключений. Вы выбрасываете ошибку с ключевым словом `throw`. Вы можете отловить её с помощью блоков `try` / `catch`, например:
 
 ```js
 try {
-  throw new Error('Something bad happened');
+  throw new Error('Случилось что-то плохое');
 }
 catch(e) {
   console.log(e);
 }
 ```
 
-## Error Sub Types
+## Подтипы ошибок
 
-Beyond the built in `Error` class there are a few additional built-in error classes that inherit from `Error` that the JavaScript runtime can throw:
+Помимо встроенного класса `Error`, существует несколько дополнительных встроенных классов ошибок, которые наследуются от `Error`, которые может генерировать среда выполнения JavaScript:
 
 ### RangeError
 
-Creates an instance representing an error that occurs when a numeric variable or parameter is outside of its valid range.
+Создается экземпляр ошибки, которая возникает, когда числовая переменная или параметр выходит за пределы допустимого диапазона.
 
 ```js
-// Call console with too many arguments
-console.log.apply(console, new Array(1000000000)); // RangeError: Invalid array length
+// Вызов консоли с слишком большим количеством параметров
+console.log.apply(console, new Array(1000000000)); // RangeError: Невалидная длина массива
 ```
 
 ### ReferenceError
 
-Creates an instance representing an error that occurs when de-referencing an invalid reference. e.g.
+Создается экземпляр ошибки, которая возникает при разыменовании недействительной ссылки. Например:
 
 ```js
 'use strict';
-console.log(notValidVar); // ReferenceError: notValidVar is not defined
+console.log(notValidVar); // ReferenceError: notValidVar не определена
 ```
 
 ### SyntaxError
 
-Creates an instance representing a syntax error that occurs while parsing code that isn't valid JavaScript.
+Создается экземпляр ошибки, возникающей при синтаксическом анализе кода, который не является допустимым в JavaScript.
 
 ```js
-1***3; // SyntaxError: Unexpected token *
+1***3; // SyntaxError: Непредвиденный токен *
 ```
 
 ### TypeError
 
-Creates an instance representing an error that occurs when a variable or parameter is not of a valid type.
+Создается экземпляр ошибки, которая возникает, когда переменная или параметр имеет недопустимый тип.
 
 ```js
-('1.2').toPrecision(1); // TypeError: '1.2'.toPrecision is not a function
+('1.2').toPrecision(1); // TypeError: '1.2'.toPrecision не является функцией
 ```
 
 ### URIError
 
-Creates an instance representing an error that occurs when `encodeURI()` or `decodeURI()` are passed invalid parameters.
+Создается экземпляр ошибки, которая возникает, когда в `encodeURI()` или `decodeURI()` передаются недопустимые параметры.
 
 ```js
-decodeURI('%'); // URIError: URI malformed
+decodeURI('%'); // URIError: URI неправильно сформирован
 ```
 
-## Always use `Error`
+## Всегда используйте `Error`
 
-Beginner JavaScript developers sometimes just throw raw strings e.g.
+Начинающие разработчики JavaScript иногда просто бросают необработанные строки, например.
 
 ```js
 try {
-  throw 'Something bad happened';
+  throw 'Случилось что-то плохое';
 }
 catch(e) {
   console.log(e);
 }
 ```
 
-*Don't do that*. The fundamental benefit of `Error` objects is that they automatically keep track of where they were built and originated with the `stack` property.
+*Не делайте так*. Основное преимущество объектов `Error` состоит в том, что автоматически отслеживается где они были созданы и произошли с помощью свойства `stack`.
 
-Raw strings result in a very painful debugging experience and complicate error analysis from logs.
+Необработанные строки приводят к очень болезненной отладке и затрудняют анализ ошибок из логов.
 
-## You don't have to `throw` an error
+## Вам не нужно `выбрасывать` ошибку
 
-It is okay to pass an `Error` object around. This is conventional in Node.js callback style code which takes callbacks with the first argument as an error object.
+Это нормально передавать объект `Error`. Это общепринятый код в Node.js колбэк стиле, который принимает колбэк первым параметром как объект ошибки.
 
 ```js
 function myFunction (callback: (e?: Error)) {
   doSomethingAsync(function () {
     if (somethingWrong) {
-      callback(new Error('This is my error'))
+      callback(new Error('Это моя ошибка'))
     } else {
       callback();
     }
@@ -90,13 +90,13 @@ function myFunction (callback: (e?: Error)) {
 }
 ```
 
-## Exceptional cases
+## Исключительные случаи
 
-`Exceptions should be exceptional` is a common saying in computer science. There are a few reasons why this is true for JavaScript (and TypeScript) as well.
+`Исключения должны быть исключительными` - это частая поговорка в компьютерных науках. Это одинаково справедливо и для JavaScript (и для TypeScript) по нескольким причинам.
 
-### Unclear where it is thrown
+### Неясно откуда брошено исключение
 
-Consider the following piece of code:
+Рассмотрим следующий фрагмент кода:
 
 ```js
 try {
@@ -104,67 +104,67 @@ try {
   const bar = runTask2();
 }
 catch(e) {
-  console.log('Error:', e);
+  console.log('Ошибка:', e);
 }
 ```
 
-The next developer cannot know which function might throw the error. The person reviewing the code cannot know without reading the code for task1 / task2 and other functions they might call etc.
+Следующий разработчик не знает, какая функция может вызвать ошибку. Человек, просматривающий код, не может знать об этом, не прочитав код для task1 / task2 и других функций, которые они могут вызвать внутри себя и т.д.
 
-### Makes graceful handling hard
+### Делает поэтапную обработку сложной
 
-You can try to make it graceful with explicit catch around each thing that might throw:
+Вы можете попытаться сделать обработку поэтапной с помощью явного отлова вокруг каждого места, которое может бросить ошибку:
 
 ```js
 try {
   const foo = runTask1();
 }
 catch(e) {
-  console.log('Error:', e);
+  console.log('Ошибка:', e);
 }
 try {
   const bar = runTask2();
 }
 catch(e) {
-  console.log('Error:', e);
+  console.log('Ошибка:', e);
 }
 ```
 
-But now if you need to pass stuff from the first task to the second one the code becomes messy: (notice `foo` mutation requiring `let` + explicit need for annotating it because it cannot be inferred from the return of `runTask1`):
+Но теперь, если вам нужно передать что-то из первой задачи во вторую, код становится грязным: (обратите внимание на мутацию `foo`, требующую `let` + явную необходимость описывать ее, потому что это не может быть логически выведено от возврата `runTask1`):
 
 ```ts
-let foo: number; // Notice use of `let` and explicit type annotation
+let foo: number; // Обратите внимание на использование `let` и явное описание типа
 try {
   foo = runTask1();
 }
 catch(e) {
-  console.log('Error:', e);
+  console.log('Ошибка:', e);
 }
 try {
   const bar = runTask2(foo);
 }
 catch(e) {
-  console.log('Error:', e);
+  console.log('Ошибка:', e);
 }
 ```
 
-### Not well represented in the type system
+### Не очень хорошо отражено в системе типов
 
-Consider the function:
+Рассмотрим функцию:
 
 ```ts
 function validate(value: number) {
-  if (value < 0 || value > 100) throw new Error('Invalid value');
+  if (value < 0 || value > 100) throw new Error('Невалидное значение');
 }
 ```
 
-Using `Error` for such cases is a bad idea as it is not represented in the type definition for the validate function (which is `(value:number) => void`). Instead a better way to create a validate method would be:
+Использование `Error` для таких случаев - плохая идея, так как ошибка не отражена в определении типа для проверки функции `(value:number) => void`. Вместо этого лучший способ создать метод проверки:
 
 ```ts
 function validate(value: number): {error?: string} {
-  if (value < 0 || value > 100) return {error:'Invalid value'};
+  if (value < 0 || value > 100) return {error:'Невалидное значение'};
 }
 ```
 
-And now its represented in the type system.
+И теперь это отражено в системе типов.
 
-> Unless you want to handle the error in a very generic (simple / catch-all etc) way, don't *throw* an error.
+> Если вы не хотите обрабатывать ошибку очень общим (простым / универсальным и т.д.) способом, не *бросайте* ошибку.
