@@ -1,12 +1,12 @@
-# Convenience vs. Soundness
+# Удобство против надежности
 
-There are a few things that TypeScript prevents you from doing out of the box e.g. using a variable that *isn't ever declared* (of course you can use a *declaration file* for external systems).
+Есть несколько вещей, которые TypeScript не позволяет вам делать, например: использование переменной, которая *никогда не объявлялась* (конечно, вы можете использовать *файл объявления* для внешних систем).
 
-That said, traditionally programming languages have a hard boundary between what is and isn't allowed by the type system. TypeScript is different in that it gives you control over where you put the slider. This is really to allow you to use the JavaScript you know and love with as much safety as **you** want. There are lots of compiler options to control exactly this slider so let's have a look.
+Тем не менее, обычно у языков программирования есть жесткое разделение между тем, что разрешено системой типов, а что нет. TypeScript отличается тем, что дает вам контроль над границами этого разделения. Это позволяет вам использовать JavaScript, который вы знаете, но с той степенью надёжности, которую **вы** захотите. Есть много параметров компилятора для управления этой степенью надёжности, так что давайте посмотрим.
 
-## Boolean Options
+## Булевы параметры
 
-`compilerOptions` that are `boolean` can be specified as `compilerOptions` in `tsconfig.json`:
+`compilerOptions`, которые являются `булевыми` параметрами, могут быть указаны как `compilerOptions` в `tsconfig.json`:
 
 ```json
 {
@@ -16,12 +16,12 @@ That said, traditionally programming languages have a hard boundary between what
 }
 ```
 
-or on the command line
+или в командной строке
 
 ```sh
 tsc --someBooleanOption
 ```
 
-> All of these are `false` by default.
+> По умолчанию они все `false`.
 
-Click [here](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to see all compiler options.
+Перейдите [сюда](https://www.typescriptlang.org/docs/handbook/compiler-options.html) чтобы увидеть все параметры компилятора.
