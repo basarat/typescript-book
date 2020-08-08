@@ -1,26 +1,26 @@
 # noImplicitAny
 
-There are some things that cannot be inferred or inferring them might result in unexpected errors. A fine example is function arguments. If you don't annotate them, its unclear what should and shouldn't be valid e.g.
+Есть некоторые вещи, которые невозможно логически вывести, или такой вывод может привести к неожиданным ошибкам. Прекрасный пример - параметры функции. Если вы не опишите их, неясно, что должно и что не должно быть вылидным, например:
 
 ```ts
 function log(someArg) {
   sendDataToServer(someArg);
 }
 
-// What arg is valid and what isn't?
+// Какой параметр валидный, а какой нет?
 log(123);
 log('hello world');
 ```
 
-So if you don't annotate some function argument, TypeScript assumes `any` and moves on. This essentially turns off type checking for such cases, which is what a JavaScript dev would expect. But this can catch people that want high safety off guard. Hence there is an option, `noImplicitAny`, that when switched on will flag the cases where the type cannot be inferred e.g.
+Поэтому, если вы не опишите какой-либо параметр функции, TypeScript присваивает значение `any` и двигается дальше. Это по существу отключает проверку типов в таких случаях, чего и ожидает разработчик JavaScript. Но это может застать врасплох людей, которые хотят более высокой надёжности. Следовательно, есть опция `noImplicitAny`, которая при включении будет отмечать случаи, когда тип не может быть определен, например:
 
 ```ts
-function log(someArg) { // Error : someArg has an implicit `any` type
+function log(someArg) { // Ошибка : someArg имеет неявный тип any
   sendDataToServer(someArg);
 }
 ```
 
-Of course you can then go ahead and annotate:
+Конечно, вы можете продолжить и описать:
 
 ```ts
 function log(someArg: number) {
@@ -28,7 +28,7 @@ function log(someArg: number) {
 }
 ```
 
-And if you truly want *zero safety* you can mark it *explicitly* as `any`:
+Но если вы действительно хотите *нулевую надёжность*, вы можете *явно* пометить это как `any`:
 
 ```ts
 function log(someArg: any) {
