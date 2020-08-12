@@ -1,11 +1,11 @@
 # Prettier 
 
-Prettier is a great tool by facebook that makes code formatting so much easier that it's worth mentioning. Setting up with TypeScript using our recommended project setup (aka everything in `src` folder) is super easy: 
+Prettier - отличный инструмент от Facebook, который настолько упрощает форматирование кода, что о нем стоит упомянуть. Настроить его для TypeScript с использованием рекомендованной нами настройки проекта (все в папке `src`) очень просто:
 
-## Setup 
+## Установка 
 
 * `npm install prettier -D` 
-* Add `scripts` to `package.json`: 
+* Добавьте `scripts` в `package.json`: 
 
 ```
     "prettier:base": "prettier --parser typescript --single-quote",
@@ -13,9 +13,9 @@ Prettier is a great tool by facebook that makes code formatting so much easier t
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
 ```
 
-## Usage 
-On your build server: 
+## Использование
+На вашем CI-сервере:
 * `npm run prettier:check` 
 
-During dev (or pre commit hook): 
+Во время разработки (или используя в хуке перед коммитом):
 * `npm run prettier:write`
