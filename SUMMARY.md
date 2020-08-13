@@ -78,6 +78,7 @@
 * [Инструменты](docs/tools/intro.md)
   * [Prettier](docs/tools/prettier.md)
   * [Husky](docs/tools/husky.md)
+  * [ESLint](docs/tools/eslint.md)
   * [Changelog](docs/tools/changelog.md)
 * [Советы](docs/tips/main.md)
   * [Строковые перечисляемые типы](docs/tips/stringEnums.md)
