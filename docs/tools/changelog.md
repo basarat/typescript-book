@@ -1,19 +1,19 @@
-## Changelog 
-> Reading a markdown file with the progress in the project is easier than reading a commit log.
+## История изменений
+> Читать markdown файл с прогрессом в проекте легче, чем читать журнал коммитов.
 
-Automatic changelog generation from commit messages is a fairly common pattern nowadays. There is a project called [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) that generates a changelog from commit messages that follow a *convention*. 
+Автоматическая генерация истории изменений из сообщений коммитов - довольно распространенная практика в настоящее время. Существует проект под названием [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog), который генерирует журнал изменений из сообщений коммитов, которые следуют *соглашению*.
 
-### Commit message convention
-The most common convention is the *angular* commit messages convention which is [detailed here](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
+### Соглашение об именах коммитов
+Наиболее распространенное соглашение - это соглашение *angular*, которое [подробно описано здесь](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
 
-### Setup
-* Install: 
+### Настройка
+* Установите: 
 
 ```bash
 npm install standard-version -D
 ```
 
-* Add a `script` target to your `package.json`: 
+* Добавьте `script` в ваш `package.json`:
 
 ```js
 {
@@ -23,7 +23,7 @@ npm install standard-version -D
 }
 ```
 
-* Optionally : To automatically push the new *git commit and tag* plus publish to npm add a `postrelease` script: 
+* Необязательно: чтобы автоматически отправить в удаленный репозиторий новые *git commit и tag* плюс опубликовать в npm, добавьте скрипт `postrelease`:
 
 ```js
 {
@@ -34,15 +34,15 @@ npm install standard-version -D
 }
 ```
 
-### Releasing 
+### Релизы
 
-Simply run: 
+Просто запустите:
 
 ```bash
 npm run release
 ```
 
-Based on the commit messages `major` | `minor` | `patch` is automatically determined. To *explicitly* specify a version you can specify `--release-as` e.g.: 
+На основе имён коммитов `major` | `minor` | `patch` вид релиза определяется автоматически. Чтобы *явно* указать вид, вы можете указать `--release-as`, например:
 
 ```bash
 npm run release -- --release-as minor
