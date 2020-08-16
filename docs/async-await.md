@@ -71,7 +71,7 @@ async function dramaticWelcome(): Promise<void> {
 
     for (let i = 0; i < 5; i++) {
         // await is converting Promise<number> into number
-        const count:number = await delay(500, i);
+        const count: number = await delay(500, i);
         console.log(count);
     }
 
