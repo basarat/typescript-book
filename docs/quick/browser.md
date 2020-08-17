@@ -21,7 +21,7 @@ npm install
 Now jump to [develop your amazing application](#develop-your-amazing-application)
 
 ## Project Setup Detailed
-To see how that project is created, its documented below.
+Below are details on how the project is created.
 
 * Create a project dir:
 
