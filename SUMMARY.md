@@ -81,7 +81,7 @@
   * [Changelog](docs/tools/changelog.md)
 * [Советы](docs/tips/main.md)
   * [Строковые перечисляемые типы](docs/tips/stringEnums.md)
-  * [Nominal Typing](docs/tips/nominalTyping.md)
+  * [Именная типизация](docs/tips/nominalTyping.md)
   * [Stateful Functions](docs/tips/statefulFunctions.md)
   * [Связывание это плохо](docs/tips/bind.md)
   * [Каррирование](docs/tips/currying.md)
