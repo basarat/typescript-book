@@ -11,7 +11,7 @@ No testing solution out there is perfect. That said, jest is an excellent unit t
 Install the following using npm:
 
 ```shell
-npm i jest @types/jest ts-jest -D
+npm i jest @types/jest ts-jest typescript -D
 ```
 
 Explanation:
@@ -19,6 +19,7 @@ Explanation:
 * Install `jest` framework (`jest`)
 * Install the types for `jest` (`@types/jest`)
 * Install the TypeScript preprocessor for jest (`ts-jest`) which allows jest to transpile TypeScript on the fly and have source-map support built in.
+* Install the TypeScript compiler ('typescript') which is prerequisite for 'ts-jest'.
 * Save all of these to your dev dependencies (testing is almost always a npm dev-dependency)
 
 ## Step 2: Configure Jest
