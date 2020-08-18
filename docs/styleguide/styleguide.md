@@ -253,7 +253,7 @@ const foo: string = "hello";
 
 ## Array
 
-* Annotate arrays as `foos:Foo[]` instead of `foos:Array<Foo>`.
+* Annotate arrays as `foos: Foo[]` instead of `foos: Array<Foo>`.
 
 > Reasons: It's easier to read. It's used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
 
