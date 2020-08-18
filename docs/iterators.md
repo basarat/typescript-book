@@ -11,7 +11,7 @@ interface Iterator<T> {
     throw?(e?: any): IteratorResult<T>;
 }
 ```
-([More on that `<T>` notation later](./types/generics.html))  
+([More on that `<T>` notation later][generics])  
 This interface allows to retrieve a value from some collection or sequence
 which belongs to the object.
 
@@ -194,3 +194,5 @@ with ES5 target as well if target JS engine supports `Symbol.iterator`.
 This can be achieved by using ES6 lib with ES5 target
 (add es6.d.ts to your project) to make it compile.
 Compiled code should work in node 4+, Google Chrome and in some other browsers.
+
+[generics]: ./types/generics.md
