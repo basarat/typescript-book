@@ -74,7 +74,7 @@ interface Foo {
     bar: number;
     bas: string;
 }
-var foo:Foo = {
+var foo: Foo = {
     // the compiler will provide autocomplete for properties of Foo
 };
 ```

@@ -163,11 +163,11 @@ enum Color {
 
 **Bad**
 ```ts
-let foo = {x:123,y:undefined};
+let foo = { x: 123, y: undefined };
 ```
 **Good**
 ```ts
-let foo:{x:number,y?:number} = {x:123};
+let foo: { x: number, y?: number } = { x:123 };
 ```
 
 * Use `undefined` in general (do consider returning an object like `{valid:boolean, value?:Foo}` instead)
