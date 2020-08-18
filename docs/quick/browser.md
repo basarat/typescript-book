@@ -18,10 +18,10 @@ cd react-typescript
 npm install
 ```
 
-Now jump to [develop your amazing application](#develop-your-amazing-application)
+Now use it as a base and jump to [develop your amazing application](#develop-your-amazing-application)
 
 ## Project Setup Detailed
-To see how that project is created, its documented below.
+If you want to learn more about the details of how that project is created (instead of using it as a base), here are the steps on how its setup from scratch:
 
 * Create a project dir:
 
