@@ -20,7 +20,7 @@ Use `include` and `exclude` to specify files / folders / globs. E.g.:
 * For globs : `**/*` (e.g. sample usage `somefolder/**/*`) means all folder and any files (the extensions `.ts`/`.tsx` will be assumed and if `allowJs:true` so will `.js`/`.jsx`)
 
 ### `files` option
-You can either use `files` to be explicit. 
+Alternatively, you can use `files` to be explicit: 
 
 ```json
 {
