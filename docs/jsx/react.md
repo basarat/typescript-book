@@ -53,6 +53,24 @@ const MyComponent: React.FunctionComponent<Props> = (props) => {
 <MyComponent foo="bar" />
 ```
 
+### Void Function Components
+
+As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare the accepted `children` explicitly. This is an interim solution until the next major version of the type defs (where VoidFunctionComponent will be deprecated and FunctionComponent will by default accept no children).
+
+```ts
+type Props = { 
+  foo: string 
+}
+// OK now, in future, error
+const FunctionComponent: React.FunctionComponent<Props> = ({ foo, children }: Props) => {
+    return <div>{foo} {children}</div>; // OK
+};
+// Error now, in future, deprecated
+const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo, children }) => {
+    return <div>{foo}{children}</div>; 
+};
+```
+
 ### Class Components
 
 Components are type checked based on the `props` property of the component. This is modeled after how JSX is transformed i.e. the attributes become the `props` of the component.
