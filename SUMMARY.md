@@ -85,7 +85,7 @@
   * [Stateful Functions](docs/tips/statefulFunctions.md)
   * [Связывание это плохо](docs/tips/bind.md)
   * [Каррирование](docs/tips/currying.md)
-  * [Type Instantiation](docs/tips/typeInstantiation.md)
+  * [Конкретизация типа](docs/tips/typeInstantiation.md)
   * [Ленивая инициализация объекта](docs/tips/lazyObjectLiteralInitialization.md)
   * [Полезные классы](docs/tips/classesAreUseful.md)
   * [Избегайте использования Export Default](docs/tips/defaultIsBad.md)
