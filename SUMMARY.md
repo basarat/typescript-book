@@ -89,7 +89,7 @@
   * [Ленивая инициализация объекта](docs/tips/lazyObjectLiteralInitialization.md)
   * [Полезные классы](docs/tips/classesAreUseful.md)
   * [Избегайте использования Export Default](docs/tips/defaultIsBad.md)
-  * [Limit Property Setters](docs/tips/propertySetters.md)
+  * [Ограничьте использование сеттеров свойств](docs/tips/propertySetters.md)
   * [`outFile` caution](docs/tips/outFile.md)
   * [Советы по JQuery](docs/tips/jquery.md)
   * [Статический конструктор](docs/tips/staticConstructor.md)
