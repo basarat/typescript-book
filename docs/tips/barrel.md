@@ -1,8 +1,8 @@
-## Barrel
+## Контейнер
 
-A barrel is a way to rollup exports from several modules into a single convenient module. The barrel itself is a module file that re-exports selected exports of other modules.
+Контейнер - это способ объединения экспорта из нескольких модулей в один удобный модуль. Сам контейнер представляет собой файл модуля, который реэкспортирует выбранные экспортные данные других модулей.
 
-Imagine the following class structure in a library: 
+Представьте себе следующую структуру классов в библиотеке:
 
 ```ts
 // demo/foo.ts
@@ -15,7 +15,7 @@ export class Bar {}
 export class Baz {}
 ```
 
-Without a barrel, a consumer would need three import statements:
+Без контейнера потребителю потребовалось бы три оператора импорта:
 
 ```ts
 import { Foo } from '../demo/foo';
@@ -23,23 +23,23 @@ import { Bar } from '../demo/bar';
 import { Baz } from '../demo/baz';
 ```
 
-You can instead add a barrel `demo/index.ts` containing the following: 
+Вместо этого вы можете добавить контейнер `demo/index.ts`, содержащий следующее:
 
 ```ts
 // demo/index.ts
-export * from './foo'; // re-export all of its exports
-export * from './bar'; // re-export all of its exports
-export * from './baz'; // re-export all of its exports
+export * from './foo'; // реэкспортируем весь экспорт
+export * from './bar'; // реэкспортируем весь экспорт
+export * from './baz'; // реэкспортируем весь экспорт
 ```
 
-Now the consumer can import what it needs from the barrel:
+Теперь пользователь может импортировать из контейнера все, что ему нужно:
 
 ```ts
-import { Foo, Bar, Baz } from '../demo'; // demo/index.ts is implied
+import { Foo, Bar, Baz } from '../demo'; // подразумевается demo/index.ts
 ```
 
-### Named exports
-Instead of exporting `*`, you can choose to export the module in a name. E.g., assume that `baz.ts` has functions:
+### Именованный экспорт
+Вместо экспорта `*` вы можете выбрать экспорт модуля по имени. Например, предположим, что у `baz.ts` есть следующие функции:
 
 ```ts
 // demo/foo.ts
@@ -53,24 +53,24 @@ export function getBaz() {}
 export function setBaz() {}
 ```
 
-If you would rather not export `getBaz` / `setBaz` from demo you can instead put them in a variable by importing them in a name and exporting that name as shown below: 
+Если вы предпочитаете не экспортировать `getBaz` / `setBaz` из примера, вы можете сначала импортировть и поместить их в переменную, а потом уже экспортировать эту переменную, как показано ниже:
 
 ```ts
 // demo/index.ts
-export * from './foo'; // re-export all of its exports
-export * from './bar'; // re-export all of its exports
+export * from './foo'; // реэкспортируем весь экспорт
+export * from './bar'; // реэкспортируем весь экспорт
 
-import * as baz from './baz'; // import as a name
-export { baz }; // export the name
+import * as baz from './baz'; // импортировать как общую переменную
+export { baz }; // экспортировать эту переменную
 ```
 
-And now the consumer would look like: 
+А теперь импорт будет выглядеть так:
 
 ```ts
-import { Foo, Bar, baz } from '../demo'; // demo/index.ts is implied
+import { Foo, Bar, baz } from '../demo'; // подразумевается demo/index.ts
 
-// usage
+// использование
 baz.getBaz();
 baz.setBaz();
-// etc. ...
+// и т.д ...
 ```

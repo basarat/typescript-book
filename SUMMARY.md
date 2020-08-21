@@ -96,7 +96,7 @@
   * [Паттерн синглтон](docs/tips/singleton.md)
   * [Аргументы функции](docs/tips/functionParameters.md)
   * [Build Toggles](docs/tips/build-toggles.md)
-  * [Barrel](docs/tips/barrel.md)
+  * [Контейнер](docs/tips/barrel.md)
   * [Create Arrays](docs/tips/create-arrays.md)
   * [Typesafe Event Emitter](docs/tips/typed-event.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
