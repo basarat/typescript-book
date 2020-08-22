@@ -70,7 +70,7 @@
   * [strictNullChecks](docs/options/strictNullChecks.md)
 * [Ошибки в TypeScript](docs/errors/main.md)
   * [Interpreting Errors](docs/errors/interpreting-errors.md)
-  * [Common Errors](docs/errors/common-errors.md)
+  * [Распространенные ошибки](docs/errors/common-errors.md)
 * [NPM](docs/npm/index.md)
 * [Тестирование](docs/testing/intro.md)
   * [Jest](docs/testing/jest.md)
