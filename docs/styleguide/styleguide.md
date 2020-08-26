@@ -172,11 +172,11 @@ let foo: { x: number, y?: number } = { x:123 };
 
 * Use `undefined` in general (do consider returning an object like `{valid:boolean, value?:Foo}` instead)
 
-***Bad***
+**Bad**
 ```ts
 return null;
 ```
-***Good***
+**Good**
 ```ts
 return undefined;
 ```
