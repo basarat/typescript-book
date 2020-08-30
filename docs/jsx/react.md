@@ -55,7 +55,7 @@ const MyComponent: React.FunctionComponent<Props> = (props) => {
 
 ### Void Function Components
 
-As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare the accepted `children` explicitly. This is an interim solution until the next major version of the type defs (where VoidFunctionComponent will be deprecated and FunctionComponent will by default accept no children).
+As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare that a component does not take `children`. This is an interim solution until the next major version of the type defs (where VoidFunctionComponent will be deprecated and FunctionComponent will by default accept no children).
 
 ```ts
 type Props = { 
@@ -65,7 +65,7 @@ type Props = {
 const FunctionComponent: React.FunctionComponent<Props> = ({ foo, children }: Props) => {
     return <div>{foo} {children}</div>; // OK
 };
-// Error now, in future, deprecated
+// Error now (children not support), in future, deprecated
 const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo, children }) => {
     return <div>{foo}{children}</div>; 
 };
