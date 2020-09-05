@@ -1,6 +1,7 @@
-## Type Instantiation for Generics
+## Конкретизация типа для обобщений
 
-Say you have something that has a generic parameter e.g. a class `Foo`:
+
+Скажем, у вас есть что-то, например класс `Foo`, который имеет обобщённый параметр:
 
 ```ts
 class Foo<T>{
@@ -8,30 +9,30 @@ class Foo<T>{
 }
 ```
 
-You want to create a specialized version for it for a particular type. The pattern is to copy the item into a new variable and give it the type annotation with the generics replaced with concrete types. E.g. if you want a class `Foo<number>`:
+Вы хотите создать для него уточнённую версию для определенного типа. Паттерн состоит в том, чтобы скопировать элемент в новую переменную и дать ей описание типа с заменой обобщённых типов конкретными типами. Например, если вам нужен класс `Foo<number>`:
 
 ```ts
 class Foo<T>{
 	foo: T;
 }
-let FooNumber = Foo as { new ():Foo<number> }; // ref 1
+let FooNumber = Foo as { new ():Foo<number> }; // ссылка 1
 ```
-In `ref 1` you are saying that `FooNumber` is the same as `Foo` but just treat it as something that when called with the `new` operator gives an instance of `Foo<Number>`.
+В `ссылке 1` вы говорите, что `FooNumber` это то же самое, что `Foo`, но просто относитесь к нему как к чему-то, что при вызове с оператором `new` дает экземпляр `Foo<Number>`.
 
-### Inheritance
-The Type assertion pattern is unsafe in that it trusts you to do the right thing. A common pattern in other languages *for classes* is to just use inheritance :
+### Наследование
+Паттерн утверждения типа небезопасен, поскольку он доверяет вам сделать всё правильно. Распространенный паттерн в других языках *для классов* - просто использовать наследование:
 
 ```ts
 class FooNumber extends Foo<number>{}
 ```
 
-One word of caution here: if you use decorators on the base class then the inherited class might not have the same behavior as the base class (it is no longer wrapped by the decorator).
+Одно предостережение: если вы используете декораторы в базовом классе, то унаследованный класс может не иметь того же поведения, что и базовый класс (он больше не обёрнут декоратором).
 
-Of course if you are not specializing classes you still have to come up with a coercion / assertion pattern that works and hence we showed the general assertion pattern first, e.g.:
+Даже если вы не уточняете свои классы, вам все равно нужно придумать паттерн приведения / утверждения, который работает, для начала покажем общий шаблон утверждения, например:
 
 ```ts
 function id<T>(x: T) { return x; }
 const idNum = id as {(x:number):number};
 ```
 
-> Inspired by this [stackoverflow question](http://stackoverflow.com/a/34864705/390330)
+> Меня вдохновил этот [вопрос на stackoverflow](http://stackoverflow.com/a/34864705/390330)

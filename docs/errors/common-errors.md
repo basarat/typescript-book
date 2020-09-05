@@ -1,49 +1,49 @@
-# Common Errors
-In this section we explain a number of common error codes that users experience in the real world.
+# Распространенные ошибки
+В этом разделе мы объясняем ряд распространенных кодов ошибок, с которыми разработчики сталкиваются в реальной жизни.
 
 ## TS2304
-Samples:
-> `Cannot find name ga`
-> `Cannot find name $`
-> `Cannot find module jquery`
+Примеры:
+> `Невозможно найти имя ga`
+> `Невозможно найти имя $`
+> `Невозможно найти модуль jquery`
 
-You are probably using a third party library (e.g. google analytics) and don't have it `declare`d. TypeScript tries to save you from *spelling mistakes* and *using variables without declaring them* so you need to be explicit on anything that is *available at runtime* because of you including some external library ([more on how to fix it][ambient]).
+Вы, вероятно, используете стороннюю библиотеку (например google analytics) и не `объявили` это. TypeScript пытается спасти вас от *орфографических ошибок* и *использования переменных без их объявления*, вы подключаете внешнюю библиотеку, поэтому вам нужно сделать ее доступной во время выполнения ([подробнее о том, как это исправить][ambient]).
 
 ## TS2307
-Samples:
-> `Cannot find module 'underscore'`
+Пример:
+> `Невозможно найти модуль 'underscore'`
 
-You are probably using a third party library (e.g. underscore) as a *module* ([more on modules][modules]) and don't have the ambient declaration file for it ([more on ambient declarations][ambient]).
+Вероятно, вы используете стороннюю библиотеку (например underscore) как *модуль* ([подробнее о модулях][modules]) и у вас нет для него файла объявления среды ([подробнее об объявлениях среды][ambient]).
 
 ## TS1148
-Sample:
-> Cannot compile modules unless the '--module' flag is provided
+Пример:
+> Невозможно скомпилировать модули, если не указан флаг '--module'
 
-Checkout the [section on modules][modules].
+Ознакомьтесь с [разделом модули][modules].
 
-## Catch clause variable cannot have a type annotation
-Sample:
+## Переменная условия catch не может иметь описание типа
+Пример:
 ```js
 try { something(); }
-catch (e: Error) { // Catch clause variable cannot have a type annotation
+catch (e: Error) { // Переменная условия catch не может иметь описание типа
 }
 ```
-TypeScript is protecting you from JavaScript code in the wild being wrong. Use a type guard instead:
+TypeScript защищает вас от ошибочного кода JavaScript. Вместо этого используйте защиту типа:
 ```js
 try { something(); }
 catch (e) {
   if (e instanceof Error){
-    // Here you go.
+    // Вот, пожалуйста.
   }
 }
 ```
 
-## Interface `ElementClass` cannot simultaneously extend types `Component` and `Component`
-This happens when you have two `react.d.ts` (`@types/react/index.d.ts`) in the compilation context.
+## Интерфейс `ElementClass` не может одновременно расширять типы `Component` и `Component`
+Это происходит, когда у вас есть два модуля `react.d.ts` (`@types/react/index.d.ts`) в контексте компиляции.
 
 **Fix**:
-* Delete `node_modules` and any `package-lock` (or yarn lock) and `npm install` again.
-* If it doesn't work, find the invalid module (all modules used by your project should have `react.d.ts` as a `peerDependency` and not a hard `dependency`) and report it on their project.
+* Удалите `node_modules` и все `package-lock` (или yarn lock) и снова запустите `npm install`.
+* Если это не сработает, найдите невалидный модуль (все модули, используемые вашим проектом, должны иметь `react.d.ts` как `peerDependency`, а не жесткую `dependency`) и сообщите об этом команде разработчиков этого модуля.
 
 
 [ambient]: ../types/ambient/d.ts.md

@@ -1,7 +1,7 @@
-# Interpreting Errors 
-Since TypeScript is a heavily focused *Developer Help* oriented programming language, its errors messages try to be super helpful when something goes wrong. This can lead to a slight information overload for unsuspecting users of compilers that aren't so helpful. 
+# Ошибки интерпретации
+Поскольку TypeScript - это язык программирования, ориентированный на *Помощь разработчику*, его сообщения об ошибках стараются быть очень полезными, когда что-то идет не так. Это может привести к небольшой информационной перегрузке для ничего не подозревающих пользователей компиляторов, что уже не очень хорошо.
 
-Lets look at an example in an IDE to break apart the process of reading an error message. 
+Давайте рассмотрим пример в среде IDE, чтобы разбить на части процесс чтения сообщения об ошибке.
 
 ```ts
 type SomethingComplex = {
@@ -15,61 +15,61 @@ function getBar(): string {
 }
 
 //////////////////////////////////
-// Example error production
+// Пример возникновения ошибки
 //////////////////////////////////
 const fail = {
   foo: 123,
   bar: getBar
 };
 
-takeSomethingComplex(fail); // TS ERROR HAPPENS HERE 
+takeSomethingComplex(fail); // TS ОШИБКА ПРОИСХОДИТ ЗДЕСЬ
 ```
 
-This example demonstrates a common programmer error where they *fail* to call a function (`bar: getBar` should be `bar: getBar()`). Fortunately this mistake is caught by TypeScript as soon as it doesn't meet the type requirements. 
+Этот пример демонстрирует распространенную ошибку программистов, когда они *не могут* вызвать функцию (`bar: getBar` должно быть `bar: getBar()`). К счастью, эта ошибка обнаруживается TypeScript, когда требования к типу не совпадают.
 
-## Error Categories
-There are two categories of TypeScript Error messages (succint and detailed). 
+## Категории ошибок
+Есть две категории сообщений об ошибках TypeScript (краткие и подробные).
 
-### Succint
-The objective of the succint error message is to provide an example *conventional compiler* description of the error number and message. For this example the succint message looks like: 
+### Краткие описания
+Цель краткого сообщения об ошибке - предоставить пример *шаблонного описания* компилятором номера ошибки и сообщения. В этом примере краткое сообщение выглядит так:
 
 ```
-TS2345: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
+TS2345: Аргумент типа '{ foo: number; bar: () => string; }' не может быть присвоен параметру типа 'SomethingComplex'.
 ```
-It is fairly self explanatory. However, it doesn't provide a deeper breakdown of *why* the error is happening. That is what the *detiled* error message is for.
+Это довольно понятное объяснение ошибки. Однако он не дает более подробного объяснения, *почему* произошла ошибка. Вот для чего нужно *подробное* сообщение об ошибке.
 
-### Detailed
-For this example the detailed version looks like: 
+### Подробные описания
+Для этого примера подробная версия ошибки выглядит так:
 
 ```
 [ts]
-Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
-  Types of property 'bar' are incompatible.
-    Type '() => string' is not assignable to type 'string'.
+Аргумент типа '{ foo: number; bar: () => string; }' не может быть присвоен параметру типа 'SomethingComplex'.
+  Типы свойства 'bar' несовместимы.
+    Тип '() => string' не может быть присвоен типу 'string'.
 ```
-The objective of the detailed error message is to *guide* the user to the reason why some error (type incompatability in this case) is happening. The first line is same as the succint, followed by a chain. You should read this chain as a series of responses to the developer question `WHY?` between lines i.e 
+Целью подробного сообщения об ошибке является *указать* пользователю причину возникновения той или иной ошибки (в данном случае несовместимости типов). Первая строка такая же, как и в кратком сообщении, за ней следует цепочка. Вы должны читать эту цепочку как серию ответов на вопрос разработчика `ПОЧЕМУ`, т.е.
 
 ```
-ERROR: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
+ОШИБКА: Аргумент типа '{ foo: number; bar: () => string; }' не может быть присвоен параметру типа 'SomethingComplex'.
 
-WHY? 
-CAUSE ERROR: Types of property 'bar' are incompatible.
+ПОЧЕМУ? 
+ПО ПРИЧИНЕ ОШИБКИ: Типы свойства 'bar' несовместимы.
 
-WHY? 
-CAUSE ERROR: Type '() => string' is not assignable to type 'string'.
+ПОЧЕМУ? 
+ПО ПРИЧИНЕ ОШИБКИ: Тип '() => string' не может быть присвоен типу 'string'.
 ```
 
-So the root cause is,
-* for property `bar`
-* there is a function `() => string` while it was expected as a `string`. 
+Итак, основная причина в том,
+* для свойства `bar`
+* существует функция `() => string` в то время как это ожидался `string`.
 
-This should help the developer fix the bug for the `bar` property (they forgot to invoke `()` the function).
+Это должно помочь разработчику исправить ошибку свойства `bar` (они забыли вызвать функцию `()`).
 
-## How it shows up in an IDE Tooltip 
+## Как это отображается во подсказках IDE
 
-The IDE normally shows the `detailed` followed by the `succint` version in a tooltip as shown below: 
+IDE обычно показывает `подробное описание`, за которым следует `краткая` версия во всплывающей подсказке, как показано ниже:
 
-![IDE error message example](https://raw.githubusercontent.com/basarat/typescript-book/master/images/errors/interpreting-errors/ide.png)
+![IDE пример сообщения об ошибке](https://raw.githubusercontent.com/basarat/typescript-book/master/images/errors/interpreting-errors/ide.png)
 
-* You normally just read the `detailed` version forming the `WHY?` chain in your head. 
-* You use the succint version if you want to search for similar errors (using the `TSXXXX` error code or portions of the error message)
+* Обычно вы просто читаете `подробную` версию, образующую цепочку `ПОЧЕМУ?` в вашей голове.
+* Используйте краткую версию, если хотите найти похожие ошибки (используя код ошибки `TSXXXX` или части сообщения об ошибке)

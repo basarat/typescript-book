@@ -1,25 +1,25 @@
-# Function Parameters
+# Параметры функции
 
-If you have a function that takes too many parameters, or parameters of the same type, then you might want to consider changing the function to take an object instead. 
+Если у вас есть функция, которая принимает слишком много параметров или параметров одного типа, вы можете подумать об изменении функции, чтобы взамен принимать объект.
 
-Consider the following function:
+Рассмотрим следующую функцию:
 
 ```ts
 function foo(flagA: boolean, flagB: boolean) {
-  // your awesome function body 
+  // ваше потрясающее тело функции
 }
 ```
 
-With such a function definition it's quite easy to invoke it incorrectly e.g. `foo(flagB, flagA)` and you would get no help from the compiler. 
+С таким определением функции довольно легко вызвать ее неправильно, например `foo(flagB, flagA)`, и компилятор вас никак не предупредит.
 
-Instead, convert the function to take an object: 
+Вместо этого преобразуйте функцию для получения объекта:
 
 ```ts
 function foo(config: {flagA: boolean, flagB: boolean}) {
   const {flagA, flagB} = config;
-  // your awesome function body 
+  // ваше потрясающее тело функции
 }
 ```
-Now the function calls will look like `foo({flagA, flagB})` which makes it much easier to spot mistakes and code review.
+Теперь вызовы функций будут выглядеть как `foo({flagA, flagB})`, что значительно упрощает обнаружение ошибок и проверку кода.
 
-> Note : If your function is simple enough, and you don't expect much churn, then feel free to ignore this advice 🌹.
+> Примечание. Если ваша функция достаточно проста и вы пока не ожидаете её усложнений, не бойтесь игнорировать этот совет 🌹.

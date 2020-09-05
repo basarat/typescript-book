@@ -1,154 +1,155 @@
-# TypeScript StyleGuide and Coding Conventions
+# TypeScript руководство по стилю и соглашения по кодированию
 
-> An unofficial TypeScript StyleGuide
+> Неофициальное TypeScript руководство по стилю
 
-People have asked me for my opinions on this. Personally I don't enforce these a lot on my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the [tips chapter](../tips/main.md) (e.g. type assertion is bad, property setters are bad) 🌹.
+Люди спрашивали меня, что я думаю по этому поводу. Лично я не навязываю их своим командам и проектам, но эти соглашения отлично выступают мировым судьёй и полезны для поддержания консистентности кодовой базы. Есть и другие более важные вещи и они описаны в [главе с советами](../tips/main.md) (например, утверждение типа это плохо, сеттеры свойств это плохо) 🌹.
 
-Key Sections:
+Ключевые разделы:
 
-* [Variable](#variable-and-function)
-* [Class](#class)
-* [Interface](#interface)
-* [Type](#type)
-* [Namespace](#namespace)
-* [Enum](#enum)
-* [`null` vs. `undefined`](#null-vs-undefined)
-* [Formatting](#formatting)
-* [Single vs. Double Quotes](#quotes)
-* [Tabs vs. Spaces](#spaces)
-* [Use semicolons](#semicolons)
-* [Annotate Arrays as `Type[]`](#array)
-* [File Names](#filename)
-* [`type` vs `interface`](#type-vs-interface)
+- [TypeScript руководство по стилю и соглашения по кодированию](#typescript-руководство-по-стилю-и-соглашения-по-кодированию)
+  - [Переменная и функция](#переменная-и-функция)
+  - [Класс](#класс)
+  - [Интерфейс](#интерфейс)
+  - [Тип](#тип)
+  - [Пространства имен](#пространства-имен)
+  - [Перечисление](#перечисление)
+  - [Null vs. Undefined](#null-vs-undefined)
+  - [Форматирование](#форматирование)
+  - [Кавычки](#кавычки)
+  - [Пробелы](#пробелы)
+  - [Точка с запятой](#точка-с-запятой)
+  - [Массив](#массив)
+  - [Имя файла](#имя-файла)
+  - [тип vs. интерфейс](#тип-vs-интерфейс)
 
-## Variable and Function
-* Use `camelCase` for variable and function names
+## Переменная и функция
+* Используйте `camelCase` для имен переменных и функций
 
-> Reason: Conventional JavaScript
+> Причина: соглашение в JavaScript
 
-**Bad**
+**Плохо**
 ```ts
 var FooVar;
 function BarFunc() { }
 ```
-**Good**
+**Хорошо**
 ```ts
 var fooVar;
 function barFunc() { }
 ```
 
-## Class
-* Use `PascalCase` for class names.
+## Класс
+* Используйте `PascalCase` для имен классов.
 
-> Reason: This is actually fairly conventional in standard JavaScript.
+> Причина: на самом деле это довольно привычно для стандартного JavaScript.
 
-**Bad**
+**Плохо**
 ```ts
 class foo { }
 ```
-**Good**
+**Хорошо**
 ```ts
 class Foo { }
 ```
-* Use `camelCase` of class members and methods
+* Используйте `camelCase` для членов класса и методов
 
-> Reason: Naturally follows from variable and function naming convention.
+> Причина: логично следует из соглашения об именах переменных и функций.
 
-**Bad**
+**Плохо**
 ```ts
 class Foo {
     Bar: number;
     Baz() { }
 }
 ```
-**Good**
+**Хорошо**
 ```ts
 class Foo {
     bar: number;
     baz() { }
 }
 ```
-## Interface
+## Интерфейс
 
-* Use `PascalCase` for name.
+* Используйте `PascalCase` для именования.
 
-> Reason: Similar to class
+> Причина: аналогично классу
 
-* Use `camelCase` for members.
+* Используйте `camelCase` для элементов.
 
-> Reason: Similar to class
+> Причина: аналогично классу
 
-* **Don't** prefix with `I`
+* **Не используйте** префикс `I`
 
-> Reason: Unconventional. `lib.d.ts` defines important interfaces without an `I` (e.g. Window, Document etc).
+> Причина: нет такого общего соглашения. `lib.d.ts` определяет важные интерфейсы без символа `I` (например Window, Document и т.д.).
 
-**Bad**
+**Плохо**
 ```ts
 interface IFoo {
 }
 ```
-**Good**
+**Хорошо**
 ```ts
 interface Foo {
 }
 ```
 
-## Type
+## Тип
 
-* Use `PascalCase` for name.
+* Используйте `PascalCase` для именования.
 
-> Reason: Similar to class
+> Причина: аналогично классу
 
-* Use `camelCase` for members.
+* Используйте `camelCase` для элементов.
 
-> Reason: Similar to class
+> Причина: аналогично классу
 
 
-## Namespace
+## Пространства имен
 
-* Use `PascalCase` for names
+* Используйте `PascalCase` для именования.
 
-> Reason: Convention followed by the TypeScript team. Namespaces are effectively just a class with static members. Class names are `PascalCase` => Namespace names are `PascalCase`
+> Причина: cоглашение, которого придерживается команда TypeScript. Пространства имен фактически представляют собой просто класс со статическими членами. Имена классов: `PascalCase` => имена пространств имен: `PascalCase`
 
-**Bad**
+**Плохо**
 ```ts
 namespace foo {
 }
 ```
-**Good**
+**Хорошо**
 ```ts
 namespace Foo {
 }
 ```
 
-## Enum
+## Перечисление
 
-* Use `PascalCase` for enum names
+* Используйте `PascalCase` для именования.
 
-> Reason: Similar to Class. Is a Type.
+> Причина: по аналогии с классами. Это тип.
 
-**Bad**
+**Плохо**
 ```ts
 enum color {
 }
 ```
-**Good**
+**Хорошо**
 ```ts
 enum Color {
 }
 ```
 
-* Use `PascalCase` for enum member
+* Используйте `PascalCase` для именования элементов перечисления.
 
-> Reason: Convention followed by TypeScript team i.e. the language creators e.g `SyntaxKind.StringLiteral`. Also helps with translation (code generation) of other languages into TypeScript.
+> Причина: соглашение, которому следует команда TypeScript, то есть создатели языка, например `SyntaxKind.StringLiteral`. Это также помогает с переводом (генерацией кода) других языков в TypeScript.
 
-**Bad**
+**Плохо**
 ```ts
 enum Color {
     red
 }
 ```
-**Good**
+**Хорошо**
 ```ts
 enum Color {
     Red
@@ -157,120 +158,119 @@ enum Color {
 
 ## Null vs. Undefined
 
-* Prefer not to use either for explicit unavailability
+* Предпочитаю не использовать ни то, ни другое из-за явной недоступности
 
-> Reason: these values are commonly used to keep a consistent structure between values. In TypeScript you use *types* to denote the structure
+> Причина: эти значения обычно используются для сохранения согласованности между значениями. В TypeScript вы используете *типы* для указания структуры
 
-**Bad**
+**Плохо**
 ```ts
-let foo = {x:123,y:undefined};
+let foo = { x: 123, y: undefined };
 ```
-**Good**
+**Хорошо**
 ```ts
-let foo:{x:number,y?:number} = {x:123};
+let foo: { x: number, y?: number } = { x:123 };
 ```
 
-* Use `undefined` in general (do consider returning an object like `{valid:boolean,value?:Foo}` instead)
+* Используйте `undefined` в общем случае (но рассмотрите возможность возврата такого объекта, как `{valid:boolean, value?:Foo}` вместо этого)
 
-***Bad***
+***Плохо***
 ```ts
 return null;
 ```
-***Good***
+***Хорошо***
 ```ts
 return undefined;
 ```
 
-* Use `null` where its a part of the API or conventional
+* Используйте `null`, если он является частью API или является традиционным
 
-> Reason: It is conventional in Node.js e.g. `error` is `null` for NodeBack style callbacks.
+> Причина: это обычное дело в Node.js, например `error` имеет значение `null` для колбэков.
 
-**Bad**
+**Плохо**
 ```ts
 cb(undefined)
 ```
-**Good**
+**Хорошо**
 ```ts
 cb(null)
 ```
 
-* Use *truthy* check for **objects** being `null` or `undefined`
+* Используйте проверку на *истинность* **объектов**, являющихся `null` или `undefined`
 
-**Bad**
+**Плохо**
 ```ts
 if (error === null)
 ```
-**Good**
+**Хорошо**
 ```ts
 if (error)
 ```
 
-* Use `== undefined` / `!= undefined` (not `===` / `!==`) to check for `null` / `undefined` on primitives as it works for both `null`/`undefined` but not other falsy values (like `''`,`0`,`false`) e.g.
+* Используйте `== null` / `!= null` (а не `===` / `!==`) для проверки наличия `null` / `undefined` в примитивах, но не для других ложных значений (например `''`, `0`, `false`), например:
 
-**Bad**
+**Плохо**
 ```ts
-if (error !== null)
+if (error !== null) // не исключает undefined
 ```
-**Good**
+**Хорошо**
 ```ts
-if (error != undefined)
+if (error != null) // исключает и null и undefined
 ```
 
-## Formatting
-The TypeScript compiler ships with a very nice formatting language service. Whatever output it gives by default is good enough to reduce the cognitive overload on the team.
+## Форматирование
+Компилятор TypeScript поставляется с очень хорошим сервисом форматирования. Какой бы результат он ни давал по умолчанию, он достаточно хорош, чтобы уменьшить когнитивную нагрузку в команде.
 
-Use [`tsfmt`](https://github.com/vvakame/typescript-formatter) to automatically format your code on the command line. Also your IDE (atom/vscode/vs/sublime) already has formatting support built-in.
+Используйте [`tsfmt`](https://github.com/vvakame/typescript-formatter) для автоматического форматирования кода в командной строке. Кроме того, ваша IDE (atom/vscode/vs/sublime) уже имеет встроенную поддержку форматирования.
 
-Examples:
+Примеры:
 ```ts
-// Space before type i.e. foo:<space>string
+// Пробел перед типом, т.е. foo:<пробел>string
 const foo: string = "hello";
 ```
 
-## Quotes
+## Кавычки
 
-* Prefer single quotes (`'`) unless escaping.
+* Предпочитаю одинарные кавычки (`'`), если не экранирую.
 
-> Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Its easier to type (no shift needed on most keyboards). [Prettier team recommends single quotes as well](https://github.com/prettier/prettier/issues/1105)
+> Причина: так делают другие команды JavaScript (например [airbnb](https://github.com/airbnb/javascript), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Печатать легче (на большинстве клавиатур shift не требуется). [Команда Prettier также рекомендует одинарные кавычки](https://github.com/prettier/prettier/issues/1105)
 
-> Double quotes are not without merit: Allows easier copy paste of objects into JSON. Allows people to use other languages to work without changing their quote character. Allows you to use apostrophes e.g. `He's not going.`. But I'd rather not deviate from where the JS Community is fairly decided.
+> Двойные кавычки не лишены достоинств: они упрощают копирование и вставку объектов в JSON. Позволяет людям использовать другие языки для работы без изменения символа кавычек. Позволяет использовать апострофы, например `He's not going.` Но я бы не стал отклоняться от того, что справедливо решило сообщество JS.
 
-* When you can't use double quotes, try using back ticks (\`).
+* Если вы не можете использовать двойные кавычки, попробуйте использовать обратные галочки (\`).
 
-> Reason: These generally represent the intent of complex enough strings.
+> Причина: обычно они предоставляют возможность удобно работать со сложными строками.
 
-## Spaces
+## Пробелы
 
-* Use `2` spaces. Not tabs.
+* Используйте `2` пробела. Не табы.
 
-> Reason: More JavaScript teams do this (e.g. [airbnb](https://github.com/airbnb/javascript), [idiomatic](https://github.com/rwaldron/idiomatic.js), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). The TypeScript/VSCode teams use 4 spaces but are definitely the exception in the ecosystem.
+> Причина: так делают другие команды JavaScript (например [airbnb](https://github.com/airbnb/javascript), [idiomatic](https://github.com/rwaldron/idiomatic.js), [standard](https://github.com/feross/standard), [npm](https://github.com/npm/npm), [node](https://github.com/nodejs/node), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react)). Команды TypeScript/VSCode используют 4 пробела, но определенно являются исключениями в экосистеме.
 
-## Semicolons
+## Точка с запятой
 
-* Use semicolons.
+* Используйте точку с запятой.
 
-> Reasons: Explicit semicolons helps language formatting tools give consistent results. Missing ASI (automatic semicolon insertion) can trip new devs e.g. `foo() \n (function(){})` will be a single statement (not two). Recommended by TC39 as well.
+> Причины: явная точка с запятой помогает инструментам форматирования языка давать стабильные результаты. Отсутствие ASI (автоматическая вставка точки с запятой) может сбить с толку новых разработчиков, например. `foo() \n (function(){})` будет одним оператором (а не двумя). TC39 [предупреждает об этом](https://github.com/tc39/ecma262/pull/1062). Примеры команд использующих точку с запятой: [airbnb](https://github.com/airbnb/javascript), [idiomatic](https://github.com/rwaldron/idiomatic.js), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react), [Microsoft/TypeScript](https://github.com/Microsoft/TypeScript/).
 
-## Array
+## Массив
 
-* Annotate arrays as `foos:Foo[]` instead of `foos:Array<Foo>`.
+* Описывайте массивы как `foos: Foo[]` вместо `foos: Array<Foo>`.
 
-> Reasons: Its easier to read. Its used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
+> Причины: легче читать. Это соглашение использует команда TypeScript. Легче узнать, что что-то представляет собой массив, так как мозг обучен обнаруживать `[]`.
 
-## Filename
-Name files with `camelCase`. E.g. `accordian.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` etc.
+## Имя файла
+Именуйте файлы в `camelCase`. Например `accordion.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` и т.д.
 
-> Reason: Conventional across many JS teams.
+> Причина: стандарт для многих JS-команд.
 
-## type vs. interface
+## тип vs. интерфейс
 
-* Use `type` when you *might* need a union or intersection:
+* Используйте `тип`, когда вам *может* понадобиться объединение или пересечение:
 
 ```
 type Foo = number | { someProperty: number }
 ```
-* Use `interface` when you want `extends` or `implements` e.g
-
+* Используйте `интерфейс`, если вы хотите использовать `extends` или `implements`, например:
 ```
 interface Foo {
   foo: string;
@@ -283,4 +283,4 @@ class X implements FooBar {
   bar: string;
 }
 ```
-* Otherwise use whatever makes you happy that day.
+* В иных случаях используйте то, что вам больше нравится.

@@ -1,6 +1,6 @@
-## Lazy Object Literal Initialization
+## Ленивая инициализация объекта
 
-Quite commonly in JavaScript code bases you would initialize object literals in the following manner:
+Довольно часто в JavaScript вы инициализируете объекты следующим образом:
 
 ```ts
 let foo = {};
@@ -8,19 +8,19 @@ foo.bar = 123;
 foo.bas = "Hello World";
 ```
 
-As soon as you move the code to TypeScript you will start to get Errors like the following:
+Как только вы переведёте код в TypeScript, вы начнете получать следующие ошибки:
 
 ```ts
 let foo = {};
-foo.bar = 123; // Error: Property 'bar' does not exist on type '{}'
-foo.bas = "Hello World"; // Error: Property 'bas' does not exist on type '{}'
+foo.bar = 123; // Ошибка: свойство 'bar' не существует для типа '{}'
+foo.bas = "Hello World"; // Ошибка: свойство 'bas' не существует для типа '{}'
 ```
 
-This is because from the state `let foo = {}`, TypeScript *infers* the type of `foo` (left hand side of initializing assignment) to be the type of the right hand side `{}` (i.e. an object with no properties). So, it error if you try to assign to a property it doesn't know about.
+Это потому, что из структуры `let foo = {}` TypeScript *логически выводит* тип `foo` (левая часть инициализирующего присваивания) как тип правой части `{}`(т.е. объект без свойств). Поэтому произойдёт ошибка, если вы попытаетесь присвоить значение свойству, о котором компилятор не знает.
 
-### Ideal Fix
+### Идеальное решение
 
-The *proper* way to initialize an object in TypeScript is to do it in the assignment:
+*Правильный* способ инициализировать объект в TypeScript - сделать это в присвоении:
 
 ```ts
 let foo = {
@@ -29,13 +29,13 @@ let foo = {
 };
 ```
 
-This is also great for code review and code maintainability purposes.
+Это также отлично подходит для ревью и удобства сопровождения кода.
 
-> The quick fix and middle ground *lazy* initialization patterns described below suffer from *mistakenly forgetting to initialize a property*. 
+> Паттерны быстрого решения и компромиссной *ленивой* инициализации, описанные ниже, страдают от *забывания инициализировать свойство*.
 
-### Quick Fix
+### Быстрое решение
 
-If you have a large JavaScript code base that you are migrating to TypeScript the ideal fix might not be a viable solution for you. In that case you can carefully use a *type assertion* to silence the compiler:
+Если у вас есть большая кодовая база на JavaScript, которую вы переносите на TypeScript, идеальное решение может оказаться для вас нецелесообразным. В этом случае вы можете осторожно использовать *утверждение типа*, чтобы заставить компилятор замолчать:
 
 ```ts
 let foo = {} as any;
@@ -43,14 +43,14 @@ foo.bar = 123;
 foo.bas = "Hello World";
 ```
 
-### Middle Ground
+### Компромиссное решение
 
-Of course using the `any` assertion can be very bad as it sort of defeats the safety of TypeScript. The middle ground fix is to create an `interface` to ensure
+Конечно, использование утверждения `any` может быть очень плохим решением, поскольку оно подрывает безопасность TypeScript. Компромиссное решение - создать `интерфейс`, чтобы гарантировать:
 
-* Good Docs
-* Safe assignment
+* Хорошее описание
+* Безопасное присвоение
 
-This is shown below:
+Это показано ниже:
 
 ```ts
 interface Foo {
@@ -63,7 +63,7 @@ foo.bar = 123;
 foo.bas = "Hello World";
 ```
 
-Here is a quick example that shows the fact that using the interface can save you:
+Вот краткий пример, показывающий, что использование интерфейса может вам помочь:
 
 ```ts
 interface Foo {
@@ -75,7 +75,6 @@ let foo = {} as Foo;
 foo.bar = 123;
 foo.bas = "Hello World";
 
-// later in the codebase:
-foo.bar = 'Hello Stranger'; // Error: You probably misspelled `bas` as `bar`, cannot assign string to number
-}
+// позже в кодовой базе:
+foo.bar = 'Hello Stranger'; // Ошибка: вы, вероятно, опечатались `bas` вместо `bar`, не возможно присвоить строку числу
 ```

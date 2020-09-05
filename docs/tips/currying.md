@@ -1,17 +1,17 @@
-## Currying
+## Каррирование
 
-Just use a chain of fat arrow functions:
+Просто используйте цепочку стрелочных функций:
 
 ```ts
-// A curried function
+// Каррированная функция
 let add = (x: number) => (y: number) => x + y;
 
-// Simple usage
+// Простое использование
 add(123)(456);
 
-// partially applied
+// Частично применить функцию
 let add123 = add(123);
 
-// fully apply the function
+// Полностью применить функцию
 add123(456);
 ```
