@@ -1,6 +1,6 @@
-## `export default` considered harmful
+## Проблемы с `export default`
 
-Consider you have a file `foo.ts` with the following contents:
+Предположим, у вас есть файл `foo.ts` со следующим содержимым:
 
 ```ts
 class Foo {
@@ -8,63 +8,99 @@ class Foo {
 export default Foo;
 ```
 
-You would import it (in `bar.ts`) using ES6 syntax as follows:
+Вы должны импортировать его (в `bar.ts`), используя синтаксис ES6, как показано ниже:
 
 ```ts
 import Foo from "./foo";
 ```
 
-There are a few maintainability concerns here:
-* If you refactor `Foo` in `foo.ts` it will not rename it in `bar.ts`.
-* If you end up needing to export more stuff from `foo.ts` (which is what many of your files will have) then you have to juggle the import syntax.
+Здесь есть несколько проблем с удобством сопровождения:
+* Если вы переименуете `Foo` в `foo.ts`, он не переименуется его в `bar.ts`.
+* Если вам в конечном итоге потребуется экспортировать больше сущностей из `foo.ts` (что довольно распространенная ситуация), вам придется переделать синтаксис импорта.
 
-For this reason I recommend simple exports + destructured import. E.g. `foo.ts`:
+По этой причине я рекомендую простой экспорт + деструктурированный импорт. Например `foo.ts`:
 
 ```ts
 export class Foo {
 }
 ```
-And then:
+А затем:
 
 ```ts
 import { Foo } from "./foo";
 ```
 
-Below I also present a few more reasons.
+Ниже я также привожу еще несколько причин.
 
-### Poor Discoverability
-Discoverability is very poor for default exports. You cannot explore a module with intellisense to see if it has a default export or not.
+### Плохая обнаруживаемость
+У экспорта по умолчанию очень низкая обнаруживаемость. Вы не можете исследовать модуль с помощью intellisense, чтобы узнать, есть ли у него экспорт по умолчанию или нет.
 
-With export default you get nothing here (maybe it does export default / maybe it doesn't `¯\_(ツ)_/¯`):
-```
-import /* here */ from 'something';
-```
-
-Without export default you get a nice intellisense here: 
-
-```
-import { /* here */ } from 'something';
+При экспорте по умолчанию вы ничего здесь не получите (может быть модуль экспортирует что-то по умолчанию / а может и нет `¯\_(ツ)_/¯`):
+```ts
+import /* здесь */ from 'something';
 ```
 
-### Autocomplete 
-Irrespective of if you know about the exports, you evenautocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+Без экспорта по умолчанию вы получите хорошее автодополнение intellisense:
 
-### CommonJS interop
-With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`. You will most likely want to rename the `default` export to something else when you import it.
-
-### Typo Protection
-You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
-
-### TypeScript auto-import
-Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module. Some tools out there will try to magic read and *infer* a name for a default export but magic is flaky.
-
-### Re-exporting
-Re-exporting is unnecessarily hard. Re-exporting is common for the root `index` file in npm packages e.g. `import Foo from "./foo"; export { Foo }` (with default) vs. `export * from "./foo"` (with named exports).
-
-### Dynamic Imports
-Default exports expose themselves badly named as `default` in dynamic `import`s e.g. 
-
+```ts
+import { /* здесь */ } from 'something';
 ```
-const HighChart = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
-Highcharts.default.chart('container', { ... }); // Notice `.default`
+
+### Автодополнение
+Независимо от того, знаете вы об экспорте или нет, вы можете автодополнить импорт  `import {/*здесь*/} from "./foo";`. Это упрощает работу разработчиков.
+
+### Несочетаемость с CommonJS
+Использование `default` ужасные испытания для commonJS пользователей, которым приходится использовать `const {default} = require('module/foo');` вместо `const {Foo} = require('module/foo')`. Скорее всего, при импорте вы захотите переименовать экспорт `по умолчанию` во что-нибудь другое.
+
+### Защита от опечаток
+Вы не получите опечаток, например, когда один разработчик пишет `import Foo from "./foo";`, а другой пишет `import foo from "./foo";`
+
+### Автоимпорт в TypeScript
+Автоматический импорт лучше всего работает c именованным экспортом. Вы используете `Foo`, и автоматический импорт запишет `import { Foo } from "./foo";` потому что это четко определенное имя, экспортированное из модуля. Некоторые инструменты будут пытаться волшебным образом прочитать и *логически вывести* имя и для экспорта по умолчанию, но такая магия уже не так надежна.
+
+### Реэкспорт
+Реэкспорт является обычным явлением для корневого файла `index` в пакетах npm и заставляет вас вручную указать экспорт по умолчанию, например `export { default as Foo } from "./foo";` (экспорт по умолчанию) по сравнению с `export * from "./foo"` (именованный экспорт).
+
+### Динамический импорт
+Экспорт по умолчанию раскрывается с дополнительным `default` при динамическом `импорте`, например:
+
+```ts
+const HighCharts = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+HighCharts.default.chart('container', { ... }); // Обратите внимание `.default`
+```
+
+Лучше с именованным экспортом:
+
+```ts
+const {HighCharts} = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+HighCharts.chart('container', { ... }); // Обратите внимание `.default`
+```
+
+
+### Требуется две строки для не-классов / не-функций
+
+Достаточно одной инструкции для функции/класса, например:
+
+```ts
+export default function foo() {
+}
+```
+
+Достаточно одной инструкции для *безымянных / типизированых* объектов, например:
+
+```ts
+export default {
+  notAFunction: 'Да, я не функция или класс',
+  soWhat: 'Экспорт сейчас *удален* из объявления'
+};
+```
+
+Но в противном случае нужны две инструкции:
+```ts
+// Если вам нужна именованная константа (здесь `foo`) для локального использования ИЛИ нужно описать тип (здесь `Foo`)
+const foo: Foo = {
+  notAFunction: 'Да, я не функция или класс',
+  soWhat: 'Экспорт сейчас *удален* из объявления'
+};
+export default foo;
 ```
