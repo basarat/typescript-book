@@ -1,27 +1,27 @@
-* [Type Guard](#type-guard)
-* [User Defined Type Guards](#user-defined-type-guards)
+* [Защита типа](#type-guard)
+* [Защита типа, определяемая пользователем](#user-defined-type-guards)
 
-## Type Guard
-Type Guards allow you to narrow down the type of an object within a conditional block. 
+## Защита типа
+Защита типа позволяет уточнить тип объекта внутри блока условия.
 
 
 ### typeof
 
-TypeScript is aware of the usage of the JavaScript `instanceof` and `typeof` operators. If you use these in a conditional block, TypeScript will understand the type of the variable to be different within that conditional block. Here is a quick example where TypeScript realizes that a particular function does not exist on `string` and points out what was probably a user typo:
+TypeScript знает об использовании JavaScript-операторов `instanceof` и `typeof`. Если вы используете их в блоке условия, TypeScript поймет, что тип переменной будет отличаться в этом блоке условия. Вот небольшой пример, где TypeScript понимает, что конкретной функции не существует в `string`, и указывает, что это, вероятно, было опечаткой пользователя:
 
 ```ts
 function doSomething(x: number | string) {
-    if (typeof x === 'string') { // Within the block TypeScript knows that `x` must be a string
-        console.log(x.subtr(1)); // Error, 'subtr' does not exist on `string`
+    if (typeof x === 'string') { // Внутри блока TypeScript знает, что `x` должно быть строкой
+        console.log(x.subtr(1)); // Ошибка, 'subtr' не существует для `string`
         console.log(x.substr(1)); // OK
     }
-    x.substr(1); // Error: There is no guarantee that `x` is a `string`
+    x.substr(1); // Ошибка: Нет гарантии, что `x` является `строкой`
 }
 ```
 
 ### instanceof
 
-Here is an example with a class and `instanceof`:
+Вот пример с классом и `instanceof`:
 
 ```ts
 class Foo {
@@ -37,23 +37,23 @@ class Bar {
 function doStuff(arg: Foo | Bar) {
     if (arg instanceof Foo) {
         console.log(arg.foo); // OK
-        console.log(arg.bar); // Error!
+        console.log(arg.bar); // Ошибка!
     }
     if (arg instanceof Bar) {
-        console.log(arg.foo); // Error!
+        console.log(arg.foo); // Ошибка!
         console.log(arg.bar); // OK
     }
 
     console.log(arg.common); // OK
-    console.log(arg.foo); // Error!
-    console.log(arg.bar); // Error!
+    console.log(arg.foo); // Ошибка!
+    console.log(arg.bar); // Ошибка!
 }
 
 doStuff(new Foo());
 doStuff(new Bar());
 ```
 
-TypeScript even understands `else` so when an `if` narrows out one type it knows that within the else *it's definitely not that type*. Here is an example:
+TypeScript даже понимает `else`, поэтому, когда `if` уточняет один тип, он знает, что внутри else *это определенно уже другой тип*. Вот пример:
 
 ```ts
 class Foo {
@@ -67,10 +67,10 @@ class Bar {
 function doStuff(arg: Foo | Bar) {
     if (arg instanceof Foo) {
         console.log(arg.foo); // OK
-        console.log(arg.bar); // Error!
+        console.log(arg.bar); // Ошибка!
     }
-    else {  // MUST BE Bar!
-        console.log(arg.foo); // Error!
+    else {  // ДОЛЖЕН БЫТЬ Bar!
+        console.log(arg.foo); // Ошибка!
         console.log(arg.bar); // OK
     }
 }
@@ -81,7 +81,7 @@ doStuff(new Bar());
 
 ### in 
 
-The `in` operator does a safe check for the existance of a property on an object and can be used as a type guard. E.g. 
+Оператор `in` выполняет безопасную проверку существования свойства объекта и может использоваться в качестве защиты типа. Например.
 
 ```ts
 interface A {
@@ -101,38 +101,37 @@ function doStuff(q: A | B) {
 }
 ```
 
-### Literal Type Guard
+### Литерал защиты типа
 
-When you have literal types in a union you can check them to discriminate e.g. 
+Когда у вас есть литералы типов в объединении, вы можете различить их, например:
 
 ```ts
 type Foo = {
-  kind: 'foo', // Literal type 
+  kind: 'foo', // Литерал типа
   foo: number
 }
 type Bar = {
-  kind: 'bar', // Literal type 
+  kind: 'bar', // Литерал типа
   bar: number
 }
 
 function doStuff(arg: Foo | Bar) {
     if (arg.kind === 'foo') {
         console.log(arg.foo); // OK
-        console.log(arg.bar); // Error!
+        console.log(arg.bar); // Ошибка!
     }
-    else {  // MUST BE Bar!
-        console.log(arg.foo); // Error!
+    else {  // ДОЛЖЕН БЫТЬ Bar!
+        console.log(arg.foo); // Ошибка!
         console.log(arg.bar); // OK
     }
 }
 ```
 
-### User Defined Type Guards
-JavaScript doesn't have very rich runtime introspection support built in. When you are using just plain JavaScript Objects (using structural typing to your advantage), you do not even have access to `instanceof` or `typeof`. For these cases you can create *User Defined Type Guard functions*. These are just functions that return `someArgumentName is SomeType`. Here is an example:
-
+### Защита типа, определяемая пользователем 
+JavaScript не имеет встроенной поддержки интроспекции. Когда вы используете простые объекты JavaScript (используя структурную типизацию себе на пользу), у вас даже нет доступа к `instanceof` или `typeof`. Для этих случаев вы можете создавать *функции для защиты типа, определяемой пользователем*. Это просто функции, которые возвращают `какойТоПараметрФункции - КакогоТоТипа`. Вот пример:
 ```ts
 /**
- * Just some interfaces
+ * Просто несколько интерфейсов
  */
 interface Foo {
     foo: number;
@@ -145,22 +144,22 @@ interface Bar {
 }
 
 /**
- * User Defined Type Guard!
+ * Определяемая пользователем защита типа!
  */
 function isFoo(arg: any): arg is Foo {
     return arg.foo !== undefined;
 }
 
 /**
- * Sample usage of the User Defined Type Guard
+ * Простой пример использования защиты типа, определяемой пользователем
  */
 function doStuff(arg: Foo | Bar) {
     if (isFoo(arg)) {
         console.log(arg.foo); // OK
-        console.log(arg.bar); // Error!
+        console.log(arg.bar); // Ошибка!
     }
     else {
-        console.log(arg.foo); // Error!
+        console.log(arg.foo); // Ошибка!
         console.log(arg.bar); // OK
     }
 }
@@ -169,31 +168,31 @@ doStuff({ foo: 123, common: '123' });
 doStuff({ bar: 123, common: '123' });
 ```
 
-### Type Guards and callbacks
+### Защита типа и колбэки
 
-TypeScript doesn't assume type guards remain active in callbacks as making this assumption is dangerous. e.g. 
+TypeScript не предполагает, что защиты типов остаются активными в колбэках, поскольку делать такое предположение опасно. Например
 
 ```js
-// Example Setup
+// Пример
 declare var foo:{bar?: {baz: string}};
 function immediate(callback: ()=>void) {
   callback();
 }
 
 
-// Type Guard
+// Защита типа
 if (foo.bar) {
   console.log(foo.bar.baz); // Okay
   functionDoingSomeStuff(() => {
-    console.log(foo.bar.baz); // TS error: Object is possibly 'undefined'"
+    console.log(foo.bar.baz); // TS ошибка: Возможно объект 'undefined'
   });
 }
 ```
 
-The fix is as easy as storing the inferred safe value in a local variable, automatically ensuring it doesn't get changed externally, and TypeScript can easily understand that: 
+Для исправления просто достаточно сохранить значение в локальной переменной, автоматически гарантируя, что оно не будет изменено извне, и TypeScript легко сможет это понять:
 
 ```js
-// Type Guard
+// Защита типа
 if (foo.bar) {
   console.log(foo.bar.baz); // Okay
   const bar = foo.bar;
