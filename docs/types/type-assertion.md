@@ -1,15 +1,15 @@
-## Type Assertion
-TypeScript allows you to override its inferred and analyzed view of types in any way you want to. This is done by a mechanism called "type assertion". TypeScript's type assertion is purely you telling the compiler that you know about the types better than it does, and that it should not second guess you.
+## Утверждение типа
+TypeScript позволяет вам переопределить прогнозируемое и проанализированное значение типов любым удобным для вас способом. Это делается с помощью механизма, называемого "утверждением типа". Простыми словами утверждение типа в TypeScript - это когда вы говорите компилятору, что вы знаете о типах лучше, чем он, и что он не должен сам догадываться.
 
-A common use case for type assertion is when you are porting over code from JavaScript to TypeScript. For example consider the following pattern:
+Обычный вариант использования утверждения типа - это когда вы портируете код с JavaScript на TypeScript. Например, рассмотрим следующий шаблон:
 
 ```ts
 var foo = {};
-foo.bar = 123; // Error: property 'bar' does not exist on `{}`
-foo.bas = 'hello'; // Error: property 'bas' does not exist on `{}`
+foo.bar = 123; // Ошибка: свойство 'bar' не существует в `{}`
+foo.bas = 'hello'; // Ошибка: свойство 'bas' не существует в `{}`
 ```
 
-Here the code errors because the *inferred* type of `foo` is `{}` i.e. an object with zero properties. Therefore you are not allowed to add `bar` or `bas` to it. You can fix this simply by a type assertion `as Foo`:
+Здесь ошибки в коде, потому что *ожидаемый* тип для `foo` это `{}`, т.е. объект без свойств. Поэтому вы не можете добавлять `bar` или `bas` к нему. Вы можете исправить это просто с помощью утверждения типа `as Foo`:
 
 ```ts
 interface Foo {
@@ -21,28 +21,28 @@ foo.bar = 123;
 foo.bas = 'hello';
 ```
 
-### `as foo` vs. `<foo>`
-Originally the syntax that was added was `<foo>`. This is demonstrated below:
+### `as foo` против `<foo>`
+Первоначально был добавлен синтаксис `<foo>`. Это продемонстрировано ниже:
 
 ```ts
 var foo: any;
-var bar = <string> foo; // bar is now of type "string"
+var bar = <string> foo; // bar теперь имеет тип "string"
 ```
 
-However, there is an ambiguity in the language grammar when using `<foo>` style assertions in JSX:
+Однако существует двусмысленность в грамматике языка при использовании утверждений в стиле `<foo>` в JSX:
 
 ```ts
 var foo = <string>bar;
 </string>
 ```
 
-Therefore it is now recommended that you just use `as foo` for consistency.
+Поэтому сейчас рекомендуется просто использовать `as foo` для единообразия.
 
-### Type Assertion vs. Casting
-The reason why it's not called "type casting" is that *casting* generally implies some sort of runtime support. However, *type assertions* are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.
+### Утверждение типа против приведения
+Причина, по которой это не называется "приведением типа", заключается в том, что *приведение* обычно подразумевает некоторую поддержку среды выполнения. Тем не менее, *утверждения типа* - это просто конструкция для компиляции и способ для вас дать подсказки компилятору о том, как вы хотите, чтобы ваш код был проанализирован.
 
-### Assertion considered harmful
-In many cases assertion will allow you to easily migrate legacy code (and even copy paste other code samples into your codebase). However, you should be careful with your use of assertions. Take our original code as a sample, the compiler will not protect you from forgetting to *actually add the properties you promised*:
+### Утверждение считается опасным
+Во многих случаях утверждение позволит вам легко перенести старый код (и даже скопипастить иные примеры кода в вашу кодовую базу). Тем не менее, вы должны быть осторожны с использованием утверждений. Возьмите наш исходный код в качестве примера, компилятор не защитит вас от того, что вы *забудете добавить свойства, которые вы обещали*:
 
 ```ts
 interface Foo {
@@ -50,10 +50,10 @@ interface Foo {
     bas: string;
 }
 var foo = {} as Foo;
-// ahhhh .... forget something?
+// аааа .... забыть что-нибудь?
 ```
 
-Also another common thought is using an assertion as a means of providing *autocomplete* e.g.:
+Также другой распространенной идеей является использовать утверждения в качестве средства обеспечения *автозаполнения*, например:
 
 ```ts
 interface Foo {
@@ -61,13 +61,13 @@ interface Foo {
     bas: string;
 }
 var foo = <Foo>{
-    // the compiler will provide autocomplete for properties of Foo
-    // But it is easy for the developer to forget adding all the properties
-    // Also this code is likely to break if Foo gets refactored (e.g. a new property added)
+    // компилятор предоставит автозаполнение для свойств Foo
+    // Но разработчику легко забыть добавить все свойства
+    // Также этот код может сломаться, если Foo подвергнется рефакторингу (например, добавлено новое свойство)
 };
 ```
 
-but the hazard here is the same, if you forget a property the compiler will not complain. It is better if you do the following:
+но опасность здесь та же, если вы забудете свойство, компилятор не будет жаловаться. Лучше, если вы сделаете следующее:
 
 ```ts
 interface Foo {
@@ -75,14 +75,14 @@ interface Foo {
     bas: string;
 }
 var foo:Foo = {
-    // the compiler will provide autocomplete for properties of Foo
+    // компилятор предоставит автозаполнение для свойств Foo
 };
 ```
 
-In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
+В некоторых случаях вам может потребоваться создать временную переменную, но, по крайней мере, вы не будете давать (возможно, ложные) обещания и вместо этого будете полагаться на предполагаемый комилятором тип.
 
-### Double assertion
-The type assertion, despite being a bit unsafe as we've shown, is not *completely open season*. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:
+### Двойное утверждение
+Утверждение типа, несмотря на то, что, как мы показали, немного небезопасно, не является «чем-то абсолютно запрещённым». Например. следующее является очень даже допустимым случаем использования (например, пользователь думает, что переданное событие будет более конкретным случаем события), и утверждение типа работает как ожидалось:
 
 ```ts
 function handler (event: Event) {
@@ -90,15 +90,15 @@ function handler (event: Event) {
 }
 ```
 
-However, the following is most likely an error and TypeScript will complain as shown despite the user's type assertion:
+Однако следующее, скорее всего, ошибка, и TypeScript будет жаловаться, как показано, несмотря на утверждение типа пользователем:
 
 ```ts
 function handler(event: Event) {
-    let element = event as HTMLElement; // Error: Neither 'Event' nor type 'HTMLElement' is assignable to the other
+    let element = event as HTMLElement; // Ошибка: Ни тип 'Event' ни тип 'HTMLElement' не могут быть присвоены
 }
 ```
 
-If you *still want that Type, you can use a double assertion*, but first asserting to `any` which is compatible with all types and therefore the compiler no longer complains:
+Если вы *все еще хотите этот тип, вы можете использовать двойное утверждение*, а именно сначала сделайте утверждение `any`, которое совместимо со всеми типами, и поэтому компилятор больше не жалуется:
 
 ```ts
 function handler(event: Event) {
@@ -106,5 +106,5 @@ function handler(event: Event) {
 }
 ```
 
-#### How TypeScript determines if a single assertion is not enough
-Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `any` to be that unsafe.
+#### Как TypeScript определяет, что недостаточно одного утверждения
+По сути, утверждение от типа `S` к `T` успешно выполняется, если либо `S` является подтипом `T`, либо `T` является подтипом `S`. Это делается для обеспечения дополнительной безопасности при выполнении утверждений типа ... совершенно безумные утверждения могут быть очень небезопасными, и вам нужно использовать `any`, чтобы можно было их использовать.
