@@ -1,62 +1,62 @@
-### Template Strings
-Syntactically these are strings that use backticks ( i.e. \` ) instead of single (') or double (") quotes. The motivation of Template Strings is three fold:
+### Шаблонные литералы (шаблонные строки)
+Синтаксически это строки в которых используются обратные кавычки (\` ) вместо одинарных (') или двойных ("). Существует три причины для использования шаблонных литералов:
 
-* String Interpolation
-* Multiline Strings
-* Tagged Templates
+* строковая интерполяция
+* многострочные литералы
+* теговые шаблоны
 
-#### String Interpolation
-Another common use case is when you want to generate some string out of some static strings + some variables. For this you would need some *templating logic* and this is where *template strings* get their name from. Here's how you would potentially generate an html string previously:
+#### Строковая интерполяция
+Распространенный вариант использования, когда вы хотите сгенерировать строку из литералов и переменных. Для этого вам понадобится некоторая *шаблонизация*, и это то, откуда *шаблонные строки* изначально получили свое имя. С тех пор они были официально переименованы в *шаблонные литералы*. Вот как вы могли бы сгенерировать HTML-строку ранее:
 
 ```ts
 var lyrics = 'Never gonna give you up';
 var html = '<div>' + lyrics + '</div>';
 ```
-Now with template strings you can just do:
+Теперь с шаблонными литералами вы можете сделать это проще:
 
 ```ts
 var lyrics = 'Never gonna give you up';
 var html = `<div>${lyrics}</div>`;
 ```
 
-Note that any placeholder inside the interpolation (`${` and `}`) is treated as a JavaScript expression and evaluated as such e.g. you can do fancy math.
+Обратите внимание, что любая подстановка внутри интерполяции (`${` и `}`) определяется как выражение JavaScript и вычисляется, например, вы можете делать некоторые математические расчёты.
 
 ```ts
 console.log(`1 and 1 make ${1 + 1}`);
 ```
 
-#### Multiline Strings
-Ever wanted to put a newline in a JavaScript string? Perhaps you wanted to embed some lyrics? You would have needed to *escape the literal newline* using our favorite escape character `\`, and then put a new line into the string manually `\n` at the next line. This is shown below:
+#### Многострочные литералы
+Когда-нибудь хотели перейти на новую строку в строке JavaScript? Возможно, вы хотели вставить текст песни? Вам нужно было бы *экранировать символ переноса строки*, используя наш любимый escape-символ `\`, а затем вручную перейти на новую строку начиная с `\n`. Как показано ниже:
 
 ```ts
 var lyrics = "Never gonna give you up \
 \nNever gonna let you down";
 ```
 
-With TypeScript you can just use a template string:
+С TypeScript вы можете просто использовать шаблонный литерал:
 
 ```ts
 var lyrics = `Never gonna give you up
 Never gonna let you down`;
 ```
 
-#### Tagged Templates
+#### Теговые шаблоны
 
-You can place a function (called a `tag`) before the template string and it gets the opportunity to pre process the template string literals plus the values of all the placeholder expressions and return a result. A few notes:
-* All the static literals are passed in as an array for the first argument.
-* All the values of the placeholders expressions are passed in as the remaining arguments. Most commonly you would just use rest parameters to convert these into an array as well.
+Вы можете поместить функцию (называемую тегом) перед шаблонной строкой, и она получит возможность предварительно обработать литералы строки шаблона плюс значения всех выражений подстановок и вернуть результат. Несколько пояснений:
+* Все статические литералы передаются в виде массива для первого аргумента.
+* Все значения подстановочных выражений передаются как оставшиеся аргументы. Чаще всего вы просто используете параметры rest, чтобы также преобразовать их в массив.
 
-Here is an example where we have a tag function (named `htmlEscape`) that escapes the html from all the placeholders:
+Далее пример, где теговая функция (названная `htmlEscape`) экранирует символы в подстановках, для обеспечения валидности html:
 
 ```ts
 var say = "a bird in hand > two in the bush";
 var html = htmlEscape `<div> I would just like to say : ${say}</div>`;
 
-// a sample tag function
+// пример теговой функции
 function htmlEscape(literals: TemplateStringsArray, ...placeholders: string[]) {
     let result = "";
 
-    // interleave the literals with the placeholders
+    // встраиваем подстановки в литералы
     for (let i = 0; i < placeholders.length; i++) {
         result += literals[i];
         result += placeholders[i]
@@ -67,15 +67,15 @@ function htmlEscape(literals: TemplateStringsArray, ...placeholders: string[]) {
             .replace(/>/g, '&gt;');
     }
 
-    // add the last literal
+    // добавляем последний литерал
     result += literals[literals.length - 1];
     return result;
 }
 ```
-> Note: You can annotate `placeholders` to be any `[]`. Whatever you annotate it as, TypeScript will type check to make sure the placeholders used to call the tag match the annotation. For example if you expect to deal with `string` or `number`s you can annotate `...placeholders:(string | number)[]`
+> Примечание: вы можете указать тип `placeholder` как `[]`. Независимо от того, какой тип указан, TypeScript проверяет все подстановки на соответствие типу. Например, если вы собираетесь работать с `string` или `number`, вы можете указать `...placeholders:(string | number)[]`
 
-#### Generated JS
-For pre ES6 compile targets the code is fairly simple. Multiline strings become escaped strings. String interpolation becomes *string concatenation*. Tagged Templates become function calls.
+#### Сгенерированный JS
+При компиляции синтаксиса в код до ES6, сгенерированный js выглядит довольно просто. Многострочные строки становятся экранированными. Строковая интерполяция становится *конкатенацией строк*. Теговые шаблоны становятся вызовами функций.
 
-#### Summary
-Multiline strings and string interpolation are just great things to have in any language. It's great that you can now use them in your JavaScript (thanks TypeScript!). Tagged templates allow you to create powerful string utilities.
+#### Заключение
+Многострочные строки и интерполяция строк - это отличная штука в любом языке. Здорово, что теперь вы можете использовать их в своем JavaScript (спасибо TypeScript!). Теговые шаблоны позволяют создавать мощные строковые утилиты.
