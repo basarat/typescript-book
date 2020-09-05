@@ -1,10 +1,10 @@
 ## Promise
 
-The `Promise` class is something that exists in many modern JavaScript engines and can be easily [polyfilled][polyfill]. The main motivation for promises is to bring synchronous style error handling to Async / Callback style code.
+Класс Promise существует во многих современных движках JavaScript и может быть легко заполифилен. Основной причиной использования промисов является синхронный стиль обработки ошибок в отличии от асинхронного коллбэк стиля.
 
-### Callback style code
+### Коллбэк стиль
 
-In order to fully appreciate promises let's present a simple sample that proves the difficulty of creating reliable Async code with just callbacks. Consider the simple case of authoring an async version of loading JSON from a file. A synchronous version of this can be quite simple:
+Чтобы в полной мере оценить промисы, давайте рассмотрим простой пример, который доказывает сложность создания надежного асинхронного кода с помощью только коллбэков. Рассмотрим простой случай создания асинхронной версии загрузки JSON из файла. Синхронная версия этого может быть довольно простой:
 
 ```ts
 import fs = require('fs');
@@ -13,10 +13,10 @@ function loadJSONSync(filename: string) {
     return JSON.parse(fs.readFileSync(filename));
 }
 
-// good json file
+// валидный json файл
 console.log(loadJSONSync('good.json'));
 
-// non-existent file, so fs.readFileSync fails
+// несуществующий файл, поэтому fs.readFileSync завершается ошибкой
 try {
     console.log(loadJSONSync('absent.json'));
 }
@@ -24,7 +24,7 @@ catch (err) {
     console.log('absent.json error', err.message);
 }
 
-// invalid json file i.e. the file exists but contains invalid JSON so JSON.parse fails
+// невалидный json файл т.е файл существует но содержит невалидный JSON, поэтому JSON.parse завершается ошибкой
 try {
     console.log(loadJSONSync('invalid.json'));
 }
@@ -32,13 +32,12 @@ catch (err) {
     console.log('invalid.json error', err.message);
 }
 ```
-
-There are three behaviors of this simple `loadJSONSync` function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let's make a good async version of such a function. A decent initial attempt with trivial error checking logic would be as follows:
+Эта простая функция `loadJSONSync` имеет три варианта поведения: валидное возвращаемое значение, ошибка файловой системы или ошибка JSON.parse. Мы обрабатываем ошибки с помощью простого метода try / catch, как вы привыкли делать синхронное программирование на других языках. Теперь давайте сделаем хорошую асинхронную версию такой функции. Неплохая первоначальная версия с простой проверкой ошибки будет выглядеть следующим образом:
 
 ```ts
 import fs = require('fs');
 
-// A decent initial attempt .... but not correct. We explain the reasons below
+// Неплохая первоначальная версия .... но неправильная. Мы объясним причины ниже
 function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) cb(err);
@@ -46,18 +45,17 @@ function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     });
 }
 ```
+Всё достаточно просто, функция принимает коллбэк, передавая ему любые ошибки файловой системы. Если нет ошибок файловой системы, он возвращает результат `JSON.parse`. При работе с асинхронными функциями, основанными на обратных вызовах, следует помнить следующее:
 
-Simple enough, it takes a callback, passes any file system errors to the callback. If no file system errors, it returns the `JSON.parse` result. A few points to keep in mind when working with async functions based on callbacks are:
+1. Никогда не вызывайте коллбэк дважды.
+2. Никогда не бросайте ошибку.
 
-1. Never call the callback twice.
-1. Never throw an error.
-
-However, this simple function fails to accommodate for point two. In fact, `JSON.parse` throws an error if it is passed bad JSON and the callback never gets called and the application crashes. This is demonstrated in the below example:
+Однако эта простая функция не подходит для второго пункта. Фактически, `JSON.parse` выдает ошибку, если ему передан неверный JSON, в итоге коллбэк никогда не вызывается и приложение вылетает. Это продемонстрировано в следующем примере:
 
 ```ts
 import fs = require('fs');
 
-// A decent initial attempt .... but not correct
+// Неплохая первоначальная версия .... но неправильная
 function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) cb(err);
@@ -65,20 +63,20 @@ function loadJSON(filename: string, cb: (error: Error, data: any) => void) {
     });
 }
 
-// load invalid json
+// загрузка невалидного json
 loadJSON('invalid.json', function (err, data) {
-    // This code never executes
+    // Этот код никогда не выполнится
     if (err) console.log('bad.json error', err.message);
     else console.log(data);
 });
 ```
 
-A naive attempt at fixing this would be to wrap the `JSON.parse` in a try catch as shown in the below example:
+Было бы наивной попыткой исправить это обернуть `JSON.parse` в try/catch, как показано в следующем примере:
 
 ```ts
 import fs = require('fs');
 
-// A better attempt ... but still not correct
+// Версия получше .... но всё ещё неправильная
 function loadJSON(filename: string, cb: (error: Error) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) {
@@ -95,14 +93,14 @@ function loadJSON(filename: string, cb: (error: Error) => void) {
     });
 }
 
-// load invalid json
+// загрузка невалидного json
 loadJSON('invalid.json', function (err, data) {
     if (err) console.log('bad.json error', err.message);
     else console.log(data);
 });
 ```
 
-However, there is a subtle bug in this code. If the callback (`cb`), and not `JSON.parse`, throws an error, since we wrapped it in a `try`/`catch`, the `catch` executes and we call the callback again i.e. the callback gets called twice! This is demonstrated in the example below:
+Тем не менее, в этом коде есть небольшая ошибка. Если коллбэк (`cb`), а не `JSON.parse`, выдает ошибку, так как мы завернули ее в `try` /` catch`, выполняется `catch`, и мы снова вызываем коллбэк, т.е. вызываем дважды! Это продемонстрировано в примере ниже:
 
 ```ts
 import fs = require('fs');
@@ -123,15 +121,15 @@ function loadJSON(filename: string, cb: (error: Error) => void) {
     });
 }
 
-// a good file but a bad callback ... gets called again!
+// валидный файл, но плохой коллбэк ... вызывается снова!
 loadJSON('good.json', function (err, data) {
     console.log('our callback called');
 
     if (err) console.log('Error:', err.message);
     else {
-        // let's simulate an error by trying to access a property on an undefined variable
+        // давайте имитируем ошибку, пытаясь получить доступ к свойству неопределенной переменной
         var foo;
-        // The following code throws `Error: Cannot read property 'bar' of undefined`
+        // Следующий код выбросит ошибку `Error: Cannot read property 'bar' of undefined`
         console.log(foo.bar);
     }
 });
@@ -144,11 +142,11 @@ our callback called
 Error: Cannot read property 'bar' of undefined
 ```
 
-This is because our `loadJSON` function wrongfully wrapped the callback in a `try` block. There is a simple lesson to remember here.
+Это потому что наша функция `loadJSON` неправильно завернула коллбэк в блок `try`. Здесь нужно запомнить простое правило.
 
-> Simple lesson: Contain all your sync code in a try catch, except when you call the callback.
+> Простое правило: держите весь ваш синхронный код в try catch, кроме случаев, когда вы вызываете коллбэк.
 
-Following this simple lesson, we have a fully functional async version of `loadJSON` as shown below:
+Следуя этому простому правилу мы имеем полностью функциональную асинхронную версию `loadJSON`, как показано ниже:
 
 ```ts
 import fs = require('fs');
@@ -156,37 +154,37 @@ import fs = require('fs');
 function loadJSON(filename: string, cb: (error: Error) => void) {
     fs.readFile(filename, function (err, data) {
         if (err) return cb(err);
-        // Contain all your sync code in a try catch
+        // Держим весь ваш синхронный код в try catch
         try {
             var parsed = JSON.parse(data);
         }
         catch (err) {
             return cb(err);
         }
-        // except when you call the callback
+        // кроме случаев, когда вы вызываете коллбэк
         return cb(null, parsed);
     });
 }
 ```
-Admittedly this is not hard to follow once you've done it a few times but nonetheless it’s a lot of boiler plate code to write simply for good error handling. Now let's look at a better way to tackle asynchronous JavaScript using promises.
+Конечно этому легко следовать, как только вы уже проделали это несколько раз, но, тем не менее, это много шаблонного кода, который нужно писать просто для хорошей обработки ошибок. Теперь давайте рассмотрим более лучший способ борьбы с асинхронным JavaScript используя промисы.
 
-## Creating a Promise
+## Создание Promise
 
-A promise can be either `pending` or `fulfilled` or `rejected`.
+Промис может быть в состоянии ожидание(`pending`), исполнено(`fulfilled`) или отклонено(`rejected`).
 
-![promise states and fates](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
+![состояния промиса и варианты его завершения](https://raw.githubusercontent.com/basarat/typescript-book/master/images/promise%20states%20and%20fates.png)
 
-Let's look at creating a promise. It's a simple matter of calling `new` on `Promise` (the promise constructor). The promise constructor is passed `resolve` and `reject` functions for settling the promise state:
+Давайте посмотрим на создание промиса. Достаточно просто вызвать `new` с `Promise` (конструктор промисов). Конструктор промисов передаст `resolve` и `reject` функции для определения состояния промиса:
 
 ```ts
 const promise = new Promise((resolve, reject) => {
-    // the resolve / reject functions control the fate of the promise
+    // resolve / reject функции контролируют варианты завершения промиса
 });
 ```
 
-### Subscribing to the fate of the promise
+### Подписка на варианты завершения промиса
 
-The promise fate can be subscribed to using `.then` (if resolved) or `.catch` (if rejected).
+На варианты завершения промиса можно подписаться с помощью `.then` (если исполнено) или` .catch` (если отклонено).
 
 ```ts
 const promise = new Promise((resolve, reject) => {
@@ -196,7 +194,7 @@ promise.then((res) => {
     console.log('I get called:', res === 123); // I get called: true
 });
 promise.catch((err) => {
-    // This is never called
+    // Не будет вызвано
 });
 ```
 
@@ -205,21 +203,21 @@ const promise = new Promise((resolve, reject) => {
     reject(new Error("Something awful happened"));
 });
 promise.then((res) => {
-    // This is never called
+    // Не будет вызвано
 });
 promise.catch((err) => {
     console.log('I get called:', err.message); // I get called: 'Something awful happened'
 });
 ```
 
-> TIP: Promise Shortcuts
-* Quickly creating an already resolved promise: `Promise.resolve(result)`
-* Quickly creating an already rejected promise: `Promise.reject(error)`
+> СОВЕТ: шорткаты для промиса
+* Быстрое создание исполненного промиса: `Promise.resolve(result)`
+* Быстрое создание отклоненного промиса: `Promise.reject(error)`
 
-### Chain-ability of Promises
-The chain-ability of promises **is the heart of the benefit that promises provide**. Once you have a promise, from that point on, you use the `then` function to create a chain of promises.
+### Цепочки промисов
+Способность создавать цепочки вызова промисов **это главное преимущество которое предоставляют промисы**. Как только у вас появляется промис, вы можете использовать функцию `then` для создания цепочки промисов.
 
-* If you return a promise from any function in the chain, `.then` is only called once the value is resolved:
+* Если вы возвращаете промис из любой функции в цепочке, `.then` вызывается только когда его значение resolved:
 
 ```ts
 Promise.resolve(123)
@@ -229,47 +227,46 @@ Promise.resolve(123)
     })
     .then((res) => {
         console.log(res); // 456
-        return Promise.resolve(123); // Notice that we are returning a Promise
+        return Promise.resolve(123); // Обратите внимание, что мы возвращаем промис
     })
     .then((res) => {
-        console.log(res); // 123 : Notice that this `then` is called with the resolved value
+        console.log(res); // 123 : Обратите внимание, что этот `then` вызывается со значением resolved
         return 123;
     })
 ```
-
-* You can aggregate the error handling of any preceding portion of the chain with a single `catch`:
+* Вы можете объединить обработку ошибок любой предыдущей части цепочки с помощью одного `catch`:
 
 ```ts
-// Create a rejected promise
+// Создаём rejected промис
 Promise.reject(new Error('something bad happened'))
     .then((res) => {
-        console.log(res); // not called
+        console.log(res); // не вызывается
         return 456;
     })
     .then((res) => {
-        console.log(res); // not called
+        console.log(res); // не вызывается
         return 123;
     })
     .then((res) => {
-        console.log(res); // not called
+        console.log(res); // не вызывается
         return 123;
     })
     .catch((err) => {
-        console.log(err.message); // something bad happened
+        console.log(err.message); // случилось что-то плохое
     });
 ```
 
-* The `catch` actually returns a new promise (effectively creating a new promise chain):
+* `сatch` фактически возвращает новый промис (фактически создавая новую цепочку промисов):
 
 ```ts
-// Create a rejected promise
+// Создаём rejected промис
 Promise.reject(new Error('something bad happened'))
     .then((res) => {
-        console.log(res); // not called
+        console.log(res); // не вызывается
         return 456;
     })
     .catch((err) => {
-        console.log(err.message); // something bad happened
+        console.log(err.message); // случилось что-то плохое
         return 123;
     })
     .then((res) => {
@@ -277,33 +274,33 @@ Promise.reject(new Error('something bad happened'))
     })
 ```
 
-* Any synchronous errors thrown in a `then` (or `catch`) result in the returned promise to fail:
+* Любые синхронные ошибки, добавленные в `then` (или `catch`), приводят к тому, что возвращаемый промис не исполняется:
 
 ```ts
 Promise.resolve(123)
     .then((res) => {
-        throw new Error('something bad happened'); // throw a synchronous error
+        throw new Error('something bad happened'); // генерируем синхронную ошибку
         return 456;
     })
     .then((res) => {
-        console.log(res); // never called
+        console.log(res); // не вызывается
         return Promise.resolve(789);
     })
     .catch((err) => {
-        console.log(err.message); // something bad happened
+        console.log(err.message); // случилось что-то плохое
     })
 ```
 
-* Only the relevant (nearest tailing) `catch` is called for a given error (as the catch starts a new promise chain).
+* Только соответствующий (ближайший) `catch` вызывается для данной ошибки (так как catch запускает новую цепочку промисов).
 
 ```ts
 Promise.resolve(123)
     .then((res) => {
-        throw new Error('something bad happened'); // throw a synchronous error
+        throw new Error('something bad happened'); // генерируем синхронную ошибку
         return 456;
     })
     .catch((err) => {
-        console.log('first catch: ' + err.message); // something bad happened
+        console.log('first catch: ' + err.message); // случилось что-то плохое
         return 123;
     })
     .then((res) => {
@@ -311,11 +308,11 @@ Promise.resolve(123)
         return Promise.resolve(789);
     })
     .catch((err) => {
-        console.log('second catch: ' + err.message); // never called
+        console.log('second catch: ' + err.message); // не вызывается
     })
 ```
 
-* A `catch` is only called in case of an error in the preceding chain:
+* `сatch` вызывается только в случае ошибки в предыдущей цепочке:
 
 ```ts
 Promise.resolve(123)
@@ -323,34 +320,34 @@ Promise.resolve(123)
         return 456;
     })
     .catch((err) => {
-        console.log("HERE"); // never called
+        console.log("HERE"); // не вызывается
     })
 ```
 
-The fact that:
+Дело в том, что:
 
-* errors jump to the tailing `catch` (and skip any middle `then` calls) and
-* synchronous errors also get caught by any tailing `catch`.
+* ошибки переходят к `catch` (и пропускают любые средние вызовы` then`) и
+* синхронные ошибки также отлавливаются любым `catch`.
 
-effectively provides us with an async programming paradigm that allows better error handling than raw callbacks. More on this below.
+эффективно предоставляя нам парадигму асинхронного программирования, которая позволяет обрабатывать ошибки лучше чем необработанные коллбэки. Подробнее об этом ниже.
 
 
-### TypeScript and promises
-The great thing about TypeScript is that it understands the flow of values through a promise chain:
+### TypeScript и промисы
+Отличительной особенностью TypeScript является то, что он понимает поток значений проходящих через цепочку промисов:
 
 ```ts
 Promise.resolve(123)
     .then((res) => {
-         // res is inferred to be of type `number`
+         // res подразумевает тип `number`
          return true;
     })
     .then((res) => {
-        // res is inferred to be of type `boolean`
+        // res подразумевает тип `boolean`
 
     });
 ```
 
-Of course it also understands unwrapping any function calls that might return a promise:
+Конечно, он также понимает развертывание любых вызовов функций, которые могут вернуть промис:
 
 ```ts
 function iReturnPromiseAfter1Second(): Promise<string> {
@@ -361,23 +358,23 @@ function iReturnPromiseAfter1Second(): Promise<string> {
 
 Promise.resolve(123)
     .then((res) => {
-        // res is inferred to be of type `number`
-        return iReturnPromiseAfter1Second(); // We are returning `Promise<string>`
+        // res подразумевает тип `number`
+        return iReturnPromiseAfter1Second(); // мы возвращаем `Promise<string>`
     })
     .then((res) => {
-        // res is inferred to be of type `string`
+        // res подразумевает тип `string`
         console.log(res); // Hello world!
     });
 ```
 
 
-### Converting a callback style function to return a promise
+### Преобразование коллбэка для возврата промиса
 
-Just wrap the function call in a promise and
-- `reject` if an error occurs,
-- `resolve` if it is all good.
+Просто оберните вызов функции в промис и
+- `reject` если произошла ошибка,
+- `resolve` если все хорошо.
 
-E.g. let's wrap `fs.readFile`:
+Например. давайте завернем `fs.readFile`:
 
 ```ts
 import fs = require('fs');
@@ -392,9 +389,9 @@ function readFileAsync(filename: string): Promise<any> {
 ```
 
 
-### Revisiting the JSON example
+### Возвращаясь к примеру с JSON
 
-Now let's revisit our `loadJSON` example and rewrite an async version that uses promises. All that we need to do is read the file contents as a promise, then parse them as JSON and we are done. This is illustrated in the below example:
+Теперь давайте вернемся к нашему примеру `loadJSON` и перепишем асинхронную версию, которая использует промисы. Все, что нам нужно сделать, это прочитать содержимое файла как промис, затем парсим его как JSON, и все готово. Это показано в следующем примере:
 
 ```ts
 function loadJSONAsync(filename: string): Promise<any> {
@@ -405,53 +402,53 @@ function loadJSONAsync(filename: string): Promise<any> {
 }
 ```
 
-Usage (notice how similar it is to the original `sync` version introduced at the start of this section 🌹):
+Использование (обратите внимание, насколько оно похоже на оригинальную версию `sync`, представленную в начале этого раздела 🌹):
 ```ts
-// good json file
+// валидный json файл
 loadJSONAsync('good.json')
     .then(function (val) { console.log(val); })
     .catch(function (err) {
-        console.log('good.json error', err.message); // never called
+        console.log('good.json error', err.message); // не вызывается
     })
 
-// non-existent json file
+// несуществующий json файл
     .then(function () {
         return loadJSONAsync('absent.json');
     })
-    .then(function (val) { console.log(val); }) // never called
+    .then(function (val) { console.log(val); }) // не вызывается
     .catch(function (err) {
         console.log('absent.json error', err.message);
     })
 
-// invalid json file
+// невалидный json файл
     .then(function () {
         return loadJSONAsync('invalid.json');
     })
-    .then(function (val) { console.log(val); }) // never called
+    .then(function (val) { console.log(val); }) // не вызывается
     .catch(function (err) {
         console.log('bad.json error', err.message);
     });
 ```
 
-The reason why this function was simpler is because the "`loadFile`(async) + `JSON.parse` (sync) => `catch`" consolidation was done by the promise chain. Also the callback was not called by *us* but called by the promise chain so we didn't have the chance of making the mistake of wrapping it in a `try/catch`.
+Эта функция проще, потому что объединение промисов произвело "`loadFile`(async) + `JSON.parse` (sync) => `catch`" объединение. Также коллбэк не был вызван *нами*, но вызван цепочкой промисов, поэтому у нас не было возможности совершить ошибку, заключив его в `try / catch`.
 
-### Parallel control flow
-We have seen how trivial doing a serial sequence of async tasks is with promises. It is simply a matter of chaining `then` calls.
+### Параллельное управление потоком
+Мы видели, как просто выполнять серию последовательных асинхронных задач с промисами. Просто использованием цепочки вызовов `then`.
 
-However, you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. `Promise` provides a static `Promise.all` function that you can use to wait for `n` number of promises to complete. You provide it with an array of `n` promises and it gives you an array of `n` resolved values. Below we show Chaining as well as Parallel:
+Однако вы, возможно, захотите выполнить серию асинхронных задач, а затем что-то сделать с результатами всех этих задач. `Promise` предоставляет статическую функцию `Promise.all`, которую вы можете использовать для ожидания выполнения `n` промисов. Вы предоставляете ему массив `n` промисов, и он дает вам массив `n` resolve значений. Ниже мы показываем последовательный вызов по цепочке, а также параллельно:
 
 ```ts
-// an async function to simulate loading an item from some server
+// асинхронная функция для имитации загрузки элемента с какого-либо сервера
 function loadItem(id: number): Promise<{ id: number }> {
     return new Promise((resolve) => {
         console.log('loading item', id);
-        setTimeout(() => { // simulate a server delay
+        setTimeout(() => { // имитируем задержку сервера
             resolve({ id: id });
         }, 1000);
     });
 }
 
-// Chaining
+// последовательный вызов по цепочке
 let item1, item2;
 loadItem(1)
     .then((res) => {
@@ -461,17 +458,17 @@ loadItem(1)
     .then((res) => {
         item2 = res;
         console.log('done');
-    }); // overall time will be around 2s
+    }); // общее время будет около 2с.
 
-// Parallel
+// параллельный вызов
 Promise.all([loadItem(1), loadItem(2)])
     .then((res) => {
         [item1, item2] = res;
         console.log('done');
-    }); // overall time will be around 1s
+    }); // общее время будет около 1с.
 ```
 
-Sometimes, you want to run a series of async tasks, but you get all you need as long as any one of these tasks is settled. `Promise` provides a static `Promise.race` function for this scenario:
+Иногда вы хотите запустить серию асинхронных задач, но вы получите все, что вам нужно, при условии что будет решена любая из этих задач. `Promise` предоставляет статическую функцию `Promise.race` для этого сценария:
 
 ```ts
 var task1 = new Promise(function(resolve, reject) {
@@ -483,22 +480,22 @@ var task2 = new Promise(function(resolve, reject) {
 
 Promise.race([task1, task2]).then(function(value) {
   console.log(value); // "one"
-  // Both resolve, but task1 resolves faster
+  // исполнены обе, но task1 исполнился быстрее
 });
 ```
 
-### Converting callback functions to promise
+### Преобразование коллбэков в промис
 
-The most reliable way to do this is to hand write it. e.g. converting `setTimeout` into a promisified `delay` function is super easy:
+Самый надежный способ сделать это вручную. Например преобразовать `setTimeout` в промис `delay` очень просто:
 
 ```ts
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 ```
 
-Note that there is a handy dandy function in NodeJS that does this `node style function => promise returning function` magic for you:
+Обратите внимание, что в NodeJS есть супер-удобная функция, которая выполняет вот такую `node style function => promise returning function` магию для вас:
 
 ```ts
-/** Sample usage */
+/** Пример использования */
 import fs = require('fs');
 import util = require('util');
 const readFile = util.promisify(fs.readFile);
