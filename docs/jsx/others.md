@@ -1,21 +1,21 @@
-# Non React JSX
+# JSX вне React
 
-TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:
+TypeScript предоставляет вам возможность использовать JSX с проверкой типов в чём-то кроме React. Ниже перечислены параметры настройки, но обратите внимание, что это для продвинутых создателей фреймворков пользовательского интерфейса:
 
-* You can disable `react` style emit by using `"jsx" : "preserve"` option. This means that JSX is emitted *as is* and then you can use your own custom transpiler to transpile the JSX portions.
-* Using the `JSX` global module:
-    * You can control what HTML tags are available and how they are type checked by customizing the `JSX.IntrinsicElements` interface members.
-    * When using components:
-        * You can control which `class` must be inherited by components by customizing the default `interface ElementClass extends React.Component<any, any> { }` declaration.
-        * You can control which property is used to type check the attributes (the default is `props`) by customizing the `declare module JSX { interface ElementAttributesProperty { props: {}; } }` declaration.
+* Вы можете отключить выдачу кода в стиле `react`, используя опцию `"jsx": "preserve"`. Это означает, что JSX передается *как есть*, а затем вы можете использовать свой собственный транспилятор для преобразования частей JSX.
+* Использование глобального модуля `JSX`:
+    * Вы можете контролировать, какие HTML-теги доступны и как они проверяются на типы, настраивая элементы интерфейса `JSX.IntrinsicElements`.
+    * При использовании компонентов:
+        * Вы можете контролировать, какой `класс` должен быть унаследован компонентами, настроив объявление по умолчанию `interface ElementClass extends React.Component<any, any> { }`.
+        * Вы можете контролировать, какое свойство используется для проверки типов атрибутов (по умолчанию - `props`), настраивая `declare module JSX { interface ElementAttributesProperty { props: {}; } }` объявление.
 
 ## `jsxFactory`
 
-Passing `--jsxFactory <JSX factory Name>` along with `--jsx react` allows for using a different JSX factory from the default `React`.
+Передача `--jsxFactory <имя фабрики JSX>` вместе с `--jsx react` позволяет использовать другую фабрику JSX, отличную от стандартной `React`.
 
-The new factory name will be used to call `createElement` functions.
+Новое имя фабрики будет использоваться для вызова функций `createElement`.
 
-### Example
+### Пример
 
 ```ts
 import {jsxFactory} from "jsxFactory";
@@ -23,13 +23,13 @@ import {jsxFactory} from "jsxFactory";
 var div = <div>Hello JSX!</div>
 ```
 
-Compiled with:
+Скомпилировано с:
 
 ```shell
 tsc --jsx react --reactNamespace jsxFactory --m commonJS
 ```
 
-Results in:
+Результат:
 
 ```js
 "use strict";
@@ -39,7 +39,7 @@ var div = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
 
 ## `jsx` pragma
 
-You can even specify a different `jsxFactory` per file using `jsxPragma` e.g. 
+Вы даже можете указать разные `jsxFactory` для каждого файла, используя `jsxPragma`, например.
 
 
 ```js
@@ -49,7 +49,7 @@ import {jsxFactory} from "jsxFactory";
 var div = <div>Hello JSX!</div>
 ```
 
-With `--jsx react` this file will emit to use the factory specfied in the jsx pragma: 
+Даже с `--jsx react` этот файл будет всё равно будет генерировать код учитывая фабрику, указанную в jsx pragma:
 ```js
 "use strict";
 var jsxFactory_1 = require("jsxFactory");
