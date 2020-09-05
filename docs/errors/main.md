@@ -1,2 +1,2 @@
-# Errors 
-In this section we discuss how to read and understand TypeScript errors. We follow this with common errors and their solutions.
+# Ошибки
+В этом разделе мы обсудим, как читать и понимать ошибки TypeScript. Мы следим за распространенными ошибками и их решениями.
