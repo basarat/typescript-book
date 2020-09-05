@@ -1,8 +1,8 @@
-# Index Signatures
+# Индексные сигнатуры
 
-An `Object` in JavaScript (and hence TypeScript) can be accessed with a **string** to hold a reference to any other JavaScript **object**.
+К `Object` в JavaScript (и, следовательно, в TypeScript) можно получить доступ с помощью **строки**, содержащей ссылку на любой другой JavaScript **объект**.
 
-Here is a quick example:
+Вот краткий пример:
 
 ```ts
 let foo:any = {};
@@ -10,7 +10,7 @@ foo['Hello'] = 'World';
 console.log(foo['Hello']); // World
 ```
 
-We store a string `"World"` under the key `"Hello"`. Remember we said it can store any JavaScript **object**, so lets store a class instance just to show the concept:
+Мы храним строку `"World"` под ключом `"Hello"`. Помните, мы говорили, что он может хранить любой JavaScript **объект**, поэтому давайте сохраним экземпляр класса, чтобы показать концепцию:
 
 ```ts
 class Foo {
@@ -25,36 +25,36 @@ foo['Hello'] = new Foo('World');
 foo['Hello'].log(); // World
 ```
 
-Also remember that we said that it can be accessed with a **string**. If you pass any other object to the index signature the JavaScript runtime actually calls `.toString` on it before getting the result. This is demonstrated below:
+Помните мы сказали, что к нему можно получить доступ с помощью **строки**. Если вы передадите в сигнатуру индекса любой другой объект, среда выполнения JavaScript вызовет для него `.toString` перед получением результата. Это показано ниже:
 
 ```ts
 let obj = {
   toString(){
-    console.log('toString called')
+    console.log('toString вызывается')
     return 'Hello'
   }
 }
 
 let foo:any = {};
-foo[obj] = 'World'; // toString called
-console.log(foo[obj]); // toString called, World
+foo[obj] = 'World'; // toString вызывается
+console.log(foo[obj]); // toString вызывается, World
 console.log(foo['Hello']); // World
 ```
 
-Note that `toString` will get called whenever the `obj` is used in an index position.
+Обратите внимание, что `toString` будет вызываться всякий раз, когда `obj` используется в позиции индекса.
 
-Arrays are slightly different. For `number` indexing JavaScript VMs will try to optimise (depending on things like is it actually an array and do the structures of items stored match etc.). So `number` should be considered as a valid object accessor in its own right (distinct from `string`). Here is a simple array example:
+Массивы немного отличаются. Для индексации `числа` виртуальные машины JavaScript будут пытаться оптимизировать (в зависимости от того, действительно ли это массив, совпадают ли структуры хранимых элементов и т.д.). Таким образом, `число` следует рассматривать как действительный метод доступа к объекту сам по себе (в отличие от `строки`). Вот простой пример c массивом:
 
 ```ts
 let foo = ['World'];
 console.log(foo[0]); // World
 ```
 
-So that's JavaScript. Now let's look at TypeScript's graceful handling of this concept.
+Итак, это JavaScript. Теперь давайте посмотрим на изящную обработку этой концепции в TypeScript.
 
-## TypeScript Index Signature
+# Индексные сигнатуры в TypeScript
 
-First off, because JavaScript *implicitly* calls `toString` on any object index signature, TypeScript will give you an error to prevent beginners from shooting themselves in the foot (I see users shooting themselves in the foot when using JavaScript all the time on stackoverflow):
+Во-первых, поскольку JavaScript *неявно* вызывает `toString` для любой сигнатуры индекса в виде объекта, TypeScript выдаст вам ошибку, чтобы новички не стреляли себе в ногу (я вижу, как пользователи стреляют себе в ногу при постоянном использовании JavaScript на stackoverflow):
 
 ```ts
 let obj = {
@@ -65,111 +65,111 @@ let obj = {
 
 let foo:any = {};
 
-// ERROR: the index signature must be string, number ...
+// ОШИБКА: сигнатура индекса должна быть строкой, числом ...
 foo[obj] = 'World';
 
-// FIX: TypeScript forces you to be explicit
+// ИСПРАВЛЕНИЕ: TypeScript заставляет вас быть явным
 foo[obj.toString()] = 'World';
 ```
 
-The reason for forcing the user to be explicit is because the default `toString` implementation on an object is pretty awful, e.g. on v8 it always returns `[object Object]`:
+Причина для такого принуждения пользователя быть явным в том, что реализация `toString` по умолчанию для объекта довольно ужасна, например в v8 он всегда возвращает `[object Object]`:
 
 ```ts
 let obj = {message:'Hello'}
 let foo:any = {};
 
-// ERROR: the index signature must be string, number ...
+// ОШИБКА: сигнатура индекса должна быть строкой, числом ...
 foo[obj] = 'World';
 
-// Here is where you actually stored it!
+// Вот где вы на самом деле хранили!
 console.log(foo["[object Object]"]); // World
 ```
 
-Of course `number` is supported because
+Конечно, поддерживается `число`, потому что
 
-1. its needed for excellent Array / Tuple support.
-1. even if you use it for an `obj` its default `toString` implementation is nice (not `[object Object]`).
+1. Это необходимо для отличной поддержки массивов / кортежей.
+2. Даже если вы используете его для `obj`, его реализация `toString` по умолчанию нормальна (не `[object Object]`).
 
-Point 2 is shown below:
+Пункт 2 показан ниже:
 
 ```ts
 console.log((1).toString()); // 1
 console.log((2).toString()); // 2
 ```
 
-So lesson 1:
+Итак, урок 1:
 
-> TypeScript index signatures must be either `string` or `number`
+> Сигнатуры индекса TypeScript должны быть либо строкой, либо числом.
 
-Quick note: `symbols` are also valid and supported by TypeScript. But let's not go there just yet. Baby steps.
+Краткое примечание: `символы` также действительны и поддерживаются TypeScript. Но пока не будем туда заходить. Будем двигаться маленькими шажками.
 
-### Declaring an index signature
+### Объявление индексной сигнатуры
 
-So we've been using `any` to tell TypeScript to let us do whatever we want. We can actually specify an *index* signature explicitly. E.g. say you want to make sure that anything that is stored in an object using a string conforms to the structure `{message: string}`. This can be done with the declaration `{ [index:string] : {message: string} }`. This is demonstrated below:
+Итак, мы использовали `any`, чтобы сказать TypeScript, что мы можем делать все, что захотим. Фактически мы можем явно указать сигнатуру для *index*. Например, скажем, вы хотите убедиться, что все, что хранится в объекте с использованием строки, соответствует структуре `{message: string}`. Это можно сделать с помощью объявления `{ [index:string] : {message: string} }`. Это показано ниже:
 
 ```ts
 let foo:{ [index:string] : {message: string} } = {};
 
 /**
- * Must store stuff that conforms to the structure
+ * Необходимо хранить в соответствии структуре
  */
 /** Ok */
 foo['a'] = { message: 'some message' };
-/** Error: must contain a `message` or type string. You have a typo in `message` */
+/** Ошибка: должно содержать `message` типа string. У вас опечатка в `message` */
 foo['a'] = { messages: 'some message' };
 
 /**
- * Stuff that is read is also type checked
+ * Тип также проверяется на чтение
  */
 /** Ok */
 foo['a'].message;
-/** Error: messages does not exist. You have a typo in `message` */
+/** Ошибка: messages не существует. У вас опечатка в `message` */
 foo['a'].messages;
 ```
 
-> TIP: the name of the index signature e.g. `index` in `{ [index:string] : {message: string} }` has no significance for TypeScript and is only for readability. e.g. if it's user names you can do `{ [username:string] : {message: string} }` to help the next dev who looks at the code (which just might happen to be you).
+> СОВЕТ: имя сигнатуры индекса, например `index` в `{ [index:string] : {message: string} }` не имеет значения для TypeScript и предназначен только для удобства чтения. Например если это имена пользователей, вы можете использовать `{ [username:string] : {message: string} }`, чтобы помочь следующему разработчику, который просматривает код (который кстати может оказаться вами).
 
-Of course `number` indexes are also supported e.g. `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
+Конечно, числовые индексы также поддерживаются, например `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
 
-### All members must conform to the `string` index signature
+### Все члены должны соответствовать сигнатуре индекса `string`
 
-As soon as you have a `string` index signature, all explicit members must also conform to that index signature. This is shown below:
+Как только у вас есть сигнатура индекса `string`, все явные элементы также должны соответствовать этой сигнатуре индекса. Это показано ниже:
 
 ```ts
 /** Okay */
 interface Foo {
-  [key:string]: number
+  [key:string]: number;
   x: number;
   y: number;
 }
-/** Error */
+/** Ошибка */
 interface Bar {
-  [key:string]: number
+  [key:string]: number;
   x: number;
-  y: string; // ERROR: Property `y` must be of type number
+  y: string; // ОШИБКА: Свойство `y` должно иметь тип number
 }
 ```
 
-This is to provide safety so that any string access gives the same result:
+Это сделано для обеспечения безопасности, чтобы любой доступ к строке давал одинаковый результат:
 
 ```ts
 interface Foo {
-  [key:string]: number
+  [key:string]: number;
   x: number;
 }
 let foo: Foo = {x:1,y:2};
 
-// Directly
-foo['x']; // number
+// Напрямую
+foo['x']; // число
 
-// Indirectly
+// Опосредственно
 let x = 'x'
-foo[x]; // number
+foo[x]; // число
 ```
 
-### Using a limited set of string literals
+### Использование ограниченного набора строковых литералов
 
-An index signature can require that index strings be members of a union of literal strings by using *Mapped Types* e.g.:
+Сигнатура индекса может требовать, чтобы строки индекса были частями объединения литеральных строк, используя *замапленные типы*, например:
 
 ```ts
 type Index = 'a' | 'b' | 'c'
@@ -177,47 +177,47 @@ type FromIndex = { [k in Index]?: number }
 
 const good: FromIndex = {b:1, c:2}
 
-// Error:
-// Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.
-// Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.
+// Ошибка:
+// Тип '{ b: number; c: number; d: number; }' нельзя присвоить типу 'FromIndex'.
+// Литерал объекта может указывать только известные свойства, а 'd' не существует в типе 'FromIndex'.
 const bad: FromIndex = {b:1, c:2, d:3};
 ```
 
-This is often used together with `keyof typeof` to capture vocabulary types, described on the next page.
+Это часто используется вместе с `keyof typeof` для захвата типов словаря, описанных далее.
 
-The specification of the vocabulary can be deferred generically:
+В общем случае определение словаря может быть отложено:
 
 ```ts
 type FromSomeIndex<K extends string> = { [key in K]: number }
 ```
 
-### Having both `string` and `number` indexers
+### Используйте и строки и числа в качестве индексов
 
-This is not a common use case, but TypeScript compiler supports it nonetheless.
+Это не стандартный вариант использования, но компилятор TypeScript, тем не менее, его поддерживает.
 
-However, it has the restriction that the `string` indexer is more strict than the `number` indexer. This is intentional e.g. to allow typing stuff like:
+Однако у него есть ограничение: индексатор `string` более строгий, чем индексатор `number`. Это сделано намеренно, например чтобы разрешить следующий код:
 
 ```ts
 interface ArrStr {
-  [key: string]: string | number; // Must accommodate all members
+  [key: string]: string | number; // Должен согласовываться со всеми элементами
 
-  [index: number]: string; // Can be a subset of string indexer
+  [index: number]: string; // Может быть подмножеством индексатора строк
 
-  // Just an example member
+  // Просто пример элемента
   length: number;
 }
 ```
 
-### Design Pattern: Nested index signature
+### Шаблон проектирования: вложенная индексная сигнатура
 
-> API consideration when adding index signatures
+> Рекомендации для API при добавлении индексных сигнатур
 
-Quite commonly in the JS community you will see APIs that abuse string indexers. e.g. a common pattern among CSS in JS libraries:
+Довольно часто в сообществе JS можно встретить API, которые неправильно употребляют строковые индексаторы. Например стандартный шаблон для CSS в библиотеках JS:
 
 ```ts
 interface NestedCSS {
   color?: string;
-  [selector: string]: string | NestedCSS;
+  [selector: string]: string | NestedCSS | undefined;
 }
 
 const example: NestedCSS = {
@@ -228,15 +228,15 @@ const example: NestedCSS = {
 }
 ```
 
-Try not to mix string indexers with *valid* values this way. E.g. a typo in the padding will remain uncaught:
+Постарайтесь не смешивать таким образом индексаторы строк с *валидными* значениями. Например, опечатка останется невыявленной:
 
 ```ts
 const failsSilently: NestedCSS = {
-  colour: 'red', // No error as `colour` is a valid string selector
+  colour: 'red', // Ошибок нет, так как colour является допустимым селектором строки
 }
 ```
 
-Instead separate out the nesting into its own property e.g. in a name like `nest` (or `children` or `subnodes` etc.):
+Вместо этого поместите вложение в отдельное свойство, например в имя `nest` (или `children`, или `subnodes` и т.д.):
 
 ```ts
 interface NestedCSS {
@@ -256,15 +256,15 @@ const example: NestedCSS = {
 }
 
 const failsSilently: NestedCSS = {
-  colour: 'red', // TS Error: unknown property `colour`
+  colour: 'red', // Ошибка TS: неизвестное свойство `colour`
 }
 ```
 
-### Excluding certain properties from the index signature
+### Исключение определенных свойств из сигнатуры индекса
 
-Sometimes you need to combine properties into the index signature. This is not advised, and you *should* use the Nested index signature pattern mentioned above. 
+Иногда вам нужно объединить свойства в сигнатуру индекса. Это не рекомендуется, и вам *следует* использовать упомянутый выше шаблон вложенной индексной сигнатуры.
 
-However, if you are modeling *existing JavaScript* you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
+Однако, если вы моделируете *существующий JavaScript*, вы можете обойти это с помощью типа пересечения. Ниже показан пример ошибки, с которой вы столкнетесь без использования пересечения:
 
 ```ts
 type FieldState = {
@@ -272,12 +272,12 @@ type FieldState = {
 }
 
 type FormState = {
-  isValid: boolean  // Error: Does not conform to the index signature
+  isValid: boolean  // Ошибка: не соответствует сигнатуре индекса
   [fieldName: string]: FieldState
 }
 ```
 
-Here is the workaround using an intersection type:
+Вот обходной путь с использованием типа пересечения:
 
 ```ts
 type FieldState = {
@@ -289,7 +289,7 @@ type FormState =
   & { [fieldName: string]: FieldState }
 ```
 
-Note that even though you can declare it to model existing JavaScript, you cannot create such an object using TypeScript:  
+Обратите внимание, что даже если вы можете объявить его для моделирования существующего JavaScript, вы не можете создать такой объект с помощью TypeScript:
 
 ```ts
 type FieldState = {
@@ -301,14 +301,14 @@ type FormState =
   & { [fieldName: string]: FieldState }
 
 
-// Use it for some JavaScript object you are gettting from somewhere 
+// Используйте это для какого-нибудь объекта JavaScript, который вы откуда-то получаете
 declare const foo:FormState; 
 
 const isValidBool = foo.isValid;
 const somethingFieldState = foo['something'];
 
-// Using it to create a TypeScript object will not work
-const bar: FormState = { // Error `isValid` not assignable to `FieldState
+// Использование его для создания объекта TypeScript не сработает
+const bar: FormState = { // Ошибка: `isValid` не может быть присвоен `FieldState`
   isValid: false
 }
 ```
