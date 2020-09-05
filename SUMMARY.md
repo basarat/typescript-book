@@ -95,7 +95,7 @@
   * [Статический конструктор](docs/tips/staticConstructor.md)
   * [Паттерн синглтон](docs/tips/singleton.md)
   * [Аргументы функции](docs/tips/functionParameters.md)
-  * [Build Toggles](docs/tips/build-toggles.md)
+  * [Переключатели сборки](docs/tips/build-toggles.md)
   * [Контейнер](docs/tips/barrel.md)
   * [Создание массивов](docs/tips/create-arrays.md)
   * [Типизированный генератор событий](docs/tips/typed-event.md)
