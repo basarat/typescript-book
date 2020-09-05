@@ -1,39 +1,39 @@
-# Mixins
+# Миксины (примеси)
 
-TypeScript (and JavaScript) classes support strict single inheritance. So you *cannot* do:
+TypeScript (и JavaScript) классы поддерживают строго одиночное наследование. К примеру, вы *не можете* сделать следующее:
 
 ```ts
-class User extends Tagged, Timestamped { // ERROR : no multiple inheritance
+class User extends Tagged, Timestamped { // ОШИБКА : невозможно множественное наследование
 }
 ```
 
-Another way of building up classes from reusable components is to build them by combining simpler partial classes called mixins.
+Еще один способ создания классов из повторно используемых компонентов - путем объединения более простых частичных классов, называемых миксины.
 
-The idea is simple, instead of a *class A extending class B* to get its functionality, *function B takes class A* and returns a new class with this added functionality. Function `B` is a mixin.  
+Идея проста: вместо *класса A, расширяющего класс B* для получения своей функциональности, *функция B принимает класс A* и возвращает новый класс с этой добавленной функциональностью. Функция `B` - это миксин.
 
-> [A mixin is] a function that
- 1. takes a constructor,
- 1. creates a class that extends that constructor with new functionality
- 1. returns the new class
+> [Миксин] - это функция, которая
 
-A complete example
+> 1. берет конструктор
+> 2. создает класс, расширяющий этот конструктор новыми функциями
+> 3. возвращает новый класс
 
+Подробный пример:
 ```ts
-// Needed for all mixins
+// Требуется для всех миксинов
 type Constructor<T = {}> = new (...args: any[]) => T;
 
 ////////////////////
-// Example mixins
+// Примеры миксинов
 ////////////////////
 
-// A mixin that adds a property
+// Миксин, который добавляет свойство
 function Timestamped<TBase extends Constructor>(Base: TBase) {
   return class extends Base {
     timestamp = Date.now();
   };
 }
 
-// a mixin that adds a property and methods
+// миксин, который добавляет свойство и методы
 function Activatable<TBase extends Constructor>(Base: TBase) {
   return class extends Base {
     isActivated = false;
@@ -49,22 +49,22 @@ function Activatable<TBase extends Constructor>(Base: TBase) {
 }
 
 ////////////////////
-// Usage to compose classes
+// Использование для создания классов
 ////////////////////
 
-// Simple class
+// Простой класс
 class User {
   name = '';
 }
 
-// User that is Timestamped
+// Пользователь с отметкой времени
 const TimestampedUser = Timestamped(User);
 
-// User that is Timestamped and Activatable
+// Пользователь с отметкой времени и доступный для активации
 const TimestampedActivatableUser = Timestamped(Activatable(User));
 
 ////////////////////
-// Using the composed classes
+// Использование созданных классов
 ////////////////////
 
 const timestampedUserExample = new TimestampedUser();
@@ -76,23 +76,23 @@ console.log(timestampedActivatableUserExample.isActivated);
 
 ```
 
-Let's decompose this example.
+Разложим этот пример на части.
 
-## Take a constructor
+## Возьмите конструктор
 
-Mixins take a class and extend it with new functionality. So we need to define what is a *constructor*. Easy as:
+Миксины берут класс и расширяют его новой функциональностью. Итак, нам нужно определить, что такое *конструктор*. Просто как:
 
 ```ts
-// Needed for all mixins
+// Требуется для всех миксинов
 type Constructor<T = {}> = new (...args: any[]) => T;
 ```
 
-## Extend the class and return it
+## Расширить класс и вернуть его
 
-Pretty easy:
+Довольно просто:
 
 ```ts
-// A mixin that adds a property
+// Миксин, который добавляет свойство
 function Timestamped<TBase extends Constructor>(Base: TBase) {
   return class extends Base {
     timestamp = Date.now();
@@ -100,4 +100,4 @@ function Timestamped<TBase extends Constructor>(Base: TBase) {
 }
 ```
 
-And that is it 🌹
+И это все 🌹
