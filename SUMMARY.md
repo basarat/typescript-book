@@ -98,7 +98,7 @@
   * [Build Toggles](docs/tips/build-toggles.md)
   * [Barrel](docs/tips/barrel.md)
   * [Create Arrays](docs/tips/create-arrays.md)
-  * [Typesafe Event Emitter](docs/tips/typed-event.md)
+  * [Типизированный эмиттер событий](docs/tips/typed-event.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
 * [TypeScript Compiler Internals](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)

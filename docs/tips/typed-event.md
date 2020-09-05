@@ -1,39 +1,39 @@
-## Typesafe Event Emitter
+## Типизированный эмиттер событий
 
-Conventionally in Node.js and traditional JavaScript you have a single event emitter. This event emitter internally tracks listener for different event types e.g. 
+Обычно в Node.js и традиционном JavaScript у вас есть один эмиттер событий. Этот эмиттер событий внутри отслеживает слушателя для разных типов событий, например:
 
 ```ts
 const emitter = new EventEmitter();
-// Emit: 
+// Издать: 
 emitter.emit('foo', foo);
 emitter.emit('bar', bar);
-// Listen: 
+// Слушать: 
 emitter.on('foo', (foo)=>console.log(foo));
 emitter.on('bar', (bar)=>console.log(bar));
 ```
-Essentially `EventEmitter` internally stores data in the form of mapped arrays: 
+По сути, `EventEmitter` хранит данные в виде сопоставленных массивов:
 ```ts
 {foo: [fooListeners], bar: [barListeners]}
 ```
-Instead, for the sake of *event* type safety, you can create an emitter *per* event type:
+Вместо этого, в целях типизации *события*, вы можете создать эмиттер *для* определённого типа события:
 ```ts
 const onFoo = new TypedEvent<Foo>();
 const onBar = new TypedEvent<Bar>();
 
-// Emit: 
+// Издать: 
 onFoo.emit(foo);
 onBar.emit(bar);
-// Listen: 
+// Слушать: 
 onFoo.on((foo)=>console.log(foo));
 onBar.on((bar)=>console.log(bar));
 ```
 
-This has the following advantages: 
-* The types of events are easily discoverable as variables.
-* The event emitter variables are easily refactored independently.
-* Type safety for event data structures.
+Это дает следующие преимущества:
+* Типы событий легко обнаруживаются как переменные.
+* Переменные генератора событий легко рефакторятся независимо.
+* Типизация структур данных событий.
 
-### Reference TypedEvent
+### Ссылка TypedEvent
 ```ts
 export interface Listener<T> {
   (event: T): any;
@@ -43,7 +43,7 @@ export interface Disposable {
   dispose();
 }
 
-/** passes through events as they happen. You will not get events from before you start listening */
+/** проходит через события по мере их возникновения. Вы не будете получать события до того, как начнете слушать */
 export class TypedEvent<T> {
   private listeners: Listener<T>[] = [];
   private listenersOncer: Listener<T>[] = [];
@@ -65,12 +65,15 @@ export class TypedEvent<T> {
   }
 
   emit = (event: T) => {
-    /** Update any general listeners */
+    /** Обновить слушателей */
     this.listeners.forEach((listener) => listener(event));
 
-    /** Clear the `once` queue */
-    this.listenersOncer.forEach((listener) => listener(event));
-    this.listenersOncer = [];
+    /** Очистить очередь единожды */
+    if (this.listenersOncer.length > 0) {
+      const toCall = this.listenersOncer;
+      this.listenersOncer = [];
+      toCall.forEach((listener) => listener(event));
+    }
   }
 
   pipe = (te: TypedEvent<T>): Disposable => {
