@@ -1,47 +1,47 @@
-## Nominal Typing
-The TypeScript type system is structural [and this is one of the main motivating benefits](../why-typescript.md). However, there are real-world use cases for a system where you want two variables to be differentiated because they have a different *type name* even if they have the same structure. A very common use case is *identity* structures (which are generally just strings with semantics associated with their *name* in languages like C#/Java).
+## Именная типизация
+Система типов TypeScript является структурной [и это одно из её главных преимуществ](../why-typescript.md). Однако существуют реальные случаи использования системы, в которой необходимо различать две переменные, потому что они имеют разное *имя типа*, даже если они имеют одинаковую структуру. Очень распространенный вариант использования - это структуры *identity* (обычно это просто строки с семантикой, связанной с их *именем* в таких языках, как C#/Java).
 
-There are a few patterns that have emerged in the community. I cover them in decreasing order of personal preference:
+В сообществе появилось несколько паттернов. Я расскажу о них в порядке убывания личного предпочтения:
 
-## Using literal types
+## Использование литеральных типов
 
-This pattern uses generics and literal types: 
+В этом паттерне используются общие и литеральные типы:
 
 ```ts
-/** Generic Id type */
+/** Общий Id тип */
 type Id<T extends string> = {
   type: T,
   value: string,
 }
 
-/** Specific Id types */
+/** Специальные Id типы */
 type FooId = Id<'foo'>;
 type BarId = Id<'bar'>;
 
-/** Optional: contructors functions */
+/** Необязательно: функции-конструкторы */
 const createFoo = (value: string): FooId => ({ type: 'foo', value });
 const createBar = (value: string): BarId => ({ type: 'bar', value });
 
 let foo = createFoo('sample')
 let bar = createBar('sample');
 
-foo = bar; // Error
+foo = bar; // Ошибка
 foo = foo; // Okay
 ```
 
-* Advantages
-  - No need for any type assertions 
-* Disadvantage
-  - The structure `{type,value}` might not be desireable and need server serialization support
+* Преимущества
+  - Утверждения типа не требуются
+* Недостаток
+  - Структура `{тип, значение}` может быть нежелательной и требовать поддержки серверной сериализации
 
-## Using Enums
-[Enums in TypeScript](../enums.md) offer a certain level of nominal typing. Two enum types aren't equal if they differ by name. We can use this fact to provide nominal typing for types that are otherwise structurally compatible.
+## Использование перечислений
+[Перечисления в TypeScript](../enums.md) предоставляют определенный уровень именной типизации. Два типа перечислений не равны, если они различаются по имени. Мы можем использовать этот факт, чтобы обеспечить именную типизацию для типов, которые в остальном структурно совместимы.
 
-The workaround involves:
-* Creating a *brand* enum.
-* Creating the type as an *intersection* (`&`) of the brand enum + the actual structure.
+Обходной путь предполагает:
+* Создание перечисления *brand*.
+* Создание типа как *пересечение* (`&`) перечисления brand + фактическая структура.
 
-This is demonstrated below where the structure of the types is just a string:
+Это показано ниже, где структура типов представляет собой просто строку:
 
 ```ts
 // FOO
@@ -53,63 +53,63 @@ enum BarIdBrand {}
 type BarId = BarIdBrand & string;
 
 /**
- * Usage Demo
+ * Пример использования
  */
 var fooId: FooId;
 var barId: BarId;
 
-// Safety!
-fooId = barId; // error
-barId = fooId; // error
+// Предохранитель!
+fooId = barId; // ошибка
+barId = fooId; // ошибка
 
-// Newing up
+// Присвоение с утверждением
 fooId = 'foo' as FooId;
 barId = 'bar' as BarId;
 
-// Both types are compatible with the base
+// Оба типа совместимы с основой
 var str: string;
 str = fooId;
 str = barId;
 ```
 
-## Using Interfaces
+## Использование интерфейсов
 
-Because `numbers` are type compatible with `enum`s the previous technique cannot be used for them. Instead we can use interfaces to break the structural compatibility. This method is still used by the TypeScript compiler team, so worth mentioning. Using `_` prefix and a `Brand` suffix is a convention I strongly recommend (and [the one followed by the TypeScript team](https://github.com/Microsoft/TypeScript/blob/7b48a182c05ea4dea81bab73ecbbe9e013a79e99/src/compiler/types.ts#L693-L698)).
+Поскольку `числа` совместимы по типу с `перечислением`, предыдущая техника для них не может быть использована. Вместо этого мы можем использовать интерфейсы, чтобы нарушить структурную совместимость. Этот метод все еще используется командой компилятора TypeScript, поэтому стоит его упомянуть. Использование префикса `_` и суффикса `Brand` - это соглашение, которому мы рекомендуем следовать (и [то, которому следует команда TypeScript](https://github.com/Microsoft/TypeScript/blob/7b48a182c05ea4dea81bab73ecbbe9e013a79e99/src/compiler/types.ts#L693-L698)).
 
-The workaround involves the following:
-* adding an unused property on a type to break structural compatibility.
-* using a type assertion when needing to new up or cast down.
+Обходной путь включает в себя следующее:
+* добавление неиспользуемого свойства к типу для нарушения структурной совместимости.
+* использование утверждения типа, когда нужно создать новый объект или изменить тип.
 
-This is demonstrated below:
+Это показано ниже:
 
 ```ts
 // FOO
 interface FooId extends String {
-    _fooIdBrand: string; // To prevent type errors
+    _fooIdBrand: string; // Для предотвращения ошибок типа
 }
 
 // BAR
 interface BarId extends String {
-    _barIdBrand: string; // To prevent type errors
+    _barIdBrand: string; // Для предотвращения ошибок типа
 }
 
 /**
- * Usage Demo
+ * Пример использования
  */
 var fooId: FooId;
 var barId: BarId;
 
-// Safety!
-fooId = barId; // error
-barId = fooId; // error
-fooId = <FooId>barId; // error
-barId = <BarId>fooId; // error
+// Предохранитель!
+fooId = barId; // ошибка
+barId = fooId; // ошибка
+fooId = <FooId>barId; // ошибка
+barId = <BarId>fooId; // ошибка
 
-// Newing up
+// Присвоение с утверждением
 fooId = 'foo' as any;
 barId = 'bar' as any;
 
-// If you need the base string
+// Если вам нужна базовая строка
 var str: string;
 str = fooId as any;
 str = barId as any;
