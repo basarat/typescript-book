@@ -146,6 +146,15 @@
         <br>
         <a href="https://github.com/sbrin">Sbrin</a>
       </td>
+      <td align="center">
+        <img
+          src="https://avatars0.githubusercontent.com/u/24520728?s=460&u=e83d4c79f0ae6bd544f2c048d866acb2b7e7510c&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/artsurkan">Artyom Tsurkan</a>
+      </td>
     </tr>
   </tbody>
 </table>
+
