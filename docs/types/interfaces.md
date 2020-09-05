@@ -1,44 +1,44 @@
-## Interfaces
+## Интерфейсы
 
-Interfaces have *zero* runtime JS impact. There is a lot of power in TypeScript interfaces to declare the structure of variables.
+Интерфейсы не оказывают *никакого* влияния на выполнение JS. Существует разные полезные возможности при объявления структуры переменных в TypeScript с помощью интерфейсов.
 
-The following two are equivalent declarations, the first uses an *inline annotation*, the second uses an *interface*:
+Следующие два являются эквивалентными объявлениями, первое использует *встроенное описание*, второе использует *интерфейс*:
 
 ```ts
-// Sample A
+// Пример A
 declare var myPoint: { x: number; y: number; };
 
-// Sample B
+// Пример B
 interface Point {
     x: number; y: number;
 }
 declare var myPoint: Point;
 ```
 
-However, the beauty of *Sample B* is that if someone authors a library that builds on the `myPoint` library to add new members, they can easily add to the existing declaration of `myPoint`:
+Однако прелесть *Примера B* заключается в том, что если кто-то пишет основанную на `myPoint` библиотеку, то ему легко расширить объявление `myPoint` просто добавив новое свойство:
 
 ```ts
-// Lib a.d.ts
+// Библиотека a.d.ts
 interface Point {
     x: number; y: number;
 }
 declare var myPoint: Point;
 
-// Lib b.d.ts
+// Библиотека b.d.ts
 interface Point {
     z: number;
 }
 
-// Your code
-var myPoint.z; // Allowed!
+// Ваш код
+var myPoint.z; // Разрешено!
 ```
 
-This is because **interfaces in TypeScript are open ended**. This is a vital tenet of TypeScript that it allows you to mimic the extensibility of JavaScript using *interfaces*.
+Это потому, что **интерфейсы в TypeScript не ограничены**. Это жизненно важный принцип TypeScript, который позволяет имитировать расширяемость JavaScript с помощью *интерфейсов*.
 
 
-## Classes can implement interfaces
+## Классы могут реализовывать интерфейсы
 
-If you want to use *classes* that must follow an object structure that someone declared for you in an `interface` you can use the `implements` keyword to ensure compatibility:
+Если вы хотите использовать *классы*, следующие структуре объекта, который кто-то объявил для вас в `интерфейсе`, вы можете сделать это, используя ключевое слово `implements` для обеспечения совместимости:
 
 ```ts
 interface Point {
@@ -46,39 +46,39 @@ interface Point {
 }
 
 class MyPoint implements Point {
-    x: number; y: number; // Same as Point
+    x: number; y: number; // Такой же как Point
 }
 ```
 
-Basically in the presence of that `implements`, any changes in that external `Point` interface will result in a compile error in your code base so you can easily keep it in sync:
+По сути, при наличии этих `implements` любое изменение во внешнем интерфейсе `Point` приведет к ошибке компиляции в новом коде, что позволит вам следить за консистентностью кода:
 
 ```ts
 interface Point {
     x: number; y: number;
-    z: number; // New member
+    z: number; // Новая переменная
 }
 
-class MyPoint implements Point { // ERROR : missing member `z`
+class MyPoint implements Point { // ОШИБКА : отсутствует переменная `z`
     x: number; y: number;
 }
 ```
 
-Note that `implements` restricts the structure of the class *instances* i.e.:
+Обратите внимание, что `implements` ограничивает структуру *экземпляров* класса, т.е.
 
 ```ts
 var foo: Point = new MyPoint();
 ```
 
-And stuff like `foo: Point = MyPoint` is not the same thing.
+И такие вещи, как `foo: Point = MyPoint` - это не одно и то же.
 
 
-## TIPs
+## Советы
 
-### Not every interface is implementable easily
+### Не каждый интерфейс легко реализуем
 
-Interfaces are designed to declare *any arbitrarily crazy* structure that might be present in JavaScript.
+Интерфейсы придуманы для объявления *любой произвольной* структуры, возможной в JavaScript.
 
-Consider the following interface where something is callable with `new`:
+Рассмотрим следующий интерфейс, где можно вызывать `new`:
 
 ```ts
 interface Crazy {
@@ -88,7 +88,7 @@ interface Crazy {
 }
 ```
 
-You would essentially have something like:
+По сути, у вас будет что-то вроде:
 
 ```ts
 class CrazyClass implements Crazy {
@@ -96,8 +96,8 @@ class CrazyClass implements Crazy {
         return { hello: 123 };
     }
 }
-// Because
-const crazy = new CrazyClass(); // crazy would be {hello:123}
+// Так как
+const crazy = new CrazyClass(); // crazy было бы {hello:123}
 ```
 
-You can *declare* all the crazy JS out there with interfaces and even use them safely from TypeScript. Doesn't mean you can use TypeScript classes to implement them.
+Вы можете *объявить* различные структуры с помощью интерфейсов и безопасно использовать JS код с помощью проверок TypeScript. Однако не всегда возможно реализовать эти структуры как классы TypeScript.
