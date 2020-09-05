@@ -1,50 +1,55 @@
-* [lib.d.ts](#libdts)
-* [Example Usage](#example-usage)
-* [Inside look](#libdts-inside-look)
-* [Modifying Native types](#modifying-native-types)
-* [Using custom lib.d.ts](#using-your-own-custom-libdts)
-* [Compiler `target` effect on lib.d.ts](#compiler-target-effect-on-libdts)
-* [`lib` option](#lib-option)
-* [Polyfill for old JavaScript engines](#polyfill-for-old-javascript-engines)
+- [`lib.d.ts`](#libdts)
+  - [Пример использования](#пример-использования)
+  - [`lib.d.ts` взгляд изнутри](#libdts-взгляд-изнутри)
+  - [Изменение нативных типов](#изменение-нативных-типов)
+    - [Пример `window`](#пример-window)
+    - [Пример `Math`](#пример-math)
+    - [Пример `Date`](#пример-date)
+    - [Пример `string`](#пример-string)
+  - [Пример global из модуля](#пример-global-из-модуля)
+  - [Использование своего собственного lib.d.ts](#использование-своего-собственного-libdts)
+  - [Эффект зависимости `lib.d.ts` от параметров вывода](#эффект-зависимости-libdts-от-параметров-вывода)
+  - [lib опция](#lib-опция)
+- [Polyfill для старых движков JavaScript](#polyfill-для-старых-движков-javascript)
 
 ## `lib.d.ts`
 
-A special declaration file `lib.d.ts` ships with every installation of TypeScript. This file contains the ambient declarations for various common JavaScript constructs present in JavaScript runtimes and the DOM.
+Специальный файл объявления `lib.d.ts` добавляется в каждую сборку TypeScript. Этот файл содержит объявления среды для различных распространенных конструкций JavaScript, присутствующих во время выполнения JavaScript и DOM.
 
-* This file is automatically included in the compilation context of a TypeScript project.
-* The objective of this file is to make it easy for you to start writing *type checked* JavaScript code.
+* Этот файл автоматически включается в контекст компиляции проекта TypeScript.
+* Цель этого файла - упростить процесс написания кода JavaScript с *контролем типов*.
 
-You can exclude this file from the compilation context by specifying the `--noLib` compiler command line flag (or `"noLib" : true` in `tsconfig.json`).
+Вы можете исключить этот файл из контекста компиляции, указав флаг командной строки компилятора `--noLib` (или `"noLib" : true` в `tsconfig.json`).
 
-### Example Usage
+### Пример использования
 
-As always let's look at examples of this file being used in action:
+Как всегда, давайте рассмотрим примеры использования этого файла:
 
 ```ts
 var foo = 123;
 var bar = foo.toString();
 ```
-This code type checks fine *because* the `toString` function is defined in `lib.d.ts` for all JavaScript objects.
+Этот код выполняет проверку типа правильно *поскольку* функция `toString` определена в `lib.d.ts` для всех объектов JavaScript.
 
-If you use the same sample code with the `noLib` option you get a type check error:
+Если вы используете тот же пример кода с опцией `noLib`, вы получите ошибку проверки типа:
 
 ```ts
 var foo = 123;
-var bar = foo.toString(); // ERROR: Property 'toString' does not exist on type 'number'.
+var bar = foo.toString(); // ОШИБКА: Свойство 'toString' не существует для типа 'number'.
 ```
-So now that you understand the importance of `lib.d.ts`, what do its contents look like? We examine that next.
+Итак, теперь, когда вы понимаете важность `lib.d.ts`, как выглядит его содержимое? Мы рассмотрим это дальше.
 
-### `lib.d.ts` Inside Look
+### `lib.d.ts` взгляд изнутри
 
-The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`.
+Содержимое `lib.d.ts` - это прежде всего набор *переменных* объявлений, например. `window`, `document`, `math` и куча похожих объявлений *интерфейсов*, например `Window`, `Document`, `Math`.
 
-The simplest way to read the documentation and type annotations of global stuff is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (VSCode has great support for this).
+Простейший способ прочитать документацию и описания типов глобального содержимого - это ввести код, *который вы знаете как работает*, например `Math.floor` и затем F12 (перейти к определению) с использованием вашей IDE (VSCode имеет отличную поддержку этого).
 
-Let's look at a sample *variable* declaration, e.g. `window` is defined as:
+Давайте рассмотрим пример объявления *переменной*, например `window` определяется как:
 ```ts
 declare var window: Window;
 ```
-That is just a simple `declare var` followed by the variable name (here `window`) and an interface for a type annotation (here the `Window` interface). These variables generally point to some global *interface* e.g. here is a small sample of the (actually quite massive) `Window` interface:
+Это просто `declare var`, за которым следует имя переменной (здесь `window`) и интерфейс для описания типа (здесь интерфейс `Window`). Эти переменные обычно указывают на некоторый глобальный *интерфейс*, например вот небольшой пример (на самом деле довольно большого) интерфейса `Window`:
 
 ```ts
 interface Window extends EventTarget, WindowTimers, WindowSessionStorage, WindowLocalStorage, WindowConsole, GlobalEventHandlers, IDBEnvironment, WindowBase64 {
@@ -53,22 +58,22 @@ interface Window extends EventTarget, WindowTimers, WindowSessionStorage, Window
     clientInformation: Navigator;
     closed: boolean;
     crypto: Crypto;
-    // so on and so forth...
+    // и так далее и тому подобное...
 }
 ```
-You can see that there is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisense`.
+Вы можете видеть, что в этих интерфейсах есть *много* информации о типах. В отсутствие TypeScript *вам* нужно было бы держать это в *своей* голове. Теперь вы можете перенести эти знания в компилятор и сделать их легкодоступными, используя такие вещи, как `intellisense`.
 
-There is a good reason for using *interfaces* for these globals. It allows you to *add additional properties* to these globals *without* a need to change `lib.d.ts`. We will cover this concept next.
+Есть веская причина использования *интерфейсов* для этих глобальных переменных. Это позволяет вам *добавлять дополнительные свойства* к этим глобальным переменным *без* необходимости изменять `lib.d.ts`. Мы рассмотрим эту концепцию дальше.
 
-### Modifying Native Types
+### Изменение нативных типов
 
-Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to be associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../project/globals.md) for this purpose.
+Поскольку `интерфейс` в TypeScript является расширяемым, это означает, что вы можете просто добавить элементы к интерфейсам, объявленным в `lib.d.ts`, и TypeScript подхватит эти добавления. Обратите внимание, что вам нужно сделать эти изменения в [*глобальном модуле*](../project/modules.md), чтобы эти интерфейсы были связаны с `lib.d.ts`. Для этой цели мы даже рекомендуем создать специальный файл с именем [`global.d.ts`](../project/globals.md).
 
-Here are a few example cases where we add stuff to `window`, `Math`, `Date`:
+Вот несколько примеров, в которых мы добавляем элементы в `window`,` Math`, `Date`:
 
-#### Example `window`
+#### Пример `window`
 
-Just add stuff to the `Window` interface e.g.:
+Просто добавьте элементы в интерфейс `Window`, например:
 
 ```ts
 interface Window {
@@ -76,36 +81,36 @@ interface Window {
 }
 ```
 
-This will allow you to use it in a *type safe* manner:
+Это позволит вам обезопасить себя проверкой типов:
 
 ```ts
-// Add it at runtime
+// Добавить в среду выполнения
 window.helloWorld = () => console.log('hello world');
-// Call it
+// Вызвать
 window.helloWorld();
-// Misuse it and you get an error:
-window.helloWorld('gracius'); // Error: Supplied parameters do not match the signature of the call target
+// Неправильное использование и вы получите ошибку:
+window.helloWorld('gracius'); // Ошибка: Предоставленные параметры не соответствуют подписи
 ```
 
-#### Example `Math`
-The global variable `Math` is defined in `lib.d.ts` as (again, use your dev tools to navigate to definition):
+#### Пример `Math`
+Глобальная переменная `Math` определена в `lib.d.ts` в виде (опять же, используйте ваши инструменты разработчика для перехода к определению):
 
 ```ts
-/** An intrinsic object that provides basic mathematics functionality and constants. */
+/** Внутренний объект, который обеспечивает базовые математические функции и константы. */
 declare var Math: Math;
 ```
 
-i.e. the variable `Math` is an instance of the `Math` interface. The `Math` interface is defined as:
+т.е. переменная `Math` является экземпляром интерфейса `Math`. Интерфейс `Math` определяется как:
 
 ```ts
 interface Math {
     E: number;
     LN10: number;
-    // others ...
+    // остальные ...
 }
 ```
 
-This means that if you want to add stuff to the `Math` global variable you just need to add it to the `Math` global interface, e.g. consider the [`seedrandom` project](https://www.npmjs.com/package/seedrandom) which adds a `seedrandom` function to the global `Math` object. This can be declared quite easily:
+Это означает, что если вы хотите добавить элементы в глобальную переменную `Math`, вам просто нужно добавить его в глобальный интерфейс `Math`, например, рассмотрим проект [`seedrandom` project](https://www.npmjs.com/package/seedrandom), который добавляет функцию `seedrandom` к глобальному объекту `Math`. Она может быть объявлена довольно легко:
 
 ```ts
 interface Math {
@@ -113,61 +118,60 @@ interface Math {
 }
 ```
 
-And then you can just use it:
+И далее вы можете просто использовать её:
 
 ```ts
 Math.seedrandom();
-// or
-Math.seedrandom("Any string you want!");
+// или
+Math.seedrandom("Любая строка, которую вы хотите!");
 ```
 
-#### Example `Date`
+#### Пример `Date`
 
-If you look at the definition of the `Date` *variable* in `lib.d.ts` you will find:
+Если вы посмотрите на определение *переменной* `Date` в `lib.d.ts`, вы увидите:
 
 ```ts
 declare var Date: DateConstructor;
 ```
-The interface `DateConstructor` is similar to what you have seen before with `Math` and `Window` in that it contains members you can use off of the `Date` global variable e.g. `Date.now()`. In addition to these members it contains *construct* signatures which allow you to create `Date` instances (e.g. `new Date()`). A snippet of the `DateConstructor` interface is shown below:
+Интерфейс `DateConstructor` похож на то, что вы видели ранее с `Math` и `Window`, в том, что он содержит элементы, которые вы можете использовать вне глобальной переменной `Date`, например, `Date.now()`. В дополнение к этим элементам он содержит сигнатуры *конструктора*, которые позволяют вам создавать экземпляры `Date` (например `new Date()`). Фрагмент интерфейса `DateConstructor` показан ниже:
 
 ```ts
 interface DateConstructor {
     new (): Date;
-    // ... other construct signatures
+    // ... другие сигнатуры конструктора
 
     now(): number;
-    // ... other member functions
+    // ... другие элементы
 }
 ```
 
-Consider the project [`datejs`](https://github.com/abritinthebay/datejs). DateJS adds members to both the `Date` global variable and `Date` instances. Therefore a TypeScript definition for this library would look like ([BTW the community has already written this for you in this case](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/datejs/index.d.ts)):
+Рассмотрим проект [`datejs`](https://github.com/abritinthebay/datejs). DateJS добавляет элементы как в глобальную переменную `Date`, так и в экземпляры `Date`. Поэтому определения TypeScript для этой библиотеки будет выглядеть следующим образом ([Кстати, сообщество уже написало их для вас в этом случае](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/datejs/index.d.ts)):
 
 ```ts
-/** DateJS Public Static Methods */
+/** DateJS открытые статические методы */
 interface DateConstructor {
-    /** Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM) */
+    /** Получает дату, которая установлена на текущую дату. Время устанавливается на начало дня (00:00 или 12:00 AM) */
     today(): Date;
-    // ... so on and so forth
+    // ... и так далее, и тому подобное
 }
 
-/** DateJS Public Instance Methods */
+/** DateJS открытые методы экземпляра */
 interface Date {
-    /** Adds the specified number of milliseconds to this instance. */
+    /** Добавляет указанное количество миллисекунд к этому экземпляру. */
     addMilliseconds(milliseconds: number): Date;
-    // ... so on and so forth
+    // ... и так далее, и тому подобное
 }
 ```
-This allows you to do stuff like the following in a TypeSafe manner:
+Это позволяет вам делать следующее с проверкой типов:
 
 ```ts
 var today = Date.today();
 var todayAfter1second = today.addMilliseconds(1000);
 ```
 
-#### Example `string`
+#### Пример `string`
 
-If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface also impacts string *literals* as demonstrated in the below code sample:
-
+Если вы поищите информацию о string в `lib.d.ts`, вы обнаружите нечто похожее на то, что мы видели для `Date` (глобальная переменная `String`, интерфейс `StringConstructor`, интерфейс `String`). Однако следует отметить, что интерфейс `String` также влияет на строковые *литералы*, как показано в следующем примере кода:
 ```ts
 
 interface String {
@@ -183,14 +187,14 @@ console.log('foo bar'.endsWith('bas')); // false
 console.log('foo bas'.endsWith('bas')); // true
 ```
 
-Similar variables and interfaces exist for other things that have both static and instance members like `Number`, `Boolean`, `RegExp`, etc. and these interfaces affect literal instances of these types as well.
+Подобные переменные и интерфейсы существуют и для других вещей, которые имеют как статические, так и методы экземпляров, такие как `Number`, `Boolean`, `RegExp` и т.д., и эти интерфейсы также влияют на литеральные экземпляры этих типов.
 
-### Example `string` redux
+### Пример global из модуля
 
-We recommended creating a `global.d.ts` for maintainability reasons. However, you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
+Мы рекомендуем создать `global.d.ts` для удобства поддержки. Однако вы можете проникнуть в *глобальное пространство имен* изнутри *файлового модуля*, если захотите. Это делается с помощью `declare global { /*global namespace here*/ }`. Например. предыдущий пример также можно сделать так:
 
 ```ts
-// Ensure this is treated as a module.
+// Убедитесь, что это обрабатывается как модуль.
 export {};
 
 declare global {
@@ -208,31 +212,31 @@ console.log('foo bar'.endsWith('bas')); // false
 console.log('foo bas'.endsWith('bas')); // true
 ```
 
-### Using your own custom lib.d.ts
-As we mentioned earlier, using the `--noLib` boolean compiler flag causes TypeScript to exclude the automatic inclusion of `lib.d.ts`. There are various reasons why this is a useful feature. Here are a few of the common ones:
+### Использование своего собственного lib.d.ts
+Как мы упоминали ранее, использование логического флага компилятора `--noLib` заставляет TypeScript исключить автоматическое добавление `lib.d.ts`. Есть несколько причин, почему это может быть полезной функцией. Вот некоторые из распространенных:
 
-* You are running in a custom JavaScript environment that differs *significantly* from the standard browser based runtime environment.
-* You like to have *strict* control over the *globals* available in your code. E.g. lib.d.ts defines `item` as a global variable and you don't want this to leak into your code.
+* Вы работаете в пользовательской среде JavaScript, которая *значительно* отличается от стандартной среды выполнения на основе браузера.
+* Вам нравится иметь *строгий* контроль над *глобальными переменными*, доступными в вашем коде. Например lib.d.ts определяет `item` как глобальную переменную, а вы не хотите, чтобы это попадало в ваш код.
 
-Once you have excluded the default `lib.d.ts` you can include a similarly named file into your compilation context and TypeScript will pick it up for type checking.
+После того как вы убрали стандартный lib.d.ts, вы можете добавить файл с аналогичным именем в контекст компиляции, и TypeScript подхватит его для проверки типов.
 
-> Note: be careful with `--noLib`. Once you are in noLib land, if you choose to share your project with others, they will be *forced* into noLib land (or rather *your lib* land). Even worse, if you bring *their* code into your project you might need to port it to *your lib* based code.
+> Примечание: будьте осторожны с `--noLib`. Как только вы окажетесь на территории noLib, если вы решите поделиться своим проектом с другими, они будут тоже *вынуждены* попасть на территорию noLib (или, скорее, на территорию *вашей lib*). Еще хуже ситуация, если вы добавите *их* код в ваш проект, вам может понадобиться портировать его в *код на основе вашей lib*.
 
-### Compiler target effect on `lib.d.ts`
+### Эффект зависимости `lib.d.ts` от параметров вывода
 
-Setting the compiler target to `es6` causes the `lib.d.ts` to include *additional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others it's problematic as it conflates *code generation* with *code ambience*.
+Настройка компилятора с выводом в `es6` заставляет `lib.d.ts` включать *дополнительные* объявления среды для более современных (es6) вещей, таких как `Promise`. Этот особый эффект меняет *окружение* кода и желаем для некоторых разработчиков, а для других он проблематичен, поскольку он связывает *генерацию кода* со *средой кода*.
 
-However, if you want finer grained control of your environment, you should use the `--lib` option which we discuss next.
+Однако, если вы хотите более детальный контроль над своей средой, вы должны использовать параметр `--lib`, который мы обсудим далее.
 
-### lib option
+### lib опция
 
-Sometimes (many times) you want to decouple the relationship between the compile target (the generated JavaScript version) and the ambient library support. A common example is `Promise`, e.g. today (in June 2016) you most likely want to `--target es5` but still use the latest features like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
+Иногда (довольно часто) вы хотите разорвать связь между выводом компиляции (сгенерированной версией JavaScript) и поддержкой окружающих библиотек. Типичным примером является `Promise`, например, сегодня (в июне 2016 года) вы, скорее всего, захотите `--target es5`, но по-прежнему будете использовать новейшие функции, такие как `Promise`. Для поддержки этого вы можете получить явный контроль над `lib` с помощью опции компилятора `lib`.
 
-> Note: using `--lib` decouples any lib magic from `--target` giving you better control.
+> Примечание: использование `--lib` позволяет отделить любую lib магию от `--target`, обеспечивая вам лучший контроль.
 
-You can provide this option on the command line or in `tsconfig.json` (recommended):
+Вы можете использовать эту опцию в командной строке или в `tsconfig.json` (рекомендуется):
 
-**Command line**:
+**Командная строка**:
 ```
 tsc --target es5 --lib dom,es6
 ```
@@ -243,9 +247,9 @@ tsc --target es5 --lib dom,es6
 }
 ```
 
-The libs can be categorized as follows:
+libs можно классифицировать следующим образом:
 
-* JavaScript Bulk Feature:
+* JavaScript версия:
     * es5
     * es6
     * es2015
@@ -253,12 +257,12 @@ The libs can be categorized as follows:
     * es2016
     * es2017
     * esnext
-* Runtime Environment
+* Среда выполнения
     * dom
     * dom.iterable
     * webworker
     * scripthost
-* ESNext By-Feature Options (even smaller than bulk feature)
+* ESNext по отдельным фичам (меньше, чем версия)
     * es2015.core
     * es2015.collection
     * es2015.generator
@@ -273,12 +277,12 @@ The libs can be categorized as follows:
     * es2017.sharedmemory
     * esnext.asynciterable
 
-> NOTE: the `--lib` option provides extremely fine tuned control. So you most likely want to pick an item from the bulk + environment categories.
-> If --lib is not specified a default library is injected:
-  - For --target es5 => es5, dom, scripthost
-  - For --target es6 => es6, dom, dom.iterable, scripthost
+> ПРИМЕЧАНИЕ: опция `--lib` обеспечивает чрезвычайно гибкий контроль. Так что, скорее всего вы хотите выбрать отдельные фичи из версий + среду выполнения.
+> Если --lib не указан, будет добавлена lib по умолчанию:
+   - Для --target es5 => es5, dom, scripthost
+   - Для --target es6 => es6, dom, dom.iterable, scripthost
 
-My Personal Recommendation:
+Моя личная рекомендация:
 
 ```json
 "compilerOptions": {
@@ -287,10 +291,10 @@ My Personal Recommendation:
 }
 ```
 
-Example Including Symbol with ES5:
+Пример для Symbol с ES5:
 
-Symbol API is not included when target is es5. In fact, we receive an error like: [ts] Cannot find name 'Symbol'.
-We can use "target": "es5" in combination with "lib" to provide Symbol API in TypeScript:
+Symbol API не добавляется, когда вывод в es5. На самом деле мы получаем ошибку вроде: [ts] Не удается найти имя 'Symbol'.
+Мы можем использовать "target": "es5" в сочетании с "lib" для предоставления Symbol API в TypeScript:
 
 ```json
 "compilerOptions": {
@@ -299,19 +303,19 @@ We can use "target": "es5" in combination with "lib" to provide Symbol API in Ty
 }
 ```
 
-## Polyfill for old JavaScript engines
+## Polyfill для старых движков JavaScript
 
-> [Egghead PRO Video on this subject](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
+> [Egghead PRO видео по этой теме](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
 
-There are quite a few runtime features that are like `Map` / `Set` and even `Promise` (this list will of course change over time) that you can use with modern `lib` options. To use these all you need to do is use `core-js`. Simply install:
+Существует довольно много функций среды выполнения, таких как `Map` / `Set` и даже `Promise` (этот список, конечно, со временем изменится), которые вы можете использовать с современными опциями `lib`. Чтобы использовать их, все, что вам нужно сделать, это использовать `core-js`. Просто установите:
 
 ```
 npm install core-js --save-dev
 ```
-And add an import to your application entry point: 
+И добавьте импорт в точку входа вашего приложения:
 
 ```js
 import "core-js";
 ```
 
-And it should polyfill these runtime features for you 🌹.
+И он должен заполифиллить эти функции среды выполнения для вас 🌹.
