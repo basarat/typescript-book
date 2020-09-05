@@ -82,7 +82,7 @@
 * [Советы](docs/tips/main.md)
   * [Строковые перечисляемые типы](docs/tips/stringEnums.md)
   * [Nominal Typing](docs/tips/nominalTyping.md)
-  * [Stateful Functions](docs/tips/statefulFunctions.md)
+  * [Функции с состоянием](docs/tips/statefulFunctions.md)
   * [Связывание это плохо](docs/tips/bind.md)
   * [Каррирование](docs/tips/currying.md)
   * [Конкретизация типа](docs/tips/typeInstantiation.md)
