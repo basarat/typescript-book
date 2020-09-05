@@ -1,15 +1,16 @@
-* [Enums](#enums)
-* [Number Enums and numbers](#number-enums-and-numbers)
-* [Number Enums and strings](#number-enums-and-strings)
-* [Changing the number associated with a number enum](#changing-the-number-associated-with-a-number-enum)
-* [Enums are open ended](#enums-are-open-ended)
-* [Number Enums as flags](#number enums-as-flags)
-* [String Enums](#string-enums)
-* [Const enums](#const-enums)
-* [Enum with static functions](#enum-with-static-functions)
+- [Перечисления](#перечисления)
+  - [Числовые перечисления и числа](#числовые-перечисления-и-числа)
+  - [Числовые перечисления и строки](#числовые-перечисления-и-строки)
+  - [Изменение числа, в числовом перечислении](#изменение-числа-в-числовом-перечислении)
+  - [Числовые перечисления в качестве флагов](#числовые-перечисления-в-качестве-флагов)
+  - [Строковые перечисления](#строковые-перечисления)
+  - [Константные перечисления](#константные-перечисления)
+  - [Константные перечисления с флагом preserveConstEnums](#константные-перечисления-с-флагом-preserveconstenums)
+- [Перечисление со статическими функциями](#перечисление-со-статическими-функциями)
+  - [Перечисления расширяемы](#перечисления-расширяемы)
 
-### Enums
-An enum is a way to organize a collection of related values. Many other programming languages (C/C#/Java) have an `enum` data type but JavaScript does not. However, TypeScript does. Here is an example definition of a TypeScript enum:
+### Перечисления
+Перечисления - это способ организовать коллекцию связанных значений. Многие другие языки программирования (C/C#/Java) имеют тип данных `enum`, а JavaScript - нет. Тем не менее, TypeScript имеет. Вот пример описания перечисления в TypeScript:
 
 ```ts
 enum CardSuit {
@@ -19,17 +20,17 @@ enum CardSuit {
 	Spades
 }
 
-// Sample usage
+// Пример использования
 var card = CardSuit.Clubs;
 
-// Safety
-card = "not a member of card suit"; // Error : string is not assignable to type `CardSuit`
+// Предохранитель
+card = "not a member of card suit"; // Ошибка : строка не может быть назначена для типа `CardSuit`
 ```
 
-These enums values are `number`s so I'll call them Number Enums from hence forth.
+Эти значения перечислений являются `числами`, поэтому далее я буду называть их числовыми перечислениями.
 
-#### Number Enums and Numbers
-TypeScript enums are number based. This means that numbers can be assigned to an instance of the enum, and so can anything else that is compatible with `number`.
+#### Числовые перечисления и числа
+TypeScript перечисления основанные на числах. Это означает, что числа могут быть назначены на экземпляр перечисления, а также всё, что совместимо с `числом`.
 
 ```ts
 enum Color {
@@ -38,11 +39,11 @@ enum Color {
     Blue
 }
 var col = Color.Red;
-col = 0; // Effectively same as Color.Red
+col = 0; // Фактически то же что и Color.Red
 ```
 
-#### Number Enums and Strings
-Before we look further into enums let's look at the JavaScript that it generates, here is a sample TypeScript:
+#### Числовые перечисления и строки
+Прежде чем мы углубимся в перечисления, давайте рассмотрим генерируемый ими JavaScript, вот пример TypeScript:
 
 ```ts
 enum Tristate {
@@ -51,7 +52,7 @@ enum Tristate {
     Unknown
 }
 ```
-generates the following JavaScript:
+генерирует следующий JavaScript:
 
 ```js
 var Tristate;
@@ -62,7 +63,7 @@ var Tristate;
 })(Tristate || (Tristate = {}));
 ```
 
-let's focus on the line `Tristate[Tristate["False"] = 0] = "False";`. Within it `Tristate["False"] = 0` should be self explanatory, i.e. sets `"False"` member of `Tristate` variable to be `0`. Note that in JavaScript the assignment operator returns the assigned value (in this case `0`). Therefore the next thing executed by the JavaScript runtime is `Tristate[0] = "False"`. This means that you can use the `Tristate` variable to convert a string version of the enum to a number or a number version of the enum to a string. This is demonstrated below:
+давайте сосредоточимся на строке `Tristate[Tristate["False"] = 0] = "False";`. Внутри неё выражение `Tristate["False"] = 0` не требует особых объяснений, по факту оно присваивает свойству `"False"`  объекта `Tristate` значение `0`. Обратите внимание, что в JavaScript оператор присваивания возвращает присвоенное значение (в данном случае `0`). Поэтому следующая операция, выполняемая средой выполнения JavaScript, это `Tristate[0] = "False"`. Это означает, что вы можете использовать переменную `Tristate` для преобразования строковой версии перечисления в число или числовой версии перечисления в строку. Это продемонстрировано ниже:
 
 ```ts
 enum Tristate {
@@ -72,11 +73,11 @@ enum Tristate {
 }
 console.log(Tristate[0]); // "False"
 console.log(Tristate["False"]); // 0
-console.log(Tristate[Tristate.False]); // "False" because `Tristate.False == 0`
+console.log(Tristate[Tristate.False]); // "False" потому что `Tristate.False == 0`
 ```
 
-#### Changing the number associated with a Number Enum
-By default enums are `0` based and then each subsequent value increments by 1 automatically. As an example consider the following:
+#### Изменение числа, в числовом перечислении
+По умолчанию перечисления начинаются с `0`, а затем каждое последующее значение автоматически увеличивается на 1. В качестве примера рассмотрим следующее:
 
 ```ts
 enum Color {
@@ -86,7 +87,7 @@ enum Color {
 }
 ```
 
-However, you can change the number associated with any enum member by assigning to it specifically. This is demonstrated below where we start at 3 and start incrementing from there:
+Однако вы можете изменить число, связанное с любым элементом перечисления, назначив его конкретным. Это показано ниже, где мы начинаем с 3 и начинаем увеличивать:
 
 ```ts
 enum Color {
@@ -96,10 +97,10 @@ enum Color {
 }
 ```
 
-> TIP: I quite commonly initialize the first enum with ` = 1` as it allows me to do a safe truthy check on an enum value.
+> СОВЕТ: Я обычно инициализирую первое перечисление с ` = 1`, чтобы можно было наверняка проверить значение перечисления на достоверность.
 
-#### Number Enums as flags
-One excellent use of enums is the ability to use enums as `Flags`. Flags allow you to check if a certain condition from a set of conditions is true. Consider the following example where we have a set of properties about animals:
+#### Числовые перечисления в качестве флагов
+Одним из отличных вариантов использования перечислений является возможность использовать перечисления в качестве `Флагов`. Флаги позволяют вам проверить, верно ли определенное условие из набора условий. Рассмотрим следующий пример, где у нас есть набор свойств о животных:
 
 ```ts
 enum AnimalFlags {
@@ -111,7 +112,7 @@ enum AnimalFlags {
 }
 ```
 
-Here we are using the left shift operator to move `1` around a certain level of bits to come up with bitwise disjoint numbers `0001`, `0010`, `0100` and `1000` (these are decimals `1`,`2`,`4`,`8` if you are curious). The bitwise operators `|` (or) / `&` (and) / `~` (not) are your best friends when working with flags and are demonstrated below:
+Здесь мы используем оператор сдвига влево для перемещения `1` вокруг определенного уровня битов, чтобы получить побитовые непересекающиеся числа `0001`, `0010`, `0100` и `1000` (это десятичные числа `1`,`2`,`4`,`8` если вам интересно). Побитовые операторы `|` (или) / `&` (и) / `~` (не) являются вашими лучшими друзьями при работе с флагами и продемонстрированы ниже:
 
 ```ts
 enum AnimalFlags {
@@ -126,32 +127,32 @@ type Animal = {
 function printAnimalAbilities(animal: Animal) {
     var animalFlags = animal.flags;
     if (animalFlags & AnimalFlags.HasClaws) {
-        console.log('animal has claws');
+        console.log('животное имеет когти');
     }
     if (animalFlags & AnimalFlags.CanFly) {
-        console.log('animal can fly');
+        console.log('животное может летать');
     }
     if (animalFlags == AnimalFlags.None) {
-        console.log('nothing');
+        console.log('ничего');
     }
 }
 
 let animal: Animal = { flags: AnimalFlags.None };
-printAnimalAbilities(animal); // nothing
+printAnimalAbilities(animal); // ничего
 animal.flags |= AnimalFlags.HasClaws;
-printAnimalAbilities(animal); // animal has claws
+printAnimalAbilities(animal); // животное имеет когти
 animal.flags &= ~AnimalFlags.HasClaws;
-printAnimalAbilities(animal); // nothing
+printAnimalAbilities(animal); // ничего
 animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
-printAnimalAbilities(animal); // animal has claws, animal can fly
+printAnimalAbilities(animal); // животное имеет когти, животное может летать
 ```
 
-Here:
-* we used `|=` to add flags
-* a combination of `&=` and `~` to clear a flag
-* `|` to combine flags
+Здесь:
+* мы использовали `|=`, чтобы добавить флаги
+* комбинация `&=` и `~` для очистки флага
+* `|` объединить флаги
 
-> Note: you can combine flags to create convenient shortcuts within the enum definition e.g. `EndangeredFlyingClawedFishEating` below:
+> Примечание: вы можете комбинировать флаги для создания удобных сокращений в определении перечисления, например `EndangeredFlyingClawedFishEating` ниже:
 
 ```ts
 enum AnimalFlags {
@@ -165,8 +166,8 @@ enum AnimalFlags {
 }
 ```
 
-#### String Enums
-We've only looked at enums where the member values are `number`s. You are actually allowed to have enum members with string values as well. e.g. 
+#### Строковые перечисления
+Мы смотрели только на перечисления, где значениями являются `числа`. На самом деле вы также можете использовать перечисления со строковыми значениями. Например
 
 ```ts
 export enum EvidenceTypeEnum {
@@ -179,24 +180,24 @@ export enum EvidenceTypeEnum {
 }
 ```
 
-These can be easier to deal with and debug as they provide meaningful / debuggable string values. 
+С ними проще работать и проверять, так как они предоставляют выразительные / проверяемые строковые значения.
 
-You can use these values to do simple string comparisons. e.g. 
+Вы можете использовать эти значения для простого сравнения строк. Например
 
 ```ts
-// Where `someStringFromBackend` will be '' | 'passport_visa' | 'passport' ... etc.
+// Где `someStringFromBackend` будет '' | 'passport_visa' | 'passport' ... и т.д.
 const value = someStringFromBackend as EvidenceTypeEnum; 
 
-// Sample use in code
+// Пример использования в коде
 if (value === EvidenceTypeEnum.PASSPORT){
-    console.log('You provided a passport');
+    console.log('Вы предоставили паспорт');
     console.log(value); // `passport`
 }
 ```
 
-#### Const Enums
+#### Константные перечисления
 
-If you have an enum definition like the following:
+Если у вас есть определение перечисления, подобное следующему:
 
 ```ts
 enum Tristate {
@@ -208,7 +209,7 @@ enum Tristate {
 var lie = Tristate.False;
 ```
 
-The line `var lie = Tristate.False` is compiled to the JavaScript `var lie = Tristate.False` (yes, output is same as input). This means that at execution the runtime will need to lookup `Tristate` and then `Tristate.False`. To get a performance boost here you can mark the `enum` as a `const enum`. This is demonstrated below:
+Строка `var lie = Tristate.False` компилируется в JavaScript как `var lie = Tristate.False` (да, вывод совпадает с вводом). Это означает, что во время выполнения потребуется поиск `Tristate`, а затем `Tristate.False`. Чтобы повысить производительность, вы можете записать `enum` как `const enum`. Это продемонстрировано ниже:
 
 ```ts
 const enum Tristate {
@@ -220,21 +221,22 @@ const enum Tristate {
 var lie = Tristate.False;
 ```
 
-generates the JavaScript:
+генерирует следующий JavaScript:
 
 ```js
 var lie = 0;
 ```
 
-i.e. the compiler:
-1. *Inlines* any usages of the enum (`0` instead of `Tristate.False`).
-1. Does not generate any JavaScript for the enum definition (there is no `Tristate` variable at runtime) as its usages are inlined.
+то есть компилятор:
 
-##### Const enum preserveConstEnums
-Inlining has obvious performance benefits. The fact that there is no `Tristate` variable at runtime is simply the compiler helping you out by not generating JavaScript that is not actually used at runtime. However, you might want the compiler to still generate the JavaScript version of the enum definition for stuff like *number to string* or *string to number* lookups as we saw. In this case you can use the compiler flag `--preserveConstEnums` and it will still generate the `var Tristate` definition so that you can use `Tristate["False"]` or `Tristate[0]` manually at runtime if you want. This does not impact *inlining* in any way.
+1. *Встраивает* любое использование перечисления (`0` вместо `Tristate.False`).
+2. Не генерирует JavaScript для определения перечисления (во время выполнения отсутствует переменная `Tristate`), поскольку его использование встроено.
 
-### Enum with static functions
-You can use the declaration `enum` + `namespace` merging to add static methods to an enum. The following demonstrates an example where we add a static member `isBusinessDay` to an enum `Weekday`:
+#### Константные перечисления с флагом preserveConstEnums
+Встраивание имеет очевидные преимущества в производительности. Тот факт, что во время выполнения отсутствует переменная `Tristate`, просто означает что компилятор помогает вам не генерировать JavaScript, который фактически не используется во время выполнения. Однако вы, возможно, захотите, чтобы компилятор по-прежнему генерировал JavaScript-версию определения перечисления для перевода *числа в строку* или *строки в число*, как мы рассматривали выше. В этом случае вы можете использовать флаг компилятора `--preserveConstEnums`, и он все равно сгенерирует определение `var Tristate`, чтобы вы могли использовать `Tristate["False"]` или `Tristate[0]` вручную во время выполнения, если это нужно. Это никак не влияет на *встраивание*.
+
+### Перечисление со статическими функциями
+Вы можете использовать объявление `перечисления` + `область имен`, чтобы добавить статические методы в перечисление. Следующий пример демонстрирует как мы добавляем статический элемент `isBusinessDay` в перечисление `Weekday`:
 
 ```ts
 enum Weekday {
@@ -264,11 +266,11 @@ console.log(Weekday.isBusinessDay(mon)); // true
 console.log(Weekday.isBusinessDay(sun)); // false
 ```
 
-#### Enums are open ended
+#### Перечисления расширяемы
 
-> NOTE: open ended enums are only relevant if you are not using modules. You should be using modules. Hence this section is last.
+> ПРИМЕЧАНИЕ: расширяемые перечисления имеют значение только в том случае, если вы не используете модули. Вы должны использовать модули. Следовательно, этот раздел является последним.
 
-Here is the generated JavaScript for an enum shown again:
+Вот сгенерированный JavaScript для перечисления из известного выше примера:
 
 ```js
 var Tristate;
@@ -279,9 +281,9 @@ var Tristate;
 })(Tristate || (Tristate = {}));
 ```
 
-We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `TriState` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object.
+Мы уже объяснили часть `Tristate[Tristate["False"] = 0] = "False";`. Теперь обратите внимание на оборачивающий код `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` особенно часть `(Tristate || (Tristate = {}));`. Он в основном описывает локальную переменную `Tristate`, которая будет либо указывать на уже определенное значение `Tristate`, либо инициализировать новый пустой объект `{}`.
 
-This means that you can split (and extend) an enum definition across multiple files. For example below we have split the definition for `Color` into two blocks
+Это означает, что вы можете разделить (и расширить) определение перечисления на несколько файлов. Например, ниже мы разделили определение для `Color` на два блока
 
 ```ts
 enum Color {
@@ -297,4 +299,4 @@ enum Color {
 }
 ```
 
-Note that you *should* reinitialize the first member (here `DarkRed = 3`) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the `0`, `1`, ... so on values). TypeScript will warn you if you don't anyways (error message `In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.`).
+Обратите внимание, что вы *должны* повторно инициализировать первый элемент (здесь `DarkRed = 3`) в продолжении перечисления, чтобы получить производный код, а не значения перезаписанные из предыдущего определения (то есть `0`, `1`, ... и так далее). TypeScript предупредит вас, если вы этого не сделаете (сообщение об ошибке `В перечислении с несколькими объявлениями только одно объявление может не использовать инициализатор для своего первого элемента`).
