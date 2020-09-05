@@ -1,40 +1,40 @@
-## Bind is Harmful
+## Связывание это плохо
 
-This is the definition of `bind` in `lib.d.ts`:
+Это определение `bind` в `lib.d.ts`:
 
 ```ts
 bind(thisArg: any, ...argArray: any[]): any;
 ```
 
-As you can see it returns **any**! That means that calling `bind` on a function will cause you to completely lose any type safety of the original function signature.
+Как видите, возвращается **any**! Это означает, что вызов `bind` для функции приведет к полной потере проверки типа исходной сигнатуры функции.
 
-For example the following compiles:
+Например, следующий пример:
 
 ```ts
 function twoParams(a:number,b:number) {
     return a + b;
 }
 let curryOne = twoParams.bind(null,123);
-curryOne(456); // Okay but is not type checked!
-curryOne('456'); // Allowed because it wasn't type checked!
+curryOne(456); // Okay, но тип не проверен!
+curryOne('456'); // Разрешено, потому что тип не проверен!
 ```
 
-A better way to write it would be with a simple [arrow function](../arrow-functions.md) with an explicit type annotation:
+Лучше написать это с помощью простой [стрелочной функции](../arrow-functions.md) с явным описанием типа:
 ```ts
 function twoParams(a:number,b:number) {
     return a + b;
 }
 let curryOne = (x:number)=>twoParams(123,x);
-curryOne(456); // Okay and type checked!
-curryOne('456'); // Error!
+curryOne(456); // Okay и тип проверен!
+curryOne('456'); // Ошибка!
 ```
 
-But if you expect a curried function [there is a better pattern for that](./currying.md).
+Но если вы ожидаете каррированную функцию [для этого есть образец получше](./currying.md).
 
-### Class Members
-Another common use is to use `bind` to ensure the correct value of `this` when passing around class functions. Don't do that!
+### Члены класса
+Другое распространенное использование - использование `bind` для обеспечения правильного значения `this` для функций класса. Не делай этого!
 
-The following demonstrates the fact that you lose parameter type safety if you use `bind`:
+Следующее демонстрирует то, что вы теряете проверку типа параметра, если используете `bind`:
 
 ```ts
 class Adder {
@@ -49,12 +49,12 @@ function useAdd(add: (x: number) => number) {
     return add(456);
 }
 
-let adder = new Adder('mary had a little 🐑');
-useAdd(adder.add.bind(adder)); // No compile error!
-useAdd((x) => adder.add(x)); // Error: number is not assignable to string
+let adder = new Adder('у Мэри была маленькая 🐑');
+useAdd(adder.add.bind(adder)); // Нет ошибки компиляции!
+useAdd((x) => adder.add(x)); // Ошибка: число нельзя присвоить строке
 ```
 
-If you have a class member function that you **expect** to pass around, [use an arrow function in the first place](../arrow-functions.md) e.g one would write the same `Adder` class as:
+Если у вас есть функция-член класса, которую вы **ожидаете** передать, [используйте в первую очередь стрелочную функцию](../arrow-functions.md), например, можно было бы написать тот же класс `Adder` как:
 
 ```ts
 class Adder {
@@ -67,7 +67,7 @@ class Adder {
 }
 ```
 
-Another alternative is to *manually* specify the type of the variable you are binding e.g. 
+Другой альтернативой является *вручную* указать тип связываемой переменной, например:
 
 ```ts
 const add: typeof adder.add = adder.add.bind(adder);
