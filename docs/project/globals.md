@@ -1,10 +1,16 @@
-# globals.d.ts
+# global.d.ts
 
-We discussed *global* vs. *file* modules when covering [projects](./modules.md) and recommended using file based modules and not polluting the global namespace.
+Мы обсуждали сравнение *глобальных* и *файловых* модулей при описании [проектов](./modules.md) и рекомендовали использовать файловые модули чтобы не загрязнять глобальное пространство имен.
 
-Nevertheless, if you have beginning TypeScript developers you can give them a `globals.d.ts` file to put interfaces / types in the global namespace to make it easy to have some *types* just *magically* available for consumption in *all* your TypeScript code.
+Тем не менее, если у вас есть начинающие разработчики TypeScript, вы можете предоставить им файл `global.d.ts` для размещения интерфейсов/типов в глобальном пространстве имен, чтобы упростить использование некоторых *типов* просто делая их *магически* доступными для использования во *всем* вашем коде TypeScript.
 
-> For any code that is going to generate *JavaScript* we highly recommend using *file modules*.
+Другой вариант использования файла `global.d.ts` - объявление компиляционных констант, которые вводятся в исходный код Webpack'ом через стандартный [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) плагин.
 
-* `globals.d.ts` is great for adding extensions to `lib.d.ts` if you need to.
-* It's good for quick `declare module "some-library-you-dont-care-to-get-defs-for";` when doing TS to JS migrations.
+```ts
+declare const BUILD_MODE_PRODUCTION: boolean; // можно использовать для компиляции с условием
+declare const BUILD_VERSION: string;
+```
+
+> Для любого кода, который будет генерировать *JavaScript*, мы настоятельно рекомендуем использовать *файловые модули* и использовать только `global.d.ts` для объявления компиляционных констант и/или для расширения стандартных объявлений типов, объявленных в `lib.d.ts`.
+
+* Бонус: файл `global.d.ts` также хорош для быстрого `declare module "some-library-you-dont-care-to-get-defs-for";` при выполнении миграции с JS на TS.

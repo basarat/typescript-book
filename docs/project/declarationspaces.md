@@ -1,16 +1,16 @@
-## Declaration Spaces
+## Области объявления
 
-There are two declaration spaces in TypeScript: the *variable* declaration space and the *type* declaration space. These concepts are explored below.
+В TypeScript есть две области объявления: область объявления *переменных* и область объявления  *типов*. Эти понятия рассматриваются ниже.
 
-### Type Declaration Space
-The type declaration space contains stuff that can be used as a type annotation. E.g. the following are a few type declarations:
+### Область объявления типов
+Область объявления типа содержит данные, которые можно использовать в качестве описания типа. Например, ниже приведены несколько объявлений типов:
 
 ```ts
 class Foo {};
 interface Bar {};
 type Bas = {};
 ```
-This means that you can use `Foo`, `Bar`, `Bas`, etc. as a type annotation. E.g.:
+Это означает, что вы можете использовать `Foo`,` Bar`, `Bas` и т.д. в качестве описания типа переменных. Например:
 
 ```ts
 var foo: Foo;
@@ -18,31 +18,31 @@ var bar: Bar;
 var bas: Bas;
 ```
 
-Notice that even though you have `interface Bar`, *you can't use it as a variable* because it doesn't contribute to the *variable declaration space*. This is shown below:
+Обратите внимание, что даже если у вас есть `interface Bar`, *вы не можете использовать его как переменную*, поскольку он не вносится в *пространство объявления переменных*. Это показано ниже:
 
 ```ts
 interface Bar {};
-var bar = Bar; // ERROR: "cannot find name 'Bar'"
+var bar = Bar; // ОШИБКА: "не возможно найти имя 'Bar'"
 ```
 
-The reason why it says `cannot find name` is because the name `Bar` *is not defined* in the *variable* declaration space. That brings us to the next topic "Variable Declaration Space".
+Причина, по которой выдаётся ошибка `не могу найти имя`, заключается в том, что имя `Bar` *не определено* в пространстве объявления *переменных*. Это подводит нас к следующей теме «Пространство объявления переменных».
 
-### Variable Declaration Space
-The variable declaration space contains stuff that you can use as a variable. We saw that having `class Foo` contributes a type `Foo` to the *type* declaration space. Guess what? it also contributes a *variable* `Foo` to the *variable* declaration space as shown below:
+### Область объявления переменных
+Область объявления переменных содержит данные, которые вы можете использовать в качестве переменной. Мы видели, что `class Foo` добавляет тип `Foo` в область объявления *типов*. B угадайте, что? он также добавляет *переменную* `Foo` в область объявления *переменных*, как показано ниже:
 
 ```ts
 class Foo {};
 var someVar = Foo;
 var someOtherVar = 123;
 ```
-This is great as sometimes you want to pass classes around as variables. Remember that:
+Это здорово, так как иногда вы хотите передавать классы как переменные. Помните, что:
 
-* we couldn't use something like an `interface` that is *only* in the *type* declaration space as a variable.
+* мы не могли бы использовать что-то вроде `interface`, который находится *только* в области объявления *типов* в качестве переменной.
 
-Similarly something that you declare with `var`, is *only* in the *variable* declaration space and cannot be used as a type annotation:
+Точно так же то, что вы объявляете с помощью `var`, находится *только* в области объявления *переменных* и не может использоваться как описание типа:
 
 ```ts
 var foo = 123;
-var bar: foo; // ERROR: "cannot find name 'foo'"
+var bar: foo; // ОШИБКА: "не возможно найти имя 'foo'"
 ```
-The reason why it says `cannot find name` is because the name `foo` *is not defined* in the *type* declaration space.
+Причина, по которой выдаётся ошибка `не могу найти имя`, заключается в том, что имя `foo` *не определено* в области объявления *типов*.

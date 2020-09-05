@@ -1,12 +1,12 @@
-## Generators
+## Генераторы
 
-`function *` is the syntax used to create a *generator function*. Calling a generator function returns a *generator object*. The generator object just follows the [iterator][iterator] interface (i.e. the `next`, `return` and `throw` functions). 
+`function *` - это синтаксис, используемый для создания *функции генератора*. Вызов функции генератора возвращает *объект генератора*. Объект генератора просто реализует интерфейс [iterator][iterator] (а именно функции `next`, `return` и `throw`).
 
-There are two key motivations behind generator functions: 
+Существуют 2 основные причины использовать функции генератора:
 
-### Lazy Iterators
+### Ленивые итераторы
 
-Generator functions can be used to create lazy iterators e.g. the following function returns an **infinite** list of integers on demand:
+Функции генератора могут использоваться для создания ленивых итераторов, например следующая функция возвращает **бесконечный** список целых чисел по запросу:
 
 ```ts
 function* infiniteSequence() {
@@ -18,11 +18,11 @@ function* infiniteSequence() {
 
 var iterator = infiniteSequence();
 while (true) {
-    console.log(iterator.next()); // { value: xxxx, done: false } forever and ever
+    console.log(iterator.next()); // { value: xxxx, done: false } бесконечно
 }
 ```
 
-Of course if the iterator does end, you get the result of `{ done: true }` as demonstrated below:
+Конечно, если итератор завершится, вы получите результат `{done: true}`, как показано ниже:
 
 ```ts
 function* idMaker(){
@@ -39,52 +39,52 @@ console.log(gen.next()); // { value: 2, done: false }
 console.log(gen.next()); // { done: true }
 ```
 
-### Externally Controlled Execution
-This is the part of generators that is truly exciting. It essentially allows a function to pause its execution and pass control (fate) of the remainder of the function execution to the caller.
+### Внешнее контролируемое исполнение
+Это та роль генераторов, которая действительно восхищает. По сути, это позволяет функции приостановить выполнение и передать управление оставшейся части функции вызывающей стороне.
 
-A generator function does not execute when you call it. It just creates a generator object. Consider the following example along with a sample execution:
+Функция генератора не выполняется при вызове. Она просто создает объект генератора. Рассмотрим следующий пример вместе с примером выполнения:
 
 ```ts
 function* generator(){
-    console.log('Execution started');
+    console.log('Выполнение началось');
     yield 0;
-    console.log('Execution resumed');
+    console.log('Выполнение возобновлено');
     yield 1;
-    console.log('Execution resumed');
+    console.log('Выполнение возобновлено');
 }
 
 var iterator = generator();
-console.log('Starting iteration'); // This will execute before anything in the generator function body executes
+console.log('Запуск итерации'); // Это будет выполнено до того, как выполнится что-либо в теле функции генератора
 console.log(iterator.next()); // { value: 0, done: false }
 console.log(iterator.next()); // { value: 1, done: false }
 console.log(iterator.next()); // { value: undefined, done: true }
 ```
 
-If you run this you get the following output:
+Если вы запустите это, вы получите следующий вывод:
 
 ```
 $ node outside.js
-Starting iteration
-Execution started
+Запуск итерации
+Выполнение началось
 { value: 0, done: false }
-Execution resumed
+Выполнение возобновлено
 { value: 1, done: false }
-Execution resumed
+Выполнение возобновлено
 { value: undefined, done: true }
 ```
 
-* The function only starts execution once `next` is called on the generator object.
-* The function *pauses* as soon as a `yield` statement is encountered.
-* The function *resumes* when `next` is called.
+* Функция начинает выполнение только после вызова `next` объекта-генератора.
+* Функция *делает паузу*, как только встречается оператор yield.
+* Функция *возобновляется* при вызове `next`.
 
-> So essentially the execution of the generator function is controllable by the generator object.
+> Так что, по сути, выполнение функции генератора контролируется объектом генератора.
 
-Our communication using the generator has been mostly one way with the generator returning values for the iterator. One extremely powerful feature of generators in JavaScript is that they allow two way communications!
+Наше общение с использованием генератора было в основном односторонним, когда генератор возвращал значения для итератора. Одна чрезвычайно мощная особенность генераторов в JavaScript состоит в том, что они допускают двустороннюю связь!
 
-* you can control the resulting value of the `yield` expression using `iterator.next(valueToInject)`
-* you can throw an exception at the point of the `yield` expression using `iterator.throw(error)`
+* Вы можете контролировать результирующее значение выражения `yield`, используя `iterator.next(valueToInject)`
+* вы можете бросить исключение в выражении `yield`, используя `iterator.throw(error)`
 
-The following example demonstrates `iterator.next(valueToInject)`:
+В следующем примере демонстрируется `iterator.next(valueToInject)`:
 
 ```ts
 function* generator() {
@@ -93,14 +93,14 @@ function* generator() {
 }
 
 const iterator = generator();
-// Start execution till we get first yield value
+// Начинаем выполнение и получим первое значение yield
 const foo = iterator.next();
 console.log(foo.value); // foo
-// Resume execution injecting bar
+// Возобновляем выполнение, вводя bar
 const nextThing = iterator.next('bar');
 ```
 
-The following example demonstrates `iterator.throw(error)`:
+В следующем примере демонстрируется `iterator.throw(error)`:
 
 ```ts
 function* generator() {
@@ -113,19 +113,19 @@ function* generator() {
 }
 
 var iterator = generator();
-// Start execution till we get first yield value
+// Начинаем выполнение и получим первое значение yield
 var foo = iterator.next();
 console.log(foo.value); // foo
-// Resume execution throwing an exception 'bar'
+// Возобновляем выполнение, бросив исключение 'bar'
 var nextThing = iterator.throw(new Error('bar'));
 ```
 
-So here is the summary:
-* `yield` allows a generator function to pause its communication and pass control to an external system
-* the external system can push a value into the generator function body
-* the external system can throw an exception into the generator function body
+Итак, вот резюме:
+* `yield` позволяет функции генератора приостанавливать выполнение и передавать управление внешней системе
+* внешняя система может передать значение в тело функции генератора
+* внешняя система может бросить исключение в тело функции генератора
 
-How is this useful? Jump to the next section [**async/await**][async-await] and find out.
+И чем это может быть полезно? Перейдите к следующему разделу [**async/await**][async-await] и узнайте.
 
 [iterator]:./iterators.md
 [async-await]:./async-await.md
