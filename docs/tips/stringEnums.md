@@ -1,3 +1,3 @@
-## String enums
+## Строковые перечисления
 
-Sometimes you need a collection of strings collected under a common key. Prior to TypeScript 2.4, TypeScript only supported number-based enums. If using versions prior to 2.4, a work-around is to use [string literal types to create string based enums by combining with union types](../types/literal-types.md).
+Иногда вам нужен набор строк, собранных под общим ключом. До TypeScript 2.4, TypeScript поддерживал только числовые перечисления. Если используются версии до 2.4, временным обходным решением является использование [строковых литералов вместе с объединенными типами, чтобы сымитировать перечисление на основе строки](../types/literal-types.md).
