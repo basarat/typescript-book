@@ -1,34 +1,36 @@
 # Never
 
-> [A video lesson on the never type](https://egghead.io/lessons/typescript-use-the-never-type-to-avoid-code-with-dead-ends-using-typescript)
+> [Youtube: Видеоурок о типе never](https://www.youtube.com/watch?v=aldIFYWu6xc)
 
-Programming language design does have a concept of *bottom* type that is a **natural** outcome as soon as you do *code flow analysis*. TypeScript does *code flow analysis* (😎) and so it needs to reliably represent stuff that might never happen.
+> [Egghead: Видеоурок о типе never](https://egghead.io/lessons/typescript-use-the-never-type-to-avoid-code-with-dead-ends-using-typescript)
 
-The `never` type is used in TypeScript to denote this *bottom* type. Cases when it occurs naturally:
+При разработке языка программирования используется понятие *bottom* типа, который является **естественным** результатом *анализа потока кода*. TypeScript выполняет *анализ потока кода* (😎), поэтому он должен достоверно представлять то, что никогда не произойдёт.
 
-* A function never returns (e.g. if the function body has `while(true){}`)
-* A function always throws (e.g. in `function foo(){throw new Error('Not Implemented')}` the return type of `foo` is `never`)
+Тип `never` используется в TypeScript для обозначения этого типа *bottom*. Случаи, когда это происходит естественным путем:
 
-Of course you can use this annotation yourself as well
+* Функция никогда ничего не вернёт (например, если в теле функции есть `while(true){}`)
+* Функция всегда выбрасывает ошибку (например, в `function foo () {throw new Error ('Не реализована')}` тип возвращаемого значения функции `foo` - `never`)
+
+Конечно, вы можете использовать это описание и сами:
 
 ```ts
 let foo: never; // Okay
 ```
 
-However, `never` *can only ever be assigned to another never*. e.g.
+Тем не менее, `never` *может быть присвоено только другое never*. Например:
 
 ```ts
-let foo: never = 123; // Error: Type number is not assignable to never
+let foo: never = 123; // Ошибка: Тип number нельзя присвоить типу never
 
-// Okay as the function's return type is `never`
-let bar: never = (() => { throw new Error('Throw my hands in the air like I just dont care') })();
+// Okay, так как тип возвращаемого значения функции - `never`
+let bar: never = (() => { throw new Error('Поднимаю руки вверх, будто мне все равно') })();
 ```
 
-Great. Now let's just jump into its key use case :)
+Отлично. Теперь давайте перейдем к основному варианту использования :)
 
-# Use case: Exhaustive Checks
+# Пример использования: тщательные проверки
 
-You can call never functions in a never context.
+Вы можете вызывать функции never в never-обстоятельствах.
 
 ```ts
 function foo(x: string | number): boolean {
@@ -38,24 +40,66 @@ function foo(x: string | number): boolean {
     return false;
   }
 
-  // Without a never type we would error :
-  // - Not all code paths return a value (strict null checks)
-  // - Or Unreachable code detected
-  // But because TypeScript understands that `fail` function returns `never`
-  // It can allow you to call it as you might be using it for runtime safety / exhaustive checks.
-  return fail("Unexhaustive!");
+  // Без типа never мы бы ошиблись:
+  // - Не все пути кода возвращают значение (строгие проверки на null)
+  // - Или обнаружен недостижимый код
+  // Но поскольку TypeScript понимает, что функция `fail` возвращает `never`
+  // Он может позволить вам вызвать её, поскольку вы могли бы использовать её для безопасности выполнения / тщательных проверок.
+  return fail("Нетщательный!");
 }
 
 function fail(message: string): never { throw new Error(message); }
 ```
 
-And because `never` is only assignable to another `never` you can use it for *compile time* exhaustive checks as well. This is covered in the [*discriminated union* section](./discriminated-unions.md).
+А поскольку `never` назначается только другому `never`, вы также можете использовать его для тщательных проверок во *время компиляции*. Это описано в разделе [*размеченные объединения*](./discriminated-unions.md).
 
-# Confusion with `void`
+# Путаница с `void`
 
-As soon as someone tells you that `never` is returned when a function never exits gracefully you intuitively want to think of it as the same as `void`. However, `void` is a Unit. `never` is a falsum.
+Как только кто-то говорит вам, что возвращается `never`, когда функция никогда не завершается корректно и ничего не будет возвращено, вы интуитивно хотите думать об этом как о `void`. Однако `void` - это значение. "Never" - ложное утверждение в логике.
 
-A function that *returns* nothing returns a Unit `void`. However, a function *that never returns* (or always throws) returns `never`. `void` is something that can be assigned (without `strictNullChecking`) but `never` can `never` be assigned to anything other than `never`.
+Функция, которая *ничего не возвращает*, возвращает значение `void`. Однако функция *которая никогда ничего не возвращает* (или всегда выбрасывает ошибку), возвращает `never`. `void` - это то, что может быть присвоено (без `strictNullChecking`), но `never` *никогда* не может быть присвоено чему-либо, кроме `never`.
+
+# Логический вывод типа в функциях, которые никогда ничего не возвращают
+
+Для объявлений функций TypeScript по умолчанию подразумевает `void`, как показано ниже:
+
+```ts
+// Предполагаемый тип возвращаемого значения: void
+function failDeclaration(message: string) {
+  throw new Error(message);
+}
+// Предполагаемый тип возвращаемого значения: never
+const failExpression = function(message: string) {
+  throw new Error(message);
+};
+```
+
+Конечно, вы можете исправить это подробным описанием:
+
+```ts
+function failDeclaration(message: string): never {
+  throw new Error(message);
+}
+```
+
+Основная причина - обратная совместимость с реальным кодом JavaScript:
+
+```ts
+class Base {
+    overrideMe() {
+        throw new Error("Ты забыл переопределить меня!");
+    }
+}
+class Derived extends Base {
+    overrideMe() {
+        // Код, который на самом деле возвращается сюда
+    }
+}
+```
+
+Если `Base.overrideMe` . 
+
+> Реальный TypeScript может преодолеть это с помощью `abstract` функций, но этот логический вывод поддерживается для совместимости.
 
 <!--
 PR: https://github.com/Microsoft/TypeScript/pull/8652
