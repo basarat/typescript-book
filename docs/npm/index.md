@@ -1,43 +1,43 @@
 # NPM 
 
-> Fun fact `npm` is [not an acronym](https://twitter.com/npmjs/status/347057301401763840) so it doesn't expand to anything, but among friends it is commonly called `node package manager`.
+> Интересный факт `npm` - это [не аббревиатура](https://twitter.com/npmjs/status/347057301401763840), но обычно его называют `node package manager`.
 
-`npm` is a binary that comes with default `node` installations used to manage community shared JavaScript / TypeScript packages.
+`npm` - это двоичный файл, который поставляется с `nodejs` по умолчанию и используется для управления JavaScript / TypeScript пакетами.
 
 
-* NPM packages are hosted at (and installed from) https://www.npmjs.com/ (the ☁️).
+* Пакеты NPM размещаются (и устанавливаются с) https://www.npmjs.com/ (☁️).
 
-## Quick common setup
+## Быстрая стандартная настройка
 
-* npm packages are configured using `package.json` file. You can generate a quick file using `npm init -y`.
-* packages get installed into a `./node_modules` folder. You normally have this folder in your `.gitignore`.
+* Пакеты npm настраиваются с помощью файла `package.json`. Вы можете быстро сгенерировать файл, используя `npm init -y`.
+* Пакеты устанавливаются в `./node_modules` папку. Обычно эта папка указана в вашем `.gitignore`.
 
-> Even though you might be building an application, having a `package.json` essentially makes your project a package as well. So the terms your `project | package` can be used interchangably.
+> Даже если вы, возможно, создаете приложение, наличие `package.json` по сути также делает ваш проект пакетом. Так что правила для вашего `проекта | пакета` одинаковы.
 
-When you checkout someone's (your team's) package, it will have a `package.json` that will list the dependencies you need to run the project. You simply run `npm install` and npm will bring them down from the cloud ☁️.
- 
-## Installing a package
-You can run `npm install <something>`. Most people will use the shorthand `npm i <something>` e.g. 
+Когда вы проверяете чей-то (вашей команды) проект, в нем будет `package.json`, в котором будут перечислены зависимости, необходимые для запуска проекта. Вы просто запускаете `npm install`, и npm загружает их из облака ☁️.
+
+## Установка пакета
+Вы можете запустить `npm install <что-то>`. Большинство людей будут использовать сокращение `npm i <что-то>`, например:
 
 ```ts
-// Install react
+// Установить react
 npm i react
 ```
 
-> This will also automatically add `react` into your `package.json`'s `dependencies`.
+> Это также автоматически добавит `react` в поле `dependencies` вашего `package.json`.
 
-## Installing a devDependency
-`devDependencies` are dependencies that are only required during *development* if your project and not required after deployment. 
+## Установка devDependency
+`devDependencies` - это зависимости, которые требуются только во время *разработки* вашего проекта, и не требуются в публикации.
 
-`typescript` is common in `devDependencies` as its only required to build `.ts -> .js`. You normally deploy the built `.js` files:
+`typescript` распространен в `devDependencies`, поскольку он требуется только для сборки `.ts -> .js`. Обычно вы публикуете собранные файлы `.js`:
 
-* into production  
-* OR for consumption by other other npm packages
+* при публикации
+* ИЛИ для использования другими пакетами npm
 
-## Security
-The public `npm` packages are scanned by security team worldwide and issues get reported to npm team. They then release security advisories detailing the issue and potential fixes. Commonly the fix is simply updating the package. 
+## Безопасность
+Общедоступные пакеты `npm` тщательно проверяются командой безопасности по всему миру, и о проблемах сообщается команде npm. Затем они выпускают рекомендации по безопасности с подробным описанием проблемы и потенциальных исправлений. Обычно исправление заключается в простом обновлении пакета.
 
-You can run an audit on your node project by simply running `npm audit`. This will highlight any vulnerabilities that might exist in the package / dependencies of the package. e.g. 
+Вы можете запустить аудит своего проекта узла с помощью команды `npm audit`. Это укажет на любые уязвимости, которые могут существовать в пакете / зависимостях пакета. Например:
 
 ```
 ┌───────────────┬──────────────────────────────────────────────────────────────┐
@@ -53,25 +53,58 @@ You can run an audit on your node project by simply running `npm audit`. This wi
 └───────────────┴──────────────────────────────────────────────────────────────┘
 ```
 
-Note that commonly the issues are found in *development* dependencies (e.g. jest in this case). Since these aren't are a part of your production deployments, most likely your production application is not vulnerable. But still good practice to keep vulnerabilities to `0`.
+Обратите внимание, что обычно проблемы обнаруживаются в *devDependency*(например, jest в данном случае). Поскольку они не являются частью ваших финальных публикаций, скорее всего, ваше финальное приложение не подвержено уязвимостям. Но по-прежнему рекомендуется сохранять количество уязвимостей в размере `0`.
 
-Simply add `npm audit` (the command exist with error code `1` in case of error) as a part of your deployment to ensure the projects stay up to date.
+Просто добавьте `npm audit` (команда имеет код ошибки `1` в случае ошибки) как часть вашего процесса публикации, чтобы обеспечить актуальность проектов.
 
-## Public vs. Private packages
-You don't need this when *using* any of the common public npm packages. Just know its there for enterprise / commercial customers.
+## Скрипты NPM
 
-### Public packages
-* Packages are public by default. 
-* Anyone can deploy a package to npm. 
-* You just need an account (which you can get for free).
- 
-No one needs an account to download a public package. 
+### Что означает `--` в скриптах
+Вы можете создать базовый скрипт с ограниченным набором параметров командной строки, например: вот сценарий, который запускает `tsc` для компилятора TypeScript:
 
-This free sharing of packages is one of the key reasons of success for npm 🌹.
+```json
+{
+  "scripts": {
+    "build": "tsc -p ."
+  }
+}
+```
 
-### Private packages 
+Вы можете создать скрипт `build:watch` для запуска `tsc -p . -w` или, альтернативно, попросить npm запустить `сборку` с дополнительным флагом `-w`, например:
 
-If you want a private package for your company / team / enterprise you need to sign up to a paid plan, details here : https://www.npmjs.com/pricing
+```json
+{
+  "scripts": {
+    "build": "tsc -p .",
+    "build:watch": "npm run build -- -w"
+  }
+}
+```
+Вы можете передать сколько угодно флагов после `--`, например в следующем примере `build: more` имеет тот же эффект, что и `something --foo -f -d --bar`
 
-Of-course you need an account with the right permissions to download a private package.
- 
+```json
+{
+  "scripts": {
+    "build": "something --foo",
+    "build:more": "npm run build -- -f -d --bar"
+  }
+}
+```
+
+## Публичные и приватные пакеты
+Вам это не нужно при *использовании* любых общедоступных пакетов npm. Просто знайте, что это для корпоративных / коммерческих клиентов.
+
+### Публичные пакеты
+* По умолчанию пакеты являются публичными.
+* Кто угодно может публиковать пакет в npm.
+* Вам просто нужна учетная запись для публикации (которую можно получить бесплатно).
+
+Но никому не нужна учетная запись для установки общедоступного пакета.
+
+Бесплатный обмен пакетами - одна из главных причин успеха npm 🌹.
+
+### Приватные пакеты
+
+Если вам нужен приватный пакет для вашей компании / команды / предприятия, вам необходимо подписаться на платный план, подробности здесь: https://www.npmjs.com/pricing
+
+Конечно, вам нужна учетная запись с соответствующими разрешениями для установки приватного пакета.
