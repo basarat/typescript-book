@@ -1,50 +1,48 @@
-# Singleton Pattern
+# Паттерн синглтон
 
-The conventional singleton pattern is really something that is used to overcome the fact that all code must be in a `class`.
+Традиционный синглтон паттерн используется для решения кейсов, когда код должен быть упакован в `классе`.
 
 ```ts
 class Singleton {
     private static instance: Singleton;
     private constructor() {
-        // do something construct...
+        // сделать что-нибудь...
     }
     static getInstance() {
         if (!Singleton.instance) {
             Singleton.instance = new Singleton();
-            // ... any one time initialization goes here ...
+            // ... здесь единожды выполняется инициализация ... 
         }
         return Singleton.instance;
     }
     someMethod() { }
 }
 
-let something = new Singleton() // Error: constructor of 'Singleton' is private.
+let something = new Singleton() // Ошибка: конструктор 'Singleton' является приватным.
 
-let instance = Singleton.getInstance() // do something with the instance...
+let instance = Singleton.getInstance() // сделать что-нибудь с экземпляром...
 ```
 
-However, if you don't want lazy initialization you can instead just use a `namespace`: 
+Однако, если вам не нужна ленивая инициализация, вы можете вместо этого просто использовать `namespace`:
 
 ```ts
 namespace Singleton {
-    // ... any one time initialization goes here ...
+    // ... здесь единожды выполняется инициализация ...
     export function someMethod() { }
 }
-// Usage
+// Использование
 Singleton.someMethod();
 ```
 
-> Warning : Singleton is just a fancy name for [global](http://stackoverflow.com/a/142450/390330)
+> Предупреждение: Синглтон - это просто причудливое название для [global](http://stackoverflow.com/a/142450/390330)
 
-For most projects `namespace` can additionally be replaced by a *module*.
+Для большинства проектов `namespace` можно заменить на *module*.
 
 ```ts
 // someFile.ts
-// ... any one time initialization goes here ...
+// ... здесь единожды выполняется инициализация ...
 export function someMethod() { }
 
-// Usage
+// Использование
 import {someMethod} from "./someFile";
 ```
-
-
