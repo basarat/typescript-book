@@ -1,8 +1,8 @@
-## Limit usage of property setters
+## Ограничьте использование сеттеров свойств
 
-Prefer explicit set/get functions (e.g. `setBar` and `getBar` functions) over setters/getters.
+Предпочтительнее явные функции установки/получения (например, функции `setBar` и `getBar`), а не сеттеры/геттеры.
 
-Consider the following code:
+Рассмотрим следующий код:
 
 ```ts
 foo.bar = {
@@ -11,7 +11,7 @@ foo.bar = {
 };
 ```
 
-In the presence of setter/getters:
+При наличии сеттеров/геттеров:
 
 ```ts
 class Foo {
@@ -25,6 +25,6 @@ class Foo {
 let foo = new Foo();
 ```
 
-This is not a *good* use of property setters. The person reading the first code sample has no context about all the things that will change. Whereas someone calling `foo.setBar(value)` might have an idea that something might change on `foo`.
+Это не *лучшее* использование сеттеров свойств. У человека, читающего первый пример кода, нет контекста обо всех вещах, которые могут измениться. В то время как кто-то, вызывающий `foo.setBar(value)`, может догадаться, что что-то может измениться в `foo`.
 
-> Bonus points: Find references works better if you have different functions. In TypeScript tools if you find references for a getter or a setter you get *both* whereas with explicit function calls you only get references to the relevant function.
+> Бонус: поиск ссылок работает лучше, если у вас разные функции. В инструментах TypeScript, если вы найдете ссылки на геттер или сеттер, вы получите *оба*, тогда как при явных вызовах функций вы получите только ссылки на соответствующую функцию.
