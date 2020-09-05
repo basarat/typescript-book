@@ -27,7 +27,7 @@ console.log(false == undefined); // false
 ```ts
 function foo(arg: string | null | undefined) {
   if (arg != null) {
-    // arg должен быть строкой, поскольку `!=` исключает и null и undefined. 
+    // arg должен быть строкой, поскольку `!=` исключает и null и undefined.
   }
 }
 ```
@@ -70,7 +70,7 @@ function foo():{a:number,b?:number}{
 ```
 
 ### Колбэки в стиле Node
-Функции колбеков в стиле Node (вроде `(err,somethingElse)=>{ /* что-нибудь */ }`) обычно вызываются с `err` равным `null`, если нет ошибок. Как бы то ни было, общем случае просто используйте проверку на истинность:
+Функции колбеков в стиле Node (вроде `(err,somethingElse)=>{ /* что-нибудь */ }`) обычно вызываются с `err` равным `null`, если нет ошибок. Как бы то ни было, в общем случае просто используйте проверку на истинность:
 ```ts
 fs.readFile('someFile', 'utf8', (err,data) => {
   if (err) {
