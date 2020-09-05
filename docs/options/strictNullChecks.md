@@ -1,6 +1,6 @@
 # `strictNullChecks`
 
-By default `null` and `undefined` are assignable to all types in TypeScript e.g.
+По умолчанию `null` и `undefined` можно назначать всем типам в TypeScript, например:
 
 ```ts
 let foo: number = 123;
@@ -8,16 +8,16 @@ foo = null; // Okay
 foo = undefined; // Okay
 ```
 
-This is modelled after how a lot of people write JavaScript. However, like all things, TypeScript allows you to be *explicit* about what *can and cannot be* assigned a `null` or `undefined`.
+Это спроектировано по образцу того, как многие люди пишут JavaScript. Однако, как и в других случаях, TypeScript позволяет вам *явно* указать, чему *можно, а чему нельзя* присвоить `null` или `undefined`.
 
-In strict null checking mode, `null` and `undefined` are different:
+В режиме `strictNullChecks`, значения `null` и `undefined` различаются:
 
 ```ts
 let foo = undefined;
-foo = null; // NOT Okay
+foo = null; // не Okay
 ```
 
-Let's say we have a `Member` interface:
+Допустим, у нас есть интерфейс `Member`:
 
 ```ts
 interface Member {
@@ -26,68 +26,68 @@ interface Member {
 }
 ```
 
-Not every `Member` will provide their age, so `age` is an optional property, meaning the value of `age` may or may not be `undefined`.
+Не каждый `Участник` предоставит свой возраст, поэтому `возраст` является необязательным свойством, то есть значение `age` может быть или не быть `undefined`.
 
-`undefined` is the root of all evil. It often leads to runtime errors. It is easy to write code that will throw `Error` at runtime:
-
-```ts
-getMember()
-  .then(member: Member => {
-    const stringifyAge = member.age.toString() // Cannot read property 'toString' of undefined
-  })
-```
-
-But in strict null checking mode, this error will be caught at compile time:
+`undefined` - корень всех зол. Это часто приводит к ошибкам во время выполнения. Легко написать код, который будет выдавать `Error` во время выполнения:
 
 ```ts
 getMember()
   .then(member: Member => {
-    const stringifyAge = member.age.toString() // Object is possibly 'undefined'
+    const stringifyAge = member.age.toString() // Невозможно прочитать свойство toString из undefined
   })
 ```
 
-## Non-Null Assertion Operator
-
-A new `!` post-fix expression operator may be used to assert that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact. For example:
+Но в режиме `strictNullChecks` эта ошибка будет обнаружена во время компиляции:
 
 ```ts
-// Compiled with --strictNullChecks
+getMember()
+  .then(member: Member => {
+    const stringifyAge = member.age.toString() // Возможно, объект 'undefined'
+  })
+```
+
+## Оператор утверждения не-null
+
+Новый постфиксный оператор `!` может использоваться для утверждения, что его операнд не равен null и не-undefined в случаях, где средство проверки типов не может сделать логический вывод об этом. Например:
+
+```ts
+// Скомпилировано с --strictNullChecks
 function validateEntity(e?: Entity) {
-    // Throw exception if e is null or invalid entity
+    // Выбрасываем исключение, если e - null или невалидный объект
 }
 
 function processEntity(e?: Entity) {
     validateEntity(e);
-    let a = e.name;  // TS ERROR: e may be null.
-    let b = e!.name;  // OKAY. We are asserting that e is non-null.
+    let a = e.name;  // ОШИБКА TS: e может быть null.
+    let b = e!.name;  // OKAY. Мы утверждаем, что e не null.
 }
 ```
 
-> Note that it is just an assertion, and just like type assertions *you are responsible* for making sure the value is not null. A non-null assertion is essentially you telling the compiler "I know it's not null so let me use it as though it's not null".
+> Обратите внимание, что это просто утверждение, и, как при утверждении типа, *вы сами несете ответственность* за то, чтобы значение не было null. Не-null утверждение, по сути, означает, что вы говорите компилятору: "Я знаю, что оно не null, поэтому позволь мне использовать его, как если бы оно не было null".
 
-### Definite Assignment Assertion Operator
+### Оператор утверждения окончательного присваивания
 
-TypeScript will also complain about properties in classes not being initialized e.g.:
+TypeScript также будет жаловаться на свойства в классах, которые не инициализированы, например:
 
 ```ts
 class C {
-  foo: number; // OKAY as assigned in constructor
-  bar: string = "hello"; // OKAY as has property initializer
-  baz: boolean; // TS ERROR: Property 'baz' has no initializer and is not assigned directly in the constructor.
+  foo: number; // OKAY, так как назначено в конструкторе
+  bar: string = "hello"; // OKAY, так как есть инициализатор свойства
+  baz: boolean; // ОШИБКА TS: свойство 'baz' не имеет инициализатора и не назначается напрямую в конструкторе.
   constructor() {
     this.foo = 42;
   }
 }
 ```
 
-You can use the definite assignment assertion postfixed to the property name to tell TypeScript that you are initializing it somewhere other than the constructor e.g.
+Вы можете использовать утверждение окончательного присваивания с постфиксом к имени свойства, чтобы сообщить TypeScript, что вы инициализируете его где-нибудь, кроме конструктора, например:
 
 ```ts
 class C {
   foo!: number;
   // ^
-  // Notice this exclamation point!
-  // This is the "definite assignment assertion" modifier.
+  // Обратите внимание на этот восклицательный знак!
+  // Это модификатор "утверждения окончательного присваивания".
   
   constructor() {
     this.initialize();
@@ -98,16 +98,16 @@ class C {
 }
 ```
 
-You can also use this assertion with simple variable declarations e.g.:
+Вы также можете использовать это утверждение с простыми объявлениями переменных, например:
 
 ```ts
-let a: number[]; // No assertion
-let b!: number[]; // Assert
+let a: number[]; // Нет утверждения
+let b!: number[]; // Утвердить
 
 initialize();
 
-a.push(4); // TS ERROR: variable used before assignment
-b.push(4); // OKAY: because of the assertion
+a.push(4); // TS ОШИБКА: переменная использована до присвоения
+b.push(4); // OKAY: из-за утверждения
 
 function initialize() {
   a = [0, 1, 2, 3];
@@ -115,4 +115,4 @@ function initialize() {
 }
 ```
 
-> Like all assertions, you are telling the compiler to trust you. The compiler will not complain even if the code doesn't actually always assign the property.
+> Как и все утверждения, вы говорите компилятору доверять вам. Компилятор не будет жаловаться, даже если код на самом деле не всегда присваивает свойство.
