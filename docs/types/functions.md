@@ -1,42 +1,43 @@
-* [Parameter Annotations](#parameter-annotations)
-* [Return Type Annotation](#return-type-annotation)
-* [Optional Parameters](#optional-parameters)
-* [Overloading](#overloading)
+- [Функции](#функции)
+  - [Описание параметров](#описание-параметров)
+  - [Описание типа возврата](#описание-типа-возврата)
+  - [Необязательные параметры](#необязательные-параметры)
+  - [Перегрузки](#перегрузки)
 
-## Functions
-The TypeScript type system pays a lot of love to functions, after all they are the core building blocks of a composable system.
+## Функции
+Система типов TypeScript уделяет большое внимание функциям, ведь они являются основными строительными блоками нашей составной системы.
 
-### Parameter annotations
-Of course you can annotate function parameters just like you can annotate other variables:
+### Описание параметров
+Конечно, вы можете описывать типы параметров функции так же, как вы можете описываете типы других переменных:
 
 ```ts
-// variable annotation
+// описание переменной
 var sampleVariable: { bar: number }
 
-// function parameter annotation
+// описание параметра функции
 function foo(sampleParameter: { bar: number }) { }
 ```
 
-Here I used inline type annotations. Of course you can use interfaces etc.
+Здесь я использовал встроенные описания типа. Конечно, вы можете использовать интерфейсы и т.д.
 
-### Return type annotation
+### Описание типа возврата
 
-You can annotate the return type after the function parameter list with the same style as you use for a variable, e.g. `: Foo` in the below example:
+Вы можете описывать тип того что возвращаете из функции после списка параметров функции тем же стилем, который вы используете для переменной, например, `: Foo` в следующем примере:
 
 ```ts
 interface Foo {
     foo: string;
 }
 
-// Return type annotated as `: Foo`
+// Тип для описания возвращаемого функцией значения `: Foo`
 function foo(sample: Foo): Foo {
     return sample;
 }
 ```
 
-Of course I used an `interface` here, but you are free to use other annotations e.g. inline annotations.
+Да, я использовал здесь интерфейс, но вы можете использовать другие описания, например, встроенные описания.
 
-Quite commonly you don't *need* to annotate the return type of a function as it can generally be inferred by the compiler.
+Как правило, вам не нужно описывать тип возвращаемого функцией значения, так как он может быть автоматически распознан компилятором.
 
 ```ts
 interface Foo {
@@ -44,24 +45,24 @@ interface Foo {
 }
 
 function foo(sample: Foo) {
-    return sample; // inferred return type 'Foo'
+    return sample; // распознан тип возвращаемого значения 'Foo'
 }
 ```
 
-However, it is generally a good idea to add these annotation to help with errors e.g.:
+Однако, как правило, рекомендуется добавлять эти описания типов для устранения ошибок, например:
 
 ```ts
 function foo() {
-    return { fou: 'John Doe' }; // You might not find this misspelling of `foo` till it's too late
+    return { fou: 'John Doe' }; // Возможно, вы не сможете найти эту опечатку `foo`, пока не станет слишком поздно
 }
 
 sendAsJSON(foo());
 ```
 
-If you don't plan to return anything from a function, you can annotate it as `:void`. You can generally drop `:void` and leave it to the inference engine though.
+Если вы не планируете возвращать что-либо из функции, вы можете описать ее как `:void`, но как правило вы можете опустить `:void`.
 
-### Optional Parameters
-You can mark a parameter as optional:
+### Необязательные параметры
+Вы можете пометить параметр как необязательный:
 
 ```ts
 function foo(bar: number, bas?: string): void {
@@ -72,7 +73,7 @@ foo(123);
 foo(123, 'hello');
 ```
 
-Alternatively you can even provide a default value (using `= someValue` after the parameter declaration) which is injected for you if the caller doesn't provide that argument:
+В качестве альтернативы вы можете даже предоставить значение по умолчанию (используя `= someValue` после объявления параметра), которое будет использоваться если при вызове  не было предоставлено иного значения этого параметра:
 
 ```ts
 function foo(bar: number, bas: string = 'hello') {
@@ -83,8 +84,8 @@ foo(123);           // 123, hello
 foo(123, 'world');  // 123, world
 ```
 
-### Overloading
-TypeScript allows you to *declare* function overloads. This is useful for documentation + type safety purpose. Consider the following code:
+### Перегрузки
+TypeScript позволяет *объявлять* перегрузки функций. Это полезно для документации + проверки типов. Рассмотрим следующий код:
 
 ```ts
 function padding(a: number, b?: number, c?: number, d?: any) {
@@ -104,16 +105,16 @@ function padding(a: number, b?: number, c?: number, d?: any) {
 }
 ```
 
-If you look at the code carefully you realize the meaning of `a`,`b`,`c`,`d` changes based on how many arguments are passed in. Also the function only expects `1`, `2` or `4` arguments. These constraints can be *enforced* and *documented* using function overloading. You just declare the function header multiple times. The last function header is the one that is actually active *within* the function body but is not available to the outside world.
+Если вы внимательно посмотрите на код, вы поймете значения `a`,`b`,`c`,`d` меняются в зависимости от количества переданных параметров. Также функция ожидает только `1`, `2` либо `4` параметра. Эти ограничения могут быть *обеспечены* и *задокументированы* с использованием перегрузки функций. По сути через условие вы просто объявляете параметры функции несколько раз. Последние объявленные параметры - это те, которые действительно используются *внутри* тела функции, но недоступные извне.
 
-This is shown below:
+Это показано ниже:
 
 ```ts
-// Overloads
+// Перегрузки
 function padding(all: number);
 function padding(topAndBottom: number, leftAndRight: number);
 function padding(top: number, right: number, bottom: number, left: number);
-// Actual implementation that is a true representation of all the cases the function body needs to handle
+// Практическая реализация содержащая все случаи, которые должно обрабатывать тело функции
 function padding(a: number, b?: number, c?: number, d?: number) {
     if (b === undefined && c === undefined && d === undefined) {
         b = c = d = a;
@@ -131,21 +132,21 @@ function padding(a: number, b?: number, c?: number, d?: number) {
 }
 ```
 
-Here the first three function headers are available as valid calls to `padding`:
+Здесь первые три случая использования параметров доступны как допустимые вызовы `padding`:
 
 ```ts
-padding(1); // Okay: all
+padding(1); // Okay: все
 padding(1,1); // Okay: topAndBottom, leftAndRight
 padding(1,1,1,1); // Okay: top, right, bottom, left
 
-padding(1,1,1); // Error: Not a part of the available overloads
+padding(1,1,1); // Ошибка: Не входит в число доступных перегрузок
 ```
 
-Of course it's important for the final declaration (the true declaration as seen from inside the function) to be compatible with all the overloads. This is because that is the true nature of the function calls that the function body needs to account for.
+Конечно, важно, чтобы последнее объявление (истинное объявление, видимое внутри функции) было совместимо со всеми перегрузками. Потому что это важный смысл вызовов функций, которые тело функции должно учитывать.
 
-> Function overloading in TypeScript doesn't come with any runtime overhead. It just allows you to document the manner you expect the function to be called in and the compiler holds the rest of your code in check.
+> Перегрузка функций в TypeScript не приводит к увеличению нагрузки во время выполнения. Она просто позволяет документировать как функция будет вызываться, а компилятор контролирует оставшуюся часть кода.
 
-[](### Declaring Functions)
-[](With lambda, with interfaces which allow overloading declarations)
+[](### Объявление функций)
+[](С лямбда, с интерфейсами, которые позволяют перегружать объявления)
 
-[](### Type Compatibility)
+[](### Совместимость типов)
