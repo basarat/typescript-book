@@ -1,25 +1,24 @@
-# Type Inference in TypeScript
+# Логический вывод типа в TypeScript
 
-TypeScript can infer (and then check) the type of a variable based on a few simple rules. Because these rules
-are simple you can train your brain to recognize safe / unsafe code (it happened for me and my teammates quite quickly).
+TypeScript может логически вывести (а затем проверить) тип переменной на основе нескольких простых правил. Потому как эти правила просты, вы можете научить свой мозг распознавать безопасный / небезопасный код (это случилось со мной и моими товарищами по команде довольно быстро).
 
-> The types flowing is just how I imagine in my brain the flow of type information.
+> Поток типов - это то, как я представляю себе в уме распространение информации о типах.
 
-## Variable Definition
+## Определение переменной
 
-Types of a variable are inferred by definition.
+Типы переменной определяются по её определению.
 
 ```ts
-let foo = 123; // foo is a `number`
-let bar = "Hello"; // bar is a `string`
-foo = bar; // Error: cannot assign `string` to a `number`
+let foo = 123; // foo `число`
+let bar = "Hello"; // bar `строка`
+foo = bar; // Ошибка: невозможно `строке` присвоить `число`
 ```
 
-This is an example of types flowing from right to left.
+Это пример типов, распространяющихся справа налево.
 
-## Function Return Types
+## Типы значений возвращаемых функцией
 
-The return type is inferred by the return statements e.g. the following function is inferred to return a `number`.
+Тип возвращаемого значения определяется инструкцией возврата, например, предполагается, что следующая функция возвращает `число`.
 
 ```ts
 function add(a: number, b: number) {
@@ -27,30 +26,30 @@ function add(a: number, b: number) {
 }
 ```
 
-This is an example of types flowing bottom out.
+Это пример типов, распространяющихся снизу вверх.
 
-## Assignment
+## Присвоение
 
-The type of function parameters / return values can also be inferred by assignment e.g. here we say that `foo` is an `Adder`, that makes `number` the type of `a` and `b`.
+Тип параметров функции / возвращаемых значений также может быть определен посредством присваивания, например, здесь мы говорим, что `foo` является `сумматором`, и это делает `a` и `b` типом `число`.
 
 ```ts
 type Adder = (a: number, b: number) => number;
 let foo: Adder = (a, b) => a + b;
 ```
 
-This fact can be demonstrated by the below code which raises an error as you would hope:
+Этот факт может быть продемонстрирован с помощью приведенного ниже кода, который вызывает ошибку, как можно было и ожидать:
 
 ```ts
 type Adder = (a: number, b: number) => number;
 let foo: Adder = (a, b) => {
-    a = "hello"; // Error: cannot assign `string` to a `number`
+    a = "hello"; // Ошибка: невозможно `строке` присвоить `число`
     return a + b;
 }
 ```
 
-This is an example of types flowing from left to right.
+Это пример типов, распространяющихся слева направо.
 
-The same *assignment* style type inference works if you create a function for a callback argument. After all an `argument -> parameter`is just another form of variable assignment.
+Логический вывод типов срабатывает с этим же стилем присвоения, если вы создаете функцию с параметром в виде колбэка. В конце концов, `argument -> parameter` - это просто еще одна форма присвоения переменных.
 
 ```ts
 type Adder = (a: number, b: number) => number;
@@ -58,42 +57,42 @@ function iTakeAnAdder(adder: Adder) {
     return adder(1, 2);
 }
 iTakeAnAdder((a, b) => {
-    // a = "hello"; // Would Error: cannot assign `string` to a `number`
+    // a = "hello"; // Будет ошибка: невозможно `строке` присвоить `число`
     return a + b;
 })
 ```
 
-## Structuring
+## Структурирование
 
-These simple rules also work in the presence of **structuring** (object literal creation). For example in the following case the type of `foo` is inferred to be `{a:number, b:number}`
+Эти простые правила также работают при использовании **структурирования** (создание литерала объекта). Например, в следующем случае тип `foo` определяется как `{a:number, b:number}`
 
 ```ts
 let foo = {
     a: 123,
     b: 456
 };
-// foo.a = "hello"; // Would Error: cannot assign `string` to a `number`
+// foo.a = "hello"; // Будет ошибка: невозможно `строке` присвоить `число`
 ```
 
-Similarly for arrays:
+Аналогично для массивов:
 
 ```ts
 const bar = [1,2,3];
-// bar[0] = "hello"; // Would error: cannot assign `string` to a `number`
+// bar[0] = "hello"; // Будет ошибка: невозможно `строке` присвоить `число`
 ```
 
-And of course any nesting:
+Ну и конечно же любое вложение:
 
 ```ts
 let foo = {
     bar: [1, 3, 4]
 };
-// foo.bar[0] = 'hello'; // Would error: cannot assign `string` to a `number`
+// foo.bar[0] = 'hello'; // Будет ошибка: невозможно `строке` присвоить `число`
 ```
 
-## Destructuring
+## Деструктуризация
 
-And of course, they also work with destructuring, both objects:
+И, конечно же, они также работают с деструктуризацией, оба:
 
 ```ts
 let foo = {
@@ -101,74 +100,74 @@ let foo = {
     b: 456
 };
 let {a} = foo;
-// a = "hello"; // Would Error: cannot assign `string` to a `number`
+// a = "hello"; // Будет ошибка: невозможно `строке` присвоить `число`
 ```
 
-and arrays:
+и массивы:
 
 ```ts
 const bar = [1, 2];
 let [a, b] = bar;
-// a = "hello"; // Would Error: cannot assign `string` to a `number`
+// a = "hello"; // Будет ошибка: невозможно `строке` присвоить `число`
 ```
 
-And if the function parameter can be inferred, so can its destructured properties. For example here we destructure the argument into its `a`/`b` members.
+И если параметр функции может быть логически выведен, то могут и его деструктурированные свойства. Например, здесь мы деструктурируем параметр на `a`/`b`.
 
 ```ts
 type Adder = (numbers: { a: number, b: number }) => number;
 function iTakeAnAdder(adder: Adder) {
     return adder({ a: 1, b: 2 });
 }
-iTakeAnAdder(({a, b}) => { // Types of `a` and `b` are inferred
-    // a = "hello"; // Would Error: cannot assign `string` to a `number`
+iTakeAnAdder(({a, b}) => { // Типы `a` и` b` логически выводятся
+    // a = "hello"; // Будет ошибка: невозможно `строке` присвоить `число`
     return a + b;
 })
 ```
 
-## Type Guards
+## Защита типа
 
-We have already seen how [Type Guards](./typeGuard.md) help change and narrow down types (particularly in the case of unions). Type guards are just another form of type inference for a variable in a block.
+Мы уже видели, как [Защита типа](./typeGuard.md) помогает изменять и уточнять типы (особенно в случае объединений). Защиты типов - это просто еще одна форма логического вывода типа для переменной в блоке.
 
-## Warnings
+## Предупреждения
 
-### Be careful around parameters
+### Будьте осторожны с параметрами
 
-Types do not flow into the function parameters if it cannot be inferred from an assignment. For example in the following case the compiler does not know the type of `foo` so it cannot infer the type of `a` or `b`.
+Типы не распространяются в параметры функции, если они не могут быть логически выведены из присвоения. Например, в следующем случае компилятор не знает тип `foo`, поэтому он не может определить тип `a` или `b`.
 
 ```ts
-const foo = (a,b) => { /* do something */ };
+const foo = (a,b) => { /* сделать что-нибудь */ };
 ```
 
-However, if `foo` was typed the function parameters type can be inferred (`a`,`b` are both inferred to be of type `number` in the example below).
+Однако, если был введен `foo`, тип параметров функции может быть логически выведен (`a`,`b` оба выведены как имеющие тип `number` в примере ниже).
 
 ```ts
 type TwoNumberFunction = (a: number, b: number) => void;
-const foo: TwoNumberFunction = (a, b) => { /* do something */ };
+const foo: TwoNumberFunction = (a, b) => { /* сделать что-нибудь */ };
 ```
 
-### Be careful around return
+### Будьте осторожны с возвращаемыми значениями
 
-Although TypeScript can generally infer the return type of a function, it might not be what you expect. For example here function `foo` has a return type of `any`.
+Хотя TypeScript может обычно логически выводить тип возвращаемого значения функции, он может не соответствовать ожидаемому. Например, здесь функция `foo` имеет тип возврата `any`.
 
 ```ts
 function foo(a: number, b: number) {
     return a + addOne(b);
 }
-// Some external function in a library someone wrote in JavaScript
-function addOne(a) {
-    return a + 1;
+// Какая-то внешняя функция в библиотеке, которую кто-то написал в JavaScript
+function addOne(c) {
+    return c + 1;
 }
 ```
 
-This is because the return type is impacted by the poor type definition for `addOne` (`a` is `any` so the return of `addOne` is `any` so the return of `foo` is `any`).
+Это связано с тем, что на возвращаемый тип влияет плохое определение типа для `addOne` (`c` равно `any`, поэтому возвращаемое от `addIn` равно `any`, поэтому отсюда и `foo` равно `any`).
 
-> I find it simplest to always be explicit about function returns. After all, these annotations are a theorem and the function body is the proof.
+> Я считаю, что проще всего всегда быть явным в описании возвращаемых значений функций. Ведь эти описания являются теоремой, а тело функции является доказательством.
 
-There are other cases that one can imagine, but the good news is that there is a compiler flag that can help catch such bugs.
+Есть и другие случаи, которые нетрудно себе представить, но хорошая новость заключается в том, что есть флаг компилятора, который может помочь отловить такие ошибки.
 
 ## `noImplicitAny`
 
-The flag `noImplicitAny` instructs the compiler to raise an error if it cannot infer the type of a variable (and therefore can only have it as an *implicit* `any` type). You can then
+Флаг `noImplicitAny` указывает компилятору выдавать ошибку, если он не может определить тип переменной (и, следовательно, может иметь ее только как *неявный* `any` тип). Далее вы сможете
 
-* either say that *yes I want it to be of type `any`* by *explicitly* adding an `: any` type annotation
-* help the compiler out by adding a few more *correct* annotations.
+* либо сказать, что *да, я хочу, чтобы это было типом `any`* и *явно* добавить описание типа `: any`
+* либо помочь компилятору, добавив еще несколько *правильных* описаний.
