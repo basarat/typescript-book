@@ -59,44 +59,93 @@
 
 ## Отдельная благодарность за помощь в переводе
 
-|<img src="https://avatars0.githubusercontent.com/u/11626976?s=460&u=e47fae8f52a67328ef0ad995aa9553fcfb64f797&v=4" width="150" />|
-|-------|
-|<div align="center">[Irina Shanina](https://github.com/irivanych)</div>|
-
-|<img src="https://avatars2.githubusercontent.com/u/1017197?s=460&u=bae9de3454d1221922ba0699799afaf68c3c1a99&v=4" width="150" />|
-|-------|
-|<div align="center">[Alexander](https://github.com/gavrashenko)</div>|
-
-|<img src="https://avatars2.githubusercontent.com/u/6252665?s=460&u=1fca2946f5e28c1c5ff402f9d21b24a4feee1dcf&v=4" width="150" />|
-|-------|
-|<div align="center">[Lee Ho](https://github.com/lee-ho)</div>|
-
-|<img src="https://avatars3.githubusercontent.com/u/20978398?s=460&u=b839ec3dfce7e5dd9280da31599df915ba244760&v=4" width="150" />|
-|-------|
-|<div align="center">[Derfex](https://github.com/derfex)</div>|
-
-|<img src="https://avatars1.githubusercontent.com/u/35610168?s=460&v=4" width="150" />|
-|-------|
-|<div align="center">[Hohserg1](https://github.com/hohserg1)</div>|
-
-|<img src="https://avatars0.githubusercontent.com/u/27624545?s=460&u=a94d0e67c062109a37c0a0604a1dbb59268db885&v=4" width="150" />|
-|-------|
-|<div align="center">[Dzmitry](https://github.com/heat98)</div>|
-
-|<img src="https://avatars0.githubusercontent.com/u/16040008?s=460&v=4" width="150" />|
-|-------|
-|<div align="center">[Dudeinhoodie](https://github.com/dudeinhoodie)</div>|
-
-|<img src="https://avatars3.githubusercontent.com/u/44474697?s=460&u=2bfb916fe0d1ecd6bf7966560855cc38f1d5bd4c&v=4" width="150" />|
-|-------|
-|<div align="center">[TicTak21](https://github.com/TicTak21)</div>|
-
-|<img src="https://avatars3.githubusercontent.com/u/2868197?s=460&v=4" width="150" />|
-|-------|
-|<div align="center">[Sergey12313](https://github.com/sergey12313)</div>|
-
-|<img src="https://avatars2.githubusercontent.com/u/1325864?s=460&v=4" width="150" />|
-|-------|
-|<div align="center">[Sbrin](https://github.com/sbrin)</div>|
-
-
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img
+          src="https://avatars0.githubusercontent.com/u/11626976?s=460&u=e47fae8f52a67328ef0ad995aa9553fcfb64f797&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/irivanych">Irina Shanina</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars2.githubusercontent.com/u/1017197?s=460&u=bae9de3454d1221922ba0699799afaf68c3c1a99&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/gavrashenko">Alexander</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars2.githubusercontent.com/u/6252665?s=460&u=1fca2946f5e28c1c5ff402f9d21b24a4feee1dcf&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/leeho">Lee Ho</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars3.githubusercontent.com/u/20978398?s=460&u=b839ec3dfce7e5dd9280da31599df915ba244760&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/derfex">Derfex</a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img
+          src="https://avatars1.githubusercontent.com/u/35610168?s=460&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/hohserg1">Hohserg1</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars0.githubusercontent.com/u/27624545?s=460&u=a94d0e67c062109a37c0a0604a1dbb59268db885&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/heat98">Dzmitry</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars0.githubusercontent.com/u/16040008?s=460&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/dudeinhoodie">Dudeinhoodie</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars3.githubusercontent.com/u/44474697?s=460&u=2bfb916fe0d1ecd6bf7966560855cc38f1d5bd4c&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/TicTak21">TicTak21</a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img
+          src="https://avatars3.githubusercontent.com/u/2868197?s=460&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/sergey12313">Sergey12313</a>
+      </td>
+      <td align="center">
+        <img
+          src="https://avatars2.githubusercontent.com/u/1325864?s=460&v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/sbrin">Sbrin</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
