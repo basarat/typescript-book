@@ -10,13 +10,17 @@
 ## `lib.d.ts`
 
 A special declaration file `lib.d.ts` ships with every installation of TypeScript. This file contains the ambient declarations for various common JavaScript constructs present in JavaScript runtimes and the DOM.
+`lib.d.ts`라는 특정 선언 파일은 TypeScript를 설치할 때 함께 따라옵니다. 이 파일은 다양한 JavaScript 런타임과 DOM에 존재하는 다양한 JavaScript 구성을 담고 있습니다.
 
 * This file is automatically included in the compilation context of a TypeScript project.
+* 이 파일은 TypeScript 프로젝트의 컴파일 과정에서 자동으로 추가됩니다.
 * The objective of this file is to make it easy for you to start writing *type checked* JavaScript code.
+* 이 파일의 목적은 당신이 타입이 체크된 JavaScript 코드를 쉽게 작성할 수 있도록 도와주기 위함입니다.
 
 You can exclude this file from the compilation context by specifying the `--noLib` compiler command line flag (or `"noLib" : true` in `tsconfig.json`).
+당신은 컴파일을 실행할 때 커맨드 라인에 `--noLib` 플래그를 명시하면 컴파일 과정에서 이 파일을 제외할 수 있습니다. (혹은 `tsconfig.json`에 `"noLib": true`를 추가하시면 됩니다.)
 
-### Example Usage
+### Example Usage 예제
 
 As always let's look at examples of this file being used in action:
 
