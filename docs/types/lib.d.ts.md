@@ -1,13 +1,13 @@
 * [lib.d.ts](#libdts)
-* [예제](#example-usage)
-* [`lib.d.ts` 뜯어보기](#libdts-inside-look)
+* [Example Usage](#example-usage)
+* [Inside look](#libdts-inside-look)
 * [Modifying Native types](#modifying-native-types)
 * [Using custom lib.d.ts](#using-your-own-custom-libdts)
 * [Compiler `target` effect on lib.d.ts](#compiler-target-effect-on-libdts)
 * [`lib` option](#lib-option)
 * [Polyfill for old JavaScript engines](#polyfill-for-old-javascript-engines)
 
-## `lib.d.ts`
+## lib.d.ts
 
 TypeScript를 설치하면 `lib.d.ts`란 이름의 특수한 선언 파일이 항상 함께 따라옵니다. 이 파일은 JavaScript 런타임 및 DOM에 존재하는 다양한 일반적인 JavaScript constructs에 대한 ambient 선언을 담고 있습니다.
 
@@ -16,7 +16,7 @@ TypeScript를 설치하면 `lib.d.ts`란 이름의 특수한 선언 파일이 �
 
 커맨드 라인에서 `--noLib` 플래그를 명시하거나 `tsconfig.json`에 `"noLib": true`를 추가하면, 컴파일 context에서 `lib.d.ts`가 추가되는 것을 막을 수 있습니다.
 
-### 예제
+### Example Usage
 
 실제로 `lib.d.ts`가 어떻게 사용되는지 예제를 통해 함께 보겠습니다:
 
@@ -36,7 +36,7 @@ var bar = foo.toString(); // Error: 'number'에는 'toString'이란 속성이 �
 
 자, 이제 `lib.d.ts`의 중요성을 충분히 이해했을 테니, `lib.d.ts`에 어떤 내용이 담겨 있는지 살펴보겠습니다.
 
-### `lib.d.ts` 뜯어보기
+### `lib.d.ts` Inside Look
 
 `lib.d.ts` 안에는 수많은 *변수*(ex. `window`, `document`, `math` 등)와 수많은 유사한 *인터페이스*(ex. `Window` , `Document`, `Math` 등)의 타입이 선언되어 있습니다.
 
@@ -65,13 +65,13 @@ interface Window extends EventTarget, WindowTimers, WindowSessionStorage, Window
 
 전역적인 것들을 선언할 때 *인터페이스*를 사용해야만 하는 좋은 이유가 있습니다. 왜냐하면 인터페이스는 우리가 굳이 `lib.d.ts` 파일을 직접 수정하지 않고도 전역에 *필요한 속성을 추가*할 수 있게 해 주기 때문입니다. 이는 다음 섹션에서 살펴보겠습니다.
 
-### Native Type 수정하기
+### Modifying Native types
 
 TypeScript의 `interface`는 항상 열려있습니다(=열린 결말, 수정 가능). 즉, 당신은 `lib.d.ts`에서 선언된 인터페이스에 필요하면 새 멤버를 언제든지 추가하기만 하면 된다는 것입니다. 그러면 TypeScript가 새로 추가된 사항들을 알아서 처리할 것입니다. [*global module(전역 모듈)*](../project/modules.md)에 변경 사항을 만들고 싶다면 `lib.d.ts`의 인터페이스를 수정해야 한다는 것을 기억하십시오. 사실 우리(=TypeScript 커뮤니티)는 이럴 경우 [`globals.d.ts`](../project/globals.md)라는 특수 파일을 만들어 전역적인 변경 사항을 따로 관리하는 것을 권장합니다.
 
 `window`, `Math`, `Date`에 새로운 항목을 추가하는 예시를 보여드리겠습니다.
 
-#### 예제: `window`
+#### Example `window`
 
 `Window` 전역 인터페이스에 그냥 필요한 항목만 추가하면 됩니다. 가령:
 
@@ -92,7 +92,7 @@ window.helloWorld();
 window.helloWorld('gracius'); // Error: Supplied parameters do not match the signature of the call target
 ```
 
-#### 예제: `Math`
+#### Example `Math`
 
 전역 변수 `Math`는 `lib.d.ts`에 다음과 같이 정의되어 있습니다(다시 한번 강조하지만, 개발 도구를 사용해서 타입 정의를 확인하시길 바랍니다):
 
@@ -127,7 +127,7 @@ Math.seedrandom();
 Math.seedrandom("Any string you want!");
 ```
 
-#### 예제: `Date`
+#### Example `Date`
 
 `lib.d.ts` 파일에서 `Date` *변수*에 관한 정의를 살펴보시면, 다음과 같은 내용을 확인할 수 있습니다:
 
@@ -175,7 +175,7 @@ var today = Date.today();
 var todayAfter1second = today.addMilliseconds(1000);
 ```
 
-#### `String` 예제
+#### Example `String`
 
 If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface also impacts string *literals* as demonstrated in the below code sample:
 
@@ -200,7 +200,7 @@ Similar variables and interfaces exist for other things that have both static an
 
 `Number`, `Boolean`, `RegExp` 등과 같이 정적 멤버(=literal)와 인스턴스 멤버를 동시에 가지고 있는 다른 데이터 타입들도 _(`String`과)_ 유사한 구조의 변수와 인터페이스를 갖고 있습니다. 그렇기에 이러한 인터페이스들도 _(`String`과)_ 마찬가지로 각 타입의 리터럴 인스턴스에도 영향을 직접적으로 끼칩니다.
 
-### `string` 리덕스 예제
+### Example `string` redux
 
 We recommended creating a `global.d.ts` for maintainability reasons. However, you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
 
@@ -225,7 +225,7 @@ console.log('foo bar'.endsWith('bas')); // false
 console.log('foo bas'.endsWith('bas')); // true
 ```
 
-### 커스텀 `lib.d.ts` 사용
+### Using your own custom lib.d.ts
 
 앞서 언급했듯, `--noLib` 컴파일러 플래그는 TypeScript가 자동으로 `lib.d.ts` 파일을 포함시키는 걸 막습니다. 이게 어떤 경우 유용하게 사용될지에 관해서는 여러 가지 이유가 있습니다. 몇 가지 대표적인 이유를 들어보겠습니다:
 
@@ -236,13 +236,13 @@ console.log('foo bas'.endsWith('bas')); // true
 
 > Note: `--noLib`를 사용할 땐 각별히 조심해야 합니다. 한번 noLib 세상에 발을 들이게 되면, 가령 다른 사람과 프로젝트를 공유해야 할 상황이 발생할 때, 그들도 *강제로* noLib 설정을 해야 한다는 문제가 발생합니다. (혹은 *당신이 커스텀한 lib*를 사용하도록 강제해야겠죠.) 더 최악인 것은, 당신이 *다른 사람이 짠 코드*를 당신의 프로젝트에서 사용할 때, 해당 라이브러리를 *당신이 설정한 lib*에 맞게 동작하도록 별도로 수정을 해야 한다는 것입니다.
 
-### Compiler target 설정이 `lib.d.ts`에 끼치는 영향
+### Compiler target effect on `lib.d.ts`
 
 compilter target을 `es6`로 설정하면 `lib.d.ts`에 `Promise` 같은 모던 JavaScript(es6)에 필요한 *추가적인* ambient 선언이 함께 포함됩니다. 이처럼 compilter target 설정에 따라 포함되는 ambient 선언을 마법처럼 바꿔주는 것은 누군가에게는 매우 유용할 수 있지만, 다른 누군가에게는 문제가 될 수도 있습니다. 왜냐하면 그 과정에서 *코드 ambience*와 *코드 생성(generation)*이 결합되기 때문입니다.
 
 하지만 만약 당신의 환경을 좀 더 세밀한 제어를 원한다면, 이다음에 이야기를 다룰 `--lib` 옵션을 사용하시면 됩니다.
 
-### lib 옵션
+### lib option
 
 Sometimes (many times) you want to decouple the relationship between the compile target (the generated JavaScript version) and the ambient library support. A common example is `Promise`, e.g. today (in June 2016) you most likely want to `--target es5` but still use the latest features like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
 
@@ -310,7 +310,7 @@ tsc --target es5 --lib dom,es6
 }
 ```
 
-### 예제: ES5에서 Symbol을 포함시키기
+**Example Including Symbol with ES5:**
 
 Symbol API는 target이 es5로 설정이 되어 있을 경우 `lib.d.ts`에 포함이 되지 않습니다. 그리고 우리는 이런 에러를 보게 될 것입니다: [ts] Cannot find name 'Symbol'.  
 하지만 우리는 "target": "es5"의 기본 lib와 함께 Symbol API를 지원하는 "lib"를 합쳐 사용할 수 있습니다.
@@ -322,7 +322,7 @@ Symbol API는 target이 es5로 설정이 되어 있을 경우 `lib.d.ts`에 포�
 }
 ```
 
-## 구 JavaScript 엔진을 위한 Polyfill
+## Polyfill for old JavaScript engines
 
 > [관련 주제에 대한 Egghead PRO 영상](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
 
@@ -338,4 +338,4 @@ application의 entry point에 import 하시면 됩니다:
 import "core-js";
 ```
 
-이제 `core-js`가 당신에게 필요한 모든 런타임 feature를 대신 polyfill 해줄 것입니다.
+이제 `core-js`가 필요한 모든 런타임 feature를 대신 polyfill 해줄 것입니다.
