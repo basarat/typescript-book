@@ -135,8 +135,6 @@ Math.seedrandom("Any string you want!");
 declare var Date: DateConstructor;
 ```
 
-The interface `DateConstructor` is similar to what you have seen before with `Math` and `Window` in that it contains members you can use off of the `Date` global variable e.g. `Date.now()`. In addition to these members it contains *construct* signatures which allow you to create `Date` instances (e.g. `new Date()`). A snippet of the `DateConstructor` interface is shown below:
-
 `DateConstructor` 인터페이스는 앞서 살펴본 `Math`나 `Window`의 예제와 마찬가지로 `Date` 전역 변수에 `Date.now()` 같은 추가적인 기능을 사용할 수 있게 합니다. 뿐만 아니라 `Date`는 `Date` 인스턴스를 생성할 때 사용되는 *생성자(=construct)*도 갖고 있습니다(ex. `new Date()`). `DateConstructor` 인터페이스의 일부는 아래와 같습니다:
 
 ```ts
@@ -177,8 +175,6 @@ var todayAfter1second = today.addMilliseconds(1000);
 
 #### Example `String`
 
-If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface also impacts string *literals* as demonstrated in the below code sample:
-
 `lib.d.ts`에서 문자열(string)에 대한 내용을 찾아보면, 앞서 `Date`에서 본 것과 유사한 구조를 확인할 수 있습니다. (`String` 전역 변수, `StringConstructor` 인터페이스, `String` 인터페이스). 여기서 한 가지 주목할 점은 `String` 인터페이스는 (아래 예시에서 보여주듯) 문자 *리터럴*에도 직접 영향을 끼친다는 것입니다.
 
 ```ts
@@ -196,13 +192,9 @@ console.log('foo bar'.endsWith('bas')); // false
 console.log('foo bas'.endsWith('bas')); // true
 ```
 
-Similar variables and interfaces exist for other things that have both static and instance members like `Number`, `Boolean`, `RegExp`, etc. and these interfaces affect literal instances of these types as well.
-
 `Number`, `Boolean`, `RegExp` 등과 같이 정적 멤버(=literal)와 인스턴스 멤버를 동시에 가지고 있는 다른 데이터 타입들도 _(`String`과)_ 유사한 구조의 변수와 인터페이스를 갖고 있습니다. 그렇기에 이러한 인터페이스들도 _(`String`과)_ 마찬가지로 각 타입의 리터럴 인스턴스에도 영향을 직접적으로 끼칩니다.
 
 ### Example `string` redux
-
-We recommended creating a `global.d.ts` for maintainability reasons. However, you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
 
 우리는 유지 · 관리를 위해 `global.d.ts`를 따로 생성하는 것을 추천드립니다. 하지만 만약 당신이 원한다면 특정 **파일 모듈**에서만 특별히 전역 namespace를 침범하실 수도 있습니다.
 
@@ -243,8 +235,6 @@ compilter target을 `es6`로 설정하면 `lib.d.ts`에 `Promise` 같은 모던 
 하지만 만약 당신의 환경을 좀 더 세밀한 제어를 원한다면, 이다음에 이야기를 다룰 `--lib` 옵션을 사용하시면 됩니다.
 
 ### lib option
-
-Sometimes (many times) you want to decouple the relationship between the compile target (the generated JavaScript version) and the ambient library support. A common example is `Promise`, e.g. today (in June 2016) you most likely want to `--target es5` but still use the latest features like `Promise`. To support this you can take explicit control of `lib` using the `lib` compiler option.
 
 종종 (사실은 꽤나 빈번하게) compile target(생성될 JavaScript 버전)과 ambient 라이브러리 타입 지원을 따로 분리하고 싶은 경우가 발생합니다. 가장 대표적인 예로 `Promise`를 살펴볼 수 있습니다. 가령 오늘(2016년 6월) 당신은 `--target es5`를 사용을 할 것이나, 동시에 가장 최신 feature인 `Promise`도 함께 사용하고 싶다고 가정해봅시다. 이를 지원하기 위해서는 `lib` 컴파일러 옵션을 사용해서 `lib`를 암묵적으로 컨트롤해야 합니다.
 
@@ -295,7 +285,6 @@ tsc --target es5 --lib dom,es6
     * esnext.asynciterable
 
 > NOTE: `--lib` 옵션은 고도의 정밀화된 컨트롤을 할 수 있게 합니다. 그래서 아마 당신은 대량으로 생성된 환경 카테고리(environment categories) 중에서 한 두 개의 아이템을 고르는 방식으로 이 기능을 사용하고 싶으실 겁니다.
-
 
 > 만약 `--lib` 값이 설정되지 않으면 기본 라이브러리가 주입될 것입니다:
   - `--target es5` => es5, dom, scripthost
