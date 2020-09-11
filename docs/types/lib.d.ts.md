@@ -9,7 +9,8 @@
 
 ## `lib.d.ts`
 
-A special declaration file `lib.d.ts` ships with every installation of TypeScript. This file contains the ambient declarations for various common JavaScript constructs present in JavaScript runtimes and the DOM.  
+A special declaration file `lib.d.ts` ships with every installation of TypeScript. This file contains the ambient declarations for various common JavaScript constructs present in JavaScript runtimes and the DOM.
+
 `lib.d.ts`라는 특정 선언 파일은 TypeScript를 설치할 때 함께 따라옵니다. 이 파일은 다양한 JavaScript 런타임과 DOM에 존재하는 다양한 JavaScript 구성을 담고 있습니다.
 
 * This file is automatically included in the compilation context of a TypeScript project.
@@ -17,46 +18,54 @@ A special declaration file `lib.d.ts` ships with every installation of TypeScrip
 * The objective of this file is to make it easy for you to start writing *type checked* JavaScript code.
 * 이 파일의 목적은 당신이 타입이 체크된 JavaScript 코드를 쉽게 작성할 수 있도록 도와주기 위함입니다.
 
-You can exclude this file from the compilation context by specifying the `--noLib` compiler command line flag (or `"noLib" : true` in `tsconfig.json`).  
+You can exclude this file from the compilation context by specifying the `--noLib` compiler command line flag (or `"noLib" : true` in `tsconfig.json`).
+
 당신은 컴파일을 실행할 때 커맨드 라인에 `--noLib` 플래그를 명시하면 컴파일 과정에서 이 파일을 제외할 수 있습니다. (혹은 `tsconfig.json`에 `"noLib": true`를 추가하시면 됩니다.)
 
 ### Example Usage 예제
 
-As always let's look at examples of this file being used in action:  
+As always let's look at examples of this file being used in action:
+
 실제 상황에서 이 파일이 어떻게 사용되는 지 예시를 함께 보겠습니다:
 
 ```ts
 var foo = 123;
 var bar = foo.toString();
 ```
-This code type checks fine *because* the `toString` function is defined in `lib.d.ts` for all JavaScript objects.  
+This code type checks fine *because* the `toString` function is defined in `lib.d.ts` for all JavaScript objects.
+
 이 코드는 타입 체크를 무사히 통과합니다. 왜냐하면 `toString` 함수는 모든 JavaScript 객체의 타입이 선언된 `lib.d.ts`에서 이미 정의가 되어 있기 때문입니다.
 
-If you use the same sample code with the `noLib` option you get a type check error:  
+If you use the same sample code with the `noLib` option you get a type check error:
+
 만약에 `noLib` 옵션으로 같은 예제 코드를 실행한다면, 타입 체크 에러가 뜰 것입니다:
 
 ```ts
 var foo = 123;
 var bar = foo.toString(); // ERROR: Property 'toString' does not exist on type 'number'. // 'number'에는 'toString`이란 속성이 없습니다
 ```
-So now that you understand the importance of `lib.d.ts`, what do its contents look like? We examine that next.  
+So now that you understand the importance of `lib.d.ts`, what do its contents look like? We examine that next.
+
 자, 이제 당신은 `lib.d.ts`의 중요성을 충분히 이해했을테니, 이제 `lib.d.ts`에 어떤 내용이 담겨져 있는 지 함께 확인해보겠습니다.
 
 ### `lib.d.ts` Inside Look `lib.d.ts` 뜯어보기
 
-The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`.  
+The contents of `lib.d.ts` are primarily a bunch of *variable* declarations e.g. `window`, `document`, `math` and a bunch of similar *interface* declarations e.g. `Window` , `Document`, `Math`.
+
 `lib.d.ts`은 수많은 변수 선언(ex. `window`, `document`, `math` 등)과 수많은 유사한 인터페이스 선언(ex. `Window` , `Document`, `Math` 등)으로 이루어져 있습니다.
 
-The simplest way to read the documentation and type annotations of global stuff is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (VSCode has great support for this).  
+The simplest way to read the documentation and type annotations of global stuff is to type in code *that you know works* e.g. `Math.floor` and then F12 (go to definition) using your IDE (VSCode has great support for this).
 가장 쉽게 문서를 읽고 글로벌한 타입 주석을 확인하는 방법은 이미 당신이 잘 알고있는 코드를 직접 쳐보는 것입니다. 가령 `Math.floor`를 작성하고 IDE에서 F12를 눌러 해당 함수의 타입을 확인할 수 있을 것입니다. (VSCode는 타입 선언 확인 기능을 아주 훌륭하게 지원합니다.)
 
-Let's look at a sample *variable* declaration, e.g. `window` is defined as:  
+Let's look at a sample *variable* declaration, e.g. `window` is defined as:
+
 예시로 변수 선언을 살펴보겠습니다. 가령 `window`는 다음과 같이 정의되어 있습니다:
 
 ```ts
 declare var window: Window;
 ```
-That is just a simple `declare var` followed by the variable name (here `window`) and an interface for a type annotation (here the `Window` interface). These variables generally point to some global *interface* e.g. here is a small sample of the (actually quite massive) `Window` interface:  
+That is just a simple `declare var` followed by the variable name (here `window`) and an interface for a type annotation (here the `Window` interface). These variables generally point to some global *interface* e.g. here is a small sample of the (actually quite massive) `Window` interface:
+
 `declare var` 키워드 뒤에 해당 변수의 이름(위의 경우 `window`)과 타입 주석에 사용된 인터페이스(위의 경우, `Window` 인터페이스)가 잇따라오는, 아주 간단한 형태를 취하고 있습니다.
 
 ```ts
@@ -69,24 +78,29 @@ interface Window extends EventTarget, WindowTimers, WindowSessionStorage, Window
     // so on and so forth...
 }
 ```
-You can see that there is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisense`.  
+You can see that there is a *lot* of type information in these interfaces. In the absence of TypeScript *you* would need to keep this in *your* head. Now you can offload that knowledge on the compiler with easy access to it using things like `intellisense`.
+
 당신은 위의 코드에서 각각의 인터페이스마다 수많은 타입 정보가 담겨져 있다는 걸 보실 수 있을 것입니다. TypeScript가 없었다면, 이 모든 것을 **당신의 머리** 속에 저장했어야 할 것입니다. 하지만 이제 그 짐을 컴파일러에게 떠넘기고, `intellisense` 같은 툴을 사용해 (필요할 때 마다) 쉽게 타입에 접근하고 확인하실 수 있습니다.
 
-There is a good reason for using *interfaces* for these globals. It allows you to *add additional properties* to these globals *without* a need to change `lib.d.ts`. We will cover this concept next.  
+There is a good reason for using *interfaces* for these globals. It allows you to *add additional properties* to these globals *without* a need to change `lib.d.ts`. We will cover this concept next.
+
 전역 변수에 인터페이스를 사용해야만 하는 이유가 있습니다. `lib.d.ts` 파일에 수정을 하지 않고도 전역 변수들에게 속성을 추가할 수 있게 해주기 때문입니다.
 
 ### Modifying Native Types
 
-Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to be associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../project/globals.md) for this purpose.  
+Since an `interface` in TypeScript is open ended this means that you can just add members to the interfaces declared in `lib.d.ts` and TypeScript will pick up on the additions. Note that you need to make these changes in a [*global module*](../project/modules.md) for these interfaces to be associated with `lib.d.ts`. We even recommend creating a special file called [`globals.d.ts`](../project/globals.md) for this purpose.
+
 TypeScript의 인터페이스는 열린 결말의 형태를 취하고 있기에, 당신은 `lib.d.ts`에 미리 선언된 인터페이스에 필요시 새 타입을 추가 수 있고 TypeScript는 추가된 항목들을 모두 체크할 것입니다. 당신은 [*global module*](../project/modules.md)에서 `lib.d.ts`의 인터페이스에 대한 수정 사항을 기재해야 합니다. 우리는 이를 위해 [`globals.d.ts`](../project/globals.md)라는 파일을 따로 만드는 것을 추천합니다.
 
 Here are a few example cases where we add stuff to `window`, `Math`, `Date`:
+
 `window`, `Math`, `Date`에 새로운 항목을 항목을 추가하는 예시를 보여드리겠습니다.
 
 
 #### Example `window` 예시 `window`
 
 Just add stuff to the `Window` interface e.g.:
+
 그냥 `Window` 인터페이스에 항목만 추가하시면 됩니다. 가령:
 
 ```ts
@@ -95,7 +109,8 @@ interface Window {
 }
 ```
 
-This will allow you to use it in a *type safe* manner:  
+This will allow you to use it in a *type safe* manner:
+
 이렇게 작성하면 당신이 타입이 안전하게 체크된 상태에서 `helloWorld`를 사용할 수 있게 허락할 것입니다.
 
 ```ts
@@ -108,7 +123,8 @@ window.helloWorld('gracius'); // Error: Supplied parameters do not match the sig
 ```
 
 #### Example `Math` 예시 `Math`
-The global variable `Math` is defined in `lib.d.ts` as (again, use your dev tools to navigate to definition):  
+The global variable `Math` is defined in `lib.d.ts` as (again, use your dev tools to navigate to definition):
+
 전역 변수 `Math`는 `lib.d.ts`에 이렇게 정의되어 있습니다(다시 한번 강조하지만, 개발 도구를 사용해서 타입 정의를 확인하시길 바랍니다):
 
 ```ts
@@ -117,7 +133,8 @@ The global variable `Math` is defined in `lib.d.ts` as (again, use your dev tool
 declare var Math: Math;
 ```
 
-i.e. the variable `Math` is an instance of the `Math` interface. The `Math` interface is defined as:  
+i.e. the variable `Math` is an instance of the `Math` interface. The `Math` interface is defined as:
+
 예를 들어, 변수 `Math`는 `Math` 인터페이스의 인스턴스입니다. `Math` 인터페이스는 다음과 같이 정의되어 있습니다:
 
 ```ts
@@ -128,7 +145,8 @@ interface Math {
 }
 ```
 
-This means that if you want to add stuff to the `Math` global variable you just need to add it to the `Math` global interface, e.g. consider the [`seedrandom` project](https://www.npmjs.com/package/seedrandom) which adds a `seedrandom` function to the global `Math` object. This can be declared quite easily:  
+This means that if you want to add stuff to the `Math` global variable you just need to add it to the `Math` global interface, e.g. consider the [`seedrandom` project](https://www.npmjs.com/package/seedrandom) which adds a `seedrandom` function to the global `Math` object. This can be declared quite easily:
+
 이는 당신이 `Math` 전역 변수에 새로운 속성을 추가하려면 `Math` 전역 인터페이스에 그 항목을 추가만 하면 된다는 뜻입니다. 예를 들어 [`seedrandom` project](https://www.npmjs.com/package/seedrandom)의 경우, `seedrandom`이란 함수를 전역 `Math` 객체에 넣는 작업을 하고 있습니다. 이것들은 꽤나 쉽게 정의될 수 있습니다.
 
 ```ts
@@ -137,7 +155,8 @@ interface Math {
 }
 ```
 
-And then you can just use it:  
+And then you can just use it:
+
 그리고 당신은 그냥 이렇게 사용하시면 됩니다:
 
 ```ts
@@ -148,13 +167,15 @@ Math.seedrandom("Any string you want!");
 
 #### Example `Date`
 
-If you look at the definition of the `Date` *variable* in `lib.d.ts` you will find:  
+If you look at the definition of the `Date` *variable* in `lib.d.ts` you will find:
+
 `lib.d.ts` 파일에서 `Date` 변수에 대한 정의를 살펴보시면 다음과 같은 내용을 확인하실 수 있습니다:
 
 ```ts
 declare var Date: DateConstructor;
 ```
-The interface `DateConstructor` is similar to what you have seen before with `Math` and `Window` in that it contains members you can use off of the `Date` global variable e.g. `Date.now()`. In addition to these members it contains *construct* signatures which allow you to create `Date` instances (e.g. `new Date()`). A snippet of the `DateConstructor` interface is shown below:  
+The interface `DateConstructor` is similar to what you have seen before with `Math` and `Window` in that it contains members you can use off of the `Date` global variable e.g. `Date.now()`. In addition to these members it contains *construct* signatures which allow you to create `Date` instances (e.g. `new Date()`). A snippet of the `DateConstructor` interface is shown below:
+
 `DateConstructor` 인터페이스는 이전에 본 `Math`나 `Window`와 `Date` 전역 변수에서 제공하는 것들을 갖고 있다는(ex. `Date.now()`) 점에서 비슷합니다. 그뿐만 아니라 `Date`는 `construct`도 지니고 있는데, 이는 여러분이 `Date` 인스턴스를 생성할 수 있게 도와줍니다. (ex. `new Date()`) `DateConstructor` 인터페이스의 스니펫은 아래와 같습니다:
 
 ```ts
@@ -169,10 +190,14 @@ interface DateConstructor {
 
 Consider the project [`datejs`](https://github.com/abritinthebay/datejs). DateJS adds members to both the `Date` global variable and `Date` instances. Therefore a TypeScript definition for this library would look like ([BTW the community has already written this for you in this case](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/datejs/index.d.ts)):
 
+[`datejs`](https://github.com/abritinthebay/datejs) 프로젝트를 예로 생각해보겠습니다. DateJS는 `Date` 전역 변수와 `Date` 인스턴스 모두에게 멤버를 추가합니다. 그러므로 이 라이브러리의 TypeScript 선언은 아마 아래와 같을 것입니다: ([참고로 TypeScript 커뮤니티는 이미 `datejs` 라이브러리의 타입 정의를 제공하고 있습니다](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/datejs/index.d.ts))
+
+
 ```ts
 /** DateJS Public Static Methods */
 interface DateConstructor {
     /** Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM) */
+    /** 현재 날짜로 설정된 date값을 가져옴. 시간은 해당 날짜의 시작 시간으로 설정 (00:00 || 12:00AM) */
     today(): Date;
     // ... so on and so forth
 }
@@ -180,20 +205,25 @@ interface DateConstructor {
 /** DateJS Public Instance Methods */
 interface Date {
     /** Adds the specified number of milliseconds to this instance. */
+    /** 해당 Date 인스턴스에게 arg로 전달된 밀리세컨드 값을 더함 */
     addMilliseconds(milliseconds: number): Date;
     // ... so on and so forth
 }
 ```
 This allows you to do stuff like the following in a TypeSafe manner:
 
+이는 다음과 같은 TypeSafe 방법을 사용할 수 있게 도와줍니다:
+
 ```ts
 var today = Date.today();
 var todayAfter1second = today.addMilliseconds(1000);
 ```
 
-#### Example `string`
+#### Example `string` `string` 예제
 
 If you look inside `lib.d.ts` for string you will find stuff similar to what we saw for `Date` (`String` global variable, `StringConstructor` interface, `String` interface). One thing of note though is that the `String` interface also impacts string *literals* as demonstrated in the below code sample:
+
+`lib.d.ts`에서 문자열에 대한 정의를 찾아보면, 우리는 `Date`에서 본 것과 유사한 구조를 확인할 수 있습니다. (`String` 전역 변수, `StringConstructor` 인터페이스, `String` 인터페이스). 그러나 한 가지 주목할 점은 `String` 인터페이스는 문자 리터럴에도 영향을 끼친다는 것입니다. 아래의 예시를 참고해주세요:
 
 ```ts
 
@@ -212,12 +242,17 @@ console.log('foo bas'.endsWith('bas')); // true
 
 Similar variables and interfaces exist for other things that have both static and instance members like `Number`, `Boolean`, `RegExp`, etc. and these interfaces affect literal instances of these types as well.
 
-### Example `string` redux
+`Number`, `Boolean`, `RegExp` 등 정적 멤버와 인스턴스 멤버를 동시에 가지고 있는 경우에도 `String`과 마찬가지로 비슷한 변수와 인터페이스가 존재합니다. 그리고 이러한 인터페이스들도 마찬가지로 각 타입의 리터럴 인스턴스에도 영향을 끼칩니다.
+
+### Example `string` redux `string` 리덕스 예시
 
 We recommended creating a `global.d.ts` for maintainability reasons. However, you can break into the *global namespace* from within *a file module* if you desire so. This is done using `declare global { /*global namespace here*/ }`. E.g. the previous example can also be done as:
 
+우리는 유지/관리를 목적으로 `global.d.ts`를 생성하는 것을 추천드립니다. 하지만 원한다면, 특정 **파일 모듈**에서는 특별히 전역 namespace를 침범할 수도 있습니다.
+
 ```ts
 // Ensure this is treated as a module.
+// 모듈이란 걸 보장
 export {};
 
 declare global {
@@ -235,21 +270,34 @@ console.log('foo bar'.endsWith('bas')); // false
 console.log('foo bas'.endsWith('bas')); // true
 ```
 
-### Using your own custom lib.d.ts
+### Using your own custom lib.d.ts 커스텀 lib.d.ts 사용
+
 As we mentioned earlier, using the `--noLib` boolean compiler flag causes TypeScript to exclude the automatic inclusion of `lib.d.ts`. There are various reasons why this is a useful feature. Here are a few of the common ones:
 
+아까 언급했듯, `--noLib` 불리언 컴파일러 플래그는 TypeScript이 자동으로 `lib.d.ts` 파일을 포함시키는 걸 막습니다. 이게 왜 유용한지에 대한 여러 이유가 있습니다. 여기 몇 가지 대표적인 이유가 있습니다:
+
 * You are running in a custom JavaScript environment that differs *significantly* from the standard browser based runtime environment.
+* 만약 당신이 표준 브라우저 런타임 환경과 *상당히* 다른 커스텀 JavaScript 환경에서 런하고 있거나
 * You like to have *strict* control over the *globals* available in your code. E.g. lib.d.ts defines `item` as a global variable and you don't want this to leak into your code.
+* 코드에서 *전역 변수*에 대해서 *엄격한* 관리를 하고 싶을 때 유용합니다. (ex. lib.d.ts는 `item`을 전역 변수로 정의하고 있는데, 당신은 이게 당신의 코드에 적용되는 걸 원치 않을 때)
 
 Once you have excluded the default `lib.d.ts` you can include a similarly named file into your compilation context and TypeScript will pick it up for type checking.
 
+기본 `lib.d.ts`을 제외시키면, 컴파일 컨텍스트에 비슷한 이름을 가진 파일을 추가할 수 있고 TypeScript는 해당 파일을 타입 체크를 위해 사용할 것입니다.
+
 > Note: be careful with `--noLib`. Once you are in noLib land, if you choose to share your project with others, they will be *forced* into noLib land (or rather *your lib* land). Even worse, if you bring *their* code into your project you might need to port it to *your lib* based code.
 
-### Compiler target effect on `lib.d.ts`
+> Note: `--noLib`를 사용할 땐 각별히 조심하세요. 한번 noLib 랜드에 발을 들이면, 다른 사람들과 프로젝트를 공유해야 하는 상황이 올 때 그들도 *강제로* noLib 설정(혹은 *당신이 커스텀한 lib*를 사용해야 하기 때문입니다.) 더 최악인 것은, 당신이 *다른 사람들의* 코드를 당신의 프로젝트에 가져올 때, 해당 라이브러리가 *당신이 설정한 lib*에 맞게 동작하도록 별도로 수정을 해야할 것입니다.
+
+### Compiler target effect on `lib.d.ts` Compiler target 설정이 `lib.d.ts`에 끼치는 영향
 
 Setting the compiler target to `es6` causes the `lib.d.ts` to include *additional* ambient declarations for more modern (es6) stuff like `Promise`. This magical effect of the compiler target changing the *ambience* of the code is desirable for some people and for others it's problematic as it conflates *code generation* with *code ambience*.
 
+compilter target을 `es6`로 설정하면 `lib.d.ts`에 `Promise` 같은 모던 JavaScript(es6)에 필요한 *추가적인* ambient 선언이  포함됩니다. 이처럼 compilter target 설정에 따라 포함될 ambient 선언을 마법처럼 자동으로 바꿔주는 것은 누군가에게는 매우 바람직할 수 있지만, 어떤 이들에게는 문제가 될 수 있습니다. 왜냐하면 그는 코드 ambience와 코드 생성을 결합시키기 때문입니다.
+
 However, if you want finer grained control of your environment, you should use the `--lib` option which we discuss next.
+
+하지만 만약 당신의 환경에서 좀더 세밀한 제어를 원한다면, 이 다음에 이야기할 `--lib` 옵션을 사용해야 합니다.
 
 ### lib option
 
