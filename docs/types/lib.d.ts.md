@@ -57,7 +57,7 @@ interface Window extends EventTarget, WindowTimers, WindowSessionStorage, Window
     clientInformation: Navigator;
     closed: boolean;
     crypto: Crypto;
-    // so on and so forth...
+    // 기타 등등...
 }
 ```
 
@@ -89,7 +89,7 @@ window.helloWorld = () => console.log('hello world');
 // 함수 호출
 window.helloWorld();
 // 잘못 사용했을 경우에는 에러를 띄웁니다:
-window.helloWorld('gracius'); // Error: Supplied parameters do not match the signature of the call target
+window.helloWorld('gracius'); // Error: parameter가 호출 대상의 signiture와 일치하지 않습니다.
 ```
 
 #### Example `Math`
@@ -123,7 +123,7 @@ interface Math {
 
 ```ts
 Math.seedrandom();
-// or
+// 혹은
 Math.seedrandom("Any string you want!");
 ```
 
@@ -140,10 +140,10 @@ declare var Date: DateConstructor;
 ```ts
 interface DateConstructor {
     new (): Date;
-    // ... other construct signatures
+    // ... 기타 생성 signiture
 
     now(): number;
-    // ... other member functions
+    // ... 기타 메소드
 }
 ```
 
@@ -155,14 +155,14 @@ interface DateConstructor {
 interface DateConstructor {
     /** 현재 날짜로 설정된 date값을 가져옴. 시간은 해당 날짜의 시작 시간으로 설정 (00:00 || 12:00AM) */
     today(): Date;
-    // ... so on and so forth
+    // ... 기타 등등
 }
 
 /** DateJS Public Instance Methods */
 interface Date {
     /** 해당 Date 인스턴스에게 arg로 전달된 밀리세컨드 값을 더함 */
     addMilliseconds(milliseconds: number): Date;
-    // ... so on and so forth
+    // ... 기타 등등
 }
 ```
 
@@ -301,7 +301,7 @@ tsc --target es5 --lib dom,es6
 
 **Example Including Symbol with ES5:**
 
-Symbol API는 target이 es5로 설정이 되어 있을 경우 `lib.d.ts`에 포함이 되지 않습니다. 그리고 우리는 이런 에러를 보게 될 것입니다: [ts] Cannot find name 'Symbol'.  
+Symbol API는 target이 es5로 설정이 되어 있을 경우 `lib.d.ts`에 포함이 되지 않습니다. 그리고 우리는 이런 에러를 보게 될 것입니다: [ts] Cannot find name 'Symbol'.
 하지만 우리는 "target": "es5"의 기본 lib와 함께 Symbol API를 지원하는 "lib"를 합쳐 사용할 수 있습니다.
 
 ```json
