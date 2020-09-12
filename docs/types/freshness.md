@@ -1,6 +1,6 @@
 * [Freshness](#freshness)
-* [추가적인 property 사용을 허락하기](#추가적인-property-사용을-허락하기)
-* [Use Case: React](#use-case-react-state)
+* [추가적인 property 사용을 허용하기](#추가적인-property-사용을-허용하기)
+* [사용 사례: React State](#사용-사례-react-state)
 
 ## Freshness
 
@@ -56,7 +56,7 @@ logIfHasName({neme: 'I just misspelled name to neme'}); // Error: 객체 리터�
 
 객체 리터럴을 다소 엄격하게 검사하는 이유는 *사용하지 않는* 추가적인 property가 있는 경우의 대부분은 단순 오타이거나 API를 잘못 이해해서 생기는 문제이기 때문입니다.
 
-### 추가적인 property 사용을 허락하기
+### 추가적인 property 사용을 허용하기
 
 타입에 index signature(ex. `[x: string]`)를 사용하면, 추가적인 property를 허용한다는 의미를 명시적으로 나타낼 수도 있습니다.
 
