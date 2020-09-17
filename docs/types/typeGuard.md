@@ -3,8 +3,10 @@
 * [`instanceof`](#instanceof)
 * [`in`](#in)
 * [리터럴 Type Guard](#리터럴-type-guard)
+* [`null`과 `undefined` (`strictNullChecks`)](#null과-undefined-strictnullchecks)
 * [사용자 정의 Type Guards](#사용자-정의-type-guards)
 * [User Defined Type Guards](#user-defined-type-guards)
+* [Type Guard와 Callback](#type-guard와-callback)
 
 > ✍️ **Type guard (타입 보호):** 정확한 의미 전달을 위해 "type guard"는 한글로 번역하지 않았습니다.
 
@@ -144,7 +146,7 @@ function logOutState(state:TriState) {
 
 This even works when you have literal types in a union. You can check the value of a shared property name to discriminate the union e.g.
 
-이는 유니언에 리터럴 타입이 있을 경우에도 동일하게 적용됩니다.
+이는 유니언에 리터럴 타입이 있을 경우에도 동일하게 적용됩니다. 유니언을 구별하기 위해 우리는 공유하는 property 이름의 값을 체크할 수 있습니다. 가령:
 
 ```ts
 type Foo = {
@@ -157,25 +159,28 @@ type Bar = {
 }
 
 function doStuff(arg: Foo | Bar) {
-    if (arg.kind === 'foo') {
-        console.log(arg.foo); // ㅇㅋ
-        console.log(arg.bar); // Error!
-    }
-    else {  // 백퍼 Bar겠군.
-        console.log(arg.foo); // Error!
-        console.log(arg.bar); // ㅇㅋ
-    }
+  if (arg.kind === 'foo') {
+    console.log(arg.foo); // ㅇㅋ
+    console.log(arg.bar); // Error!
+  }
+  else {  // 백퍼 Bar겠군.
+    console.log(arg.foo); // Error!
+    console.log(arg.bar); // ㅇㅋ
+  }
 }
 ```
 
-### `null` and `undefined` with `strictNullChecks`
+### `null`과 `undefined` (`strictNullChecks`)
 
 TypeScript is smart enough to rule out both `null` and `undefined` with `a == null` / `!= null` check. For example:
+
+TypeScript는 `a == null` / `!= null`를 통해 `null`과 `undefined`를 모두 걸러낼 수 있을 만큼 똑똑합니다. 가령:
 
 ```ts
 function foo(a?: number | null) {
   if (a == null) return;
   // a is number now.
+  // a는 이제 무조건 number입니다.
 }
 
 ```
@@ -184,9 +189,11 @@ function foo(a?: number | null) {
 
 JavaScript doesn't have very rich runtime introspection support built in. When you are using just plain JavaScript Objects (using structural typing to your advantage), you do not even have access to `instanceof` or `typeof`. For these cases you can create *User Defined Type Guard functions*. These are just functions that return `someArgumentName is SomeType`. Here is an example:
 
+JavaScript는 풍부한 런타임 내부 검사 지원은 (딱히) 내장되어 있지는 않습니다. 일반 JavaScript 객체(구조적 타입을 유용하게 사용)를 사용할 때, 우리는 `instanceof`나 `typeof`에 엑세스 조차할 수 없습니다. 이러한 이유로 우리는 *사용자 정의 Type Guard 함수*를 만들 수 있습니다. 이들은 `어떤 인자의 이름은 어떤 타입이다`라는 걸 리턴하는 함수일 뿐입니다. 아래에 예시가 있습니다:
+
 ```ts
 /**
- * Just some interfaces
+ * 가장 보통의 인터페이스
  */
 interface Foo {
     foo: number;
@@ -199,23 +206,23 @@ interface Bar {
 }
 
 /**
- * User Defined Type Guard!
+ * 사용자 정의 Type Guard!
  */
 function isFoo(arg: any): arg is Foo {
     return arg.foo !== undefined;
 }
 
 /**
- * Sample usage of the User Defined Type Guard
+ * 사용자 정의 Type Guard 사용 예시
  */
 function doStuff(arg: Foo | Bar) {
     if (isFoo(arg)) {
-        console.log(arg.foo); // OK
+        console.log(arg.foo); // ㅇㅋ
         console.log(arg.bar); // Error!
     }
     else {
         console.log(arg.foo); // Error!
-        console.log(arg.bar); // OK
+        console.log(arg.bar); // ㅇㅋ
     }
 }
 
@@ -223,9 +230,11 @@ doStuff({ foo: 123, common: '123' });
 doStuff({ bar: 123, common: '123' });
 ```
 
-### Type Guards and callbacks
+### Type Guard와 Callback
 
 TypeScript doesn't assume type guards remain active in callbacks as making this assumption is dangerous. e.g.
+
+TypeScript는 콜백 함수에서는 type guard가 여전히 유효하다고 가정하지 않습니다. 왜냐하면 이런 가정은 매우 위험하기 때문입니다. 예를 들어:
 
 ```js
 // Example Setup
@@ -234,25 +243,27 @@ function immediate(callback: ()=>void) {
   callback();
 }
 
-
 // Type Guard
 if (foo.bar) {
-  console.log(foo.bar.baz); // Okay
+  console.log(foo.bar.baz); // ㅇㅋ
   functionDoingSomeStuff(() => {
     console.log(foo.bar.baz); // TS error: Object is possibly 'undefined'"
+    // TS error: 해당 객체는 'undefined'가 될 가능성이 있습니다.
   });
 }
 ```
 
 The fix is as easy as storing the inferred safe value in a local variable, automatically ensuring it doesn't get changed externally, and TypeScript can easily understand that:
 
+해결법은 아주 간단합니다. 타입 추론이 가능한 안전한 값을 지역 변수안에 담아두기만 하면, 외부적인 요인으로 값이 바뀌지 않는다는 사실을 보장할 수 있기 때문입니다. 그리고 TypeScript도 쉽게 이해할 수 있죠:
+
 ```js
 // Type Guard
 if (foo.bar) {
-  console.log(foo.bar.baz); // Okay
+  console.log(foo.bar.baz); // ㅇㅋ
   const bar = foo.bar;
   functionDoingSomeStuff(() => {
-    console.log(bar.baz); // Okay
+    console.log(bar.baz); // ㅇㅋ
   });
 }
 ```
