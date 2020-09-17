@@ -5,7 +5,6 @@
 * [리터럴 Type Guard](#리터럴-type-guard)
 * [`null`과 `undefined` (`strictNullChecks`)](#null과-undefined-strictnullchecks)
 * [사용자 정의 Type Guards](#사용자-정의-type-guards)
-* [User Defined Type Guards](#user-defined-type-guards)
 * [Type Guard와 Callback](#type-guard와-callback)
 
 > ✍️ **Type guard (타입 보호):** 정확한 의미 전달을 위해 "type guard"는 한글로 번역하지 않았습니다.
