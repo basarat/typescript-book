@@ -74,7 +74,7 @@ const failExpression = function(message: string) {
 };
 ```
 
-Ofcourse you can fix it by an explict annotation: 
+Of course you can fix it by an explict annotation: 
 
 ```ts
 function failDeclaration(message: string): never {
