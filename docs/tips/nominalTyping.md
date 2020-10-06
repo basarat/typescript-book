@@ -72,7 +72,7 @@ str = fooId;
 str = barId;
 ```
 
-Note how the brand enums,  ``FooIdBrand`` and ``BarIdBrand`` above, each have single member (_) that maps to the empty string, as specified by ``{ _ = "" }``. This forces TypeScript to infer that these are string-based enums, with values of type ``string``, and not enums with values of type ``number``.  This is necessary because TypeScript infers an empty enum (``{}``) to be a numeric enum, and as of TypeScript 3.6.2 the intersection of a numeric ``enum`` and ``string`` is ``never``.
+Note how the brand enums,  ``FooIdBrand`` and ``BarIdBrand`` above, each have single member (`_`) that maps to the empty string, as specified by ``{ _ = "" }``. This forces TypeScript to infer that these are string-based enums, with values of type ``string``, and not enums with values of type ``number``.  This is necessary because TypeScript infers an empty enum (``{}``) to be a numeric enum, and as of TypeScript 3.6.2 the intersection of a numeric ``enum`` and ``string`` is ``never``.
 
 ## Using Interfaces
 
