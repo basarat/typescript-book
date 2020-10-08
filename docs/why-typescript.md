@@ -41,7 +41,7 @@ TypeScript uses postfix type annotations popular in other *optionally* annotated
 ```ts
 var foo: number = 123;
 ```
-So if you do something wrong the compiler will error e.g.:
+So if you do something wrong the compiler will report an error e.g.:
 
 ```ts
 var foo: number = '123'; // Error: cannot assign a `string` to a `number`
