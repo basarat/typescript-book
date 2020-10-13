@@ -8,7 +8,7 @@
 Для тех, кто знаком с doubles / float в других языках, важно знать, что двоичные числа с плавающей запятой обрабатываются *некорректно*. Известный пример некорректной работы с числами в JavaScript:
 
 ```js
-console.log(.1 + .2); // 0.30000000000000004  
+console.log(.1 + .2); // 0.30000000000000004
 ```
 
 > Для корректных математических вычислений используйте `big.js`, упоминаемый ниже.
@@ -32,7 +32,7 @@ console.log(Number.MIN_SAFE_INTEGER - 1 === Number.MIN_SAFE_INTEGER - 2); // tru
 console.log(Number.MAX_SAFE_INTEGER);      // 9007199254740991
 console.log(Number.MAX_SAFE_INTEGER + 1);  // 9007199254740992 - Верно
 console.log(Number.MAX_SAFE_INTEGER + 2);  // 9007199254740992 - Округлено!
-console.log(Number.MAX_SAFE_INTEGER + 3);  // 9007199254740994 - Округлено - случано корректно
+console.log(Number.MAX_SAFE_INTEGER + 3);  // 9007199254740994 - Округлено - случайно корректно
 console.log(Number.MAX_SAFE_INTEGER + 4);  // 9007199254740996 - Округлено!
 ```
 
@@ -114,7 +114,7 @@ console.log(Number.MAX_VALUE + 10**1000);  // Infinity
 console.log(-Number.MAX_VALUE - 10**1000); // -Infinity
 ```
 
-Конечно, эти специальные значения также отображаются при вычисления, для которых они необходимы, например:
+Конечно, эти специальные значения также отображаются при вычислениях, для которых они необходимы, например:
 
 ```js
 console.log( 1 / 0); // Infinity
