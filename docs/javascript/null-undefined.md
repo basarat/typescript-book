@@ -2,7 +2,7 @@
 
 > [Free youtube video on the subject](https://www.youtube.com/watch?v=kaUfBNzuUAI)
 
-JavaScript (and by extension TypeScript) has two bottom types : `null` and `undefined`. They are *intended* to mean different things:
+JavaScript (and by extension TypeScript) has two "unit" or "null" types : `null` and `undefined`. They are *intended* to mean different things:
 
 * Something hasn't been initialized : `undefined`.
 * Something is currently unavailable: `null`.
