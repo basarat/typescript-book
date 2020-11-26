@@ -18,7 +18,7 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install calibre-bin
       - run: sudo npm install -g gitbook-cli
-      - run: npm clean cache —-force # https://github.com/nodejs/help/issues/2874
+      - run: npm clean cache --force # https://github.com/nodejs/help/issues/2874
       - run: gitbook install
       - run: mkdir output
       - run: gitbook pdf . ./output/typescript-book-${SHA}.pdf
