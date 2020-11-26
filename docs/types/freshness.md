@@ -59,7 +59,7 @@ The reason why only object literals are type checked this way is because in this
 A type can include an index signature to explicitly indicate that excess properties are permitted:
 
 ```ts
-var x: { foo: number, [x: string]: any };
+var x: { foo: number, [x: string]: unknown };
 x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 ```
 
