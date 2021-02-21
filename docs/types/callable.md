@@ -1,81 +1,84 @@
 ## Callable
-You can annotate callables as a part of a type or an interface as follows
+
+다음과 같이 인터페이스의 호출이 필요한 경우 타입 지정을 할 수 있습니다.
 
 ```ts
 interface ReturnString {
   (): string
 }
 ```
-An instance of such an interface would be a function that returns a string e.g.
+
+이러한 인터페이스의 인스턴스는 예를 들어 문자열을 반환하는 함수입니다.
 
 ```ts
-declare const foo: ReturnString;
-const bar = foo(); // bar is inferred as a string
+declare const foo: ReturnString
+const bar = foo() // `bar`는 string으로 추론됩니다.
 ```
 
 ### Obvious examples
-Of course such a *callable* annotation can also specify any arguments / optional arguments / rest arguments as needed. e.g. here is a complex example:
+
+물론 이러한 호출 시 타입 지정은 필요에 따라 모든 인수 / 선택적 인수 / 나머지 인수를 지정할 수도 있습니다. 예를 들어 다음은 복잡한 예입니다.
 
 ```ts
 interface Complex {
-  (foo: string, bar?: number, ...others: boolean[]): number;
+  (foo: string, bar?: number, ...others: boolean[]): number
 }
 ```
 
-An interface can provide multiple callable annotations to specify function overloading. For example:
+인터페이스는 함수 오버 로딩을 지정하기 위해 여러 번 호출하는 경우 타입 지정을 제공할 수 있습니다. 예를 들면:
 
 ```ts
 interface Overloaded {
-    (foo: string): string
-    (foo: number): number
+  (foo: string): string
+  (foo: number): number
 }
 
 // example implementation
-function stringOrNumber(foo: number): number;
-function stringOrNumber(foo: string): string;
+function stringOrNumber(foo: number): number
+function stringOrNumber(foo: string): string
 function stringOrNumber(foo: any): any {
-    if (typeof foo === 'number') {
-        return foo * foo;
-    } else if (typeof foo === 'string') {
-        return `hello ${foo}`;
-    }
+  if (typeof foo === "number") {
+    return foo * foo
+  } else if (typeof foo === "string") {
+    return `hello ${foo}`
+  }
 }
 
-const overloaded: Overloaded = stringOrNumber;
+const overloaded: Overloaded = stringOrNumber
 
 // example usage
-const str = overloaded(''); // type of `str` is inferred as `string`
-const num = overloaded(123); // type of `num` is inferred as `number`
+const str = overloaded("") // `str`의 타입은 `string`으로 추론됩니다.
+const num = overloaded(123) // `num`의 타입은 `number`로 추론됩니다.
 ```
 
-Of course, like the body of *any* interface, you can use the body of a callable interface as a type annotation for a variable. For example:
+물론, 모든 `interface`의 `body`와 마찬가지로, 호출하는 `interface`의 `body` 변수의 타입 지정을 사용할 수 있습니다. 예를 들면:
 
 ```ts
 const overloaded: {
   (foo: string): string
   (foo: number): number
-} = (foo: any) => foo;
+} = (foo: any) => foo
 ```
 
 ### Arrow Syntax
-To make it easy to specify callable signatures, TypeScript also allows simple arrow type annotations. For example, a function that takes a `number` and returns a `string` can be annotated as:
+
+호출 가능한 타입을 쉽게 지정할 수 있도록 TypeScript는 화살표 구문에서도 타입 지정 사용이 가능합니다. 예를 들어, 숫자를 사용하고 문자열을 반환하는 함수에 다음과 같이 타입 지정을 할 수 있습니다.
 
 ```ts
-const simple: (foo: number) => string
-    = (foo) => foo.toString();
+const simple: (foo: number) => string = (foo) => foo.toString()
 ```
 
-> Only limitation of the arrow syntax: You can't specify overloads. For overloads you must use the full bodied `{ (someArgs): someReturn }` syntax.
+> 화살표 구문의 제한 사항 : 오버로드를 지정할 수 없습니다. 오버로드의 경우 전체 본문 { (someArgs): someReturn }구문을 사용해야 합니다.
 
 ### Newable
 
-Newable is just a special type of *callable* type annotation with the prefix `new`. It simply means that you need to *invoke* with `new` e.g.
+`new` 접두사를 사용하여 호출한 특수한 타입에도 타입 지정이 가능합니다. 즉, `new`로 호출해야 합니다. 예를 들면:
 
 ```ts
 interface CallMeWithNewToGetString {
-  new(): string
+  new (): string
 }
 // Usage
-declare const Foo: CallMeWithNewToGetString;
-const bar = new Foo(); // bar is inferred to be of type string
+declare const Foo: CallMeWithNewToGetString
+const bar = new Foo() // `bar`의 타입은 `string`으로 추론됩니다.
 ```
