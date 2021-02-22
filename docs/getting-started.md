@@ -1,4 +1,4 @@
--   [타입사크립트 시작하기](#getting-started-with-typescript)
+-   [타입스크립트 시작하기](#getting-started-with-typescript)
 -   [타입스크립트 버전](#typescript-version)
 
 # 타입스크립트 시작하기
