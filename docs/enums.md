@@ -280,7 +280,7 @@ var Tristate;
 })(Tristate || (Tristate = {}));
 ```
 
-We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `TriState` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object.
+We already explained the `Tristate[Tristate["False"] = 0] = "False";` portion. Now notice the surrounding code `(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));` specifically the `(Tristate || (Tristate = {}));` portion. This basically captures a local variable `Tristate` that will either point to an already defined `Tristate` value or initialize it with a new empty `{}` object.
 
 This means that you can split (and extend) an enum definition across multiple files. For example below we have split the definition for `Color` into two blocks
 
