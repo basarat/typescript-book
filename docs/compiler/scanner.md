@@ -12,7 +12,7 @@ Here is a *simplied* version of the actual code in the parser that you can run d
 
 `code/compiler/scanner/runScanner.ts`
 ```ts
-import * as ts from "ntypescript";
+import * as ts from "typescript";
 
 // TypeScript has a singleton scanner
 const scanner = ts.createScanner(ts.ScriptTarget.Latest, /*skipTrivia*/ true);
