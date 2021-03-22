@@ -41,16 +41,16 @@ The workaround involves:
 * Creating a *brand* enum.
 * Creating the type as an *intersection* (`&`) of the brand enum + the actual structure.
 
-This is demonstrated below where the structure of the types is just a string:
+This is demonstrated below where the structure of the types is just a number:
 
 ```ts
 // FOO
 enum FooIdBrand { _ = "" };
-type FooId = FooIdBrand & string;
+type FooId = FooIdBrand & number;
 
 // BAR
 enum BarIdBrand  { _ = "" };
-type BarId = BarIdBrand & string;
+type BarId = BarIdBrand & number;
 
 /**
  * Usage Demo
@@ -63,13 +63,14 @@ fooId = barId; // error
 barId = fooId; // error
 
 // Newing up
-fooId = 'foo' as FooId;
-barId = 'bar' as BarId;
+fooId = 12345; //error
+fooId = 12345 as FooId;
+barId = 88888 as BarId;
 
 // Both types are compatible with the base
-var str: string;
-str = fooId;
-str = barId;
+var num: number;
+num = fooId;
+num = barId;
 ```
 
 Note how the brand enums,  ``FooIdBrand`` and ``BarIdBrand`` above, each have single member (`_`) that maps to the empty string, as specified by ``{ _ = "" }``. This forces TypeScript to infer that these are string-based enums, with values of type ``string``, and not enums with values of type ``number``.  This is necessary because TypeScript infers an empty enum (``{}``) to be a numeric enum, and as of TypeScript 3.6.2 the intersection of a numeric ``enum`` and ``string`` is ``never``.
