@@ -1,15 +1,13 @@
-* [Freshness](#freshness)
-* [추가적인 property 사용을 허용하기](#추가적인-property-사용을-허용하기)
+
+* [신선도(Freshness)](#freshness)
+* [추가 속성 허용](#추가-속성-허용)
 * [사용 사례: React State](#사용-사례-react-state)
 
-## Freshness
+## 신선도(Freshness)
 
-> ✍️ **Freshness (신선도)**: 정확한 의미 전달을 위해 "freshness"은 한글로 번역하지 않았습니다.
+TypeScipt는 구조적으로 타입 호환성이 있는 객체 리터럴의 타입 검사를 쉽게 할 수 있도록 **신선도(Freshness)**라는 개념을 제공합니다(다른 말로 *엄격한 객체 리터럴 검사*라 하기도 함).
 
-TypeScript에는 **Freshness** *(=strict object literal checking)* 라는 개념이 있습니다. Freshness는 자칫 [구조적인 관점](#fyi)에서는 호환 가능한 타입이라고 _(잘못)_ 판단될 가능성이 있는 객체 리터럴을 보다 쉽고 정확하게 검사할 수 있게 합니다.
-
-구조적 타이핑(=Structural typing)은 일단 *매우 편리합니다*. 일정 수준의 타입 안정성을 보장해주면서 동시에 *아주 손쉽게* JavaScript 코드를 TypeScript로 업그레이드할 수 있게 하기 때문입니다. 아래의 코드를 살펴보겠습니다.
-
+구조적 타입 처리는 *매우 편리*합니다. 다음의 코드를 보세요. 이렇게 하면 JavaScript 코드를 TypeScript로 *아주 쉽게* 업그레이드할 수 있고 적정 수준의 타입 안정성이 유지됩니다:
 
 ```ts
 function logName(something: { name: string }) {
@@ -20,25 +18,25 @@ var person = { name: 'matt', job: 'being awesome' };
 var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
 var random = { note: `I don't have a name property` };
 
-logName(person); // okay
-logName(animal); // okay
-logName(random); // Error: `name` property가 없습니다.
+logName(person); // 오케이
+logName(animal); // 오케이
+logName(random); // Error: property `name` is missing
 ```
 
-그러나 *구조적* 타이핑에는 약점도 함께 존재합니다. 바로 어떤 경우에는 실제보다 더 많은 데이터를 받을 수 있는 것처럼 (우리를) 착각하게 만들 수 있기 때문입니다. 이와 같은 오류는 아래 코드에서 확인 가능합니다. TypeScript는 다음과 같은 에러를 띄울 것입니다:
+그렇지만, *구조적* 타입 처리는 무언가가 실제 다루는 것보다 더 많은 데이터를 받아들인다는 오해를 불러일으킬 수 있다는 약점이 있습니다. 이런 경우는 아래 코드에서 TypeScript가 발생시키는 오류와 함께 확인할 수 있습니다:
 
 ```ts
 function logName(something: { name: string }) {
     console.log(something.name);
 }
 
-logName({ name: 'matt' }); // ㅇㅋ
-logName({ name: 'matt', job: 'being awesome' }); // Error: 객체 리터럴은 선언된 property만 명시해야 합니다. `job`은 too much입니다.
+logName({ name: 'matt' }); // okay
+logName({ name: 'matt', job: 'being awesome' }); // Error: object literals must only specify known properties. `job` is excessive here.
 ```
 
-위같은 에러는 *객체 리터럴을 사용했을 때만* 발생한다는 것을 꼭 명심하세요. 만약 이 에러가 없었다면 우리는 `logName({ name: 'matt', job: 'being awesome' })` 실행문을 보고 `logName` 함수 내부에 `job` property를 처리하는 로직이 있을 것이라고 오해할 위험이 있습니다. (실제로는 완전히 무시되는 녀석이긴 하지만요!)
+이 오류는 *객체 리터럴을 사용한 경우에만" 발생한다는 점을 유념해주세요. 이렇게 오류가 발생하지 않는다면 `logName({ name: 'matt', job: 'being awesome' })`라는 코드를 보는 사람은 *logName*이 `job`에 대해서도 뭔가 처리할 것이라고 오해할 수 있습니다, 실제로는 아무것도 하지 않는데도요.
 
-또 Freshness가 유용하게 적용되는 경우는 선택적(=optional) 멤버가 있는 인터페이스의 타입을 검사할 때입니다. 이 경우 엄격한 객체 리터럴 검사(=strict object literal checking)를 하지 않으면, 오타가 있더라도 타입 검사를 그냥 통과해버리기 때문입니다. 이는 아래에 설명되어 있습니다.
+또 다른 큰 사용 예는 선택적(optional) 멤버가 있는 인터페이스의 경우이며, 앞서 설명한 객체 리터럴 검사가 없다면 오타가 있어도 타입 검사가 그냥 통과될 것 입니다. 아레에 나와 있습니다:
 
 ```ts
 function logIfHasName(something: { name?: string }) {
@@ -49,61 +47,55 @@ function logIfHasName(something: { name?: string }) {
 var person = { name: 'matt', job: 'being awesome' };
 var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
 
-logIfHasName(person); // ㅇㅋ
-logIfHasName(animal); // ㅇㅋ
-logIfHasName({neme: 'I just misspelled name to neme'}); // Error: 객체 리터럴은 선언된 property만 명시해야 합니다. `neme`는 too much입니다.
+logIfHasName(person); // okay
+logIfHasName(animal); // okay
+logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
 ```
 
-객체 리터럴을 다소 엄격하게 검사하는 이유는 *사용하지 않는* 추가적인 property가 있는 경우의 대부분은 단순 오타이거나 API를 잘못 이해해서 생기는 문제이기 때문입니다.
+객체 리터럴일 때만 이런 식의 타입 검사가 수행되는 이유는 속성이 추가로 입력되었지만 그 속성이 "실제로 사용되지 않는다면" 거의 항상 오타가 발생한 경우이거나 API를 잘못 이해한 경우이기 때문입니다.
 
-### 추가적인 property 사용을 허용하기
+### 추가 속성 허용
 
-타입에 index signature(ex. `[x: string]`)를 사용하면, 추가적인 property를 허용한다는 의미를 명시적으로 나타낼 수도 있습니다.
+타입 선언에 인덱스 서명을 포함시키면 그 타입이 추가 속성을 허용함을 명시적으로 나타낼 수 있습니다.:
 
 ```ts
-var x: { foo: number, [x: string]: any };
-x = { foo: 1, baz: 2 };  // ㅇㅋ `baz`는 index signature 조건에 부합하는 군.
+var x: { foo: number, [x: string]: unknown };
+x = { foo: 1, baz: 2 };  // 오케이, `baz`는 인덱스 서명 부분에 해당하게 됨
 ```
 
 ### 사용 사례: React State
 
-Freshness 활용의 좋은 사례로는 [페이스북의 ReactJS](https://facebook.github.io/react/)를 예로 들 수 있습니다. 보통 컴포넌트 내부에서 `setState` 함수를 호출할 때 필요한 모든 property를 다 전달하는 것이 아니라 (업데이트가) 필요한 몇몇 개의 property만 전달합니다.
+[Facebook ReactJS](https://facebook.github.io/react/)에서 객체 신선도의 좋은 사용 사례를 볼 수 있습니다. 컴포넌트에서 `setState`를 호출할 때 일부 속성만 넣는 경우가 아주 흔합니다, 예를 들면:
 
 ```ts
-// 가령
+// 아래와 같을 때
 interface State {
-  foo: string;
-  bar: string;
+    foo: string;
+    bar: string;
 }
 
-// 당신은 foo를 "Hello"로 설정하고 싶습니다:
-this.setState({foo: "Hello"}); // Error: bar가 없습니다
+// 하려고 한 것:
+this.setState({foo: "Hello"}); // Error: missing property bar
 
-// 그러나 state가 `foo`와 `bar`를 모두 갖고 있기 때문에 TypeScript는 다음과 같이 작성하도록 강요할 것입니다:
-this.setState({foo: "Hello", bar: this.state.bar}};
+// State에 `foo`와 `bar` 둘 다 있기 때문에 TypeScript에서는 이렇게 할 수 밖에 없음: 
+this.setState({foo: "Hello", bar: this.state.bar});
 ```
 
-Freshness의 개념을 잘 이용하면 우리는 모든 멤버를 선택적으로 두면서도 *오타도 찾아줄 수 있도록* 활용할 수 있습니다:
+신신도 개념을 생각해서 모든 멤버를 선택적(optional)로 표시하면 일부 속성만 넣으면서도 *오타를 검출할 수 있습니다*!: 
 
 ```ts
-// 가령
+// 아래와 같을 때
 interface State {
-  foo?: string;
-  bar?: string;
+    foo?: string;
+    bar?: string;
 }
 
-// foo를 "Hello"로 설정하고 싶습니다:
-this.setState({foo: "Hello"}); // ㅇㅋ 통과!
+// 하려고 한 것: 
+this.setState({foo: "Hello"}); // 좋아, 잘 되는군!
 
-// Freshness 덕분에 state는 오타로 부터 지켜지고 있습니다!
-this.setState({foos: "Hello"}}; // Error: 객체에는 선언된 property만 명시해야 합니다.
+// 신선도 때문에 오타 입력은 방지됨!
+this.setState({foos: "Hello"}); // Error: Objects may only specify known properties
 
-// 그리고 타입은 여전히 검사됩니다.
-this.setState({foo: 123}}; // Error: 문자열을 지정해야 곳에 숫자를 지정할 수 없습니다.
+// 타입 검사도 유지됨
+this.setState({foo: 123}); // Error: Cannot assign number to a string
 ```
-
----
-
-#### fyi
-
-* **구조적 관점(structural)** 이란, 타입을 built-in 타입의 작은 모임이나, 합성형 타입(Composite type)으로 보는 관점을 뜻함 [(출처)](https://chayan-memorias.tistory.com/189)
