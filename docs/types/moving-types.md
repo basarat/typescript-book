@@ -1,22 +1,22 @@
-# Moving Types
+# 타입 이동하기
 
-TypeScript's type system is extremely powerful and allows moving and slicing types in ways not possible in any other single language out there.
+TypeScript의 타입 시스템은 놀랍도록 강력하며 다른 어떤 언어에서도 불가능한 수준으로 타입 이동과 타입 분할을 지원합니다.
 
-This is because TypeScript is designed to allow you to work seamlessly with a *highly dynamic* language like JavaScript. Here we cover a few tricks for moving types around in TypeScript.
+이것은 TypeScript가 *고도로 동적인* 언어인 JavaScript와 이음새 없이 매끄럽게 같이 사용돌 수 있도록 설계되었기 때문입니다. 이 단원에서는 TypeScript에서 타입을 이동하는 몇가지 트릭을 다룰 것입니다.
 
-Key motivation for these : You change one thing and everything else just updates automatically and you get nice errors if something is going to break, like a well designed constraint system.
+핵심 동기는 이것입니다 : 잘 설계된 제약조건 시스템처럼 하나를 바꾸면 다른 모든 것이 저절로 업데이트되고 무언가가 망가졌을 때는 보기좋게 오류가 발생하게 하는 것입니다.
 
-## Copying both the Type + Value
+## 타입 + 값 둘 다 복사하기
 
-If you want to move a class around, you might be tempted to do the following:
+클래스를 이동하고 싶을 때 아래처럼 하고 싶을 것입니다:
 
 ```ts
 class Foo { }
 var Bar = Foo;
-var bar: Bar; // ERROR: cannot find name 'Bar'
+var bar: Bar; // 오류: 'Bar' 이름을 찾을 수 없음
 ```
 
-This is an error because `var` only copied the `Foo` into the *variable* declaration space and you therefore cannot use `Bar` as a type annotation. The proper way is to use the `import` keyword. Note that you can only use the `import` keyword in such a way if you are using *namespaces* or *modules* (more on these later):
+이것은 `var`가 `Foo`를 *변수* 선언 공간으로만 복사했기 때문에, `Bar`를 타입 어노테이션으로 사용할 수 없기 때문입니다. 올바른 방법은 `import` 키워드를 사용하는 것입니다. 다만 `import`는 *네임스페이스* 또는 *모듈* (잠시 뒤 다룸)을 사용할 때처럼 사용해야만 한다는 점을 참고하세요:
 
 ```ts
 namespace importing {
@@ -27,62 +27,62 @@ import Bar = importing.Foo;
 var bar: Bar; // Okay
 ```
 
-This `import` trick only works for things that are *both type and variable*.
+이 `import` 트릭은 *타입이면서 동시에 변수인* 경우에만 사용할 수 있습니다.
 
-## Capturing the type of a variable
+## 변수의 타입 캡쳐하기
 
-You can actually use a variable in a type annotation using the `typeof` operator. This allows you to tell the compiler that one variable is the same type as another. Here is an example to demonstrate this:
+실은 `typeof` 연산자를 사용하면 변수를 타입 어노테이션 용으로 사용할 수 있습니다. 이것은 컴파일러에게 한 변수가 다른 변수와 동일한 타입임을 알려주는 것입니다. 이것을 보여주는 예제:
 
 ```ts
 var foo = 123;
-var bar: typeof foo; // `bar` has the same type as `foo` (here `number`)
-bar = 456; // Okay
-bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
+var bar: typeof foo; // `bar`는 `foo`와 같은 타입 (여기서는 `number`)
+bar = 456; // 오케이
+bar = '789'; // 오류: 타입 `string`은 타입 `number`에 할당할 수 없음
 ```
 
-## Capturing the type of a class member
+## 클래스 멤버의 타입 캡쳐하기
 
-You can traverse into any non-nullable object type to retrieve the type of a property:
+널이 아닌 어떤 객체라도 내용을 뒤져서 속성의 타입을 찾아낼 수 있습니다:
 
 ```ts
 class Foo {
-  foo: number; // some member whose type we want to capture
+  foo: number; // 우리가 타입을 캡쳐하고 싶은 어떤 멤버
 }
 
-let bar: Foo['foo']; // `bar` has type `number`
+let bar: Foo['foo']; // `bar`는 `number` 타입이 됨
 ```
 
-Alternatively, similar to capturing the type of a variable, you just declare a variable purely for type capturing purposes:
+다른 방법으로, 변수의 타입을 캡쳐할 때처럼, 순전히 타입 캡쳐의 목적으로 변수를 하나 선언해도 됩니다:
 
 ```ts
-// Purely to capture type
+// 순전히 타입 캡쳐를 위한 것
 declare let _foo: Foo;
 
-// Same as before
-let bar: typeof _foo.foo; // `bar` has type `number`
+// 전과 동일
+let bar: typeof _foo.foo; // `bar`는 `number` 타입이 됨
 ```
 
-## Capturing the type of magic strings
+## 매직 문자열의 타입 캡쳐하기
 
-Lots of JavaScript libraries and frameworks work off of raw JavaScript strings. You can use `const` variables to capture their type e.g.
+다수의 JavaScript 라이브러리 및 프레임워크들을 JavaScript 문자열을 생으로 사용합니다. `const` 변수를 사용하여 그것들의 타입을 캡쳐할 수 있습니다, 예를 들면:
 
 ```ts
-// Capture both the *type* _and_ *value* of magic string:
+// 매직 문자열의 *타입* 그리고 *값* 둘 다 캡쳐:
 const foo = "Hello World";
 
-// Use the captured type:
+// 캡쳐된 타입 사용:
 let bar: typeof foo;
 
-// bar can only ever be assigned to `Hello World`
-bar = "Hello World"; // Okay!
-bar = "anything else "; // Error!
+// bar에는 `Hello World`만 할당 가능
+bar = "Hello World"; // 오케이!
+bar = "anything else "; // 오류!
 ```
 
-In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](./literal-types.md).
+이 예제에서 `bar`는 리터럴 타입 `"Hello World"`가 됩니다. 이에 대해서는 [리터럴 타입 섹션](./literal-types.md)에서 자세히 다룹니다.
 
-## Capturing Key Names
+## 키 이름 캡쳐하기
 
-The `keyof` operator lets you capture the key names of a type. E.g. you can use it to capture the key names of a variable by first grabbing its type using `typeof`:
+`keyof` 연사자는 어떤 타입의 키 이름을 캡쳐할 수 있게 해줍니다. 즉, 먼저 `typeof`을 써서 변수의 타입을 캡쳐한 다음 이걸 써서 변수의 키 이름을 캡쳐할 수 있습니다:
 
 ```ts
 const colors = {
@@ -91,10 +91,10 @@ const colors = {
 }
 type Colors = keyof typeof colors;
 
-let color: Colors; // same as let color: "red" | "blue"
-color = 'red'; // okay
-color = 'blue'; // okay
-color = 'anythingElse'; // Error: Type '"anythingElse"' is not assignable to type '"red" | "blue"'
+let color: Colors; // 우측과 동일 let color: "red" | "blue"
+color = 'red'; // 오케이
+color = 'blue'; // 오케이
+color = 'anythingElse'; // 오류: 타입 '"anythingElse"'는 타입 '"red" | "blue"'에 할당할 수 없음
 ```
 
-This allows you to have stuff like string enums + constants quite easily, as you just saw in the above example.
+이걸 이용하면 위 예제에서 볼 수 있듯이 문자열 열거형 + 상수를 아주 쉽게 다룰 수 있습니다.
