@@ -20,7 +20,7 @@ var random = { note: `I don't have a name property` };
 
 logName(person); // 오케이
 logName(animal); // 오케이
-logName(random); // Error: property `name` is missing
+logName(random); // 오류: 속성 `name` 누락
 ```
 
 그렇지만, *구조적* 타입 처리는 무언가가 실제 다루는 것보다 더 많은 데이터를 받아들인다는 오해를 불러일으킬 수 있다는 약점이 있습니다. 이런 경우는 아래 코드에서 TypeScript가 발생시키는 오류와 함께 확인할 수 있습니다:
@@ -30,8 +30,8 @@ function logName(something: { name: string }) {
     console.log(something.name);
 }
 
-logName({ name: 'matt' }); // okay
-logName({ name: 'matt', job: 'being awesome' }); // Error: object literals must only specify known properties. `job` is excessive here.
+logName({ name: 'matt' }); // 오케이
+logName({ name: 'matt', job: 'being awesome' }); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함. 여기서 `job`은 불필요.
 ```
 
 이 오류는 *객체 리터럴을 사용한 경우에만" 발생한다는 점을 유념해주세요. 이렇게 오류가 발생하지 않는다면 `logName({ name: 'matt', job: 'being awesome' })`라는 코드를 보는 사람은 *logName*이 `job`에 대해서도 뭔가 처리할 것이라고 오해할 수 있습니다, 실제로는 아무것도 하지 않는데도요.
@@ -47,9 +47,9 @@ function logIfHasName(something: { name?: string }) {
 var person = { name: 'matt', job: 'being awesome' };
 var animal = { name: 'cow', diet: 'vegan, but has milk of own species' };
 
-logIfHasName(person); // okay
-logIfHasName(animal); // okay
-logIfHasName({neme: 'I just misspelled name to neme'}); // Error: object literals must only specify known properties. `neme` is excessive here.
+logIfHasName(person); // 오케이
+logIfHasName(animal); // 오케이
+logIfHasName({neme: 'I just misspelled name to neme'}); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함. 여기서 `neme`은 불필요.
 ```
 
 객체 리터럴일 때만 이런 식의 타입 검사가 수행되는 이유는 속성이 추가로 입력되었지만 그 속성이 "실제로 사용되지 않는다면" 거의 항상 오타가 발생한 경우이거나 API를 잘못 이해한 경우이기 때문입니다.
@@ -75,7 +75,7 @@ interface State {
 }
 
 // 하려고 한 것:
-this.setState({foo: "Hello"}); // Error: missing property bar
+this.setState({foo: "Hello"}); // 오류: 속성 bar 누락
 
 // State에 `foo`와 `bar` 둘 다 있기 때문에 TypeScript에서는 이렇게 할 수 밖에 없음: 
 this.setState({foo: "Hello", bar: this.state.bar});
@@ -94,8 +94,8 @@ interface State {
 this.setState({foo: "Hello"}); // 좋아, 잘 되는군!
 
 // 신선도 때문에 오타 입력은 방지됨!
-this.setState({foos: "Hello"}); // Error: Objects may only specify known properties
+this.setState({foos: "Hello"}); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함
 
 // 타입 검사도 유지됨
-this.setState({foo: 123}); // Error: Cannot assign number to a string
+this.setState({foo: 123}); // 오류: 문자열에 숫자를 할당할 수 없음
 ```
