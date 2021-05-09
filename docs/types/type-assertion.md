@@ -6,8 +6,8 @@ TypeScript에서는 시스템이 추론 및 분석한 타입 내용을 우리가
 
 ```ts
 var foo = {};
-foo.bar = 123; // Error: property 'bar' does not exist on `{}`
-foo.bas = 'hello'; // Error: property 'bas' does not exist on `{}`
+foo.bar = 123; // 오류: 속성 'bar'가 `{}`에 존재하지 않음
+foo.bas = 'hello'; // 오류: 속성 'bar'가 `{}`에 존재하지 않음
 ```
 
 위 코드는 에러를 발생시키는데 그 이유는 `foo`가 `{}`, 즉 속성이 하나도 없는 빈 객체로 타입 추론이 되었기 때문입니다. 그러므로 `bar`나 `bas`같은 속성을 `foo`에 추가할 수 없는 것입니다. 이런 문제는 `as Foo`라는 타입 표명을 사용해서 간단히 해결할 수 있습니다:
