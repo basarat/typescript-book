@@ -1,8 +1,8 @@
-### Discriminated Union
+### 구별된 유니온(Discriminated Union)
 
-If you have a class with a [*literal member*](./literal-types.md) then you can use that property to discriminate between union members.
+[*리터럴 멤버 속성*](./literal-types.md)이 있는 클래스가 있다면 그 속성으로 유니온 구성원을 구별할 수 있습니다.
 
-As an example consider the union of a `Square` and `Rectangle`, here we have a member `kind` that exists on both union members and is of a particular *literal type*:
+예제로 `Square` 타입과 `Rectangle` 타입의 유니온을 생각해봅시다. 여기에 `kind`라는 멤버 속성이 있는데, 이 속성은 모든 유니온 구성원에 존재하는 *리터럴 타입*입니다:
 
 ```ts
 interface Square {
@@ -18,25 +18,26 @@ interface Rectangle {
 type Shape = Square | Rectangle;
 ```
 
-If you use a type guard style check (`==`, `===`, `!=`, `!==`) or `switch` on the *discriminant property* (here `kind`) TypeScript will realize that the object must be of the type that has that specific literal and do a type narrowing for you :)
+이런 경우, *구별 속성(여기선 `kind`)*에 대해 타입 가드 스타일의 검사 (`==`, `===`, `!=`, `!==`) 또는 `switch`를 사용하면 TypeScript가 특정한 리터럴을 가진 객체를 대상으로 한다는 것을 알아채고 알아서 타입 좁히기를 실행해줍니다 :)
 
 ```ts
 function area(s: Shape) {
     if (s.kind === "square") {
-        // Now TypeScript *knows* that `s` must be a square ;)
-        // So you can use its members safely :)
+        // 이것으로 TypeScript가 `s`가 `Square`임을 알게 됨 ;)
+        // 그러므로 `Square`의 멤버를 안전하게 사용할 수 있음 :)
         return s.size * s.size;
     }
     else {
-        // Wasn't a square? So TypeScript will figure out that it must be a Rectangle ;)
-        // So you can use its members safely :)
+        // `Square`가 아님? 그러면 TypeScript는
+        // 이것이 `Rectangle`일 수 밖에 없음을 알게 됨 ;)
+        // 그러므로 `Rectangle`의 멤버를 안전하게 사용할 수 있음 :)
         return s.width * s.height;
     }
 }
 ```
 
-### Exhaustive Checks
-Quite commonly you want to make sure that all members of a union have some code(action) against them.
+### 빠짐없는 검사
+매우 자주 유니온의 모든 구성원들이 어떤 코드(동작)를 가지고 있음을 보장하고 싶어집니다.
 
 ```ts
 interface Square {
@@ -50,8 +51,8 @@ interface Rectangle {
     height: number;
 }
 
-// Someone just added this new `Circle` Type
-// We would like to let TypeScript give an error at any place that *needs* to cater for this
+// 누가 새로운 타입 `Circle`을 추가함
+// 이 새로운 타입에 대한 *처리가 필요한* 곳에서 TypeScript가 오류를 발생시켜주길 바람
 interface Circle {
     kind: "circle";
     radius: number;
@@ -60,7 +61,7 @@ interface Circle {
 type Shape = Square | Rectangle | Circle;
 ```
 
-As an example of where stuff goes bad:
+예를 들어 조치가 필요한 부분:
 
 ```ts
 function area(s: Shape) {
@@ -70,11 +71,11 @@ function area(s: Shape) {
     else if (s.kind === "rectangle") {
         return s.width * s.height;
     }
-    // Would it be great if you could get TypeScript to give you an error?
+    // 여기서 TypeScript가 오류를 발생시켜주면 얼마나 좋을까?
 }
 ```
 
-You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the `never` type. For example if you add the exhaustive check you get a nice error:
+간단하게, 조건에 걸리지 않는 블럭을 하나 추가하고 그 블럭에서 추론된 타입이 `never` 타입과 호환되는 것으로 정의하면 됩니다. 예제처럼 완전(exhaustive) 검사를 추가하면 보기좋게 오류가 발생합니다:
 
 ```ts
 function area(s: Shape) {
@@ -91,7 +92,7 @@ function area(s: Shape) {
 }
 ```
 
-That forces you to handle this new case : 
+그러면 새로 추가된 경우를 처리하며 됩니다: 
 
 ```ts
 function area(s: Shape) {
@@ -105,7 +106,7 @@ function area(s: Shape) {
         return Math.PI * (s.radius **2);
     }
     else {
-        // Okay once more
+        // 오케이, 한번 더
         const _exhaustiveCheck: never = s;
     }
 }
@@ -113,7 +114,7 @@ function area(s: Shape) {
 
 
 ### Switch
-TIP: of course you can also do it in a `switch` statement:
+팁: 당연히 `switch` 문에서 동일하게 할 수 있습니다:
 
 ```ts
 function area(s: Shape) {
@@ -130,7 +131,7 @@ function area(s: Shape) {
 
 ### strictNullChecks
 
-If using strictNullChecks and doing exhaustive checks, TypeScript might complain "not all code paths return a value". You can silence that by simply returning the `_exhaustiveCheck` variable (of type `never`). So:
+만약 strictNullChecks를 사용하면서 완전(exhaustive) 검사를 사용한다면, TypeScript에서 "not all code paths return a value"라는 오류가 발생할 수 있습니다. 그냥 `_exhaustiveCheck` (`never` 타입) 변수를 반환하면 됩니다. 이렇게:
 
 ```ts
 function area(s: Shape) {
