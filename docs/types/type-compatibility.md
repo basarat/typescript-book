@@ -15,7 +15,7 @@
 
 ## 타입 호환성
 
-여기서 다루는 타입 호환성은 어떤 것이 다른 것에 대입될 수 있는지 판단하는 것을 말합니다. 예를 들어, `string`과 `number`는 호환되지 않습니다:
+여기서 다루는 타입 호환성은 어떤 것이 다른 것에 할당될 수 있는지 판단하는 것을 말합니다. 예를 들어, `string`과 `number`는 호환되지 않습니다:
 
 ```ts
 let str: string = "Hello";
@@ -27,7 +27,7 @@ num = str; // ERROR: `string` is not assignable to `number`
 
 ## 건강성
 
-TypeScript의 타입 시스템은 간편하도록 설계되었지만 *건강하지 못한* 행위도 허용하며, 예를 들어 `any`에는 무엇이든 대입할 수 있고, 이것은 컴파일러에게 내 마음대로 하고 싶다고 말하는 것과 같습니다:
+TypeScript의 타입 시스템은 간편하도록 설계되었지만 *건강하지 못한* 행위도 허용하며, 예를 들어 `any`에는 무엇이든 할당할 수 있고, 이것은 컴파일러에게 내 마음대로 하고 싶다고 말하는 것과 같습니다:
 
 ```ts
 let foo: any = 123;
@@ -83,7 +83,7 @@ iTakePoint2D({ x: 0 }); // 오류: `y` 정보 없음
 
 변형성은 쉽게 이해할 수 있고 타입 호환성을 분석할 때 매우 중요한 개념입니다.
 
-간단한 타입 `Base`와 `Child`가 있다고 했을 때, `Child`가 `Base`의 자식 타입이라면, `Child`의 개체를 `Base` 타입을 갖는 변수에 대입할 수 있습니다.
+간단한 타입 `Base`와 `Child`가 있다고 했을 때, `Child`가 `Base`의 자식 타입이라면, `Child`의 개체를 `Base` 타입을 갖는 변수에 할당할 수 있습니다.
 
 > 이것이 다형성(polymorphism) 101 입니다
 
@@ -115,9 +115,9 @@ interface Point3D { x: number; y: number; z: number; }
 let iMakePoint2D = (): Point2D => ({ x: 0, y: 0 });
 let iMakePoint3D = (): Point3D => ({ x: 0, y: 0, z: 0 });
 
-/** 대입 */
+/** 할당 */
 iMakePoint2D = iMakePoint3D; // 오케이
-iMakePoint3D = iMakePoint2D; // 오류: Point2D를 Point3D에 대입할 수 없음
+iMakePoint3D = iMakePoint2D; // 오류: Point2D를 Point3D에 할당할 수 없음
 ```
 
 ### 인자 갯수
@@ -132,7 +132,7 @@ iTakeSomethingAndPassItAnErr(() => null) // 오케이
 iTakeSomethingAndPassItAnErr((err) => null) // 오케이
 iTakeSomethingAndPassItAnErr((err, data) => null) // 오케이
 
-// 오류: 타입이 '(err: any, data: any, more: any) => null'인 인자는 타입이 '(err: Error, data: any) => void'인 파라미터로 대입할 수 없음
+// 오류: 타입이 '(err: any, data: any, more: any) => null'인 인자는 타입이 '(err: Error, data: any) => void'인 파라미터로 할당할 수 없음
 iTakeSomethingAndPassItAnErr((err, data, more) => null);
 ```
 
@@ -178,7 +178,7 @@ addEventListener(EventType.Mouse, <(e: Event) => void>((e: MouseEvent) => consol
 addEventListener(EventType.Mouse, (e: number) => console.log(e));
 ```
 
-또한 `Array<Child>`을 `Array<Base>`에 대입하는 것도 허용됩니다 (공변형), 함수가 호환되니까요. 배열의 공변형성(covariance)은 `Array<Child>`의 모든 함수가 `Array<Base>`에 대입 가능한 경우입니다. 즉, `push(t:Child)`를 `push(t:Base)`에 대입할 수 있어야 하고, 함수 인자의 양변형성(bivariance)이 이것을 허용합니다.
+또한 `Array<Child>`을 `Array<Base>`에 할당하는 것도 허용됩니다 (공변형), 함수가 호환되니까요. 배열의 공변형성(covariance)은 `Array<Child>`의 모든 함수가 `Array<Base>`에 할당 가능한 경우입니다. 즉, `push(t:Child)`를 `push(t:Base)`에 할당할 수 있어야 하고, 함수 인자의 양변형성(bivariance)이 이것을 허용합니다.
 
 **다른 언어 사용자들이 이것 때문에 혼란**스러울 수도 있습니다. 아래에서 오류가 발생할 것이라 생각하지만 TypeScript에서는 오류가 발생하지 않으니까요.
 

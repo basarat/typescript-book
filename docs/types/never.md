@@ -17,10 +17,10 @@ TypeScript가 이 *바닥* 타입을 나타내기 위해 사용하는 것이 `ne
 let foo: never; // 오케이
 ```
 
-그렇지만, *`never` 타입에는 다른 never 타입만* 대입 가능합니다. 예를 들면:
+그렇지만, *`never` 타입에는 다른 never 타입만* 할당 가능합니다. 예를 들면:
 
 ```ts
-let foo: never = 123; // 오류: number 타입은 never에 대입할 수 없음
+let foo: never = 123; // 오류: number 타입은 never에 할당할 수 없음
 
 // 오케이, 함수의 리턴 타입이 `never`
 let bar: never = (() => { throw new Error(`Throw my hands in the air like I just don't care`) })();
@@ -51,13 +51,13 @@ function foo(x: string | number): boolean {
 function fail(message: string): never { throw new Error(message); }
 ```
 
-그리고 `never`에는 `never`만 대입할 수 있기 때문에 *컴파일 시간*의 빠짐없는 검사 목적으로 사용할 수 있습니다. 이 내용은 [*구별된 유니온* 단원](./discriminated-unions.md)에 나와 있습니다.
+그리고 `never`에는 `never`만 할당할 수 있기 때문에 *컴파일 시간*의 빠짐없는 검사 목적으로 사용할 수 있습니다. 이 내용은 [*구별된 유니온* 단원](./discriminated-unions.md)에 나와 있습니다.
 
 # `void`와 혼동
 
 함수가 매끄럽게 종료하지 않을 때 `never`가 반환된다고 하면 직관적으로 이것은 `void` 같은 것이라고 생각하기 쉽습니다. 그렇지만 `void`는 하나의 단위이고 `never` 모순(falsum)입니다.
 
-아무것도 *반환*하지 않는 함수는 단위 `void`를 반환하는 것입니다. 하지만 *영원히 리턴하지 않는* 함수 (또는 항상 throw하는 함수)는 `never`입니다. `void`는 대입이 가능한 타입이지만 (`strictNullCheckings`를 끄면) `never`는 절대 `never` 이외에는 대입할 수 없습니다.
+아무것도 *반환*하지 않는 함수는 단위 `void`를 반환하는 것입니다. 하지만 *영원히 리턴하지 않는* 함수 (또는 항상 throw하는 함수)는 `never`입니다. `void`는 할당이 가능한 타입이지만 (`strictNullCheckings`를 끄면) `never`는 절대 `never` 이외에는 할당할 수 없습니다.
 
 # never 반환 함수의 타입 추론
 

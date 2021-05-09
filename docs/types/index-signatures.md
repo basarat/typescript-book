@@ -179,7 +179,7 @@ type FromIndex = { [k in Index]?: number }
 const good: FromIndex = {b:1, c:2}
 
 // 오류:
-// 타입 '{ b: number; c: number; d: number; }'은 타입 'FromIndex'에 대입 불가능.
+// 타입 '{ b: number; c: number; d: number; }'은 타입 'FromIndex'에 할당 불가능.
 // 객체 리터럴은 알려진 속성만 지정할 수 있고 'd'는 'FromIndex' 타입에 존재하지 않음.
 const bad: FromIndex = {b:1, c:2, d:3};
 ```
@@ -311,7 +311,7 @@ const isValidBool = foo.isValid;
 const somethingFieldState = foo['something'];
 
 // 이것으로 TypeScript 객체를 생성하는 것은 안됨
-const bar: FormState = { // 오류 `isValid`는 `FieldState`에 대입할 수 없음
+const bar: FormState = { // 오류 `isValid`는 `FieldState`에 할당할 수 없음
   isValid: false
 }
 ```
