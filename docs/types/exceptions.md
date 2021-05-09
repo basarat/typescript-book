@@ -1,6 +1,6 @@
-# Exception Handling
+# 예외 처리
 
-JavaScript has an `Error` class that you can use for exceptions. You throw an error with the `throw` keyword. You can catch it with a `try` / `catch` block pair e.g.
+JavaScript에는 예외 처리 용으로 사용할 수 있는 `Error` 클래스가 있습니다. 오류를 던질 때는 `throw` 키워드를 사용합니다. 그 오류는 `try` / `catch` 블럭으로 잡을 수 있습니다, 예를 들면:
 
 ```js
 try {
@@ -11,22 +11,22 @@ catch(e) {
 }
 ```
 
-## Error Sub Types
+## Error 서브 타입
 
-Beyond the built in `Error` class there are a few additional built-in error classes that inherit from `Error` that the JavaScript runtime can throw:
+내장된 `Error` 클래스에 더하여 `Error`를 상속하는 내장 오류 클래스가 몇개 더 있고, JavaScript 런타임이 이런 오류를 던질 수 있습니다:
 
 ### RangeError
 
-Creates an instance representing an error that occurs when a numeric variable or parameter is outside of its valid range.
+숫자 변수 또는 파라미터가 유효한 범위를 벗어난 경우를 나타내는 인스턴스 생성.
 
 ```js
-// Call console with too many arguments
+// 너무 많은 수의 인자로 콘솔 호출
 console.log.apply(console, new Array(1000000000)); // RangeError: Invalid array length
 ```
 
 ### ReferenceError
 
-Creates an instance representing an error that occurs when de-referencing an invalid reference. e.g.
+유효하지 않은 참조 값을 참조(de-referencing)하여 오류가 발생했음을 나타내는 인스턴스 생성, 예를 들면:
 
 ```js
 'use strict';
@@ -35,7 +35,7 @@ console.log(notValidVar); // ReferenceError: notValidVar is not defined
 
 ### SyntaxError
 
-Creates an instance representing a syntax error that occurs while parsing code that isn't valid JavaScript.
+유효하지 않은 JavaScript 코드를 파싱하여 구문 오류가 발생했음을 나타내는 인스턴스 생성.
 
 ```js
 1***3; // SyntaxError: Unexpected token *
@@ -43,7 +43,7 @@ Creates an instance representing a syntax error that occurs while parsing code t
 
 ### TypeError
 
-Creates an instance representing an error that occurs when a variable or parameter is not of a valid type.
+변수 또는 파라미터가 유효하지 않은 타입인 경우일 때 발생하는 오류를 나타내는 인스턴스 생성.
 
 ```js
 ('1.2').toPrecision(1); // TypeError: '1.2'.toPrecision is not a function
@@ -51,15 +51,15 @@ Creates an instance representing an error that occurs when a variable or paramet
 
 ### URIError
 
-Creates an instance representing an error that occurs when `encodeURI()` or `decodeURI()` are passed invalid parameters.
+`encodeURI()` 또는 `decodeURI()`에 유효하지 않은 파라미터가 전달되었을 때 발생하는 오류를 나타내는 인스턴스 생성.
 
 ```js
 decodeURI('%'); // URIError: URI malformed
 ```
 
-## Always use `Error`
+## 항상 `Error` 사용
 
-Beginner JavaScript developers sometimes just throw raw strings e.g.
+초급 JavaScript 개발자들은 종종 그냥 생 문자열을 던집니다, 예를 들면:
 
 ```js
 try {
@@ -70,13 +70,13 @@ catch(e) {
 }
 ```
 
-*Don't do that*. The fundamental benefit of `Error` objects is that they automatically keep track of where they were built and originated with the `stack` property.
+*이렇게 하지 마세요*. `Error` 객체의 근본적인 편의성은 자신이 어디서 만들어졌고 발생했는지에 대해 `stack` 프로퍼티로 자동으로 기록을 유지해준다는 점입니다.
 
-Raw strings result in a very painful debugging experience and complicate error analysis from logs.
+생 문자열은 정말 고통스러운 디버깅을 경험하게 할 수 있고 로그를 보고 오류를 분석하는 일을 힘들게 만듭니다.
 
-## You don't have to `throw` an error
+## 오류를 꼭 `throw` 할 필요 없음
 
-It is okay to pass an `Error` object around. This is conventional in Node.js callback style code which takes callbacks with the first argument as an error object.
+`Error` 객체를 여기저기로 전달해도 괜찮습니다. Node.js의 콜백 스타일 코드가 이런 식이며, 콜백의 첫번째 인자가 오류 객체입니다.
 
 ```js
 function myFunction (callback: (e?: Error)) {
@@ -90,13 +90,13 @@ function myFunction (callback: (e?: Error)) {
 }
 ```
 
-## Exceptional cases
+## 예외적인 경우
 
-`Exceptions should be exceptional` is a common saying in computer science. There are a few reasons why this is true for JavaScript (and TypeScript) as well.
+컴퓨터 과학에서 `예외는 예외적이어야 한다!`는 말을 많이 합니다. 이것이 JavaScript (그리고 TypeScript) 에서도 맞는 말인 이유가 몇가지 있습니다.
 
-### Unclear where it is thrown
+### 어디서 던졌는지 불확실
 
-Consider the following piece of code:
+아래 코드를 봅시다:
 
 ```js
 try {
@@ -108,11 +108,11 @@ catch(e) {
 }
 ```
 
-The next developer cannot know which function might throw the error. The person reviewing the code cannot know without reading the code for task1 / task2 and other functions they might call etc.
+다음에 올 개발자는 오류 발생 가능한 함수가 어떤 것인지 알 수 없습니다. 이 코드를 리뷰하는 사람은 task1 / task2 그리고 이들이 호출하는 다른 함수들을 조사해보지 않으면 알 수 없습니다.
 
-### Makes graceful handling hard
+### 부드러운 처리를 어렵게 함
 
-You can try to make it graceful with explicit catch around each thing that might throw:
+오류 발생 가능한 각 부분에 명시적으로 catch를 넣어서 이 문제를 부드러운 처리를 가능하게 할 수 있습니다:
 
 ```js
 try {
@@ -129,10 +129,10 @@ catch(e) {
 }
 ```
 
-But now if you need to pass stuff from the first task to the second one the code becomes messy: (notice `foo` mutation requiring `let` + explicit need for annotating it because it cannot be inferred from the return of `runTask1`):
+하지만 이제 첫번째 작업에서 두번째 작업으로 뭔가를 넘기려고 하면 코드가 지저분해집니다: (`foo`가 변경되어야 하는데 `runTask1`의 리턴 타입으로 그 타입을 추론할 수 없으므로 `let` + 명시적인 타입 지정이 필요하다는 점을 눈여겨 보세요):
 
 ```ts
-let foo: number; // Notice use of `let` and explicit type annotation
+let foo: number; // `let`과 명시적 타입 지정
 try {
   foo = runTask1();
 }
@@ -147,9 +147,9 @@ catch(e) {
 }
 ```
 
-### Not well represented in the type system
+### 타입 시스템으로 잘 표현 안됨
 
-Consider the function:
+아래 함수의 경우:
 
 ```ts
 function validate(value: number) {
@@ -157,7 +157,7 @@ function validate(value: number) {
 }
 ```
 
-Using `Error` for such cases is a bad idea as it is not represented in the type definition for the validate function (which is `(value:number) => void`). Instead a better way to create a validate method would be:
+이런 경우에 `Error`를 사용하는 것은 좋은 생각이 아닙니다. 밸리데이션 함수의 타입 정의가 제대로 표현되지 않기 때문입니다 (`(value:number) => void` 타입이 됨). 이거 말고 더 좋은 방법은 이것일 겁니다:
 
 ```ts
 function validate(value: number): {error?: string} {
@@ -165,6 +165,6 @@ function validate(value: number): {error?: string} {
 }
 ```
 
-And now its represented in the type system.
+이제 결과가 타입 시스템으로 표현됩니다.
 
-> Unless you want to handle the error in a very generic (simple / catch-all etc) way, don't *throw* an error.
+> 아주 범용적인 방식 (단순 catch-all 등)으로 오류를 처리하는 것이 아니라면 오류를 *던지지* 마세요.
