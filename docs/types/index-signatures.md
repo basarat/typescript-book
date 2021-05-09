@@ -1,4 +1,4 @@
-# Index Signatures
+# 인덱스 서명(Index Signature)
 
 An `Object` in JavaScript (and hence TypeScript) can be accessed with a **string** to hold a reference to any other JavaScript **object**.
 
