@@ -242,23 +242,14 @@ function formatCommandline(command: string[] | string) {
 
 ```ts
 function extend<T, U>(first: T, second: U): T & U {
-    let result = <T & U>{}
-    for (let id in first) {
-        result[id] = first[id]
-    }
-    for (let id in second) {
-        if (!result.hasOwnProperty(id)) {
-            result[id] = second[id]
-        }
-    }
-    return result
+  return { ...first, ...second };
 }
 
-var x = extend({ a: 'hello' }, { b: 42 })
+const x = extend({ a: "hello" }, { b: 42 });
 
 // x now has both `a` and `b`
-var a = x.a
-var b = x.b
+const a = x.a;
+const b = x.b;
 ```
 
 ## Tuple Type

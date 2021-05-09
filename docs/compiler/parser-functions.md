@@ -7,7 +7,7 @@ As mentioned `parseSourceFile` sets up the initial state and passes the work ont
 Starts by creating a `SourceFile` AST node. Then it goes into parsing source code starting from the `parseStatements` function. Once that returns, it then completes the `SourceFile` node with additional information such as its `nodeCount`, `identifierCount` and such.
 
 #### `parseStatements`
-One of the most significant `parseFoo` style functions (a concept we cover next). It switches by the the current `token` returned from the scanner. E.g. if the current token is a `SemicolonToken` it will call out to `parseEmptyStatement` to create an AST node for an empty statement.
+One of the most significant `parseFoo` style functions (a concept we cover next). It switches by the current `token` returned from the scanner. E.g. if the current token is a `SemicolonToken` it will call out to `parseEmptyStatement` to create an AST node for an empty statement.
 
 ### Node creation
 

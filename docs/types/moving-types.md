@@ -42,13 +42,19 @@ bar = '789'; // ERROR: Type `string` is not `assignable` to type `number`
 
 ## Capturing the type of a class member
 
-Similar to capturing the type of a variable, you just declare a variable purely for type capturing purposes:
+You can traverse into any non-nullable object type to retrieve the type of a property:
 
 ```ts
 class Foo {
   foo: number; // some member whose type we want to capture
 }
 
+let bar: Foo['foo']; // `bar` has type `number`
+```
+
+Alternatively, similar to capturing the type of a variable, you just declare a variable purely for type capturing purposes:
+
+```ts
 // Purely to capture type
 declare let _foo: Foo;
 
@@ -72,7 +78,7 @@ bar = "Hello World"; // Okay!
 bar = "anything else "; // Error!
 ```
 
-In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](https://basarat.gitbooks.io/typescript/content/docs/types/literal-types.html "Literal Types").
+In this example `bar` has the literal type `"Hello World"`. We cover this more in the [literal type section](./literal-types.md).
 
 ## Capturing Key Names
 

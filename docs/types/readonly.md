@@ -52,8 +52,8 @@ type Foo = {
 
 type FooReadonly = Readonly<Foo>; 
 
-let foo:Foo = {bar: 123, bas: 456};
-let fooReadonly:FooReadonly = {bar: 123, bas: 456};
+let foo: Foo = {bar: 123, bas: 456};
+let fooReadonly: FooReadonly = {bar: 123, bas: 456};
 
 foo.bar = 456; // Okay
 fooReadonly.bar = 456; // ERROR: bar is readonly
@@ -140,10 +140,12 @@ person.fullName = "Dear Reader"; // Error! fullName is readonly
 
 ### Difference from `const`
 `const`
+
 1. is for a variable reference
 1. the variable cannot be reassigned to anything else.
 
 `readonly` is
+
 1. for a property
 1. the property can be modified because of aliasing
 

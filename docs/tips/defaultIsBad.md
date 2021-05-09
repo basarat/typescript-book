@@ -1,4 +1,4 @@
-## `export default` considered harmful
+## `export default` concerns
 
 Consider you have a file `foo.ts` with the following contents:
 
@@ -47,7 +47,7 @@ import { /* here */ } from 'something';
 ```
 
 ### Autocomplete 
-Irrespective of if you know about the exports, you evenautocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
+Irrespective of if you know about the exports, you even autocomplete at this `import {/*here*/} from "./foo";` cursor location. Gives your developers a bit of wrist relief.
 
 ### CommonJS interop
 With `default` there is horrible experience for commonJS users who have to `const {default} = require('module/foo');` instead of `const {Foo} = require('module/foo')`. You will most likely want to rename the `default` export to something else when you import it.
@@ -64,10 +64,18 @@ Re-exporting is common for the root `index` file in npm packages, and forces you
 ### Dynamic Imports
 Default exports expose themselves badly named as `default` in dynamic `import`s e.g. 
 
+```ts
+const HighCharts = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+HighCharts.default.chart('container', { ... }); // Notice `.default`
 ```
-const HighChart = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
-Highcharts.default.chart('container', { ... }); // Notice `.default`
+
+Much nicer with named exports: 
+
+```ts
+const {HighCharts} = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
+HighCharts.chart('container', { ... }); // Notice `.default`
 ```
+
 
 ### Needs two lines for non-class / non-function
 

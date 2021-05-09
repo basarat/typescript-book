@@ -1,0 +1,40 @@
+name: build ebook
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.18.2'
+      - run: sudo apt update
+      - run: sudo apt install calibre-bin
+      - run: sudo npm install -g gitbook-cli
+      - run: gitbook install
+      - run: mkdir output
+      - run: gitbook pdf . ./output/typescript-book-${SHA}.pdf
+      - run: gitbook epub . ./output/typescript-book-${SHA}.epub
+      - run: gitbook mobi . ./output/typescript-book-${SHA}.mobi
+      - name: upload pdf artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: typescript-book.pdf
+          path: output/typescript-book-${{ env.SHA }}.pdf
+      - name: upload epub artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: typescript-book.epub
+          path: output/typescript-book-${{ env.SHA }}.epub
+      - name: upload mobi artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: typescript-book.mobi
+          path: output/typescript-book-${{ env.SHA }}.mobi
