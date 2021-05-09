@@ -1,8 +1,8 @@
 # 인덱스 서명(Index Signature)
 
-An `Object` in JavaScript (and hence TypeScript) can be accessed with a **string** to hold a reference to any other JavaScript **object**.
+JavaScript에서 (따라서 TypeScript)에서 `Object`에 들어있는 다른 어떤 JavaScript **객체** 참조도 **문자열** 로 액세스할 수 있습니다.
 
-Here is a quick example:
+간단한 예제:
 
 ```ts
 let foo: any = {};
@@ -10,7 +10,7 @@ foo['Hello'] = 'World';
 console.log(foo['Hello']); // World
 ```
 
-We store a string `"World"` under the key `"Hello"`. Remember we said it can store any JavaScript **object**, so lets store a class instance just to show the concept:
+우리는 `"World"`라는 문자열을 `"Hello"`라는 키로 저장했습니다. 다른 어떤 JavaScript **객체** 도 저장할 수 있다고 얘기했었죠, 그러니 이걸 확인할 수 있도록 클래스 인스턴스를 저장해 봅시다:
 
 ```ts
 class Foo {
@@ -25,7 +25,7 @@ foo['Hello'] = new Foo('World');
 foo['Hello'].log(); // World
 ```
 
-Also remember that we said that it can be accessed with a **string**. If you pass any other object to the index signature the JavaScript runtime actually calls `.toString` on it before getting the result. This is demonstrated below:
+그리고 **문자열** 로 액세스 가능하다고 말한 것도 기억하세요. 인덱스 서명에 다른 타입의 객체을 넘기면 JavaScript 런타임이 실제로 그 객체에 대해 `.toString`을 호출합니다. 이것이 아래에 나와 있습니다:
 
 ```ts
 let obj = {
@@ -41,20 +41,20 @@ console.log(foo[obj]); // toString called, World
 console.log(foo['Hello']); // World
 ```
 
-Note that `toString` will get called whenever the `obj` is used in an index position.
+인덱스 위치에 `obj`가 사용될 때마다 `toString`이 호출된다는 점을 참고하세요.
 
-Arrays are slightly different. For `number` indexing JavaScript VMs will try to optimise (depending on things like is it actually an array and do the structures of items stored match etc.). So `number` should be considered as a valid object accessor in its own right (distinct from `string`). Here is a simple array example:
+배열은 약간 다릅니다. JavaScript VM은 `number` 인덱싱에 대해 최적화를 시도합니다 (그것이 실제 배열인지, 저장된 객체들의 구조가 일치하는 등에 따라). 그러므로 `number`도 (`string`과 다른 ) 별도의 유효한 객체 액세스 수단으로 생각해야 합니다. 여기 간단한 배열 예제가 있습니다:
 
 ```ts
 let foo = ['World'];
 console.log(foo[0]); // World
 ```
 
-So that's JavaScript. Now let's look at TypeScript's graceful handling of this concept.
+여기까지가 JavaScript입니다. 이제 TypeScript가 이 개념들을 어떻게 매끄럽게 처리하는지 살펴봅시다.
 
-## TypeScript Index Signature
+## TypeScript 인덱스 서명
 
-First off, because JavaScript *implicitly* calls `toString` on any object index signature, TypeScript will give you an error to prevent beginners from shooting themselves in the foot (I see users shooting themselves in the foot when using JavaScript all the time on stackoverflow):
+먼저 JavaScript가 객체 인덱스 서명에 사용된 객체에 대해 *암묵적으로* `toString`를 호출하기 때문에 TypeScript는 초심자가 실수로 자기 발에 총을 쏘려 할 때 오류를 발생시킵니다 (필자는 Stackoverflow.com에서 사용자들이 자기 발을 쏘는 모습을 매일 봅니다):
 
 ```ts
 let obj = {
@@ -65,92 +65,93 @@ let obj = {
 
 let foo: any = {};
 
-// ERROR: the index signature must be string, number ...
+// 오류: 인덱스 서명은 string, number 여야 함...
 foo[obj] = 'World';
 
-// FIX: TypeScript forces you to be explicit
+// FIX: TypeScript는 명시적으로 호출하게 강제함
 foo[obj.toString()] = 'World';
 ```
 
-The reason for forcing the user to be explicit is because the default `toString` implementation on an object is pretty awful, e.g. on v8 it always returns `[object Object]`:
+사용자가 명시적으로 처리하게 하는 이유는 대개 객체의 기본 `toString` 구현이 엉망이기 때문입니다. 예를 들어, v8은 항상
+ `[object Object]`를 반환합니다:
 
 ```ts
 let obj = {message:'Hello'}
 let foo: any = {};
 
-// ERROR: the index signature must be string, number ...
+// 오류: 인덱스 서명은 string, number 여야 함...
 foo[obj] = 'World';
 
-// Here is where you actually stored it!
+// 실제 저장 위치가 이렇게 됨!
 console.log(foo["[object Object]"]); // World
 ```
 
-Of course `number` is supported because
+당연히 `number`가 지원됩니다, 왜냐하면
 
-1. its needed for excellent Array / Tuple support.
-1. even if you use it for an `obj` its default `toString` implementation is nice (not `[object Object]`).
+1. Array / Tuple을 잘 지원하기 위해 필요합니다.
+1. `obj`의 기본 `toString` 구현으로 숫자를 사용하는 건 쓸만 합니다 (`[object Object]` 보다는).
 
-Point 2 is shown below:
+2번이 아래에 나와 있습니다:
 
 ```ts
 console.log((1).toString()); // 1
 console.log((2).toString()); // 2
 ```
 
-So lesson 1:
+그러므로 교훈 1:
 
-> TypeScript index signatures must be either `string` or `number`
+> TypeScript 인덱스 서명은 반드시 `string` 또는 `number` 여야 함
 
-Quick note: `symbols` are also valid and supported by TypeScript. But let's not go there just yet. Baby steps.
+간단 참고: `symbols`도 유효하고 TypeScript에서 지원됩니다. 하지만 거기까진 가지 말기로 하죠. 조금씩 알아가기로.
 
-### Declaring an index signature
+### 인덱스 서명 선언하기
 
-So we've been using `any` to tell TypeScript to let us do whatever we want. We can actually specify an *index* signature explicitly. E.g. say you want to make sure that anything that is stored in an object using a string conforms to the structure `{message: string}`. This can be done with the declaration `{ [index:string] : {message: string} }`. This is demonstrated below:
+지금까지 우리는 `any`를 사용하여 TypeScript에게 우리 마음대로 하고 싶다고 말해 왔습니다. 우리는 *인덱스* 서명을 명시적으로 지정할 수 있습니다. 예를 들어, 문자열을 사용하여 객체에 저장된 것들은 `{message: string}` 구조를 준수하길 바랄 수 있습니다. 이것은 `{ [index:string] : {message: string} }` 선언으로 할 수 있습니다. 아래에 나와 있습니다:
 
 ```ts
 let foo:{ [index:string] : {message: string} } = {};
 
 /**
- * Must store stuff that conforms to the structure
+ * 정의된 구조에 맞는 것들만 저장
  */
 /** Ok */
 foo['a'] = { message: 'some message' };
-/** Error: must contain a `message` of type string. You have a typo in `message` */
+/** 오류: 타입이 string인 `message`가 있어야 함. `message` 부분에 오타 존재  */
 foo['a'] = { messages: 'some message' };
 
 /**
- * Stuff that is read is also type checked
+ * 내용을 읽을 때도 타입 검사가 이루어짐
  */
 /** Ok */
 foo['a'].message;
-/** Error: messages does not exist. You have a typo in `message` */
+/** 오류: messages는 존재하지 않음. `message` 부분에 오타 존재 */
 foo['a'].messages;
 ```
 
-> TIP: the name of the index signature e.g. `index` in `{ [index:string] : {message: string} }` has no significance for TypeScript and is only for readability. e.g. if it's user names you can do `{ [username:string] : {message: string} }` to help the next dev who looks at the code (which just might happen to be you).
+> 팁: 인덱스 서명의 이름, 즉 `{ [index:string] : {message: string} }`에서 `index`는 TypeScript에서 아무 의미가 없으며 가독성을 위해 넣는 내용입니다, 예를 들어, 사용자 이름이라면 코드를 보게 될 다음 개발자의 이해를 돕기 위해 `{ [username:string] : {message: string} }`라고 적을 수도 있습니다 (그 다음 개발자는 바로 당신이 될 수도).
 
-Of course `number` indexes are also supported e.g. `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
+당연히 `number` 인덱스도 지원됩니다. 예를 들어 `{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }`
 
-### All members must conform to the `string` index signature
+### 모든 구성원은 `string` 인덱스 서명을 준수해야
 
-As soon as you have a `string` index signature, all explicit members must also conform to that index signature. This is shown below:
+`string` 인덱스 서명을 만들면 모든 명시적인 구성원은 인덱스 서명을 준수해야 합니다. 아래에 나와 있습니다:
 
 ```ts
-/** Okay */
+/** 오케이 */
 interface Foo {
   [key:string]: number;
   x: number;
   y: number;
 }
-/** Error */
+/** 오류 */
 interface Bar {
   [key:string]: number;
   x: number;
-  y: string; // ERROR: Property `y` must be of type number
+  y: string; // 오류: `y` 속성은 number 타입이어야 함
 }
 ```
 
-This is to provide safety so that any string access gives the same result:
+이를 통해 안전성이 제공되고 어떤 문자열로 액세스해도 같은 결과가 나오게 됩니다:
 
 ```ts
 interface Foo {
@@ -159,17 +160,17 @@ interface Foo {
 }
 let foo: Foo = {x:1,y:2};
 
-// Directly
+// 직접
 foo['x']; // number
 
-// Indirectly
+// 간접
 let x = 'x'
 foo[x]; // number
 ```
 
-### Using a limited set of string literals
+### 제한된 문자열 리터럴 집합 사용
 
-An index signature can require that index strings be members of a union of literal strings by using *Mapped Types* e.g.:
+*타입 매핑(Mapped Type)* 을 사용하여 인덱스 서명에서 인덱스 문자열이 리터럴 문자열 유니온의 구성원이 되게 할 수 있습니다. 예를 들면:
 
 ```ts
 type Index = 'a' | 'b' | 'c'
@@ -177,42 +178,44 @@ type FromIndex = { [k in Index]?: number }
 
 const good: FromIndex = {b:1, c:2}
 
-// Error:
-// Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.
-// Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.
+// 오류:
+// 타입 '{ b: number; c: number; d: number; }'은 타입 'FromIndex'에 대입 불가능.
+// 객체 리터럴은 알려진 속성만 지정할 수 있고 'd'는 'FromIndex' 타입에 존재하지 않음.
 const bad: FromIndex = {b:1, c:2, d:3};
 ```
 
-This is often used together with `keyof typeof` to capture vocabulary types, described on the next page.
+종종 `keyof typeof`와 함께 사용하여 타입의 구성 단어를 추출할 수도 있습니다. 이 내용은 다음 페이지에서 설명합니다.
 
-The specification of the vocabulary can be deferred generically:
+> 역주: [리터럴(Literal)](docs/types/literal-types.md) 단원 참고
+
+구성 단어의 명세는 제네릭한 방법으로 도출할 수도 있습니다:
 
 ```ts
 type FromSomeIndex<K extends string> = { [key in K]: number }
 ```
 
-### Having both `string` and `number` indexers
+### 인덱서로 `string`과 `number` 둘 다 사용
 
-This is not a common use case, but TypeScript compiler supports it nonetheless.
+일반적인 사용법은 아니지만 TypeScript 컴파일러는 이것도 지원합니다.
 
-However, it has the restriction that the `string` indexer is more strict than the `number` indexer. This is intentional e.g. to allow typing stuff like:
+그렇지만 `string` 인덱서가 `number` 인덱서보다 더 구체적이어야 한다는 제약이 있습니다. 이것은 의도적인 것으로, 아래와 같이 타입을 정의할 수 있게 하기 위함입니다:
 
 ```ts
 interface ArrStr {
-  [key: string]: string | number; // Must accommodate all members
+  [key: string]: string | number; // 모든 구성원을 수용해야 함
 
-  [index: number]: string; // Can be a subset of string indexer
+  [index: number]: string; // string 인덱서의 일부만 수용 가능
 
-  // Just an example member
+  // 그냥 예제 멤버
   length: number;
 }
 ```
 
-### Design Pattern: Nested index signature
+### 디자인 패턴: 중첩 인덱스 서명
 
-> API consideration when adding index signatures
+> 인덱스 서명을 추가할 때 API 고려 사항
 
-Quite commonly in the JS community you will see APIs that abuse string indexers. e.g. a common pattern among CSS in JS libraries:
+매우 빈번하게 JS 커뮤니티에서 문자열 인덱서를 남용하는 API 들을 볼 수 있습니다. 예를 들어, JS 라이브러리에서 CSS를 다루는 흔한 패턴:
 
 ```ts
 interface NestedCSS {
@@ -228,15 +231,15 @@ const example: NestedCSS = {
 }
 ```
 
-Try not to mix string indexers with *valid* values this way. E.g. a typo in the padding will remain uncaught:
+이런 식으로 문자열 인덱서와 *유효한* 값을 섞어서 쓰지 마세요. 이러면 오타가 발생해도 검출이 안됩니다:
 
 ```ts
 const failsSilently: NestedCSS = {
-  colour: 'red', // No error as `colour` is a valid string selector
+  colour: 'red', // `colour`는 유효한 문자열 인덱서이므로 오류 아님
 }
 ```
 
-Instead separate out the nesting into its own property e.g. in a name like `nest` (or `children` or `subnodes` etc.):
+대신 중첩된 내용을 `nest` (아니면 `children` 아니면 `subnodes` 등) 같은 별도 이름 속성으로 분리하는 것이 좋습니다:
 
 ```ts
 interface NestedCSS {
@@ -256,15 +259,15 @@ const example: NestedCSS = {
 }
 
 const failsSilently: NestedCSS = {
-  colour: 'red', // TS Error: unknown property `colour`
+  colour: 'red', // TS 오류: 정의되지 않은 속성 `colour`
 }
 ```
 
-### Excluding certain properties from the index signature
+### 인덱스 서명에서 특정 속성 제외시키기
 
-Sometimes you need to combine properties into the index signature. This is not advised, and you *should* use the Nested index signature pattern mentioned above. 
+때로는 여러 속성을 한 인덱스 서명으로 합쳐야 할 수 있습니다. 추천하는 방법은 아니고, 대신 앞서 설명한 중첩 인덱스 서명 패턴을 사용하는 것이 *맞습니다*.
 
-However, if you are modeling *existing JavaScript* you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:
+그렇지만 *기존 JavaScript* 를 모델링하는 경우라면 교차 타입으로 해결할 수 있습니다. 다음은 교차 타입을 사용하지 않은 경우에 발생하는 오류를 보여줍니다:
 
 ```ts
 type FieldState = {
@@ -272,12 +275,12 @@ type FieldState = {
 }
 
 type FormState = {
-  isValid: boolean  // Error: Does not conform to the index signature
+  isValid: boolean  // 오류: 인덱스 서명을 준수하지 않음
   [fieldName: string]: FieldState
 }
 ```
 
-Here is the workaround using an intersection type:
+이것은 교차 타입으로 문제를 해결하는 방법입니다:
 
 ```ts
 type FieldState = {
@@ -289,7 +292,7 @@ type FormState =
   & { [fieldName: string]: FieldState }
 ```
 
-Note that even though you can declare it to model existing JavaScript, you cannot create such an object using TypeScript:  
+이렇게 해서 기존 JavaScript 모델을 선언할 수는 있지만 이런 객체를 TypeScript로 생성할 수는 없다는 점을 유념해주세요:  
 
 ```ts
 type FieldState = {
@@ -301,14 +304,14 @@ type FormState =
   & { [fieldName: string]: FieldState }
 
 
-// Use it for some JavaScript object you are getting from somewhere 
+// 다른데서 넘어오는 JavaScript 객체 용으로 사용
 declare const foo:FormState; 
 
 const isValidBool = foo.isValid;
 const somethingFieldState = foo['something'];
 
-// Using it to create a TypeScript object will not work
-const bar: FormState = { // Error `isValid` not assignable to `FieldState
+// 이것으로 TypeScript 객체를 생성하는 것은 안됨
+const bar: FormState = { // 오류 `isValid`는 `FieldState`에 대입할 수 없음
   isValid: false
 }
 ```
