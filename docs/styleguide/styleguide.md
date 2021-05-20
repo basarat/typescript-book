@@ -50,7 +50,7 @@ class foo { }
 ```ts
 class Foo { }
 ```
-* Use `camelCase` of class members and methods
+* Use `camelCase` for class members and methods
 
 > Reason: Naturally follows from variable and function naming convention.
 
