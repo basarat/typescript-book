@@ -228,7 +228,7 @@ if (error === null)
 if (error)
 ```
 
-* 원시적으로 `null` / `undefined` 를 체크할 때 `== undefined` 또는 `!= undefined`를 사용하세요. (`===` / `!==` 말고).  `null` / `undefined` 에는 작동하지만, 다른 falsy 값들(`''`,`0`,`false`) 에는 작동하지 않습니다.
+* 원시적으로 `null` / `undefined` 를 체크할 때 `== undefined` 또는 `!= undefined`를 사용하세요. (`===` / `!==` 말고).  `null` / `undefined` 에는 작동하지만, 다른 fasly 값들(`''`,`0`,`false`) 에는 작동하지 않습니다.
 
 **나쁜 예**
 
@@ -272,7 +272,8 @@ const foo: string = "hello";
 
 * 세미콜론을 사용하세요.
 
-> 이유 : 명확한 세미콜론은 언어 포메팅 도구가 일관된 결과를 가져오는데 도움을 줍니다. ASI(자동 세미콜론 삽입)가 없는 것은 새로운 현상을 갖고올 수 있다. 예를들어 `foo() \n (function(){})` 는 2개가 아니라 한개의 선언문이 됩다. TC39도 추천하는 사항입니다. 참고: [airbnb](https://github.com/airbnb/javascript), [idiomatic](https://github.com/rwaldron/idiomatic.js), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react), [Microsoft/TypeScript](https://github.com/Microsoft/TypeScript/).
+> 이유 : 명확한 세미콜론은 언어 포메팅 도구가 일관된 결과를 가져오는데 도움을 줍니다. ASI(자동 세미콜론 삽입)가 없는 것은 새로운 현상을 갖고올 수 있다. 예를들어 `foo() \n (function(){})` 는 2개가 아니라 한개의 선언문이 됩다. TC39도 추천하는 사항입니다.
+. 예시: [airbnb](https://github.com/airbnb/javascript), [idiomatic](https://github.com/rwaldron/idiomatic.js), [google/angular](https://github.com/angular/angular/), [facebook/react](https://github.com/facebook/react), [Microsoft/TypeScript](https://github.com/Microsoft/TypeScript/).
 
 ## 배열
 

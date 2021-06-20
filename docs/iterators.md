@@ -189,5 +189,8 @@ for (let num of fibMax21) {
 ```
 
 #### Building code with iterators for ES5 target
+위의 코드 예제에는 ES6가 필요합니다. 그러나 JS엔진이 `Symbol.iterator`을 지원한다면 ES5에서도 사용할 수 있습니다.
+타겟을 ES5으로 설정하고, ES6 lib를 사용하여 컴파일하면 됩니다 (프로젝트에 es6.d.ts 추가)
+컴파일된 코드는 node 4+, Google Chrome 등의 브라우저에서 작동 가능합니다.
 
-위의 코드 예제에는 ES6가 필요합니다. 그러나 JS엔진이 `Symbol.iterator`을 지원한다면 ES5에서도 사용할 수 있습니다. 컴파일된 코드는 node 4+, 크롬 브라우저에서 작동해야 합니다.
+[generics]: ./types/generics.md

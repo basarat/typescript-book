@@ -401,9 +401,9 @@ import util from 'util'
 const readFile = util.promisify(fs.readFile)
 ```
 
-웹팩은 `util` 모듈을 지원하고 브라우저에서도 사용할 수 있습니다.
+> 웹팩이 `util`모듈을 지원하고 브라우저에서도 사용할 수 있습니다.
 
-*멤버* 중에 노드 콜백 스타일 함수가 있다면 그 함수에서 올바른 `this`가 사용될 수 있도록 잊지 말고 `bind`를 호출해주세요: 
+Node 콜백 스타일 함수를 멤버로 가지고 있다면 잊지말고 `bind` 해주어야 올바른 `this` 가 적용됩니다: 
 
 ```ts
 const dbGet = util.promisify(db.get).bind(db);
