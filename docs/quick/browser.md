@@ -19,7 +19,7 @@ cd react-typescript
 npm install
 ```
 
-이걸 기본으로 하여 [당신의 멋진운 애플리케이션을 개발하세요.](#develop-your-amazing-application)
+이걸 기본으로 하여 [멋진 애플리케이션을 개발](#develop-your-amazing-application) 하세요.
 
 ## 프로젝트를 구성하는 자세한 방법
 

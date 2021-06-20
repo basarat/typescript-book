@@ -42,7 +42,7 @@ foo = '456' // Error: cannot assign `string` to `number`
 1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
 1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
 
-1. 컴파일러를 도와주기 위ㅐ, 더 중요하게는 다음에 코드를 읽어야 하는 개발자 (미래의 당신!)를 위해 문서화하는 목적으로.
+1. 컴파일러를 도와주기 위해, 더 중요하게는 다음에 코드를 읽어야 하는 개발자 (미래의 당신!)를 위해 문서화하는 목적으로.
 2. 컴파일러가 당신이 생각하는 방향으로 코드를 보도록 강제하기 위해. 그러니까 당신이 가지고 있는 코드에 대한 이해에 알고리즘적 분석(컴파일러가 수행)을 일치시키기 위해.
 
 타입스크립트에서는 필요할 때 접미사 형식으로 어노테이션을 붙일 수 있습니다.
