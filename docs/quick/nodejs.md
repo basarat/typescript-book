@@ -24,7 +24,7 @@
   "scripts": {
     "start": "npm run build:live",
     "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts"
   },
 ```
 
@@ -35,51 +35,6 @@
 -   Node.js를 통해 ts-node가 실행되면 자바스크립트를 출력합니다.
 
 자바스크립트 애플리케이션을 배포할 준비가 되면 `npm run build`를 실행하십시요.
-
-## 타입스크립트에서 node modules를 생성
-
--   [타입스크립트에서 node modules를 생성하는 수업](https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript)
-
-컴파일 시간 안정성과 자동완성 기능이 향상되어 타입스크립트로 작성된 모듈을 사용하는 것은 매우 재미있습니다.
-
-고품질의 타입스크립트 모듈을 만드는 것은 간단합니다. 패키지에 대해 원하는 폴더 구조를 가정하십시요.
-
-```text
-package
-├─ package.json
-├─ tsconfig.json
-├─ src
-│  ├─ All your source files
-│  ├─ index.ts
-│  ├─ foo.ts
-│  └─ ...
-└─ lib
-  ├─ All your compiled files
-  ├─ index.d.ts
-  ├─ index.js
-  ├─ foo.d.ts
-  ├─ foo.js
-  └─ ...
-```
-
--   내부에 `tsconfig.json`가 있고
-
-    -   옵션에는 `compilerOptions`: `"outDir": "lib"` 그리고 `"declaration": true` 이것은 컴파일된 js파일을 lib폴더 생성 하겠다고 선언한것입니다.
-    -   또 다른 옵션으로는 `include: ["./src/**/*"]` 포함할 모든 파일은 `src`폴더에 지정
-
--   그리고 `package.json` 파일도 있습니다.
-    -   `"main": "lib/index"` Node.js로 로드할 경우 `lib/index.js`를 지정
-    -   `"types": "lib/index"` 타입도 마찬가지로 `lib/index.d.ts`를 지정
-
-Example 패키지:
-
--   `npm install typestyle` [타입스타일](https://www.npmjs.com/package/typestyle)
--   Usage: `import { style } from 'typestyle';` 타입을 안전하게 사용하는 방법.
-
-MORE:
-
--   패키지가 다른 타입스크립트 패키지에 의존하는 경우 원시 JS 패키지와 마찬가지로 `dependencies`/`devDependencies`/`peerDependencies`에 넣으십시요.
--   패키지가 다른 자바스크립트 패키지에 의존하는 경우에는 프로젝트에 안전하게 타입을 이용하려면 (예: `@types/foo`) 를 `devDependencies`에 넣으십시요. 자바스크립트 타입은 NPM 스트림에서 *out of bound*로 관리되어야 합니다. 자바스크립트는 일반적으로 타입을 구분하므로 만약 당신이 `@types/foo` 타입이 필요한 경우에는 해당 버전을 설치하십시요.
 
 ## 보너스 포인트
 

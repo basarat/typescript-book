@@ -14,7 +14,7 @@ Here is a *simplied* version of the actual code in the parser that you can run d
 ```ts
 import * as ts from "ntypescript";
 
-// TypeScript has a singelton scanner
+// TypeScript has a singleton scanner
 const scanner = ts.createScanner(ts.ScriptTarget.Latest, /*skipTrivia*/ true);
 
 // That is initialized using a function `initializeState` similar to

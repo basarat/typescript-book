@@ -22,7 +22,7 @@ interface ActivatibleDisposible extends Disposable, Activatable {
     new (): ActivatibleDisposible;
 }
 
-var ActivatibleDisposible:ActivatibleDisposible = <any>(function(){
+var ActivatibleDisposible: ActivatibleDisposible = <any>(function(){
     Disposable.apply(this);
     ActivatibleDisposible.apply(this);
     return this;

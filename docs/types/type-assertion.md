@@ -107,14 +107,14 @@ function handler(event: Event) {
 }
 ```
 
-그럼에도 불구하고 *해당 타입을 반드시 사용하고 싶은 경우*, double assertion(이중 타입 주장)을 사용하시면 됩니다. 하지만 그전에 모든 타입에 호환 가능한 `any`로 type assertion을 먼저 진행해야만 컴파일러가 에러를 더 이상 발생시키지 않을 것입니다:
+그럼에도 불구하고 *해당 타입을 반드시 사용하고 싶은 경우*, double assertion(이중 타입 주장)을 사용하시면 됩니다. 하지만 그전에 모든 타입에 호환 가능한 `unknown` (또는 `any`)로 type assertion을 먼저 진행해야만 컴파일러가 에러를 더 이상 발생시키지 않을 것입니다:
 
 ```ts
 function handler(event: Event) {
-    let element = event as any as HTMLElement; // ㅇㅋ!
+    let element = event as unknown as HTMLElement; // ㅇㅋ!
 }
 ```
 
 #### TypeScript가 single type assertion으로는 충분하지 않음을 판단하는 방법
 
-기본적으로 `S`에서 `T`로의 type assertion은 1) `S`가 `T`의 하위 타입이거나 2) `T`가 `S`의 하위 타입인 경우에 가능합니다. 그래야만 type assertion을 하더라도 좀 더 안전하게 사용할 수 있기 때문입니다… 완전히 와일드한 type assertion을 사용하는 건 매우 위험한 일이고, 불안전한 type assertion을 하려면 `any`를 사용하시면 됩니다.
+기본적으로 `S`에서 `T`로의 type assertion은 1) `S`가 `T`의 하위 타입이거나 2) `T`가 `S`의 하위 타입인 경우에 가능합니다. 그래야만 type assertion을 하더라도 좀 더 안전하게 사용할 수 있기 때문입니다… 완전히 와일드한 type assertion을 사용하는 건 매우 위험한 일이고, 불안전한 type assertion을 하려면 `unknown`(또는 `any`)을 사용하면 됩니다.

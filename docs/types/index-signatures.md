@@ -5,7 +5,7 @@ An `Object` in JavaScript (and hence TypeScript) can be accessed with a **string
 Here is a quick example:
 
 ```ts
-let foo:any = {};
+let foo: any = {};
 foo['Hello'] = 'World';
 console.log(foo['Hello']); // World
 ```
@@ -20,7 +20,7 @@ class Foo {
   }
 }
 
-let foo:any = {};
+let foo: any = {};
 foo['Hello'] = new Foo('World');
 foo['Hello'].log(); // World
 ```
@@ -35,7 +35,7 @@ let obj = {
   }
 }
 
-let foo:any = {};
+let foo: any = {};
 foo[obj] = 'World'; // toString called
 console.log(foo[obj]); // toString called, World
 console.log(foo['Hello']); // World
@@ -63,7 +63,7 @@ let obj = {
   }
 }
 
-let foo:any = {};
+let foo: any = {};
 
 // ERROR: the index signature must be string, number ...
 foo[obj] = 'World';
@@ -76,7 +76,7 @@ The reason for forcing the user to be explicit is because the default `toString`
 
 ```ts
 let obj = {message:'Hello'}
-let foo:any = {};
+let foo: any = {};
 
 // ERROR: the index signature must be string, number ...
 foo[obj] = 'World';
@@ -115,7 +115,7 @@ let foo:{ [index:string] : {message: string} } = {};
  */
 /** Ok */
 foo['a'] = { message: 'some message' };
-/** Error: must contain a `message` or type string. You have a typo in `message` */
+/** Error: must contain a `message` of type string. You have a typo in `message` */
 foo['a'] = { messages: 'some message' };
 
 /**
@@ -138,13 +138,13 @@ As soon as you have a `string` index signature, all explicit members must also c
 ```ts
 /** Okay */
 interface Foo {
-  [key:string]: number
+  [key:string]: number;
   x: number;
   y: number;
 }
 /** Error */
 interface Bar {
-  [key:string]: number
+  [key:string]: number;
   x: number;
   y: string; // ERROR: Property `y` must be of type number
 }
@@ -154,7 +154,7 @@ This is to provide safety so that any string access gives the same result:
 
 ```ts
 interface Foo {
-  [key:string]: number
+  [key:string]: number;
   x: number;
 }
 let foo: Foo = {x:1,y:2};
@@ -301,7 +301,7 @@ type FormState =
   & { [fieldName: string]: FieldState }
 
 
-// Use it for some JavaScript object you are gettting from somewhere 
+// Use it for some JavaScript object you are getting from somewhere 
 declare const foo:FormState; 
 
 const isValidBool = foo.isValid;

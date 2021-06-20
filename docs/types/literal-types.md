@@ -64,7 +64,7 @@ iTakeFoo(test.someProp); // Okay!
 
 or use a type annotation that helps TypeScript infer the correct thing at the point of declaration: 
 
-```
+```ts
 function iTakeFoo(foo: 'foo') { }
 type Test = {
   someProp: 'foo',

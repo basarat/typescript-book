@@ -31,7 +31,7 @@ console.log(iterator.next()); // 2
 Now that you have seen `function*`, `yield` and `.next()` we can dig deeper.
 
 #### Catching Errors
-Any errors thrown (intentially using `throw` or unintentionally due to error) from the generator can be caught using `try/catch` just like normal function executions. This is demonstrated below:
+Any errors thrown (intentionally using `throw` or unintentionally due to error) from the generator can be caught using `try/catch` just like normal function executions. This is demonstrated below:
 
 ```ts
 function* wholeNumbers() {

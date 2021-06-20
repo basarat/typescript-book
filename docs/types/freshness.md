@@ -61,7 +61,7 @@ logIfHasName({neme: 'I just misspelled name to neme'}); // Error: 객체 리터�
 타입에 index signature(ex. `[x: string]`)를 사용하면, 추가적인 property를 허용한다는 의미를 명시적으로 나타낼 수도 있습니다.
 
 ```ts
-var x: { foo: number, [x: string]: any };
+var x: { foo: number, [x: string]: unknown };
 x = { foo: 1, baz: 2 };  // ㅇㅋ `baz`는 index signature 조건에 부합하는 군.
 ```
 
@@ -72,8 +72,8 @@ Freshness 활용의 좋은 사례로는 [페이스북의 ReactJS](https://facebo
 ```ts
 // 가령
 interface State {
-  foo: string;
-  bar: string;
+    foo: string;
+    bar: string;
 }
 
 // 당신은 foo를 "Hello"로 설정하고 싶습니다:
@@ -88,8 +88,8 @@ Freshness의 개념을 잘 이용하면 우리는 모든 멤버를 선택적으�
 ```ts
 // 가령
 interface State {
-  foo?: string;
-  bar?: string;
+    foo?: string;
+    bar?: string;
 }
 
 // foo를 "Hello"로 설정하고 싶습니다:

@@ -143,7 +143,7 @@ num = power
 
 ### `null` and `undefined`
 
-자바스크립트 리터럴에서 `null`과 `undefined`는 타입 시스템에서 `any`와 동일한 방식으로 처리됩니다. 이 리터럴은 다른 타입에서 지정할 수 있습니다. 아래 예에서 설명합니다.
+타입 시스템이 이들을 어떻게 처리하는지는 `strictNullChecks` 컴파일러 플래그에 따라 결정됩니다 (이 플래그는 다음에 다룸). `strictNullCheck:false`인 경우, 자바스크립트 리터럴에서 `null`과 `undefined`는 타입 시스템에서 `any`와 동일한 방식으로 처리됩니다. 이 리터럴은 다른 타입에서 지정할 수 있습니다. 아래 예에서 설명합니다:
 
 ```ts
 var num: number
@@ -242,23 +242,14 @@ function formatCommandline(command: string[] | string) {
 
 ```ts
 function extend<T, U>(first: T, second: U): T & U {
-    let result = <T & U>{}
-    for (let id in first) {
-        result[id] = first[id]
-    }
-    for (let id in second) {
-        if (!result.hasOwnProperty(id)) {
-            result[id] = second[id]
-        }
-    }
-    return result
+  return { ...first, ...second };
 }
 
-var x = extend({ a: 'hello' }, { b: 42 })
+const x = extend({ a: "hello" }, { b: 42 });
 
 // x now has both `a` and `b`
-var a = x.a
-var b = x.b
+const a = x.a;
+const b = x.b;
 ```
 
 ## Tuple Type

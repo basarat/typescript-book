@@ -1,4 +1,4 @@
-### Template Strings
+### Template Strings (Template Literals)
 
 템플릿 문자열은 백틱 구문을 사용해야 합니다. ', '' 대신에 사용할 수 있습니다. 템플릿 문자열은 아래 3가지의 장점이 있습니다.
 
@@ -9,6 +9,8 @@
 #### String Interpolation
 
 문자열에 변수를 추가할때 +를 이용해서 추가해야 합니다. 하지만 템플릿 문자열을 이용하면 +를 생략할 수 있습니다.
+이렇게 하려면 *템플릿 로직*을 짜야 하는데 *템플릿 문자열* 이라는 말이 여기서 비롯된 것입니다. 공식적인 명칭으로는 *템플릿 리터럴(template literals)* 을 사용합니다.
+다음은 html 문자열을 생성하는 예제입니다:
 
 ```ts
 var lyrics = 'Never gonna give you up'
@@ -28,9 +30,9 @@ var html = `<div>${lyrics}</div>`
 console.log(`1 and 1 make ${1 + 1}`)
 ```
 
-#### Multiline Strings
+#### Multiline Literals
 
-자바스크립트 문자열에 개행을 넣고 싶었던 적이 있습니까? 개행을 하려면 `\` 와 `\n`를 사용해야 합니다.
+자바스크립트 문자열에 줄바꿈을 넣고 싶었던 적이 있습니까? 노래 가사 같은 것을 적을 때? 줄바꿈을 하려면 친숙한 이스케이프 문자 `\` 로 *실제 개행 문자* 를 이스케이프한 후 다음 줄에 `\n` 를 넣어서 줄바꿈을 만드렁야 합니다. 다음 처럼:
 
 ```ts
 var lyrics =

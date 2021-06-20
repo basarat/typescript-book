@@ -1,6 +1,10 @@
 # React JSX
 
+> [Free series of youtube videos on React / TypeScript best practices](https://www.youtube.com/watch?v=7EW67MqgJvs&list=PLYvdvJlnTOjHNayH7MukKbSJ6PueUNkkG)
+
 > [PRO Egghead course on TypeScript and React](https://egghead.io/courses/use-typescript-to-develop-react-applications)
+
+[![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)](https://designtsx.com)
 
 ## Setup
 
@@ -13,7 +17,7 @@ Our [browser quickstart already sets you up to develop react applications](../qu
 
 ## HTML Tags vs. Components
 
-React can either render HTML tags (strings) or React components (classes). The JavaScript emit for these elements is different (`React.createElement('div')` vs. `React.createElement(MyComponent)`). The way this is determined is by the *case* of the *first* letter. `foo` is treated as an HTML tag and `Foo` is treated as a component.
+React can either render HTML tags (strings) or React components. The JavaScript emit for these elements is different (`React.createElement('div')` vs. `React.createElement(MyComponent)`). The way this is determined is by the *case* of the *first* letter. `foo` is treated as an HTML tag and `Foo` is treated as a component.
 
 ## Type Checking
 
@@ -47,6 +51,24 @@ const MyComponent: React.FunctionComponent<Props> = (props) => {
 }
 
 <MyComponent foo="bar" />
+```
+
+### Void Function Components
+
+As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare that a component does not take `children`. This is an interim solution until the next major version of the type defs (where VoidFunctionComponent will be deprecated and FunctionComponent will by default accept no children).
+
+```ts
+type Props = { 
+  foo: string 
+}
+// OK now, in future, error
+const FunctionComponent: React.FunctionComponent<Props> = ({ foo, children }: Props) => {
+    return <div>{foo} {children}</div>; // OK
+};
+// Error now (children not support), in future, deprecated
+const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo, children }) => {
+    return <div>{foo}{children}</div>; 
+};
 ```
 
 ### Class Components
@@ -147,7 +169,7 @@ const foo = <T>(x: T) => x; // ERROR : unclosed `T` tag
 **Workaround**: Use `extends` on the generic parameter to hint the compiler that it's a generic, e.g.:
 
 ```ts
-const foo = <T extends {}>(x: T) => x;
+const foo = <T extends unknown>(x: T) => x;
 ```
 
 ### React Tip: Strongly Typed Refs 
@@ -195,7 +217,7 @@ class FocusingInput extends React.Component<{ value: string, onChange: (value: s
 
 ### Type Assertions
 
-Use `as Foo` syntax for type assertions as we [mentioned before](./type-assertion.md#as-foo-vs-foo).
+Use `as Foo` syntax for type assertions as we [mentioned before](../types/type-assertion.md#as-foo-vs-foo).
 
 ## Default Props
 
@@ -255,4 +277,28 @@ ReactDOM.render(
   <Hello framework="React" />, // TypeScript React
   document.getElementById("root")
 );
+```
+
+## Declaring a webcomponent
+
+If you are using a web component the default React type definitions (`@types/react`) will not know about it. But you can declare it easily e.g. to declare a webcomponent called `my-awesome-slider` that takes Props `MyAwesomeSliderProps` you would: 
+
+```tsx
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-awesome-slider': MyAwesomeSliderProps;
+    }
+
+    interface MyAwesomeSliderProps extends React.Attributes {
+      name: string;
+    }
+  }
+}
+```
+
+Now you can use it in TSX:
+
+```tsx
+<my-awesome-slider name='amazing'/>
 ```

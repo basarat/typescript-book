@@ -130,7 +130,7 @@ function area(s: Shape) {
 
 ### strictNullChecks
 
-If using strictNullChecks and doing exhaustive checks, TypeScript might complain "not all code paths return a value". You can silence that by simply returning the `_exhaustiveCheck` variable (of type `never`). So:
+If using *strictNullChecks* and doing exhaustive checks, TypeScript might complain "not all code paths return a value". You can silence that by simply returning the `_exhaustiveCheck` variable (of type `never`). So:
 
 ```ts
 function area(s: Shape) {
@@ -142,6 +142,87 @@ function area(s: Shape) {
           const _exhaustiveCheck: never = s;
           return _exhaustiveCheck;
     }
+}
+```
+
+### Throw in exhaustive checks
+You can write a function that takes a `never` (and therefore can only be called with a variable that is inferred as `never`) and then throws an error if its body ever executes: 
+
+```ts
+function assertNever(x:never): never {
+    throw new Error('Unexpected value. Should have been never.');
+}
+```
+
+Example use with the area function: 
+
+```ts
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Rectangle {
+    kind: "rectangle";
+    width: number;
+    height: number;
+}
+type Shape = Square | Rectangle;
+
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.width * s.height;
+		// If a new case is added at compile time you will get a compile error
+		// If a new value appears at runtime you will get a runtime error
+        default: return assertNever(s);
+    }
+}
+```
+
+### Retrospective Versioning
+Say you have a data structure of the form: 
+
+```ts
+type DTO = {
+  name: string
+}
+```
+And after you have a bunch of `DTO`s you realize that `name` was a poor choice. You can add versioning retrospectively by creating a new *union* with *literal number* (or string if you want) of DTO. Mark the version 0 as `undefined` and if you have *strictNullChecks* enabled it will just work out: 
+
+```ts
+type DTO = 
+| { 
+   version: undefined, // version 0
+   name: string,
+ }
+| {
+   version: 1,
+   firstName: string,
+   lastName: string, 
+}
+// Even later 
+| {
+    version: 2,
+    firstName: string,
+    middleName: string,
+    lastName: string, 
+} 
+// So on
+```
+
+ Example usage of such a DTO:
+
+```ts
+function printDTO(dto:DTO) {
+  if (dto.version == null) {
+      console.log(dto.name);
+  } else if (dto.version == 1) {
+      console.log(dto.firstName,dto.lastName);
+  } else if (dto.version == 2) {
+      console.log(dto.firstName, dto.middleName, dto.lastName);
+  } else {
+      const _exhaustiveCheck: never = dto;
+  }
 }
 ```
 
@@ -208,3 +289,4 @@ store.dispatch({ type: 'DECREMENT' })
 ```
 
 Using it with TypeScript gives you safety against typo errors, increased refactor-ability and self documenting code.
+

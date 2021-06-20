@@ -401,7 +401,13 @@ import util from 'util'
 const readFile = util.promisify(fs.readFile)
 ```
 
-> 웹팩을 `util`모듈을 지원하고 브라우저에서도 사용할 수 있습니다.
+> 웹팩이 `util`모듈을 지원하고 브라우저에서도 사용할 수 있습니다.
+
+Node 콜백 스타일 함수를 멤버로 가지고 있다면 잊지말고 `bind` 해주어야 올바른 `this` 가 적용됩니다: 
+
+```ts
+const dbGet = util.promisify(db.get).bind(db);
+```
 
 ### Revisiting the JSON example
 
@@ -472,8 +478,8 @@ function loadItem(id: number): Promise<{ id: number }> {
     })
 }
 
-// Chaining
-let item1, item2
+// Chained / Sequential
+let item1, item2;
 loadItem(1)
     .then(res => {
         item1 = res
@@ -484,11 +490,12 @@ loadItem(1)
         console.log('done')
     }) // overall time will be around 2s
 
-// Parallel
-Promise.all([loadItem(1), loadItem(2)]).then(res => {
-    ;[item1, item2] = res
-    console.log('done')
-}) // overall time will be around 1s
+// Concurrent / Parallel
+Promise.all([loadItem(1), loadItem(2)])
+    .then((res) => {
+        [item1, item2] = res;
+        console.log('done');
+    }); // overall time will be around 1s
 ```
 
 때때로, 당신은 비동기를 연속적으로 실행해야 할 수도 있습니다. 그러나 이러한 작업중 하나가 해결되는 한 필요한 모든 것을 얻을 수 있습니다. 아래에 `Promise.race`함수를 이용해서 `Promise`를 주입하는 방법을 설명하고 있습니다.

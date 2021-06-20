@@ -12,7 +12,7 @@
 * npm packages are configured using `package.json` file. You can generate a quick file using `npm init -y`.
 * packages get installed into a `./node_modules` folder. You normally have this folder in your `.gitignore`.
 
-> Even though you might be building an application, having a `package.json` essentially makes your project a package as well. So the terms your `project | package` can be used interchangably.
+> Even though you might be building an application, having a `package.json` essentially makes your project a package as well. So the terms your `project | package` can be used interchangeably.
 
 When you checkout someone's (your team's) package, it will have a `package.json` that will list the dependencies you need to run the project. You simply run `npm install` and npm will bring them down from the cloud ☁️.
  

@@ -33,16 +33,19 @@ foo = '456' // Error: cannot assign `string` to `number`
 // Is foo a number or a string?
 ```
 
-이러한 방식은 타입을 잘 유추해 냅니다. 위 예제처럼 `foo` 변수에 `number` 또는 `string`. 을 재할당 했을 때 타입시스템이 정확한 타입을 추론하지 못하는 경우가 발생합니다 나중에 타입을 유추하는 규칙에 대해서 살펴보도록 하겠습니다.
+이러한 방식은 타입을 잘 유추해 냅니다. 위 예제처럼 `foo` 변수에 `number` 또는 `string` 을 재할당 했을 때 타입시스템이 정확한 타입을 추론하지 못하는 경우가 발생합니다 나중에 타입을 유추하는 규칙에 대해서 살펴보도록 하겠습니다.
 
 ### 타입을 명시적으로 사용할 수 있습니다.
 
-이전에 말했듯이 타입스크립트는 안전하게 추론할 수 있는 만큼 추론을 할 것 입니다.
+이전에 말했듯이 타입스크립트는 안전하게 추론할 수 있는 만큼 추론을 할 것 입니다. 하지만 직접 타입을 지정할 수도 있습니다:
 
-1. 코드를 읽어야 하는 다음 개발자를 위해 문서화 합니다.
-2. 코드에 대한 이해는 코드의 알고리즘 분석과 일치합니다.
+1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
+1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
 
-타입스크립트는 선택적으로 접미사 유형 주석을 사용합니다.
+1. 컴파일러를 도와주기 위ㅐ, 더 중요하게는 다음에 코드를 읽어야 하는 개발자 (미래의 당신!)를 위해 문서화하는 목적으로.
+2. 컴파일러가 당신이 생각하는 방향으로 코드를 보도록 강제하기 위해. 그러니까 당신이 가지고 있는 코드에 대한 이해에 알고리즘적 분석(컴파일러가 수행)을 일치시키기 위해.
+
+타입스크립트에서는 필요할 때 접미사 형식으로 어노테이션을 붙일 수 있습니다.
 
 ```ts
 var foo: number = 123
@@ -54,7 +57,7 @@ var foo: number = 123
 var foo: number = '123' // Error: cannot assign a `string` to a `number`
 ```
 
-타입스크립트에서 지원하는 모든 주석 구문에 대한 자세한 내용은 다음장부터 다룰 것 입니다.
+타입스크립트에서 지원하는 모든 어노테이션 구문에 대한 자세한 내용은 다음장부터 다룰 것 입니다.
 
 ### 타입 구조
 

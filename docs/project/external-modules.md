@@ -126,7 +126,7 @@ import someLocalNameForThisFile from '../foo'
 
 ### Module paths
 
-> 나는 `moduleResolution: commonjs`를 가정하려고합니다. 이것은 타입스크립트 구성에 있어야하는 옵션입니다. 이 설정은 `module:commonjs`를 의해 자동으로 암시됩니다.
+> 나는 `moduleResolution: "Node"` 라고 가정하려고 합니다. 이것은 타입스크립트 구성에 있어야하는 옵션입니다. 이 설정은 `module:commonjs`를 의해 자동으로 암시됩니다.
 
 모듈들은 두가지 분명한 유형이 있습니다. 구별은 import문의 경로에 의해 결정됩니다. (예를들어 `import foo from 'THIS IS THE PATH SECTION'`)
 
@@ -183,7 +183,7 @@ import로 가져온 경로가 상대 경로가 아닐때, 옆의 링크를 클�
 e.g.
 
 ```ts
-// globals.d.ts
+// global.d.ts
 declare module 'foo' {
     // Some variable declarations
     export var bar: number /*sample*/
@@ -313,8 +313,11 @@ lazy 로딩 사례와 마찬가지로 특정 모듈 로더 (commonjs/node 그리
 때때로 당신은 파일을 로드할때 사이드 이펙트를 경험할 수 있습니다. (예: 모듈은 다음과 같은 라이브러리와 함께 등록할 수 있습니다. [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.) 그러나 `import/require`만 하면 변환된 자바스크립트에는 모듈에 의존성이 포함되어 있지 않으며 모듈 로더 (예: webpack)가 가져오기를 완전히 무시할 수 있습니다. 이 경우 `ensureImport` 변수를 사용하여 컴파일 된 자바스크립트가 모듈에 의존성을 갖도록 할 수 있습니다.
 
 ```ts
-import foo = require('./foo')
-import bar = require('./bar')
-import bas = require('./bas')
-const ensureImport: any = foo || bar || bas
+import foo = require('./foo');
+import bar = require('./bar');
+import bas = require('./bas');
+const ensureImport: any =
+    foo
+    && bar
+    && bas;
 ```
