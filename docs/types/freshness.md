@@ -60,7 +60,7 @@ logIfHasName({neme: 'I just misspelled name to neme'}); // 오류: 객체 리터
 
 ```ts
 var x: { foo: number, [x: string]: unknown };
-x = { foo: 1, baz: 2 };  // ㅇㅋ `baz`는 index signature 조건에 부합하는 군.
+x = { foo: 1, baz: 2 };  // 오케이, `baz`는 인덱스 서명 부분에 해당하게 됨
 ```
 
 ### 사용 사례: React State
@@ -77,8 +77,8 @@ interface State {
 // 하려고 한 것:
 this.setState({foo: "Hello"}); // 오류: 속성 bar 누락
 
-// 그러나 state가 `foo`와 `bar`를 모두 갖고 있기 때문에 TypeScript는 다음과 같이 작성하도록 강요할 것입니다:
-this.setState({foo: "Hello", bar: this.state.bar}};
+// State에 `foo`와 `bar` 둘 다 있기 때문에 TypeScript에서는 이렇게 할 수 밖에 없음: 
+this.setState({foo: "Hello", bar: this.state.bar});
 ```
 
 신신도 개념을 생각해서 모든 멤버를 선택적(optional)로 표시하면 일부 속성만 넣으면서도 *오타를 검출할 수 있습니다*!: 
@@ -90,12 +90,12 @@ interface State {
     bar?: string;
 }
 
-// foo를 "Hello"로 설정하고 싶습니다:
-this.setState({foo: "Hello"}); // ㅇㅋ 통과!
+// 하려고 한 것: 
+this.setState({foo: "Hello"}); // 좋아, 잘 되는군!
 
-// Freshness 덕분에 state는 오타로 부터 지켜지고 있습니다!
-this.setState({foos: "Hello"}}; // Error: 객체에는 선언된 property만 명시해야 합니다.
+// 신선도 때문에 오타 입력은 방지됨!
+this.setState({foos: "Hello"}); // 오류: 객체 리터럴은 정의된 속성만 지정해야 함
 
-// 그리고 타입은 여전히 검사됩니다.
-this.setState({foo: 123}}; // Error: 문자열을 지정해야 곳에 숫자를 지정할 수 없습니다.
+// 타입 검사도 유지됨
+this.setState({foo: 123}); // 오류: 문자열에 숫자를 할당할 수 없음
 ```

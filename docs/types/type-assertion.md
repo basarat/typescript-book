@@ -79,7 +79,7 @@ interface Foo {
     bas: string;
 }
 var foo: Foo = {
-    // 컴파일러는 여전히 Foo의 property에 대한 자동 완성을 지원할 것입니다
+    // 컴파일러가 Foo의 속성에 대해 자동완성을 지원할 것입니다
 };
 ```
 
@@ -103,14 +103,14 @@ function handler(event: Event) {
 }
 ```
 
-그럼에도 불구하고 *해당 타입을 반드시 사용하고 싶은 경우*, double assertion(이중 타입 주장)을 사용하시면 됩니다. 하지만 그전에 모든 타입에 호환 가능한 `unknown` (또는 `any`)로 type assertion을 먼저 진행해야만 컴파일러가 에러를 더 이상 발생시키지 않을 것입니다:
+그래도 *여전히 그 타입을 사용하고 싶다면 이중 표명을 사용할 수 있습니다*, 먼저 모든 타입과 호환되는 `unknown` (또는 `any`)로 타입 표명을 하면 컴파일러가 더이상 불평하지 않습니다:
 
 ```ts
 function handler(event: Event) {
-    let element = event as unknown as HTMLElement; // ㅇㅋ!
+    let element = event as any as HTMLElement; // 오케이!
 }
 ```
 
-#### TypeScript가 single type assertion으로는 충분하지 않음을 판단하는 방법
+#### TypeScript가 단일 타입 표명으로 충분하지 않음을 판단하는 방법
 
-기본적으로 `S`에서 `T`로의 type assertion은 1) `S`가 `T`의 하위 타입이거나 2) `T`가 `S`의 하위 타입인 경우에 가능합니다. 그래야만 type assertion을 하더라도 좀 더 안전하게 사용할 수 있기 때문입니다… 완전히 와일드한 type assertion을 사용하는 건 매우 위험한 일이고, 불안전한 type assertion을 하려면 `unknown`(또는 `any`)을 사용하면 됩니다.
+기본적으로 `S` 타입이 `T` 타입의 하위 타입이거나 `T`가 `S`의 하위 타입이면 `S`에서 `T`로의 타입 표명이 성공합니다. 이것은 타입 표명을 사용할 때 추가적인 안전을 제공합니다 ... 완전히 무작위적인 타입 표명은 아주 위험할 수 있고 그 정도로 위험한 일을 하려면 `unknown` (또는 `any`)를 사용해야 합니다.
