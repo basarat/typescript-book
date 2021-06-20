@@ -18,7 +18,7 @@ type Id<T extends string> = {
 type FooId = Id<'foo'>;
 type BarId = Id<'bar'>;
 
-/** Optional: contructors functions */
+/** Optional: constructors functions */
 const createFoo = (value: string): FooId => ({ type: 'foo', value });
 const createBar = (value: string): BarId => ({ type: 'bar', value });
 
@@ -45,11 +45,11 @@ This is demonstrated below where the structure of the types is just a string:
 
 ```ts
 // FOO
-enum FooIdBrand {}
+enum FooIdBrand { _ = "" };
 type FooId = FooIdBrand & string;
 
 // BAR
-enum BarIdBrand {}
+enum BarIdBrand  { _ = "" };
 type BarId = BarIdBrand & string;
 
 /**
@@ -71,6 +71,8 @@ var str: string;
 str = fooId;
 str = barId;
 ```
+
+Note how the brand enums,  ``FooIdBrand`` and ``BarIdBrand`` above, each have single member (`_`) that maps to the empty string, as specified by ``{ _ = "" }``. This forces TypeScript to infer that these are string-based enums, with values of type ``string``, and not enums with values of type ``number``.  This is necessary because TypeScript infers an empty enum (``{}``) to be a numeric enum, and as of TypeScript 3.6.2 the intersection of a numeric ``enum`` and ``string`` is ``never``.
 
 ## Using Interfaces
 

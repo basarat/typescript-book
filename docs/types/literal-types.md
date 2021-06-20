@@ -1,22 +1,22 @@
-## Literals
-Literals are *exact* values that are JavaScript primitives. 
+## 리터럴(Literal)
+리터럴은 *입력된 그대로*의 값이며 JavaScript 기본 타입(primitive)입니다. 
 
-### String Literals
+### 문자열 리터럴
 
-You can use a string literal as a type. For example:
+문자열 리터럴을 타입으로 사용할 수 있습니다. 예를 들면:
 
 ```ts
 let foo: 'Hello';
 ```
 
-Here we have created a variable called `foo` that *will only allow the literal value `'Hello'` to be assigned to it*. This is demonstrated below:
+여기서 우리는 `foo`라는 이름의 변수를 만들었는데 그 변수에는 *리터럴 값 `'Hello'`만 할당이 허용됩니다*. 아래에서 볼 수 있습니다:
 
 ```ts
 let foo: 'Hello';
 foo = 'Bar'; // Error: "Bar" is not assignable to type "Hello"
 ```
 
-They are not very useful on their own but can be combined in a type union to create a powerful (and useful) abstraction e.g.:
+이 자체로는 그닥 유용하지 않지만 타입 유니온에서 사용하면 강력한 (그리고 유용한) 추상화를 만들 수 있습니다. 예를 들면:
 
 ```ts
 type CardinalDirection =
@@ -29,20 +29,20 @@ function move(distance: number, direction: CardinalDirection) {
     // ...
 }
 
-move(1,"North"); // Okay
-move(1,"Nurth"); // Error!
+move(1,"North"); // 오케이
+move(1,"Nurth"); // 오류!
 ```
 
-### Other literal types
-TypeScript also supports `boolean` and `number` literal types, e.g.: 
+### 다른 리터럴 타입들
+TypeScript는 `boolean`과 `number` 리터럴 타입도 지원합니다, 예를 들면:
 
 ```ts
 type OneToFive = 1 | 2 | 3 | 4 | 5;
 type Bools = true | false;
 ```
 
-### Inference 
-Quite commonly you get an error like `Type string is not assignable to type "foo"`. The following example demonstrates this.
+### 추론(Inference)
+매우 자주 `Type string is not assignable to type "foo"` 같은 오류를 만나게 됩니다. 아래 예제에서 이런 경우를 볼 수 있습니다.
 
 ```js
 function iTakeFoo(foo: 'foo') { }
@@ -52,38 +52,38 @@ const test = {
 iTakeFoo(test.someProp); // Error: Argument of type string is not assignable to parameter of type 'foo'
 ```
 
-This is because `test` is inferred to be of type `{someProp: string}`. The fix here is to use a simple type assertion to tell TypeScript the literal you want it to infer as shown below: 
+이것은 `test`가 `{someProp: string}`라는 타입을 가진 것으로 추론되었기 때문입니다. 고치는 방법은 아래와 같이 간단한 타입 표명을 사용해서 TypeScript에게 어떤 리터럴 타입으로 추론되어야 하는지 알려주는 것입니다:
 
 ```js
 function iTakeFoo(foo: 'foo') { }
 const test = {
   someProp: 'foo' as 'foo'
 };
-iTakeFoo(test.someProp); // Okay!
+iTakeFoo(test.someProp); // 오케이!
 ```
 
-or use a type annotation that helps TypeScript infer the correct thing at the point of declaration: 
+아니면 선언 시점에 타입 어노테이션을 사용하여 TypeScript가 올바르게 추론할 수 있게 도와줄 수도 있습니다: 
 
-```
+```ts
 function iTakeFoo(foo: 'foo') { }
 type Test = {
   someProp: 'foo',
 }
-const test: Test = { // Annotate - inferred someProp is always === 'foo'
+const test: Test = { // 타입을 붙임 - someProp의 추론된 타입은 항상 === 'foo'
   someProp: 'foo' 
 }; 
-iTakeFoo(test.someProp); // Okay!
+iTakeFoo(test.someProp); // 오케이!
 ```
 
-### Use cases
-Valid use cases for string literal types are:
+### 사용 사례
+문자열 리터럴 타입의 유효한 사용 사례들:
 
-#### String based enums
+#### 문자열 열거형(String Enums)
 
-[TypeScript enums are number based](../enums.md). You can use string literals with union types to mock a string based enum as we did in the `CardinalDirection` example above. You can even generate a `Key:Value` structure using the following function: 
+[TypeScript 열거형은 숫자 기반입니다](../enums.md). 위의 `CardinalDirection` 예제처럼 문자열 리터럴이 있는 유니온 타입으로 문자열 기반 열거형의 표현할 수 있습니다. 다음과 같은 함수로 `Key:Value` 구조를 만들 수도 있습니다:
 
 ```ts
-/** Utility function to create a K:V from a list of strings */
+/** 문자열 목록으로 K:V를 만드는 유틸리티 함수 */
 function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
   return o.reduce((res, key) => {
     res[key] = key;
@@ -92,10 +92,10 @@ function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
 }
 ```
 
-And then generate the literal type union using `keyof typeof`. Here is a complete example:
+그리고 `keyof typeof`를 사용하여 리터럴 타입 유니온을 생성할 수 있습니다. 전체 내용이 아래 예제에 나와 있습니다:
 
 ```ts
-/** Utility function to create a K:V from a list of strings */
+/** 문자열 목록으로 K:V를 만드는 유틸리티 함수 */
 function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
   return o.reduce((res, key) => {
     res[key] = key;
@@ -104,40 +104,39 @@ function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
 }
 
 /**
-  * Sample create a string enum
+  * 문자열 열거형을 만드는 예시
   */
 
-/** Create a K:V */
+/** K:V 생성 */
 const Direction = strEnum([
   'North',
   'South',
   'East',
   'West'
 ])
-/** Create a Type */
+/** 타입 생성 */
 type Direction = keyof typeof Direction;
 
 /** 
-  * Sample using a string enum
+  * 문자열 열거형을 사용하는 예시
   */
 let sample: Direction;
 
-sample = Direction.North; // Okay
-sample = 'North'; // Okay
-sample = 'AnythingElse'; // ERROR!
+sample = Direction.North; // 오케이
+sample = 'North'; // 오케이
+sample = 'AnythingElse'; // 오류!
 ```
 
-#### Modelling existing JavaScript APIs
+#### 기존 JavaScript API 모델링
 
-E.g. [CodeMirror editor has an option `readOnly`](https://codemirror.net/doc/manual.html#option_readOnly) that can either be a `boolean` or the literal string `"nocursor"` (effective valid values `true,false,"nocursor"`).  It can be declared as:
+예를 들어, [CodeMirror 편집기에는 `readOnly` 옵션이 있는데](https://codemirror.net/doc/manual.html#option_readOnly), `boolean` 값이나 문자열 리터럴 `"nocursor"`를 지정할 수 있습니다(사용 가능한 값은 `true,false,"nocursor"`). 이것은 아래와 같이 선언할 수 있습니다:
 
 ```ts
 readOnly: boolean | 'nocursor';
 ```
 
-#### Discriminated Unions
+#### 구별된 유니온
 
-We will cover [this later in the book](./discriminated-unions.md).
-
+이 부분은 [이 책애서](./discriminated-unions.md) 다룹니다.
 
 [](https://github.com/Microsoft/TypeScript/pull/5185)

@@ -1,34 +1,36 @@
 # Never
+> [Youtube: Never 타입에 대한 동영상 강의](https://www.youtube.com/watch?v=aldIFYWu6xc)
 
-> [A video lesson on the never type](https://egghead.io/lessons/typescript-use-the-never-type-to-avoid-code-with-dead-ends-using-typescript)
+> [Egghead: Never 타입에 대한 동영상 강의](https://egghead.io/lessons/typescript-use-the-never-type-to-avoid-code-with-dead-ends-using-typescript)
 
-Programming language design does have a concept of *bottom* type that is a **natural** outcome as soon as you do *code flow analysis*. TypeScript does *code flow analysis* (😎) and so it needs to reliably represent stuff that might never happen.
 
-The `never` type is used in TypeScript to denote this *bottom* type. Cases when it occurs naturally:
+프로그래밍 언어 디자인에는 *코드 흐름 분석* 을 수행할 때 **자연스럽게** 결과로 나오는 *바닥* 타입이라는 개념이 있습니다. TypeScript도 *코드 흐름 분석* 을 하기 때문에 (😎) 발생 가능성이 없는 것들을 표현할 방법이 필요합니다.
 
-* A function never returns (e.g. if the function body has `while(true){}`)
-* A function always throws (e.g. in `function foo(){throw new Error('Not Implemented')}` the return type of `foo` is `never`)
+TypeScript가 이 *바닥* 타입을 나타내기 위해 사용하는 것이 `never` 타입입니다. 이 타입이 발생하는 경우들:
 
-Of course you can use this annotation yourself as well
+* 리턴하지 않는 함수 (e.g. 함수 내용에 `while(true){}`가 들어 있는 경우)
+* 항상 예외를 던지는 함수 (e.g. `function foo(){throw new Error('Not Implemented')}` 에서 `foo`의 리턴 타입이 `never`)
 
-```ts
-let foo: never; // Okay
-```
-
-However, *only `never` can be assigned to another never*. e.g.
+당연히 이 어노테이션을 프로그래머가 직접 사용할 수도 있습니다
 
 ```ts
-let foo: never = 123; // Error: Type number is not assignable to never
-
-// Okay as the function's return type is `never`
-let bar: never = (() => { throw new Error('Throw my hands in the air like I just dont care') })();
+let foo: never; // 오케이
 ```
 
-Great. Now let's just jump into its key use case :)
+그렇지만, *`never` 타입에는 다른 never 타입만* 할당 가능합니다. 예를 들면:
 
-# Use case: Exhaustive Checks
+```ts
+let foo: never = 123; // 오류: number 타입은 never에 할당할 수 없음
 
-You can call never functions in a never context.
+// 오케이, 함수의 리턴 타입이 `never`
+let bar: never = (() => { throw new Error(`Throw my hands in the air like I just don't care`) })();
+```
+
+좋습니다. 그러면 핵심 사용 방법으로 넘어가죠 :)
+
+# 사용 사례: 빠짐없는 검사(Exhaustive Check)
+
+발생 불가능한 상황(never 컨텍스트)에서 never 함수를 호출할 수 있습니다.
 
 ```ts
 function foo(x: string | number): boolean {
@@ -38,24 +40,68 @@ function foo(x: string | number): boolean {
     return false;
   }
 
-  // Without a never type we would error :
-  // - Not all code paths return a value (strict null checks)
-  // - Or Unreachable code detected
-  // But because TypeScript understands that `fail` function returns `never`
-  // It can allow you to call it as you might be using it for runtime safety / exhaustive checks.
+  // never 타입이 없다면 오류 발생 :
+  // - 코드 경로 중에 값을 반환하지 않는 경로 존재 (strictNullChecks)
+  // - 또는 접근 불가능한 코드 검출
+  // 하지만 TypeScript는 `fail` 함수는 `never` 리턴임을 알 수 있고
+  // 런타임 안전 / 빠짐없는 검사를 위해 이런 함수를 호출할 수 있음.
   return fail("Unexhaustive!");
 }
 
 function fail(message: string): never { throw new Error(message); }
 ```
 
-And because `never` is only assignable to another `never` you can use it for *compile time* exhaustive checks as well. This is covered in the [*discriminated union* section](./discriminated-unions.md).
+그리고 `never`에는 `never`만 할당할 수 있기 때문에 *컴파일 시간*의 빠짐없는 검사 목적으로 사용할 수 있습니다. 이 내용은 [*구별된 유니온* 단원](./discriminated-unions.md)에 나와 있습니다.
 
-# Confusion with `void`
+# `void`와 혼동
 
-As soon as someone tells you that `never` is returned when a function never exits gracefully you intuitively want to think of it as the same as `void`. However, `void` is a Unit. `never` is a falsum.
+함수가 매끄럽게 종료하지 않을 때 `never`가 반환된다고 하면 직관적으로 이것은 `void` 같은 것이라고 생각하기 쉽습니다. 그렇지만 `void`는 하나의 단위이고 `never` 모순(falsum)입니다.
 
-A function that *returns* nothing returns a Unit `void`. However, a function *that never returns* (or always throws) returns `never`. `void` is something that can be assigned (without `strictNullChecking`) but `never` can *never* be assigned to anything other than `never`.
+아무것도 *반환*하지 않는 함수는 단위 `void`를 반환하는 것입니다. 하지만 *영원히 리턴하지 않는* 함수 (또는 항상 throw하는 함수)는 `never`입니다. `void`는 할당이 가능한 타입이지만 (`strictNullCheckings`를 끄면) `never`는 절대 `never` 이외에는 할당할 수 없습니다.
+
+# never 반환 함수의 타입 추론
+
+함수 선언시 TypeScript는 기본으로 `void`를 가정합니다, 아래 처럼:
+
+```ts
+// 추론된 리턴 타입: void
+function failDeclaration(message: string) {
+  throw new Error(message);
+}
+
+// 추론된 리턴 타입: never
+const failExpression = function(message: string) {
+  throw new Error(message);
+};
+```
+
+물론 명시적인 어노테이션을 추가하면 고칠 수 있습니다: 
+
+```ts
+function failDeclaration(message: string): never {
+  throw new Error(message);
+}
+```
+
+이렇게 하는 핵심 이유는 실제 JavaScript 코드와의 호환성 유지입니다: 
+
+```ts
+class Base {
+    overrideMe() {
+        throw new Error("You forgot to override me!");
+    }
+}
+
+class Derived extends Base {
+    overrideMe() {
+        // Code that actually returns here
+    }
+}
+```
+
+`Base.overrideMe` 호출의 경우. 
+
+> 실제 TypeScript에서는 `abstract` 함수를 써서 이 문제를 해결할 수 있지만 이 타입 추론은 호환성을 위해 유지되고 있습니다.
 
 <!--
 PR: https://github.com/Microsoft/TypeScript/pull/8652

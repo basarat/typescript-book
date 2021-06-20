@@ -6,6 +6,7 @@ Here's how to setup a Dev Environment:
 
 ```
 npm install gitbook-cli -g
+gitbook install
 gitbook serve .
 ```
 > Note: serve needs port `35729` (for live reload) and `4000` for serving http://localhost:4000.

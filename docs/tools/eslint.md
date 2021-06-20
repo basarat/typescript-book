@@ -47,7 +47,7 @@ In your `package.json` add to `scripts`:
 ```json
 {
   "scripts": {
-    "lint": "eslint src/**"
+    "lint": "eslint \"src/**\""
   }
 }
 ```
