@@ -1,5 +1,7 @@
 # TypeScript in the browser
 
+[![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)](https://designtsx.com)
+
 만약 당신이 타입스크립트를 사용해서 웹 애플리케이션을 만들어야 한다면 나는 타입스크립트 + 리액트 조합으로 프로젝트를 구성하는 것을 추천합니다.
 
 ## 일반적인 프로그램 설정
@@ -83,27 +85,31 @@ cd your-project
 -   `webpack.config.js`는 당신의 모듈을 번들해서 모든 리소스가 담긴 하나의 `app.js` 파일을 생성할 것 입니다.
 
 ```js
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/app/app.tsx',
-    plugins: [
-        new CleanWebpackPlugin(['public/build']),
-        new HtmlWebpackPlugin({
-            template: 'src/templates/index.html'
-        })
-    ],
-    output: {
-        path: __dirname + '/public',
-        filename: 'build/[name].[contenthash].js'
-    },
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js']
-    },
-    module: {
-        rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }]
-    }
+  entry: './src/app/app.tsx',
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['public/build']
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/templates/index.html'
+    }),
+  ],
+  output: {
+    path: __dirname + '/public',
+    filename: 'build/[name].[contenthash].js'
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
+  module: {
+    rules: [
+      { test: /\.tsx?$/, loader: 'ts-loader' }
+    ]
+  }
 }
 ```
 

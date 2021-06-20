@@ -70,8 +70,9 @@ export class TypedEvent<T> {
 
     /** Clear the `once` queue */
     if (this.listenersOncer.length > 0) {
-      this.listenersOncer.forEach((listener) => listener(event));
+      const toCall = this.listenersOncer;
       this.listenersOncer = [];
+      toCall.forEach((listener) => listener(event));
     }
   }
 

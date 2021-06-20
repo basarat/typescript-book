@@ -99,7 +99,7 @@ fs.readFile('someFile', 'utf8', (err, data) => {
 
 ```ts
 function toInt(str: string) {
-    return str ? parseInt(str) : undefined
+  return str ? parseInt(str) : undefined;
 }
 ```
 

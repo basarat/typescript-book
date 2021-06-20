@@ -183,7 +183,7 @@ import로 가져온 경로가 상대 경로가 아닐때, 옆의 링크를 클�
 e.g.
 
 ```ts
-// globals.d.ts
+// global.d.ts
 declare module 'foo' {
     // Some variable declarations
     export var bar: number /*sample*/
@@ -313,8 +313,11 @@ lazy 로딩 사례와 마찬가지로 특정 모듈 로더 (commonjs/node 그리
 때때로 당신은 파일을 로드할때 사이드 이펙트를 경험할 수 있습니다. (예: 모듈은 다음과 같은 라이브러리와 함께 등록할 수 있습니다. [CodeMirror addons](https://codemirror.net/doc/manual.html#addons) etc.) 그러나 `import/require`만 하면 변환된 자바스크립트에는 모듈에 의존성이 포함되어 있지 않으며 모듈 로더 (예: webpack)가 가져오기를 완전히 무시할 수 있습니다. 이 경우 `ensureImport` 변수를 사용하여 컴파일 된 자바스크립트가 모듈에 의존성을 갖도록 할 수 있습니다.
 
 ```ts
-import foo = require('./foo')
-import bar = require('./bar')
-import bas = require('./bas')
-const ensureImport: any = foo || bar || bas
+import foo = require('./foo');
+import bar = require('./bar');
+import bas = require('./bas');
+const ensureImport: any =
+    foo
+    && bar
+    && bas;
 ```
