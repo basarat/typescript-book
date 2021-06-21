@@ -126,7 +126,7 @@ import someLocalNameForThisFile from '../foo'
 
 ### Module paths
 
-> 나는 `moduleResolution: commonjs`를 가정하려고합니다. 이것은 타입스크립트 구성에 있어야하는 옵션입니다. 이 설정은 `module:commonjs`를 의해 자동으로 암시됩니다.
+> 나는 `moduleResolution: "Node"` 라고 가정하려고 합니다. 이것은 타입스크립트 구성에 있어야하는 옵션입니다. 이 설정은 `module:commonjs`를 의해 자동으로 암시됩니다.
 
 모듈들은 두가지 분명한 유형이 있습니다. 구별은 import문의 경로에 의해 결정됩니다. (예를들어 `import foo from 'THIS IS THE PATH SECTION'`)
 

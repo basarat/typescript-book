@@ -143,7 +143,7 @@ num = power
 
 ### `null` and `undefined`
 
-자바스크립트 리터럴에서 `null`과 `undefined`는 타입 시스템에서 `any`와 동일한 방식으로 처리됩니다. 이 리터럴은 다른 타입에서 지정할 수 있습니다. 아래 예에서 설명합니다.
+타입 시스템이 이들을 어떻게 처리하는지는 `strictNullChecks` 컴파일러 플래그에 따라 결정됩니다 (이 플래그는 다음에 다룸). `strictNullCheck:false`인 경우, 자바스크립트 리터럴에서 `null`과 `undefined`는 타입 시스템에서 `any`와 동일한 방식으로 처리됩니다. 이 리터럴은 다른 타입에서 지정할 수 있습니다. 아래 예에서 설명합니다:
 
 ```ts
 var num: number

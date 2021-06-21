@@ -126,10 +126,41 @@ class FooChild extends FooBase {
 
 ### Abstract
 
--   앞에서 언급한 `class`의 접근 수식어와 다르게 `abstract`는 접근 수식어로 생각할 수 있지만 클래스의 모든 구성원뿐 아니라 클래스의 요소일 수도 있기 때문에 별도로 제시합니다. `abstract` 직접 호출할 수 없으며 자식 클래스는 `abstract`에 정의된 기능을 제공해야 함을 의미합니다.
--   `abstract`를 이용해서 클래스를 생성하면 직접 접근할 수 없고 자식요소를 이용해서 기능을 제공해야 합니다.
+`abstract`는 앞서 언급한 접근 수식어로 생각할 수 있지만 클래스 뿐만 아니라 클래스의 구성 요소에도 사용할 수 있기 때문에 별도로 제시합니다. `abstract` 수식어는 기본적으로 해당 기능이 *직접적으로 실행될 수 없음을* 뜻하고 자식 클래스가 그 기능을 제공해야 함을 뜻합니다.
 
-### Constructor는 선택사항입니다.
+* `abstract` **클래스** 는 직접 인스턴스를 만들 수 없습니다. 대신 이 `abstract class` 를 상속하는 다른 `class` 를 만들어야 합니다.
+
+```ts
+abstract class FooCommand {}
+
+class BarCommand extends FooCommand {}
+
+const fooCommand: FooCommand = new FooCommand(); // abstract 클래스 인스턴스는 생성할 수 없음.
+
+const barCommand = new BarCommand(); // abstract 클래스를 상속한 클래스의 인스턴스는 생성 가능.
+```
+
+* `abstract` **구성 요소** 는 직접 액세스할 수 없고 자식 클래스가 그 기능을 제공해야 함니다.
+
+```ts
+abstract class FooCommand {
+  abstract execute(): string;
+}
+
+class BarErrorCommand  extends FooCommand {} // 'BarErrorCommand'는 추상(abstract) 멤버인 'execute'를 제공해야 함.
+
+class BarCommand extends FooCommand {
+  execute() {
+    return `Command Bar executed`;
+  }
+}
+
+const barCommand = new BarCommand();
+
+barCommand.execute(); // Command Bar executed 출력
+```
+
+### Constructor is optional
 
 클래스는 constructor를 항상 포함하지 않아도 됩니다. 예제를 참조하십시요
 

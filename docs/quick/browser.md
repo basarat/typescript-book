@@ -2,7 +2,7 @@
 
 [![DesignTSX](https://raw.githubusercontent.com/basarat/typescript-book/master/images/designtsx-banner.png)](https://designtsx.com)
 
-만약 당신이 타입스크립트를 사용해서 웹 애플리케이션을 만들어야 한다면 나는 타입스크립트 + 리액트 조합으로 프로젝트를 구성하는 것을 추천합니다.
+만약 당신이 웹 애플리케이션을 만들기 위해 타입스크립트를 사용한다면 타입스크립트 + 리액트 (나의 UI 프레임워크 선택) 프로젝트 구성을 다음과 같이 할 수 있습니다.
 
 ## 일반적인 프로그램 설정
 
@@ -19,11 +19,11 @@ cd react-typescript
 npm install
 ```
 
-지금 읽으십시요 [당신은 놀라운 애플리케이션을 개발할 수 있습니다.](#develop-your-amazing-application)
+이걸 기본으로 하여 [멋진 애플리케이션을 개발](#develop-your-amazing-application) 하세요.
 
 ## 프로젝트를 구성하는 자세한 방법
 
-프로젝트를 어떻게 생성해야 하는지는 아래 문서에 있습니다.
+이 프로젝트가 어떤 식으로 만들어졌는지 자세한 내용을 알고 싶다면 (그냥 기반으로 사용하는 것이 아니라), 다음에 나온대로 처음부터 만들어 볼 수 있습니다:
 
 -   프로젝트 폴더를 생성
 

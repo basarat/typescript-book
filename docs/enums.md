@@ -237,8 +237,10 @@ var lie = Tristate.False
 var lie = 0
 ```
 
-1. 인라인 enum을 사용하는 방법 (`0` 대신 `Tristate.False`)
-2. 사용법이 인라인되어 있기 때문에 enum 정의에 대한 JavaScript를 생성하지 않습니다 (런타임에는`Tristate` 변수가 없습니다)
+즉, 컴파일러는:
+
+1. 모든 enum 사용을 *인라인* 으로 변환합니다 (`Tristate.False` 대신 `0`).
+1. 인라인화 되기 때문에 enum 정의에 대한 JavaScript를 생성하지 않습니다 (런타임에는`Tristate` 변수가 없습니다).
 
 ##### Const enum preserveConstEnums
 
