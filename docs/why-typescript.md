@@ -84,7 +84,7 @@ iTakePoint2D(point3D) // extra information okay
 iTakePoint2D({ x: 0 }) // Error: missing information `y`
 ```
 
-### 타입 에러 발생시 자바스크립트를 반환하지 않음
+### 타입 에러 발생 시 자바스크립트를 반환하는 것을 막지 않습니다.
 
 자바스크립트 코드를 쉽게 타입스크립트 코드로 마이그레이션 할수 있도록 합니다, 컴파일 오류가 있더라도 타입스크립트는 자바스크립트 코드를 최대한 반환합니다.
 
