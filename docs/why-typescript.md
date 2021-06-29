@@ -39,11 +39,8 @@ foo = '456' // Error: cannot assign `string` to `number`
 
 이전에 말했듯이 타입스크립트는 안전하게 추론할 수 있는 만큼 추론을 할 것 입니다. 하지만 직접 타입을 지정할 수도 있습니다:
 
-1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
-1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
-
 1. 컴파일러를 도와주기 위해, 더 중요하게는 다음에 코드를 읽어야 하는 개발자 (미래의 당신!)를 위해 문서화하는 목적으로.
-2. 컴파일러가 당신이 생각하는 방향으로 코드를 보도록 강제하기 위해. 그러니까 당신이 가지고 있는 코드에 대한 이해에 알고리즘적 분석(컴파일러가 수행)을 일치시키기 위해.
+2. 컴파일러가 당신이 생각하는 방향으로 코드를 보도록 강제하기 위해. 그러니까 당신이 가지고 있는 코드에 대한 이해에 (컴파일러가 수행하는) 알고리즘적 분석을 일치시키기 위해.
 
 타입스크립트에서는 필요할 때 접미사 형식으로 어노테이션을 붙일 수 있습니다.
 
@@ -109,13 +106,13 @@ foo = '456'
 1. 정의파일이 이미 있음.
 2. 또는 잘 검토된 타입스크립트 템플릿 목록이 이미 있습니다.
 
-선언파일을 작성하는 간단한 예로 제이쿼리의 간단한 예제를 고려해 보십시요. [jquery](https://jquery.com/). 기본적으로 타입스크립트는 변수를 사용하기전에 선언해야 합니다.
+선언파일을 작성하는 간단한 예로 [jquery](https://jquery.com/)의 간단한 예제를 고려해 보십시요. 기본적으로 타입스크립트는 변수를 사용하기 전에 선언(예: `var` 키워드 사용)해야 합니다.
 
 ```ts
 $('.awesome').show() // Error: cannot find name `$`
 ```
 
-빠른 해결방법으로 타입스크립트에 `$`을 있다는 것을 알리면 됩니다.
+간단한 해결책으로 `$`이라는 무언가가 있다는 것을 타입스크립트에게 알려주면 됩니다.
 
 ```ts
 declare var $: any
@@ -160,8 +157,8 @@ var inc = x => x + 1
 
 ### 요약
 
-이 섹션에서는 타입스크립트의 동기부여와 목표를 제공하였습니다.
-이것을 벗어나서 우리는 타입스크립트의 핵심세부사항들을 파헤칠 수 있습니다.
+이 섹션에서는 타입스크립트의 동기부여와 설계 목적을 제공하였습니다.
+이것을 벗어나서 우리는 타입스크립트의 핵심 세부사항들을 파헤칠 수 있습니다.
 
 [](Interfaces are open ended)
 [](Type Inference rules)
