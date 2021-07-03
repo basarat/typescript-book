@@ -56,7 +56,7 @@ import { /* here */ } from 'something';
 한 개발자는 `import Foo from "./foo";` 로 하고 다른 개발자는 `import foo from "./foo";` 로 하는 오타가 발생하지 않습니다.
 
 ### TypeScript 자동 임포트
-자동 임포트 빠른 수정이 더 잘 동작합니다. `Foo` 를 입력하면 이 이름은 한 모듈에서 익스포트된 잘 정의된 이름으로 자동 임포트가 `import { Foo } from "./foo";` 를 추가해줍니다. 어떤 툴은 마법적으로 파일을 분석해서 디폴트 익스포트의 이름을 *추론* 해주기도 하는데, 마법은 불안하죠.
+자동 임포트 빠른 수정(Quick Fix)이 더 잘 동작합니다. `Foo` 를 입력했을 때, 그 이름이 한 모듈에서 익스포트된 잘 정의된 이름이라면 자동 임포트가 `import { Foo } from "./foo";` 를 추가해줍니다. 어떤 툴은 마법적으로 파일을 분석해서 디폴트 익스포트의 이름을 *추론* 해주기도 하는데, 마법은 불안하죠.
 
 ### 재익스포트
 NPM 패키지의 루트 `index` 에서 재익스포트를 하는 경우가 많고, 이런 경우에는 디폴트 익스포트를 수동으로 바꿔줘야 합니다, 이렇게 `export { default as Foo } from "./foo";` (디폴트 사용) vs. 이렇게 `export * from "./foo"` (이름 붙인 익스포트).
@@ -69,7 +69,7 @@ const HighCharts = await import('https://code.highcharts.com/js/es-modules/maste
 HighCharts.default.chart('container', { ... }); // `.default`가 붙음
 ```
 
-이름 붙인 익스포트가 훨씬 보기 좋으: 
+이름 붙인 익스포트가 훨씬 보기 좋음: 
 
 ```ts
 const {HighCharts} = await import('https://code.highcharts.com/js/es-modules/masters/highcharts.src.js');
