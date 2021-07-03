@@ -1,10 +1,10 @@
-## JQuery Tips
+## JQuery 팁
 
-Note: you need to install the `jquery.d.ts` file for these tips
+참고: 이 팁 내용을 적용하려면 `jquery.d.ts` 파일을 설치해야 합니다
 
-### Quickly define a new plugin 
+### 빠르게 새 플러그인을 만들기
 
-Just create `jquery-foo.d.ts` with: 
+다음과 같은 내용을 `jquery-foo.d.ts` 파일을 만드세요: 
 
 ```ts
 interface JQuery {
@@ -12,4 +12,4 @@ interface JQuery {
 }
 ```
 
-And now you can use `$('something').foo({whateverYouWant:'hello jquery plugin'})`
+그러면 `$('something').foo({whateverYouWant:'hello jquery plugin'})` 같은 식으로 사용할 수 있습니다.

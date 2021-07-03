@@ -1,19 +1,19 @@
-## Creating arrays
+## 배열 생성
 
-Creating an empty array is super easy: 
+빈 배열을 만드는 것은 아주 간단합니다: 
 
 ```ts
 const foo: string[] = [];
 ```
 
-If you want to create an array pre-filled with some content use the ES6 `Array.prototype.fill`: 
+내용을 채워서 배열을 만들고 있다면 ES6 `Array.prototype.fill` 을 사용하세요: 
 
 ```ts
 const foo: string[] = new Array(3).fill('');
 console.log(foo); // ['','',''];
 ```
 
-If you want to create an array of a predefined length with calls you can use the spread operator: 
+함수를 호출해서 길이가 정해져 있는 배열을 만들고 싶다면 스프레드 연산자(...)를 사용하세요: 
 
 ```ts
 const someNumbers = [...new Array(3)].map((_,i) => i * 10);

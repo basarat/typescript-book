@@ -1,3 +1,3 @@
-## String enums
+## 문자열 열거형
 
-Sometimes you need a collection of strings collected under a common key. Prior to TypeScript 2.4, TypeScript only supported number-based enums. If using versions prior to 2.4, a work-around is to use [string literal types to create string based enums by combining with union types](../types/literal-types.md).
+때대로 일련의 문자열을 하나의 공통 키로 묶어서 관리하고 싶어집니다. TypeScript 2.4 이전에는 숫자 기반 열거형만 지원했습니다. 만약 2.4 이전 버전을 사용하고 있다면 다른 대안은 [문자열 리터럴 타입을 사용하여 유니온 타입을 결합한 문자열 기반 열거형](../types/literal-types.md) 을 만드는 방법입니다.

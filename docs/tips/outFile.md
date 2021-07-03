@@ -1,104 +1,104 @@
-# `--outFile` is BAD {#outFile}
+# `--outFile` 은 나쁨 {#outFile}
 
-Its a bad idea for you to use because of the following reasons:
+이것의 사용이 나쁜 이유는 아래와 같습니다:
 
-* Runtime Errors
-* Fast compile
-* Global scope
-* Hard to analyze
-* Hard to scale
+* 런타임 오류
+* 빠른 컴파일
+* 글로벌 스코프
+* 분석이 어려움
+* 확장이 어려움
 * `_references`
-* Code reuse
-* Multiple Targets
-* Isolated Compile
+* 코드 재사용
+* 여러 개의 타겟
+* 분리된 컴파일
 
-## Runtime Errors
+## 런타임 오류
 
-If your code depends on any form of js ordering you will get random errors at runtime.
+코드가 어떤 식으로든 JS 순서에 영향을 받는다면 런타임이 무작위적인 오류가 발생할 수 있습니다.
 
-* **class inheritance can break at runtime.**
+* **클래스 상속이 런타임에 깨질 수 있음.**
 
-Consider `foo.ts`: 
+`foo.ts` 를 보세요: 
 ```ts
 class Foo {
     
 }
 ```
 
-and a `bar.ts`:
+그리고 `bar.ts`:
 ```ts
 class Bar extends Foo {
     
 }
 ```
 
-If you fail to compile it in correct order e.g. perhaps alphabetically `tsc bar.ts foo.ts` the code will compile fine but error at runtime with `ReferenceError`. 
+올바른 순서로 컴파일하지 않는다면, 예를 들어 알파벳 순으로 `tsc bar.ts foo.ts`, 컴파일은 잘 되지만 런타임에 `ReferenceError` 오류가 발생할 것입니다. 
 
-* **module splitting can fail at runtime.**
+* **모듈 분할이 런타임에 실패할 수 있음.**
 
-Consider `foo.ts`: 
+`foo.ts` 를 보세요: 
 ```ts
 module App {
     export var foo = 123;
 }
 ```
-And `bar.ts`: 
+그리고 `bar.ts`: 
 ```ts
 module App {
     export var bar = foo + 456;
 }
 ```
 
-If you fail to compile it in correct order e.g. perhaps alphabetically `tsc bar.ts foo.ts` the code will compile fine but  *silently* fail at runtime with `bar` set to `NaN`. 
+올바른 순서로 컴파일하지 않는다면, 예를 들어 알파벳 순으로 `tsc bar.ts foo.ts`, 컴파일은 잘 되지만 런타임에 *조용하게* 실패하고 `bar` 는 `NaN` 으로 설정될 것입니다.
 
-## Fast compile
-If you use `--out` then single `.ts` files cannot be codegened into single `.js` files in isolation without unnecessary hacks. `--out` essentially forces a slower incremental build.
+## 빠른 컴파일
+`--out` 을 사용한 경우, 특별한 조작을 하지 않는 이상 하나의 `.ts` 파일이 하나의 `.js` 로 분리되어 생성될 수 없습니다. 결과적으로 `--out` 은 더 느린 점증적 빌드를 강요합니다.
 
-Also source maps are positionally sensitive and run-length encoded so most of the map has to be rebuilt on a recompile if you use source maps (which you should!). At high-10s to 100s kloc combined it’s going to get slow.
+또한 소스 맵은 위치에 민감해지고 런랭스(run-length) 인코딩이 되어 소스 맵을 사용하려면 (당연히 사용해야 함!) 대부분의 파일을 재컴파일로 다시 빌드해야 합니다. 1만 후반에서 10만 줄까지 될 수 있을 때 이렇게 되면 느릴 수 밖에 없습니다.
 
-## Global Scope
-Sure you can use name spaces but its still on `window` if you run it in the browser. Namespaces are just an unnecessary workaround. Also `/// <reference` comments introduce a global context in *your code* that can get hard to maintain.
+## 글로벌 스코프
+이름 공간을 사용할 수 있지만 브라우저에서 실행한다면 여전히 `window` 에 속한 것입니다. 이름 공간은 불필요한 문제 조치일 뿐입니다. 또한 `/// <reference` 주석이 여러분의 코드에 글로벌 컨텍스트을 추가하기 때문에 관리가 까다롭습니다.
 
-Also if your company has several teams working independently and then someone decides to try integrating two independently written apps there is a high likelihood of a name conflict.
+그리고 여러분의 회사에 독립적으로 일하는 여러 개의 팀이 있고 누군가가 각 팀에서 작성한 앱을 하나로 합치게 된다면 아주 높은 확률로 이름 충돌이 발생할 수 있습니다.
 
-## Hard to analyze
-We wish to provide more code analysis tools. These will be easier if you provide us with the dependency chain (implicitly there on a silver platter using external modules). 
+## 분석이 어려움
+우리는 더 많은 코드 분석 툴을 공급하고 싶습니다. 우리에게 종속성 체인이 제공된다면 더 쉽게 할 수 있을 것 입니다 (외부 모듈을 사용하면 이게 공짜로 깔끔하게 제공됨).
 
-Also its not just the *dev tools* that have a hard time making sense of the code. The next human needs to understand a lot of the code base before they start to understand where stuff is actually imported from. Using internal modules also makes code difficult to review in isolation e.g. on github.
+또한 코드 분석이 어려워지는 것은 *개발 툴* 만의 문제가 아닙니다. 다음에 오는 사람도 어떤 내용이 어디서 임포트되는지 이해하려면 많은 양의 코드 베이스를 이해해야 합니다. 내부 모듈을 사용하면 코드를 단독으로, github 같은 곳에서 리뷰할 때도 어렵습니다.
 
-## Hard to scale
-Really just a result of random runtime errors + slower and slower compile times + difficulty in understanding someone else's code.
+## 확장이 어려움
+무작위적인 런타임 오류 + 느리고 느린 컴파일 시간 + 다른 사람의 코드를 이해하기 어렵기 때문입니다.
 
 ## `_references.ts`
-Isn't supported by `tsconfig.json` : https://github.com/Microsoft/TypeScript/issues/2472#issuecomment-85330803 You'll have to manually sort the  `files` array. 
+`tsconfig.json` : https://github.com/Microsoft/TypeScript/issues/2472#issuecomment-85330803 에서 지원하지 않으며, 수동으로 `files` 배열의 순서를 관리해야 합니다. 
 
-## Code reuse
-If you want to reuse a portion of your code in another project, with all that *implicit* dependency management, it will be difficult to port it over without potential runtime errors. 
+## 코드 재사용
+코드의 일부를 다른 프로젝트에서 재사용하려면 모든 *암묵적인* 종속성을 관리해야 하므로 이식이 어렵고 런타임 오류로 이어질 가능성이 높습니다.
 
-## Multiple Targets
-Also if you decide to reuse your browser code in something like nodejs (e.g. for *testing* APIs) you are going to need to port it over to a module system or come up with ugly hacks to make the nodejs `global` your new global scope (i.e. `window`).
+## 여러 개의 타겟
+그리고 브라우저 용 코드를 nodejs (예를 들면 API *테스틑* 를 위해) 같은 다른 곳에서 사용하기로 했다면 모듈 시스템으로 포팅하거나 nodejs의 `global` 이 여러분의 글로벌 스코프 (예를 들어 `window`)에 대응되도록 복잡한 꼼수를 써야할 것입니다.
 
-## Isolated Compile
-Files cannot be compiled in isolation. E.g. consider `a.ts`: 
+## 분리된 컴파일
+파일을 분리해서 컴파일할 수 없습니다. 예를 들어, 다음의 `a.ts`: 
 ```ts
 module M {
   var s = t;
 }
 ```
-Will have different output depending upon whether there is a `b.ts` of the form: 
+파일은 다음 형태의 `b.ts` 가 있는지 없는지 여부에 따라 출력이 달라질 것입니다: 
 ```ts
 module M {
   export var t = 5;
 }
 ```
-or 
+또는 
 ```ts
 var t = 5;
 ```
-So `a.ts` [cannot be compiled in isolation](https://github.com/Microsoft/TypeScript/issues/2715).
+그러므로 `a.ts` 파일은 [분리해서 컴파일할 수 없습니다](https://github.com/Microsoft/TypeScript/issues/2715).
 
-## Summary
-`--out` is really the job of some build tool. And even such a build tool can benefit from the dependency mentions provided by external modules. So we recommend you use external modules and then let the build tool create a single `.js` for you if you so desire.
+## 요약
+`--out` 은 사실 빌드 툴이 해야하는 일입니다. 그런 툴일지라도 외부 모듈을 통해 제공되는 종속성 정보가 있다면 도움이 될 것입니다. 그러므로 우리는 여러분들이 외부 모듈을 사용하고 빌드 툴이 여러분이 필요로 할 때 단일 `.js` 를 생성하게 하는 방식을 추천합니다.
 
 https://twitter.com/nycdotnet/status/613705850574778368 
 

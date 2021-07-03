@@ -1,6 +1,6 @@
-## Type Instantiation for Generics
+## 제네릭(Generic)의 타입 실체화
 
-Say you have something that has a generic parameter e.g. a class `Foo`:
+제네릭 파라미터가 있는 무언가가 있다고 치죠, 예를 들어 클래스 `Foo`:
 
 ```ts
 class Foo<T>{
@@ -8,7 +8,7 @@ class Foo<T>{
 }
 ```
 
-You want to create a specialized version for it for a particular type. The pattern is to copy the item into a new variable and give it the type annotation with the generics replaced with concrete types. E.g. if you want a class `Foo<number>`:
+어떤 한 타입을 위해 이 클래스의 특별한 버전을 만들고 싶을 수 있습니다. 다음은 클래스의 내용을 새로운 변수로 복사한 후 그 변수에 제너릭의 파라미터를 구체적인 타입으로 대체한 타입을 붙여주는 내용입니다. 예를 들어 `Foo<number>` 클래스를 원한다면:
 
 ```ts
 class Foo<T>{
@@ -16,22 +16,22 @@ class Foo<T>{
 }
 let FooNumber = Foo as { new ():Foo<number> }; // ref 1
 ```
-In `ref 1` you are saying that `FooNumber` is the same as `Foo` but just treat it as something that when called with the `new` operator gives an instance of `Foo<Number>`.
+여기 `ref 1` 에서 `FooNumber` 가 `Foo` 와 동일하지만 `new` 연산자와 함께 호출하면 `Foo<Number>` 의 인스턴스가 생성되는 것으로 정의한 것입니다.
 
-### Inheritance
-The Type assertion pattern is unsafe in that it trusts you to do the right thing. A common pattern in other languages *for classes* is to just use inheritance :
+### 상속
+타입 표명 패턴은 개발자가 올바르게 사용할 것이라고 가정한다는 점에서 안전하지 않습니다. 다른 *클래스를 사용하는* 언어에서 이런 경우에 대한 일반적인 패턴은 그냥 상속을 사용하는 것입니다:
 
 ```ts
 class FooNumber extends Foo<number>{}
 ```
 
-One word of caution here: if you use decorators on the base class then the inherited class might not have the same behavior as the base class (it is no longer wrapped by the decorator).
+주의사항 하나: 기반 클래스에서 데코레이터를 사용했다면 상속한 클래스의 동작은 기반 클래스와 다를 수 있습니다 (상속한 클래스는 데코레이터로 감싸지지 않았으므로).
 
-Of course if you are not specializing classes you still have to come up with a coercion / assertion pattern that works and hence we showed the general assertion pattern first, e.g.:
+당연히 클래스 특수화를 하지 않더라도 변환 / 표명 패턴을 사용하게 될 것이므로 먼저 범용적인 타입 표명 패턴을 먼저 소개했습니다, 예를 들어:
 
 ```ts
 function id<T>(x: T) { return x; }
 const idNum = id as {(x:number):number};
 ```
 
-> Inspired by this [stackoverflow question](http://stackoverflow.com/a/34864705/390330)
+> 이 [스택오버플로 질문](http://stackoverflow.com/a/34864705/390330) 에서 영감을 받음

@@ -1,24 +1,24 @@
-## Nominal Typing
-The TypeScript type system is structural [and this is one of the main motivating benefits](../why-typescript.md). However, there are real-world use cases for a system where you want two variables to be differentiated because they have a different *type name* even if they have the same structure. A very common use case is *identity* structures (which are generally just strings with semantics associated with their *name* in languages like C#/Java).
+## 이름 기준 타입 검사(Nominal Typing)
+TypeScript의 타입 시스템은 구조적이고 [가장 중요한 혜택 가운데 하나입니다](../why-typescript.md). 그렇지만 어떤 시스템에서는 두 변수가 동일한 구조이더라도 *타입 이름* 이 다르면 다른 타입으로 구분되는 것이 좋은 실세계 사례들이 있습니다. 아주 흔한 사례는 *식별자* 구조입니다 (C#/Java 같은 언어에서 이 구조는 일반적으로 그냥 문자열이지만 *이름* 에 따라 다른 동작을 하게 됨).
 
-There are a few patterns that have emerged in the community. I cover them in decreasing order of personal preference:
+TypeScript 커뮤니티에서 이와 관련된 몇가지 패턴이 나왔습니다. 몇가지를 개인적인 선호도 순으로 다루겠습니다:
 
-## Using literal types
+## 리터럴 타입 사용
 
-This pattern uses generics and literal types: 
+이 패턴은 제네릭과 리터럴 타입을 사용합니다: 
 
 ```ts
-/** Generic Id type */
+/** 제네릭 Id 타입 */
 type Id<T extends string> = {
   type: T,
   value: string,
 }
 
-/** Specific Id types */
+/** 구체화된 Id 타입 */
 type FooId = Id<'foo'>;
 type BarId = Id<'bar'>;
 
-/** Optional: constructors functions */
+/** 선택적으로 사용: 생성자 함수 */
 const createFoo = (value: string): FooId => ({ type: 'foo', value });
 const createBar = (value: string): BarId => ({ type: 'bar', value });
 
@@ -29,19 +29,19 @@ foo = bar; // Error
 foo = foo; // Okay
 ```
 
-* Advantages
-  - No need for any type assertions 
-* Disadvantage
-  - The structure `{type,value}` might not be desireable and need server serialization support
+* 장점
+  - 타입 표명이 필요 없음
+* 단점
+  - `{type,value}` 구조를 감수해야 하고 서버 직렬화 작업 필요
 
-## Using Enums
-[Enums in TypeScript](../enums.md) offer a certain level of nominal typing. Two enum types aren't equal if they differ by name. We can use this fact to provide nominal typing for types that are otherwise structurally compatible.
+## 열거형 사용
+[TypeScript의 열거형은](../enums.md) 상당 수준의 이름 기준 타입 검사를 제공합니다. 열거형 타입들은 이름이 다르다면 구별됩니다. 이 사실을 활용하여 구조적으로 호환되는 타입이 이름에 따라 구별되게 할 수 있습니다.
 
-The workaround involves:
-* Creating a *brand* enum.
-* Creating the type as an *intersection* (`&`) of the brand enum + the actual structure.
+이 기법의 내용은:
+* *브랜드* 열거형을 만듬.
+* 브랜드 열거형 + 실제 구조의 *교차* (`&`) 로 타입 정의.
 
-This is demonstrated below where the structure of the types is just a string:
+아래에 구조의 타입이 문자열로 표현되는 모습이 보이고 있습니다:
 
 ```ts
 // FOO
@@ -53,50 +53,50 @@ enum BarIdBrand  { _ = "" };
 type BarId = BarIdBrand & string;
 
 /**
- * Usage Demo
+ * 사용 데모
  */
 var fooId: FooId;
 var barId: BarId;
 
-// Safety!
+// 안전함!
 fooId = barId; // error
 barId = fooId; // error
 
-// Newing up
+// 생성하기
 fooId = 'foo' as FooId;
 barId = 'bar' as BarId;
 
-// Both types are compatible with the base
+// 두 타입 모두 부모 타입과 호환됨
 var str: string;
 str = fooId;
 str = barId;
 ```
 
-Note how the brand enums,  ``FooIdBrand`` and ``BarIdBrand`` above, each have single member (`_`) that maps to the empty string, as specified by ``{ _ = "" }``. This forces TypeScript to infer that these are string-based enums, with values of type ``string``, and not enums with values of type ``number``.  This is necessary because TypeScript infers an empty enum (``{}``) to be a numeric enum, and as of TypeScript 3.6.2 the intersection of a numeric ``enum`` and ``string`` is ``never``.
+위 브랜드 열거형 ``FooIdBrand`` 와 ``BarIdBrand`` 을 보면, 둘 다 한 개의 멤버 (`_`)가 있고 ``{ _ = "" }`` 구문에 의해 빈 문자열에 대응되고 있습니다. 이렇게 하면 TypeScript는 이것들이 문자열 기반 열거형이고, ``number`` 타입 값이 아니라 ``string`` 타입 값을 가진다고 추론합니다. TypeScript는 빈 열거형(``{}``)을 숫자 기반 열거형으로 간주하기 때문에 이렇게 해야 합니다. 그리고 TypeScript 3.6.2부터 숫자 기반 ``enum`` 과 ``string`` 의 교집합은 ``never`` 입니다.
 
-## Using Interfaces
+## 인터페이스 사용
 
-Because `numbers` are type compatible with `enum`s the previous technique cannot be used for them. Instead we can use interfaces to break the structural compatibility. This method is still used by the TypeScript compiler team, so worth mentioning. Using `_` prefix and a `Brand` suffix is a convention I strongly recommend (and [the one followed by the TypeScript team](https://github.com/Microsoft/TypeScript/blob/7b48a182c05ea4dea81bab73ecbbe9e013a79e99/src/compiler/types.ts#L693-L698)).
+`number` 타입은 `enum` 과 호환되기 때문에 앞서의 기법은 숫자 용으로 사용할 수 없습니다. 대신 인터페이스를 사용하여 구조 호환성을 끊을 수 있습니다. 이 기법은 TypeScript 컴파일러 팀도 사용하고 있기 때문에 살펴볼 가치가 있습니다. 여기 나온대로 앞에 `_` 를 붙이고 뒤에 `Brand` 를 붙이는 규칙을 적극 추천합니다 ([TypeScript 팀이 사용하는 방식이기도 함](https://github.com/Microsoft/TypeScript/blob/7b48a182c05ea4dea81bab73ecbbe9e013a79e99/src/compiler/types.ts#L693-L698)).
 
-The workaround involves the following:
-* adding an unused property on a type to break structural compatibility.
-* using a type assertion when needing to new up or cast down.
+이 기법의 내용은:
+* 타입에 사용하지 않는 속성을 추가하여 구조 호환성을 끊음
+* 새 객체에 타입을 붙이거나 타입 캐스팅을 할 때는 타입 표명을 사용함.
 
-This is demonstrated below:
+아래에 나와 있습니다:
 
 ```ts
 // FOO
 interface FooId extends String {
-    _fooIdBrand: string; // To prevent type errors
+    _fooIdBrand: string; // 타입 오류 방지용
 }
 
 // BAR
 interface BarId extends String {
-    _barIdBrand: string; // To prevent type errors
+    _barIdBrand: string; // 타입 오류 방지용
 }
 
 /**
- * Usage Demo
+ * 사용 데모
  */
 var fooId: FooId;
 var barId: BarId;
@@ -107,11 +107,11 @@ barId = fooId; // error
 fooId = <FooId>barId; // error
 barId = <BarId>fooId; // error
 
-// Newing up
+// 생성하기
 fooId = 'foo' as any;
 barId = 'bar' as any;
 
-// If you need the base string
+// 부모 string이 필요한 경우
 var str: string;
 str = fooId as any;
 str = barId as any;
