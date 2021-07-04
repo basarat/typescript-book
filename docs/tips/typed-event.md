@@ -1,6 +1,6 @@
-## Typesafe Event Emitter
+## 타입 안전한 이벤트 출력
 
-Conventionally in Node.js and traditional JavaScript you have a single event emitter. This event emitter internally tracks listener for different event types e.g. 
+일반적인 Node.js와 전통 JavaScript에서는 단일 이벤트 출력기를 사용합니다. 이 이벤트 출력기는 내부적으로 여러 이벤트 종류에 대한 리스너를 관리합니다. 예를 들어:
 
 ```ts
 const emitter = new EventEmitter();
@@ -11,11 +11,11 @@ emitter.emit('bar', bar);
 emitter.on('foo', (foo)=>console.log(foo));
 emitter.on('bar', (bar)=>console.log(bar));
 ```
-Essentially `EventEmitter` internally stores data in the form of mapped arrays: 
+기본적으로 `EventEmitter` 내부에는 데이터가 매핑된 배열로 저장됩니다: 
 ```ts
 {foo: [fooListeners], bar: [barListeners]}
 ```
-Instead, for the sake of *event* type safety, you can create an emitter *per* event type:
+대신, 순전히 *이벤트 * 타입 안전성을 위해 이벤트 타입별로 출력기를 만들 수도 있습니다:
 ```ts
 const onFoo = new TypedEvent<Foo>();
 const onBar = new TypedEvent<Bar>();
@@ -28,12 +28,12 @@ onFoo.on((foo)=>console.log(foo));
 onBar.on((bar)=>console.log(bar));
 ```
 
-This has the following advantages: 
-* The types of events are easily discoverable as variables.
-* The event emitter variables are easily refactored independently.
-* Type safety for event data structures.
+이렇게 하면 다음과 같은 장점이 있습니다: 
+* 이벤트의 타입이 변수 값을 통해 쉽게 파악됨.
+* 이벤트 출력기 변수를 독립적으로 손쉽게 리팩토링할 수 있음.
+* 이벤트 자료 구조의 타입 안전성.
 
-### Reference TypedEvent
+### TypedEvent 예시
 ```ts
 export interface Listener<T> {
   (event: T): any;
@@ -43,7 +43,7 @@ export interface Disposable {
   dispose();
 }
 
-/** passes through events as they happen. You will not get events from before you start listening */
+/** 발생하는 이벤트를 지켜봄. 리스닝을 시작하기 전에 발생한 이벤트는 받지 못함 */
 export class TypedEvent<T> {
   private listeners: Listener<T>[] = [];
   private listenersOncer: Listener<T>[] = [];
@@ -65,10 +65,10 @@ export class TypedEvent<T> {
   }
 
   emit = (event: T) => {
-    /** Update any general listeners */
+    /** 범용 리스너 모두에게 알림 */
     this.listeners.forEach((listener) => listener(event));
 
-    /** Clear the `once` queue */
+    /** `once` 큐 처리 */
     if (this.listenersOncer.length > 0) {
       const toCall = this.listenersOncer;
       this.listenersOncer = [];

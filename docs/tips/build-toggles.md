@@ -1,36 +1,35 @@
-## Build Toggles
+## 빌드 토글
 
-It is common to switch in JavaScript projects based on where they are being run. You can do this quite easily with webpack as it supports *dead code elimination* based on environment variables.
+JavaScript 프로젝트에서는 실행 환경에 따라 달라지는 기능이 많습니다. 이런 일은 웹팩(Webpack)의 환경 변수에 따라 *죽은 코드 삭제하기* 기능을 이용하면 아주 쉽게 처리할 수 있습니다..
 
-Add different targets in your `package.json` `scripts`:
+프로젝트의 `package.json` `scripts` 부분에 타겟 추가:
 
 ```json
 "build:test": "webpack -p --config ./src/webpack.config.js",
 "build:prod": "webpack -p --define process.env.NODE_ENV='\"production\"' --config ./src/webpack.config.js",
 ```
 
-Of course I am assuming you have `npm install webpack --save-dev`. Now you can run `npm run build:test` etc.
+당연히 이전에 `npm install webpack --save-dev` 했다고 가정합니다. 이제 `npm run build:test` 식으로 사용할 수 있습니다.
 
-Using this variable is super easy as well:
+이 변수를 사용하기는 매우 쉽습니다:
 
 ```ts
 /**
- * This interface makes sure we don't miss adding a property to both `prod` and `test`
+ * `prod` 와 `test` 모두에 속성을 추가해야 된다는 것을 잊지 않기 위해 인터페이스 사용
  */
 interface Config {
   someItem: string;
 }
 
 /**
- * We only export a single thing. The config.
+ * config 하나만 익스포트함.
  */
 export let config: Config;
 
 /**
- * `process.env.NODE_ENV` definition is driven from webpack
+ * `process.env.NODE_ENV` 정의는 웹팩으로부터 넘어 옴
  *
- * The whole `else` block will be removed in the emitted JavaScript
- *  for a production build
+ * 프로덕션 빌드에서 출력되는 JavaScript 에서는 `else` 블럭 전체가 삭제됨
  */
 if (process.env.NODE_ENV === 'production') {
   config = {
@@ -45,4 +44,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
-> We use `process.env.NODE_ENV` just because it is conventional in a lot of JavaScript libraries themselves e.g. `React`.
+> 여기서 `process.env.NODE_ENV` 를 사용한 이유는 `React` 등 많은 JavaScript 라이브러리에서 이 변수를 사용하기 때문입니다.
