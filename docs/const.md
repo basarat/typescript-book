@@ -64,4 +64,4 @@ console.log(foo); // { bar: 456 }
 
 #### Prefer const
 
-Always use `const`, unless you plan to either lazily initialization of a variable, or do a reassignment (use `let` for those cases).
+Always use `const`, unless you plan to either lazily initialize a variable, or do a reassignment (use `let` for those cases).
