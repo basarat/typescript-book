@@ -17,7 +17,7 @@ console.log(null == null) // true (of course)
 console.log(undefined == undefined) // true (of course)
 console.log(null == undefined) // true
 
-// 다음과 같은 경우는 falsy값을 반환합니다.
+// 다음과 같은 경우는 false값을 반환합니다.
 console.log(0 == undefined) // false
 console.log('' == undefined) // false
 console.log(false == undefined) // false
