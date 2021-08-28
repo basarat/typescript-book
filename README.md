@@ -1,5 +1,5 @@
 # পরিচিতি 
-TypeScript বর্তমান সময়ে অত্যন্ত জনপ্রিয়, JavaScript এর superset। এই repository টি TypeScript deep dive এর বাংলা সংস্করণ। বইটি প্রকাশের জন্য, এর মুল লেখক [বারাসাত](https://github.com/basarat) কে অসংখ্য ধন্যবাদ। বইটিতে TypeScript ও JavaScript এর modern features, project configuration, node.js, testing, tools এবং অন্যান্য বিষয়ে বিষদ আলোচনা করা হয়েছে। এছাড়া React এবং JSX নিয়েও কিছু আলোচনা রয়েছে।
+TypeScript বর্তমান সময়ে অত্যন্ত জনপ্রিয়, JavaScript এর superset। এই repository টি TypeScript deep dive এর বাংলা সংস্করণ। বইটি প্রকাশের জন্য, এর মুল লেখক [বাসারাত](https://github.com/basarat) কে অসংখ্য ধন্যবাদ। বইটিতে TypeScript ও JavaScript এর modern features, project configuration, node.js, testing, tools এবং অন্যান্য বিষয়ে বিষদ আলোচনা করা হয়েছে। এছাড়া React এবং JSX নিয়েও কিছু আলোচনা রয়েছে।
 
 ## বইটি পড়ার উপায়
 [এখানে](https://sajibsrs.gitbook.io/typescript-book-bn) আপনি বইটির বাংলা সংস্করণ অনলাইনে পড়তে পারেন, এবং ইংরেজি সংস্করণ [এখানে](https://basarat.gitbook.io/typescript/getting-started)।
