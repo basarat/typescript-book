@@ -1,27 +1,28 @@
-* [Getting Started with TypeScript](#getting-started-with-typescript)
-* [TypeScript Version](#typescript-version)
+- [TypeScript এর সূচনা](#typescript-এর-সূচনা)
+  - [TypeScript ভার্সন](#typescript-ভার্সন)
+  - [বইটির Source Code](#বইটির-source-code)
 
-# Getting Started With TypeScript
+# TypeScript এর সূচনা
 
-TypeScript compiles into JavaScript. JavaScript is what you are actually going to execute (either in the browser or on the server). So you are going to need the following:
+TypeScript, JavaScript এ transpile হয়. JavaScript ই প্রকৃত পক্ষে execute হয় (browser অথবা server এ). সুতরাং নিচের বিষয়গুলো প্রয়োজন হবে:
 
-* TypeScript compiler (OSS available [in source](https://github.com/Microsoft/TypeScript/) and on [NPM](https://www.npmjs.com/package/typescript))
-* A TypeScript editor (you can use notepad if you want but I use [vscode 🌹](https://code.visualstudio.com/) with an [extension I wrote](https://marketplace.visualstudio.com/items?itemName=basarat.god). Also [lots of other IDES support it as well]( https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support))
+* TypeScript compiler (OSS (ওপেন সোর্স সফটওয়্যার) পাওয়া যাবে [সোর্স থেকে](https://github.com/Microsoft/TypeScript/) এবং [NPM](https://www.npmjs.com/package/typescript)) থেকে।
+* A TypeScript editor (আপনি যেকোনো editor বেবহার করতে পারেন, তবে আমি [vscode](https://code.visualstudio.com/) ব্যাবহার করি. এছাড়া [অনেক IDE ও editor]( https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support) ভালো TypeScript সাপোর্ট দিয়ে থাকে)।
 
 
-## TypeScript Version
+## TypeScript ভার্সন
 
-Instead of using the *stable* TypeScript compiler we will be presenting a lot of new stuff in this book that may not be associated with a version number yet. I generally recommend people to use the nightly version because **the compiler test suite only catches more bugs over time**.
+আমরা TypeScript এর *stable* ব্যাবহার না করে *latest nighty* ভার্সন ব্যাবহার করব। এখানে অনেক latest features আছে যেগুলো *stable* ভার্সন এ এখনো সংযুক্ত হয় নি এবং এই বইটিতে এমন অনেক features এর ব্যাবহার রয়েছে.
 
-You can install it on the command line as
+আপনি নিম্নক্ত ভাবে এটি কমান্ড লাইন থেকে ইন্সটল করতে পারেন:
 
 ```
 npm install -g typescript@next
 ```
 
-And now the command line `tsc` will be the latest and greatest. Various IDEs support it too, e.g.
+এখন কমান্ড লাইন এ `tsc` কমান্ড পাওয়া যাবে. সাথে IDE সাপোর্ট ও পাওয়া যাবে, যেমন
 
-* You can ask vscode to use this version by creating `.vscode/settings.json` with the following contents:
+* এই ফাইলটি এডিট করে *latest* ভার্সন সেট করা যাবে `.vscode/settings.json` ফাইল modify করে নিচের টুকু বসাতে হবে:
 
 ```json
 {
@@ -29,12 +30,12 @@ And now the command line `tsc` will be the latest and greatest. Various IDEs sup
 }
 ```
 
-## Getting the Source Code
-The source for this book is available in the books github repository https://github.com/basarat/typescript-book/tree/master/code most of the code samples can be copied into vscode and you can play with them as is. For code samples that need additional setup (e.g. npm modules), we will link you to the code sample before presenting the code. e.g.
+## বইটির Source Code
+এই বইটির source code, এই github repository https://github.com/basarat/typescript-book/tree/master/code পাওয়া যাবে, আপনি এগুলি কপি করে vscode ব্যাবহার করতে পারেন. যে code samples গুলোর জন্য additional setup প্রয়োজন (যেমনঃ npm modules), সেগুলোর লিঙ্ক কোড স্নিপ্পেট এর সাথে দেয়া থাকবে যেমনঃ
 
 `this/will/be/the/link/to/the/code.ts`
 ```ts
-// This will be the code under discussion
+// এই কোড ব্লক সম্পর্কে আলোচনা করে হচ্ছে
 ```
 
-With a dev setup out of the way let's jump into TypeScript syntax.
+যেহেতু setup নিয়ে আলোচনা করা হলো, এখন চলুন আমরা TypeScript এর syntax নিয়ে আলোচনা করি.
