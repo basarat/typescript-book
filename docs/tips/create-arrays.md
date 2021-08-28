@@ -13,9 +13,9 @@ const foo: string[] = new Array(3).fill('');
 console.log(foo); // ['','',''];
 ```
 
-If you want to create an array of a predefined length with calls you can use the spread operator: 
+If you want to create an array of a predefined length with calls you can use `Array.from`: 
 
 ```ts
-const someNumbers = [...new Array(3)].map((_,i) => i * 10);
+const someNumbers = Array.from({ length: 3 }, (_, i) => i * 10);
 console.log(someNumbers); // [0,10,20];
 ```
