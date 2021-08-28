@@ -74,7 +74,7 @@ const failExpression = function(message: string) {
 };
 ```
 
-Of course you can fix it by an explict annotation: 
+Of course you can fix it by an explicit annotation: 
 
 ```ts
 function failDeclaration(message: string): never {
@@ -82,7 +82,7 @@ function failDeclaration(message: string): never {
 }
 ```
 
-Key reason is backword compatability with real world JavaScript code: 
+Key reason is backword compatibility with real world JavaScript code: 
 
 ```ts
 class Base {
@@ -100,7 +100,7 @@ class Derived extends Base {
 
 If `Base.overrideMe` . 
 
-> Real world TypeScript can overcome this with `abstract` functions but this inferrence is maintained for compatability.
+> Real world TypeScript can overcome this with `abstract` functions but this inferrence is maintained for compatibility.
 
 <!--
 PR: https://github.com/Microsoft/TypeScript/pull/8652
