@@ -1,9 +1,10 @@
 name: build ebook
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#  push:
+#    branches:
+#      - master
+on: workflow_dispatch
 
 jobs:
   build:
