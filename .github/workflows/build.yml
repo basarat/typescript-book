@@ -1,15 +1,13 @@
 name: build ebook
 
-# on:
-#  push:
-#    branches:
-#      - master
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-#    runs-on: ubuntu-latest
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.04 # due to problem with Calibre and Ubuntu 20
     env:
       SHA: ${{ github.sha }}
     steps:
