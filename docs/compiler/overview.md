@@ -8,7 +8,7 @@ It is split into the follow key parts:
 * Checker (`checker.ts`)
 * Emitter (`emitter.ts`)
 
-Each of these get their own unique files in the source. These parts will be explained later on in this chapter. 
+Each of these get their own unique files in the source. These parts will be explained later on in this chapter.
 
 ## Syntax vs. Semantics
 Just because something is *syntactically* correct doesn't mean it is *semantically* correct. Consider the following piece of TypeScript code which although *syntactically* valid is *semantically* wrong
@@ -22,26 +22,26 @@ var foo: number = "not a number";
 ## Processing Overview
 The following is a quick review of how these key parts of the TypeScript compiler compose:
 
-```code
+```
 SourceCode ~~ scanner ~~> Token Stream
 ```
 
-```code
+```
 Token Stream ~~ parser ~~> AST
 ```
 
-```code
+```
 AST ~~ binder ~~> Symbols
 ```
 `Symbol` is the primary building block of the TypeScript *semantic* system. As shown the symbols are created as a result of binding. Symbols connect declaration nodes in the AST to other declarations contributing to the same entity.
 
 Symbols + AST are what is used by the checker to *semantically* validate the source code
-```code
+```
 AST + Symbols ~~ checker ~~> Type Validation
 ```
 
 Finally When a JS output is requested:
-```code
+```
 AST + Checker ~~ emitter ~~> JS
 ```
 
