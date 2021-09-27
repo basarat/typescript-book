@@ -20,6 +20,7 @@ Key Sections:
 * [Annotate Arrays as `Type[]`](#array)
 * [File Names](#filename)
 * [`type` vs `interface`](#type-vs-interface)
+* [`==` or `===`](#==-or-===)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -283,4 +284,8 @@ class X implements FooBar {
   bar: string;
 }
 ```
-* Otherwise use whatever makes you happy that day.
+* Otherwise use whatever makes you happy that day. I use [type](https://www.youtube.com/watch?v=IXAT3If0pGI)
+
+## `==` or `===`
+Both are [mostly safe for TypeScript users](https://www.youtube.com/watch?v=vBhRXMDlA18). I use `===` as that is what is used in the TypeScript codebase. 
+
