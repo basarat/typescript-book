@@ -20,7 +20,7 @@ Key Sections:
 * [Annotate Arrays as `Type[]`](#array)
 * [File Names](#filename)
 * [`type` vs `interface`](#type-vs-interface)
-* [`==` or `===`](#==-or-===)
+* [`==` or `===`](#-or-)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
