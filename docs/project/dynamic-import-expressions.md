@@ -1,13 +1,13 @@
 ## Dynamic import expressions 
 
 **Dynamic import expressions** are a new feature and part of **ECMAScript** that allows users to asynchronously request a module at any arbitrary point in your program.
-**TC39** JavaScript committee has it’s own proposal which is in stage 3, and it’s called [import() proposal for JavaScript](https://github.com/tc39/proposal-dynamic-import).
+It was introduced in ES2020.
 
 Alternatively, **webpack** bundler has a feature called [**Code Splitting**](https://webpack.js.org/guides/code-splitting/) which allows you to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously load additional features later.
 
 It’s natural to think (if we are using webpack in our dev workflow) that [TypeScript 2.4 dynamic import expressions](https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#dynamic-import-expressions) will **automatically produce** bundle chunks and automatically code-split your JS final bundle. BUT, that is not as easy as it seems, because it depends on the **tsconfig.json configuration** we are working with.
 
-The thing is that webpack code splitting supports two similar techniques to achieve this goal: using **import()** (preferred, ECMAScript proposal) and **require.ensure()** (legacy, webpack specific). And what that means is the expected TypeScript output is **leave the import() statement as it is** instead of transpile it to anything else.
+The thing is that webpack code splitting supports two similar techniques to achieve this goal: using **import()** (preferred) and **require.ensure()** (legacy, webpack specific). And what that means is the expected TypeScript output is **leave the import() statement as it is** instead of transpile it to anything else.
 
 Let’s see an example to figure out how to configure webpack + TypeScript 2.4.
 
@@ -33,7 +33,7 @@ Here is the tsconfig.json:
 {
     "compilerOptions": {
         "target": "es5",                          
-        "module": "esnext",                     
+        "module": "es2020",                     
         "lib": [
             "dom",
             "es5",
@@ -61,7 +61,7 @@ Here is the tsconfig.json:
 
 **Important notes**:
 
-- Using **"module": "esnext"** TypeScript produces the mimic import() statement to be input for Webpack Code Splitting.
+- Set the **module** flag to **es2020, esnext, commonjs, amd, system, or umd**. TypeScript produces the mimic import() statement to be input for Webpack Code Splitting.
 - For further information read this article: [Dynamic Import Expressions and webpack 2 Code Splitting integration with TypeScript 2.4](https://blog.josequinto.com/2017/06/29/dynamic-import-expressions-and-webpack-code-splitting-integration-with-typescript-2-4/).
 
 
