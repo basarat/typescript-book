@@ -108,3 +108,9 @@ function handler(event: Event) {
 
 #### How TypeScript determines if a single assertion is not enough
 Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtype of `T` or `T` is a subtype of `S`. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use `unknown` (or `any`) to be that unsafe.
+
+#### `as any as` vs `as unknown as`
+Both are *equally unsafe* as far as TypeScript is concerned. Use what makes you happy. Considerations: 
+
+* Linters prefer `unknown` (with `no-explicit-any` rule)
+* `any` is less words to type than `unknown`
