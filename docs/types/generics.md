@@ -107,7 +107,7 @@ class Utility {
 }
 ```
 
-> TIP: You can call the generic parameter whatever you want. It is conventional to use `T`, `U`, `V` when you have simple generics. If you have more than one generic argument try to use meaningful names e.g. `TKey` and `TValue` (conventional to prefix with `T` as generics are also called *templates* in other languages e.g. C++).
+> TIP: You can call the generic parameter whatever you want. It is conventional to use `T`, `U`, or `V` when you have simple generics. If you have more than one generic argument try to use meaningful names like `TKey` and `TValue`. The convention is to prefix with `T` because generics are also called *templates* in other languages like C++.
 
 
 ### Design Pattern: Convenience generic
