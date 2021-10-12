@@ -113,4 +113,4 @@ Basically, the assertion from type `S` to `T` succeeds if either `S` is a subtyp
 Both are *equally unsafe* as far as TypeScript is concerned. Use what makes you happy. Considerations: 
 
 * Linters prefer `unknown` (with `no-explicit-any` rule)
-* `any` is less words to type than `unknown`
+* `any` is less characters to type than `unknown`
