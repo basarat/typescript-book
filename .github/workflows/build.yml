@@ -12,17 +12,17 @@ jobs:
       SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: '12.18.2'
+          cache: 'npm'
       - run: sudo apt update
       - run: sudo apt install calibre-bin
-      - run: sudo npm install -g gitbook-cli
-      - run: gitbook install
+      - run: npm install
       - run: mkdir output
-      - run: gitbook pdf . ./output/typescript-book-${SHA}.pdf
-      - run: gitbook epub . ./output/typescript-book-${SHA}.epub
-      - run: gitbook mobi . ./output/typescript-book-${SHA}.mobi
+      - run: npx honkit pdf . ./output/typescript-book-${SHA}.pdf
+      - run: npx honkit epub . ./output/typescript-book-${SHA}.epub
+      - run: npx honkit mobi . ./output/typescript-book-${SHA}.mobi
       - name: upload pdf artifact
         uses: actions/upload-artifact@v1
         with:

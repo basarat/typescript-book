@@ -1,0 +1,23 @@
+{
+  "name": "typescript-book",
+  "description": "TypeScript Deep Dive",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basarat/typescript-book.git"
+  },
+  "author": "Basarat Ali Syed",
+  "license": "cc by",
+  "dependencies": {},
+  "devDependencies": {
+    "gitbook-plugin-adsense": "^1.0.3",
+    "gitbook-plugin-code": "^0.1.0",
+    "gitbook-plugin-edit-link": "^2.0.2",
+    "gitbook-plugin-github": "^3.0.0",
+    "gitbook-plugin-header": "^0.1.0",
+    "gitbook-plugin-layout": "0.0.1",
+    "gitbook-plugin-lunr": "^1.2.0",
+    "highlight.js": "^10.7.1",
+    "honkit": "^3.6.20"
+  }
+}
