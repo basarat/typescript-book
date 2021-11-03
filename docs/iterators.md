@@ -41,7 +41,8 @@ class Frame implements Iterator<Component> {
       }
     } else {
       return {
-        done: true
+        done: true,
+        value: null
       }
     }
   }
@@ -53,7 +54,7 @@ let iteratorResult1 = frame.next(); //{ done: false, value: Component { name: 't
 let iteratorResult2 = frame.next(); //{ done: false, value: Component { name: 'bottom' } }
 let iteratorResult3 = frame.next(); //{ done: false, value: Component { name: 'left' } }
 let iteratorResult4 = frame.next(); //{ done: false, value: Component { name: 'right' } }
-let iteratorResult5 = frame.next(); //{ done: true }
+let iteratorResult5 = frame.next(); //{ done: true, value: null }
 
 //Вы можете получить значение результата итерации через value свойство:
 let component = iteratorResult1.value; //Component { name: 'top' }
