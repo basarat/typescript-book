@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '12.18.2'
       - run: sudo apt update
-      - run: sudo apt install calibre-bin
+      - run: wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh
       - run: sudo npm install -g gitbook-cli
       - run: gitbook install
       - run: mkdir output
