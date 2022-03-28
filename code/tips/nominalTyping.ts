@@ -9,7 +9,7 @@ namespace Literal {
   type FooId = Id<'foo'>;
   type BarId = Id<'bar'>;
 
-  /** Optional: contructors functions */
+  /** Optional: constructors functions */
   const createFoo = (value: string): FooId => ({ type: 'foo', value });
   const createBar = (value: string): BarId => ({ type: 'bar', value });
 
