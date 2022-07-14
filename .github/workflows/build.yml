@@ -15,8 +15,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.18.2'
-      - run: sudo apt update
-      - run: sudo apt install calibre-bin
+      # - run: yay -S calibre # need to install calibre first
       - run: sudo npm install -g gitbook-cli
       - run: gitbook install
       - run: mkdir output
