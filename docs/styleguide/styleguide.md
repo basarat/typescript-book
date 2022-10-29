@@ -259,9 +259,13 @@ const foo: string = "hello";
 > Reasons: It's easier to read. It's used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
 
 ## Filename
-Name files with `camelCase`. E.g. `accordion.tsx`, `myControl.tsx`, `utils.ts`, `map.ts` etc.
+Name files with `camelCase`. E.g. `utils.ts`, `map.ts` etc.
 
 > Reason: Conventional across many JS teams.
+
+When the file exports a component and your framework (like React) wants component to be PascalCased, use pascal case file name to match e.g. `Accordion.tsx`, `MyControl.tsx`. 
+
+> Reason: Helps with consistency (little overthought required) and its what the ecosystem is doing.
 
 ## type vs. interface
 
