@@ -110,8 +110,8 @@ console.log(-Number.MAX_VALUE - 1 == -Number.MAX_VALUE); // true!
 Values outside the range where precision is changed resolve to special values `Infinity`/`-Infinity` e.g.
 
 ```js
-console.log(Number.MAX_VALUE + 10**1000);  // Infinity
-console.log(-Number.MAX_VALUE - 10**1000); // -Infinity
+console.log(Number.MAX_VALUE + 1e292);  // Infinity
+console.log(-Number.MAX_VALUE - 1e292); // -Infinity
 ```
 
 Of-course, these special infinity values also show up with arithmetic that requires it e.g.
