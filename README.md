@@ -61,3 +61,6 @@ All the amazing [contributors](https://github.com/basarat/typescript-book/graphs
 
 ## Share
 Share URL: https://basarat.gitbook.io/typescript/
+
+## Roadmap
+* [TypeScript Roadmap](https://roadmap.sh/typescript)
