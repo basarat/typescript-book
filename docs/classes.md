@@ -74,7 +74,7 @@ var s2 = new Something();
 console.log(Something.instances); // 2
 ```
 
-You can have static members as well as static functions.
+You can have static properties as well as static functions.
 
 ### Access Modifiers
 TypeScript supports access modifiers `public`,`private` and `protected` which determine the accessibility of a `class` member as shown below:
