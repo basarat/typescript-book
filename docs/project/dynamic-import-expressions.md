@@ -1,7 +1,7 @@
 ## Dynamic import expressions 
 
 **Dynamic import expressions** are a new feature and part of **ECMAScript** that allows users to asynchronously request a module at any arbitrary point in your program.
-**TC39** JavaScript committee has it’s own proposal which is in stage 3, and it’s called [import() proposal for JavaScript](https://github.com/tc39/proposal-dynamic-import).
+**TC39** JavaScript committee has it’s own proposal which is in stage 4, and it’s called [import() proposal for JavaScript](https://github.com/tc39/proposal-dynamic-import).
 
 Alternatively, **webpack** bundler has a feature called [**Code Splitting**](https://webpack.js.org/guides/code-splitting/) which allows you to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously load additional features later.
 
