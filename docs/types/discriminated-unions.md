@@ -262,8 +262,13 @@ function counter(state = 0, action: Action) {
   case 'DECREMENT':
     return state - 1
   default:
-    return state
+    return unknownAction(action, state)
   }
+}
+
+function unknownAction<S>(action: never, state: S): state {
+    // Redux sends actions through all reducers
+    return state
 }
 
 // Create a Redux store holding the state of your app.
