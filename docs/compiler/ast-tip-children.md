@@ -1,8 +1,8 @@
 ### AST Tip: Visit Children
 
-There is a utility function `ts.forEachChild` that allows you to visit all the child nodes of any Node in the AST.
+Існує допоміжна функція `ts.forEachChild` яка дозволяє відвідувати всі дочірні вузли будь-якого Node  в AST.
 
-Here is simplified snippet of the source code to demonstrate how it functions:
+Нижче наведений спрощений фрагмент вихідного (програмного) коду, щоб продемонструвати, як він працює:
 
 ```ts
 
@@ -23,9 +23,9 @@ export function forEachChild<T>(node: Node, cbNode: (node: Node) => T, cbNodeArr
             // .... lots more
 ```
 
-Basically, it checks `node.kind` and based on that assumes an interface offered by the `node` and calls the `cbNode` on the children. However, note that this function doesn't call `visitNode` for *all* children (e.g. SyntaxKind.SemicolonToken). If you want *all* the children of a node in the AST just call `.getChildren` member function of the `Node`.
+На практиці ця функція перевіряє значення `node.kind`  та, виходячи з цього, вважає, який інтерфейс пропонується `node` і викликає `cbNode` для дочірніх елементів вузла. Зверніть увагу, що ця функція не викликає `visitNode` для *всіх* дочірніх елементів (наприклад, SyntaxKind.SemicolonToken). Якщо вам потрібно отримати *всі* дочірні елементи вузла у AST, просто викличте метод `.getChildren` об'єкта Node.
 
-E.g. here is a function that prints the verbose `AST` of a node:
+Наприклад, ось функція, яка виводить докладний AST вузла: 
 
 ```ts
 function printAllChildren(node: ts.Node, depth = 0) {
@@ -35,4 +35,4 @@ function printAllChildren(node: ts.Node, depth = 0) {
 }
 ```
 
-We will see a sample usage of this function when we discuss the parser further.
+Ми побачимо приклад використання цієї функції, коли будемо детальніше обговорювати парсер.

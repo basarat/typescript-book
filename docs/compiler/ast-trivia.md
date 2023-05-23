@@ -1,26 +1,28 @@
 ### Trivia
-Trivia (called that because it's `trivial`) represent the parts of the source text that are largely insignificant for normal understanding of the code. For example; whitespace, comments, and even conflict markers. Trivia is *not stored* in the AST (to keep it lightweight). However, it can be fetched *on demand* using a few `ts.*` APIs. 
+Trivia (названа так через свою `незначимість`) представляє частини початкового тексту, які в значній мірі не мають значення для звичайного розуміння коду. Наприклад, це можуть бути пробіли, коментарі або навіть мітки конфліктів. Trivia is *не зберігається* в AST (щоб він залишався легким). Однак, його можна отримати *при  потребі* за допомогою кількох `ts.*` APIs. 
 
-Before we show them you need to understand the following:
+Перш ніж ми покажемо їх, ви повинні зрозуміти наступне:
 
 #### Trivia Ownership
-In General:
-* A token owns any trivia after it on the *same* line *upto* the next token.
-* Any comment *after that line* is associated with the following token.
+Загалом:
+* Токену належать будь-яка trivia після нього в *тому самому* рядку *до* наступного токена.
+* Будь-який коментар *після цього рядка* пов'язаний з наступним токеном.
 
-For leading and ending comments in a file:
-* The first token in the source file gets all the initial trivia.
-* The last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
+Для початкових і кінцевих коментарів у файлі:
+* Перший токен у початковому файлі отримує всю початкову trivia.
+* Остання послідовність trivia у файлі прикріплюється до токена кінця файлу, який в іншому випадку має нульову ширину.
 
 #### Trivia APIs
-For most basic uses, comments are the "interesting" trivia. The comments that belong to a Node can be fetched through the following functions:
+Для більшості основних випадків коментарі є "цікавою" trivia. Коментарі, що належать до вузла(Node), можна отримати за допомогою наступних функцій:
 
-Function | Description
+
+
+Функція | Опис
 ---------|------------
-`ts.getLeadingCommentRanges` | Given the source text and position within that text, returns ranges of comments between the first line break following the given position and the token itself (probably most useful with `ts.Node.getFullStart`).
-`ts.getTrailingCommentRanges` | Given the source text and position within that text, returns ranges of comments until the first line break following the given position (probably most useful with `ts.Node.getEnd`).
+`ts.getLeadingCommentRanges` | Враховуючи вихідний текст і позицію в цьому тексті, повертає діапазони коментарів між першим символом нового рядка після заданої позиції та самим токеном (найімовірніше, найбільш корисно з `ts.Node.getFullStart`).
+`ts.getTrailingCommentRanges` | Враховуючи вихідний текст і позицію в цьому тексті, повертає діапазони коментарів до першого символу нового рядка після заданої позиції  (найімовірніше, найбільш корисно з `ts.Node.getEnd`).
 
-As an example, imagine this portion of a source file:
+Наприклад, уявіть таку частину вихідний файлу:
 
 ```ts
 debugger;/*hello*/
@@ -28,21 +30,21 @@ debugger;/*hello*/
   /*hi*/    function
 ```
 
-`getLeadingCommentRanges` for the `function` will only return the last 2 comments `//bye` and `/*hi*/`.
+`getLeadingCommentRanges` для `функції` поверне лише останні 2 коментарі `//bye` and `/*hi*/`.
 
-Appropriately, calling `getTrailingCommentRanges` on the end of the debugger statement will extract the `/*hello*/` comment.
+Відповідно, виклик функції `getTrailingCommentRanges` на кінці оператора debugger вилучить коментар `/*hello*/`.
 
 #### Token Start/Full Start
-Nodes have what is called a "token start" and a "full start".
+У вузлів є так звана "початкова позиція токена"(token start) та "повна початкова позиція"(full start).
 
-* Token Start: the more natural version, which is the position in file where the text of a token begins
-* Full Start: the point at which the scanner began scanning since the last significant token
+* Початкова позиція токена: це більш природна версія, яка відображає позицію в файлі, з якої починається текст токена.
+* Повна початкова позиція: це точка, з якої сканер почав сканування з моменту останнього значущого токена.
 
-AST nodes have an API for `getStart` and `getFullStart`. In the following example:
+У вузлів AST є API для `getStart` and `getFullStart`. У наступному прикладі:
 
 ```ts
 debugger;/*hello*/
     //bye
   /*hi*/    function
 ```
-for `function` the token start is at `function` whereas *full* start is at `/*hello*/`. Note that full start even includes the trivia that would otherwise be owned by the previous node.
+для `function`  початкова позиція токена знаходиться на слові `function` тоді як *повна початкова позиція* знаходиться на `/*hello*/`. Зверніть увагу, що повна початкова позиція навіть включає trivia, які зазвичай належать попередньому вузлу. 

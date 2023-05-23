@@ -1,17 +1,17 @@
 ## Node
-The basic building block of the Abstract Syntax Tree (AST). In general a `Node` represents non-terminals in the language grammar; however, some terminals are kept in the tree such as identifiers and literals.
+Основним будівельним блоком Абстрактного Синтаксичного Дерева(AST) є Node. В загальному випадку, Node представляє нелематичні(non-terminals) символи в граматиці мови, проте деякі лематичні символи, такі як ідентифікатори і літерали, також зберігаються у дереві.
 
-Two key things make up an AST node's documentation. The node's `SyntaxKind` which identifies its type within the AST, and its `interface`, the API the node provides when instantiated into the AST.
+Документація вузла AST складається з двох основних елементів: `SyntaxKind`, який ідентифікує тип вузла в межах AST, і `interface`, API, яке вузол надає під час інстанціювання в AST.
 
-Here are a few key `interface Node` members:
-* `TextRange` members that identify the node's `start` and `end` in the source file.
-* `parent?: Node` the parent of the node in the AST.
+Нижче наведені ключові елементи `interface Node`:
+* `TextRange` визначають `початок` і `кінець` вузла в вихідному файлі.
+* `parent?: Node` батьківський вузол в AST.
 
-There are other additional members for `Node` flags and modifiers etc. that you can lookup by searching `interface Node` in the source code but the ones we mentioned are vital for node traversal.
+У інтерфейсі Node є й інші додаткові елементи, такі як прапорці (flags) та модифікатори (modifiers), які визначають додаткові властивості та характеристики вузлів абстрактного синтаксичного дерева (AST). Ці додаткові елементи надають більше інформації про вузли та їхні властивості, і можуть бути корисними для певних операцій і обробки AST. Докладнішу інформацію можна знайти за допомогою ключового слова `interface Node` в у вихідному коді. Однак, для навігації та обходу AST, основними та важливими членами Node є ті, які були згадані в початковому поясненні.
 
 ## SourceFile
 
 * `SyntaxKind.SourceFile`
 * `interface SourceFile`.
 
-Each `SourceFile` is a top-level AST node that is contained in the `Program`.
+Кожен `SourceFile` є верхнім вузлом абстрактного синтаксичного дерева (AST), який міститься в `Program`.

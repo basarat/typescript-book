@@ -1,6 +1,6 @@
 ### AST Tip: SyntaxKind
 
-`SyntaxKind` is defined as a `const enum`, here is a sample:
+`SyntaxKind` визначений як `const enum`, ось приклад :
 
 ```ts
 export const enum SyntaxKind {
@@ -10,7 +10,12 @@ export const enum SyntaxKind {
     // ... LOTS more
 ```
 
-It's a `const enum` (a concept [we covered previously](../enums.md)) so that it gets *inlined* (e.g. `ts.SyntaxKind.EndOfFileToken` becomes `1`) and we don't get a dereferencing cost when working with the AST. However, the compiler is compiled with `--preserveConstEnums` compiler flag so that the enum *is still available at runtime*. So in JavaScript you can use `ts.SyntaxKind.EndOfFileToken` if you want. Additionally you can convert these enum members to display strings using the following function:
+Це `const enum` (концепція [яку ми розглянули раніше](../enums.md)). Вона використовується для того, щоб перелік *вбудовувався* безпосередньо у код, замість створення об'єкта переліку.
+Коли ми використовуємо const enum, значення переліку замінюється прямо в місці використання (наприклад, `ts.SyntaxKind.EndOfFileToken` буде замінено на фактичне значення `1` в усіх місцях, де використовується цей перелік).
+
+Один з основних переваг використання const enum полягає в тому, що ми уникаємо витрат на дереференцію (dereferencing cost), тобто на доступ до об'єкта переліку під час роботи з AST. Оскільки значення вбудовуються безпосередньо в код, нам не потрібно звертатися до об'єкта переліку, що полегшує та прискорює роботу з AST.
+
+Однак, компілятор компілюється з прапорцем `--preserveConstEnums` тому перелік *все ще доступний під час виконання*. Одже, в JavaScript ви можете використовувати `ts.SyntaxKind.EndOfFileToken`, якщо бажаєте. Крім того, ви можете перетворити ці елементи переліку у рядки для відображення за допомогою наступної функції:
 
 ```ts
 export function syntaxKindToName(kind: ts.SyntaxKind) {
