@@ -1,24 +1,24 @@
-# Contributing
+# Співпраця
 
-This book is developed using [GitBook](https://github.com/GitbookIO/gitbook). Authored in Markdown files (I use [atom](http://atom.io)).
+Ця книга розроблена з використанням [GitBook](https://github.com/GitbookIO/gitbook). Складається з Markdown файлів (Я використовую [atom](http://atom.io)).
 
-Here's how to setup a Dev Environment:
+Як налаштувати оточення розробника (Dev Environment):
 
 ```
 npm install gitbook-cli -g
 gitbook install
 gitbook serve .
 ```
-> Note: serve needs port `35729` (for live reload) and `4000` for serving http://localhost:4000.
+> Зверніть увагу: serve використовує порт `35729` (для онлайн перезавантаженя) та `4000` для роботи http://localhost:4000.
 
-Also you can mostly just edit the `.md` files in [`/docs`](https://github.com/basarat/typescript-book/docs) using github and create a Pull Request (PR).
+Також можна просто редагувати `.md` файли в [`/docs`](https://github.com/basarat/typescript-book/docs) використовуючи github і створити Pull Request (PR).
 
-# Code
-All the code for the book is in the `/code` folder. Tested with `atom-typescript`.
+# Код
+Увесь код для книги знаходиться в папці `/code`. Проткстовано за допомогою `atom-typescript`.
 
-### More Gitbook Tips
-* Links best work if they are relative (e.g. `./foo.md`) to the *current* file.
-* For links in the same file (`#foo-bar` style links) best to click the heading on github to get what gitbook expects.
+### Додаткові рекомендації з Gitbook
+* Послилання краще пряцюють, якщо вони відносні (наприклад, `./foo.md`) для *поточного* файлу.
+* Для посилань всередині певного файлу (посилання у стилі `#foo-bar`) краще кліенути на заголовку у github, щоб зрозуміти, що очікує gitbook.
 
-### TypeScript Compiler Docs
-Thanks to the TypeScript team for providing much of the docs: https://github.com/Microsoft/TypeScript/wiki/Architectural-Overview that are used to write the compiler story.
+### Документація компілятора TypeScript
+Дякую команді TypeScript за надання документації https://github.com/Microsoft/TypeScript/wiki/Architectural-Overview, що використовується для написання compiler story.
