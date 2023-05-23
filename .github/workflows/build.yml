@@ -18,21 +18,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: sudo apt update
-      - run: sudo apt install python3
-      #- run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
       - run: sudo apt-get install -y calibre
-      # https://stackoverflow.com/questions/64211386/gitbook-cli-install-error-typeerror-cb-apply-is-not-a-function-inside-graceful
-      # - run: sudo npm install graceful-fs@latest --save
-      # - run: sudo npm install -g gitbook-cli
-      # - run: gitbook install
       # gitbook replaced by https://github.com/honkit/honkit
-      - run: npm install -g honkit
+      - run: |
+          npm install -g honkit
+          npm install -g gitbook-plugin-edit-link
+          npm install -g gitbook-plugin-github
+          npm install -g gitbook-plugin-google-adsense
+          npm install -g gitbook-plugin-header
       # Compose books: https://honkit.netlify.app/ebook.html
-      - run: mkdir output
-      - run: honkit pdf ./ ./output/typescript-book-${SHA}.pdf
-      - run: honkit epub ./ ./output/typescript-book-${SHA}.epub
-      - run: honkit mobi ./ ./output/typescript-book-${SHA}.mobi
+      - run: |
+          mkdir output 
+          npx honkit pdf ./ ./output/typescript-book-${SHA}.pdf
+          npx honkit epub ./ ./output/typescript-book-${SHA}.epub
+          npx honkit mobi ./ ./output/typescript-book-${SHA}.mobi
       - name: upload pdf artifact
         uses: actions/upload-artifact@v3
         with:
