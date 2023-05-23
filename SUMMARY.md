@@ -1,6 +1,7 @@
-# Summary
+# Table of contents
 
-* [Getting Started](docs/getting-started.md)
+* [README](README.md)
+* [Давайте Почнемо](docs/getting-started.md)
   * [Why TypeScript](docs/why-typescript.md)
 * [JavaScript](docs/javascript/recap.md)
   * [Equality](docs/javascript/equality.md)
@@ -46,7 +47,7 @@
     * [Variables](docs/types/ambient/variables.md)
   * [Interfaces](docs/types/interfaces.md)
   * [Enums](docs/enums.md)
-  * [`lib.d.ts`](docs/types/lib.d.ts.md)
+  * [lib.d.ts](docs/types/lib.d.ts.md)
   * [Functions](docs/types/functions.md)
   * [Callable](docs/types/callable.md)
   * [Type Assertion](docs/types/type-assertion.md)
@@ -91,7 +92,7 @@
   * [Classes are Useful](docs/tips/classesAreUseful.md)
   * [Avoid Export Default](docs/tips/defaultIsBad.md)
   * [Limit Property Setters](docs/tips/propertySetters.md)
-  * [`outFile` caution](docs/tips/outFile.md)
+  * [outFile caution](docs/tips/outFile.md)
   * [JQuery tips](docs/tips/jquery.md)
   * [static constructors](docs/tips/staticConstructor.md)
   * [singleton pattern](docs/tips/singleton.md)
