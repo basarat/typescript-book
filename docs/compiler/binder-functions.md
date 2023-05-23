@@ -1,21 +1,21 @@
-### Binder function
-Two critical binder functions are `bindSourceFile` and `mergeSymbolTable`. We will take a look at these next.
+### Функції зв'язування (Binder)
+Дві ключові функції зв'язування - це `bindSourceFile` та `mergeSymbolTable`. Давайте розглянемо їх детальніше.
 
 #### `bindSourceFile`
-Basically checks if `file.locals` is defined, if not it hands over to (a local function) `bind`.
+В основному перевіряє, чи визначений `file.locals`. Якщо ні, він передає управління функції `bind` (локальній функції).
 
-Note: `locals` is defined on `Node` and is of type `SymbolTable`. Note that `SourceFile` is also a `Node` (in fact a root node in the AST).
+Примітка: `locals` визначено у `Node` і має тип `SymbolTable`. Зверніть увагу, що `SourceFile` також є `Node`  (фактично кореневим вузлом в AST).
 
-TIP: local functions are used heavily within the TypeScript compiler. A local function very likely uses variables from the parent function (captured by closure). In the case of `bind` (a local function within `bindSourceFile`) it (or a function it calls) will setup the `symbolCount` and `classifiableNames` among others, that are then stored on the returned `SourceFile`.
+ПОРАДА: локальні функції широко використовуються в компіляторі TypeScript. Локальна функція, скоріш за все, використовує змінні з батьківської функції (захоплені за допомогою замикання). У випадку `bind` (локальна функція в межах `bindSourceFile`) вона (або функція, яку вона викликає) налаштовує `symbolCount`, `classifiableNames` та інші значення, які потім зберігаються у поверненому `SourceFile`.
 
 #### `bind`
-Bind takes any `Node` (not just `SourceFile`). First thing it does is assign the `node.parent` (if `parent` variable has been setup ... which again is something the binder does during its processing within the `bindChildren` function), then hands off to `bindWorker` which does the *heavy* lifting. Finally it calls `bindChildren` (a function that simply stores the binder state e.g. current `parent` within its function local vars, then calls `bind` on each child, and then restores the binder state). Now let's look at `bindWorker` which is the more interesting function.
+Функція `bind` працює з будь-яким об'єктом типу `Node` (не тільки з `SourceFile`). По-перше, вона призначає значення для `node.parent` (якщо змінна `parent` була налаштована... це також те, що `binder` робить під час обробки в межах функції `bindChildren`), далі передає управління до функції `bindWorker`, яка виконує *основну* роботу. Нарешті, вона викликає функцію `bindChildren` (функція, яка просто зберігає стан `binder`, наприклад, поточний `parent`, у своїх локальних змінних, далі викликає `bind` для кожного дочірнього вузла і наостанок, відновлює стан байндера). Тепер давайте розглянемо найцікавішу функцію `bindWorker`.
 
 #### `bindWorker`
-This function switches on `node.kind` (of type `SyntaxKind`) and delegates work to the appropriate `bindFoo` function (also defined within `binder.ts`). For example if the `node` is a `SourceFile` it calls (eventually and only if its an external file module) `bindAnonymousDeclaration`
+Ця функція вмикає `node.kind` (типу `SyntaxKind`) і делегує роботу відповідній функції `bindFoo` (також визначеної у `binder.ts`). Наприклад, якщо `node` є `SourceFile` він викликає (у випадку зовнішнього модуля файлу) `bindAnonymousDeclaration`
 
-#### `bindFoo` functions
-There are a few patterns common to `bindFoo` functions as well as some utility functions that these use. One function that is almost always used is the `createSymbol` function. It is presented in its entirety below:
+#### `bindFoo`
+Існують кілька типових шаблонів для функцій `bindFoo`, а також кілька вспоміжних функцій, якими вони користуються. Одна функція, яка майже завжди використовується, - це функція `createSymbol`. Нижче наведено її повний варіант:
 
 ```ts
 function createSymbol(flags: SymbolFlags, name: string): Symbol {
@@ -23,4 +23,4 @@ function createSymbol(flags: SymbolFlags, name: string): Symbol {
     return new Symbol(flags, name);
 }
 ```
-As you can see it is simply keeping the `symbolCount` (a local to `bindSourceFile`) up to date and creating the symbol with the specified parameters.
+Як можна побачити, `bindFoo` просто оновлює значення `symbolCount` (локальної змінної в функції `bindSourceFile`) та створює символ із вказаними параметрами.

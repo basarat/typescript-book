@@ -1,6 +1,6 @@
 ### SymbolTable
 
-SymbolTable is implemented as a simple HashMap. Here is the interface (`types.ts`):
+SymbolTable реалізовано як простий HashMap. Нижче приведений його інтерфейс (`types.ts`):
 
 ```ts
 interface SymbolTable {
@@ -8,24 +8,24 @@ interface SymbolTable {
 }
 ```
 
-SymbolTables are initialized by binding. There are a few SymbolTables used by the compiler:
+SymbolTables ініціалізується при прив'язці (binder). У компіляторі використовуються декілька SymbolTables:
 
-On `Node`:
+На `Node`:
 ```ts
 locals?: SymbolTable;                   // Locals associated with node
 ```
 
-On `Symbol`:
+На `Symbol`:
 
 ```ts
 members?: SymbolTable;                  // Class, interface or literal instance members
 exports?: SymbolTable;                  // Module exports
 ```
 
-Note: We saw `locals` getting initialized (to `{}`) by `bindChildren` based on `ContainerFlags`.
+Зауваження: Ми вже спостерігали як `locals` ініціалізується  (як `{}`) в `bindChildren` на основі `ContainerFlags`.
 
-#### SymbolTable population
-SymbolTables are populated with `Symbols` primarily by a call to `declareSymbol`. This function is presented below in entirety:
+### Наповнення (population) SymbolTable 
+SymbolTables заповнюються `Symbols` переважно за допомогою виклику функції `declareSymbol`. Нижче наведено цю функцію повністю:
 
 ```ts
 /**
@@ -100,7 +100,7 @@ function declareSymbol(symbolTable: SymbolTable, parent: Symbol, node: Declarati
 }
 ```
 
-Which SymbolTable is populated is driven by the first argument to this function. e.g. when adding a declaration to a *container* of kind `SyntaxKind.ClassDeclaration` or `SyntaxKind.ClassExpression` the function `declareClassMember` will get called which has the following code:
+Як SymbolTable заповнюється, визначається першим аргументом цієї функції. Наприклад, при додаванні оголошення до *контейнера* типу `SyntaxKind.ClassDeclaration` або `SyntaxKind.ClassExpression` буде викликана функція `declareClassMember` яка має такий код:
 
 ```ts
 function declareClassMember(node: Declaration, symbolFlags: SymbolFlags, symbolExcludes: SymbolFlags) {

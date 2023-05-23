@@ -1,4 +1,4 @@
-### AST Tip: Visit Children
+### AST Порада: Visit Children
 
 Існує допоміжна функція `ts.forEachChild` яка дозволяє відвідувати всі дочірні вузли будь-якого Node  в AST.
 

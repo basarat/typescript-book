@@ -1,4 +1,4 @@
-### AST Tip: SyntaxKind
+### AST Порада: SyntaxKind
 
 `SyntaxKind` визначений як `const enum`, ось приклад :
 

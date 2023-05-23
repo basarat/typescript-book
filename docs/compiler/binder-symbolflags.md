@@ -1,5 +1,5 @@
 ### SymbolFlags
-Symbols have `SymbolFlags`. Below we have them in their verbatim, as of TypeScript 2.2
+Символи мають `SymbolFlags`. Нижче ми приводимо їх, на момент версії TypeScript 2.2.
 
 ```ts
     export const enum SymbolFlags {
@@ -88,4 +88,4 @@ Symbols have `SymbolFlags`. Below we have them in their verbatim, as of TypeScri
 ```
 
 #### ValueModule
-`ValueModule // Instantiated module` is the SymbolFlag used for `SourceFile` if it an external module.
+`ValueModule // Instantiated module` це SymbolFlag, який використовується для `SourceFile`, якщо він є зовнішнім модулем.

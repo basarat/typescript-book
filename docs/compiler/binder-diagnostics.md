@@ -1,8 +1,8 @@
-### Binder Error Reporting
+### Повідомлення про помилки зв'язування (Binder Error Reporting)
 
-Binding errors are added to the sourceFile's list of `bindDiagnostics`.
+Помилки зв'язування додаються до списку `bindDiagnostics` вихідного файлу.
 
-An example error detected during binding is the use of `eval` or `arguments` as a variable name in `use strict` scenario. The relevant code is presented in its entirety below (`checkStrictModeEvalOrArguments` is called from multiple places, call stacks originating from `bindWorker` which calls different functions for different node `SyntaxKind`):
+Прикладом помилки, виявленої під час зв'язування, є використання `eval` або `arguments` як назви змінної в сценарії з включеним режимом `use strict`. Відповідний код наведено повністю нижче (`checkStrictModeEvalOrArguments` викликається з різних місць, стеки викликів походять з `bindWorker` який викликає різні функції для різних `SyntaxKind` вузлів):
 
 ```ts
 function checkStrictModeEvalOrArguments(contextNode: Node, name: Node) {

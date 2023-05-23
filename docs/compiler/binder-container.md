@@ -1,6 +1,6 @@
-### Container
+### Контейнер
 
-An AST node can be a container. This determines the kinds of `SymbolTables` the Node and associated Symbol will have. Container is an abstract concept (i.e. has no associated data structure). The concept is driven by a few things, one being the `ContainerFlags` enum. The function `getContainerFlags` (in `binder.ts`) drives this flag and is presented below:
+Вузол AST може бути контейнером. Це визначає типи `SymbolTables`, які матимуть вузол і пов’язаний із ним символ. Контейнер — це абстрактна концепція (тобто не має пов’язаної структури даних). Концепція контейнера зумовлена кількома факторами, одним з яких є перелік(enum) `ContainerFlags`. Функція `getContainerFlags` (у `binder.ts`) керує цим прапором і представлена нижче:
 
 ```ts
 function getContainerFlags(node: Node): ContainerFlags {
@@ -62,7 +62,7 @@ function getContainerFlags(node: Node): ContainerFlags {
 }
 ```
 
-It is *only* invoked from the binder's `bindChildren` function which sets up a node as a `container` and/or a `blockScopedContainer` depending upon the evaluation of the `getContainerFlags` function. The function `bindChildren` is presented below:
+Вона *лише* викликається з функції `bindChildren` біндера, яка налаштовує вузол як `container` та/або `blockScopedContainer` залежно від результату виконання функції  `getContainerFlags`. Функція `bindChildren` наведена нижче:
 
 ```ts
 // All container nodes are kept on a linked list in declaration order. This list is used by
@@ -120,4 +120,4 @@ function bindChildren(node: Node) {
 }
 ```
 
-As you might recall from the section on binder functions : `bindChildren` is called from the `bind` function. So we have the recursive binding setup : `bind` calls `bindChildren` calls `bind` for each child.
+Як ви пам’ятаєте з розділу про функції прив’язки: `bindChildren` викликається з функції `bind`. Отже, ми маємо рекурсивне налаштування зв’язування: `bind` викликає `bindChildren` яка в свою чергу викликає `bind` для кожного дочірнього елемента.

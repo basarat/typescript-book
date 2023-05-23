@@ -1,7 +1,7 @@
-### Symbols and Declarations
-Linking between a `node` and a `symbol` is performed by a few functions. One function that is used to bind the `SourceFile` node to the source file Symbol (in case of an external module) is the `addDeclarationToSymbol` function
+### Символи та декларації
+Посилання між `node` та `symbol` встановлюється за допомогою кількох функцій. Одна з таких функцій, яка використовується для зв'язку між вузлом `SourceFile` та символом вихідного файлу (у випадку зовнішнього модуля), - це функція `addDeclarationToSymbol`.
 
-Note : the `Symbol` for an external module source file is setup as `flags : SymbolFlags.ValueModule` and `name: '"' + removeFileExtension(file.fileName) + '"'`).
+Примітка: `Symbol` для вихідного файлу зовнішнього модуля встановлюється як `flags : SymbolFlags.ValueModule` та `name: '"' + removeFileExtension(file.fileName) + '"'`).
 
 ```ts
 function addDeclarationToSymbol(symbol: Symbol, node: Declaration, symbolFlags: SymbolFlags) {
@@ -28,12 +28,12 @@ function addDeclarationToSymbol(symbol: Symbol, node: Declaration, symbolFlags: 
 }
 ```
 
-The important linking portions:
-* Creates a link to the Symbol from the AST node (`node.symbol`).
-* Adds the node as *one of* the declarations of the Symbol (`symbol.declarations`).
+Важливі сполучні частини:
+* Створює посилання на символ з вузла AST (`node.symbol`).
+* Додає вузол як *одну з* декларацій символу (`symbol.declarations`).
 
-#### Declaration
-Declaration is just a `node` with an optional name. In `types.ts`
+#### Декларація
+Декларація у `types.ts` це лише `node` із необов’язковим ім’ям.
 
 ```ts
 interface Declaration extends Node {
