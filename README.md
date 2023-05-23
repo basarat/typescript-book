@@ -65,7 +65,7 @@
 
 ### Давайти Починати
 
-Якщо ви тут щоб читати книгу онлайн [тисніть тут](https://basarat.gitbook.io/typescript/ukrainian).
+Якщо ви тут щоб читати книгу онлайн [тисніть тут](https://artfulbits-se.gitbook.io/typescript/).
 
 ### Переклади
 
