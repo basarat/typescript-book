@@ -96,7 +96,7 @@
 
 ## Розповсюдження
 
-За для розповсюдження використовуйте це посилання: https://basarat.gitbook.io/typescript/ukrainian
+За для розповсюдження використовуйте це посилання: https://artfulbits-se.gitbook.io/typescript/
 
 Або англійску вірсію URL: https://basarat.gitbook.io/typescript/
 
