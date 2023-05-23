@@ -52,6 +52,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [Polish](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
 * [Thai](https://github.com/futurouz/typescript-book)
 * [Bengali](https://github.com/Acesif/typescript-book)
+* [Ukrainian](https://github.com/ArtfulBits/typescript-book)
 
 ## Other Options
 You can also download one of the Epub, Mobi, or PDF formats from the [actions tab](https://github.com/basarat/typescript-book/actions) by clicking on the latest build run. You will find the files in the artifacts section.
