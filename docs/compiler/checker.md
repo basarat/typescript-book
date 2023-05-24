@@ -1,8 +1,8 @@
 ## Checker
-Like we mentioned before *checker* is the thing that makes TypeScript uniquely more powerful than *just another JavaScript transpiler*. The checker is located in `checker.ts` and at this moment it is 23k+ lines of TypeScript (largest part of the compiler).
+Як ми вже згадували раніше *checker* - це те, що робить TypeScript унікально потужним у порівнянні з *просто ще одним транспілером JavaScript*.   `Checker` розташований у файлі `checker.ts`  і на даний момент складається з понад 23 тис. рядків коду на TypeScript (найбільша частина компілятора).
 
-### Usage by Program
-The `checker` is initialized by `program`. The following is a sampling of the call stack (we showed the same one when looking at `binder`):
+### Використання програмою
+`Checker` ініціалізується об'єктом `program`. Нижче наведений невеликий приклад стеку викликів (ми використовували той самий приклад при дослідженні  `binder`):
 
 ```
 program.getTypeChecker ->
@@ -13,10 +13,10 @@ program.getTypeChecker ->
             for each SourceFile `ts.mergeSymbolTable` (in checker)
 ```
 
-### Association with Emitter
-True type checking happens once a call is made to `getDiagnostics`. This function is called e.g. once a request is made to `Program.emit`, in which case the checker returns an `EmitResolver` (program calls the checkers `getEmitResolver` function) which is just a set of functions local to `createTypeChecker`. We will mention this again when we look at the emitter.
+### Пов'язаність з генератором коду
+Справжня перевірка типу відбувається після виклику `getDiagnostics`.  Ця функція викликається наприклад, коли запит зроблений до `Program.emit`, в такому випадку `checker` повертає `EmitResolver` (програма викликає функцію `getEmitResolver` чекера)  який представляє собою набір функцій, локальних для `createTypeChecker`. Ми ще повернемося до цього, коли будемо розглядати `emitter`.
 
-Here is the call stack right down to `checkSourceFile` (a function local to `createTypeChecker`).
+Нижче наведений стек викликів, що веде до `checkSourceFile` (функції, що локально присутня у  `createTypeChecker`).
 
 ```
 program.emit ->
