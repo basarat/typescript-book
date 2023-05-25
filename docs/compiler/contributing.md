@@ -1,9 +1,9 @@
-## Contributing
+## Співпраця
 
-TypeScript is [OSS and on GitHub](https://github.com/Microsoft/TypeScript) and the team welcomes community input.
+TypeScript є відкритим програмним забезпеченням і знаходиться на [GitHub](https://github.com/Microsoft/TypeScript). Kоманда розробників вітає внесок спільноти.
 
-### Setup
-Super easy:
+### Налаштування
+Супер легко:
 
 ```bash
 git clone https://github.com/Microsoft/TypeScript.git
@@ -12,8 +12,8 @@ npm install -g jake
 npm install
 ```
 
-### Setup Fork
-You would obviously need to setup Microsoft/TypeScript as an `upstream` remote and your own *fork* (use the GitHub *fork* button) as `origin`:
+### Налаштування репозиторію (fork)
+В першу чергу, вам потрібно налаштувати вихідний репозиторій Microsoft/TypeScript як віддалений `upstream`, далі необхідно налаштувати влсний репозиторій *(fork)* як `origin`. Для цього натиснить кнопку *fork* на GitHub:
 
 ```bash
 git remote rm origin
@@ -21,48 +21,47 @@ git remote rm upstream
 git remote add upstream https://github.com/Microsoft/TypeScript.git
 git remote add origin https://github.com/basarat/TypeScript.git
 ```
-Additionally I like to work off branches like `bas/` to have it show up cleaner in the branch listings.
+Додатково, мені подобається працювати з гілками, такими як `bas/`, щоб вони відображалися більш чисто в списку гілок.
 
-### Running Tests
-There are lots of `test` and `build` options in their JakeFile. You can run *all* tests with `jake runtests`
+### Запуск тестів
+У файлі JakeFile є багато опцій для `тестування` та `збирання`. Ви можете запустити `всі` тести за допомогою команди `jake runtests`.
 
-### Baselines
-Baselines are used to manage if there are any changes in the *expected* output of the TypeScript compiler. Baselines are located in `tests/baselines`.
+### Базові лінії
+Базові лінії використовуються для управління змінами у *очікуваному* виведенні (output) компілятора TypeScript. 
+Базові лінії знаходяться у папці `tests/baselines`.
 
-* Reference (*expected*) baselines: `tests/baselines/reference`
-* Generated (*in this test run*) baselines : `tests/baselines/local` (this folder is in **.gitignore**)
 
-> If there are any differences between these folders tests will fail. You can diff the two folders with tools like BeyondCompare or KDiff3.
+* Основні базові лінії (*очікуване виведення*): `tests/baselines/reference`
+* Згенеровані базові лінії (*у поточному запуску тестів*): `tests/baselines/local` (ця папка включена до **.gitignore**)
 
-If you think these changes in generated files are valid then accept baselines using `jake baseline-accept`. The changes to `reference` baselines will now show as a git diff you can commit.
+> Якщо є будь-які відмінності між цими папками, тести будуть неуспішними. Ви можете порівняти ці дві папки за допомогою інструментів, таких як BeyondCompare або KDiff3.
 
-> Note that if you don't run *all* tests then use `jake baseline-accept[soft]` which will only copy over the new files and not delete the whole `reference` directory.
+Якщо ви вважаєте, що зміни в згенерованих файлах є дійсними, то прийміть базові лінії за допомогою команди `jake baseline-accept`. Зміни в базових лініях `reference` тепер відображатимуться як git diff, який ви можете зафіксувати.
 
-### Test Categories
+> Зверніть увагу, що якщо ви не запускаєте *всі* тести, то використовуйте команду `jake baseline-accept[soft]`, яка лише скопіює нові файли, а не видалить всю папку `reference`.
 
-There are different categories for different scenarios and even different test infrastructures. Here are a few of these explained.
+### Категорії тестів
+Існують різні категорії для різних сценаріїв та навіть різні інфраструктури для тестування. Ось кілька з них, які пояснюються:
 
-#### Compiler Tests
+#### Тести компілятора
+Ці тести переконуються, що компіляція файлу:
 
-These ensure that compiling a file :
+* генерує очікувані помилки
+* генерує очікуваний JavaScript-код
+* ідентифікує типи, як очікуються
+* ідентифікує символи, як очікуються
 
-* generates errors as expected
-* generated JS as expected
-* types are identified as expected
-* symbols are identified as expected
+Ці очікування перевіряються за допомогою інфраструктури базових значень.
 
-These expectations are validated using the baselines infrastructure.
+##### Створення тесту компілятора
+Тест можна створити, додавши новий файл `yourtest.ts` до папки `tests/cases/compiler`.  Як тільки ви це зробите і запустите тести, ви повинні отримати помилку базових значень. Прийміть ці базові значення (щоб вони відображалися в Git) і налаштуйте їх такими, якими ви *очікуєте*, щоб вони проходили.
 
-##### Creating a Compiler Test
-Test can be created by adding a new file `yourtest.ts` to `tests/cases/compiler`. As soon as you do so and run the tests you should get baseline failure. Accept these baselines (to get them to show up in git), and tweak them to be what you *expect* them to be ... now get the tests to pass.
+Запустіть всі ці тести ізольовано за допомогою `jake runtests tests=compiler`, або за дпомогою вашого нового файлу `jake runtests tests=compiler/yourtest`
 
-Run all of these in isolation using `jake runtests tests=compiler`, or just your new file using `jake runtests tests=compiler/yourtest`
+Часто я використовую команду `jake runtests tests=compiler/yourtest || jake baseline-accept[soft]`, щоб отримати різницю в `git`.
 
-I will even often do `jake runtests tests=compiler/yourtest || jake baseline-accept[soft]` and get the diff in `git`.
+### Відлагодження тестів
+Команда `jake runtests-browser tests=theNameOfYourTest` та відлагодження в браузері, як правило, працюють досить добре.
 
-### Debugging Tests
-
-`jake runtests-browser tests=theNameOfYourTest` and debugging in-browser usually works pretty well.
-
-### More 
-* An article by Remo : https://dev.to/remojansen/learn-how-to-contribute-to-the-typescript-compiler-on-github-through-a-real-world-example-4df0 🌹
+### Більше 
+* Посилання на статтю автора Remo : https://dev.to/remojansen/learn-how-to-contribute-to-the-typescript-compiler-on-github-through-a-real-world-example-4df0 🌹
