@@ -1,13 +1,14 @@
-### `emitFiles`
-Defined in `emitter.ts` here is the function signature:
+### Функція `emitFiles`
+Сигнатура функціі віизначена в файлі `emitter.ts`:
+
 ```ts
 // targetSourceFile is when users only want one file in entire project to be emitted. This is used in compileOnSave feature
 export function emitFiles(resolver: EmitResolver, host: EmitHost, targetSourceFile?: SourceFile): EmitResult {
 ```
 
-`EmitHost` is just a simplified (as in narrowed down) version of `CompilerHost` (and is at runtime actually a `CompilerHost` for many use cases).
+`EmitHost` є спрощеною (зменшеною) версією `CompilerHost` (і насправді є CompilerHost для багатьох випадків під час виконання).
 
-The most interesting call stack from `emitFiles` is the following:
+Найцікавіший стек викликів з `emitFiles` має наступний вигляд:
 
 ```
 emitFiles ->
@@ -15,8 +16,8 @@ emitFiles ->
         emitJavaScript(jsFilePath, targetSourceFile);
 ```
 
-### `emitJavaScript`
-There is a lot of good comments in this function so we present it below :
+### Функція `emitJavaScript`
+В цій функції є багато корисних коментарів, тому ми приводимо її нижче:
 
 ```ts
 function emitJavaScript(jsFilePath: string, root?: SourceFile) {
@@ -111,7 +112,7 @@ function emitJavaScript(jsFilePath: string, root?: SourceFile) {
 }
 ```
 
-Basically it sets up a bunch of locals (these functions form the *bulk* of `emitter.ts`) and then hands off to a local function `emitSourceFile` which kicks off the emit. The `emitSourceFile` function just sets up the `currentSourceFile` and in turn hands off to a local `emit` function.
+По суті, вона налаштовує набір локальних змінних (ці функції утворюють *основну* частину `emitter.ts`), а потім передає керування локальній функції `emitSourceFile`, яка розпочинає процес генерації коду. Функція `emitSourceFile` просто налаштовує `currentSourceFile` і передає керування локальній функції `emit`.
 
 ```ts
 function emitSourceFile(sourceFile: SourceFile): void {
@@ -121,11 +122,11 @@ function emitSourceFile(sourceFile: SourceFile): void {
 }
 ```
 
-The `emit` function handles *comment* emit + *actual JavaScript* emit. The *actual JavaScript* emit is the job of `emitJavaScriptWorker` function.
+Функція `emit` відповідає за генерацію *коментарів* emit + *фактичного JavaScript* emit. Завданням функції `emitJavaScriptWorker` є генерація *фактичного JavaScript* коду.
 
-### `emitJavaScriptWorker`
+### Функція `emitJavaScriptWorker`
+Повний код функціі:
 
-The complete function:
 ```ts
 function emitJavaScriptWorker(node: Node) {
     // Check if the node can be emitted regardless of the ScriptTarget
@@ -299,7 +300,8 @@ function emitJavaScriptWorker(node: Node) {
 }
 ```
 
-Recursion is done by simply calling other `emitFoo` function from these functions as needed e.g. from `emitFunctionDeclaration` :
+Рекурсія виконується простим викликом іншої функції `emitFoo` з цих функцій за потреби, наприклад. з `emitFunctionDeclaration`:
+
 ```ts
 function emitFunctionDeclaration(node: FunctionLikeDeclaration) {
     if (nodeIsMissing(node.body)) {

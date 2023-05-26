@@ -1,17 +1,18 @@
-## Emitter
-There are two `emitters` provided with the TypeScript compiler:
+## Еміттер
+Існує два `еміттера` в компіляторі TypeScript:
 
-* `emitter.ts`: this is the emitter you are most likely to be interested in. Its the TS -> JavaScript emitter.
-* `declarationEmitter.ts`: this is the emitter used to create a *declaration file* (a `.d.ts`) for a *TypeScript source file* (a `.ts` file).
+* `emitter.ts`: це еміттер, який ймовірно вас цікавить найбільше. Він виконує перетворення з TS у JavaScript.
+* `declarationEmitter.ts`: це еміттер, який використовується для створення *файлу оголошення* (`.d.ts`) для *файлу з вихідним кодом TypeScript* (`.ts`).
 
-We will look at `emitter.ts` in this section.
+У цьому розділі ми розглянемо `emitter.ts`.
 
-### Usage by `program`
-Program provides an `emit` function. This function primarily delegates to `emitFiles` function in `emitter.ts`. Here is the call stack:
+### Використання класом `Program`
+Клас `Program` надає функцію `emit`. Ця функція переважно делегує виклик до функції `emitFiles` у файлі `emitter.ts`. Нижче наведено стек викликів:
 
 ```
 Program.emit ->
     `emitWorker` (local in program.ts createProgram) ->
         `emitFiles` (function in emitter.ts)
 ```
-One thing that the `emitWorker` provides to the emitter (via an argument to `emitFiles`) is an `EmitResolver`. `EmitResolver` is provided by the program's TypeChecker, basically it is a subset of *local* functions from `createChecker`.
+
+Одним з аргументів, який `emitWorker` передає еміттеру (через `emitFiles`), є `EmitResolver`. `EmitResolver` надається від програми TypeChecker і, по суті, він є підмножиною *локальних* функцій з `createChecker`.
