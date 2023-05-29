@@ -1,14 +1,14 @@
-## Scanner
-The source code for the TypeScript scanner is located entirely in `scanner.ts`. Scanner is *controlled* internally by the `Parser` to convert the source code to an AST. Here is what the desired outcome is.
+## Сканер (Scanner)
+Вихідний код сканера TypeScript повністю знаходиться у файлі `scanner.ts`. Сканер *контролюється* внутрішньо `парсером` для перетворення вихідного коду в AST. Ось бажаний результат.
 
 ```
 SourceCode ~~ scanner ~~> Token Stream ~~ parser ~~> AST
 ```
 
-### Usage by Parser
-There is a *singleton* `scanner` created in `parser.ts` to avoid the cost of creating scanners over and over again. This scanner is then *primed* by the parser on demand using the `initializeState` function.
+### Використання парсером
+У файлі `parser.ts` створено `сканер` (як *сінглтон*), щоб уникнути витрат на створення сканерів знову і знову. Цей сканер потім *запускається* синтаксичним аналізатором на вимогу за допомогою функції `initializeState`.
 
-Here is a *simplied* version of the actual code in the parser that you can run demonstrating this concept:
+Нижче наведено *спрощену* версію коду синтаксичного аналізатора, яку ви можете запустити для демонстрації цієї концепції:
 
 `code/compiler/scanner/runScanner.ts`
 ```ts
@@ -40,7 +40,7 @@ while (token != ts.SyntaxKind.EndOfFileToken) {
 }
 ```
 
-This will print out the following :
+У результаті буде виведено наступне:
 
 ```
 VarKeyword
@@ -50,8 +50,8 @@ FirstLiteralToken
 SemicolonToken
 ```
 
-### Scanner State
-After you call `scan` the scanner updates its local state (position in the scan, current token details etc). The scanner provides a bunch of utility functions to get the current scanner state. In the below sample we create a scanner and then use it to identify the tokens as well as their positions in the code.
+### Стан сканера (Scanner State)
+Після виклику `scan` сканер оновлює свій локальний стан (позицію у скануванні, поточні дані токенів тощо). Сканер надає набір утиліт для отримання поточного стану сканера. У наведеному нижче прикладі ми створюємо сканер, а потім використовуємо його для ідентифікації токенів, а також їх позицій у коді.
 
 `code/compiler/scanner/runScannerWithPosition.ts`
 ```ts
@@ -71,7 +71,7 @@ while (token != ts.SyntaxKind.EndOfFileToken) {
 }
 ```
 
-This will print out the following:
+У результаті буде виведено наступне:
 ```
 VarKeyword 0 3
 Identifier 3 7
@@ -80,5 +80,6 @@ FirstLiteralToken 9 13
 SemicolonToken 13 14
 ```
 
-### Standalone scanner
-Even though the TypeScript parser has a singleton scanner you can create a standalone scanner using `createScanner` and use its `setText`/`setTextPos` to scan at different points in a file for your amusement.
+### Самостійний сканер (Standalone scanner)
+Незважаючи на те, що парсер TypeScript має сінглтон сканера, ви також можете створити самостійний сканер, використовуючи `createScanner`, і використовувати його методи `setText`/`setTextPos` для сканування різних частин файлу на ваш розсуд або задоволення. 
+

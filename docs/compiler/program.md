@@ -1,17 +1,17 @@
 ## Program
 
-Defined in `program.ts`. The compilation context ([a concept we covered previously](../project/compilation-context.md)) is represented within the TypeScript compiler as a `Program`. It consists of `SourceFile`s and compiler options.
+Визначається у файлі `program.ts`. Контекст компіляції ([поняття, яке ми розглядали раніше](../project/compilation-context.md)) представлено у компіляторі TypeScript як `Program`. Він складається з `SourceFile` та опцій компілятора.
 
 
-### Usage of `CompilerHost`
-Its interaction mechanism with the OE:
+### Використання `CompilerHost`
+Механізм його взаємодії з операційним оточенням:
 
 `Program` *-uses->* `CompilerHost` *-uses->* `System`
 
-The reason for having a `CompilerHost` as a point of indirection is that it allows its interface to be more finely tuned for `Program` needs and not bother with OE needs (e.g. the `Program` doesn't care about `fileExists` a function provided by `System`).
+Причиною використання `CompilerHost` як точки опосередкування є те, що це дозволяє тонше налаштувати інтерфейс для потреб `Program` і не турбуватися про потреби операційного оточення (наприклад, `Program` не турбується про функцію `fileExists`, надану `System`).
 
-There are other users of `System` as well (e.g. tests).
+Такод є й інші користувачі `System` (наприклад, тести).
 
 ### SourceFile
 
-The program provides an API to get the Source Files `getSourceFiles(): SourceFile[];`. Each is represented as a root-level node for an AST (called `SourceFile`).
+Програма надає API для отримання вихідних файлів `getSourceFiles(): SourceFile[];`. Кожен з них представлено у вигляді вузла кореневого рівня для AST (який називається `SourceFile`).
