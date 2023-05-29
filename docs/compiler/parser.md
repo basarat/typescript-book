@@ -1,14 +1,14 @@
-## Parser
-The sourcecode for the TypeScript parser is located entirely in `parser.ts`. Scanner is *controlled* internally by the `Parser` to convert the source code to an AST. Here is a review of what the desired outcome is.
+## Синтаксичний аналізатор (Parser)
+Вихідний код синтаксичного аналізатора TypeScript повністю знаходиться у файлі `parser.ts`. Сканер *керується* зсередини `Parser` для перетворення вихідного коду в AST. Нижче наведено огляд бажаного результату.
 
 ```
 SourceCode ~~ scanner ~~> Token Stream ~~ parser ~~> AST
 ```
 
-The parser is implemented as a singleton (similar reasons to `scanner`, don't want to recreate it if we can reinit it). It is actually implemented as `namespace Parser` which contains *state* variables for the Parser as well as a singleton `scanner`. As mentioned before it contains a `const scanner`. The parser functions manage this scanner.
+Парсер реалізований як сінглтон (аналогічні причини, як у `scanner`, не хочемо перестворювати його, якщо можемо повторно ініціалізувати). Фактично він реалізований як `namespace Parser`, який містить *state* (змінні стану) для парсера, а також сінглтон `scanner`. Як зазначалося раніше, він містить `const scanner`. Функції парсера керують цим сканером.
 
-### Usage by program
-Parser is driven indirectly by Program (indirectly as its actually by `CompilerHost` which we mentioned previously). Basically this is the simplified call stack:
+### Використання програмою
+Синтаксичний аналізатор опосередковано керується програмою (опосередковано, оскільки насправді він керується `CompilerHost`, про який ми згадували раніше). По суті, це спрощений стек викликів:
 
 ```
 Program ->
@@ -17,10 +17,10 @@ Program ->
             Parser.parseSourceFile
 ```
 
-The `parseSourceFile` not only primes the state for the Parser but also primes the state for the `scanner` by calling `initializeState`. It then goes on to parse the source file using `parseSourceFileWorker`.
+Функція `parseSourceFile` не лише встановлює стан для парсера, але й встановлює стан для сканера, викликаючи функцію `initializeState`. Потім він продовжує розбір вихідного файлу за допомогою `parseSourceFileWorker`.
 
-### Sample Usage
-Before we dig too deep into the parser internals, here is a sample code that uses the TypeScript's parser to get the AST of a source file (using `ts.createSourceFile`), and then print it.
+### Приклад використання
+Перш ніж ми заглибимося у внутрішню роботу синтаксичного аналізатора, наведемо приклад коду, який використовує парсер TypeScript для отримання AST вихідного файлу (за допомогою `ts.createSourceFile`), а потім виводить його на друк.
 
 `code/compiler/parser/runParser.ts`
 ```ts
@@ -40,7 +40,7 @@ var sourceFile = ts.createSourceFile('foo.ts', sourceCode, ts.ScriptTarget.ES5, 
 printAllChildren(sourceFile);
 ```
 
-This will print out the following:
+У результаті буде виведено наступне:
 
 ```ts
 SourceFile 0 14
@@ -56,4 +56,5 @@ SourceFile 0 14
 ------------ SemicolonToken 13 14
 ---- EndOfFileToken 14 14
 ```
-This looks like a (very right sided) tree if you tilt your head to the left.
+
+Це схоже на дерево, якщо ви нахиляєте голову вліво.

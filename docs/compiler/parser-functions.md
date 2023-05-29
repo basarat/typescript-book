@@ -1,17 +1,17 @@
-### Parser Functions
+### Функції синтаксичного аналізатора (Parser Functions)
 
-As mentioned `parseSourceFile` sets up the initial state and passes the work onto `parseSourceFileWorker` function.
+Як вже згадувалося, `parseSourceFile` встановлює початковий стан і передає роботу функції `parseSourceFileWorker`.
 
-#### `parseSourceFileWorker`
+#### Функція `parseSourceFileWorker`
 
-Starts by creating a `SourceFile` AST node. Then it goes into parsing source code starting from the `parseStatements` function. Once that returns, it then completes the `SourceFile` node with additional information such as its `nodeCount`, `identifierCount` and such.
+Починається зі створення вузла AST `SourceFile`. Потім починає синтаксичний аналіз вихідного коду, починаючи з функції `parseStatements`. Після повернення результату вона доповнює вузол `SourceFile` додатковою інформацією, такою як `nodeCount`, `identifierCount` тощо.
 
-#### `parseStatements`
-One of the most significant `parseFoo` style functions (a concept we cover next). It switches by the current `token` returned from the scanner. E.g. if the current token is a `SemicolonToken` it will call out to `parseEmptyStatement` to create an AST node for an empty statement.
+#### Функція `parseStatements`
+Одна з найважливіших функцій стилю `parseFoo` (концепція, яку ми розглянемо далі). Вона перемикається за поточним `токеном`, поверненим зі сканера. Наприклад, якщо поточна лексема є `SemilonToken`, вона викличе `parseEmptyStatement` для створення вузла AST для порожнього оператора.
 
-### Node creation
+### Створення вузла (Node creation)
 
-The parser has a bunch of `parserFoo` functions with bodies that create `Foo` nodes. These are generally called (from other parser functions) at a time where a `Foo` node is expected. A typical sample of this process is the `parseEmptyStatement()` function which is used to parse out empty statements like `;;;;;;`. Here is the function in its entirety
+Синтаксичний аналізатор має набір функцій `parserFoo` з тілами, які створюють вузли `Foo`. Зазвичай вони викликаються (з інших функцій синтаксичного аналізатора) у той момент, коли очікується поява вузла `Foo`. Типовим прикладом цього процесу є функція `parseEmptyStatement()`, яка використовується для розбору порожніх операторів типу `;;;;;;`. Нижче наведено повний текст функції
 
 ```ts
 function parseEmptyStatement(): Statement {
@@ -21,13 +21,13 @@ function parseEmptyStatement(): Statement {
 }
 ```
 
-It shows three critical functions `createNode`, `parseExpected` and `finishNode`.
+Він показує три критичні функції `createNode`, `parseExpected` та `finishNode`.
 
-#### `createNode`
-The parser's `createNode` function `function createNode(kind: SyntaxKind, pos?: number): Node` is responsible for creating a Node, setting up its `SyntaxKind` as passed in, and set the initial position if passed in (or use the position from the current scanner state).
+#### Функція`createNode`
+Функція `createNode` парсера `function createNode(kind: SyntaxKind, pos?: number): Node` відповідає за створення вузла, встановлення його `SyntaxKind` переданого значення та задання початкової позиції (якщо передано) або використання позиції з поточного стану сканера.
 
-#### `parseExpected`
-The parser's `parseExpected` function `function parseExpected(kind: SyntaxKind, diagnosticMessage?: DiagnosticMessage): boolean` will check that the current token in the parser state matches the desired `SyntaxKind`. If not it will either report the `diagnosticMessage` sent in or create a generic one of the form `foo expected`. It internally uses the `parseErrorAtPosition` function (which uses the scanning positions) to give good error reporting.
+#### Функція `parseExpected`
+Функція `parseExpected` парсера `function parseExpected(kind: SyntaxKind, diagnosticMessage?: DiagnosticMessage): boolean` перевірить, чи відповідає поточний токен у стані синтаксичного аналізатора бажаному `SyntaxKind`. Якщо ні, він або повідомить про надіслане `diagnosticMessage`, або створить узагальнене повідомлення у вигляді `foo expected`. Внутрішньо він використовує функцію `parseErrorAtPosition` (яка використовує позиції сканування) для отримання якісних звітів про помилки.
 
-### `finishNode`
-The parser's `finishNode` function `function finishNode<T extends Node>(node: T, end?: number): T` sets up the `end` position for the node and additional useful stuff like the `parserContextFlags` it was parsed under as well as if there were any errors before parsing this node (if there were then we cannot reuse this AST node in incremental parsing).
+### Функція `finishNode`
+Функція `finishNode` синтаксичного аналізатора `function finishNode<T extends Node>(node: T, end?: number): T` встановлює `кінцеву` позицію для вузла і додаткові корисні речі, такі як `parserContextFlags`, під якими він був розібраний, а також чи були помилки перед розбором цього вузла (якщо були, то ми не зможемо повторно використати цей вузол AST в інкрементному розборі).

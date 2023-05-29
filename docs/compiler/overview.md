@@ -1,30 +1,32 @@
-# Compiler
+# Компілятор
 
-The TypeScript compiler source is located under the [`src/compiler`](https://github.com/Microsoft/TypeScript/tree/master/src/compiler) folder.
+Вихідні тексти компілятора TypeScript знаходяться в [`src/compiler`](https://github.com/Microsoft/TypeScript/tree/master/src/compiler).
 
-It is split into the follow key parts:
+Він складається з наступних ключових частин:
 
-- Scanner (`scanner.ts`)
-- Parser (`parser.ts`)
-- Binder (`binder.ts`)
-- Checker (`checker.ts`)
-- Emitter (`emitter.ts`)
+- Сканер (`scanner.ts`)
+- Синтаксичний аналізатор (`parser.ts`)
+- Біндер (`binder.ts`)
+- Чекер (`checker.ts`)
+- Випромінювач (`emitter.ts`)
 
-Each of these get their own unique files in the source. These parts will be explained later on in this chapter.
+Кожен з них отримує власні унікальні файли у вихідному коді. Ці частини буде описано далі у цій главі.
 
-## Syntax vs. Semantics
+## Синтаксис vs. Семантика
 
-Just because something is _syntactically_ correct doesn't mean it is _semantically_ correct. Consider the following piece of TypeScript code which although _syntactically_ valid is _semantically_ wrong
+Просто тому, що щось є _синтаксично_ правильним, це не означає, що воно _семантично_ правильне. Розгляньте наступний фрагмент коду на TypeScript, який, хоча _синтаксично_ дійсний, але _семантично_ неправильний.
+
 
 ```ts
 var foo: number = "not a number";
 ```
 
-`Semantic` means "meaning" in English. This concept is useful to have in your head.
+`Semantic` означає "значення" англійською мовою. Цю концепцію корисно розуміти.
 
-## Processing Overview
+## Огляд обробки даних
 
-The following is a quick review of how these key parts of the TypeScript compiler compose:
+
+Нижче наведено короткий огляд того, як складають ці ключові частини компілятора TypeScript:
 
 ```txt
 SourceCode ~~ scanner ~~> Token Stream
@@ -38,43 +40,41 @@ Token Stream ~~ parser ~~> AST
 AST ~~ binder ~~> Symbols
 ```
 
-`Symbol` is the primary building block of the TypeScript _semantic_ system. As shown the symbols are created as a result of binding. Symbols connect declaration nodes in the AST to other declarations contributing to the same entity.
+`Символ` є основним будівельним блоком _семантичної_ системи TypeScript. Як показано, символи створюються в результаті прив'язки. Символи з'єднують вузли оголошення (nodes declaration) в абстрактному синтаксичному дереві (AST) з іншими оголошеннями, які співпрацюють для тієї ж сутності.
 
-Symbols + AST are what is used by the checker to _semantically_ validate the source code
+Символи + AST використовуються перевірювачем для _семантичної_ перевірки вихідного коду.
+
 
 ```txt
 AST + Symbols ~~ checker ~~> Type Validation
 ```
 
-Finally When a JS output is requested:
+Коли запитується вихідний код JavaScript:
 
 ```txt
 AST + Checker ~~ emitter ~~> JS
 ```
 
-There are a few additional files in the TypeScript compiler that provide utilities to many of these key portions which we cover next.
+У компіляторі TypeScript є декілька додаткових файлів, які надають утиліти для багатьох з цих ключових частин, які ми розглянемо далі.
 
-## File: Utilities
+## Файл: Утиліти
 
-`core.ts` : core utilities used by the TypeScript compiler. A few important ones:
+`core.ts` : основні утиліти, що використовуються компілятором TypeScript. Кілька важливих з них:
 
-- `let objectAllocator: ObjectAllocator` : is a variable defined as a singleton global. It provides the definitions for `getNodeConstructor` (Nodes are covered when we look at `parser` / `AST`), `getSymbolConstructor` (Symbols are covered in `binder`), `getTypeConstructor` (Types are covered in `checker`), `getSignatureConstructor` (Signatures are the index, call and construct signatures).
+- `let objectAllocator: ObjectAllocator` : змінна, визначена як глобальна змінна. Вона містить визначення для `getNodeConstructor` (Вузли розглядаються у `parser` / `AST`), `getSymbolConstructor` (символи розглядаються у `binder`), `getTypeConstructor` (типи розглядаються у `checker`), `getSignatureConstructor` (сигнатури - це сигнатури індексів, викликів і конструкцій).
 
-## File: Key Data Structures
 
-`types.ts` contains key data structures and interfaces uses throughout the compiler. Here is a sampling of a few key ones:
+## Файл: Основні структури даних
 
-- `SyntaxKind`
-  The AST node type is identified by the `SyntaxKind` enum.
-- `TypeChecker`
-  This is the interface provided by the TypeChecker.
-- `CompilerHost`
-  This is used by the `Program` to interact with the `System`.
-- `Node`
-  An AST node.
+Файл `types.ts` містить ключові структури даних та інтерфейси, що використовуються у компіляторі. Ось деякі ключові:
 
-## File: System
+- `SyntaxKind` це тип вузла AST визначається зчисленням `SyntaxKind`.
+- `TypeChecker` (перевірка типу) - інтерфейс, що надається TypeChecker.
+- `CompilerHost` (хост компілятора), використовується `Програмою` для взаємодії з `Системою`.
+- `Node` (вузол) - вузол AST.
 
-`system.ts`. All interaction of the TypeScript compiler with the operating system goes through a `System` interface. Both the interface and its implementations (`WScript` and `Node`) are defined in `system.ts`. You can think of it as the _Operating Environment_ (OE).
+## Файл: System
 
-Now that you have an overview of the major files, we can look at the concept of `Program`
+`system.ts`. Вся взаємодія компілятора TypeScript з операційною системою відбувається через інтерфейс `System`. Як сам інтерфейс, так і його реалізації (`WScript` та `Node`) визначені у файлі `system.ts`. Ви можете думати про це як про _Операційне середовище_ (OE).
+
+Тепер, коли ви ознайомилися з основними файлами, ми можемо розглянути поняття `Program`.
