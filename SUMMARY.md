@@ -102,7 +102,7 @@
   * [Создание массивов](docs/tips/create-arrays.md)
   * [Типизированный генератор событий](docs/tips/typed-event.md)
 * [StyleGuide](docs/styleguide/styleguide.md)
-* [TypeScript Compiler Internals](docs/compiler/overview.md)
+* [Внутреннее устройство компилятора TypeScript](docs/compiler/overview.md)
   * [Program](docs/compiler/program.md)
   * [AST](docs/compiler/ast.md)
     * [TIP: Visit Children](docs/compiler/ast-tip-children.md)
