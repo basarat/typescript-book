@@ -154,7 +154,14 @@
         <br>
         <a href="https://github.com/artsurkan">Artyom Tsurkan</a>
       </td>
+      <td align="center">
+        <img
+          src="https://avatars.githubusercontent.com/u/105169805?v=4"
+          width="150"
+        />
+        <br>
+        <a href="https://github.com/sergey12313">Ruslan Lukoyanov</a>
+      </td>
     </tr>
   </tbody>
 </table>
-
