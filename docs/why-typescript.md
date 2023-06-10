@@ -1,26 +1,33 @@
-# Why TypeScript
-There are two main goals of TypeScript:
-* Provide an *optional type system* for JavaScript.
-* Provide planned features from future JavaScript editions to current JavaScript engines
+<div dir="auto">
 
-The desire for these goals is motivated below.
+# چرا تایپ اسکریپت؟
+تایپ اسکریپت دو هدف اصلی رو دنبال می‌کند:
+* ارائه‌ی *optional type system* برای جاوا اسکریپت.
+* ارائه فیچرهایی که برای ورژن های آینده جاوااسکریپت قرار هست که ارائه بشه اما روی engine فعلی 
+
+اما انگیزه پشت این دوهدف رو باید مورد بررسی قرار بدیم.
 
 ## The TypeScript type system
 
-You might be wondering "**Why add types to JavaScript?**"
+ممکن است برای شما این سوال پیش بیاید که "**چرا باید به جاوااسکریپت تایپ اضافه کرد؟**"
 
-Types have proven ability to enhance code quality and understandability. Large teams (Google, Microsoft, Facebook) have continually arrived at this conclusion. Specifically:
+ثابت شده است که تایپ‌ها باعث افزایش کیفیت کد و خوانایی آن میشوند. تیم های بزرگ (مثل گوگل و مایکروسافت و فیس‌بوک) به طور مداوم به این نتیجه رسیده‌اند. مخصوصا:
 
-* Types increase your agility when doing refactoring. *It's better for the compiler to catch errors than to have things fail at runtime*.
-* Types are one of the best forms of documentation you can have. *The function signature is a theorem and the function body is the proof*.
+* تایپ‌ها چابکی شما در هنگام ریفکتور را افزایش می‌دهند
+*بهتر است که کامپایلر خطاها را تشخیص دهد (error catching)  تا اینکه در زمان اجرا (runtime)  چیزهایی خراب باشند (به نوعی باگ داشته باشند)*
+* تایپ‌ها یکی از بهترین فرم‌ها برای مستند کردن آن چیزی است که شما در اختیار دارید.
+ *اسم تابع مثل عنوان یک قضیه است و بدنه آن اثبات آن قضیه*
 
-However, types have a way of being unnecessarily ceremonious. TypeScript is very particular about keeping the barrier to entry as low as possible. Here's how:
+با این حال، اقزودن تایپ به کد جاوااسکریپت همیشه یک کار اضافه به نظر می‌آید. تایپ اسکریپت به صورت به خصوصی تلاش دارد که این کار اضاقه با کمترین مشکل انجام شود. اما چطور:
 
-### Your JavaScript is TypeScript
-TypeScript provides compile time type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code `.js` file can be renamed to a `.ts` file and TypeScript will still give you back valid `.js` equivalent to the original JavaScript file. TypeScript is *intentionally* and strictly a superset of JavaScript with optional Type checking.
+### کد جاوااسکریپت شما همین الان تایپ‌اسکریپت هم هست
 
-### Types can be Implicit
-TypeScript will try to infer as much of the type information as it can in order to give you type safety with minimal cost of productivity during code development. For example, in the following example TypeScript will know that foo is of type `number` below and will give an error on the second line as shown:
+تایپ‌اسکریپت صرفا در زمان اجرا یک  type safety به کد شما اضافه میکند. برای داشتن این type safety check شما کافیست که پسوند ‍`.js` در انتهای فایل خود را به `.ts` تغییر دهید و کامپایلر تایپ‌اسکریپت کماکان یک فایل `.js` معتبر که معادل فایل اصلی شما است، به شما تحویل می‌دهد. فراموش نکنیم که تایپ‌اسکریپت یک superset روی جاوااسکریپت است که یک optional type checking در اختیار شما می‌گذارد نه هیچ چیز دیگری.
+
+
+### تایپ‌ها می‌توانند به صورت ضمنی تعریف شوند
+تایپ‌اسکریپت همواره تلاش میکند تا جایی که میتواند اطلاعات مربوط به تایپ را استخراج کند تا به کمک آن بتواند type safety را با کمترین هزینه یا تاثیر بر بهره‌وری در زمان توسعه نرم‌افزار ارائه دهد. به طور مثال، در مثال زیر تایپ‌اسکریپت می‌داند که متغییر foo از نوع `number`  خواهد بود و برای خط دوم همان‌طور که می‌بینید خطا نشان خواهد داد:
+
 
 ```ts
 var foo = 123;
@@ -28,32 +35,32 @@ foo = '456'; // Error: cannot assign `string` to `number`
 
 // Is foo a number or a string?
 ```
-This type inference is well motivated. If you do stuff like shown in this example, then, in the rest of your code, you cannot be certain that `foo` is a `number` or a `string`. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later.
+اگر شما کارهایی از این دست که در مثال بالا نشان داده شد را انجام بدهید در بقیه کدها نمیتوانید مطمئن باشید که `foo` یک `number` است یا یک `string`. این‌گونه مشکلات معمولا در کدهایی رخ می‌دهد که از چندین فایل تشکیل شده‌اند. ما بعدا قوانین مربوط به استخراج تایپ(type inference) را به طور کامل مورد بررسی قرار می‌دهیم.
 
-### Types can be Explicit
-As we've mentioned before, TypeScript will infer as much as it can safely. However, you can use annotations to:
+### تایپ‌ها می‌توانند به طور غیرضمنی تعریف شوند
+همانطور که اشاره کردیم، تایپ اسکریپت به اندازه‌ای که type safety به خوبی کار کند، میتواند تایپ‌ها را به صورت خودکار تشخیص بدهد. با این‌حال شما می‌توانید از annotations استفاده کنید تا:
 
-1. Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).
-1. Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).
+1. در کنار اینکه به کامپایلر کمک می‌کنید که تایپ ها را بهتر تشخیص بدهد، کدهای خود را برای دوولوپر بعدی (که ممکن است خود شما باشید) مستند می‌کنید.
 
-TypeScript uses postfix type annotations popular in other *optionally* annotated languages (e.g. ActionScript and F#).
+2. annotation را اعمال می‌کنید تا کامپایلر همان‌چیزی را ببیند که شما فکر میکنید باید ببیند. این یعنی درک شما از کد با تحلیل الگوریتمی کد (انجام شده توسط کامپایلر) مطابقت دارد.
+
+تایپ اسکریپت همانند دیگر زبانهایی که تعریف تایپ *optional* دارند(مثل actionScript و F#) از مدل postfix یا پسوندی استفاده می‌کند. یعنی بعد از تعریف متغییر تایپ آن را مشخص میکند.
 
 ```ts
-var foo: number = 123;
+var foo: number = 123; // foo value must be a number
 ```
-So if you do something wrong the compiler will report an error e.g.:
+حال اگر شما تغییر اشتباهی در مقدار متغییر انجام بدهید کامپایلر خطا گزراش خواهد کرد
 
 ```ts
 var foo: number = '123'; // Error: cannot assign a `string` to a `number`
 ```
-
-We will discuss all the details of all the annotation syntax supported by TypeScript in a later chapter.
+در فصل‌های بعدی در مورد تمام annotation هایی که تایپ‌اسکریپت پشتیبانی میکند با جزئیات صحبت خواهیم کرد
 
 ### Types are structural
 In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though *you know* that the code will work fine the language semantics force you to copy stuff around. This is why stuff like [automapper for C#](http://automapper.org/) is *vital* for C#. In TypeScript because we really want it to be easy for JavaScript developers with a minimum cognitive overload, types are *structural*. This means that *duck typing* is a first class language construct. Consider the following example. The function `iTakePoint2D` will accept anything that contains all the things (`x` and `y`) it expects:
 
 ```ts
-interface Point2D {
+interface Point2D { 
     x: number;
     y: number;
 }
@@ -145,3 +152,9 @@ In this section we have provided you with the motivation and design goals of Typ
 [](Cover all the annotations)
 [](Cover all ambients : also that there are no runtime enforcement)
 [](.ts vs. .d.ts)
+
+
+
+
+
+</div>
