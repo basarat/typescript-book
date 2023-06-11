@@ -56,8 +56,10 @@ var foo: number = '123'; // Error: cannot assign a `string` to a `number`
 ```
 در فصل‌های بعدی در مورد تمام annotation هایی که تایپ‌اسکریپت پشتیبانی میکند با جزئیات صحبت خواهیم کرد
 
-### Types are structural
-In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though *you know* that the code will work fine the language semantics force you to copy stuff around. This is why stuff like [automapper for C#](http://automapper.org/) is *vital* for C#. In TypeScript because we really want it to be easy for JavaScript developers with a minimum cognitive overload, types are *structural*. This means that *duck typing* is a first class language construct. Consider the following example. The function `iTakePoint2D` will accept anything that contains all the things (`x` and `y`) it expects:
+### تایپ‌ها ساختار دارند
+در برخی زبان‌ها (مخصوصا آنهایی که تایپ دارند) افزودن تایپ‌های ایستا (static typing) یک تشریفات اضافه است چون با اینکه شما *شما می‌دانید* که کد شما درست کار میکند اما ساختار آن زبان شما را محبور می‌کند تا چیزهایی را کپی و تکرار کنید. به همین خاطر است که استفاده از مواردی مثل [automapper](https://automapper.org) برای c# ضروری است. در تایپ‌اسکریپت چون ما واقعا نیاز داریم که برای برنامه نویسان جاوااسکریپت ساده و با کمترین سربار باشد، تایپ‌ها ساختارمند شده اند. این بدان معناست که duck typing (به این معنی که تایپ یا کلاس یک آبجکت اهمیت کمتری نسبت به متدهای آن کلاس دارد) باعث ساخت یک first class language  می‌شود.
+
+مثال زیر را در نظر بگیرید. فانکشن `iTakePoint2D` هر چیزی که شامل چیزهایی که `x` و ‍‍‍`y` قبول می‌کند را خواهد پذیرفت.
 
 ```ts
 interface Point2D { 
@@ -78,39 +80,42 @@ iTakePoint2D(point3D); // extra information okay
 iTakePoint2D({ x: 0 }); // Error: missing information `y`
 ```
 
-### Type errors do not prevent JavaScript emit
-To make it easy for you to migrate your JavaScript code to TypeScript, even if there are compilation errors, by default TypeScript *will emit valid JavaScript* the best that it can. e.g.
+### خطاهای مربوط به تایپ‌ها جلوی کار جاوااسکریپت را نمی‌گیرد
+برای اینکه کار مهاجرت از جاوااسکریپت به تایپ‌اسکریپت راحت باشد، با اینکه ممکن است خطاهای زمان کامپایل داشته باشید اما به صورت پیش فرض تایپ اسکریپت یک جاوااسکریپت معتبر منتشر خواهد کرد که باعث حلوگیری از روند اجرای جاوااسکریپت نمی شود.
+یعنی حتی اگر type error  داشته باشیم باز کد ما کار خواهد کرد و صرفا در کد با خطاهایی روبه‌رو خواهیم شد. به طور مثال ثطعه کد زیر که دارای خطا می‌باشد
 
 ```ts
 var foo = 123;
 foo = '456'; // Error: cannot assign a `string` to a `number`
 ```
 
-will emit the following js:
+کد js زیر را تولید می‌کند که قابل اجرا است:
 
 ```ts
 var foo = 123;
 foo = '456';
 ```
+بنابراین شما میتوانید به صورت افزایش کدهای جاوااسکریپت خود را به تایپ‌اسکریپت ارتفا بدهید بدون اینکه در اجرای کد شما ایرادی پیش بیاید. این رفتار کامپایلر تایپ‌اسکریپت با کامپایلر بسیاری از زبانهای دیگر متفاوت است و اتفاقا دلیل دیگری است برای اینکه به تایپ اسکریپت مهاجرت کنید.
 
-So you can incrementally upgrade your JavaScript code to TypeScript. This is very different from how many other language compilers work and yet another reason to move to TypeScript.
 
-### Types can be ambient
-A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of *declaration*. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular JavaScript libraries have already been written for you by the [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) so for most purposes either:
+### تایپ‌ها می‌توانند محیطی (‌ambient) باشند.
+اینکه محیطی بودن به چه معناست ممکن است مقداری پیچیده باشد اما یکی از هدفهای طراحی تایپ اسکریپت این بود که استفاده از کتابخانه هایی که با جاوا اسکریپت نوشته شده‌اند در تایپ اسکریپت ساده و امن باشد. کتابخانه ای که با جاوااسکریپت نوشته شده است هیچ گونه تایپی ندارد اما تایپ اسکریپت با مفهوم *declaration* این کار را انجام می‌دهد. 
+در تایپ‌اسکریپت هرچه زمان بیشتری صرف declaration کنید تایپ‌ها دقیق تر و کد شما هوشمند تر خواهد بود. به خاطر داشته باشید که بیشتر این تعریف ها برای کتابخانه‌های جاوااسکریپتی توسط [DefinitelyTyped community](https://github.com/borisyankov/DefinitelyTyped) نوشته شده است بنابراین برای بسیاری از موارد :
 
-1. The definition file already exists.
-1. Or at the very least, you have a vast list of well reviewed TypeScript declaration templates already available
+1. definition file وجود دارد
+2. یا در بدترین حالت، شما یه لیست کامل از فایلهای definition  که به خوبی بررسی شده‌اند در  اختیار دارید
 
-As a quick example of how you would author your own declaration file, consider a trivial example of [jquery](https://jquery.com/). By default (as is to be expected of good JS code) TypeScript expects you to declare (i.e. use `var` somewhere) before you use a variable
+به عنوان یک مثال که شما چگونه میتونید یک فایل definition ایجاد کنید، می‌توانید یک قطعه کد کوچک jquery را در نظر بگیرید. به صورت پیش فرض تایپ‌اسکریپت توقع دارد که شما ثبل از استفاده از یک متغییر تایپ آن را declare کرده باشید
 ```ts
 $('.awesome').show(); // Error: cannot find name `$`
 ```
-As a quick fix *you can tell TypeScript* that there is indeed something called `$`:
+یک راه‌حل سریع برای این مشکل این است که شما *به تایپ‌اسکریپت بگویید* که یک چیزی که `$` نامید ه می‌شود وجود دارد.
 ```ts
 declare var $: any;
 $('.awesome').show(); // Okay!
 ```
-If you want you can build on this basic definition and provide more information to help protect you from errors:
+اگر بخواهید می‌توانید این definition را تکمیل تر کنید تا اطلاعات بیشتری را در اختیار کامپایلر و دوولوپر قرار دهد و البته از خطاهای بیشتر جلوگیری کند.
+
 ```ts
 declare var $: {
     (selector:string): any;
@@ -118,11 +123,10 @@ declare var $: {
 $('.awesome').show(); // Okay!
 $(123).show(); // Error: selector needs to be a string
 ```
+زمانی‌که شما بیشتر با تایپ‌اسکریپت آشنا شدید (مثلا با `interface` یا `any`) با جزئیات بیشتری در مورد ساخت definition برای کدهای جاوااسکریپت صحبت خواهیم کرد.
 
-We will discuss the details of creating TypeScript definitions for existing JavaScript in detail later once you know more about TypeScript (e.g. stuff like `interface` and the `any`).
-
-## Future JavaScript => Now
-TypeScript provides a number of features that are planned in ES6 for current JavaScript engines (that only support ES5 etc). The TypeScript team is actively adding these features and this list is only going to get bigger over time and we will cover this in its own section. But just as a specimen here is an example of a class:
+## آینده جاوااسکریپت؟ چرا همین الان نه؟
+تایپ‌اسکریپت تعدادی از فیچر‌هایی که قرار است در آینده به جاوااسکریپت اضافه شود را روی engine فعلی جاوااسکریپت ارائه می‌دهد. تیم تایپ‌اسکریپت به صورت مداوم مشغول اضافه کردن این فیچرهاست و لیست این فیچرها در مرور زمان در حال بزرگ و بزرگتر شدن است و این فیچر ها را در بخش خودش مورد بررسی قرار خواهیم داد. یک مثال صرفا جهت نمونه ای از این فیچرها اینجا ارائه می‌کنیم:
 
 ```ts
 class Point {
@@ -138,23 +142,12 @@ var p2 = new Point(10, 20);
 var p3 = p1.add(p2); // { x: 10, y: 30 }
 ```
 
-and the lovely fat arrow function:
+و همچنین arrow function عزیزمون:
 
 ```ts
 var inc = x => x+1;
 ```
 
-### Summary
-In this section we have provided you with the motivation and design goals of TypeScript. With this out of the way we can dig into the nitty gritty details of TypeScript.
-
-[](Interfaces are open ended)
-[](Type Inference rules)
-[](Cover all the annotations)
-[](Cover all ambients : also that there are no runtime enforcement)
-[](.ts vs. .d.ts)
-
-
-
-
-
+### خلاصه
+در این بخش تلاش شد تا انگیزه و هدف از طراحی تایپ‌اسکریپت را بیان کنیم و الان می‌توانیم با این تعاریف وارد جزئیات بیشتری از تایپ‌اسکریپت شویم
 </div>
