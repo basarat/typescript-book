@@ -1,21 +1,25 @@
-# Your JavaScript is TypeScript
+<div dir="rtl">
 
-There were (and will continue to be) a lot of competitors in *Some syntax* to *JavaScript* compilers. TypeScript is different from them in that *Your JavaScript is TypeScript*. Here's a diagram:
+# کد جاوااسکریپت شما همین الان هم تایپ‌اسکریپت هست!!
+
+کامپایلر جاوااسکریپت در *برخی syntaxها* رقبایی دارد و خواهد داشت اما تایپ‌اسکریپت با همه آنها از این نظر متفاوت است که *کد جاوااسکریپت شما همین الان هم تایپ‌اسکریپت هست*. به دیاگرام زیر توجه کنید:
+
 
 ![JavaScript is TypeScript](https://raw.githubusercontent.com/basarat/typescript-book/master/images/venn.png)
 
-However, it does mean that *you need to learn JavaScript* (the good news is *you **only** need to learn JavaScript*). TypeScript is just standardizing all the ways you provide *good documentation* on JavaScript.
+بااین حال، مفهوم این دیاگرام این است که *شما باید جاوااسکریپت بلد باشید* (خبر خوب اینکه شما **فقط** باید جاوااسکریپت بلد باشید). تایپ‌اسکریپت صرفا همه چیز برای یک *مستندسازی خوب و مناسب* روی جاوااسکریپت را به طور استاندارد فراهم میکند.
 
-* Just giving you a new syntax doesn't help catch bugs - but might help you write cleaner / less bugs (e.g. CoffeeScript).
-* Creating a new language abstracts you too far from your runtimes and communities - but might help on-board you easier if its an already familiar flavour (e.g. Dart - closer for Java / C# devs).
+* ارائه یک syntax جدید صرفا به شما در پیداکردن باگ‌ها کمک نمی کند بلکه به شما کمک می‌ند تا بتوانید کد تمیزتر با باگ کمتر بنویسید
+*  درست است که تایپ‌اسکریپت مثل زبانهایی مثل دارت که به جاوا نزدیک است شما را از community اصلی و البته زمان اجرا دور میکند اما از آنجایی که به خود جاوااسکریپت نزدیک است زمان onboard برای شما ساده می‌کند.
 
-TypeScript is just JavaScript with docs.
+تایپ‌اسکریپت صرفا همان جاوااسکریپت است با مستندات.
 
-> JSNext is open to interpretation - not everything proposed for the next version of JS actually makes it to browsers. TypeScript only adds support for proposals once they reach [stage 3](https://tc39.es/process-document/).
+> گفتیم که تایپ‌اسکریپت فیچرهایی که برای آینده جاوااسکریپت برنامه ریزی و پیشنهاد شده اند را در اختیار ما خواهد گذاشت اما باید بدانیم که هرچیزی که پیشنهاد می‌شود روی مرورگرها اعمال نمی‌شود. تایپ اسکریپت صرفا از فیچرهایی پشتیبانی می‌کند که به مرحله [stage 3](https://tc39.es/process-document/) رسیده باشند.
+> صرفا برای اطلاع بیشتر باید بدانیم که هر فیچری که برای جاوااسکریپت پیشنهاد می‌شود باید از ۵ مرحله بگذرد که به هر مرحله stage می‌گویند. وقتی فیچری به مرحله ۳ برسد تقریبا می‌توان گفت که این فیچر در آینده به جاوااسکریپت اضافه خواهد شد.
 
-## Making JavaScript Better
+## جاوااسکریپت رو بهتر کنیم!
 
-TypeScript will try to protect you from portions of JavaScript that never worked (so you don't need to remember this stuff):
+تایپ‌اسکریپت تلاش می‌کنه تا شما رو از بخشی از جاوااسکریپت که هیچ وقت کار نمی کرد و نمی کنه نجات بده. بخشی از جاوااسکریپت که شما نه لازمه حواستون بهش باشه و نه امکانش هست که همیشه یادتون بمونه : 
 
 ```ts
 [] + []; // JavaScript will give you "" (which makes little sense), TypeScript will error
@@ -35,11 +39,13 @@ function add(a,b) {
     a + b; // JS : undefined, TS Error 'unreachable code detected'
 }
 ```
+اساسا تایپ‌اسکریپت نوعی linter برای جاوااسکریپت است. با تایپ اسکریپت میتوانید یک کار را بسیار بهتر انجام دهید نسبت به زمانی که از دیگر linterها که اطلاعاتی از تایپ‌ها ندارند.
 
-Essentially TypeScript is linting JavaScript. Just doing a better job at it than other linters that don't have *type information*.
+## باز هم نیازمند یادگیری جاوااسکریپت هستید!!
 
-## You still need to learn JavaScript
+همونطور که دیدیم تایپ‌اسکریپت بسیار به این اصل که *شما جاوااسکریپت می‌نویسید* عمل میکند، بنابراین شما نمی توانید تایپ‌اسکریپت را بیاموزید بدون اینکه چیزی در مورد جاوااسکریپت بدانید چرا که باید برخی چیزها را در مورد جاوااسکریپت بدانید تا متوجه بشوید که چرا تایپ‌اسکریپت برای دوولوپرها کارآمد خواهد بود.
 
-That said TypeScript is very pragmatic about the fact that *you do write JavaScript* so there are some things about JavaScript that you still need to know in order to not be caught off-guard. Let's discuss them next.
 
-> Note: TypeScript is a superset of JavaScript. Just with documentation that can actually be used by compilers / IDEs ;)
+> فراموش نکنید که: تایپ‌اسکریپت یک superset روی جاوااسکریپت است. صرفا با یک مستند که در واقع مورد استفاده کامپایلر و IDEها است ;)
+
+<div>
