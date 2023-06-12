@@ -1,8 +1,9 @@
-## References
+## رفرنس‌ها!!
 
+در واقع هر آبجکتی در جاوااسکریپت ( که شامل فانکشن‌ها، آرایه‌ها و رجکس‌ها هم میشه) رفرنس هستن . میتونیم اینجوری بگیم که : 
 Beyond literals, any Object in JavaScript (including functions, arrays, regexp etc) are references. This means the following
 
-### Mutations are across all references
+### هر تغییری که بدید تمام رفرنس‌ها از اون آبجکت هم تغییر می‌کنند
 
 ```js
 var foo = {};
@@ -12,7 +13,7 @@ foo.baz = 123;
 console.log(bar.baz); // 123
 ```
 
-### Equality is for references
+### تساوی هم برای همه رفرنس‌ها از یک آبجکت برقراره
 
 ```js
 var foo = {};
