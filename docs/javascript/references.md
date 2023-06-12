@@ -1,7 +1,6 @@
 ## رفرنس‌ها!!
 
 در واقع هر آبجکتی در جاوااسکریپت ( که شامل فانکشن‌ها، آرایه‌ها و رجکس‌ها هم میشه) رفرنس هستن . میتونیم اینجوری بگیم که : 
-Beyond literals, any Object in JavaScript (including functions, arrays, regexp etc) are references. This means the following
 
 ### هر تغییری که بدید تمام رفرنس‌ها از اون آبجکت هم تغییر می‌کنند
 
