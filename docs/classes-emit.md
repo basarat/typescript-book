@@ -119,10 +119,13 @@ That's it. Now look at the following straight out of `__extends`. I've taken the
 2   __.prototype = b.prototype;
 3   d.prototype = new __();
 ```
+Remember that in the second part of this explanation "all `function`s in JavaScript have a property called `prototype` and that it has a member `constructor` pointing back to the function". At first inspection of `d.prototype` on line 3, we could infer that `d` is a function and the obect `d.prototype` should have a member `constructor` pointing back to this function `d`. So we could do a name lookup in the `d.prototype` object for the `constructor` member just as we did for the `bar` member of the `foo` object. 
 
-Reading this function in reverse the `d.prototype = new __()` on line 3 effectively means `d.prototype = {__proto__ : __.prototype}` (because of the effect of `new` on `prototype` and `__proto__`), combining it with the previous line (i.e. line 2 `__.prototype = b.prototype;`) you get `d.prototype = {__proto__ : b.prototype}`.
+Also remember that in the second part of this explanation "`this` inside the called function is going to point to the newly created object that will be returned from the function", so the `constructor` would found to be `d` due to the usage of `new` on line 3. 
 
-But wait, we wanted `d.prototype.__proto__` i.e. just the proto changed and maintain the old `d.prototype.constructor`. This is where the significance of the first line (i.e. `function __() { this.constructor = d; }`) comes in. Here we will effectively have `d.prototype = {__proto__ : __.prototype, constructor : d}` (because of the effect of `new` on `this` inside the called function). So, since we restore `d.prototype.constructor`, the only thing we have truly mutated is the `__proto__` hence `d.prototype.__proto__ = b.prototype`.
+Another fact to remember is that "calling `new` on a function assigns the `prototype` of the function to the `__proto__` of the newly created object that is returned from the function call", combining with line 2 this assigns `__.prototype` which is defined as `b.prototype` to `d.prototype.__proto__`. 
+
+So the first name lookup for member `constructor` in `d.prototype` would yield `d`. And were this lookup unsuccessful, it would continue to search for `constructor` in `d.prototype.__proto__`, which would have yielded `b`. 
 
 #### `d.prototype.__proto__ = b.prototype` significance
 
