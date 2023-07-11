@@ -2,7 +2,7 @@
   "language": "en",
   "author": "Basarat Ali Syed",
   "title": "TypeScript Deep Dive",
-  "plugins": ["edit-link", "github", "adsense","header"],
+  "plugins": ["edit-link", "github", "adsense", "header", "page-treeview"],
   "pluginsConfig": {
     "layout": {
       "headerPath" : "header.html"
@@ -23,6 +23,11 @@
       "format": "auto",
       "element": ".page-inner section",
       "position": "bottom"
+    },
+    "page-treeview": {
+      "copyright": "Copyright &#169; Basarat",
+      "minHeaderCount": "2",
+      "minHeaderDeep": "2"
     }
   }
 }
