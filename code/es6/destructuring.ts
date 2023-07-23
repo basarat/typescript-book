@@ -4,7 +4,7 @@ export var destructuring = true;
 module m1 {
     var x = 1, y = 2;
     [x, y] = [y, x];
-    console.log(x, y); // 1,2
+    console.log(x, y); // 2,1
 }
 
 module m2 {
