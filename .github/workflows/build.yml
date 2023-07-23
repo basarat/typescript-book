@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: '12.18.2'
       - run: sudo apt update
+      - run: sudo apt install libegl1 libopengl0
       - run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
       - run: sudo npm install -g gitbook-cli
       - run: gitbook install
