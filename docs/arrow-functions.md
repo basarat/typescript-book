@@ -165,3 +165,30 @@ var foo = () => ({
     bar: 123
 });
 ```
+
+### Tip: Quick value return
+
+You might want to return value from `variables` or `functions` using the arrow function. Consider the snippet below which generates random numbers:
+
+```ts
+var random = () => Math.random();
+```
+
+> This is short form of 💡:
+
+```ts
+var random = () => { 
+    return Math.random(); 
+}
+```
+While it is possible that you can also use this while working with `arrays` and `strings`;
+
+```ts
+const str = ['a', 'b', 'c', 'd', 'e'];
+const desc = () => str.reverse(); //['e', 'd', 'c', 'b', 'a']
+```
+in some cases, you might just want to return the value of a `variable`:
+```ts
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const arrFruits = () => fruits;
+```
