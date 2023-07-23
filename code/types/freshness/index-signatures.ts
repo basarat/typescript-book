@@ -115,7 +115,7 @@ module mustConform2 {
 
 module dual {
   interface ArrStr {
-    [key: string]: string | number; // Must accomodate all members
+    [key: string]: string | number; // Must accommodate all members
 
     [index: number]: string; // Can be a subset of string indexer
 

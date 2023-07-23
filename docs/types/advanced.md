@@ -5,7 +5,7 @@
 # Functions
 
 ## Optional
-The `?` annotation can be used before a function argument or member of an interface to denote that a member is optional. That is to say that you can provide it if you want (and it will be type checked), but if it is ommited its *okay*. This is shown in the following example:
+The `?` annotation can be used before a function argument or member of an interface to denote that a member is optional. That is to say that you can provide it if you want (and it will be type checked), but if it is omitted its *okay*. This is shown in the following example:
 
 ## Specialized Parameters
 

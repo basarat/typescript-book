@@ -19,7 +19,7 @@ export namespace FunctionArgsCount {
 }
 
 export namespace FunctionReturnCo {
-    /** Type Heirarchy */
+    /** Type Hierarchy */
     interface Point2D { x: number; y: number; }
     interface Point3D { x: number; y: number; z: number; }
 
@@ -42,7 +42,7 @@ export namespace FunctionRest {
 }
 
 export namespace FunctionArgsBi {
-    /** Type Heirarchy */
+    /** Type Hierarchy */
     interface Point2D { x: number; y: number; }
     interface Point3D { x: number; y: number; z: number; }
 
@@ -76,7 +76,7 @@ namespace NominalClassMemebers {
 
 
 export namespace invariance {
-    /** Heirarchy */
+    /** Hierarchy */
     class Animal { constructor(public name: string){} }
     class Cat extends Animal { meow() { } }
 
