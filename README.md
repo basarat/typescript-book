@@ -47,7 +47,7 @@ Book is completely free so you can copy paste whatever you want without requirin
 * [Portuguese](https://github.com/overlineink/typescript-book)
 * [Japanese](https://github.com/yohamta/typescript-book)
 * [Spanish](https://github.com/melissarofman/typescript-book)
-* [Korean](https://github.com/radlohead/typescript-book)
+* [Korean](https://github.com/sonseong10/typescript-book)
 * [French](https://github.com/HachemiH/typescript-book)
 * [Polish](https://github.com/mbiesiad/typescript-book/tree/pl_PL)
 * [Thai](https://github.com/futurouz/typescript-book)
