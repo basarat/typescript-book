@@ -8,7 +8,7 @@ i.e. an empty JSON file at the *root* of your project. This way TypeScript will 
 ### compilerOptions
 You can customize the compiler options using `compilerOptions`:
 
-```json
+```jsonc
 {
   "compilerOptions": {
 
