@@ -58,18 +58,6 @@ Under the `e2e` folder you now have these files:
     * `/integration`: All your tests.
         * Feel free to create tests under subfolders for better organization e.g. `/someFeatureFolder/something.spec.ts`.
 
-## First test
-* create a file `/cypress/integration/first.ts` with the following contents:
-
-```ts
-describe('google search', () => {
-  it('should work', () => {
-    cy.visit('http://www.google.com');
-    cy.get('#lst-ib').type('Hello world{enter}')
-  });
-});
-```
-
 ## Running in development
 Open the cypress IDE using the following command.
 
