@@ -41,7 +41,7 @@ module.exports = {
 }
 ```
 
-(If your `package.json` file contains `"type": "module"`, which causes Node to assume modules are in es6 format, you can convert the above to es6 format by replacing the top line to `export default { ` .)
+(If your `package.json` file contains `"type": "module"`, which causes Node to assume modules are in es6 format, you can convert the above to es6 format by replacing the top line to `export default { `  and the file name `jest.config.js` by `jest.config.mjs` .)
 
 Explanation:
 
