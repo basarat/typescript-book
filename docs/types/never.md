@@ -1,4 +1,6 @@
 # Never
+> [Professional Lesson on BooleanArt](https://www.booleanart.com/course/typescript/never)
+
 > [Youtube: Video lesson on the never type](https://www.youtube.com/watch?v=aldIFYWu6xc)
 
 > [Egghead: Video lesson on the never type](https://egghead.io/lessons/typescript-use-the-never-type-to-avoid-code-with-dead-ends-using-typescript)
