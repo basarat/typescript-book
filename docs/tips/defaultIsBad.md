@@ -55,6 +55,10 @@ With `default` there is horrible experience for commonJS users who have to `cons
 ### Typo Protection
 You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
 
+### Greppability
+
+Default exports cannot be easily grepped across the whole codebase. With named exports it's trivial to find all the uses of an exported token even from a basic terminal, without the need to spin up a typescript language server.
+
 ### TypeScript auto-import
 Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module. Some tools out there will try to magic read and *infer* a name for a default export but magic is flaky.
 
