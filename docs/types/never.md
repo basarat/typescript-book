@@ -52,8 +52,6 @@ function foo(x: string | number): boolean {
 function fail(message: string): never { throw new Error(message); }
 ```
 
-And because `never` is only assignable to another `never` you can use it for *compile time* exhaustive checks as well. This is covered in the [*discriminated union* section](./discriminated-unions.md).
-
 # Confusion with `void`
 
 As soon as someone tells you that `never` is returned when a function never exits gracefully you intuitively want to think of it as the same as `void`. However, `void` is a Unit. `never` is a falsum.
