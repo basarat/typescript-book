@@ -32,7 +32,6 @@ Learn Professional TypeScript. I've been looking at the issues that turn up comm
 * Thanks, this is a great book 🤓🤓 [link](https://twitter.com/jjwonmin/status/885666375548547073)
 * Deep dive to typescript is awesome in so many levels. i find it very insightful. Thanks [link](https://twitter.com/orenmizr/status/891083492787970053)
 * @basarat's intro to @typescriptlang is still one of the best going (if not THE best) [link](https://twitter.com/stevealee/status/953953255968698368)
-* 
 * This is sweet! So many #typescript goodies! [link](https://twitter.com/pauliescanlon/status/989898852474998784)
 
 ## Get Started
