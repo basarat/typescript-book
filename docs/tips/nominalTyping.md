@@ -32,7 +32,7 @@ foo = foo; // Okay
 * Advantages
   - No need for any type assertions 
 * Disadvantage
-  - The structure `{type,value}` might not be desireable and need server serialization support
+  - The structure `{type,value}` might not be desirable and need server serialization support
 
 ## Using Enums
 [Enums in TypeScript](../enums.md) offer a certain level of nominal typing. Two enum types aren't equal if they differ by name. We can use this fact to provide nominal typing for types that are otherwise structurally compatible.

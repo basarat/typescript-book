@@ -51,7 +51,7 @@ import {jsxFactory} from "jsxFactory";
 var div = <div>Hello JSX!</div>
 ```
 
-With `--jsx react` this file will emit to use the factory specfied in the jsx pragma: 
+With `--jsx react` this file will emit to use the factory specified in the jsx pragma: 
 ```js
 "use strict";
 var jsxFactory_1 = require("jsxFactory");
