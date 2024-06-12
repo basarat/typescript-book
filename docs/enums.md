@@ -125,10 +125,10 @@ type Animal = {
 
 function printAnimalAbilities(animal: Animal) {
     var animalFlags = animal.flags;
-    if (animalFlags & AnimalFlags.HasClaws) {
+    if ((animalFlags & AnimalFlags.HasClaws) === AnimalFlags.HasClaws) {
         console.log('animal has claws');
     }
-    if (animalFlags & AnimalFlags.CanFly) {
+    if ((animalFlags & AnimalFlags.CanFly) === AnimalFlags.CanFly) {
         console.log('animal can fly');
     }
     if (animalFlags == AnimalFlags.None) {
