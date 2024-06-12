@@ -221,7 +221,7 @@ Use `as Foo` syntax for type assertions as we [mentioned before](../types/type-a
 
 ## Default Props
 
-* Stateful components with default props: You can tell TypeScript that a property will be provided externally (by React) by using a *null assertion* operator (this isn't ideal but is the simplest minimum *extra code* solution I could think of).
+* Stateful components with default props: You can tell TypeScript that a property will be provided externally (by React) by using a *non-null assertion* operator (this isn't ideal but is the simplest minimum *extra code* solution I could think of).
 
 ```tsx
 class Hello extends React.Component<{
