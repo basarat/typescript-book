@@ -56,7 +56,7 @@ With `default` there is horrible experience for commonJS users who have to `cons
 You don't get typos like one dev doing `import Foo from "./foo";` and another doing `import foo from "./foo";`
 
 ### TypeScript auto-import
-Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` cause its a well defined name exported from a module. Some tools out there will try to magic read and *infer* a name for a default export but magic is flaky.
+Auto import quickfix works better. You use `Foo` and auto import will write down `import { Foo } from "./foo";` because it's a well-defined name exported from a module. Some tools out there will try to magically read and *infer* a name for a default export but magic is flaky.
 
 ### Re-exporting
 Re-exporting is common for the root `index` file in npm packages, and forces you to name the default export manually e.g. `export { default as Foo } from "./foo";` (with default) vs. `export * from "./foo"` (with named exports).
