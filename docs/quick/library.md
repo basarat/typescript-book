@@ -4,7 +4,7 @@
 
 Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).
 
-TypeScript modules can be consumed both in the nodejs (as is) browser (with something like webpack).
+TypeScript modules can be consumed both in the nodejs (as is) and the browser (with something like webpack).
 
 Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:
 
