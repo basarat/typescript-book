@@ -207,7 +207,7 @@ status = num; // OKAY
 num = status; // OKAY
 ```
 
-* Enum values from different enum types are considered incompatible. This makes enums useable *nominally* (as opposed to structurally)
+* Enum values from different enum types are considered incompatible. This makes enums usable *nominally* (as opposed to structurally)
 
 ```ts
 enum Status { Ready, Waiting };
