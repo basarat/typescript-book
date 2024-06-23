@@ -1,14 +1,14 @@
 # Compiler
 The TypeScript compiler source is located under the [`src/compiler`](https://github.com/Microsoft/TypeScript/tree/master/src/compiler) folder.
 
-It is split into the follow key parts:
+It is split into the following key parts:
 * Scanner (`scanner.ts`)
 * Parser (`parser.ts`)
 * Binder (`binder.ts`)
 * Checker (`checker.ts`)
 * Emitter (`emitter.ts`)
 
-Each of these get their own unique files in the source. These parts will be explained later on in this chapter. 
+Each of these has its own unique files in the source. These parts will be explained later on in this chapter. 
 
 ## Syntax vs. Semantics
 Just because something is *syntactically* correct doesn't mean it is *semantically* correct. Consider the following piece of TypeScript code which although *syntactically* valid is *semantically* wrong
@@ -53,7 +53,7 @@ There are a few additional files in the TypeScript compiler that provide utiliti
 * `let objectAllocator: ObjectAllocator` : is a variable defined as a singleton global. It provides the definitions for `getNodeConstructor` (Nodes are covered when we look at `parser` / `AST`), `getSymbolConstructor` (Symbols are covered in `binder`), `getTypeConstructor` (Types are covered in `checker`), `getSignatureConstructor` (Signatures are the index, call and construct signatures).
 
 ## File: Key Data Structures
-`types.ts` contains key data structures and interfaces uses throughout the compiler. Here is a sampling of a few key ones:
+`types.ts` contains key data structures and interfaces used throughout the compiler. Here is a sampling of a few key ones:
 * `SyntaxKind`
 The AST node type is identified by the `SyntaxKind` enum.
 * `TypeChecker`
