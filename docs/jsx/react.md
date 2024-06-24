@@ -1,6 +1,6 @@
 # React JSX
 
-> [Free series of youtube videos on React / TypeScript best practices](https://www.youtube.com/watch?v=7EW67MqgJvs&list=PLYvdvJlnTOjHNayH7MukKbSJ6PueUNkkG)
+> [Free series of YouTube videos on React / TypeScript best practices](https://www.youtube.com/watch?v=7EW67MqgJvs&list=PLYvdvJlnTOjHNayH7MukKbSJ6PueUNkkG)
 
 > [PRO Egghead course on TypeScript and React](https://egghead.io/courses/use-typescript-to-develop-react-applications)
 
@@ -23,7 +23,7 @@ React can either render HTML tags (strings) or React components. The JavaScript 
 
 ### HTML Tags
 
-An HTML Tag `foo` is to be of the type `JSX.IntrinsicElements.foo`. These types are already defined for all the major tags in a file `react-jsx.d.ts` which we had you install as a part of the setup. Here is a sample of the  the contents of the file:
+An HTML Tag `foo` is to be of the type `JSX.IntrinsicElements.foo`. These types are already defined for all the major tags in a file `react-jsx.d.ts` which we had you install as a part of the setup. Here is a sample of the contents of the file:
 
 ```ts
 declare module JSX {
@@ -61,7 +61,7 @@ As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyType
 type Props = { 
   foo: string 
 }
-// OK now, in future, error
+// OK now, in the future, error
 const FunctionComponent: React.FunctionComponent<Props> = ({ foo, children }: Props) => {
     return <div>{foo} {children}</div>; // OK
 };
@@ -73,7 +73,7 @@ const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo, childr
 
 ### Class Components
 
-Components are type checked based on the `props` property of the component. This is modeled after how JSX is transformed i.e. the attributes become the `props` of the component.
+Components are type-checked based on the `props` property of the component. This is modeled after how JSX is transformed i.e. the attributes become the `props` of the component.
 
 The `react.d.ts` file defines the `React.Component<Props,State>` class which you should extend in your own class providing your own `Props` and `State` interfaces. This is demonstrated below:
 
@@ -194,7 +194,7 @@ class Use {
 }
 ```
 
-And the same with ref's for native elements e.g. 
+and the same with ref's for native elements e.g. 
 
 ```ts
 class FocusingInput extends React.Component<{ value: string, onChange: (value: string) => any }, {}>{

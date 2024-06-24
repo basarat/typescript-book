@@ -1,6 +1,6 @@
 ## References
 
-Beyond literals, any Object in JavaScript (including functions, arrays, regexp etc) are references. This means the following
+Beyond literals, any Objects in JavaScript (including functions, arrays, regexp, etc) are references. This means the following:
 
 ### Mutations are across all references
 

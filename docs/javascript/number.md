@@ -5,7 +5,7 @@ Whenever you are handling numbers in any programming language you need to be awa
 JavaScript has only one number type. It is a double-precision 64-bit `Number`. Below we discuss its limitations along with a recommended solution.
 
 ### Decimal
-For those familiar with doubles / float in other languages, you would know that binary floating point numbers *do not* map correctly to Decimal numbers. A trivial (and famous) example with JavaScript's built in numbers is shown below:
+For those familiar with doubles/float in other languages, you would know that binary floating point numbers *do not* map correctly to Decimal numbers. A trivial (and famous) example with JavaScript's built-in numbers is shown below:
 
 ```js
 console.log(.1 + .2); // 0.30000000000000004
@@ -14,7 +14,7 @@ console.log(.1 + .2); // 0.30000000000000004
 > For true decimal math use `big.js` mentioned below.
 
 ### Integer
-The integer limits represented by the built in number type are `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER`.
+The integer limits represented by the built-in number type are `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER`.
 
 ```js
 console.log({max: Number.MAX_SAFE_INTEGER, min: Number.MIN_SAFE_INTEGER});
@@ -23,7 +23,7 @@ console.log({max: Number.MAX_SAFE_INTEGER, min: Number.MIN_SAFE_INTEGER});
 
 **Safe** in this context refers to the fact that the value *cannot be the result of a rounding error*.
 
-The unsafe values are `+1 / -1` away from these safe values and any amount of addition / subtraction will *round* the result.
+The unsafe values are `+1 / -1` away from these safe values and any amount of addition/subtraction will *round* the result.
 
 ```js
 console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true!
@@ -52,7 +52,7 @@ console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 10)); // false
 > JavaScript will eventually get [BigInt](https://developers.google.com/web/updates/2018/05/bigint) support. For now, if you want arbitrary precision integer math use `big.js` mentioned below.
 
 ### big.js
-Whenever you use math for financial calculations (e.g. GST calculation, money with cents, addition etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
+Whenever you use math for financial calculations (e.g. GST calculation, money with cents, addition, etc) use a library like [big.js](https://github.com/MikeMcl/big.js/) which is designed for
 * Perfect decimal math
 * Safe out of bound integer values
 
@@ -73,7 +73,7 @@ export const bar = foo.plus(new Big('0.00000000000000000001'));
 const x: number = Number(bar.toString()); // Loses the precision
 ```
 
-> Do not use this library for math used for UI / performance intensive purposes e.g charts, canvas drawing etc.
+> Do not use this library for math used for UI / performance-intensive purposes e.g. charts, canvas drawing, etc.
 
 ### NaN
 When some number calculation is not representable by a valid number, JavaScript returns a special `NaN` value. A  classic example is imaginary numbers:
@@ -114,7 +114,7 @@ console.log(Number.MAX_VALUE + 1e292);  // Infinity
 console.log(-Number.MAX_VALUE - 1e292); // -Infinity
 ```
 
-Of-course, these special infinity values also show up with arithmetic that requires it e.g.
+Of course, these special infinity values also show up with arithmetic that requires it e.g.
 
 ```js
 console.log( 1 / 0); // Infinity
@@ -128,7 +128,7 @@ console.log(Number.POSITIVE_INFINITY === Infinity);  // true
 console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
 ```
 
-Fortunately comparison operators (`<` / `>`) work reliably on infinity values:
+Fortunately, comparison operators (`<` / `>`) work reliably on infinity values:
 
 ```js
 console.log( Infinity >  1); // true
