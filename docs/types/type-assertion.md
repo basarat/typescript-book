@@ -82,6 +82,9 @@ var foo: Foo = {
 In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.
 
 ### Double assertion
+
+> [Pro Video Lesson on Double Assertion](https://www.booleanart.com/course/typescript/double-assertion)
+
 The type assertion, despite being a bit unsafe as we've shown, is not *completely open season*. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:
 
 ```ts
