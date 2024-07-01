@@ -137,7 +137,7 @@ console.log(-Infinity < -1); // true
 
 ### Infinitesimal
 
-The smallest non-zero value representable in Number is available as static `Number.MIN_VALUE`
+The smallest positive value representable in Number is available as static `Number.MIN_VALUE`
 
 ```js
 console.log(Number.MIN_VALUE);  // 5e-324
