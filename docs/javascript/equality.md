@@ -9,7 +9,7 @@ console.log(5 == "5"); // true   , TS Error
 console.log(5 === "5"); // false , TS Error
 ```
 
-However, the choices JavaScript makes are not always ideal. For example, in the below example the first statement is false
+However, the choices JavaScript makes are not always ideal. For example, in the example below, the first statement is false
 because `""` and `"0"` are both strings and are clearly not equal. However, in the second case both `0` and the
 empty string (`""`) are falsy (i.e. behave like `false`) and are therefore equal with respect to `==`. Both statements
 are false when you use `===`.
@@ -51,14 +51,14 @@ type IdDisplay = {
   display: string
 }
 const list: IdDisplay[] = [
-  {
+ {
     id: 'foo',
     display: 'Foo Select'
-  },
-  {
+ },
+ {
     id: 'bar',
     display: 'Bar Select'
-  },
+ },
 ]
 
 const fooIndex = list.map(i => i.id).indexOf('foo');
