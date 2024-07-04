@@ -14,7 +14,7 @@ npm i eslint eslint-plugin-react @typescript-eslint/parser @typescript-eslint/es
 
 * eslint : Core eslint 
 * eslint-plugin-react : For react rules provided by eslint. [Supported rules list](https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules)
-* @typescript-eslint/parse : To allow eslint to understand ts / tsx files 
+* @typescript-eslint/parser : To allow eslint to understand ts / tsx files 
 * @typescript-eslint/eslint-plugin : For TypeScript rules. [Supported rules list](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules)
 
 > As you can see there are two eslint packages (for use with js or ts) and two @typescript-eslint packages (for use with ts). So the overhead for TypeScript is not *that much*.
