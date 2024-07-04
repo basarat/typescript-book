@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04 # due to problem with Calibre and Ubuntu 20
     env:
       SHA: ${{ github.sha }}
     steps:
